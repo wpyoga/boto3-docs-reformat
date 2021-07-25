@@ -2,5 +2,5 @@ The HTML documentation is hosted [here](https://wpyoga.github.io/boto3-docs-refo
 
 We might have other forms hosted here, later on.
 
-Check the [`master`](../..) branch for more information.
+Check the [`master`](https://github.com/wpyoga/boto3-docs-reformat/) branch for more information.
 
