@@ -45,6 +45,15 @@ Also, currently everything has to be done by hand, and all these can actually be
 - the python script has to be executed manually
 - the documentation has to be published manually to GitHub Pages
 
+## Ideas
+
+Eventually, maybe we will have a `Makefile` with a few commands:
+- `make rerun`: utilizing the `services.orig` directory, just re-run the script and push the changes
+- `make refresh`: remove the `gh-pages` branch and start over, but still using the pregenerated html, then run `make rerun`
+- `make rebuild`: do everything from scratch, including cloning the latest boto3 from github (as in, remove the pregenerated html, start over, then run `make refresh`)
+
+Also, it might be better to split each service subclass into its own HTML file. For example, DynamoDB can be split up into Client, Paginators, Waiters, Service Resource, and Table. The naming can be: dynamodb.client.html, dynamodb.paginators.html, ... We don't usually read up on Paginators while working on the Client anyway.
+
 ## Licensing status
 
 This project is just a simple python script that modifies boto3's documentation. Therefore I just went with boto3's license, which is Apache License 2.0. You can read the license in its entirety, in the file [LICENSE](LICENSE).
