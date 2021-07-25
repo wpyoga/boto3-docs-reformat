@@ -10,6 +10,15 @@ I had a couple of different ideas on how to solve this problem:
 
 With this project, I'm implementing the second idea. This project reformats boto3 HTML docs, specifically the available services section inside the API reference, so that it is easier to read. After the HTML docs have been reformatted, we put it up on GitHub Pages.
 
+## Transformation
+
+For each service,
+- Client: each function is collapsed
+- Paginators: each class is collapsed (TODO), but each function is not collapsed (TODO)
+- Waiters: same as paginators, each collapsed, but each function is not (both TODO)
+- Service Resource: collapse each action (TODO)
+- Table (special resource for DynamoDB): collapse each identifier, attribute, action, and waiter (TODO)
+
 ## Conversion mechanism
 
 Currently, I first have to generate the HTML docs from boto3. It's something like this:
