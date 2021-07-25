@@ -1,0 +1,1428 @@
+
+
+********
+finspace
+********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: finspace.Client
+
+  A low-level client representing FinSpace User Environment Management service
+  
+
+  The FinSpace management service provides the APIs for managing the FinSpace environments. 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('finspace')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~finspace.Client.can_paginate`
+
+  
+  *   :py:meth:`~finspace.Client.create_environment`
+
+  
+  *   :py:meth:`~finspace.Client.delete_environment`
+
+  
+  *   :py:meth:`~finspace.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~finspace.Client.get_environment`
+
+  
+  *   :py:meth:`~finspace.Client.get_paginator`
+
+  
+  *   :py:meth:`~finspace.Client.get_waiter`
+
+  
+  *   :py:meth:`~finspace.Client.list_environments`
+
+  
+  *   :py:meth:`~finspace.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~finspace.Client.tag_resource`
+
+  
+  *   :py:meth:`~finspace.Client.untag_resource`
+
+  
+  *   :py:meth:`~finspace.Client.update_environment`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_environment(**kwargs)
+
+    
+
+    Create a new FinSpace environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/CreateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_environment(
+          name='string',
+          description='string',
+          kmsKeyId='string',
+          tags={
+              'string': 'string'
+          },
+          federationMode='FEDERATED'|'LOCAL',
+          federationParameters={
+              'samlMetadataDocument': 'string',
+              'samlMetadataURL': 'string',
+              'applicationCallBackURL': 'string',
+              'federationURN': 'string',
+              'federationProviderName': 'string',
+              'attributeMap': {
+                  'string': 'string'
+              }
+          }
+      )
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      The name of the FinSpace environment to be created.
+
+      
+
+    
+    :type description: string
+    :param description: 
+
+      The description of the FinSpace environment to be created.
+
+      
+
+    
+    :type kmsKeyId: string
+    :param kmsKeyId: 
+
+      The KMS key id to encrypt your data in the FinSpace environment.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Add tags to your FinSpace environment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type federationMode: string
+    :param federationMode: 
+
+      Authentication mode for the environment.
+
+       
+
+       
+      * ``FEDERATED`` - Users access FinSpace through Single Sign On (SSO) via your Identity provider. 
+       
+      * ``LOCAL`` - Users access FinSpace via email and password managed within the FinSpace environment. 
+       
+
+      
+
+    
+    :type federationParameters: dict
+    :param federationParameters: 
+
+      Configuration information when authentication mode is FEDERATED.
+
+      
+
+    
+      - **samlMetadataDocument** *(string) --* 
+
+        SAML 2.0 Metadata document from identity provider (IdP).
+
+        
+
+      
+      - **samlMetadataURL** *(string) --* 
+
+        Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+
+        
+
+      
+      - **applicationCallBackURL** *(string) --* 
+
+        The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+
+        
+
+      
+      - **federationURN** *(string) --* 
+
+        The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+
+        
+
+      
+      - **federationProviderName** *(string) --* 
+
+        Name of the identity provider (IdP).
+
+        
+
+      
+      - **attributeMap** *(dict) --* 
+
+        SAML attribute name and value. The name must always be ``Email`` and the value should be set to the attribute definition in which user email is set. For example, name would be ``Email`` and value ``http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`` . Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(string) --* 
+
+          
+    
+  
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'environmentId': 'string',
+            'environmentArn': 'string',
+            'environmentUrl': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **environmentId** *(string) --* 
+
+          The unique identifier for FinSpace environment that you created.
+
+          
+        
+
+        - **environmentArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the FinSpace environment that you created.
+
+          
+        
+
+        - **environmentUrl** *(string) --* 
+
+          The sign-in url for the web application of the FinSpace environment you created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: delete_environment(**kwargs)
+
+    
+
+    Delete an FinSpace environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/DeleteEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_environment(
+          environmentId='string'
+      )
+    :type environmentId: string
+    :param environmentId: **[REQUIRED]** 
+
+      The identifier for the FinSpace environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_environment(**kwargs)
+
+    
+
+    Returns the FinSpace environment object.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/GetEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_environment(
+          environmentId='string'
+      )
+    :type environmentId: string
+    :param environmentId: **[REQUIRED]** 
+
+      The identifier of the FinSpace environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'environment': {
+                'name': 'string',
+                'environmentId': 'string',
+                'awsAccountId': 'string',
+                'status': 'CREATE_REQUESTED'|'CREATING'|'CREATED'|'DELETE_REQUESTED'|'DELETING'|'DELETED'|'FAILED_CREATION'|'RETRY_DELETION'|'FAILED_DELETION'|'SUSPENDED',
+                'environmentUrl': 'string',
+                'description': 'string',
+                'environmentArn': 'string',
+                'sageMakerStudioDomainUrl': 'string',
+                'kmsKeyId': 'string',
+                'dedicatedServiceAccountId': 'string',
+                'federationMode': 'FEDERATED'|'LOCAL',
+                'federationParameters': {
+                    'samlMetadataDocument': 'string',
+                    'samlMetadataURL': 'string',
+                    'applicationCallBackURL': 'string',
+                    'federationURN': 'string',
+                    'federationProviderName': 'string',
+                    'attributeMap': {
+                        'string': 'string'
+                    }
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **environment** *(dict) --* 
+
+          The name of the FinSpace environment.
+
+          
+          
+
+          - **name** *(string) --* 
+
+            The name of the FinSpace environment.
+
+            
+          
+
+          - **environmentId** *(string) --* 
+
+            The identifier of the FinSpace environment.
+
+            
+          
+
+          - **awsAccountId** *(string) --* 
+
+            The ID of the AWS account in which the FinSpace environment is created.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The current status of creation of the FinSpace environment.
+
+            
+          
+
+          - **environmentUrl** *(string) --* 
+
+            The sign-in url for the web application of your FinSpace environment.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description of the FinSpace environment.
+
+            
+          
+
+          - **environmentArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of your FinSpace environment.
+
+            
+          
+
+          - **sageMakerStudioDomainUrl** *(string) --* 
+
+            The url of the integrated FinSpace notebook environment in your web application.
+
+            
+          
+
+          - **kmsKeyId** *(string) --* 
+
+            The KMS key id used to encrypt in the FinSpace environment.
+
+            
+          
+
+          - **dedicatedServiceAccountId** *(string) --* 
+
+            The AWS account ID of the dedicated service account associated with your FinSpace environment.
+
+            
+          
+
+          - **federationMode** *(string) --* 
+
+            The authentication mode for the environment.
+
+            
+          
+
+          - **federationParameters** *(dict) --* 
+
+            Configuration information when authentication mode is FEDERATED.
+
+            
+            
+
+            - **samlMetadataDocument** *(string) --* 
+
+              SAML 2.0 Metadata document from identity provider (IdP).
+
+              
+            
+
+            - **samlMetadataURL** *(string) --* 
+
+              Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+
+              
+            
+
+            - **applicationCallBackURL** *(string) --* 
+
+              The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+
+              
+            
+
+            - **federationURN** *(string) --* 
+
+              The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+
+              
+            
+
+            - **federationProviderName** *(string) --* 
+
+              Name of the identity provider (IdP).
+
+              
+            
+
+            - **attributeMap** *(dict) --* 
+
+              SAML attribute name and value. The name must always be ``Email`` and the value should be set to the attribute definition in which user email is set. For example, name would be ``Email`` and value ``http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`` . Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_environments(**kwargs)
+
+    
+
+    A list of all of your FinSpace environments.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListEnvironments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_environments(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      A token generated by FinSpace that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the nextToken value from the response object of the previous page call.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return in this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'environments': [
+                {
+                    'name': 'string',
+                    'environmentId': 'string',
+                    'awsAccountId': 'string',
+                    'status': 'CREATE_REQUESTED'|'CREATING'|'CREATED'|'DELETE_REQUESTED'|'DELETING'|'DELETED'|'FAILED_CREATION'|'RETRY_DELETION'|'FAILED_DELETION'|'SUSPENDED',
+                    'environmentUrl': 'string',
+                    'description': 'string',
+                    'environmentArn': 'string',
+                    'sageMakerStudioDomainUrl': 'string',
+                    'kmsKeyId': 'string',
+                    'dedicatedServiceAccountId': 'string',
+                    'federationMode': 'FEDERATED'|'LOCAL',
+                    'federationParameters': {
+                        'samlMetadataDocument': 'string',
+                        'samlMetadataURL': 'string',
+                        'applicationCallBackURL': 'string',
+                        'federationURN': 'string',
+                        'federationProviderName': 'string',
+                        'attributeMap': {
+                            'string': 'string'
+                        }
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **environments** *(list) --* 
+
+          A list of all of your FinSpace environments.
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents an FinSpace environment.
+
+            
+            
+
+            - **name** *(string) --* 
+
+              The name of the FinSpace environment.
+
+              
+            
+
+            - **environmentId** *(string) --* 
+
+              The identifier of the FinSpace environment.
+
+              
+            
+
+            - **awsAccountId** *(string) --* 
+
+              The ID of the AWS account in which the FinSpace environment is created.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The current status of creation of the FinSpace environment.
+
+              
+            
+
+            - **environmentUrl** *(string) --* 
+
+              The sign-in url for the web application of your FinSpace environment.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              The description of the FinSpace environment.
+
+              
+            
+
+            - **environmentArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of your FinSpace environment.
+
+              
+            
+
+            - **sageMakerStudioDomainUrl** *(string) --* 
+
+              The url of the integrated FinSpace notebook environment in your web application.
+
+              
+            
+
+            - **kmsKeyId** *(string) --* 
+
+              The KMS key id used to encrypt in the FinSpace environment.
+
+              
+            
+
+            - **dedicatedServiceAccountId** *(string) --* 
+
+              The AWS account ID of the dedicated service account associated with your FinSpace environment.
+
+              
+            
+
+            - **federationMode** *(string) --* 
+
+              The authentication mode for the environment.
+
+              
+            
+
+            - **federationParameters** *(dict) --* 
+
+              Configuration information when authentication mode is FEDERATED.
+
+              
+              
+
+              - **samlMetadataDocument** *(string) --* 
+
+                SAML 2.0 Metadata document from identity provider (IdP).
+
+                
+              
+
+              - **samlMetadataURL** *(string) --* 
+
+                Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+
+                
+              
+
+              - **applicationCallBackURL** *(string) --* 
+
+                The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+
+                
+              
+
+              - **federationURN** *(string) --* 
+
+                The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+
+                
+              
+
+              - **federationProviderName** *(string) --* 
+
+                Name of the identity provider (IdP).
+
+                
+              
+
+              - **attributeMap** *(dict) --* 
+
+                SAML attribute name and value. The name must always be ``Email`` and the value should be set to the attribute definition in which user email is set. For example, name would be ``Email`` and value ``http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`` . Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token that you can use in a subsequent call to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    A list of all tags for a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          A list of all tags for a resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds metadata tags to a FinSpace resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the resource.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      One or more tags to be assigned to the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes metadata tags from a FinSpace resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      A FinSpace resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN).
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The tag keys (names) of one or more tags to be removed.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_environment(**kwargs)
+
+    
+
+    Update your FinSpace environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2021-03-12/UpdateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_environment(
+          environmentId='string',
+          name='string',
+          description='string',
+          federationMode='FEDERATED'|'LOCAL',
+          federationParameters={
+              'samlMetadataDocument': 'string',
+              'samlMetadataURL': 'string',
+              'applicationCallBackURL': 'string',
+              'federationURN': 'string',
+              'federationProviderName': 'string',
+              'attributeMap': {
+                  'string': 'string'
+              }
+          }
+      )
+    :type environmentId: string
+    :param environmentId: **[REQUIRED]** 
+
+      The identifier of the FinSpace environment.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the environment.
+
+      
+
+    
+    :type description: string
+    :param description: 
+
+      The description of the environment.
+
+      
+
+    
+    :type federationMode: string
+    :param federationMode: 
+
+      Authentication mode for the environment.
+
+       
+
+       
+      * ``FEDERATED`` - Users access FinSpace through Single Sign On (SSO) via your Identity provider. 
+       
+      * ``LOCAL`` - Users access FinSpace via email and password managed within the FinSpace environment. 
+       
+
+      
+
+    
+    :type federationParameters: dict
+    :param federationParameters: 
+
+      Configuration information when authentication mode is FEDERATED.
+
+      
+
+    
+      - **samlMetadataDocument** *(string) --* 
+
+        SAML 2.0 Metadata document from identity provider (IdP).
+
+        
+
+      
+      - **samlMetadataURL** *(string) --* 
+
+        Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+
+        
+
+      
+      - **applicationCallBackURL** *(string) --* 
+
+        The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+
+        
+
+      
+      - **federationURN** *(string) --* 
+
+        The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+
+        
+
+      
+      - **federationProviderName** *(string) --* 
+
+        Name of the identity provider (IdP).
+
+        
+
+      
+      - **attributeMap** *(dict) --* 
+
+        SAML attribute name and value. The name must always be ``Email`` and the value should be set to the attribute definition in which user email is set. For example, name would be ``Email`` and value ``http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`` . Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(string) --* 
+
+          
+    
+  
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'environment': {
+                'name': 'string',
+                'environmentId': 'string',
+                'awsAccountId': 'string',
+                'status': 'CREATE_REQUESTED'|'CREATING'|'CREATED'|'DELETE_REQUESTED'|'DELETING'|'DELETED'|'FAILED_CREATION'|'RETRY_DELETION'|'FAILED_DELETION'|'SUSPENDED',
+                'environmentUrl': 'string',
+                'description': 'string',
+                'environmentArn': 'string',
+                'sageMakerStudioDomainUrl': 'string',
+                'kmsKeyId': 'string',
+                'dedicatedServiceAccountId': 'string',
+                'federationMode': 'FEDERATED'|'LOCAL',
+                'federationParameters': {
+                    'samlMetadataDocument': 'string',
+                    'samlMetadataURL': 'string',
+                    'applicationCallBackURL': 'string',
+                    'federationURN': 'string',
+                    'federationProviderName': 'string',
+                    'attributeMap': {
+                        'string': 'string'
+                    }
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **environment** *(dict) --* 
+
+          Returns the FinSpace environment object.
+
+          
+          
+
+          - **name** *(string) --* 
+
+            The name of the FinSpace environment.
+
+            
+          
+
+          - **environmentId** *(string) --* 
+
+            The identifier of the FinSpace environment.
+
+            
+          
+
+          - **awsAccountId** *(string) --* 
+
+            The ID of the AWS account in which the FinSpace environment is created.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The current status of creation of the FinSpace environment.
+
+            
+          
+
+          - **environmentUrl** *(string) --* 
+
+            The sign-in url for the web application of your FinSpace environment.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description of the FinSpace environment.
+
+            
+          
+
+          - **environmentArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of your FinSpace environment.
+
+            
+          
+
+          - **sageMakerStudioDomainUrl** *(string) --* 
+
+            The url of the integrated FinSpace notebook environment in your web application.
+
+            
+          
+
+          - **kmsKeyId** *(string) --* 
+
+            The KMS key id used to encrypt in the FinSpace environment.
+
+            
+          
+
+          - **dedicatedServiceAccountId** *(string) --* 
+
+            The AWS account ID of the dedicated service account associated with your FinSpace environment.
+
+            
+          
+
+          - **federationMode** *(string) --* 
+
+            The authentication mode for the environment.
+
+            
+          
+
+          - **federationParameters** *(dict) --* 
+
+            Configuration information when authentication mode is FEDERATED.
+
+            
+            
+
+            - **samlMetadataDocument** *(string) --* 
+
+              SAML 2.0 Metadata document from identity provider (IdP).
+
+              
+            
+
+            - **samlMetadataURL** *(string) --* 
+
+              Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).
+
+              
+            
+
+            - **applicationCallBackURL** *(string) --* 
+
+              The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration (IdP).
+
+              
+            
+
+            - **federationURN** *(string) --* 
+
+              The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.
+
+              
+            
+
+            - **federationProviderName** *(string) --* 
+
+              Name of the identity provider (IdP).
+
+              
+            
+
+            - **attributeMap** *(dict) --* 
+
+              SAML attribute name and value. The name must always be ``Email`` and the value should be set to the attribute definition in which user email is set. For example, name would be ``Email`` and value ``http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`` . Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`finspace.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`finspace.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

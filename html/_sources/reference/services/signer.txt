@@ -1,0 +1,4129 @@
+
+
+******
+signer
+******
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: signer.Client
+
+  A low-level client representing AWS Signer
+  
+
+  AWS Signer is a fully managed code signing service to help you ensure the trust and integrity of your code. 
+
+   
+
+  AWS Signer supports the following applications:
+
+   
+
+  With *code signing for AWS Lambda* , you can sign AWS Lambda deployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch, and AWS CloudTrail. In order to sign code, you create a signing profile and then use Signer to sign Lambda zip files in S3. 
+
+   
+
+  With *code signing for IoT* , you can sign code for any IoT device that is supported by AWS. IoT code signing is available for `Amazon FreeRTOS <http://docs.aws.amazon.com/freertos/latest/userguide/>`__ and `AWS IoT Device Management <http://docs.aws.amazon.com/iot/latest/developerguide/>`__ , and is integrated with `AWS Certificate Manager (ACM) <http://docs.aws.amazon.com/acm/latest/userguide/>`__ . In order to sign code, you import a third-party code signing certificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. 
+
+   
+
+  For more information about AWS Signer, see the `AWS Signer Developer Guide <http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html>`__ .
+
+   
+
+  
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('signer')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~signer.Client.add_profile_permission`
+
+  
+  *   :py:meth:`~signer.Client.can_paginate`
+
+  
+  *   :py:meth:`~signer.Client.cancel_signing_profile`
+
+  
+  *   :py:meth:`~signer.Client.describe_signing_job`
+
+  
+  *   :py:meth:`~signer.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~signer.Client.get_paginator`
+
+  
+  *   :py:meth:`~signer.Client.get_signing_platform`
+
+  
+  *   :py:meth:`~signer.Client.get_signing_profile`
+
+  
+  *   :py:meth:`~signer.Client.get_waiter`
+
+  
+  *   :py:meth:`~signer.Client.list_profile_permissions`
+
+  
+  *   :py:meth:`~signer.Client.list_signing_jobs`
+
+  
+  *   :py:meth:`~signer.Client.list_signing_platforms`
+
+  
+  *   :py:meth:`~signer.Client.list_signing_profiles`
+
+  
+  *   :py:meth:`~signer.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~signer.Client.put_signing_profile`
+
+  
+  *   :py:meth:`~signer.Client.remove_profile_permission`
+
+  
+  *   :py:meth:`~signer.Client.revoke_signature`
+
+  
+  *   :py:meth:`~signer.Client.revoke_signing_profile`
+
+  
+  *   :py:meth:`~signer.Client.start_signing_job`
+
+  
+  *   :py:meth:`~signer.Client.tag_resource`
+
+  
+  *   :py:meth:`~signer.Client.untag_resource`
+
+  
+
+  .. py:method:: add_profile_permission(**kwargs)
+
+    
+
+    Adds cross-account permissions to a signing profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/AddProfilePermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.add_profile_permission(
+          profileName='string',
+          profileVersion='string',
+          action='string',
+          principal='string',
+          revisionId='string',
+          statementId='string'
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The human-readable name of the signing profile.
+
+      
+
+    
+    :type profileVersion: string
+    :param profileVersion: 
+
+      The version of the signing profile.
+
+      
+
+    
+    :type action: string
+    :param action: **[REQUIRED]** 
+
+      The AWS Signer action permitted as part of cross-account permissions.
+
+      
+
+    
+    :type principal: string
+    :param principal: **[REQUIRED]** 
+
+      The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
+
+      
+
+    
+    :type revisionId: string
+    :param revisionId: 
+
+      A unique identifier for the current profile revision.
+
+      
+
+    
+    :type statementId: string
+    :param statementId: **[REQUIRED]** 
+
+      A unique identifier for the cross-account permission statement.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'revisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **revisionId** *(string) --* 
+
+          A unique identifier for the current profile revision.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ServiceLimitExceededException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_signing_profile(**kwargs)
+
+    
+
+    Changes the state of an ``ACTIVE`` signing profile to ``CANCELED`` . A canceled profile is still viewable with the ``ListSigningProfiles`` operation, but it cannot perform new signing jobs, and is deleted two years after cancelation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/CancelSigningProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_signing_profile(
+          profileName='string'
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The name of the signing profile to be canceled.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: describe_signing_job(**kwargs)
+
+    
+
+    Returns information about a specific code signing job. You specify the job by using the ``jobId`` value that is returned by the  StartSigningJob operation. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/DescribeSigningJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_signing_job(
+          jobId='string'
+      )
+    :type jobId: string
+    :param jobId: **[REQUIRED]** 
+
+      The ID of the signing job on input.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobId': 'string',
+            'source': {
+                's3': {
+                    'bucketName': 'string',
+                    'key': 'string',
+                    'version': 'string'
+                }
+            },
+            'signingMaterial': {
+                'certificateArn': 'string'
+            },
+            'platformId': 'string',
+            'platformDisplayName': 'string',
+            'profileName': 'string',
+            'profileVersion': 'string',
+            'overrides': {
+                'signingConfiguration': {
+                    'encryptionAlgorithm': 'RSA'|'ECDSA',
+                    'hashAlgorithm': 'SHA1'|'SHA256'
+                },
+                'signingImageFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+            },
+            'signingParameters': {
+                'string': 'string'
+            },
+            'createdAt': datetime(2015, 1, 1),
+            'completedAt': datetime(2015, 1, 1),
+            'signatureExpiresAt': datetime(2015, 1, 1),
+            'requestedBy': 'string',
+            'status': 'InProgress'|'Failed'|'Succeeded',
+            'statusReason': 'string',
+            'revocationRecord': {
+                'reason': 'string',
+                'revokedAt': datetime(2015, 1, 1),
+                'revokedBy': 'string'
+            },
+            'signedObject': {
+                's3': {
+                    'bucketName': 'string',
+                    'key': 'string'
+                }
+            },
+            'jobOwner': 'string',
+            'jobInvoker': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobId** *(string) --* 
+
+          The ID of the signing job on output.
+
+          
+        
+
+        - **source** *(dict) --* 
+
+          The object that contains the name of your S3 bucket or your raw code.
+
+          
+          
+
+          - **s3** *(dict) --* 
+
+            The ``S3Source`` object.
+
+            
+            
+
+            - **bucketName** *(string) --* 
+
+              Name of the S3 bucket.
+
+              
+            
+
+            - **key** *(string) --* 
+
+              Key name of the bucket object that contains your unsigned code.
+
+              
+            
+
+            - **version** *(string) --* 
+
+              Version of your source image in your version enabled S3 bucket.
+
+              
+        
+      
+        
+
+        - **signingMaterial** *(dict) --* 
+
+          The Amazon Resource Name (ARN) of your code signing certificate.
+
+          
+          
+
+          - **certificateArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+            
+      
+        
+
+        - **platformId** *(string) --* 
+
+          The microcontroller platform to which your signed code image will be distributed.
+
+          
+        
+
+        - **platformDisplayName** *(string) --* 
+
+          A human-readable name for the signing platform associated with the signing job.
+
+          
+        
+
+        - **profileName** *(string) --* 
+
+          The name of the profile that initiated the signing operation.
+
+          
+        
+
+        - **profileVersion** *(string) --* 
+
+          The version of the signing profile used to initiate the signing job.
+
+          
+        
+
+        - **overrides** *(dict) --* 
+
+          A list of any overrides that were applied to the signing operation.
+
+          
+          
+
+          - **signingConfiguration** *(dict) --* 
+
+            A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+
+            
+            
+
+            - **encryptionAlgorithm** *(string) --* 
+
+              A specified override of the default encryption algorithm that is used in a code signing job.
+
+              
+            
+
+            - **hashAlgorithm** *(string) --* 
+
+              A specified override of the default hash algorithm that is used in a code signing job.
+
+              
+        
+          
+
+          - **signingImageFormat** *(string) --* 
+
+            A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, ``JSONEmbedded`` or ``JSONDetached`` . (A third format value, ``JSON`` , is reserved for future use.) With ``JSONEmbedded`` , the signing image has the payload embedded in it. With ``JSONDetached`` , the payload is not be embedded in the signing image.
+
+            
+      
+        
+
+        - **signingParameters** *(dict) --* 
+
+          Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. 
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Date and time that the signing job was created.
+
+          
+        
+
+        - **completedAt** *(datetime) --* 
+
+          Date and time that the signing job was completed.
+
+          
+        
+
+        - **signatureExpiresAt** *(datetime) --* 
+
+          Thr expiration timestamp for the signature generated by the signing job.
+
+          
+        
+
+        - **requestedBy** *(string) --* 
+
+          The IAM principal that requested the signing job.
+
+          
+        
+
+        - **status** *(string) --* 
+
+          Status of the signing job.
+
+          
+        
+
+        - **statusReason** *(string) --* 
+
+          String value that contains the status reason.
+
+          
+        
+
+        - **revocationRecord** *(dict) --* 
+
+          A revocation record if the signature generated by the signing job has been revoked. Contains a timestamp and the ID of the IAM entity that revoked the signature.
+
+          
+          
+
+          - **reason** *(string) --* 
+
+            A caller-supplied reason for revocation.
+
+            
+          
+
+          - **revokedAt** *(datetime) --* 
+
+            The time of revocation.
+
+            
+          
+
+          - **revokedBy** *(string) --* 
+
+            The identity of the revoker.
+
+            
+      
+        
+
+        - **signedObject** *(dict) --* 
+
+          Name of the S3 bucket where the signed code image is saved by code signing.
+
+          
+          
+
+          - **s3** *(dict) --* 
+
+            The ``S3SignedObject`` .
+
+            
+            
+
+            - **bucketName** *(string) --* 
+
+              Name of the S3 bucket.
+
+              
+            
+
+            - **key** *(string) --* 
+
+              Key name that uniquely identifies a signed code image in your bucket.
+
+              
+        
+      
+        
+
+        - **jobOwner** *(string) --* 
+
+          The AWS account ID of the job owner.
+
+          
+        
+
+        - **jobInvoker** *(string) --* 
+
+          The IAM entity that initiated the signing job.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_signing_platform(**kwargs)
+
+    
+
+    Returns information on a specific signing platform.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningPlatform>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_signing_platform(
+          platformId='string'
+      )
+    :type platformId: string
+    :param platformId: **[REQUIRED]** 
+
+      The ID of the target signing platform.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'platformId': 'string',
+            'displayName': 'string',
+            'partner': 'string',
+            'target': 'string',
+            'category': 'AWSIoT',
+            'signingConfiguration': {
+                'encryptionAlgorithmOptions': {
+                    'allowedValues': [
+                        'RSA'|'ECDSA',
+                    ],
+                    'defaultValue': 'RSA'|'ECDSA'
+                },
+                'hashAlgorithmOptions': {
+                    'allowedValues': [
+                        'SHA1'|'SHA256',
+                    ],
+                    'defaultValue': 'SHA1'|'SHA256'
+                }
+            },
+            'signingImageFormat': {
+                'supportedFormats': [
+                    'JSON'|'JSONEmbedded'|'JSONDetached',
+                ],
+                'defaultFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+            },
+            'maxSizeInMB': 123,
+            'revocationSupported': True|False
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **platformId** *(string) --* 
+
+          The ID of the target signing platform.
+
+          
+        
+
+        - **displayName** *(string) --* 
+
+          The display name of the target signing platform.
+
+          
+        
+
+        - **partner** *(string) --* 
+
+          A list of partner entities that use the target signing platform.
+
+          
+        
+
+        - **target** *(string) --* 
+
+          The validation template that is used by the target signing platform.
+
+          
+        
+
+        - **category** *(string) --* 
+
+          The category type of the target signing platform.
+
+          
+        
+
+        - **signingConfiguration** *(dict) --* 
+
+          A list of configurations applied to the target platform at signing.
+
+          
+          
+
+          - **encryptionAlgorithmOptions** *(dict) --* 
+
+            The encryption algorithm options that are available for a code signing job.
+
+            
+            
+
+            - **allowedValues** *(list) --* 
+
+              The set of accepted encryption algorithms that are allowed in a code signing job.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **defaultValue** *(string) --* 
+
+              The default encryption algorithm that is used by a code signing job.
+
+              
+        
+          
+
+          - **hashAlgorithmOptions** *(dict) --* 
+
+            The hash algorithm options that are available for a code signing job.
+
+            
+            
+
+            - **allowedValues** *(list) --* 
+
+              The set of accepted hash algorithms allowed in a code signing job.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **defaultValue** *(string) --* 
+
+              The default hash algorithm that is used in a code signing job.
+
+              
+        
+      
+        
+
+        - **signingImageFormat** *(dict) --* 
+
+          The format of the target platform's signing image.
+
+          
+          
+
+          - **supportedFormats** *(list) --* 
+
+            The supported formats of a code signing image.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **defaultFormat** *(string) --* 
+
+            The default format of a code signing image.
+
+            
+      
+        
+
+        - **maxSizeInMB** *(integer) --* 
+
+          The maximum size (in MB) of the payload that can be signed by the target platform.
+
+          
+        
+
+        - **revocationSupported** *(boolean) --* 
+
+          A flag indicating whether signatures generated for the signing platform can be revoked.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: get_signing_profile(**kwargs)
+
+    
+
+    Returns information on a specific signing profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/GetSigningProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_signing_profile(
+          profileName='string',
+          profileOwner='string'
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The name of the target signing profile.
+
+      
+
+    
+    :type profileOwner: string
+    :param profileOwner: 
+
+      The AWS account ID of the profile owner.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profileName': 'string',
+            'profileVersion': 'string',
+            'profileVersionArn': 'string',
+            'revocationRecord': {
+                'revocationEffectiveFrom': datetime(2015, 1, 1),
+                'revokedAt': datetime(2015, 1, 1),
+                'revokedBy': 'string'
+            },
+            'signingMaterial': {
+                'certificateArn': 'string'
+            },
+            'platformId': 'string',
+            'platformDisplayName': 'string',
+            'signatureValidityPeriod': {
+                'value': 123,
+                'type': 'DAYS'|'MONTHS'|'YEARS'
+            },
+            'overrides': {
+                'signingConfiguration': {
+                    'encryptionAlgorithm': 'RSA'|'ECDSA',
+                    'hashAlgorithm': 'SHA1'|'SHA256'
+                },
+                'signingImageFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+            },
+            'signingParameters': {
+                'string': 'string'
+            },
+            'status': 'Active'|'Canceled'|'Revoked',
+            'statusReason': 'string',
+            'arn': 'string',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **profileName** *(string) --* 
+
+          The name of the target signing profile.
+
+          
+        
+
+        - **profileVersion** *(string) --* 
+
+          The current version of the signing profile.
+
+          
+        
+
+        - **profileVersionArn** *(string) --* 
+
+          The signing profile ARN, including the profile version.
+
+          
+        
+
+        - **revocationRecord** *(dict) --* 
+
+          Revocation information for a signing profile.
+
+          
+          
+
+          - **revocationEffectiveFrom** *(datetime) --* 
+
+            The time when revocation becomes effective.
+
+            
+          
+
+          - **revokedAt** *(datetime) --* 
+
+            The time when the signing profile was revoked.
+
+            
+          
+
+          - **revokedBy** *(string) --* 
+
+            The identity of the revoker.
+
+            
+      
+        
+
+        - **signingMaterial** *(dict) --* 
+
+          The ARN of the certificate that the target profile uses for signing operations.
+
+          
+          
+
+          - **certificateArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+            
+      
+        
+
+        - **platformId** *(string) --* 
+
+          The ID of the platform that is used by the target signing profile.
+
+          
+        
+
+        - **platformDisplayName** *(string) --* 
+
+          A human-readable name for the signing platform associated with the signing profile.
+
+          
+        
+
+        - **signatureValidityPeriod** *(dict) --* 
+
+          The validity period for a signing job.
+
+          
+          
+
+          - **value** *(integer) --* 
+
+            The numerical value of the time unit for signature validity.
+
+            
+          
+
+          - **type** *(string) --* 
+
+            The time unit for signature validity.
+
+            
+      
+        
+
+        - **overrides** *(dict) --* 
+
+          A list of overrides applied by the target signing profile for signing operations.
+
+          
+          
+
+          - **signingConfiguration** *(dict) --* 
+
+            A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+
+            
+            
+
+            - **encryptionAlgorithm** *(string) --* 
+
+              A specified override of the default encryption algorithm that is used in a code signing job.
+
+              
+            
+
+            - **hashAlgorithm** *(string) --* 
+
+              A specified override of the default hash algorithm that is used in a code signing job.
+
+              
+        
+          
+
+          - **signingImageFormat** *(string) --* 
+
+            A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, ``JSONEmbedded`` or ``JSONDetached`` . (A third format value, ``JSON`` , is reserved for future use.) With ``JSONEmbedded`` , the signing image has the payload embedded in it. With ``JSONDetached`` , the payload is not be embedded in the signing image.
+
+            
+      
+        
+
+        - **signingParameters** *(dict) --* 
+
+          A map of key-value pairs for signing operations that is attached to the target signing profile.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **status** *(string) --* 
+
+          The status of the target signing profile.
+
+          
+        
+
+        - **statusReason** *(string) --* 
+
+          Reason for the status of the target signing profile.
+
+          
+        
+
+        - **arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) for the signing profile.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          A list of tags associated with the signing profile.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_profile_permissions(**kwargs)
+
+    
+
+    Lists the cross-account permissions associated with a signing profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListProfilePermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_profile_permissions(
+          profileName='string',
+          nextToken='string'
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      Name of the signing profile containing the cross-account permissions.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      String for specifying the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'revisionId': 'string',
+            'policySizeBytes': 123,
+            'permissions': [
+                {
+                    'action': 'string',
+                    'principal': 'string',
+                    'statementId': 'string',
+                    'profileVersion': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **revisionId** *(string) --* 
+
+          The identifier for the current revision of profile permissions.
+
+          
+        
+
+        - **policySizeBytes** *(integer) --* 
+
+          Total size of the policy associated with the Signing Profile in bytes.
+
+          
+        
+
+        - **permissions** *(list) --* 
+
+          List of permissions associated with the Signing Profile.
+
+          
+          
+
+          - *(dict) --* 
+
+            A cross-account permission for a signing profile.
+
+            
+            
+
+            - **action** *(string) --* 
+
+              An AWS Signer action permitted as part of cross-account permissions.
+
+              
+            
+
+            - **principal** *(string) --* 
+
+              The AWS principal that has been granted a cross-account permission.
+
+              
+            
+
+            - **statementId** *(string) --* 
+
+              A unique identifier for a cross-account permission statement.
+
+              
+            
+
+            - **profileVersion** *(string) --* 
+
+              The signing profile version that a permission applies to.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          String for specifying the next set of paginated results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: list_signing_jobs(**kwargs)
+
+    
+
+    Lists all your signing jobs. You can use the ``maxResults`` parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a ``nextToken`` value. Use this value in subsequent calls to ``ListSigningJobs`` to fetch the remaining values. You can continue calling ``ListSigningJobs`` with your ``maxResults`` parameter and with new values that code signing returns in the ``nextToken`` parameter until all of your signing jobs have been returned. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_signing_jobs(
+          status='InProgress'|'Failed'|'Succeeded',
+          platformId='string',
+          requestedBy='string',
+          maxResults=123,
+          nextToken='string',
+          isRevoked=True|False,
+          signatureExpiresBefore=datetime(2015, 1, 1),
+          signatureExpiresAfter=datetime(2015, 1, 1),
+          jobInvoker='string'
+      )
+    :type status: string
+    :param status: 
+
+      A status value with which to filter your results.
+
+      
+
+    
+    :type platformId: string
+    :param platformId: 
+
+      The ID of microcontroller platform that you specified for the distribution of your code image.
+
+      
+
+    
+    :type requestedBy: string
+    :param requestedBy: 
+
+      The IAM principal that requested the signing job.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Specifies the maximum number of items to return in the response. Use this parameter when paginating results. If additional items exist beyond the number you specify, the ``nextToken`` element is set in the response. Use the ``nextToken`` value in a subsequent request to retrieve additional items. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      String for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of ``nextToken`` from the response that you just received.
+
+      
+
+    
+    :type isRevoked: boolean
+    :param isRevoked: 
+
+      Filters results to return only signing jobs with revoked signatures.
+
+      
+
+    
+    :type signatureExpiresBefore: datetime
+    :param signatureExpiresBefore: 
+
+      Filters results to return only signing jobs with signatures expiring before a specified timestamp.
+
+      
+
+    
+    :type signatureExpiresAfter: datetime
+    :param signatureExpiresAfter: 
+
+      Filters results to return only signing jobs with signatures expiring after a specified timestamp.
+
+      
+
+    
+    :type jobInvoker: string
+    :param jobInvoker: 
+
+      Filters results to return only signing jobs initiated by a specified IAM entity.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobs': [
+                {
+                    'jobId': 'string',
+                    'source': {
+                        's3': {
+                            'bucketName': 'string',
+                            'key': 'string',
+                            'version': 'string'
+                        }
+                    },
+                    'signedObject': {
+                        's3': {
+                            'bucketName': 'string',
+                            'key': 'string'
+                        }
+                    },
+                    'signingMaterial': {
+                        'certificateArn': 'string'
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'status': 'InProgress'|'Failed'|'Succeeded',
+                    'isRevoked': True|False,
+                    'profileName': 'string',
+                    'profileVersion': 'string',
+                    'platformId': 'string',
+                    'platformDisplayName': 'string',
+                    'signatureExpiresAt': datetime(2015, 1, 1),
+                    'jobOwner': 'string',
+                    'jobInvoker': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobs** *(list) --* 
+
+          A list of your signing jobs.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a signing job.
+
+            
+            
+
+            - **jobId** *(string) --* 
+
+              The ID of the signing job.
+
+              
+            
+
+            - **source** *(dict) --* 
+
+              A ``Source`` that contains information about a signing job's code image source.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                The ``S3Source`` object.
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Name of the S3 bucket.
+
+                  
+                
+
+                - **key** *(string) --* 
+
+                  Key name of the bucket object that contains your unsigned code.
+
+                  
+                
+
+                - **version** *(string) --* 
+
+                  Version of your source image in your version enabled S3 bucket.
+
+                  
+            
+          
+            
+
+            - **signedObject** *(dict) --* 
+
+              A ``SignedObject`` structure that contains information about a signing job's signed code image.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                The ``S3SignedObject`` .
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Name of the S3 bucket.
+
+                  
+                
+
+                - **key** *(string) --* 
+
+                  Key name that uniquely identifies a signed code image in your bucket.
+
+                  
+            
+          
+            
+
+            - **signingMaterial** *(dict) --* 
+
+              A ``SigningMaterial`` object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
+
+              
+              
+
+              - **certificateArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+                
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time that the signing job was created.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the signing job.
+
+              
+            
+
+            - **isRevoked** *(boolean) --* 
+
+              Indicates whether the signing job is revoked.
+
+              
+            
+
+            - **profileName** *(string) --* 
+
+              The name of the signing profile that created a signing job.
+
+              
+            
+
+            - **profileVersion** *(string) --* 
+
+              The version of the signing profile that created a signing job.
+
+              
+            
+
+            - **platformId** *(string) --* 
+
+              The unique identifier for a signing platform.
+
+              
+            
+
+            - **platformDisplayName** *(string) --* 
+
+              The name of a signing platform.
+
+              
+            
+
+            - **signatureExpiresAt** *(datetime) --* 
+
+              The time when the signature of a signing job expires.
+
+              
+            
+
+            - **jobOwner** *(string) --* 
+
+              The AWS account ID of the job owner.
+
+              
+            
+
+            - **jobInvoker** *(string) --* 
+
+              The AWS account ID of the job invoker.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          String for specifying the next set of paginated results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: list_signing_platforms(**kwargs)
+
+    
+
+    Lists all signing platforms available in code signing that match the request parameters. If additional jobs remain to be listed, code signing returns a ``nextToken`` value. Use this value in subsequent calls to ``ListSigningJobs`` to fetch the remaining values. You can continue calling ``ListSigningJobs`` with your ``maxResults`` parameter and with new values that code signing returns in the ``nextToken`` parameter until all of your signing jobs have been returned.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningPlatforms>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_signing_platforms(
+          category='string',
+          partner='string',
+          target='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type category: string
+    :param category: 
+
+      The category type of a signing platform.
+
+      
+
+    
+    :type partner: string
+    :param partner: 
+
+      Any partner entities connected to a signing platform.
+
+      
+
+    
+    :type target: string
+    :param target: 
+
+      The validation template that is used by the target signing platform.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned by this operation.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of ``nextToken`` from the response that you just received.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'platforms': [
+                {
+                    'platformId': 'string',
+                    'displayName': 'string',
+                    'partner': 'string',
+                    'target': 'string',
+                    'category': 'AWSIoT',
+                    'signingConfiguration': {
+                        'encryptionAlgorithmOptions': {
+                            'allowedValues': [
+                                'RSA'|'ECDSA',
+                            ],
+                            'defaultValue': 'RSA'|'ECDSA'
+                        },
+                        'hashAlgorithmOptions': {
+                            'allowedValues': [
+                                'SHA1'|'SHA256',
+                            ],
+                            'defaultValue': 'SHA1'|'SHA256'
+                        }
+                    },
+                    'signingImageFormat': {
+                        'supportedFormats': [
+                            'JSON'|'JSONEmbedded'|'JSONDetached',
+                        ],
+                        'defaultFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+                    },
+                    'maxSizeInMB': 123,
+                    'revocationSupported': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **platforms** *(list) --* 
+
+          A list of all platforms that match the request parameters.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the signing configurations and parameters that are used to perform a code signing job.
+
+            
+            
+
+            - **platformId** *(string) --* 
+
+              The ID of a code signing; platform.
+
+              
+            
+
+            - **displayName** *(string) --* 
+
+              The display name of a code signing platform.
+
+              
+            
+
+            - **partner** *(string) --* 
+
+              Any partner entities linked to a code signing platform.
+
+              
+            
+
+            - **target** *(string) --* 
+
+              The types of targets that can be signed by a code signing platform.
+
+              
+            
+
+            - **category** *(string) --* 
+
+              The category of a code signing platform.
+
+              
+            
+
+            - **signingConfiguration** *(dict) --* 
+
+              The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
+
+              
+              
+
+              - **encryptionAlgorithmOptions** *(dict) --* 
+
+                The encryption algorithm options that are available for a code signing job.
+
+                
+                
+
+                - **allowedValues** *(list) --* 
+
+                  The set of accepted encryption algorithms that are allowed in a code signing job.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **defaultValue** *(string) --* 
+
+                  The default encryption algorithm that is used by a code signing job.
+
+                  
+            
+              
+
+              - **hashAlgorithmOptions** *(dict) --* 
+
+                The hash algorithm options that are available for a code signing job.
+
+                
+                
+
+                - **allowedValues** *(list) --* 
+
+                  The set of accepted hash algorithms allowed in a code signing job.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **defaultValue** *(string) --* 
+
+                  The default hash algorithm that is used in a code signing job.
+
+                  
+            
+          
+            
+
+            - **signingImageFormat** *(dict) --* 
+
+              The image format of a code signing platform or profile.
+
+              
+              
+
+              - **supportedFormats** *(list) --* 
+
+                The supported formats of a code signing image.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **defaultFormat** *(string) --* 
+
+                The default format of a code signing image.
+
+                
+          
+            
+
+            - **maxSizeInMB** *(integer) --* 
+
+              The maximum size (in MB) of code that can be signed by a code signing platform.
+
+              
+            
+
+            - **revocationSupported** *(boolean) --* 
+
+              Indicates whether revocation is supported for the platform.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Value for specifying the next set of paginated results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: list_signing_profiles(**kwargs)
+
+    
+
+    Lists all available signing profiles in your AWS account. Returns only profiles with an ``ACTIVE`` status unless the ``includeCanceled`` request field is set to ``true`` . If additional jobs remain to be listed, code signing returns a ``nextToken`` value. Use this value in subsequent calls to ``ListSigningJobs`` to fetch the remaining values. You can continue calling ``ListSigningJobs`` with your ``maxResults`` parameter and with new values that code signing returns in the ``nextToken`` parameter until all of your signing jobs have been returned.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningProfiles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_signing_profiles(
+          includeCanceled=True|False,
+          maxResults=123,
+          nextToken='string',
+          platformId='string',
+          statuses=[
+              'Active'|'Canceled'|'Revoked',
+          ]
+      )
+    :type includeCanceled: boolean
+    :param includeCanceled: 
+
+      Designates whether to include profiles with the status of ``CANCELED`` .
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of profiles to be returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of ``nextToken`` from the response that you just received.
+
+      
+
+    
+    :type platformId: string
+    :param platformId: 
+
+      Filters results to return only signing jobs initiated for a specified signing platform.
+
+      
+
+    
+    :type statuses: list
+    :param statuses: 
+
+      Filters results to return only signing jobs with statuses in the specified list.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profiles': [
+                {
+                    'profileName': 'string',
+                    'profileVersion': 'string',
+                    'profileVersionArn': 'string',
+                    'signingMaterial': {
+                        'certificateArn': 'string'
+                    },
+                    'signatureValidityPeriod': {
+                        'value': 123,
+                        'type': 'DAYS'|'MONTHS'|'YEARS'
+                    },
+                    'platformId': 'string',
+                    'platformDisplayName': 'string',
+                    'signingParameters': {
+                        'string': 'string'
+                    },
+                    'status': 'Active'|'Canceled'|'Revoked',
+                    'arn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **profiles** *(list) --* 
+
+          A list of profiles that are available in the AWS account. This includes profiles with the status of ``CANCELED`` if the ``includeCanceled`` parameter is set to ``true`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the ACM certificates and code signing configuration parameters that can be used by a given code signing user.
+
+            
+            
+
+            - **profileName** *(string) --* 
+
+              The name of the signing profile.
+
+              
+            
+
+            - **profileVersion** *(string) --* 
+
+              The version of a signing profile.
+
+              
+            
+
+            - **profileVersionArn** *(string) --* 
+
+              The ARN of a signing profile, including the profile version.
+
+              
+            
+
+            - **signingMaterial** *(dict) --* 
+
+              The ACM certificate that is available for use by a signing profile.
+
+              
+              
+
+              - **certificateArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+                
+          
+            
+
+            - **signatureValidityPeriod** *(dict) --* 
+
+              The validity period for a signing job created using this signing profile.
+
+              
+              
+
+              - **value** *(integer) --* 
+
+                The numerical value of the time unit for signature validity.
+
+                
+              
+
+              - **type** *(string) --* 
+
+                The time unit for signature validity.
+
+                
+          
+            
+
+            - **platformId** *(string) --* 
+
+              The ID of a platform that is available for use by a signing profile.
+
+              
+            
+
+            - **platformDisplayName** *(string) --* 
+
+              The name of the signing platform.
+
+              
+            
+
+            - **signingParameters** *(dict) --* 
+
+              The parameters that are available for use by a code signing user.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **status** *(string) --* 
+
+              The status of a code signing profile.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) for the signing profile.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              A list of tags associated with the signing profile.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Value for specifying the next set of paginated results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of the tags associated with a signing profile resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the signing profile.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          A list of tags associated with the signing profile.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+    *     :py:class:`signer.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`signer.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: put_signing_profile(**kwargs)
+
+    
+
+    Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see `http\://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html <http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html>`__  
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/PutSigningProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_signing_profile(
+          profileName='string',
+          signingMaterial={
+              'certificateArn': 'string'
+          },
+          signatureValidityPeriod={
+              'value': 123,
+              'type': 'DAYS'|'MONTHS'|'YEARS'
+          },
+          platformId='string',
+          overrides={
+              'signingConfiguration': {
+                  'encryptionAlgorithm': 'RSA'|'ECDSA',
+                  'hashAlgorithm': 'SHA1'|'SHA256'
+              },
+              'signingImageFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+          },
+          signingParameters={
+              'string': 'string'
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The name of the signing profile to be created.
+
+      
+
+    
+    :type signingMaterial: dict
+    :param signingMaterial: 
+
+      The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
+
+      
+
+    
+      - **certificateArn** *(string) --* **[REQUIRED]** 
+
+        The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+        
+
+      
+    
+    :type signatureValidityPeriod: dict
+    :param signatureValidityPeriod: 
+
+      The default validity period override for any signature generated using this signing profile. If unspecified, the default is 135 months.
+
+      
+
+    
+      - **value** *(integer) --* 
+
+        The numerical value of the time unit for signature validity.
+
+        
+
+      
+      - **type** *(string) --* 
+
+        The time unit for signature validity.
+
+        
+
+      
+    
+    :type platformId: string
+    :param platformId: **[REQUIRED]** 
+
+      The ID of the signing platform to be created.
+
+      
+
+    
+    :type overrides: dict
+    :param overrides: 
+
+      A subfield of ``platform`` . This specifies any different configuration options that you want to apply to the chosen platform (such as a different ``hash-algorithm`` or ``signing-algorithm`` ).
+
+      
+
+    
+      - **signingConfiguration** *(dict) --* 
+
+        A signing configuration that overrides the default encryption or hash algorithm of a signing job.
+
+        
+
+      
+        - **encryptionAlgorithm** *(string) --* 
+
+          A specified override of the default encryption algorithm that is used in a code signing job.
+
+          
+
+        
+        - **hashAlgorithm** *(string) --* 
+
+          A specified override of the default hash algorithm that is used in a code signing job.
+
+          
+
+        
+      
+      - **signingImageFormat** *(string) --* 
+
+        A signed image is a JSON object. When overriding the default signing platform configuration, a customer can select either of two signing formats, ``JSONEmbedded`` or ``JSONDetached`` . (A third format value, ``JSON`` , is reserved for future use.) With ``JSONEmbedded`` , the signing image has the payload embedded in it. With ``JSONDetached`` , the payload is not be embedded in the signing image.
+
+        
+
+      
+    
+    :type signingParameters: dict
+    :param signingParameters: 
+
+      Map of key-value pairs for signing. These can include any information that you want to use during signing.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type tags: dict
+    :param tags: 
+
+      Tags to be associated with the signing profile that is being created.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string',
+            'profileVersion': 'string',
+            'profileVersionArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the signing profile created.
+
+          
+        
+
+        - **profileVersion** *(string) --* 
+
+          The version of the signing profile being created.
+
+          
+        
+
+        - **profileVersionArn** *(string) --* 
+
+          The signing profile ARN, including the profile version.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: remove_profile_permission(**kwargs)
+
+    
+
+    Removes cross-account permissions from a signing profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RemoveProfilePermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.remove_profile_permission(
+          profileName='string',
+          revisionId='string',
+          statementId='string'
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      A human-readable name for the signing profile with permissions to be removed.
+
+      
+
+    
+    :type revisionId: string
+    :param revisionId: **[REQUIRED]** 
+
+      An identifier for the current revision of the signing profile permissions.
+
+      
+
+    
+    :type statementId: string
+    :param statementId: **[REQUIRED]** 
+
+      A unique identifier for the cross-account permissions statement.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'revisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **revisionId** *(string) --* 
+
+          An identifier for the current revision of the profile permissions.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: revoke_signature(**kwargs)
+
+    
+
+    Changes the state of a signing job to REVOKED. This indicates that the signature is no longer valid.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RevokeSignature>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.revoke_signature(
+          jobId='string',
+          jobOwner='string',
+          reason='string'
+      )
+    :type jobId: string
+    :param jobId: **[REQUIRED]** 
+
+      ID of the signing job to be revoked.
+
+      
+
+    
+    :type jobOwner: string
+    :param jobOwner: 
+
+      AWS account ID of the job owner.
+
+      
+
+    
+    :type reason: string
+    :param reason: **[REQUIRED]** 
+
+      The reason for revoking the signing job.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: revoke_signing_profile(**kwargs)
+
+    
+
+    Changes the state of a signing profile to REVOKED. This indicates that signatures generated using the signing profile after an effective start date are no longer valid.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/RevokeSigningProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.revoke_signing_profile(
+          profileName='string',
+          profileVersion='string',
+          reason='string',
+          effectiveTime=datetime(2015, 1, 1)
+      )
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The name of the signing profile to be revoked.
+
+      
+
+    
+    :type profileVersion: string
+    :param profileVersion: **[REQUIRED]** 
+
+      The version of the signing profile to be revoked.
+
+      
+
+    
+    :type reason: string
+    :param reason: **[REQUIRED]** 
+
+      The reason for revoking a signing profile.
+
+      
+
+    
+    :type effectiveTime: datetime
+    :param effectiveTime: **[REQUIRED]** 
+
+      A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: start_signing_job(**kwargs)
+
+    
+
+    Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ``ListSigningJobs`` operation for two years after they are performed. Note the following requirements: 
+
+     
+
+     
+    * You must create an Amazon S3 source bucket. For more information, see `Create a Bucket <http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html>`__ in the *Amazon S3 Getting Started Guide* .  
+     
+    * Your S3 source bucket must be version enabled. 
+     
+    * You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code. 
+     
+    * You specify the name of the source and destination buckets when calling the ``StartSigningJob`` operation. 
+     
+    * You must also specify a request token that identifies your request to code signing. 
+     
+
+     
+
+    You can call the  DescribeSigningJob and the  ListSigningJobs actions after you call ``StartSigningJob`` .
+
+     
+
+    For a Java example that shows how to use this action, see `http\://docs.aws.amazon.com/acm/latest/userguide/ <http://docs.aws.amazon.com/acm/latest/userguide/>`__  
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/StartSigningJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_signing_job(
+          source={
+              's3': {
+                  'bucketName': 'string',
+                  'key': 'string',
+                  'version': 'string'
+              }
+          },
+          destination={
+              's3': {
+                  'bucketName': 'string',
+                  'prefix': 'string'
+              }
+          },
+          profileName='string',
+          clientRequestToken='string',
+          profileOwner='string'
+      )
+    :type source: dict
+    :param source: **[REQUIRED]** 
+
+      The S3 bucket that contains the object to sign or a BLOB that contains your raw code.
+
+      
+
+    
+      - **s3** *(dict) --* 
+
+        The ``S3Source`` object.
+
+        
+
+      
+        - **bucketName** *(string) --* **[REQUIRED]** 
+
+          Name of the S3 bucket.
+
+          
+
+        
+        - **key** *(string) --* **[REQUIRED]** 
+
+          Key name of the bucket object that contains your unsigned code.
+
+          
+
+        
+        - **version** *(string) --* **[REQUIRED]** 
+
+          Version of your source image in your version enabled S3 bucket.
+
+          
+
+        
+      
+    
+    :type destination: dict
+    :param destination: **[REQUIRED]** 
+
+      The S3 bucket in which to save your signed object. The destination contains the name of your bucket and an optional prefix.
+
+      
+
+    
+      - **s3** *(dict) --* 
+
+        The ``S3Destination`` object.
+
+        
+
+      
+        - **bucketName** *(string) --* 
+
+          Name of the S3 bucket.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
+
+          
+
+        
+      
+    
+    :type profileName: string
+    :param profileName: **[REQUIRED]** 
+
+      The name of the signing profile.
+
+      
+
+    
+    :type clientRequestToken: string
+    :param clientRequestToken: **[REQUIRED]** 
+
+      String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
+
+      This field is autopopulated if not provided.
+
+    
+    :type profileOwner: string
+    :param profileOwner: 
+
+      The AWS account ID of the signing profile owner.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobId': 'string',
+            'jobOwner': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobId** *(string) --* 
+
+          The ID of your signing job.
+
+          
+        
+
+        - **jobOwner** *(string) --* 
+
+          The AWS account ID of the signing job owner.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`signer.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds one or more tags to a signing profile. Tags are labels that you can use to identify and organize your AWS resources. Each tag consists of a key and an optional value. To specify the signing profile, use its Amazon Resource Name (ARN). To specify the tag, use a key-value pair.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the signing profile.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      One or more tags to be associated with the signing profile.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+    *     :py:class:`signer.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`signer.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes one or more tags from a signing profile. To remove the tags, specify a list of tag keys.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the signing profile.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      A list of tag keys to be removed from the signing profile.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`signer.Client.exceptions.InternalServiceErrorException`
+
+    
+    *     :py:class:`signer.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`signer.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`signer.Client.exceptions.TooManyRequestsException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`signer.Paginator.ListSigningJobs`
+
+
+* :py:class:`signer.Paginator.ListSigningPlatforms`
+
+
+* :py:class:`signer.Paginator.ListSigningProfiles`
+
+
+
+.. py:class:: signer.Paginator.ListSigningJobs
+
+  ::
+
+    
+    paginator = client.get_paginator('list_signing_jobs')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`signer.Client.list_signing_jobs`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          status='InProgress'|'Failed'|'Succeeded',
+          platformId='string',
+          requestedBy='string',
+          isRevoked=True|False,
+          signatureExpiresBefore=datetime(2015, 1, 1),
+          signatureExpiresAfter=datetime(2015, 1, 1),
+          jobInvoker='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type status: string
+    :param status: 
+
+      A status value with which to filter your results.
+
+      
+
+    
+    :type platformId: string
+    :param platformId: 
+
+      The ID of microcontroller platform that you specified for the distribution of your code image.
+
+      
+
+    
+    :type requestedBy: string
+    :param requestedBy: 
+
+      The IAM principal that requested the signing job.
+
+      
+
+    
+    :type isRevoked: boolean
+    :param isRevoked: 
+
+      Filters results to return only signing jobs with revoked signatures.
+
+      
+
+    
+    :type signatureExpiresBefore: datetime
+    :param signatureExpiresBefore: 
+
+      Filters results to return only signing jobs with signatures expiring before a specified timestamp.
+
+      
+
+    
+    :type signatureExpiresAfter: datetime
+    :param signatureExpiresAfter: 
+
+      Filters results to return only signing jobs with signatures expiring after a specified timestamp.
+
+      
+
+    
+    :type jobInvoker: string
+    :param jobInvoker: 
+
+      Filters results to return only signing jobs initiated by a specified IAM entity.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobs': [
+                {
+                    'jobId': 'string',
+                    'source': {
+                        's3': {
+                            'bucketName': 'string',
+                            'key': 'string',
+                            'version': 'string'
+                        }
+                    },
+                    'signedObject': {
+                        's3': {
+                            'bucketName': 'string',
+                            'key': 'string'
+                        }
+                    },
+                    'signingMaterial': {
+                        'certificateArn': 'string'
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'status': 'InProgress'|'Failed'|'Succeeded',
+                    'isRevoked': True|False,
+                    'profileName': 'string',
+                    'profileVersion': 'string',
+                    'platformId': 'string',
+                    'platformDisplayName': 'string',
+                    'signatureExpiresAt': datetime(2015, 1, 1),
+                    'jobOwner': 'string',
+                    'jobInvoker': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobs** *(list) --* 
+
+          A list of your signing jobs.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a signing job.
+
+            
+            
+
+            - **jobId** *(string) --* 
+
+              The ID of the signing job.
+
+              
+            
+
+            - **source** *(dict) --* 
+
+              A ``Source`` that contains information about a signing job's code image source.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                The ``S3Source`` object.
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Name of the S3 bucket.
+
+                  
+                
+
+                - **key** *(string) --* 
+
+                  Key name of the bucket object that contains your unsigned code.
+
+                  
+                
+
+                - **version** *(string) --* 
+
+                  Version of your source image in your version enabled S3 bucket.
+
+                  
+            
+          
+            
+
+            - **signedObject** *(dict) --* 
+
+              A ``SignedObject`` structure that contains information about a signing job's signed code image.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                The ``S3SignedObject`` .
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Name of the S3 bucket.
+
+                  
+                
+
+                - **key** *(string) --* 
+
+                  Key name that uniquely identifies a signed code image in your bucket.
+
+                  
+            
+          
+            
+
+            - **signingMaterial** *(dict) --* 
+
+              A ``SigningMaterial`` object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
+
+              
+              
+
+              - **certificateArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+                
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time that the signing job was created.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the signing job.
+
+              
+            
+
+            - **isRevoked** *(boolean) --* 
+
+              Indicates whether the signing job is revoked.
+
+              
+            
+
+            - **profileName** *(string) --* 
+
+              The name of the signing profile that created a signing job.
+
+              
+            
+
+            - **profileVersion** *(string) --* 
+
+              The version of the signing profile that created a signing job.
+
+              
+            
+
+            - **platformId** *(string) --* 
+
+              The unique identifier for a signing platform.
+
+              
+            
+
+            - **platformDisplayName** *(string) --* 
+
+              The name of a signing platform.
+
+              
+            
+
+            - **signatureExpiresAt** *(datetime) --* 
+
+              The time when the signature of a signing job expires.
+
+              
+            
+
+            - **jobOwner** *(string) --* 
+
+              The AWS account ID of the job owner.
+
+              
+            
+
+            - **jobInvoker** *(string) --* 
+
+              The AWS account ID of the job invoker.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: signer.Paginator.ListSigningPlatforms
+
+  ::
+
+    
+    paginator = client.get_paginator('list_signing_platforms')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`signer.Client.list_signing_platforms`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningPlatforms>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          category='string',
+          partner='string',
+          target='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type category: string
+    :param category: 
+
+      The category type of a signing platform.
+
+      
+
+    
+    :type partner: string
+    :param partner: 
+
+      Any partner entities connected to a signing platform.
+
+      
+
+    
+    :type target: string
+    :param target: 
+
+      The validation template that is used by the target signing platform.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'platforms': [
+                {
+                    'platformId': 'string',
+                    'displayName': 'string',
+                    'partner': 'string',
+                    'target': 'string',
+                    'category': 'AWSIoT',
+                    'signingConfiguration': {
+                        'encryptionAlgorithmOptions': {
+                            'allowedValues': [
+                                'RSA'|'ECDSA',
+                            ],
+                            'defaultValue': 'RSA'|'ECDSA'
+                        },
+                        'hashAlgorithmOptions': {
+                            'allowedValues': [
+                                'SHA1'|'SHA256',
+                            ],
+                            'defaultValue': 'SHA1'|'SHA256'
+                        }
+                    },
+                    'signingImageFormat': {
+                        'supportedFormats': [
+                            'JSON'|'JSONEmbedded'|'JSONDetached',
+                        ],
+                        'defaultFormat': 'JSON'|'JSONEmbedded'|'JSONDetached'
+                    },
+                    'maxSizeInMB': 123,
+                    'revocationSupported': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **platforms** *(list) --* 
+
+          A list of all platforms that match the request parameters.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the signing configurations and parameters that are used to perform a code signing job.
+
+            
+            
+
+            - **platformId** *(string) --* 
+
+              The ID of a code signing; platform.
+
+              
+            
+
+            - **displayName** *(string) --* 
+
+              The display name of a code signing platform.
+
+              
+            
+
+            - **partner** *(string) --* 
+
+              Any partner entities linked to a code signing platform.
+
+              
+            
+
+            - **target** *(string) --* 
+
+              The types of targets that can be signed by a code signing platform.
+
+              
+            
+
+            - **category** *(string) --* 
+
+              The category of a code signing platform.
+
+              
+            
+
+            - **signingConfiguration** *(dict) --* 
+
+              The configuration of a code signing platform. This includes the designated hash algorithm and encryption algorithm of a signing platform.
+
+              
+              
+
+              - **encryptionAlgorithmOptions** *(dict) --* 
+
+                The encryption algorithm options that are available for a code signing job.
+
+                
+                
+
+                - **allowedValues** *(list) --* 
+
+                  The set of accepted encryption algorithms that are allowed in a code signing job.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **defaultValue** *(string) --* 
+
+                  The default encryption algorithm that is used by a code signing job.
+
+                  
+            
+              
+
+              - **hashAlgorithmOptions** *(dict) --* 
+
+                The hash algorithm options that are available for a code signing job.
+
+                
+                
+
+                - **allowedValues** *(list) --* 
+
+                  The set of accepted hash algorithms allowed in a code signing job.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **defaultValue** *(string) --* 
+
+                  The default hash algorithm that is used in a code signing job.
+
+                  
+            
+          
+            
+
+            - **signingImageFormat** *(dict) --* 
+
+              The image format of a code signing platform or profile.
+
+              
+              
+
+              - **supportedFormats** *(list) --* 
+
+                The supported formats of a code signing image.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **defaultFormat** *(string) --* 
+
+                The default format of a code signing image.
+
+                
+          
+            
+
+            - **maxSizeInMB** *(integer) --* 
+
+              The maximum size (in MB) of code that can be signed by a code signing platform.
+
+              
+            
+
+            - **revocationSupported** *(boolean) --* 
+
+              Indicates whether revocation is supported for the platform.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: signer.Paginator.ListSigningProfiles
+
+  ::
+
+    
+    paginator = client.get_paginator('list_signing_profiles')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`signer.Client.list_signing_profiles`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/ListSigningProfiles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          includeCanceled=True|False,
+          platformId='string',
+          statuses=[
+              'Active'|'Canceled'|'Revoked',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type includeCanceled: boolean
+    :param includeCanceled: 
+
+      Designates whether to include profiles with the status of ``CANCELED`` .
+
+      
+
+    
+    :type platformId: string
+    :param platformId: 
+
+      Filters results to return only signing jobs initiated for a specified signing platform.
+
+      
+
+    
+    :type statuses: list
+    :param statuses: 
+
+      Filters results to return only signing jobs with statuses in the specified list.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profiles': [
+                {
+                    'profileName': 'string',
+                    'profileVersion': 'string',
+                    'profileVersionArn': 'string',
+                    'signingMaterial': {
+                        'certificateArn': 'string'
+                    },
+                    'signatureValidityPeriod': {
+                        'value': 123,
+                        'type': 'DAYS'|'MONTHS'|'YEARS'
+                    },
+                    'platformId': 'string',
+                    'platformDisplayName': 'string',
+                    'signingParameters': {
+                        'string': 'string'
+                    },
+                    'status': 'Active'|'Canceled'|'Revoked',
+                    'arn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **profiles** *(list) --* 
+
+          A list of profiles that are available in the AWS account. This includes profiles with the status of ``CANCELED`` if the ``includeCanceled`` parameter is set to ``true`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the ACM certificates and code signing configuration parameters that can be used by a given code signing user.
+
+            
+            
+
+            - **profileName** *(string) --* 
+
+              The name of the signing profile.
+
+              
+            
+
+            - **profileVersion** *(string) --* 
+
+              The version of a signing profile.
+
+              
+            
+
+            - **profileVersionArn** *(string) --* 
+
+              The ARN of a signing profile, including the profile version.
+
+              
+            
+
+            - **signingMaterial** *(dict) --* 
+
+              The ACM certificate that is available for use by a signing profile.
+
+              
+              
+
+              - **certificateArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+
+                
+          
+            
+
+            - **signatureValidityPeriod** *(dict) --* 
+
+              The validity period for a signing job created using this signing profile.
+
+              
+              
+
+              - **value** *(integer) --* 
+
+                The numerical value of the time unit for signature validity.
+
+                
+              
+
+              - **type** *(string) --* 
+
+                The time unit for signature validity.
+
+                
+          
+            
+
+            - **platformId** *(string) --* 
+
+              The ID of a platform that is available for use by a signing profile.
+
+              
+            
+
+            - **platformDisplayName** *(string) --* 
+
+              The name of the signing platform.
+
+              
+            
+
+            - **signingParameters** *(dict) --* 
+
+              The parameters that are available for use by a code signing user.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **status** *(string) --* 
+
+              The status of a code signing profile.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) for the signing profile.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              A list of tags associated with the signing profile.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+=======
+Waiters
+=======
+
+
+The available waiters are:
+
+* :py:class:`signer.Waiter.SuccessfulSigningJob`
+
+
+
+.. py:class:: signer.Waiter.SuccessfulSigningJob
+
+  ::
+
+    
+    waiter = client.get_waiter('successful_signing_job')
+
+  
+  
+
+  .. py:method:: wait(**kwargs)
+
+    Polls :py:meth:`signer.Client.describe_signing_job` every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/signer-2017-08-25/DescribeSigningJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      waiter.wait(
+          jobId='string',
+          WaiterConfig={
+              'Delay': 123,
+              'MaxAttempts': 123
+          }
+      )
+    :type jobId: string
+    :param jobId: **[REQUIRED]** 
+
+      The ID of the signing job on input.
+
+      
+
+    
+    :type WaiterConfig: dict
+    :param WaiterConfig: 
+
+      A dictionary that provides parameters to control waiting behavior.
+
+      
+
+    
+      - **Delay** *(integer) --* 
+
+        The amount of time in seconds to wait between attempts. Default: 20
+
+        
+
+      
+      - **MaxAttempts** *(integer) --* 
+
+        The maximum number of attempts to be made. Default: 25
+
+        
+
+      
+    
+    
+    :returns: None

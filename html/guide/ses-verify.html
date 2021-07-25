@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Use Amazon SES API to verify email addresses and domains." name="description" />
+<meta content="SES Python" name="keywords" />
+
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Verifying email identities in Amazon SES &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon SES examples" href="ses-examples.html" />
+    <link rel="next" title="Creating custom email templates with Amazon SES" href="ses-template.html" />
+    <link rel="prev" title="Amazon SES examples" href="ses-examples.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ses-template.html" title="Creating custom email templates with Amazon SES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ses-examples.html" title="Amazon SES examples"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ses-examples.html" accesskey="U">Amazon SES examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="ses-examples.html">Amazon SES examples</a></li>
+              
+              <li>Verifying email identities in Amazon SES</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="verifying-email-identities-in-amazon-ses">
+<span id="aws-boto3-ses-verify"></span><h1>Verifying email identities in Amazon SES<a class="headerlink" href="#verifying-email-identities-in-amazon-ses" title="Permalink to this headline">¶</a></h1>
+<p>When you first start using your Amazon Simple Email Service (SES) account,
+all senders and recipients must be verified in the same AWS Region that you
+will be sending emails to. For more information about sending emails, see
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-email.html">Sending Email with Amazon
+SES</a>.</p>
+<p>The following examples show how to:</p>
+<ul class="simple">
+<li>Verify an email address using <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.verify_email_identity">verify_email_identity()</a>.</li>
+<li>Verify an email domain using <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.verify_domain_identity">verify_domain_identity()</a>.</li>
+<li>List all email addresses or domains using <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.list_identities">list_identities()</a>.</li>
+<li>Remove an email address or domain using <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.delete_identity">delete_identity()</a>.</li>
+</ul>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first complete these tasks:</p>
+<ul class="simple">
+<li>Configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="verify-an-email-address">
+<h2>Verify an email address<a class="headerlink" href="#verify-an-email-address" title="Permalink to this headline">¶</a></h2>
+<p>SES can send email only from verified email addresses or domains. By
+verifying an email address, you demonstrate that you're the owner of that
+address and want to allow SES to send email from that address.</p>
+<p>When you run the following code example, SES sends an email to the address
+you specified. When you (or the recipient of the email) click the link in
+the email, the address is verified.</p>
+<p>To add an email address to your SES account, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_VerifyEmailIdentity.html">VerifyEmailIdentity</a>
+operation.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">verify_email_identity</span><span class="p">(</span>
+  <span class="n">EmailAddress</span> <span class="o">=</span> <span class="s1">&#39;EMAIL_ADDRESS&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="verify-an-email-domain">
+<h2>Verify an email domain<a class="headerlink" href="#verify-an-email-domain" title="Permalink to this headline">¶</a></h2>
+<p>SES can send email only from verified email addresses or domains. By verifying
+a domain, you demonstrate that you're the owner of that domain. When you
+verify a domain, you allow SES to send email from any address on that domain.</p>
+<p>When you run the following code example, SES provides you with a verification
+token. You have to add the token to your domain's DNS configuration. For more
+information, see <a class="reference external" href="http://aws.amazon.com/documentation/ses/verify-domain-procedure.html">Verifying a Domain with Amazon
+SES</a>.</p>
+<p>To add a sending domain to your SES account, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_VerifyDomainIdentity.html">VerifyDomainIdentity</a>
+operation.</p>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">verify_domain_identity</span><span class="p">(</span>
+  <span class="n">Domain</span><span class="o">=</span><span class="s1">&#39;DOMAIN_NAME&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list-email-addresses">
+<h2>List email addresses<a class="headerlink" href="#list-email-addresses" title="Permalink to this headline">¶</a></h2>
+<p>To retrieve a list of email addresses submitted in the current AWS Region,
+regardless of verification status, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ListIdentities.html">ListIdentities</a>
+operation.</p>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">list_identities</span><span class="p">(</span>
+  <span class="n">IdentityType</span> <span class="o">=</span> <span class="s1">&#39;EmailAddress&#39;</span><span class="p">,</span>
+  <span class="n">MaxItems</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list-email-domains">
+<h2>List email domains<a class="headerlink" href="#list-email-domains" title="Permalink to this headline">¶</a></h2>
+<p>To retrieve a list of email domains submitted in the current AWS Region,
+regardless of verification status use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ListIdentities.html">ListIdentities</a>
+operation.</p>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">list_identities</span><span class="p">(</span>
+  <span class="n">IdentityType</span> <span class="o">=</span> <span class="s1">&#39;Domain&#39;</span><span class="p">,</span>
+  <span class="n">MaxItems</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="delete-an-email-address">
+<h2>Delete an email address<a class="headerlink" href="#delete-an-email-address" title="Permalink to this headline">¶</a></h2>
+<p>To delete a verified email address from the list of verified identities, use
+the <a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_DeleteIdentity.html">DeleteIdentity</a>
+operation.</p>
+<div class="section" id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">delete_identity</span><span class="p">(</span>
+  <span class="n">Identity</span> <span class="o">=</span> <span class="s1">&#39;EMAIL_ADDRESS&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="delete-an-email-domain">
+<h2>Delete an email domain<a class="headerlink" href="#delete-an-email-domain" title="Permalink to this headline">¶</a></h2>
+<p>To delete a verified email domain from the list of verified identities, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_DeleteIdentity.html">DeleteIdentity</a>
+operation.</p>
+<div class="section" id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">delete_identity</span><span class="p">(</span>
+  <span class="n">Identity</span> <span class="o">=</span> <span class="s1">&#39;DOMAIN_NAME&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="ses-examples.html" title="previous chapter (use the left arrow)">Amazon SES examples</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="ses-template.html" title="next chapter (use the right arrow)">Creating custom email templates with Amazon SES</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ses-template.html" title="Creating custom email templates with Amazon SES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ses-examples.html" title="Amazon SES examples"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ses-examples.html" >Amazon SES examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

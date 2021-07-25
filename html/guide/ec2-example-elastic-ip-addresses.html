@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Using Elastic IP addresses in Amazon EC2 &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon EC2 examples" href="ec2-examples.html" />
+    <link rel="next" title="AWS Identity and Access Management examples" href="iam-examples.html" />
+    <link rel="prev" title="Working with security groups in Amazon EC2" href="ec2-example-security-group.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="iam-examples.html" title="AWS Identity and Access Management examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ec2-example-security-group.html" title="Working with security groups in Amazon EC2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ec2-examples.html" accesskey="U">Amazon EC2 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="ec2-examples.html">Amazon EC2 examples</a></li>
+              
+              <li>Using Elastic IP addresses in Amazon EC2</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="using-elastic-ip-addresses-in-amazon-ec2">
+<span id="aws-boto-ec2-example-elastic-ip-addresses"></span><h1>Using Elastic IP addresses in Amazon EC2<a class="headerlink" href="#using-elastic-ip-addresses-in-amazon-ec2" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to:</p>
+<ul class="simple">
+<li>Get descriptions of your Elastic IP addresses</li>
+<li>Allocate an Elastic IP address</li>
+<li>Release an Elastic IP address</li>
+</ul>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>An Elastic IP address is a static IP address designed for dynamic cloud computing. An Elastic IP
+address is associated with your AWS account. It is a public IP address, which is reachable from the
+Internet. If your instance does not have a public IP address, you can associate an Elastic IP address
+with your instance to enable communication with the Internet.</p>
+<p>In this example, Python code performs several Amazon EC2 operations involving Elastic IP addresses.
+The code uses the AWS SDK for Python to manage IAM access keys using these methods of the EC2
+client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_addresses">describe_addresses</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.allocate_address">allocate_address</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.release_address">release_address</a>.</li>
+</ul>
+<p>For more information about Elastic IP addresses in Amazon EC2, see
+<a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a>
+in the <em>Amazon EC2 User Guide for Linux Instances</em> or
+<a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html">Elastic IP Addresses</a> in the <em>Amazon EC2 User Guide for Windows Instances</em>.
+Prerequisite Tasks</p>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</div>
+<div class="section" id="describe-elastic-ip-addresses">
+<h2>Describe Elastic IP addresses<a class="headerlink" href="#describe-elastic-ip-addresses" title="Permalink to this headline">¶</a></h2>
+<p>An Elastic IP address is a static IPv4 address designed for dynamic cloud computing. An Elastic IP
+address is associated with your AWS account. With an Elastic IP address, you can mask the failure of
+an instance or software by rapidly remapping the address to another instance in your account.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Describe Elastic IP addresses using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.describe_addresses">describe_addresses</a>.</li>
+</ul>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+
+<span class="n">ec2</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ec2&#39;</span><span class="p">)</span>
+<span class="n">filters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;Values&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;vpc&#39;</span><span class="p">]}</span>
+<span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">describe_addresses</span><span class="p">(</span><span class="n">Filters</span><span class="o">=</span><span class="n">filters</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="allocate-and-associate-an-elastic-ip-address-with-an-amazon-ec2-instance">
+<h2>Allocate and associate an Elastic IP address with an Amazon EC2 instance<a class="headerlink" href="#allocate-and-associate-an-elastic-ip-address-with-an-amazon-ec2-instance" title="Permalink to this headline">¶</a></h2>
+<p>An <em>Elastic IP address</em> is a static IPv4 address designed for dynamic cloud computing. An Elastic IP
+address is associated with your AWS account. With an Elastic IP address, you can mask the failure of
+an instance or software by rapidly remapping the address to another instance in your account.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Acquire an Elastic IP address using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.allocate_address">allocate_address</a>.</li>
+</ul>
+<div class="section" id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+
+<span class="n">ec2</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ec2&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">allocation</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">allocate_address</span><span class="p">(</span><span class="n">Domain</span><span class="o">=</span><span class="s1">&#39;vpc&#39;</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">associate_address</span><span class="p">(</span><span class="n">AllocationId</span><span class="o">=</span><span class="n">allocation</span><span class="p">[</span><span class="s1">&#39;AllocationId&#39;</span><span class="p">],</span>
+                                     <span class="n">InstanceId</span><span class="o">=</span><span class="s1">&#39;INSTANCE_ID&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="release-an-elastic-ip-address">
+<h2>Release an Elastic IP address<a class="headerlink" href="#release-an-elastic-ip-address" title="Permalink to this headline">¶</a></h2>
+<p>After releasing an Elastic IP address, it is released to the IP address pool and might be unavailable
+to you. Be sure to update your DNS records and any servers or devices that communicate with the address.
+If you attempt to release an Elastic IP address that you already released, you'll get an <tt class="code docutils literal"><span class="pre">AuthFailure</span></tt>
+error if the address is already allocated to another AWS account.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Release the specified Elastic IP address using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html#EC2.Client.release_address">release_address</a>.</li>
+</ul>
+<div class="section" id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+
+
+<span class="n">ec2</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ec2&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">ec2</span><span class="o">.</span><span class="n">release_address</span><span class="p">(</span><span class="n">AllocationId</span><span class="o">=</span><span class="s1">&#39;ALLOCATION_ID&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Address released&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="ec2-example-security-group.html" title="previous chapter (use the left arrow)">Working with security groups in Amazon EC2</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="iam-examples.html" title="next chapter (use the right arrow)">AWS Identity and Access Management examples</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="iam-examples.html" title="AWS Identity and Access Management examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ec2-example-security-group.html" title="Working with security groups in Amazon EC2"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ec2-examples.html" >Amazon EC2 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

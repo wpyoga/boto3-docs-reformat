@@ -1,0 +1,5949 @@
+
+
+***
+RAM
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: RAM.Client
+
+  A low-level client representing AWS Resource Access Manager (RAM)
+  
+
+  Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you create a resource share, associate the resource with the resource share, and specify the principals that can access the resources associated with the resource share. The following principals are supported: AWS accounts, organizational units (OU) from AWS Organizations, and organizations from AWS Organizations.
+
+   
+
+  For more information, see the `AWS Resource Access Manager User Guide <https://docs.aws.amazon.com/ram/latest/userguide/>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ram')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~RAM.Client.accept_resource_share_invitation`
+
+  
+  *   :py:meth:`~RAM.Client.associate_resource_share`
+
+  
+  *   :py:meth:`~RAM.Client.associate_resource_share_permission`
+
+  
+  *   :py:meth:`~RAM.Client.can_paginate`
+
+  
+  *   :py:meth:`~RAM.Client.create_resource_share`
+
+  
+  *   :py:meth:`~RAM.Client.delete_resource_share`
+
+  
+  *   :py:meth:`~RAM.Client.disassociate_resource_share`
+
+  
+  *   :py:meth:`~RAM.Client.disassociate_resource_share_permission`
+
+  
+  *   :py:meth:`~RAM.Client.enable_sharing_with_aws_organization`
+
+  
+  *   :py:meth:`~RAM.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~RAM.Client.get_paginator`
+
+  
+  *   :py:meth:`~RAM.Client.get_permission`
+
+  
+  *   :py:meth:`~RAM.Client.get_resource_policies`
+
+  
+  *   :py:meth:`~RAM.Client.get_resource_share_associations`
+
+  
+  *   :py:meth:`~RAM.Client.get_resource_share_invitations`
+
+  
+  *   :py:meth:`~RAM.Client.get_resource_shares`
+
+  
+  *   :py:meth:`~RAM.Client.get_waiter`
+
+  
+  *   :py:meth:`~RAM.Client.list_pending_invitation_resources`
+
+  
+  *   :py:meth:`~RAM.Client.list_permissions`
+
+  
+  *   :py:meth:`~RAM.Client.list_principals`
+
+  
+  *   :py:meth:`~RAM.Client.list_resource_share_permissions`
+
+  
+  *   :py:meth:`~RAM.Client.list_resource_types`
+
+  
+  *   :py:meth:`~RAM.Client.list_resources`
+
+  
+  *   :py:meth:`~RAM.Client.promote_resource_share_created_from_policy`
+
+  
+  *   :py:meth:`~RAM.Client.reject_resource_share_invitation`
+
+  
+  *   :py:meth:`~RAM.Client.tag_resource`
+
+  
+  *   :py:meth:`~RAM.Client.untag_resource`
+
+  
+  *   :py:meth:`~RAM.Client.update_resource_share`
+
+  
+
+  .. py:method:: accept_resource_share_invitation(**kwargs)
+
+    
+
+    Accepts an invitation to a resource share from another AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AcceptResourceShareInvitation>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.accept_resource_share_invitation(
+          resourceShareInvitationArn='string',
+          clientToken='string'
+      )
+    :type resourceShareInvitationArn: string
+    :param resourceShareInvitationArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the invitation.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareInvitation': {
+                'resourceShareInvitationArn': 'string',
+                'resourceShareName': 'string',
+                'resourceShareArn': 'string',
+                'senderAccountId': 'string',
+                'receiverAccountId': 'string',
+                'invitationTimestamp': datetime(2015, 1, 1),
+                'status': 'PENDING'|'ACCEPTED'|'REJECTED'|'EXPIRED',
+                'resourceShareAssociations': [
+                    {
+                        'resourceShareArn': 'string',
+                        'resourceShareName': 'string',
+                        'associatedEntity': 'string',
+                        'associationType': 'PRINCIPAL'|'RESOURCE',
+                        'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                        'statusMessage': 'string',
+                        'creationTime': datetime(2015, 1, 1),
+                        'lastUpdatedTime': datetime(2015, 1, 1),
+                        'external': True|False
+                    },
+                ],
+                'receiverArn': 'string'
+            },
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareInvitation** *(dict) --* 
+
+          Information about the invitation.
+
+          
+          
+
+          - **resourceShareInvitationArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the invitation.
+
+            
+          
+
+          - **resourceShareName** *(string) --* 
+
+            The name of the resource share.
+
+            
+          
+
+          - **resourceShareArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the resource share.
+
+            
+          
+
+          - **senderAccountId** *(string) --* 
+
+            The ID of the AWS account that sent the invitation.
+
+            
+          
+
+          - **receiverAccountId** *(string) --* 
+
+            The ID of the AWS account that received the invitation.
+
+            
+          
+
+          - **invitationTimestamp** *(datetime) --* 
+
+            The date and time when the invitation was sent.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of the invitation.
+
+            
+          
+
+          - **resourceShareAssociations** *(list) --* 
+
+            To view the resources associated with a pending resource share invitation, use `ListPendingInvitationResources <https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html>`__ .
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes an association with a resource share.
+
+              
+              
+
+              - **resourceShareArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the resource share.
+
+                
+              
+
+              - **resourceShareName** *(string) --* 
+
+                The name of the resource share.
+
+                
+              
+
+              - **associatedEntity** *(string) --* 
+
+                The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+                
+              
+
+              - **associationType** *(string) --* 
+
+                The association type.
+
+                
+              
+
+              - **status** *(string) --* 
+
+                The status of the association.
+
+                
+              
+
+              - **statusMessage** *(string) --* 
+
+                A message about the status of the association.
+
+                
+              
+
+              - **creationTime** *(datetime) --* 
+
+                The time when the association was created.
+
+                
+              
+
+              - **lastUpdatedTime** *(datetime) --* 
+
+                The time when the association was last updated.
+
+                
+              
+
+              - **external** *(boolean) --* 
+
+                Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+                
+          
+        
+          
+
+          - **receiverArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
+
+            
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationAlreadyAcceptedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationAlreadyRejectedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationExpiredException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+
+  .. py:method:: associate_resource_share(**kwargs)
+
+    
+
+    Associates the specified resource share with the specified principals and resources.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_resource_share(
+          resourceShareArn='string',
+          resourceArns=[
+              'string',
+          ],
+          principals=[
+              'string',
+          ],
+          clientToken='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type resourceArns: list
+    :param resourceArns: 
+
+      The Amazon Resource Names (ARN) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type principals: list
+    :param principals: 
+
+      The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareAssociations': [
+                {
+                    'resourceShareArn': 'string',
+                    'resourceShareName': 'string',
+                    'associatedEntity': 'string',
+                    'associationType': 'PRINCIPAL'|'RESOURCE',
+                    'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareAssociations** *(list) --* 
+
+          Information about the associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an association with a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **associatedEntity** *(string) --* 
+
+              The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+              
+            
+
+            - **associationType** *(string) --* 
+
+              The association type.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the association.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the association.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the association was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareLimitExceededException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+
+  .. py:method:: associate_resource_share_permission(**kwargs)
+
+    
+
+    Associates a permission with a resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/AssociateResourceSharePermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_resource_share_permission(
+          resourceShareArn='string',
+          permissionArn='string',
+          replace=True|False,
+          clientToken='string',
+          permissionVersion=123
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type permissionArn: string
+    :param permissionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
+
+      
+
+    
+    :type replace: boolean
+    :param replace: 
+
+      Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use ``true`` to replace the current permissions. Use ``false`` to add the permission to the current permission.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    :type permissionVersion: integer
+    :param permissionVersion: 
+
+      The version of the AWS RAM permissions to associate with the resource share.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'returnValue': True|False,
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **returnValue** *(boolean) --* 
+
+          Indicates whether the request succeeded.
+
+          
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_resource_share(**kwargs)
+
+    
+
+    Creates a resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreateResourceShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_resource_share(
+          name='string',
+          resourceArns=[
+              'string',
+          ],
+          principals=[
+              'string',
+          ],
+          tags=[
+              {
+                  'key': 'string',
+                  'value': 'string'
+              },
+          ],
+          allowExternalPrincipals=True|False,
+          clientToken='string',
+          permissionArns=[
+              'string',
+          ]
+      )
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      The name of the resource share.
+
+      
+
+    
+    :type resourceArns: list
+    :param resourceArns: 
+
+      The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type principals: list
+    :param principals: 
+
+      The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type tags: list
+    :param tags: 
+
+      One or more tags.
+
+      
+
+    
+      - *(dict) --* 
+
+        Information about a tag.
+
+        
+
+      
+        - **key** *(string) --* 
+
+          The key of the tag.
+
+          
+
+        
+        - **value** *(string) --* 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    :type allowExternalPrincipals: boolean
+    :param allowExternalPrincipals: 
+
+      Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    :type permissionArns: list
+    :param permissionArns: 
+
+      The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShare': {
+                'resourceShareArn': 'string',
+                'name': 'string',
+                'owningAccountId': 'string',
+                'allowExternalPrincipals': True|False,
+                'status': 'PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+                'statusMessage': 'string',
+                'tags': [
+                    {
+                        'key': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdatedTime': datetime(2015, 1, 1),
+                'featureSet': 'CREATED_FROM_POLICY'|'PROMOTING_TO_STANDARD'|'STANDARD'
+            },
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShare** *(dict) --* 
+
+          Information about the resource share.
+
+          
+          
+
+          - **resourceShareArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the resource share.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the resource share.
+
+            
+          
+
+          - **owningAccountId** *(string) --* 
+
+            The ID of the AWS account that owns the resource share.
+
+            
+          
+
+          - **allowExternalPrincipals** *(boolean) --* 
+
+            Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of the resource share.
+
+            
+          
+
+          - **statusMessage** *(string) --* 
+
+            A message about the status of the resource share.
+
+            
+          
+
+          - **tags** *(list) --* 
+
+            The tags for the resource share.
+
+            
+            
+
+            - *(dict) --* 
+
+              Information about a tag.
+
+              
+              
+
+              - **key** *(string) --* 
+
+                The key of the tag.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The value of the tag.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time when the resource share was created.
+
+            
+          
+
+          - **lastUpdatedTime** *(datetime) --* 
+
+            The time when the resource share was last updated.
+
+            
+          
+
+          - **featureSet** *(string) --* 
+
+            Indicates how the resource share was created. Possible values include:
+
+             
+
+             
+            * ``CREATED_FROM_POLICY`` - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM. 
+             
+            * ``PROMOTING_TO_STANDARD`` - The resource share is in the process of being promoted. For more information, see  PromoteResourceShareCreatedFromPolicy . 
+             
+            * ``STANDARD`` - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM. 
+             
+
+            
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareLimitExceededException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.TagPolicyViolationException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: delete_resource_share(**kwargs)
+
+    
+
+    Deletes the specified resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeleteResourceShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_resource_share(
+          resourceShareArn='string',
+          clientToken='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'returnValue': True|False,
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **returnValue** *(boolean) --* 
+
+          Indicates whether the request succeeded.
+
+          
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: disassociate_resource_share(**kwargs)
+
+    
+
+    Disassociates the specified principals or resources from the specified resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_resource_share(
+          resourceShareArn='string',
+          resourceArns=[
+              'string',
+          ],
+          principals=[
+              'string',
+          ],
+          clientToken='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type resourceArns: list
+    :param resourceArns: 
+
+      The Amazon Resource Names (ARNs) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type principals: list
+    :param principals: 
+
+      The principals.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareAssociations': [
+                {
+                    'resourceShareArn': 'string',
+                    'resourceShareName': 'string',
+                    'associatedEntity': 'string',
+                    'associationType': 'PRINCIPAL'|'RESOURCE',
+                    'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareAssociations** *(list) --* 
+
+          Information about the associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an association with a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **associatedEntity** *(string) --* 
+
+              The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+              
+            
+
+            - **associationType** *(string) --* 
+
+              The association type.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the association.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the association.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the association was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareLimitExceededException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+
+  .. py:method:: disassociate_resource_share_permission(**kwargs)
+
+    
+
+    Disassociates an AWS RAM permission from a resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DisassociateResourceSharePermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_resource_share_permission(
+          resourceShareArn='string',
+          permissionArn='string',
+          clientToken='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type permissionArn: string
+    :param permissionArn: **[REQUIRED]** 
+
+      The ARN of the permission to disassociate from the resource share.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'returnValue': True|False,
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **returnValue** *(boolean) --* 
+
+          Indicates whether the request succeeded.
+
+          
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidStateTransitionException`
+
+    
+
+  .. py:method:: enable_sharing_with_aws_organization()
+
+    
+
+    Enables resource sharing within your AWS Organization.
+
+     
+
+    The caller must be the master account for the AWS Organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/EnableSharingWithAwsOrganization>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.enable_sharing_with_aws_organization()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'returnValue': True|False
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **returnValue** *(boolean) --* 
+
+          Indicates whether the request succeeded.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_permission(**kwargs)
+
+    
+
+    Gets the contents of an AWS RAM permission in JSON format.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_permission(
+          permissionArn='string',
+          permissionVersion=123
+      )
+    :type permissionArn: string
+    :param permissionArn: **[REQUIRED]** 
+
+      The ARN of the permission.
+
+      
+
+    
+    :type permissionVersion: integer
+    :param permissionVersion: 
+
+      The identifier for the version of the permission.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'permission': {
+                'arn': 'string',
+                'version': 'string',
+                'defaultVersion': True|False,
+                'name': 'string',
+                'resourceType': 'string',
+                'permission': 'string',
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdatedTime': datetime(2015, 1, 1),
+                'isResourceTypeDefault': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **permission** *(dict) --* 
+
+          Information about the permission.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            The ARN of the permission.
+
+            
+          
+
+          - **version** *(string) --* 
+
+            The identifier for the version of the permission.
+
+            
+          
+
+          - **defaultVersion** *(boolean) --* 
+
+            Specifies whether the version of the permission is set to the default version for this permission.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the permission.
+
+            
+          
+
+          - **resourceType** *(string) --* 
+
+            The resource type to which the permission applies.
+
+            
+          
+
+          - **permission** *(string) --* 
+
+            The permission's effect and actions in JSON format. The ``effect`` indicates whether the actions are allowed or denied. The ``actions`` list the API actions to which the principal is granted or denied access.
+
+            
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The date and time when the permission was created.
+
+            
+          
+
+          - **lastUpdatedTime** *(datetime) --* 
+
+            The date and time when the permission was last updated.
+
+            
+          
+
+          - **isResourceTypeDefault** *(boolean) --* 
+
+            Specifies whether the version of the permission is set to the default version for this resource type.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+
+  .. py:method:: get_resource_policies(**kwargs)
+
+    
+
+    Gets the policies for the specified resources that you own and have shared.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourcePolicies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_policies(
+          resourceArns=[
+              'string',
+          ],
+          principal='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceArns: list
+    :param resourceArns: **[REQUIRED]** 
+
+      The Amazon Resource Names (ARN) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type principal: string
+    :param principal: 
+
+      The principal.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policies': [
+                'string',
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **policies** *(list) --* 
+
+          A key policy document, in JSON format.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: get_resource_share_associations(**kwargs)
+
+    
+
+    Gets the resources or principals for the resource shares that you own.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_share_associations(
+          associationType='PRINCIPAL'|'RESOURCE',
+          resourceShareArns=[
+              'string',
+          ],
+          resourceArn='string',
+          principal='string',
+          associationStatus='ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+          nextToken='string',
+          maxResults=123
+      )
+    :type associationType: string
+    :param associationType: **[REQUIRED]** 
+
+      The association type. Specify ``PRINCIPAL`` to list the principals that are associated with the specified resource share. Specify ``RESOURCE`` to list the resources that are associated with the specified resource share.
+
+      
+
+    
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceArn: string
+    :param resourceArn: 
+
+      The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is ``PRINCIPAL`` .
+
+      
+
+    
+    :type principal: string
+    :param principal: 
+
+      The principal. You cannot specify this parameter if the association type is ``RESOURCE`` .
+
+      
+
+    
+    :type associationStatus: string
+    :param associationStatus: 
+
+      The association status.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareAssociations': [
+                {
+                    'resourceShareArn': 'string',
+                    'resourceShareName': 'string',
+                    'associatedEntity': 'string',
+                    'associationType': 'PRINCIPAL'|'RESOURCE',
+                    'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareAssociations** *(list) --* 
+
+          Information about the associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an association with a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **associatedEntity** *(string) --* 
+
+              The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+              
+            
+
+            - **associationType** *(string) --* 
+
+              The association type.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the association.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the association.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the association was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: get_resource_share_invitations(**kwargs)
+
+    
+
+    Gets the invitations that you have received for resource shares.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_share_invitations(
+          resourceShareInvitationArns=[
+              'string',
+          ],
+          resourceShareArns=[
+              'string',
+          ],
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceShareInvitationArns: list
+    :param resourceShareInvitationArns: 
+
+      The Amazon Resource Names (ARN) of the invitations.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareInvitations': [
+                {
+                    'resourceShareInvitationArn': 'string',
+                    'resourceShareName': 'string',
+                    'resourceShareArn': 'string',
+                    'senderAccountId': 'string',
+                    'receiverAccountId': 'string',
+                    'invitationTimestamp': datetime(2015, 1, 1),
+                    'status': 'PENDING'|'ACCEPTED'|'REJECTED'|'EXPIRED',
+                    'resourceShareAssociations': [
+                        {
+                            'resourceShareArn': 'string',
+                            'resourceShareName': 'string',
+                            'associatedEntity': 'string',
+                            'associationType': 'PRINCIPAL'|'RESOURCE',
+                            'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                            'statusMessage': 'string',
+                            'creationTime': datetime(2015, 1, 1),
+                            'lastUpdatedTime': datetime(2015, 1, 1),
+                            'external': True|False
+                        },
+                    ],
+                    'receiverArn': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareInvitations** *(list) --* 
+
+          Information about the invitations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an invitation to join a resource share.
+
+            
+            
+
+            - **resourceShareInvitationArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the invitation.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **senderAccountId** *(string) --* 
+
+              The ID of the AWS account that sent the invitation.
+
+              
+            
+
+            - **receiverAccountId** *(string) --* 
+
+              The ID of the AWS account that received the invitation.
+
+              
+            
+
+            - **invitationTimestamp** *(datetime) --* 
+
+              The date and time when the invitation was sent.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the invitation.
+
+              
+            
+
+            - **resourceShareAssociations** *(list) --* 
+
+              To view the resources associated with a pending resource share invitation, use `ListPendingInvitationResources <https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html>`__ .
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes an association with a resource share.
+
+                
+                
+
+                - **resourceShareArn** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the resource share.
+
+                  
+                
+
+                - **resourceShareName** *(string) --* 
+
+                  The name of the resource share.
+
+                  
+                
+
+                - **associatedEntity** *(string) --* 
+
+                  The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+                  
+                
+
+                - **associationType** *(string) --* 
+
+                  The association type.
+
+                  
+                
+
+                - **status** *(string) --* 
+
+                  The status of the association.
+
+                  
+                
+
+                - **statusMessage** *(string) --* 
+
+                  A message about the status of the association.
+
+                  
+                
+
+                - **creationTime** *(datetime) --* 
+
+                  The time when the association was created.
+
+                  
+                
+
+                - **lastUpdatedTime** *(datetime) --* 
+
+                  The time when the association was last updated.
+
+                  
+                
+
+                - **external** *(boolean) --* 
+
+                  Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+                  
+            
+          
+            
+
+            - **receiverArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidMaxResultsException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: get_resource_shares(**kwargs)
+
+    
+
+    Gets the resource shares that you own or the resource shares that are shared with you.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShares>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_shares(
+          resourceShareArns=[
+              'string',
+          ],
+          resourceShareStatus='PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          name='string',
+          tagFilters=[
+              {
+                  'tagKey': 'string',
+                  'tagValues': [
+                      'string',
+                  ]
+              },
+          ],
+          nextToken='string',
+          maxResults=123,
+          permissionArn='string'
+      )
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The ARNs of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareStatus: string
+    :param resourceShareStatus: 
+
+      The status of the resource share.
+
+      
+
+    
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the resource share.
+
+      
+
+    
+    :type tagFilters: list
+    :param tagFilters: 
+
+      One or more tag filters.
+
+      
+
+    
+      - *(dict) --* 
+
+        Used to filter information based on tags.
+
+        
+
+      
+        - **tagKey** *(string) --* 
+
+          The tag key.
+
+          
+
+        
+        - **tagValues** *(list) --* 
+
+          The tag values.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type permissionArn: string
+    :param permissionArn: 
+
+      The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShares': [
+                {
+                    'resourceShareArn': 'string',
+                    'name': 'string',
+                    'owningAccountId': 'string',
+                    'allowExternalPrincipals': True|False,
+                    'status': 'PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+                    'statusMessage': 'string',
+                    'tags': [
+                        {
+                            'key': 'string',
+                            'value': 'string'
+                        },
+                    ],
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'featureSet': 'CREATED_FROM_POLICY'|'PROMOTING_TO_STANDARD'|'STANDARD'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShares** *(list) --* 
+
+          Information about the resource shares.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **owningAccountId** *(string) --* 
+
+              The ID of the AWS account that owns the resource share.
+
+              
+            
+
+            - **allowExternalPrincipals** *(boolean) --* 
+
+              Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the resource share.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the resource share.
+
+              
+            
+
+            - **tags** *(list) --* 
+
+              The tags for the resource share.
+
+              
+              
+
+              - *(dict) --* 
+
+                Information about a tag.
+
+                
+                
+
+                - **key** *(string) --* 
+
+                  The key of the tag.
+
+                  
+                
+
+                - **value** *(string) --* 
+
+                  The value of the tag.
+
+                  
+            
+          
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the resource share was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the resource share was last updated.
+
+              
+            
+
+            - **featureSet** *(string) --* 
+
+              Indicates how the resource share was created. Possible values include:
+
+               
+
+               
+              * ``CREATED_FROM_POLICY`` - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM. 
+               
+              * ``PROMOTING_TO_STANDARD`` - The resource share is in the process of being promoted. For more information, see  PromoteResourceShareCreatedFromPolicy . 
+               
+              * ``STANDARD`` - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM. 
+               
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_pending_invitation_resources(**kwargs)
+
+    
+
+    Lists the resources in a resource share that is shared with you but that the invitation is still pending for.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_pending_invitation_resources(
+          resourceShareInvitationArn='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceShareInvitationArn: string
+    :param resourceShareInvitationArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the invitation.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resources': [
+                {
+                    'arn': 'string',
+                    'type': 'string',
+                    'resourceShareArn': 'string',
+                    'resourceGroupArn': 'string',
+                    'status': 'AVAILABLE'|'ZONAL_RESOURCE_INACCESSIBLE'|'LIMIT_EXCEEDED'|'UNAVAILABLE'|'PENDING',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resources** *(list) --* 
+
+          Information about the resources included the resource share.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a resource associated with a resource share.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource.
+
+              
+            
+
+            - **type** *(string) --* 
+
+              The resource type.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceGroupArn** *(string) --* 
+
+              The ARN of the resource group. This value is returned only if the resource is a resource group.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the resource.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the resource.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the resource was associated with the resource share.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MissingRequiredParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationAlreadyRejectedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationExpiredException`
+
+    
+
+  .. py:method:: list_permissions(**kwargs)
+
+    
+
+    Lists the AWS RAM permissions.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_permissions(
+          resourceType='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceType: string
+    :param resourceType: 
+
+      Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify ``ec2:Subnet`` .
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'permissions': [
+                {
+                    'arn': 'string',
+                    'version': 'string',
+                    'defaultVersion': True|False,
+                    'name': 'string',
+                    'resourceType': 'string',
+                    'status': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'isResourceTypeDefault': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **permissions** *(list) --* 
+
+          Information about the permissions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a permission that is associated with a resource share.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the permission.
+
+              
+            
+
+            - **version** *(string) --* 
+
+              The identifier for the version of the permission.
+
+              
+            
+
+            - **defaultVersion** *(boolean) --* 
+
+              Specifies whether the version of the permission is set to the default version for this permission.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the permission.
+
+              
+            
+
+            - **resourceType** *(string) --* 
+
+              The type of resource to which the permission applies.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The current status of the permission.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The date and time when the permission was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The date and time when the permission was last updated.
+
+              
+            
+
+            - **isResourceTypeDefault** *(boolean) --* 
+
+              Specifies whether the version of the permission is set to the default version for this resource type.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+
+  .. py:method:: list_principals(**kwargs)
+
+    
+
+    Lists the principals that you have shared resources with or that have shared resources with you.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipals>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_principals(
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          resourceArn='string',
+          principals=[
+              'string',
+          ],
+          resourceType='string',
+          resourceShareArns=[
+              'string',
+          ],
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type resourceArn: string
+    :param resourceArn: 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type principals: list
+    :param principals: 
+
+      The principals.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceType: string
+    :param resourceType: 
+
+      The resource type.
+
+       
+
+      Valid values: ``acm-pca:CertificateAuthority`` | ``appmesh:Mesh`` | ``codebuild:Project`` | ``codebuild:ReportGroup`` | ``ec2:CapacityReservation`` | ``ec2:DedicatedHost`` | ``ec2:LocalGatewayRouteTable`` | ``ec2:PrefixList`` | ``ec2:Subnet`` | ``ec2:TrafficMirrorTarget`` | ``ec2:TransitGateway`` | ``imagebuilder:Component`` | ``imagebuilder:Image`` | ``imagebuilder:ImageRecipe`` | ``imagebuilder:ContainerRecipe`` | ``glue:Catalog`` | ``glue:Database`` | ``glue:Table`` | ``license-manager:LicenseConfiguration`` I ``network-firewall:FirewallPolicy`` | ``network-firewall:StatefulRuleGroup`` | ``network-firewall:StatelessRuleGroup`` | ``outposts:Outpost`` | ``resource-groups:Group`` | ``rds:Cluster`` | ``route53resolver:ResolverQueryLogConfig`` | ``route53resolver:ResolverRule``  
+
+      
+
+    
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'principals': [
+                {
+                    'id': 'string',
+                    'resourceShareArn': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **principals** *(list) --* 
+
+          The principals.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a principal for use with AWS Resource Access Manager.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the principal.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the principal was associated with the resource share.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: list_resource_share_permissions(**kwargs)
+
+    
+
+    Lists the AWS RAM permissions that are associated with a resource share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_resource_share_permissions(
+          resourceShareArn='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'permissions': [
+                {
+                    'arn': 'string',
+                    'version': 'string',
+                    'defaultVersion': True|False,
+                    'name': 'string',
+                    'resourceType': 'string',
+                    'status': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'isResourceTypeDefault': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **permissions** *(list) --* 
+
+          The permissions associated with the resource share.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a permission that is associated with a resource share.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the permission.
+
+              
+            
+
+            - **version** *(string) --* 
+
+              The identifier for the version of the permission.
+
+              
+            
+
+            - **defaultVersion** *(boolean) --* 
+
+              Specifies whether the version of the permission is set to the default version for this permission.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the permission.
+
+              
+            
+
+            - **resourceType** *(string) --* 
+
+              The type of resource to which the permission applies.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The current status of the permission.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The date and time when the permission was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The date and time when the permission was last updated.
+
+              
+            
+
+            - **isResourceTypeDefault** *(boolean) --* 
+
+              Specifies whether the version of the permission is set to the default version for this resource type.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+
+  .. py:method:: list_resource_types(**kwargs)
+
+    
+
+    Lists the shareable resource types supported by AWS RAM.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_resource_types(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceTypes': [
+                {
+                    'resourceType': 'string',
+                    'serviceName': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceTypes** *(list) --* 
+
+          The shareable resource types supported by AWS RAM.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the shareable resource types and the AWS services to which they belong.
+
+            
+            
+
+            - **resourceType** *(string) --* 
+
+              The shareable resource types.
+
+              
+            
+
+            - **serviceName** *(string) --* 
+
+              The name of the AWS services to which the resources belong.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: list_resources(**kwargs)
+
+    
+
+    Lists the resources that you added to a resource shares or the resources that are shared with you.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_resources(
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          principal='string',
+          resourceType='string',
+          resourceArns=[
+              'string',
+          ],
+          resourceShareArns=[
+              'string',
+          ],
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type principal: string
+    :param principal: 
+
+      The principal.
+
+      
+
+    
+    :type resourceType: string
+    :param resourceType: 
+
+      The resource type.
+
+       
+
+      Valid values: ``acm-pca:CertificateAuthority`` | ``appmesh:Mesh`` | ``codebuild:Project`` | ``codebuild:ReportGroup`` | ``ec2:CapacityReservation`` | ``ec2:DedicatedHost`` | ``ec2:LocalGatewayRouteTable`` | ``ec2:PrefixList`` | ``ec2:Subnet`` | ``ec2:TrafficMirrorTarget`` | ``ec2:TransitGateway`` | ``imagebuilder:Component`` | ``imagebuilder:Image`` | ``imagebuilder:ImageRecipe`` | ``imagebuilder:ContainerRecipe`` | ``glue:Catalog`` | ``glue:Database`` | ``glue:Table`` | ``license-manager:LicenseConfiguration`` I ``network-firewall:FirewallPolicy`` | ``network-firewall:StatefulRuleGroup`` | ``network-firewall:StatelessRuleGroup`` | ``outposts:Outpost`` | ``resource-groups:Group`` | ``rds:Cluster`` | ``route53resolver:ResolverQueryLogConfig`` | ``route53resolver:ResolverRule``  
+
+      
+
+    
+    :type resourceArns: list
+    :param resourceArns: 
+
+      The Amazon Resource Names (ARN) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resources': [
+                {
+                    'arn': 'string',
+                    'type': 'string',
+                    'resourceShareArn': 'string',
+                    'resourceGroupArn': 'string',
+                    'status': 'AVAILABLE'|'ZONAL_RESOURCE_INACCESSIBLE'|'LIMIT_EXCEEDED'|'UNAVAILABLE'|'PENDING',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resources** *(list) --* 
+
+          Information about the resources.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a resource associated with a resource share.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource.
+
+              
+            
+
+            - **type** *(string) --* 
+
+              The resource type.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceGroupArn** *(string) --* 
+
+              The ARN of the resource group. This value is returned only if the resource is a resource group.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the resource.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the resource.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the resource was associated with the resource share.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidResourceTypeException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidNextTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: promote_resource_share_created_from_policy(**kwargs)
+
+    
+
+    Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in AWS RAM.
+
+     
+
+    Use this API action to promote the resource share. When you promote the resource share, it becomes:
+
+     
+
+     
+    * Visible to all principals that it is shared with. 
+     
+    * Modifiable in AWS RAM. 
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromoteResourceShareCreatedFromPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.promote_resource_share_created_from_policy(
+          resourceShareArn='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The ARN of the resource share to promote.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'returnValue': True|False
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **returnValue** *(boolean) --* 
+
+          Indicates whether the request succeeded.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareLimitExceededException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MissingRequiredParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+
+  .. py:method:: reject_resource_share_invitation(**kwargs)
+
+    
+
+    Rejects an invitation to a resource share from another AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/RejectResourceShareInvitation>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.reject_resource_share_invitation(
+          resourceShareInvitationArn='string',
+          clientToken='string'
+      )
+    :type resourceShareInvitationArn: string
+    :param resourceShareInvitationArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the invitation.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareInvitation': {
+                'resourceShareInvitationArn': 'string',
+                'resourceShareName': 'string',
+                'resourceShareArn': 'string',
+                'senderAccountId': 'string',
+                'receiverAccountId': 'string',
+                'invitationTimestamp': datetime(2015, 1, 1),
+                'status': 'PENDING'|'ACCEPTED'|'REJECTED'|'EXPIRED',
+                'resourceShareAssociations': [
+                    {
+                        'resourceShareArn': 'string',
+                        'resourceShareName': 'string',
+                        'associatedEntity': 'string',
+                        'associationType': 'PRINCIPAL'|'RESOURCE',
+                        'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                        'statusMessage': 'string',
+                        'creationTime': datetime(2015, 1, 1),
+                        'lastUpdatedTime': datetime(2015, 1, 1),
+                        'external': True|False
+                    },
+                ],
+                'receiverArn': 'string'
+            },
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareInvitation** *(dict) --* 
+
+          Information about the invitation.
+
+          
+          
+
+          - **resourceShareInvitationArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the invitation.
+
+            
+          
+
+          - **resourceShareName** *(string) --* 
+
+            The name of the resource share.
+
+            
+          
+
+          - **resourceShareArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the resource share.
+
+            
+          
+
+          - **senderAccountId** *(string) --* 
+
+            The ID of the AWS account that sent the invitation.
+
+            
+          
+
+          - **receiverAccountId** *(string) --* 
+
+            The ID of the AWS account that received the invitation.
+
+            
+          
+
+          - **invitationTimestamp** *(datetime) --* 
+
+            The date and time when the invitation was sent.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of the invitation.
+
+            
+          
+
+          - **resourceShareAssociations** *(list) --* 
+
+            To view the resources associated with a pending resource share invitation, use `ListPendingInvitationResources <https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html>`__ .
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes an association with a resource share.
+
+              
+              
+
+              - **resourceShareArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the resource share.
+
+                
+              
+
+              - **resourceShareName** *(string) --* 
+
+                The name of the resource share.
+
+                
+              
+
+              - **associatedEntity** *(string) --* 
+
+                The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+                
+              
+
+              - **associationType** *(string) --* 
+
+                The association type.
+
+                
+              
+
+              - **status** *(string) --* 
+
+                The status of the association.
+
+                
+              
+
+              - **statusMessage** *(string) --* 
+
+                A message about the status of the association.
+
+                
+              
+
+              - **creationTime** *(datetime) --* 
+
+                The time when the association was created.
+
+                
+              
+
+              - **lastUpdatedTime** *(datetime) --* 
+
+                The time when the association was last updated.
+
+                
+              
+
+              - **external** *(boolean) --* 
+
+                Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+                
+          
+        
+          
+
+          - **receiverArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
+
+            
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationAlreadyAcceptedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationAlreadyRejectedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceShareInvitationExpiredException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds the specified tags to the specified resource share that you own.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceShareArn='string',
+          tags=[
+              {
+                  'key': 'string',
+                  'value': 'string'
+              },
+          ]
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type tags: list
+    :param tags: **[REQUIRED]** 
+
+      One or more tags.
+
+      
+
+    
+      - *(dict) --* 
+
+        Information about a tag.
+
+        
+
+      
+        - **key** *(string) --* 
+
+          The key of the tag.
+
+          
+
+        
+        - **value** *(string) --* 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.TagLimitExceededException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ResourceArnNotFoundException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.TagPolicyViolationException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes the specified tags from the specified resource share that you own.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceShareArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The tag keys of the tags to remove.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: update_resource_share(**kwargs)
+
+    
+
+    Updates the specified resource share that you own.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdateResourceShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_resource_share(
+          resourceShareArn='string',
+          name='string',
+          allowExternalPrincipals=True|False,
+          clientToken='string'
+      )
+    :type resourceShareArn: string
+    :param resourceShareArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource share.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the resource share.
+
+      
+
+    
+    :type allowExternalPrincipals: boolean
+    :param allowExternalPrincipals: 
+
+      Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShare': {
+                'resourceShareArn': 'string',
+                'name': 'string',
+                'owningAccountId': 'string',
+                'allowExternalPrincipals': True|False,
+                'status': 'PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+                'statusMessage': 'string',
+                'tags': [
+                    {
+                        'key': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdatedTime': datetime(2015, 1, 1),
+                'featureSet': 'CREATED_FROM_POLICY'|'PROMOTING_TO_STANDARD'|'STANDARD'
+            },
+            'clientToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShare** *(dict) --* 
+
+          Information about the resource share.
+
+          
+          
+
+          - **resourceShareArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the resource share.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the resource share.
+
+            
+          
+
+          - **owningAccountId** *(string) --* 
+
+            The ID of the AWS account that owns the resource share.
+
+            
+          
+
+          - **allowExternalPrincipals** *(boolean) --* 
+
+            Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of the resource share.
+
+            
+          
+
+          - **statusMessage** *(string) --* 
+
+            A message about the status of the resource share.
+
+            
+          
+
+          - **tags** *(list) --* 
+
+            The tags for the resource share.
+
+            
+            
+
+            - *(dict) --* 
+
+              Information about a tag.
+
+              
+              
+
+              - **key** *(string) --* 
+
+                The key of the tag.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The value of the tag.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time when the resource share was created.
+
+            
+          
+
+          - **lastUpdatedTime** *(datetime) --* 
+
+            The time when the resource share was last updated.
+
+            
+          
+
+          - **featureSet** *(string) --* 
+
+            Indicates how the resource share was created. Possible values include:
+
+             
+
+             
+            * ``CREATED_FROM_POLICY`` - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM. 
+             
+            * ``PROMOTING_TO_STANDARD`` - The resource share is in the process of being promoted. For more information, see  PromoteResourceShareCreatedFromPolicy . 
+             
+            * ``STANDARD`` - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM. 
+             
+
+            
+      
+        
+
+        - **clientToken** *(string) --* 
+
+          A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`RAM.Client.exceptions.IdempotentParameterMismatchException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MissingRequiredParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.UnknownResourceException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.MalformedArnException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidClientTokenException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.OperationNotPermittedException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServerInternalException`
+
+    
+    *     :py:class:`RAM.Client.exceptions.ServiceUnavailableException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`RAM.Paginator.GetResourcePolicies`
+
+
+* :py:class:`RAM.Paginator.GetResourceShareAssociations`
+
+
+* :py:class:`RAM.Paginator.GetResourceShareInvitations`
+
+
+* :py:class:`RAM.Paginator.GetResourceShares`
+
+
+* :py:class:`RAM.Paginator.ListPrincipals`
+
+
+* :py:class:`RAM.Paginator.ListResources`
+
+
+
+.. py:class:: RAM.Paginator.GetResourcePolicies
+
+  ::
+
+    
+    paginator = client.get_paginator('get_resource_policies')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.get_resource_policies`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourcePolicies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceArns=[
+              'string',
+          ],
+          principal='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceArns: list
+    :param resourceArns: **[REQUIRED]** 
+
+      The Amazon Resource Names (ARN) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type principal: string
+    :param principal: 
+
+      The principal.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policies': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **policies** *(list) --* 
+
+          A key policy document, in JSON format.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: RAM.Paginator.GetResourceShareAssociations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_resource_share_associations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.get_resource_share_associations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          associationType='PRINCIPAL'|'RESOURCE',
+          resourceShareArns=[
+              'string',
+          ],
+          resourceArn='string',
+          principal='string',
+          associationStatus='ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type associationType: string
+    :param associationType: **[REQUIRED]** 
+
+      The association type. Specify ``PRINCIPAL`` to list the principals that are associated with the specified resource share. Specify ``RESOURCE`` to list the resources that are associated with the specified resource share.
+
+      
+
+    
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceArn: string
+    :param resourceArn: 
+
+      The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is ``PRINCIPAL`` .
+
+      
+
+    
+    :type principal: string
+    :param principal: 
+
+      The principal. You cannot specify this parameter if the association type is ``RESOURCE`` .
+
+      
+
+    
+    :type associationStatus: string
+    :param associationStatus: 
+
+      The association status.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareAssociations': [
+                {
+                    'resourceShareArn': 'string',
+                    'resourceShareName': 'string',
+                    'associatedEntity': 'string',
+                    'associationType': 'PRINCIPAL'|'RESOURCE',
+                    'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareAssociations** *(list) --* 
+
+          Information about the associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an association with a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **associatedEntity** *(string) --* 
+
+              The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+              
+            
+
+            - **associationType** *(string) --* 
+
+              The association type.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the association.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the association.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the association was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: RAM.Paginator.GetResourceShareInvitations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_resource_share_invitations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.get_resource_share_invitations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShareInvitations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceShareInvitationArns=[
+              'string',
+          ],
+          resourceShareArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceShareInvitationArns: list
+    :param resourceShareInvitationArns: 
+
+      The Amazon Resource Names (ARN) of the invitations.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShareInvitations': [
+                {
+                    'resourceShareInvitationArn': 'string',
+                    'resourceShareName': 'string',
+                    'resourceShareArn': 'string',
+                    'senderAccountId': 'string',
+                    'receiverAccountId': 'string',
+                    'invitationTimestamp': datetime(2015, 1, 1),
+                    'status': 'PENDING'|'ACCEPTED'|'REJECTED'|'EXPIRED',
+                    'resourceShareAssociations': [
+                        {
+                            'resourceShareArn': 'string',
+                            'resourceShareName': 'string',
+                            'associatedEntity': 'string',
+                            'associationType': 'PRINCIPAL'|'RESOURCE',
+                            'status': 'ASSOCIATING'|'ASSOCIATED'|'FAILED'|'DISASSOCIATING'|'DISASSOCIATED',
+                            'statusMessage': 'string',
+                            'creationTime': datetime(2015, 1, 1),
+                            'lastUpdatedTime': datetime(2015, 1, 1),
+                            'external': True|False
+                        },
+                    ],
+                    'receiverArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShareInvitations** *(list) --* 
+
+          Information about the invitations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an invitation to join a resource share.
+
+            
+            
+
+            - **resourceShareInvitationArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the invitation.
+
+              
+            
+
+            - **resourceShareName** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **senderAccountId** *(string) --* 
+
+              The ID of the AWS account that sent the invitation.
+
+              
+            
+
+            - **receiverAccountId** *(string) --* 
+
+              The ID of the AWS account that received the invitation.
+
+              
+            
+
+            - **invitationTimestamp** *(datetime) --* 
+
+              The date and time when the invitation was sent.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the invitation.
+
+              
+            
+
+            - **resourceShareAssociations** *(list) --* 
+
+              To view the resources associated with a pending resource share invitation, use `ListPendingInvitationResources <https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html>`__ .
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes an association with a resource share.
+
+                
+                
+
+                - **resourceShareArn** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the resource share.
+
+                  
+                
+
+                - **resourceShareName** *(string) --* 
+
+                  The name of the resource share.
+
+                  
+                
+
+                - **associatedEntity** *(string) --* 
+
+                  The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+
+                  
+                
+
+                - **associationType** *(string) --* 
+
+                  The association type.
+
+                  
+                
+
+                - **status** *(string) --* 
+
+                  The status of the association.
+
+                  
+                
+
+                - **statusMessage** *(string) --* 
+
+                  A message about the status of the association.
+
+                  
+                
+
+                - **creationTime** *(datetime) --* 
+
+                  The time when the association was created.
+
+                  
+                
+
+                - **lastUpdatedTime** *(datetime) --* 
+
+                  The time when the association was last updated.
+
+                  
+                
+
+                - **external** *(boolean) --* 
+
+                  Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+                  
+            
+          
+            
+
+            - **receiverArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: RAM.Paginator.GetResourceShares
+
+  ::
+
+    
+    paginator = client.get_paginator('get_resource_shares')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.get_resource_shares`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetResourceShares>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceShareArns=[
+              'string',
+          ],
+          resourceShareStatus='PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          name='string',
+          tagFilters=[
+              {
+                  'tagKey': 'string',
+                  'tagValues': [
+                      'string',
+                  ]
+              },
+          ],
+          permissionArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The ARNs of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareStatus: string
+    :param resourceShareStatus: 
+
+      The status of the resource share.
+
+      
+
+    
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the resource share.
+
+      
+
+    
+    :type tagFilters: list
+    :param tagFilters: 
+
+      One or more tag filters.
+
+      
+
+    
+      - *(dict) --* 
+
+        Used to filter information based on tags.
+
+        
+
+      
+        - **tagKey** *(string) --* 
+
+          The tag key.
+
+          
+
+        
+        - **tagValues** *(list) --* 
+
+          The tag values.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type permissionArn: string
+    :param permissionArn: 
+
+      The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourceShares': [
+                {
+                    'resourceShareArn': 'string',
+                    'name': 'string',
+                    'owningAccountId': 'string',
+                    'allowExternalPrincipals': True|False,
+                    'status': 'PENDING'|'ACTIVE'|'FAILED'|'DELETING'|'DELETED',
+                    'statusMessage': 'string',
+                    'tags': [
+                        {
+                            'key': 'string',
+                            'value': 'string'
+                        },
+                    ],
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'featureSet': 'CREATED_FROM_POLICY'|'PROMOTING_TO_STANDARD'|'STANDARD'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourceShares** *(list) --* 
+
+          Information about the resource shares.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a resource share.
+
+            
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the resource share.
+
+              
+            
+
+            - **owningAccountId** *(string) --* 
+
+              The ID of the AWS account that owns the resource share.
+
+              
+            
+
+            - **allowExternalPrincipals** *(boolean) --* 
+
+              Indicates whether principals outside your AWS organization can be associated with a resource share.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the resource share.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the resource share.
+
+              
+            
+
+            - **tags** *(list) --* 
+
+              The tags for the resource share.
+
+              
+              
+
+              - *(dict) --* 
+
+                Information about a tag.
+
+                
+                
+
+                - **key** *(string) --* 
+
+                  The key of the tag.
+
+                  
+                
+
+                - **value** *(string) --* 
+
+                  The value of the tag.
+
+                  
+            
+          
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the resource share was created.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the resource share was last updated.
+
+              
+            
+
+            - **featureSet** *(string) --* 
+
+              Indicates how the resource share was created. Possible values include:
+
+               
+
+               
+              * ``CREATED_FROM_POLICY`` - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM. 
+               
+              * ``PROMOTING_TO_STANDARD`` - The resource share is in the process of being promoted. For more information, see  PromoteResourceShareCreatedFromPolicy . 
+               
+              * ``STANDARD`` - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM. 
+               
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: RAM.Paginator.ListPrincipals
+
+  ::
+
+    
+    paginator = client.get_paginator('list_principals')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.list_principals`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPrincipals>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          resourceArn='string',
+          principals=[
+              'string',
+          ],
+          resourceType='string',
+          resourceShareArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type resourceArn: string
+    :param resourceArn: 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type principals: list
+    :param principals: 
+
+      The principals.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceType: string
+    :param resourceType: 
+
+      The resource type.
+
+       
+
+      Valid values: ``acm-pca:CertificateAuthority`` | ``appmesh:Mesh`` | ``codebuild:Project`` | ``codebuild:ReportGroup`` | ``ec2:CapacityReservation`` | ``ec2:DedicatedHost`` | ``ec2:LocalGatewayRouteTable`` | ``ec2:PrefixList`` | ``ec2:Subnet`` | ``ec2:TrafficMirrorTarget`` | ``ec2:TransitGateway`` | ``imagebuilder:Component`` | ``imagebuilder:Image`` | ``imagebuilder:ImageRecipe`` | ``imagebuilder:ContainerRecipe`` | ``glue:Catalog`` | ``glue:Database`` | ``glue:Table`` | ``license-manager:LicenseConfiguration`` I ``network-firewall:FirewallPolicy`` | ``network-firewall:StatefulRuleGroup`` | ``network-firewall:StatelessRuleGroup`` | ``outposts:Outpost`` | ``resource-groups:Group`` | ``rds:Cluster`` | ``route53resolver:ResolverQueryLogConfig`` | ``route53resolver:ResolverRule``  
+
+      
+
+    
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'principals': [
+                {
+                    'id': 'string',
+                    'resourceShareArn': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1),
+                    'external': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **principals** *(list) --* 
+
+          The principals.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a principal for use with AWS Resource Access Manager.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the principal.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the principal was associated with the resource share.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+            
+
+            - **external** *(boolean) --* 
+
+              Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: RAM.Paginator.ListResources
+
+  ::
+
+    
+    paginator = client.get_paginator('list_resources')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`RAM.Client.list_resources`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceOwner='SELF'|'OTHER-ACCOUNTS',
+          principal='string',
+          resourceType='string',
+          resourceArns=[
+              'string',
+          ],
+          resourceShareArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceOwner: string
+    :param resourceOwner: **[REQUIRED]** 
+
+      The type of owner.
+
+      
+
+    
+    :type principal: string
+    :param principal: 
+
+      The principal.
+
+      
+
+    
+    :type resourceType: string
+    :param resourceType: 
+
+      The resource type.
+
+       
+
+      Valid values: ``acm-pca:CertificateAuthority`` | ``appmesh:Mesh`` | ``codebuild:Project`` | ``codebuild:ReportGroup`` | ``ec2:CapacityReservation`` | ``ec2:DedicatedHost`` | ``ec2:LocalGatewayRouteTable`` | ``ec2:PrefixList`` | ``ec2:Subnet`` | ``ec2:TrafficMirrorTarget`` | ``ec2:TransitGateway`` | ``imagebuilder:Component`` | ``imagebuilder:Image`` | ``imagebuilder:ImageRecipe`` | ``imagebuilder:ContainerRecipe`` | ``glue:Catalog`` | ``glue:Database`` | ``glue:Table`` | ``license-manager:LicenseConfiguration`` I ``network-firewall:FirewallPolicy`` | ``network-firewall:StatefulRuleGroup`` | ``network-firewall:StatelessRuleGroup`` | ``outposts:Outpost`` | ``resource-groups:Group`` | ``rds:Cluster`` | ``route53resolver:ResolverQueryLogConfig`` | ``route53resolver:ResolverRule``  
+
+      
+
+    
+    :type resourceArns: list
+    :param resourceArns: 
+
+      The Amazon Resource Names (ARN) of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type resourceShareArns: list
+    :param resourceShareArns: 
+
+      The Amazon Resource Names (ARN) of the resource shares.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resources': [
+                {
+                    'arn': 'string',
+                    'type': 'string',
+                    'resourceShareArn': 'string',
+                    'resourceGroupArn': 'string',
+                    'status': 'AVAILABLE'|'ZONAL_RESOURCE_INACCESSIBLE'|'LIMIT_EXCEEDED'|'UNAVAILABLE'|'PENDING',
+                    'statusMessage': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdatedTime': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resources** *(list) --* 
+
+          Information about the resources.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a resource associated with a resource share.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource.
+
+              
+            
+
+            - **type** *(string) --* 
+
+              The resource type.
+
+              
+            
+
+            - **resourceShareArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the resource share.
+
+              
+            
+
+            - **resourceGroupArn** *(string) --* 
+
+              The ARN of the resource group. This value is returned only if the resource is a resource group.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the resource.
+
+              
+            
+
+            - **statusMessage** *(string) --* 
+
+              A message about the status of the resource.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time when the resource was associated with the resource share.
+
+              
+            
+
+            - **lastUpdatedTime** *(datetime) --* 
+
+              The time when the association was last updated.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

@@ -1,0 +1,1300 @@
+
+
+**
+PI
+**
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: PI.Client
+
+  A low-level client representing AWS Performance Insights (PI)
+   
+
+  Amazon RDS Performance Insights enables you to monitor and explore different dimensions of database load based on data captured from a running DB instance. The guide provides detailed information about Performance Insights data types, parameters and errors.
+
+   
+
+  When Performance Insights is enabled, the Amazon RDS Performance Insights API provides visibility into the performance of your DB instance. Amazon CloudWatch provides the authoritative source for AWS service-vended monitoring metrics. Performance Insights offers a domain-specific view of DB load. 
+
+   
+
+  DB load is measured as Average Active Sessions. Performance Insights provides the data to API consumers as a two-dimensional time-series dataset. The time dimension provides DB load data for each time point in the queried time range. Each time point decomposes overall load in relation to the requested dimensions, measured at that time point. Examples include SQL, Wait event, User, and Host.
+
+   
+
+   
+  * To learn more about Performance Insights and Amazon Aurora DB instances, go to the `Amazon Aurora User Guide <https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights.html>`__ . 
+   
+  * To learn more about Performance Insights and Amazon RDS DB instances, go to the `Amazon RDS User Guide <https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html>`__ . 
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('pi')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~PI.Client.can_paginate`
+
+  
+  *   :py:meth:`~PI.Client.describe_dimension_keys`
+
+  
+  *   :py:meth:`~PI.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~PI.Client.get_dimension_key_details`
+
+  
+  *   :py:meth:`~PI.Client.get_paginator`
+
+  
+  *   :py:meth:`~PI.Client.get_resource_metrics`
+
+  
+  *   :py:meth:`~PI.Client.get_waiter`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: describe_dimension_keys(**kwargs)
+
+    
+
+    For a specific time period, retrieve the top ``N`` dimension keys for a metric.
+
+     
+
+    .. note::
+
+       
+
+      Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DescribeDimensionKeys>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_dimension_keys(
+          ServiceType='RDS',
+          Identifier='string',
+          StartTime=datetime(2015, 1, 1),
+          EndTime=datetime(2015, 1, 1),
+          Metric='string',
+          PeriodInSeconds=123,
+          GroupBy={
+              'Group': 'string',
+              'Dimensions': [
+                  'string',
+              ],
+              'Limit': 123
+          },
+          PartitionBy={
+              'Group': 'string',
+              'Dimensions': [
+                  'string',
+              ],
+              'Limit': 123
+          },
+          Filter={
+              'string': 'string'
+          },
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ServiceType: string
+    :param ServiceType: **[REQUIRED]** 
+
+      The AWS service for which Performance Insights will return metrics. The only valid value for *ServiceType* is ``RDS`` .
+
+      
+
+    
+    :type Identifier: string
+    :param Identifier: **[REQUIRED]** 
+
+      An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.
+
+       
+
+      To use an Amazon RDS instance as a data source, you specify its ``DbiResourceId`` value. For example, specify ``db-FAIHNTYBKTGAUSUZQYPDS2GW4A``  
+
+      
+
+    
+    :type StartTime: datetime
+    :param StartTime: **[REQUIRED]** 
+
+      The date and time specifying the beginning of the requested time series data. You must specify a ``StartTime`` within the past 7 days. The value specified is *inclusive* , which means that data points equal to or greater than ``StartTime`` are returned.
+
+       
+
+      The value for ``StartTime`` must be earlier than the value for ``EndTime`` .
+
+      
+
+    
+    :type EndTime: datetime
+    :param EndTime: **[REQUIRED]** 
+
+      The date and time specifying the end of the requested time series data. The value specified is *exclusive* , which means that data points less than (but not equal to) ``EndTime`` are returned.
+
+       
+
+      The value for ``EndTime`` must be later than the value for ``StartTime`` .
+
+      
+
+    
+    :type Metric: string
+    :param Metric: **[REQUIRED]** 
+
+      The name of a Performance Insights metric to be measured.
+
+       
+
+      Valid values for ``Metric`` are:
+
+       
+
+       
+      * ``db.load.avg`` - a scaled representation of the number of active sessions for the database engine. 
+       
+      * ``db.sampledload.avg`` - the raw number of active sessions for the database engine. 
+       
+
+       
+
+      If the number of active sessions is less than an internal Performance Insights threshold, ``db.load.avg`` and ``db.sampledload.avg`` are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with ``db.load.avg`` showing the scaled values, ``db.sampledload.avg`` showing the raw values, and ``db.sampledload.avg`` less than ``db.load.avg`` . For most use cases, you can query ``db.load.avg`` only. 
+
+      
+
+    
+    :type PeriodInSeconds: integer
+    :param PeriodInSeconds: 
+
+      The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as one second, or as long as one day (86400 seconds). Valid values are:
+
+       
+
+       
+      * ``1`` (one second) 
+       
+      * ``60`` (one minute) 
+       
+      * ``300`` (five minutes) 
+       
+      * ``3600`` (one hour) 
+       
+      * ``86400`` (twenty-four hours) 
+       
+
+       
+
+      If you don't specify ``PeriodInSeconds`` , then Performance Insights chooses a value for you, with a goal of returning roughly 100-200 data points in the response.
+
+      
+
+    
+    :type GroupBy: dict
+    :param GroupBy: **[REQUIRED]** 
+
+      A specification for how to aggregate the data points from a query result. You must specify a valid dimension group. Performance Insights returns all dimensions within this group, unless you provide the names of specific dimensions within this group. You can also request that Performance Insights return a limited number of values for a dimension.
+
+      
+
+    
+      - **Group** *(string) --* **[REQUIRED]** 
+
+        The name of the dimension group. Valid values are:
+
+         
+
+         
+        * ``db`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+         
+        * ``db.application`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.host`` - The host name of the connected client (all engines) 
+         
+        * ``db.session_type`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.sql`` - The SQL that is currently executing (all engines) 
+         
+        * ``db.sql_tokenized`` - The SQL digest (all engines) 
+         
+        * ``db.wait_event`` - The event for which the database backend is waiting (all engines) 
+         
+        * ``db.wait_event_type`` - The type of event for which the database backend is waiting (all engines) 
+         
+        * ``db.user`` - The user logged in to the database (all engines) 
+         
+
+        
+
+      
+      - **Dimensions** *(list) --* 
+
+        A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.
+
+         
+
+        Valid values for elements in the ``Dimensions`` array are:
+
+         
+
+         
+        * ``db.application.name`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.host.id`` - The host ID of the connected client (all engines) 
+         
+        * ``db.host.name`` - The host name of the connected client (all engines) 
+         
+        * ``db.name`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+         
+        * ``db.session_type.name`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.sql.id`` - The SQL ID generated by Performance Insights (all engines) 
+         
+        * ``db.sql.db_id`` - The SQL ID generated by the database (all engines) 
+         
+        * ``db.sql.statement`` - The SQL text that is being executed (all engines) 
+         
+        * ``db.sql.tokenized_id``   
+         
+        * ``db.sql_tokenized.id`` - The SQL digest ID generated by Performance Insights (all engines) 
+         
+        * ``db.sql_tokenized.db_id`` - SQL digest ID generated by the database (all engines) 
+         
+        * ``db.sql_tokenized.statement`` - The SQL digest text (all engines) 
+         
+        * ``db.user.id`` - The ID of the user logged in to the database (all engines) 
+         
+        * ``db.user.name`` - The name of the user logged in to the database (all engines) 
+         
+        * ``db.wait_event.name`` - The event for which the backend is waiting (all engines) 
+         
+        * ``db.wait_event.type`` - The type of event for which the backend is waiting (all engines) 
+         
+        * ``db.wait_event_type.name`` - The name of the event type for which the backend is waiting (all engines) 
+         
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **Limit** *(integer) --* 
+
+        The maximum number of items to fetch for this dimension group.
+
+        
+
+      
+    
+    :type PartitionBy: dict
+    :param PartitionBy: 
+
+      For each dimension specified in ``GroupBy`` , specify a secondary dimension to further subdivide the partition keys in the response.
+
+      
+
+    
+      - **Group** *(string) --* **[REQUIRED]** 
+
+        The name of the dimension group. Valid values are:
+
+         
+
+         
+        * ``db`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+         
+        * ``db.application`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.host`` - The host name of the connected client (all engines) 
+         
+        * ``db.session_type`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.sql`` - The SQL that is currently executing (all engines) 
+         
+        * ``db.sql_tokenized`` - The SQL digest (all engines) 
+         
+        * ``db.wait_event`` - The event for which the database backend is waiting (all engines) 
+         
+        * ``db.wait_event_type`` - The type of event for which the database backend is waiting (all engines) 
+         
+        * ``db.user`` - The user logged in to the database (all engines) 
+         
+
+        
+
+      
+      - **Dimensions** *(list) --* 
+
+        A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.
+
+         
+
+        Valid values for elements in the ``Dimensions`` array are:
+
+         
+
+         
+        * ``db.application.name`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.host.id`` - The host ID of the connected client (all engines) 
+         
+        * ``db.host.name`` - The host name of the connected client (all engines) 
+         
+        * ``db.name`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+         
+        * ``db.session_type.name`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+         
+        * ``db.sql.id`` - The SQL ID generated by Performance Insights (all engines) 
+         
+        * ``db.sql.db_id`` - The SQL ID generated by the database (all engines) 
+         
+        * ``db.sql.statement`` - The SQL text that is being executed (all engines) 
+         
+        * ``db.sql.tokenized_id``   
+         
+        * ``db.sql_tokenized.id`` - The SQL digest ID generated by Performance Insights (all engines) 
+         
+        * ``db.sql_tokenized.db_id`` - SQL digest ID generated by the database (all engines) 
+         
+        * ``db.sql_tokenized.statement`` - The SQL digest text (all engines) 
+         
+        * ``db.user.id`` - The ID of the user logged in to the database (all engines) 
+         
+        * ``db.user.name`` - The name of the user logged in to the database (all engines) 
+         
+        * ``db.wait_event.name`` - The event for which the backend is waiting (all engines) 
+         
+        * ``db.wait_event.type`` - The type of event for which the backend is waiting (all engines) 
+         
+        * ``db.wait_event_type.name`` - The name of the event type for which the backend is waiting (all engines) 
+         
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **Limit** *(integer) --* 
+
+        The maximum number of items to fetch for this dimension group.
+
+        
+
+      
+    
+    :type Filter: dict
+    :param Filter: 
+
+      One or more filters to apply in the request. Restrictions:
+
+       
+
+       
+      * Any number of filters by the same dimension, as specified in the ``GroupBy`` or ``Partition`` parameters. 
+       
+      * A single filter for any other dimension in this dimension group. 
+       
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return in the response. If more items exist than the specified ``MaxRecords`` value, a pagination token is included in the response so that the remaining results can be retrieved. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by ``MaxRecords`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AlignedStartTime': datetime(2015, 1, 1),
+            'AlignedEndTime': datetime(2015, 1, 1),
+            'PartitionKeys': [
+                {
+                    'Dimensions': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'Keys': [
+                {
+                    'Dimensions': {
+                        'string': 'string'
+                    },
+                    'Total': 123.0,
+                    'Partitions': [
+                        123.0,
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AlignedStartTime** *(datetime) --* 
+
+          The start time for the returned dimension keys, after alignment to a granular boundary (as specified by ``PeriodInSeconds`` ). ``AlignedStartTime`` will be less than or equal to the value of the user-specified ``StartTime`` .
+
+          
+        
+
+        - **AlignedEndTime** *(datetime) --* 
+
+          The end time for the returned dimension keys, after alignment to a granular boundary (as specified by ``PeriodInSeconds`` ). ``AlignedEndTime`` will be greater than or equal to the value of the user-specified ``Endtime`` .
+
+          
+        
+
+        - **PartitionKeys** *(list) --* 
+
+          If ``PartitionBy`` was present in the request, ``PartitionKeys`` contains the breakdown of dimension keys by the specified partitions.
+
+          
+          
+
+          - *(dict) --* 
+
+            If ``PartitionBy`` was specified in a ``DescribeDimensionKeys`` request, the dimensions are returned in an array. Each element in the array specifies one dimension. 
+
+            
+            
+
+            - **Dimensions** *(dict) --* 
+
+              A dimension map that contains the dimension(s) for this partition.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **Keys** *(list) --* 
+
+          The dimension keys that were requested.
+
+          
+          
+
+          - *(dict) --* 
+
+            An array of descriptions and aggregated values for each dimension within a dimension group.
+
+            
+            
+
+            - **Dimensions** *(dict) --* 
+
+              A map of name-value pairs for the dimensions in the group.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **Total** *(float) --* 
+
+              The aggregated metric value for the dimension(s), over the requested time range.
+
+              
+            
+
+            - **Partitions** *(list) --* 
+
+              If ``PartitionBy`` was specified, ``PartitionKeys`` contains the dimensions that were.
+
+              
+              
+
+              - *(float) --* 
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by ``MaxRecords`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`PI.Client.exceptions.InvalidArgumentException`
+
+    
+    *     :py:class:`PI.Client.exceptions.InternalServiceError`
+
+    
+    *     :py:class:`PI.Client.exceptions.NotAuthorizedException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_dimension_key_details(**kwargs)
+
+    
+
+    Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a SQL ID, ``GetDimensionKeyDetails`` retrieves the full text of the dimension ``db.sql.statement`` associated with this ID. This operation is useful because ``GetResourceMetrics`` and ``DescribeDimensionKeys`` don't support retrieval of large SQL statement text.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetDimensionKeyDetails>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_dimension_key_details(
+          ServiceType='RDS',
+          Identifier='string',
+          Group='string',
+          GroupIdentifier='string',
+          RequestedDimensions=[
+              'string',
+          ]
+      )
+    :type ServiceType: string
+    :param ServiceType: **[REQUIRED]** 
+
+      The AWS service for which Performance Insights returns data. The only valid value is ``RDS`` .
+
+      
+
+    
+    :type Identifier: string
+    :param Identifier: **[REQUIRED]** 
+
+      The ID for a data source from which to gather dimension data. This ID must be immutable and unique within an AWS Region. When a DB instance is the data source, specify its ``DbiResourceId`` value. For example, specify ``db-ABCDEFGHIJKLMNOPQRSTU1VW2X`` . 
+
+      
+
+    
+    :type Group: string
+    :param Group: **[REQUIRED]** 
+
+      The name of the dimension group. The only valid value is ``db.sql`` . Performance Insights searches the specified group for the dimension group ID.
+
+      
+
+    
+    :type GroupIdentifier: string
+    :param GroupIdentifier: **[REQUIRED]** 
+
+      The ID of the dimension group from which to retrieve dimension details. For dimension group ``db.sql`` , the group ID is ``db.sql.id`` .
+
+      
+
+    
+    :type RequestedDimensions: list
+    :param RequestedDimensions: 
+
+      A list of dimensions to retrieve the detail data for within the given dimension group. For the dimension group ``db.sql`` , specify either the full dimension name ``db.sql.statement`` or the short dimension name ``statement`` . If you don't specify this parameter, Performance Insights returns all dimension data within the specified dimension group.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Dimensions': [
+                {
+                    'Value': 'string',
+                    'Dimension': 'string',
+                    'Status': 'AVAILABLE'|'PROCESSING'|'UNAVAILABLE'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Dimensions** *(list) --* 
+
+          The details for the requested dimensions.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes the details for a specified dimension.
+
+            
+            
+
+            - **Value** *(string) --* 
+
+              The value of the dimension detail data. For the ``db.sql.statement`` dimension, this value is either the full or truncated SQL query, depending on the return status.
+
+              
+            
+
+            - **Dimension** *(string) --* 
+
+              The full name of the dimension. The full name includes the group name and key name. The only valid value is ``db.sql.statement`` . 
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the dimension detail data. Possible values include the following:
+
+               
+
+               
+              * ``AVAILABLE`` - The dimension detail data is ready to be retrieved. 
+               
+              * ``PROCESSING`` - The dimension detail data isn't ready to be retrieved because more processing time is required. If the requested detail data for ``db.sql.statement`` has the status ``PROCESSING`` , Performance Insights returns the truncated query. 
+               
+              * ``UNAVAILABLE`` - The dimension detail data could not be collected successfully. 
+               
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`PI.Client.exceptions.InvalidArgumentException`
+
+    
+    *     :py:class:`PI.Client.exceptions.InternalServiceError`
+
+    
+    *     :py:class:`PI.Client.exceptions.NotAuthorizedException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_resource_metrics(**kwargs)
+
+    
+
+    Retrieve Performance Insights metrics for a set of data sources, over a time period. You can provide specific dimension groups and dimensions, and provide aggregation and filtering criteria for each group.
+
+     
+
+    .. note::
+
+       
+
+      Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetrics>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_metrics(
+          ServiceType='RDS',
+          Identifier='string',
+          MetricQueries=[
+              {
+                  'Metric': 'string',
+                  'GroupBy': {
+                      'Group': 'string',
+                      'Dimensions': [
+                          'string',
+                      ],
+                      'Limit': 123
+                  },
+                  'Filter': {
+                      'string': 'string'
+                  }
+              },
+          ],
+          StartTime=datetime(2015, 1, 1),
+          EndTime=datetime(2015, 1, 1),
+          PeriodInSeconds=123,
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ServiceType: string
+    :param ServiceType: **[REQUIRED]** 
+
+      The AWS service for which Performance Insights returns metrics. The only valid value for *ServiceType* is ``RDS`` .
+
+      
+
+    
+    :type Identifier: string
+    :param Identifier: **[REQUIRED]** 
+
+      An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.
+
+       
+
+      To use a DB instance as a data source, specify its ``DbiResourceId`` value. For example, specify ``db-FAIHNTYBKTGAUSUZQYPDS2GW4A`` .
+
+      
+
+    
+    :type MetricQueries: list
+    :param MetricQueries: **[REQUIRED]** 
+
+      An array of one or more queries to perform. Each query must specify a Performance Insights metric, and can optionally specify aggregation and filtering criteria.
+
+      
+
+    
+      - *(dict) --* 
+
+        A single query to be processed. You must provide the metric to query. If no other parameters are specified, Performance Insights returns all of the data points for that metric. You can optionally request that the data points be aggregated by dimension group ( ``GroupBy`` ), and return only those data points that match your criteria (``Filter`` ).
+
+        
+
+      
+        - **Metric** *(string) --* **[REQUIRED]** 
+
+          The name of a Performance Insights metric to be measured.
+
+           
+
+          Valid values for ``Metric`` are:
+
+           
+
+           
+          * ``db.load.avg`` - a scaled representation of the number of active sessions for the database engine. 
+           
+          * ``db.sampledload.avg`` - the raw number of active sessions for the database engine. 
+           
+
+           
+
+          If the number of active sessions is less than an internal Performance Insights threshold, ``db.load.avg`` and ``db.sampledload.avg`` are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with ``db.load.avg`` showing the scaled values, ``db.sampledload.avg`` showing the raw values, and ``db.sampledload.avg`` less than ``db.load.avg`` . For most use cases, you can query ``db.load.avg`` only. 
+
+          
+
+        
+        - **GroupBy** *(dict) --* 
+
+          A specification for how to aggregate the data points from a query result. You must specify a valid dimension group. Performance Insights will return all of the dimensions within that group, unless you provide the names of specific dimensions within that group. You can also request that Performance Insights return a limited number of values for a dimension.
+
+          
+
+        
+          - **Group** *(string) --* **[REQUIRED]** 
+
+            The name of the dimension group. Valid values are:
+
+             
+
+             
+            * ``db`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+             
+            * ``db.application`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+             
+            * ``db.host`` - The host name of the connected client (all engines) 
+             
+            * ``db.session_type`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+             
+            * ``db.sql`` - The SQL that is currently executing (all engines) 
+             
+            * ``db.sql_tokenized`` - The SQL digest (all engines) 
+             
+            * ``db.wait_event`` - The event for which the database backend is waiting (all engines) 
+             
+            * ``db.wait_event_type`` - The type of event for which the database backend is waiting (all engines) 
+             
+            * ``db.user`` - The user logged in to the database (all engines) 
+             
+
+            
+
+          
+          - **Dimensions** *(list) --* 
+
+            A list of specific dimensions from a dimension group. If this parameter is not present, then it signifies that all of the dimensions in the group were requested, or are present in the response.
+
+             
+
+            Valid values for elements in the ``Dimensions`` array are:
+
+             
+
+             
+            * ``db.application.name`` - The name of the application that is connected to the database (only Aurora PostgreSQL and RDS PostgreSQL) 
+             
+            * ``db.host.id`` - The host ID of the connected client (all engines) 
+             
+            * ``db.host.name`` - The host name of the connected client (all engines) 
+             
+            * ``db.name`` - The name of the database to which the client is connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL, and MariaDB) 
+             
+            * ``db.session_type.name`` - The type of the current session (only Aurora PostgreSQL and RDS PostgreSQL) 
+             
+            * ``db.sql.id`` - The SQL ID generated by Performance Insights (all engines) 
+             
+            * ``db.sql.db_id`` - The SQL ID generated by the database (all engines) 
+             
+            * ``db.sql.statement`` - The SQL text that is being executed (all engines) 
+             
+            * ``db.sql.tokenized_id``   
+             
+            * ``db.sql_tokenized.id`` - The SQL digest ID generated by Performance Insights (all engines) 
+             
+            * ``db.sql_tokenized.db_id`` - SQL digest ID generated by the database (all engines) 
+             
+            * ``db.sql_tokenized.statement`` - The SQL digest text (all engines) 
+             
+            * ``db.user.id`` - The ID of the user logged in to the database (all engines) 
+             
+            * ``db.user.name`` - The name of the user logged in to the database (all engines) 
+             
+            * ``db.wait_event.name`` - The event for which the backend is waiting (all engines) 
+             
+            * ``db.wait_event.type`` - The type of event for which the backend is waiting (all engines) 
+             
+            * ``db.wait_event_type.name`` - The name of the event type for which the backend is waiting (all engines) 
+             
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **Limit** *(integer) --* 
+
+            The maximum number of items to fetch for this dimension group.
+
+            
+
+          
+        
+        - **Filter** *(dict) --* 
+
+          One or more filters to apply in the request. Restrictions:
+
+           
+
+           
+          * Any number of filters by the same dimension, as specified in the ``GroupBy`` parameter. 
+           
+          * A single filter for any other dimension in this dimension group. 
+           
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(string) --* 
+
+            
+      
+    
+      
+  
+    :type StartTime: datetime
+    :param StartTime: **[REQUIRED]** 
+
+      The date and time specifying the beginning of the requested time series data. You can't specify a ``StartTime`` that's earlier than 7 days ago. The value specified is *inclusive* - data points equal to or greater than ``StartTime`` will be returned.
+
+       
+
+      The value for ``StartTime`` must be earlier than the value for ``EndTime`` .
+
+      
+
+    
+    :type EndTime: datetime
+    :param EndTime: **[REQUIRED]** 
+
+      The date and time specifying the end of the requested time series data. The value specified is *exclusive* - data points less than (but not equal to) ``EndTime`` will be returned.
+
+       
+
+      The value for ``EndTime`` must be later than the value for ``StartTime`` .
+
+      
+
+    
+    :type PeriodInSeconds: integer
+    :param PeriodInSeconds: 
+
+      The granularity, in seconds, of the data points returned from Performance Insights. A period can be as short as one second, or as long as one day (86400 seconds). Valid values are:
+
+       
+
+       
+      * ``1`` (one second) 
+       
+      * ``60`` (one minute) 
+       
+      * ``300`` (five minutes) 
+       
+      * ``3600`` (one hour) 
+       
+      * ``86400`` (twenty-four hours) 
+       
+
+       
+
+      If you don't specify ``PeriodInSeconds`` , then Performance Insights will choose a value for you, with a goal of returning roughly 100-200 data points in the response.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return in the response. If more items exist than the specified ``MaxRecords`` value, a pagination token is included in the response so that the remaining results can be retrieved. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by ``MaxRecords`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AlignedStartTime': datetime(2015, 1, 1),
+            'AlignedEndTime': datetime(2015, 1, 1),
+            'Identifier': 'string',
+            'MetricList': [
+                {
+                    'Key': {
+                        'Metric': 'string',
+                        'Dimensions': {
+                            'string': 'string'
+                        }
+                    },
+                    'DataPoints': [
+                        {
+                            'Timestamp': datetime(2015, 1, 1),
+                            'Value': 123.0
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AlignedStartTime** *(datetime) --* 
+
+          The start time for the returned metrics, after alignment to a granular boundary (as specified by ``PeriodInSeconds`` ). ``AlignedStartTime`` will be less than or equal to the value of the user-specified ``StartTime`` .
+
+          
+        
+
+        - **AlignedEndTime** *(datetime) --* 
+
+          The end time for the returned metrics, after alignment to a granular boundary (as specified by ``PeriodInSeconds`` ). ``AlignedEndTime`` will be greater than or equal to the value of the user-specified ``Endtime`` .
+
+          
+        
+
+        - **Identifier** *(string) --* 
+
+          An immutable, AWS Region-unique identifier for a data source. Performance Insights gathers metrics from this data source.
+
+           
+
+          To use a DB instance as a data source, you specify its ``DbiResourceId`` value - for example: ``db-FAIHNTYBKTGAUSUZQYPDS2GW4A``  
+
+          
+        
+
+        - **MetricList** *(list) --* 
+
+          An array of metric results,, where each array element contains all of the data points for a particular dimension.
+
+          
+          
+
+          - *(dict) --* 
+
+            A time-ordered series of data points, corresponding to a dimension of a Performance Insights metric.
+
+            
+            
+
+            - **Key** *(dict) --* 
+
+              The dimension(s) to which the data points apply.
+
+              
+              
+
+              - **Metric** *(string) --* 
+
+                The name of a Performance Insights metric to be measured.
+
+                 
+
+                Valid values for ``Metric`` are:
+
+                 
+
+                 
+                * ``db.load.avg`` - a scaled representation of the number of active sessions for the database engine. 
+                 
+                * ``db.sampledload.avg`` - the raw number of active sessions for the database engine. 
+                 
+
+                 
+
+                If the number of active sessions is less than an internal Performance Insights threshold, ``db.load.avg`` and ``db.sampledload.avg`` are the same value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with ``db.load.avg`` showing the scaled values, ``db.sampledload.avg`` showing the raw values, and ``db.sampledload.avg`` less than ``db.load.avg`` . For most use cases, you can query ``db.load.avg`` only. 
+
+                
+              
+
+              - **Dimensions** *(dict) --* 
+
+                The valid dimensions for the metric.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+          
+            
+
+            - **DataPoints** *(list) --* 
+
+              An array of timestamp-value pairs, representing measurements over a period of time.
+
+              
+              
+
+              - *(dict) --* 
+
+                A timestamp, and a single numerical value, which together represent a measurement at a particular point in time.
+
+                
+                
+
+                - **Timestamp** *(datetime) --* 
+
+                  The time, in epoch format, associated with a particular ``Value`` .
+
+                  
+                
+
+                - **Value** *(float) --* 
+
+                  The actual value associated with a particular ``Timestamp`` .
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by ``MaxRecords`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`PI.Client.exceptions.InvalidArgumentException`
+
+    
+    *     :py:class:`PI.Client.exceptions.InternalServiceError`
+
+    
+    *     :py:class:`PI.Client.exceptions.NotAuthorizedException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Sending events to Amazon CloudWatch Events &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon CloudWatch examples" href="cw-examples.html" />
+    <link rel="next" title="Using subscription filters in Amazon CloudWatch Logs" href="cw-example-subscription-filters.html" />
+    <link rel="prev" title="Getting metrics from Amazon CloudWatch" href="cw-example-metrics.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-subscription-filters.html" title="Using subscription filters in Amazon CloudWatch Logs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-metrics.html" title="Getting metrics from Amazon CloudWatch"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" accesskey="U">Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="cw-examples.html">Amazon CloudWatch examples</a></li>
+              
+              <li>Sending events to Amazon CloudWatch Events</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="sending-events-to-amazon-cloudwatch-events">
+<span id="aws-boto3-cw-events"></span><h1>Sending events to Amazon CloudWatch Events<a class="headerlink" href="#sending-events-to-amazon-cloudwatch-events" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to:</p>
+<ul class="simple">
+<li>Create and update a rule used to trigger an event</li>
+<li>Define one or more targets to respond to an event</li>
+<li>Send events that are matched to targets for handling</li>
+</ul>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>CloudWatch Events delivers a near real-time stream of system events that describe changes in
+Amazon Web Services (AWS) resources to any of various targets. Using simple rules, you can match
+events and route them to one or more target functions or streams.</p>
+<p>In this example, Python code is used to send events to CloudWatch Events. The code uses the
+AWS SDK for Python to manage instances using these methods of the CloudWatchEvents client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_rule">put_rule</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_targets">put_targets</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_events">put_events</a>.</li>
+</ul>
+<p>For more information about CloudWatch Events, see
+<a class="reference external" href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/AddEventsPutEvents.html">Adding Events with PutEvents</a>
+in the <em>Amazon CloudWatch Events User Guide</em>.</p>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</li>
+<li><p class="first">Create a Lambda function using the <strong>hello-world</strong> blueprint to serve as the target for events. To
+learn how, see <a class="reference external" href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/LogEC2InstanceState.html">Step 1: Create an AWS Lambda function</a>
+in the <em>Amazon CloudWatch Events User Guide</em>.</p>
+</li>
+<li><p class="first">Create an IAM role whose policy grants permission to CloudWatch Events and that includes <tt class="code docutils literal"><span class="pre">events.amazonaws.com</span></tt>
+as a trusted entity. For more information about creating an IAM role, see
+<a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html">Creating a Role to Delegate Permissions to an AWS Service</a>
+in the <em>IAM User Guide</em>.</p>
+<p>Use the following role policy when creating the IAM role.</p>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Sid&quot;</span><span class="p">:</span> <span class="s2">&quot;CloudWatchEventsFullAccess&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;events:*&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Sid&quot;</span><span class="p">:</span> <span class="s2">&quot;IAMPassRoleForCloudWatchEvents&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;iam:PassRole&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:iam::*:role/AWS_Events_Invoke_Targets&quot;</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Use the following trust relationship when creating the IAM role.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Principal&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;Service&quot;</span><span class="p">:</span> <span class="s2">&quot;events.amazonaws.com&quot;</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;sts:AssumeRole&quot;</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="create-a-scheduled-rule">
+<h2>Create a scheduled rule<a class="headerlink" href="#create-a-scheduled-rule" title="Permalink to this headline">¶</a></h2>
+<p>Create or update the specified rule. Rules are enabled by default, or based on value of the state.
+You can disable a rule using <a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.disable_rule">DisableRule</a>.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Create a CloudWatch Events rule using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_rule">put_rule</a>.</li>
+</ul>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+
+<span class="c1"># Create CloudWatchEvents client</span>
+<span class="n">cloudwatch_events</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span>
+
+<span class="c1"># Put an event rule</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">cloudwatch_events</span><span class="o">.</span><span class="n">put_rule</span><span class="p">(</span>
+    <span class="n">Name</span><span class="o">=</span><span class="s1">&#39;DEMO_EVENT&#39;</span><span class="p">,</span>
+    <span class="n">RoleArn</span><span class="o">=</span><span class="s1">&#39;IAM_ROLE_ARN&#39;</span><span class="p">,</span>
+    <span class="n">ScheduleExpression</span><span class="o">=</span><span class="s1">&#39;rate(5 minutes)&#39;</span><span class="p">,</span>
+    <span class="n">State</span><span class="o">=</span><span class="s1">&#39;ENABLED&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;RuleArn&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="add-an-aws-lambda-function-target">
+<h2>Add an AWS Lambda function target<a class="headerlink" href="#add-an-aws-lambda-function-target" title="Permalink to this headline">¶</a></h2>
+<p>Add the specified targets to the specified rule, or update the targets if they are already
+associated with the rule.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Add a target to a rule using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_targets">put_targets</a>.</li>
+</ul>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatchEvents client</span>
+<span class="n">cloudwatch_events</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span>
+
+<span class="c1"># Put target for rule</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">cloudwatch_events</span><span class="o">.</span><span class="n">put_targets</span><span class="p">(</span>
+    <span class="n">Rule</span><span class="o">=</span><span class="s1">&#39;DEMO_EVENT&#39;</span><span class="p">,</span>
+    <span class="n">Targets</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;Arn&#39;</span><span class="p">:</span> <span class="s1">&#39;LAMBDA_FUNCTION_ARN&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Id&#39;</span><span class="p">:</span> <span class="s1">&#39;myCloudWatchEventsTarget&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="send-events">
+<h2>Send events<a class="headerlink" href="#send-events" title="Permalink to this headline">¶</a></h2>
+<p>Send custom events to Amazon CloudWatch Events so that they can be matched to rules.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Send a custom event to CloudWatch Events using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/events.html#CloudWatchEvents.Client.put_events">put_events</a>.</li>
+</ul>
+<div class="section" id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+
+<span class="c1"># Create CloudWatchEvents client</span>
+<span class="n">cloudwatch_events</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;events&#39;</span><span class="p">)</span>
+
+<span class="c1"># Put an event</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">cloudwatch_events</span><span class="o">.</span><span class="n">put_events</span><span class="p">(</span>
+    <span class="n">Entries</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;Detail&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="s1">&#39;value1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="s1">&#39;value2&#39;</span><span class="p">}),</span>
+            <span class="s1">&#39;DetailType&#39;</span><span class="p">:</span> <span class="s1">&#39;appRequestSubmitted&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Resources&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;RESOURCE_ARN&#39;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;Source&#39;</span><span class="p">:</span> <span class="s1">&#39;com.company.myapp&#39;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Entries&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="cw-example-metrics.html" title="previous chapter (use the left arrow)">Getting metrics from Amazon CloudWatch</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="cw-example-subscription-filters.html" title="next chapter (use the right arrow)">Using subscription filters in Amazon CloudWatch Logs</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-subscription-filters.html" title="Using subscription filters in Amazon CloudWatch Logs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-metrics.html" title="Getting metrics from Amazon CloudWatch"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" >Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

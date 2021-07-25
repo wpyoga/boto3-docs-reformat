@@ -1,0 +1,1240 @@
+
+
+******************
+ConnectParticipant
+******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ConnectParticipant.Client
+
+  A low-level client representing Amazon Connect Participant Service
+  
+
+  Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center and provide reliable customer engagement at any scale.
+
+   
+
+  Amazon Connect enables customer contacts through voice or chat.
+
+   
+
+  The APIs described here are used by chat participants, such as agents and customers.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('connectparticipant')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ConnectParticipant.Client.can_paginate`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.complete_attachment_upload`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.create_participant_connection`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.disconnect_participant`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.get_attachment`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.get_paginator`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.get_transcript`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.get_waiter`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.send_event`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.send_message`
+
+  
+  *   :py:meth:`~ConnectParticipant.Client.start_attachment_upload`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: complete_attachment_upload(**kwargs)
+
+    
+
+    Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CompleteAttachmentUpload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.complete_attachment_upload(
+          AttachmentIds=[
+              'string',
+          ],
+          ClientToken='string',
+          ConnectionToken='string'
+      )
+    :type AttachmentIds: list
+    :param AttachmentIds: **[REQUIRED]** 
+
+      A list of unique identifiers for the attachments.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: create_participant_connection(**kwargs)
+
+    
+
+    Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.
+
+     
+
+    The participant token is valid for the lifetime of the participant – until they are part of a contact.
+
+     
+
+    The response URL for ``WEBSOCKET`` Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. 
+
+     
+
+    For chat, you need to publish the following on the established websocket connection:
+
+     
+
+     ``{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}``  
+
+     
+
+    Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.
+
+     
+
+    .. note::
+
+       
+
+      The Amazon Connect Participant Service APIs do not use `Signature Version 4 authentication <https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`__ .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CreateParticipantConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_participant_connection(
+          Type=[
+              'WEBSOCKET'|'CONNECTION_CREDENTIALS',
+          ],
+          ParticipantToken='string'
+      )
+    :type Type: list
+    :param Type: **[REQUIRED]** 
+
+      Type of connection information required.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type ParticipantToken: string
+    :param ParticipantToken: **[REQUIRED]** 
+
+      This is a header parameter.
+
+       
+
+      The Participant Token as obtained from `StartChatContact <https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html>`__ API response.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Websocket': {
+                'Url': 'string',
+                'ConnectionExpiry': 'string'
+            },
+            'ConnectionCredentials': {
+                'ConnectionToken': 'string',
+                'Expiry': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Websocket** *(dict) --* 
+
+          Creates the participant's websocket connection.
+
+          
+          
+
+          - **Url** *(string) --* 
+
+            The URL of the websocket.
+
+            
+          
+
+          - **ConnectionExpiry** *(string) --* 
+
+            The URL expiration timestamp in ISO date format.
+
+             
+
+            It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+            
+      
+        
+
+        - **ConnectionCredentials** *(dict) --* 
+
+          Creates the participant's connection credentials. The authentication token associated with the participant's connection.
+
+          
+          
+
+          - **ConnectionToken** *(string) --* 
+
+            The connection token.
+
+            
+          
+
+          - **Expiry** *(string) --* 
+
+            The expiration of the token.
+
+             
+
+            It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: disconnect_participant(**kwargs)
+
+    
+
+    Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+
+     
+
+    The Amazon Connect Participant Service APIs do not use `Signature Version 4 authentication <https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DisconnectParticipant>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disconnect_participant(
+          ClientToken='string',
+          ConnectionToken='string'
+      )
+    :type ClientToken: string
+    :param ClientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_attachment(**kwargs)
+
+    
+
+    Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetAttachment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_attachment(
+          AttachmentId='string',
+          ConnectionToken='string'
+      )
+    :type AttachmentId: string
+    :param AttachmentId: **[REQUIRED]** 
+
+      A unique identifier for the attachment.
+
+      
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Url': 'string',
+            'UrlExpiry': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Url** *(string) --* 
+
+          The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+
+          
+        
+
+        - **UrlExpiry** *(string) --* 
+
+          The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_transcript(**kwargs)
+
+    
+
+    Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+
+     
+
+    The Amazon Connect Participant Service APIs do not use `Signature Version 4 authentication <https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetTranscript>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_transcript(
+          ContactId='string',
+          MaxResults=123,
+          NextToken='string',
+          ScanDirection='FORWARD'|'BACKWARD',
+          SortOrder='DESCENDING'|'ASCENDING',
+          StartPosition={
+              'Id': 'string',
+              'AbsoluteTime': 'string',
+              'MostRecent': 123
+          },
+          ConnectionToken='string'
+      )
+    :type ContactId: string
+    :param ContactId: 
+
+      The contactId from the current contact chain for which transcript is needed.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in the page. Default: 10. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+
+      
+
+    
+    :type ScanDirection: string
+    :param ScanDirection: 
+
+      The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. 
+
+      
+
+    
+    :type SortOrder: string
+    :param SortOrder: 
+
+      The sort order for the records. Default: DESCENDING.
+
+      
+
+    
+    :type StartPosition: dict
+    :param StartPosition: 
+
+      A filtering option for where to start.
+
+      
+
+    
+      - **Id** *(string) --* 
+
+        The ID of the message or event where to start. 
+
+        
+
+      
+      - **AbsoluteTime** *(string) --* 
+
+        The time in ISO format where to start.
+
+         
+
+        It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+        
+
+      
+      - **MostRecent** *(integer) --* 
+
+        The start position of the most recent message where you want to start. 
+
+        
+
+      
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'InitialContactId': 'string',
+            'Transcript': [
+                {
+                    'AbsoluteTime': 'string',
+                    'Content': 'string',
+                    'ContentType': 'string',
+                    'Id': 'string',
+                    'Type': 'TYPING'|'PARTICIPANT_JOINED'|'PARTICIPANT_LEFT'|'CHAT_ENDED'|'TRANSFER_SUCCEEDED'|'TRANSFER_FAILED'|'MESSAGE'|'EVENT'|'ATTACHMENT'|'CONNECTION_ACK',
+                    'ParticipantId': 'string',
+                    'DisplayName': 'string',
+                    'ParticipantRole': 'AGENT'|'CUSTOMER'|'SYSTEM',
+                    'Attachments': [
+                        {
+                            'ContentType': 'string',
+                            'AttachmentId': 'string',
+                            'AttachmentName': 'string',
+                            'Status': 'APPROVED'|'REJECTED'|'IN_PROGRESS'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **InitialContactId** *(string) --* 
+
+          The initial contact ID for the contact. 
+
+          
+        
+
+        - **Transcript** *(list) --* 
+
+          The list of messages in the session.
+
+          
+          
+
+          - *(dict) --* 
+
+            An item - message or event - that has been sent. 
+
+            
+            
+
+            - **AbsoluteTime** *(string) --* 
+
+              The time when the message or event was sent.
+
+               
+
+              It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+              
+            
+
+            - **Content** *(string) --* 
+
+              The content of the message or event.
+
+              
+            
+
+            - **ContentType** *(string) --* 
+
+              The type of content of the item.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The ID of the item.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              Type of the item: message or event. 
+
+              
+            
+
+            - **ParticipantId** *(string) --* 
+
+              The ID of the sender in the session.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              The chat display name of the sender.
+
+              
+            
+
+            - **ParticipantRole** *(string) --* 
+
+              The role of the sender. For example, is it a customer, agent, or system.
+
+              
+            
+
+            - **Attachments** *(list) --* 
+
+              Provides information about the attachments.
+
+              
+              
+
+              - *(dict) --* 
+
+                The case-insensitive input to indicate standard MIME type that describes the format of the file that will be uploaded.
+
+                
+                
+
+                - **ContentType** *(string) --* 
+
+                  Describes the MIME file type of the attachment. For a list of supported file types, see `Feature specifications <https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits>`__ in the *Amazon Connect Administrator Guide* .
+
+                  
+                
+
+                - **AttachmentId** *(string) --* 
+
+                  A unique identifier for the attachment.
+
+                  
+                
+
+                - **AttachmentName** *(string) --* 
+
+                  A case-sensitive name of the attachment being uploaded.
+
+                  
+                
+
+                - **Status** *(string) --* 
+
+                  Status of the attachment.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: send_event(**kwargs)
+
+    
+
+    Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+
+     
+
+    The Amazon Connect Participant Service APIs do not use `Signature Version 4 authentication <https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendEvent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.send_event(
+          ContentType='string',
+          Content='string',
+          ClientToken='string',
+          ConnectionToken='string'
+      )
+    :type ContentType: string
+    :param ContentType: **[REQUIRED]** 
+
+      The content type of the request. Supported types are:
+
+       
+
+       
+      * application/vnd.amazonaws.connect.event.typing 
+       
+      * application/vnd.amazonaws.connect.event.connection.acknowledged 
+       
+
+      
+
+    
+    :type Content: string
+    :param Content: 
+
+      The content of the event to be sent (for example, message text). This is not yet supported.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'AbsoluteTime': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The ID of the response.
+
+          
+        
+
+        - **AbsoluteTime** *(string) --* 
+
+          The time when the event was sent.
+
+           
+
+          It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: send_message(**kwargs)
+
+    
+
+    Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+
+     
+
+    .. note::
+
+       
+
+      The Amazon Connect Participant Service APIs do not use `Signature Version 4 authentication <https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html>`__ .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendMessage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.send_message(
+          ContentType='string',
+          Content='string',
+          ClientToken='string',
+          ConnectionToken='string'
+      )
+    :type ContentType: string
+    :param ContentType: **[REQUIRED]** 
+
+      The type of the content. Supported types are text/plain.
+
+      
+
+    
+    :type Content: string
+    :param Content: **[REQUIRED]** 
+
+      The content of the message.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'AbsoluteTime': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The ID of the message.
+
+          
+        
+
+        - **AbsoluteTime** *(string) --* 
+
+          The time when the message was sent.
+
+           
+
+          It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: start_attachment_upload(**kwargs)
+
+    
+
+    Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/StartAttachmentUpload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_attachment_upload(
+          ContentType='string',
+          AttachmentSizeInBytes=123,
+          AttachmentName='string',
+          ClientToken='string',
+          ConnectionToken='string'
+      )
+    :type ContentType: string
+    :param ContentType: **[REQUIRED]** 
+
+      Describes the MIME file type of the attachment. For a list of supported file types, see `Feature specifications <https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits>`__ in the *Amazon Connect Administrator Guide* .
+
+      
+
+    
+    :type AttachmentSizeInBytes: integer
+    :param AttachmentSizeInBytes: **[REQUIRED]** 
+
+      The size of the attachment in bytes.
+
+      
+
+    
+    :type AttachmentName: string
+    :param AttachmentName: **[REQUIRED]** 
+
+      A case-sensitive name of the attachment being uploaded.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A unique case sensitive identifier to support idempotency of request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type ConnectionToken: string
+    :param ConnectionToken: **[REQUIRED]** 
+
+      The authentication token associated with the participant's connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AttachmentId': 'string',
+            'UploadMetadata': {
+                'Url': 'string',
+                'UrlExpiry': 'string',
+                'HeadersToInclude': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AttachmentId** *(string) --* 
+
+          A unique identifier for the attachment.
+
+          
+        
+
+        - **UploadMetadata** *(dict) --* 
+
+          Fields to be used while uploading the attachment.
+
+          
+          
+
+          - **Url** *(string) --* 
+
+            The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+
+            
+          
+
+          - **UrlExpiry** *(string) --* 
+
+            The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+
+            
+          
+
+          - **HeadersToInclude** *(dict) --* 
+
+            The headers to be provided while uploading the file to the URL.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ConnectParticipant.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,708 @@
+
+
+****************************
+SageMakerFeatureStoreRuntime
+****************************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SageMakerFeatureStoreRuntime.Client
+
+  A low-level client representing Amazon SageMaker Feature Store Runtime
+  
+
+  Contains all data plane API operations and data types for the Amazon SageMaker Feature Store. Use this API to put, delete, and retrieve (get) features from a feature store.
+
+   
+
+  Use the following operations to configure your ``OnlineStore`` and ``OfflineStore`` features, and to create and manage feature groups:
+
+   
+
+   
+  * `CreateFeatureGroup <https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateFeatureGroup.html>`__   
+   
+  * `DeleteFeatureGroup <https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteFeatureGroup.html>`__   
+   
+  * `DescribeFeatureGroup <https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeFeatureGroup.html>`__   
+   
+  * `ListFeatureGroups <https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListFeatureGroups.html>`__   
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('sagemaker-featurestore-runtime')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.batch_get_record`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.can_paginate`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.delete_record`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.get_paginator`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.get_record`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.get_waiter`
+
+  
+  *   :py:meth:`~SageMakerFeatureStoreRuntime.Client.put_record`
+
+  
+
+  .. py:method:: batch_get_record(**kwargs)
+
+    
+
+    Retrieves a batch of ``Records`` from a ``FeatureGroup`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/BatchGetRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_get_record(
+          Identifiers=[
+              {
+                  'FeatureGroupName': 'string',
+                  'RecordIdentifiersValueAsString': [
+                      'string',
+                  ],
+                  'FeatureNames': [
+                      'string',
+                  ]
+              },
+          ]
+      )
+    :type Identifiers: list
+    :param Identifiers: **[REQUIRED]** 
+
+      A list of ``FeatureGroup`` names, with their corresponding ``RecordIdentifier`` value, and Feature name that have been requested to be retrieved in batch.
+
+      
+
+    
+      - *(dict) --* 
+
+        The identifier that identifies the batch of Records you are retrieving in a batch.
+
+        
+
+      
+        - **FeatureGroupName** *(string) --* **[REQUIRED]** 
+
+          A ``FeatureGroupName`` containing Records you are retrieving in a batch.
+
+          
+
+        
+        - **RecordIdentifiersValueAsString** *(list) --* **[REQUIRED]** 
+
+          The value for a list of record identifiers in string format.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **FeatureNames** *(list) --* 
+
+          List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Records': [
+                {
+                    'FeatureGroupName': 'string',
+                    'RecordIdentifierValueAsString': 'string',
+                    'Record': [
+                        {
+                            'FeatureName': 'string',
+                            'ValueAsString': 'string'
+                        },
+                    ]
+                },
+            ],
+            'Errors': [
+                {
+                    'FeatureGroupName': 'string',
+                    'RecordIdentifierValueAsString': 'string',
+                    'ErrorCode': 'string',
+                    'ErrorMessage': 'string'
+                },
+            ],
+            'UnprocessedIdentifiers': [
+                {
+                    'FeatureGroupName': 'string',
+                    'RecordIdentifiersValueAsString': [
+                        'string',
+                    ],
+                    'FeatureNames': [
+                        'string',
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Records** *(list) --* 
+
+          A list of Records you requested to be retrieved in batch.
+
+          
+          
+
+          - *(dict) --* 
+
+            The output of Records that have been retrieved in a batch.
+
+            
+            
+
+            - **FeatureGroupName** *(string) --* 
+
+              The ``FeatureGroupName`` containing Records you retrieved in a batch.
+
+              
+            
+
+            - **RecordIdentifierValueAsString** *(string) --* 
+
+              The value of the record identifer in string format.
+
+              
+            
+
+            - **Record** *(list) --* 
+
+              The ``Record`` retrieved.
+
+              
+              
+
+              - *(dict) --* 
+
+                The value associated with a feature.
+
+                
+                
+
+                - **FeatureName** *(string) --* 
+
+                  The name of a feature that a feature value corresponds to.
+
+                  
+                
+
+                - **ValueAsString** *(string) --* 
+
+                  The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.
+
+                  
+            
+          
+        
+      
+        
+
+        - **Errors** *(list) --* 
+
+          A list of errors that have occured when retrieving a batch of Records.
+
+          
+          
+
+          - *(dict) --* 
+
+            The error that has occurred when attempting to retrieve a batch of Records.
+
+            
+            
+
+            - **FeatureGroupName** *(string) --* 
+
+              The name of the feature group that the record belongs to.
+
+              
+            
+
+            - **RecordIdentifierValueAsString** *(string) --* 
+
+              The value for the ``RecordIdentifier`` in string format of a Record from a ``FeatureGroup`` that is causing an error when attempting to be retrieved.
+
+              
+            
+
+            - **ErrorCode** *(string) --* 
+
+              The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see `Errors <https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors>`__ .
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message of an error that has occured when attempting to retrieve a record in the batch.
+
+              
+        
+      
+        
+
+        - **UnprocessedIdentifiers** *(list) --* 
+
+          A unprocessed list of ``FeatureGroup`` names, with their corresponding ``RecordIdentifier`` value, and Feature name.
+
+          
+          
+
+          - *(dict) --* 
+
+            The identifier that identifies the batch of Records you are retrieving in a batch.
+
+            
+            
+
+            - **FeatureGroupName** *(string) --* 
+
+              A ``FeatureGroupName`` containing Records you are retrieving in a batch.
+
+              
+            
+
+            - **RecordIdentifiersValueAsString** *(list) --* 
+
+              The value for a list of record identifiers in string format.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **FeatureNames** *(list) --* 
+
+              List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ValidationError`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.InternalFailure`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ServiceUnavailable`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.AccessForbidden`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: delete_record(**kwargs)
+
+    
+
+    Deletes a ``Record`` from a ``FeatureGroup`` . A new record will show up in the ``OfflineStore`` when the ``DeleteRecord`` API is called. This record will have a value of ``True`` in the ``is_deleted`` column.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/DeleteRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_record(
+          FeatureGroupName='string',
+          RecordIdentifierValueAsString='string',
+          EventTime='string'
+      )
+    :type FeatureGroupName: string
+    :param FeatureGroupName: **[REQUIRED]** 
+
+      The name of the feature group to delete the record from. 
+
+      
+
+    
+    :type RecordIdentifierValueAsString: string
+    :param RecordIdentifierValueAsString: **[REQUIRED]** 
+
+      The value for the ``RecordIdentifier`` that uniquely identifies the record, in string format. 
+
+      
+
+    
+    :type EventTime: string
+    :param EventTime: **[REQUIRED]** 
+
+      Timestamp indicating when the deletion event occurred. ``EventTime`` can be used to query data at a certain point in time.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ValidationError`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.InternalFailure`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ServiceUnavailable`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.AccessForbidden`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_record(**kwargs)
+
+    
+
+    Use for ``OnlineStore`` serving from a ``FeatureStore`` . Only the latest records stored in the ``OnlineStore`` can be retrieved. If no Record with ``RecordIdentifierValue`` is found, then an empty result is returned. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/GetRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_record(
+          FeatureGroupName='string',
+          RecordIdentifierValueAsString='string',
+          FeatureNames=[
+              'string',
+          ]
+      )
+    :type FeatureGroupName: string
+    :param FeatureGroupName: **[REQUIRED]** 
+
+      The name of the feature group in which you want to put the records.
+
+      
+
+    
+    :type RecordIdentifierValueAsString: string
+    :param RecordIdentifierValueAsString: **[REQUIRED]** 
+
+      The value that corresponds to ``RecordIdentifier`` type and uniquely identifies the record in the ``FeatureGroup`` . 
+
+      
+
+    
+    :type FeatureNames: list
+    :param FeatureNames: 
+
+      List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Record': [
+                {
+                    'FeatureName': 'string',
+                    'ValueAsString': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Record** *(list) --* 
+
+          The record you requested. A list of ``FeatureValues`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            The value associated with a feature.
+
+            
+            
+
+            - **FeatureName** *(string) --* 
+
+              The name of a feature that a feature value corresponds to.
+
+              
+            
+
+            - **ValueAsString** *(string) --* 
+
+              The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ValidationError`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ResourceNotFound`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.InternalFailure`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ServiceUnavailable`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.AccessForbidden`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: put_record(**kwargs)
+
+    
+
+    Used for data ingestion into the ``FeatureStore`` . The ``PutRecord`` API writes to both the ``OnlineStore`` and ``OfflineStore`` . If the record is the latest record for the ``recordIdentifier`` , the record is written to both the ``OnlineStore`` and ``OfflineStore`` . If the record is a historic record, it is written only to the ``OfflineStore`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/PutRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_record(
+          FeatureGroupName='string',
+          Record=[
+              {
+                  'FeatureName': 'string',
+                  'ValueAsString': 'string'
+              },
+          ]
+      )
+    :type FeatureGroupName: string
+    :param FeatureGroupName: **[REQUIRED]** 
+
+      The name of the feature group that you want to insert the record into.
+
+      
+
+    
+    :type Record: list
+    :param Record: **[REQUIRED]** 
+
+      List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:
+
+       
+
+       
+      * Use ``GetRecord`` to retrieve the latest record. 
+       
+      * Update the record returned from ``GetRecord`` .  
+       
+      * Use ``PutRecord`` to update feature values. 
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        The value associated with a feature.
+
+        
+
+      
+        - **FeatureName** *(string) --* **[REQUIRED]** 
+
+          The name of a feature that a feature value corresponds to.
+
+          
+
+        
+        - **ValueAsString** *(string) --* **[REQUIRED]** 
+
+          The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.
+
+          
+
+        
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ValidationError`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.InternalFailure`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.ServiceUnavailable`
+
+    
+    *     :py:class:`SageMakerFeatureStoreRuntime.Client.exceptions.AccessForbidden`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

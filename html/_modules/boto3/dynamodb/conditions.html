@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>boto3.dynamodb.conditions &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../../../index.html" />
+    <link rel="up" title="boto3" href="../../boto3.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../boto3.html" accesskey="U">boto3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../../../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide/sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide/examples.html">Code examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide/index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../guide/security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../../index.html">Docs</a></li>
+              
+                <li><a href="../../index.html">Module code</a></li>
+              
+                <li><a href="../../boto3.html">boto3</a></li>
+              
+              <li>boto3.dynamodb.conditions</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <h1>Source code for boto3.dynamodb.conditions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;). You</span>
+<span class="c1"># may not use this file except in compliance with the License. A copy of</span>
+<span class="c1"># the License is located at</span>
+<span class="c1">#</span>
+<span class="c1"># https://aws.amazon.com/apache2.0/</span>
+<span class="c1">#</span>
+<span class="c1"># or in the &quot;license&quot; file accompanying this file. This file is</span>
+<span class="c1"># distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF</span>
+<span class="c1"># ANY KIND, either express or implied. See the License for the specific</span>
+<span class="c1"># language governing permissions and limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">boto3.exceptions</span> <span class="kn">import</span> <span class="n">DynamoDBOperationNotSupportedError</span>
+<span class="kn">from</span> <span class="nn">boto3.exceptions</span> <span class="kn">import</span> <span class="n">DynamoDBNeedsConditionError</span>
+<span class="kn">from</span> <span class="nn">boto3.exceptions</span> <span class="kn">import</span> <span class="n">DynamoDBNeedsKeyConditionError</span>
+
+
+<span class="n">ATTR_NAME_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^.\[\]]+(?![^\[]*\])&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ConditionBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">has_grouped_values</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">=</span> <span class="n">values</span>
+
+    <span class="k">def</span> <span class="fm">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ConditionBase</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">DynamoDBOperationNotSupportedError</span><span class="p">(</span><span class="s1">&#39;AND&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ConditionBase</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">DynamoDBOperationNotSupportedError</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Not</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression_format</span><span class="p">,</span>
+                <span class="s1">&#39;operator&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">expression_operator</span><span class="p">,</span>
+                <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_values</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">AttributeBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__and__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">DynamoDBOperationNotSupportedError</span><span class="p">(</span><span class="s1">&#39;AND&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__or__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">DynamoDBOperationNotSupportedError</span><span class="p">(</span><span class="s1">&#39;OR&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">DynamoDBOperationNotSupportedError</span><span class="p">(</span><span class="s1">&#39;NOT&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is equal to the value.</span>
+
+<span class="sd">        :param value: The value that the attribute is equal to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">lt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is less than the value.</span>
+
+<span class="sd">        :param value: The value that the attribute is less than.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LessThan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">lte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is less than or equal to the</span>
+<span class="sd">           value.</span>
+
+<span class="sd">        :param value: The value that the attribute is less than or equal to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LessThanEquals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is greater than the value.</span>
+
+<span class="sd">        :param value: The value that the attribute is greater than.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GreaterThan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is greater than or equal to</span>
+<span class="sd">           the value.</span>
+
+<span class="sd">        :param value: The value that the attribute is greater than or equal to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GreaterThanEquals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">begins_with</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute begins with the value.</span>
+
+<span class="sd">        :param value: The value that the attribute begins with.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">BeginsWith</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">between</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low_value</span><span class="p">,</span> <span class="n">high_value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is greater than or equal</span>
+<span class="sd">        to the low value and less than or equal to the high value.</span>
+
+<span class="sd">        :param low_value: The value that the attribute is greater than or equal to.</span>
+<span class="sd">        :param high_value: The value that the attribute is less than or equal to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Between</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low_value</span><span class="p">,</span> <span class="n">high_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ConditionAttributeBase</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">,</span> <span class="n">AttributeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This base class is for conditions that can have attribute methods.</span>
+
+<span class="sd">    One example is the Size condition. To complete a condition, you need</span>
+<span class="sd">    to apply another AttributeBase method like eq().</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">):</span>
+        <span class="n">ConditionBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">)</span>
+        <span class="c1"># This is assuming the first value to the condition is the attribute</span>
+        <span class="c1"># in which can be used to generate its attribute base.</span>
+        <span class="n">AttributeBase</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ConditionBase</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="n">AttributeBase</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ComparisonCondition</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{operator}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Equals</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;=&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">NotEquals</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&lt;&gt;&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">LessThan</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&lt;&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">LessThanEquals</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&lt;=&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">GreaterThan</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&gt;&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">GreaterThanEquals</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;&gt;=&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">In</span><span class="p">(</span><span class="n">ComparisonCondition</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;IN&#39;</span>
+    <span class="n">has_grouped_values</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">Between</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;BETWEEN&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{operator}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> AND </span><span class="si">{2}</span><span class="s1">&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">BeginsWith</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;begins_with&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Contains</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;contains&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Size</span><span class="p">(</span><span class="n">ConditionAttributeBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;size&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">AttributeType</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;attribute_type&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">AttributeExists</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;attribute_exists&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">AttributeNotExists</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;attribute_not_exists&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{operator}</span><span class="s1">(</span><span class="si">{0}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">And</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;AND&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{operator}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Or</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;OR&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{operator}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1">)&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">Not</span><span class="p">(</span><span class="n">ConditionBase</span><span class="p">):</span>
+    <span class="n">expression_operator</span> <span class="o">=</span> <span class="s1">&#39;NOT&#39;</span>
+    <span class="n">expression_format</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{operator}</span><span class="s1"> </span><span class="si">{0}</span><span class="s1">)&#39;</span>
+
+
+<div class="viewcode-block" id="Key"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Key">[docs]</a><span class="k">class</span> <span class="nc">Key</span><span class="p">(</span><span class="n">AttributeBase</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="Attr"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr">[docs]</a><span class="k">class</span> <span class="nc">Attr</span><span class="p">(</span><span class="n">AttributeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents an DynamoDB item&#39;s attribute.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Attr.ne"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.ne">[docs]</a>    <span class="k">def</span> <span class="nf">ne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is not equal to the value</span>
+
+<span class="sd">        :param value: The value that the attribute is not equal to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">NotEquals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.is_in"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.is_in">[docs]</a>    <span class="k">def</span> <span class="nf">is_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute is in the value,</span>
+
+<span class="sd">        :type value: list</span>
+<span class="sd">        :param value: The value that the attribute is in.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">In</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.exists"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute exists.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AttributeExists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.not_exists"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.not_exists">[docs]</a>    <span class="k">def</span> <span class="nf">not_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute does not exist.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AttributeNotExists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.contains"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition where the attribute contains the value.</span>
+
+<span class="sd">        :param value: The value the attribute contains.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.size"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.size">[docs]</a>    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition for the attribute size.</span>
+
+<span class="sd">        Note another AttributeBase method must be called on the returned</span>
+<span class="sd">        size condition to be a valid DynamoDB condition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Attr.attribute_type"><a class="viewcode-back" href="../../../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr.attribute_type">[docs]</a>    <span class="k">def</span> <span class="nf">attribute_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates a condition for the attribute type.</span>
+
+<span class="sd">        :param value: The type of the attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AttributeType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+</div></div>
+<span class="n">BuiltConditionExpression</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+    <span class="s1">&#39;BuiltConditionExpression&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;condition_expression&#39;</span><span class="p">,</span> <span class="s1">&#39;attribute_name_placeholders&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;attribute_value_placeholders&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ConditionExpressionBuilder</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class is used to build condition expressions with placeholders&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name_placeholder</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_placeholder</span> <span class="o">=</span> <span class="s1">&#39;v&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_get_name_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name_placeholder</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name_count</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_value_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value_placeholder</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value_count</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resets the placeholder name and values&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">build_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">is_key_condition</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Builds the condition expression and the dictionary of placeholders.</span>
+
+<span class="sd">        :type condition: ConditionBase</span>
+<span class="sd">        :param condition: A condition to be built into a condition expression</span>
+<span class="sd">            string with any necessary placeholders.</span>
+
+<span class="sd">        :type is_key_condition: Boolean</span>
+<span class="sd">        :param is_key_condition: True if the expression is for a</span>
+<span class="sd">            KeyConditionExpression. False otherwise.</span>
+
+<span class="sd">        :rtype: (string, dict, dict)</span>
+<span class="sd">        :returns: Will return a string representing the condition with</span>
+<span class="sd">            placeholders inserted where necessary, a dictionary of</span>
+<span class="sd">            placeholders for attribute names, and a dictionary of</span>
+<span class="sd">            placeholders for attribute values. Here is a sample return value:</span>
+
+<span class="sd">            (&#39;#n0 = :v0&#39;, {&#39;#n0&#39;: &#39;myattribute&#39;}, {&#39;:v1&#39;: &#39;myvalue&#39;})</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span> <span class="n">ConditionBase</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">DynamoDBNeedsConditionError</span><span class="p">(</span><span class="n">condition</span><span class="p">)</span>
+        <span class="n">attribute_name_placeholders</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">attribute_value_placeholders</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">condition_expression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_expression</span><span class="p">(</span>
+            <span class="n">condition</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">,</span>
+            <span class="n">attribute_value_placeholders</span><span class="p">,</span> <span class="n">is_key_condition</span><span class="o">=</span><span class="n">is_key_condition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BuiltConditionExpression</span><span class="p">(</span>
+            <span class="n">condition_expression</span><span class="o">=</span><span class="n">condition_expression</span><span class="p">,</span>
+            <span class="n">attribute_name_placeholders</span><span class="o">=</span><span class="n">attribute_name_placeholders</span><span class="p">,</span>
+            <span class="n">attribute_value_placeholders</span><span class="o">=</span><span class="n">attribute_value_placeholders</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">,</span>
+                          <span class="n">attribute_value_placeholders</span><span class="p">,</span> <span class="n">is_key_condition</span><span class="p">):</span>
+        <span class="n">expression_dict</span> <span class="o">=</span> <span class="n">condition</span><span class="o">.</span><span class="n">get_expression</span><span class="p">()</span>
+        <span class="n">replaced_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">expression_dict</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]:</span>
+            <span class="c1"># Build the necessary placeholders for that value.</span>
+            <span class="c1"># Placeholders are built for both attribute names and values.</span>
+            <span class="n">replaced_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_expression_component</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">,</span>
+                <span class="n">attribute_value_placeholders</span><span class="p">,</span> <span class="n">condition</span><span class="o">.</span><span class="n">has_grouped_values</span><span class="p">,</span>
+                <span class="n">is_key_condition</span><span class="p">)</span>
+            <span class="n">replaced_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">replaced_value</span><span class="p">)</span>
+        <span class="c1"># Fill out the expression using the operator and the</span>
+        <span class="c1"># values that have been replaced with placeholders.</span>
+        <span class="k">return</span> <span class="n">expression_dict</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="o">*</span><span class="n">replaced_values</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="n">expression_dict</span><span class="p">[</span><span class="s1">&#39;operator&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_build_expression_component</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">,</span>
+                                    <span class="n">attribute_value_placeholders</span><span class="p">,</span>
+                                    <span class="n">has_grouped_values</span><span class="p">,</span> <span class="n">is_key_condition</span><span class="p">):</span>
+        <span class="c1"># Continue to recurse if the value is a ConditionBase in order</span>
+        <span class="c1"># to extract out all parts of the expression.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">ConditionBase</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_expression</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">,</span>
+                <span class="n">attribute_value_placeholders</span><span class="p">,</span> <span class="n">is_key_condition</span><span class="p">)</span>
+        <span class="c1"># If it is not a ConditionBase, we can recurse no further.</span>
+        <span class="c1"># So we check if it is an attribute and add placeholders for</span>
+        <span class="c1"># its name</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">AttributeBase</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">is_key_condition</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Key</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">DynamoDBNeedsKeyConditionError</span><span class="p">(</span>
+                    <span class="s1">&#39;Attribute object </span><span class="si">%s</span><span class="s1"> is of type </span><span class="si">%s</span><span class="s1">. &#39;</span>
+                    <span class="s1">&#39;KeyConditionExpression only supports Attribute objects &#39;</span>
+                    <span class="s1">&#39;of type Key&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_name_placeholder</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">)</span>
+        <span class="c1"># If it is anything else, we treat it as a value and thus placeholders</span>
+        <span class="c1"># are needed for the value.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_value_placeholder</span><span class="p">(</span>
+                <span class="n">value</span><span class="p">,</span> <span class="n">attribute_value_placeholders</span><span class="p">,</span> <span class="n">has_grouped_values</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_name_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attribute_name_placeholders</span><span class="p">):</span>
+        <span class="n">attribute_name</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1"># Figure out which parts of the attribute name that needs replacement.</span>
+        <span class="n">attribute_name_parts</span> <span class="o">=</span> <span class="n">ATTR_NAME_REGEX</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">attribute_name</span><span class="p">)</span>
+
+        <span class="c1"># Add a temporary placeholder for each of these parts.</span>
+        <span class="n">placeholder_format</span> <span class="o">=</span> <span class="n">ATTR_NAME_REGEX</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">)</span>
+        <span class="n">str_format_args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">attribute_name_parts</span><span class="p">:</span>
+            <span class="n">name_placeholder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_name_placeholder</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">str_format_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name_placeholder</span><span class="p">)</span>
+            <span class="c1"># Add the placeholder and value to dictionary of name placeholders.</span>
+            <span class="n">attribute_name_placeholders</span><span class="p">[</span><span class="n">name_placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">part</span>
+        <span class="c1"># Replace the temporary placeholders with the designated placeholders.</span>
+        <span class="k">return</span> <span class="n">placeholder_format</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">str_format_args</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_value_placeholder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">attribute_value_placeholders</span><span class="p">,</span>
+                                 <span class="n">has_grouped_values</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># If the values are grouped, we need to add a placeholder for</span>
+        <span class="c1"># each element inside of the actual value.</span>
+        <span class="k">if</span> <span class="n">has_grouped_values</span><span class="p">:</span>
+            <span class="n">placeholder_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">value_placeholder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value_placeholder</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_value_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">placeholder_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_placeholder</span><span class="p">)</span>
+                <span class="n">attribute_value_placeholders</span><span class="p">[</span><span class="n">value_placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+            <span class="c1"># Assuming the values are grouped by parenthesis.</span>
+            <span class="c1"># IN is the currently the only one that uses this so it maybe</span>
+            <span class="c1"># needed to be changed in future.</span>
+            <span class="k">return</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">placeholder_list</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="c1"># Otherwise, treat the value as a single value that needs only</span>
+        <span class="c1"># one placeholder.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value_placeholder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value_placeholder</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_value_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">attribute_value_placeholders</span><span class="p">[</span><span class="n">value_placeholder</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">return</span> <span class="n">value_placeholder</span>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../boto3.html" >boto3</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../../../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

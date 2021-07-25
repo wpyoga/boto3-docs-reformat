@@ -1,0 +1,5406 @@
+
+
+***
+EFS
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: EFS.Client
+
+  A low-level client representing Amazon Elastic File System (EFS)
+   
+
+  Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need, when they need it. For more information, see the `Amazon Elastic File System API Reference <https://docs.aws.amazon.com/efs/latest/ug/api-reference.html>`__ and the `Amazon Elastic File System User Guide <https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('efs')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~EFS.Client.can_paginate`
+
+  
+  *   :py:meth:`~EFS.Client.create_access_point`
+
+  
+  *   :py:meth:`~EFS.Client.create_file_system`
+
+  
+  *   :py:meth:`~EFS.Client.create_mount_target`
+
+  
+  *   :py:meth:`~EFS.Client.create_tags`
+
+  
+  *   :py:meth:`~EFS.Client.delete_access_point`
+
+  
+  *   :py:meth:`~EFS.Client.delete_file_system`
+
+  
+  *   :py:meth:`~EFS.Client.delete_file_system_policy`
+
+  
+  *   :py:meth:`~EFS.Client.delete_mount_target`
+
+  
+  *   :py:meth:`~EFS.Client.delete_tags`
+
+  
+  *   :py:meth:`~EFS.Client.describe_access_points`
+
+  
+  *   :py:meth:`~EFS.Client.describe_account_preferences`
+
+  
+  *   :py:meth:`~EFS.Client.describe_backup_policy`
+
+  
+  *   :py:meth:`~EFS.Client.describe_file_system_policy`
+
+  
+  *   :py:meth:`~EFS.Client.describe_file_systems`
+
+  
+  *   :py:meth:`~EFS.Client.describe_lifecycle_configuration`
+
+  
+  *   :py:meth:`~EFS.Client.describe_mount_target_security_groups`
+
+  
+  *   :py:meth:`~EFS.Client.describe_mount_targets`
+
+  
+  *   :py:meth:`~EFS.Client.describe_tags`
+
+  
+  *   :py:meth:`~EFS.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~EFS.Client.get_paginator`
+
+  
+  *   :py:meth:`~EFS.Client.get_waiter`
+
+  
+  *   :py:meth:`~EFS.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~EFS.Client.modify_mount_target_security_groups`
+
+  
+  *   :py:meth:`~EFS.Client.put_account_preferences`
+
+  
+  *   :py:meth:`~EFS.Client.put_backup_policy`
+
+  
+  *   :py:meth:`~EFS.Client.put_file_system_policy`
+
+  
+  *   :py:meth:`~EFS.Client.put_lifecycle_configuration`
+
+  
+  *   :py:meth:`~EFS.Client.tag_resource`
+
+  
+  *   :py:meth:`~EFS.Client.untag_resource`
+
+  
+  *   :py:meth:`~EFS.Client.update_file_system`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_access_point(**kwargs)
+
+    
+
+    Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and group, and a file system path, to any file system request made through the access point. The operating system user and group override any identity information provided by the NFS client. The file system path is exposed as the access point's root directory. Applications using the access point can only access data in its own directory and below. To learn more, see `Mounting a file system using EFS access points <https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html>`__ .
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:CreateAccessPoint`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateAccessPoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_access_point(
+          ClientToken='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ],
+          FileSystemId='string',
+          PosixUser={
+              'Uid': 123,
+              'Gid': 123,
+              'SecondaryGids': [
+                  123,
+              ]
+          },
+          RootDirectory={
+              'Path': 'string',
+              'CreationInfo': {
+                  'OwnerUid': 123,
+                  'OwnerGid': 123,
+                  'Permissions': 'string'
+              }
+          }
+      )
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.
+
+      This field is autopopulated if not provided.
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      Creates tags associated with the access point. Each tag is a key-value pair.
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag key (String). The key can't start with ``aws:`` .
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag key.
+
+          
+
+        
+      
+  
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the EFS file system that the access point provides access to.
+
+      
+
+    
+    :type PosixUser: dict
+    :param PosixUser: 
+
+      The operating system user and group applied to all file system requests made using the access point.
+
+      
+
+    
+      - **Uid** *(integer) --* **[REQUIRED]** 
+
+        The POSIX user ID used for all file system operations using this access point.
+
+        
+
+      
+      - **Gid** *(integer) --* **[REQUIRED]** 
+
+        The POSIX group ID used for all file system operations using this access point.
+
+        
+
+      
+      - **SecondaryGids** *(list) --* 
+
+        Secondary POSIX group IDs used for all file system operations using this access point.
+
+        
+
+      
+        - *(integer) --* 
+
+        
+    
+    
+    :type RootDirectory: dict
+    :param RootDirectory: 
+
+      Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the ``RootDirectory`` > ``Path`` specified does not exist, EFS creates it and applies the ``CreationInfo`` settings when a client connects to an access point. When specifying a ``RootDirectory`` , you need to provide the ``Path`` , and the ``CreationInfo`` .
+
+       
+
+      Amazon EFS creates a root directory only if you have provided the CreationInfo: OwnUid, OwnGID, and permissions for the directory. If you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount using the access point will fail.
+
+      
+
+    
+      - **Path** *(string) --* 
+
+        Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the ``CreationInfo`` .
+
+        
+
+      
+      - **CreationInfo** *(dict) --* 
+
+        (Optional) Specifies the POSIX IDs and permissions to apply to the access point's ``RootDirectory`` . If the ``RootDirectory`` > ``Path`` specified does not exist, EFS creates the root directory using the ``CreationInfo`` settings when a client connects to an access point. When specifying the ``CreationInfo`` , you must provide values for all properties. 
+
+         
+
+        .. warning::
+
+           
+
+          If you do not provide ``CreationInfo`` and the specified ``RootDirectory`` > ``Path`` does not exist, attempts to mount the file system using the access point will fail.
+
+           
+
+        
+
+      
+        - **OwnerUid** *(integer) --* **[REQUIRED]** 
+
+          Specifies the POSIX user ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+          
+
+        
+        - **OwnerGid** *(integer) --* **[REQUIRED]** 
+
+          Specifies the POSIX group ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+          
+
+        
+        - **Permissions** *(string) --* **[REQUIRED]** 
+
+          Specifies the POSIX permissions to apply to the ``RootDirectory`` , in the format of an octal number representing the file's mode bits.
+
+          
+
+        
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ClientToken': 'string',
+            'Name': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'AccessPointId': 'string',
+            'AccessPointArn': 'string',
+            'FileSystemId': 'string',
+            'PosixUser': {
+                'Uid': 123,
+                'Gid': 123,
+                'SecondaryGids': [
+                    123,
+                ]
+            },
+            'RootDirectory': {
+                'Path': 'string',
+                'CreationInfo': {
+                    'OwnerUid': 123,
+                    'OwnerGid': 123,
+                    'Permissions': 'string'
+                }
+            },
+            'OwnerId': 'string',
+            'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Provides a description of an EFS file system access point.
+
+        
+        
+
+        - **ClientToken** *(string) --* 
+
+          The opaque string specified in the request to ensure idempotent creation.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the access point. This is the value of the ``Name`` tag.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          The tags associated with the access point, presented as an array of Tag objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+        
+
+        - **AccessPointId** *(string) --* 
+
+          The ID of the access point, assigned by Amazon EFS.
+
+          
+        
+
+        - **AccessPointArn** *(string) --* 
+
+          The unique Amazon Resource Name (ARN) associated with the access point.
+
+          
+        
+
+        - **FileSystemId** *(string) --* 
+
+          The ID of the EFS file system that the access point applies to.
+
+          
+        
+
+        - **PosixUser** *(dict) --* 
+
+          The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point that is used for all file operations by NFS clients using the access point.
+
+          
+          
+
+          - **Uid** *(integer) --* 
+
+            The POSIX user ID used for all file system operations using this access point.
+
+            
+          
+
+          - **Gid** *(integer) --* 
+
+            The POSIX group ID used for all file system operations using this access point.
+
+            
+          
+
+          - **SecondaryGids** *(list) --* 
+
+            Secondary POSIX group IDs used for all file system operations using this access point.
+
+            
+            
+
+            - *(integer) --* 
+        
+      
+        
+
+        - **RootDirectory** *(dict) --* 
+
+          The directory on the Amazon EFS file system that the access point exposes as the root directory to NFS clients using the access point.
+
+          
+          
+
+          - **Path** *(string) --* 
+
+            Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the ``CreationInfo`` .
+
+            
+          
+
+          - **CreationInfo** *(dict) --* 
+
+            (Optional) Specifies the POSIX IDs and permissions to apply to the access point's ``RootDirectory`` . If the ``RootDirectory`` > ``Path`` specified does not exist, EFS creates the root directory using the ``CreationInfo`` settings when a client connects to an access point. When specifying the ``CreationInfo`` , you must provide values for all properties. 
+
+             
+
+            .. warning::
+
+               
+
+              If you do not provide ``CreationInfo`` and the specified ``RootDirectory`` > ``Path`` does not exist, attempts to mount the file system using the access point will fail.
+
+               
+
+            
+            
+
+            - **OwnerUid** *(integer) --* 
+
+              Specifies the POSIX user ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+              
+            
+
+            - **OwnerGid** *(integer) --* 
+
+              Specifies the POSIX group ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+              
+            
+
+            - **Permissions** *(string) --* 
+
+              Specifies the POSIX permissions to apply to the ``RootDirectory`` , in the format of an octal number representing the file's mode bits.
+
+              
+        
+      
+        
+
+        - **OwnerId** *(string) --* 
+
+          Identified the AWS account that owns the access point resource.
+
+          
+        
+
+        - **LifeCycleState** *(string) --* 
+
+          Identifies the lifecycle phase of the access point.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointAlreadyExists`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointLimitExceeded`
+
+    
+
+  .. py:method:: create_file_system(**kwargs)
+
+    
+
+    Creates a new, empty file system. The operation requires a creation token in the request that Amazon EFS uses to ensure idempotent creation (calling the operation with same creation token has no effect). If a file system does not currently exist that is owned by the caller's AWS account with the specified creation token, this operation does the following:
+
+     
+
+     
+    * Creates a new, empty file system. The file system will have an Amazon EFS assigned ID, and an initial lifecycle state ``creating`` . 
+     
+    * Returns with the description of the created file system. 
+     
+
+     
+
+    Otherwise, this operation returns a ``FileSystemAlreadyExists`` error with the ID of the existing file system.
+
+     
+
+    .. note::
+
+       
+
+      For basic use cases, you can use a randomly generated UUID for the creation token.
+
+       
+
+     
+
+    The idempotent operation allows you to retry a ``CreateFileSystem`` call without risk of creating an extra file system. This can happen when an initial call fails in a way that leaves it uncertain whether or not a file system was actually created. An example might be that a transport level timeout occurred or your connection was reset. As long as you use the same creation token, if the initial call had succeeded in creating a file system, the client can learn of its existence from the ``FileSystemAlreadyExists`` error.
+
+     
+
+    For more information, see `Creating a file system <https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1>`__ in the *Amazon EFS User Guide* .
+
+     
+
+    .. note::
+
+       
+
+      The ``CreateFileSystem`` call returns while the file system's lifecycle state is still ``creating`` . You can check the file system creation status by calling the  DescribeFileSystems operation, which among other things returns the file system state.
+
+       
+
+     
+
+    This operation accepts an optional ``PerformanceMode`` parameter that you choose for your file system. We recommend ``generalPurpose`` performance mode for most file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created. For more information, see `Amazon EFS performance modes <https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html>`__ .
+
+     
+
+    You can set the throughput mode for the file system using the ``ThroughputMode`` parameter.
+
+     
+
+    After the file system is fully created, Amazon EFS sets its lifecycle state to ``available`` , at which point you can create one or more mount targets for the file system in your VPC. For more information, see  CreateMountTarget . You mount your Amazon EFS file system on an EC2 instances in your VPC by using the mount target. For more information, see `Amazon EFS\: How it Works <https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html>`__ . 
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:CreateFileSystem`` action. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_file_system(
+          CreationToken='string',
+          PerformanceMode='generalPurpose'|'maxIO',
+          Encrypted=True|False,
+          KmsKeyId='string',
+          ThroughputMode='bursting'|'provisioned',
+          ProvisionedThroughputInMibps=123.0,
+          AvailabilityZoneName='string',
+          Backup=True|False,
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type CreationToken: string
+    :param CreationToken: **[REQUIRED]** 
+
+      A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent creation.
+
+      This field is autopopulated if not provided.
+
+    
+    :type PerformanceMode: string
+    :param PerformanceMode: 
+
+      The performance mode of the file system. We recommend ``generalPurpose`` performance mode for most file systems. File systems using the ``maxIO`` performance mode can scale to higher levels of aggregate throughput and operations per second with a tradeoff of slightly higher latencies for most file operations. The performance mode can't be changed after the file system has been created.
+
+       
+
+      .. note::
+
+         
+
+        The ``maxIO`` mode is not supported on file systems using One Zone storage classes.
+
+         
+
+      
+
+    
+    :type Encrypted: boolean
+    :param Encrypted: 
+
+      A Boolean value that, if true, creates an encrypted file system. When creating an encrypted file system, you have the option of specifying  CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, ``/aws/elasticfilesystem`` , is used to protect the encrypted file system. 
+
+      
+
+    
+    :type KmsKeyId: string
+    :param KmsKeyId: 
+
+      The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This parameter is only required if you want to use a non-default KMS key. If this parameter is not specified, the default CMK for Amazon EFS is used. This ID can be in one of the following formats:
+
+       
+
+       
+      * Key ID - A unique identifier of the key, for example ``1234abcd-12ab-34cd-56ef-1234567890ab`` . 
+       
+      * ARN - An Amazon Resource Name (ARN) for the key, for example ``arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` . 
+       
+      * Key alias - A previously created display name for a key, for example ``alias/projectKey1`` . 
+       
+      * Key alias ARN - An ARN for a key alias, for example ``arn:aws:kms:us-west-2:444455556666:alias/projectKey1`` . 
+       
+
+       
+
+      If ``KmsKeyId`` is specified, the  CreateFileSystemRequest$Encrypted parameter must be set to true.
+
+       
+
+      .. warning::
+
+         
+
+        EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.
+
+         
+
+      
+
+    
+    :type ThroughputMode: string
+    :param ThroughputMode: 
+
+      Specifies the throughput mode for the file system, either ``bursting`` or ``provisioned`` . If you set ``ThroughputMode`` to ``provisioned`` , you must also set a value for ``ProvisionedThroughputInMibps`` . After you create the file system, you can decrease your file system's throughput in Provisioned Throughput mode or change between the throughput modes, as long as it’s been more than 24 hours since the last decrease or throughput mode change. For more information, see `Specifying throughput with provisioned mode <https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput>`__ in the *Amazon EFS User Guide* . 
+
+       
+
+      Default is ``bursting`` .
+
+      
+
+    
+    :type ProvisionedThroughputInMibps: float
+    :param ProvisionedThroughputInMibps: 
+
+      The throughput, measured in MiB/s, that you want to provision for a file system that you're creating. Valid values are 1-1024. Required if ``ThroughputMode`` is set to ``provisioned`` . The upper limit for throughput is 1024 MiB/s. To increase this limit, contact AWS Support. For more information, see `Amazon EFS quotas that you can increase <https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits>`__ in the *Amazon EFS User Guide* .
+
+      
+
+    
+    :type AvailabilityZoneName: string
+    :param AvailabilityZoneName: 
+
+      Used to create a file system that uses One Zone storage classes. It specifies the AWS Availability Zone in which to create the file system. Use the format ``us-east-1a`` to specify the Availability Zone. For more information about One Zone storage classes, see `Using EFS storage classes <https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html>`__ in the *Amazon EFS User Guide* .
+
+       
+
+      .. note::
+
+         
+
+        One Zone storage classes are not available in all Availability Zones in AWS Regions where Amazon EFS is available.
+
+         
+
+      
+
+    
+    :type Backup: boolean
+    :param Backup: 
+
+      Specifies whether automatic backups are enabled on the file system that you are creating. Set the value to ``true`` to enable automatic backups. If you are creating a file system that uses One Zone storage classes, automatic backups are enabled by default. For more information, see `Automatic backups <https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups>`__ in the *Amazon EFS User Guide* .
+
+       
+
+      Default is ``false`` . However, if you specify an ``AvailabilityZoneName`` , the default is ``true`` .
+
+       
+
+      .. note::
+
+         
+
+        AWS Backup is not available in all AWS Regions where Amazon EFS is available.
+
+         
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      A value that specifies to create one or more tags associated with the file system. Each tag is a user-defined key-value pair. Name your file system on creation by including a ``"Key":"Name","Value":"{value}"`` key-value pair.
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag key (String). The key can't start with ``aws:`` .
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag key.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OwnerId': 'string',
+            'CreationToken': 'string',
+            'FileSystemId': 'string',
+            'FileSystemArn': 'string',
+            'CreationTime': datetime(2015, 1, 1),
+            'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+            'Name': 'string',
+            'NumberOfMountTargets': 123,
+            'SizeInBytes': {
+                'Value': 123,
+                'Timestamp': datetime(2015, 1, 1),
+                'ValueInIA': 123,
+                'ValueInStandard': 123
+            },
+            'PerformanceMode': 'generalPurpose'|'maxIO',
+            'Encrypted': True|False,
+            'KmsKeyId': 'string',
+            'ThroughputMode': 'bursting'|'provisioned',
+            'ProvisionedThroughputInMibps': 123.0,
+            'AvailabilityZoneName': 'string',
+            'AvailabilityZoneId': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        A description of the file system.
+
+        
+        
+
+        - **OwnerId** *(string) --* 
+
+          The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+
+          
+        
+
+        - **CreationToken** *(string) --* 
+
+          The opaque string specified in the request.
+
+          
+        
+
+        - **FileSystemId** *(string) --* 
+
+          The ID of the file system, assigned by Amazon EFS.
+
+          
+        
+
+        - **FileSystemArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) for the EFS file system, in the format ``arn:aws:elasticfilesystem:*region* :*account-id* :file-system/*file-system-id* `` . Example with sample data: ``arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567``  
+
+          
+        
+
+        - **CreationTime** *(datetime) --* 
+
+          The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+
+          
+        
+
+        - **LifeCycleState** *(string) --* 
+
+          The lifecycle phase of the file system.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          You can add tags to a file system, including a ``Name`` tag. For more information, see  CreateFileSystem . If the file system has a ``Name`` tag, Amazon EFS returns the value in this field. 
+
+          
+        
+
+        - **NumberOfMountTargets** *(integer) --* 
+
+          The current number of mount targets that the file system has. For more information, see  CreateMountTarget .
+
+          
+        
+
+        - **SizeInBytes** *(dict) --* 
+
+          The latest known metered size (in bytes) of data stored in the file system, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. The ``SizeInBytes`` value doesn't represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, ``SizeInBytes`` represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. 
+
+          
+          
+
+          - **Value** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the file system.
+
+            
+          
+
+          - **Timestamp** *(datetime) --* 
+
+            The time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+
+            
+          
+
+          - **ValueInIA** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
+
+            
+          
+
+          - **ValueInStandard** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the Standard storage class.
+
+            
+      
+        
+
+        - **PerformanceMode** *(string) --* 
+
+          The performance mode of the file system.
+
+          
+        
+
+        - **Encrypted** *(boolean) --* 
+
+          A Boolean value that, if true, indicates that the file system is encrypted.
+
+          
+        
+
+        - **KmsKeyId** *(string) --* 
+
+          The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+
+          
+        
+
+        - **ThroughputMode** *(string) --* 
+
+          Displays the file system's throughput mode. For more information, see `Throughput modes <https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes>`__ in the *Amazon EFS User Guide* . 
+
+          
+        
+
+        - **ProvisionedThroughputInMibps** *(float) --* 
+
+          The amount of provisioned throughput, measured in MiB/s, for the file system. Valid for file systems using ``ThroughputMode`` set to ``provisioned`` .
+
+          
+        
+
+        - **AvailabilityZoneName** *(string) --* 
+
+          Describes the AWS Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see `Using EFS storage classes <https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html>`__ in the *Amazon EFS User Guide* .
+
+          
+        
+
+        - **AvailabilityZoneId** *(string) --* 
+
+          The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, ``use1-az1`` is an Availability Zone ID for the us-east-1 AWS Region, and it has the same location in every AWS account.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          The tags associated with the file system, presented as an array of ``Tag`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemAlreadyExists`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InsufficientThroughputCapacity`
+
+    
+    *     :py:class:`EFS.Client.exceptions.ThroughputLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.UnsupportedAvailabilityZone`
+
+    
+
+    **Examples** 
+
+    This operation creates a new file system with the default generalpurpose performance mode.
+    ::
+
+      response = client.create_file_system(
+          CreationToken='tokenstring',
+          PerformanceMode='generalPurpose',
+          Tags=[
+              {
+                  'Key': 'Name',
+                  'Value': 'MyFileSystem',
+              },
+          ],
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'CreationTime': datetime(2016, 12, 16, 5, 38, 44, 4, 351, 0),
+          'CreationToken': 'tokenstring',
+          'FileSystemId': 'fs-01234567',
+          'LifeCycleState': 'creating',
+          'NumberOfMountTargets': 0,
+          'OwnerId': '012345678912',
+          'PerformanceMode': 'generalPurpose',
+          'SizeInBytes': {
+              'Value': 0,
+          },
+          'Tags': [
+              {
+                  'Key': 'Name',
+                  'Value': 'MyFileSystem',
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: create_mount_target(**kwargs)
+
+    
+
+    Creates a mount target for a file system. You can then mount the file system on EC2 instances by using the mount target.
+
+     
+
+    You can create one mount target in each Availability Zone in your VPC. All EC2 instances in a VPC within a given Availability Zone share a single mount target for a given file system. If you have multiple subnets in an Availability Zone, you create a mount target in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target in order to access their file system.
+
+     
+
+    You can create only one mount target for an EFS file system using One Zone storage classes. You must create that mount target in the same Availability Zone in which the file system is located. Use the ``AvailabilityZoneName`` and ``AvailabiltyZoneId`` properties in the  DescribeFileSystems response object to get this information. Use the ``subnetId`` associated with the file system's Availability Zone when creating the mount target.
+
+     
+
+    For more information, see `Amazon EFS\: How it Works <https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html>`__ . 
+
+     
+
+    To create a mount target for a file system, the file system's lifecycle state must be ``available`` . For more information, see  DescribeFileSystems .
+
+     
+
+    In the request, provide the following:
+
+     
+
+     
+    * The file system ID for which you are creating the mount target. 
+     
+    * A subnet ID, which determines the following: 
+
+       
+      * The VPC in which Amazon EFS creates the mount target 
+       
+      * The Availability Zone in which Amazon EFS creates the mount target 
+       
+      * The IP address range from which Amazon EFS selects the IP address of the mount target (if you don't specify an IP address in the request) 
+       
+
+     
+     
+
+     
+
+    After creating the mount target, Amazon EFS returns a response that includes, a ``MountTargetId`` and an ``IpAddress`` . You use this IP address when mounting the file system in an EC2 instance. You can also use the mount target's DNS name when mounting the file system. The EC2 instance on which you mount the file system by using the mount target can resolve the mount target's DNS name to its IP address. For more information, see `How it Works\: Implementation Overview <https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation>`__ . 
+
+     
+
+    Note that you can create mount targets for a file system in only one VPC, and there can be only one mount target per Availability Zone. That is, if the file system already has one or more mount targets created for it, the subnet specified in the request to add another mount target must meet the following requirements:
+
+     
+
+     
+    * Must belong to the same VPC as the subnets of the existing mount targets 
+     
+    * Must not be in the same Availability Zone as any of the subnets of the existing mount targets 
+     
+
+     
+
+    If the request satisfies the requirements, Amazon EFS does the following:
+
+     
+
+     
+    * Creates a new mount target in the specified subnet. 
+     
+    * Also creates a new network interface in the subnet as follows: 
+
+       
+      * If the request provides an ``IpAddress`` , Amazon EFS assigns that IP address to the network interface. Otherwise, Amazon EFS assigns a free address in the subnet (in the same way that the Amazon EC2 ``CreateNetworkInterface`` call does when a request does not specify a primary private IP address). 
+       
+      * If the request provides ``SecurityGroups`` , this network interface is associated with those security groups. Otherwise, it belongs to the default security group for the subnet's VPC. 
+       
+      * Assigns the description ``Mount target *fsmt-id* for file system *fs-id* `` where `` *fsmt-id* `` is the mount target ID, and `` *fs-id* `` is the ``FileSystemId`` . 
+       
+      * Sets the ``requesterManaged`` property of the network interface to ``true`` , and the ``requesterId`` value to ``EFS`` . 
+       
+
+     
+
+    Each Amazon EFS mount target has one corresponding requester-managed EC2 network interface. After the network interface is created, Amazon EFS sets the ``NetworkInterfaceId`` field in the mount target's description to the network interface ID, and the ``IpAddress`` field to its address. If network interface creation fails, the entire ``CreateMountTarget`` operation fails.
+
+     
+     
+
+     
+
+    .. note::
+
+       
+
+      The ``CreateMountTarget`` call returns only after creating the network interface, but while the mount target state is still ``creating`` , you can check the mount target creation status by calling the  DescribeMountTargets operation, which among other things returns the mount target state.
+
+       
+
+     
+
+    We recommend that you create a mount target in each of the Availability Zones. There are cost considerations for using a file system in an Availability Zone through a mount target created in another Availability Zone. For more information, see `Amazon EFS <http://aws.amazon.com/efs/>`__ . In addition, by always using a mount target local to the instance's Availability Zone, you eliminate a partial failure scenario. If the Availability Zone in which your mount target is created goes down, then you can't access your file system through that mount target. 
+
+     
+
+    This operation requires permissions for the following action on the file system:
+
+     
+
+     
+    * ``elasticfilesystem:CreateMountTarget``   
+     
+
+     
+
+    This operation also requires permissions for the following Amazon EC2 actions:
+
+     
+
+     
+    * ``ec2:DescribeSubnets``   
+     
+    * ``ec2:DescribeNetworkInterfaces``   
+     
+    * ``ec2:CreateNetworkInterface``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_mount_target(
+          FileSystemId='string',
+          SubnetId='string',
+          IpAddress='string',
+          SecurityGroups=[
+              'string',
+          ]
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system for which to create the mount target.
+
+      
+
+    
+    :type SubnetId: string
+    :param SubnetId: **[REQUIRED]** 
+
+      The ID of the subnet to add the mount target in. For file systems that use One Zone storage classes, use the subnet that is associated with the file system's Availability Zone.
+
+      
+
+    
+    :type IpAddress: string
+    :param IpAddress: 
+
+      Valid IPv4 address within the address range of the specified subnet.
+
+      
+
+    
+    :type SecurityGroups: list
+    :param SecurityGroups: 
+
+      Up to five VPC security group IDs, of the form ``sg-xxxxxxxx`` . These must be for the same VPC as subnet specified.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OwnerId': 'string',
+            'MountTargetId': 'string',
+            'FileSystemId': 'string',
+            'SubnetId': 'string',
+            'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+            'IpAddress': 'string',
+            'NetworkInterfaceId': 'string',
+            'AvailabilityZoneId': 'string',
+            'AvailabilityZoneName': 'string',
+            'VpcId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Provides a description of a mount target.
+
+        
+        
+
+        - **OwnerId** *(string) --* 
+
+          AWS account ID that owns the resource.
+
+          
+        
+
+        - **MountTargetId** *(string) --* 
+
+          System-assigned mount target ID.
+
+          
+        
+
+        - **FileSystemId** *(string) --* 
+
+          The ID of the file system for which the mount target is intended.
+
+          
+        
+
+        - **SubnetId** *(string) --* 
+
+          The ID of the mount target's subnet.
+
+          
+        
+
+        - **LifeCycleState** *(string) --* 
+
+          Lifecycle state of the mount target.
+
+          
+        
+
+        - **IpAddress** *(string) --* 
+
+          Address at which the file system can be mounted by using the mount target.
+
+          
+        
+
+        - **NetworkInterfaceId** *(string) --* 
+
+          The ID of the network interface that Amazon EFS created when it created the mount target.
+
+          
+        
+
+        - **AvailabilityZoneId** *(string) --* 
+
+          The unique and consistent identifier of the Availability Zone that the mount target resides in. For example, ``use1-az1`` is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.
+
+          
+        
+
+        - **AvailabilityZoneName** *(string) --* 
+
+          The name of the Availability Zone in which the mount target is located. Availability Zones are independently mapped to names for each AWS account. For example, the Availability Zone ``us-east-1a`` for your AWS account might not be the same location as ``us-east-1a`` for another AWS account.
+
+          
+        
+
+        - **VpcId** *(string) --* 
+
+          The virtual private cloud (VPC) ID that the mount target is configured in.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+    *     :py:class:`EFS.Client.exceptions.MountTargetConflict`
+
+    
+    *     :py:class:`EFS.Client.exceptions.SubnetNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.NoFreeAddressesInSubnet`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IpAddressInUse`
+
+    
+    *     :py:class:`EFS.Client.exceptions.NetworkInterfaceLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.SecurityGroupLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.SecurityGroupNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.UnsupportedAvailabilityZone`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AvailabilityZonesMismatch`
+
+    
+
+    **Examples** 
+
+    This operation creates a new mount target for an EFS file system.
+    ::
+
+      response = client.create_mount_target(
+          FileSystemId='fs-01234567',
+          SubnetId='subnet-1234abcd',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'FileSystemId': 'fs-01234567',
+          'IpAddress': '192.0.0.2',
+          'LifeCycleState': 'creating',
+          'MountTargetId': 'fsmt-12340abc',
+          'NetworkInterfaceId': 'eni-cedf6789',
+          'OwnerId': '012345678912',
+          'SubnetId': 'subnet-1234abcd',
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: create_tags(**kwargs)
+
+    
+
+    .. note::
+
+       
+
+      DEPRECATED - CreateTags is deprecated and not maintained. Please use the API action to create tags for EFS resources.
+
+       
+
+     
+
+    Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If a tag key specified in the request already exists on the file system, this operation overwrites its value with the value provided in the request. If you add the ``Name`` tag to your file system, Amazon EFS returns it in the response to the  DescribeFileSystems operation. 
+
+     
+
+    This operation requires permission for the ``elasticfilesystem:CreateTags`` action.
+
+    
+
+    .. danger::
+
+            This operation is deprecated and may not function as expected. This operation should not be used going forward and is only kept for the purpose of backwards compatiblity.
+
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_tags(
+          FileSystemId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system whose tags you want to modify (String). This operation modifies the tags only, not the file system.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      An array of ``Tag`` objects to add. Each ``Tag`` object is a key-value pair. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag key (String). The key can't start with ``aws:`` .
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag key.
+
+          
+
+        
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+
+    **Examples** 
+
+    This operation creates a new tag for an EFS file system.
+    ::
+
+      response = client.create_tags(
+          FileSystemId='fs-01234567',
+          Tags=[
+              {
+                  'Key': 'Name',
+                  'Value': 'MyFileSystem',
+              },
+          ],
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: delete_access_point(**kwargs)
+
+    
+
+    Deletes the specified access point. After deletion is complete, new clients can no longer connect to the access points. Clients connected to the access point at the time of deletion will continue to function until they terminate their connection.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DeleteAccessPoint`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteAccessPoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_access_point(
+          AccessPointId='string'
+      )
+    :type AccessPointId: string
+    :param AccessPointId: **[REQUIRED]** 
+
+      The ID of the access point that you want to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+  .. py:method:: delete_file_system(**kwargs)
+
+    
+
+    Deletes a file system, permanently severing access to its contents. Upon return, the file system no longer exists and you can't access any contents of the deleted file system.
+
+     
+
+    You can't delete a file system that is in use. That is, if the file system has any mount targets, you must first delete them. For more information, see  DescribeMountTargets and  DeleteMountTarget . 
+
+     
+
+    .. note::
+
+       
+
+      The ``DeleteFileSystem`` call returns while the file system state is still ``deleting`` . You can check the file system deletion status by calling the  DescribeFileSystems operation, which returns a list of file systems in your account. If you pass file system ID or creation token for the deleted file system, the  DescribeFileSystems returns a ``404 FileSystemNotFound`` error.
+
+       
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DeleteFileSystem`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_file_system(
+          FileSystemId='string'
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system you want to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemInUse`
+
+    
+
+    **Examples** 
+
+    This operation deletes an EFS file system.
+    ::
+
+      response = client.delete_file_system(
+          FileSystemId='fs-01234567',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: delete_file_system_policy(**kwargs)
+
+    
+
+    Deletes the ``FileSystemPolicy`` for the specified file system. The default ``FileSystemPolicy`` goes into effect once the existing policy is deleted. For more information about the default file system policy, see `Using Resource-based Policies with EFS <https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html>`__ .
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DeleteFileSystemPolicy`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_file_system_policy(
+          FileSystemId='string'
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      Specifies the EFS file system for which to delete the ``FileSystemPolicy`` .
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+
+  .. py:method:: delete_mount_target(**kwargs)
+
+    
+
+    Deletes the specified mount target.
+
+     
+
+    This operation forcibly breaks any mounts of the file system by using the mount target that is being deleted, which might disrupt instances or applications using those mounts. To avoid applications getting cut off abruptly, you might consider unmounting any mounts of the mount target, if feasible. The operation also deletes the associated network interface. Uncommitted writes might be lost, but breaking a mount target using this operation does not corrupt the file system itself. The file system you created remains. You can mount an EC2 instance in your VPC by using another mount target.
+
+     
+
+    This operation requires permissions for the following action on the file system:
+
+     
+
+     
+    * ``elasticfilesystem:DeleteMountTarget``   
+     
+
+     
+
+    .. note::
+
+       
+
+      The ``DeleteMountTarget`` call returns while the mount target state is still ``deleting`` . You can check the mount target deletion by calling the  DescribeMountTargets operation, which returns a list of mount target descriptions for the given file system. 
+
+       
+
+     
+
+    The operation also requires permissions for the following Amazon EC2 action on the mount target's network interface:
+
+     
+
+     
+    * ``ec2:DeleteNetworkInterface``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_mount_target(
+          MountTargetId='string'
+      )
+    :type MountTargetId: string
+    :param MountTargetId: **[REQUIRED]** 
+
+      The ID of the mount target to delete (String).
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.DependencyTimeout`
+
+    
+    *     :py:class:`EFS.Client.exceptions.MountTargetNotFound`
+
+    
+
+    **Examples** 
+
+    This operation deletes a mount target.
+    ::
+
+      response = client.delete_mount_target(
+          MountTargetId='fsmt-12340abc',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: delete_tags(**kwargs)
+
+    
+
+    .. note::
+
+       
+
+      DEPRECATED - DeleteTags is deprecated and not maintained. Please use the API action to remove tags from EFS resources.
+
+       
+
+     
+
+    Deletes the specified tags from a file system. If the ``DeleteTags`` request includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an error. For more information about tags and related restrictions, see `Tag Restrictions <https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html>`__ in the *AWS Billing and Cost Management User Guide* .
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DeleteTags`` action.
+
+    
+
+    .. danger::
+
+            This operation is deprecated and may not function as expected. This operation should not be used going forward and is only kept for the purpose of backwards compatiblity.
+
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_tags(
+          FileSystemId='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system whose tags you want to delete (String).
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      A list of tag keys to delete.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+
+    **Examples** 
+
+    This operation deletes tags for an EFS file system.
+    ::
+
+      response = client.delete_tags(
+          FileSystemId='fs-01234567',
+          TagKeys=[
+              'Name',
+          ],
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: describe_access_points(**kwargs)
+
+    
+
+    Returns the description of a specific Amazon EFS access point if the ``AccessPointId`` is provided. If you provide an EFS ``FileSystemId`` , it returns descriptions of all access points for that file system. You can provide either an ``AccessPointId`` or a ``FileSystemId`` in the request, but not both. 
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeAccessPoints`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccessPoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_access_points(
+          MaxResults=123,
+          NextToken='string',
+          AccessPointId='string',
+          FileSystemId='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      (Optional) When retrieving all access points for a file system, you can optionally specify the ``MaxItems`` parameter to limit the number of objects returned in a response. The default value is 100. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+       ``NextToken`` is present if the response is paginated. You can use ``NextMarker`` in the subsequent request to fetch the next page of access point descriptions.
+
+      
+
+    
+    :type AccessPointId: string
+    :param AccessPointId: 
+
+      (Optional) Specifies an EFS access point to describe in the response; mutually exclusive with ``FileSystemId`` .
+
+      
+
+    
+    :type FileSystemId: string
+    :param FileSystemId: 
+
+      (Optional) If you provide a ``FileSystemId`` , EFS returns all access points for that file system; mutually exclusive with ``AccessPointId`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccessPoints': [
+                {
+                    'ClientToken': 'string',
+                    'Name': 'string',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ],
+                    'AccessPointId': 'string',
+                    'AccessPointArn': 'string',
+                    'FileSystemId': 'string',
+                    'PosixUser': {
+                        'Uid': 123,
+                        'Gid': 123,
+                        'SecondaryGids': [
+                            123,
+                        ]
+                    },
+                    'RootDirectory': {
+                        'Path': 'string',
+                        'CreationInfo': {
+                            'OwnerUid': 123,
+                            'OwnerGid': 123,
+                            'Permissions': 'string'
+                        }
+                    },
+                    'OwnerId': 'string',
+                    'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccessPoints** *(list) --* 
+
+          An array of access point descriptions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a description of an EFS file system access point.
+
+            
+            
+
+            - **ClientToken** *(string) --* 
+
+              The opaque string specified in the request to ensure idempotent creation.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the access point. This is the value of the ``Name`` tag.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags associated with the access point, presented as an array of Tag objects.
+
+              
+              
+
+              - *(dict) --* 
+
+                A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key (String). The key can't start with ``aws:`` .
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The value of the tag key.
+
+                  
+            
+          
+            
+
+            - **AccessPointId** *(string) --* 
+
+              The ID of the access point, assigned by Amazon EFS.
+
+              
+            
+
+            - **AccessPointArn** *(string) --* 
+
+              The unique Amazon Resource Name (ARN) associated with the access point.
+
+              
+            
+
+            - **FileSystemId** *(string) --* 
+
+              The ID of the EFS file system that the access point applies to.
+
+              
+            
+
+            - **PosixUser** *(dict) --* 
+
+              The full POSIX identity, including the user ID, group ID, and secondary group IDs on the access point that is used for all file operations by NFS clients using the access point.
+
+              
+              
+
+              - **Uid** *(integer) --* 
+
+                The POSIX user ID used for all file system operations using this access point.
+
+                
+              
+
+              - **Gid** *(integer) --* 
+
+                The POSIX group ID used for all file system operations using this access point.
+
+                
+              
+
+              - **SecondaryGids** *(list) --* 
+
+                Secondary POSIX group IDs used for all file system operations using this access point.
+
+                
+                
+
+                - *(integer) --* 
+            
+          
+            
+
+            - **RootDirectory** *(dict) --* 
+
+              The directory on the Amazon EFS file system that the access point exposes as the root directory to NFS clients using the access point.
+
+              
+              
+
+              - **Path** *(string) --* 
+
+                Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the ``CreationInfo`` .
+
+                
+              
+
+              - **CreationInfo** *(dict) --* 
+
+                (Optional) Specifies the POSIX IDs and permissions to apply to the access point's ``RootDirectory`` . If the ``RootDirectory`` > ``Path`` specified does not exist, EFS creates the root directory using the ``CreationInfo`` settings when a client connects to an access point. When specifying the ``CreationInfo`` , you must provide values for all properties. 
+
+                 
+
+                .. warning::
+
+                   
+
+                  If you do not provide ``CreationInfo`` and the specified ``RootDirectory`` > ``Path`` does not exist, attempts to mount the file system using the access point will fail.
+
+                   
+
+                
+                
+
+                - **OwnerUid** *(integer) --* 
+
+                  Specifies the POSIX user ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+                  
+                
+
+                - **OwnerGid** *(integer) --* 
+
+                  Specifies the POSIX group ID to apply to the ``RootDirectory`` . Accepts values from 0 to 2^32 (4294967295).
+
+                  
+                
+
+                - **Permissions** *(string) --* 
+
+                  Specifies the POSIX permissions to apply to the ``RootDirectory`` , in the format of an octal number representing the file's mode bits.
+
+                  
+            
+          
+            
+
+            - **OwnerId** *(string) --* 
+
+              Identified the AWS account that owns the access point resource.
+
+              
+            
+
+            - **LifeCycleState** *(string) --* 
+
+              Identifies the lifecycle phase of the access point.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          Present if there are more access points than returned in the response. You can use the NextMarker in the subsequent request to fetch the additional descriptions.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+  .. py:method:: describe_account_preferences(**kwargs)
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccountPreferences>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_account_preferences(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: Token used for pagination.
+
+    
+    :type MaxResults: integer
+    :param MaxResults: Max results used for pagination.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceIdPreference': {
+                'ResourceIdType': 'LONG_ID'|'SHORT_ID',
+                'Resources': [
+                    'FILE_SYSTEM'|'MOUNT_TARGET',
+                ]
+            },
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceIdPreference** *(dict) --* 
+          
+
+          - **ResourceIdType** *(string) --* A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
+          
+
+          - **Resources** *(list) --* EFS resources to which a preference applies to.
+            
+
+            - *(string) --* An EFS resource, for example a file system or a mount target.
+        
+      
+        
+
+        - **NextToken** *(string) --* Token used for pagination.
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+
+  .. py:method:: describe_backup_policy(**kwargs)
+
+    
+
+    Returns the backup policy for the specified EFS file system.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeBackupPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_backup_policy(
+          FileSystemId='string'
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      Specifies which EFS file system to retrieve the ``BackupPolicy`` for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BackupPolicy': {
+                'Status': 'ENABLED'|'ENABLING'|'DISABLED'|'DISABLING'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **BackupPolicy** *(dict) --* 
+
+          Describes the file system's backup policy, indicating whether automatic backups are turned on or off..
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            Describes the status of the file system's backup policy.
+
+             
+
+             
+            * **``ENABLED`` ** - EFS is automatically backing up the file system. 
+             
+            * **``ENABLING`` ** - EFS is turning on automatic backups for the file system. 
+             
+            * **``DISABLED`` ** - automatic back ups are turned off for the file system. 
+             
+            * **``DISABLING`` ** - EFS is turning off automatic backups for the file system. 
+             
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.PolicyNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: describe_file_system_policy(**kwargs)
+
+    
+
+    Returns the ``FileSystemPolicy`` for the specified EFS file system.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeFileSystemPolicy`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_file_system_policy(
+          FileSystemId='string'
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      Specifies which EFS file system to retrieve the ``FileSystemPolicy`` for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'FileSystemId': 'string',
+            'Policy': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **FileSystemId** *(string) --* 
+
+          Specifies the EFS file system to which the ``FileSystemPolicy`` applies.
+
+          
+        
+
+        - **Policy** *(string) --* 
+
+          The JSON formatted ``FileSystemPolicy`` for the EFS file system.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.PolicyNotFound`
+
+    
+
+  .. py:method:: describe_file_systems(**kwargs)
+
+    
+
+    Returns the description of a specific Amazon EFS file system if either the file system ``CreationToken`` or the ``FileSystemId`` is provided. Otherwise, it returns descriptions of all file systems owned by the caller's AWS account in the AWS Region of the endpoint that you're calling.
+
+     
+
+    When retrieving all file system descriptions, you can optionally specify the ``MaxItems`` parameter to limit the number of descriptions in a response. Currently, this number is automatically set to 10. If more file system descriptions remain, Amazon EFS returns a ``NextMarker`` , an opaque token, in the response. In this case, you should send a subsequent request with the ``Marker`` request parameter set to the value of ``NextMarker`` . 
+
+     
+
+    To retrieve a list of your file system descriptions, this operation is used in an iterative process, where ``DescribeFileSystems`` is called first without the ``Marker`` and then the operation continues to call it with the ``Marker`` parameter set to the value of the ``NextMarker`` from the previous response until the response has no ``NextMarker`` . 
+
+     
+
+    The order of file systems returned in the response of one ``DescribeFileSystems`` call and the order of file systems returned across the responses of a multi-call iteration is unspecified. 
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeFileSystems`` action. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_file_systems(
+          MaxItems=123,
+          Marker='string',
+          CreationToken='string',
+          FileSystemId='string'
+      )
+    :type MaxItems: integer
+    :param MaxItems: 
+
+      (Optional) Specifies the maximum number of file systems to return in the response (integer). This number is automatically set to 100. The response is paginated at 100 per page if you have more than 100 file systems. 
+
+      
+
+    
+    :type Marker: string
+    :param Marker: 
+
+      (Optional) Opaque pagination token returned from a previous ``DescribeFileSystems`` operation (String). If present, specifies to continue the list from where the returning call had left off. 
+
+      
+
+    
+    :type CreationToken: string
+    :param CreationToken: 
+
+      (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
+
+      
+
+    
+    :type FileSystemId: string
+    :param FileSystemId: 
+
+      (Optional) ID of the file system whose description you want to retrieve (String).
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'FileSystems': [
+                {
+                    'OwnerId': 'string',
+                    'CreationToken': 'string',
+                    'FileSystemId': 'string',
+                    'FileSystemArn': 'string',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+                    'Name': 'string',
+                    'NumberOfMountTargets': 123,
+                    'SizeInBytes': {
+                        'Value': 123,
+                        'Timestamp': datetime(2015, 1, 1),
+                        'ValueInIA': 123,
+                        'ValueInStandard': 123
+                    },
+                    'PerformanceMode': 'generalPurpose'|'maxIO',
+                    'Encrypted': True|False,
+                    'KmsKeyId': 'string',
+                    'ThroughputMode': 'bursting'|'provisioned',
+                    'ProvisionedThroughputInMibps': 123.0,
+                    'AvailabilityZoneName': 'string',
+                    'AvailabilityZoneId': 'string',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextMarker': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Marker** *(string) --* 
+
+          Present if provided by caller in the request (String).
+
+          
+        
+
+        - **FileSystems** *(list) --* 
+
+          An array of file system descriptions.
+
+          
+          
+
+          - *(dict) --* 
+
+            A description of the file system.
+
+            
+            
+
+            - **OwnerId** *(string) --* 
+
+              The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+
+              
+            
+
+            - **CreationToken** *(string) --* 
+
+              The opaque string specified in the request.
+
+              
+            
+
+            - **FileSystemId** *(string) --* 
+
+              The ID of the file system, assigned by Amazon EFS.
+
+              
+            
+
+            - **FileSystemArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) for the EFS file system, in the format ``arn:aws:elasticfilesystem:*region* :*account-id* :file-system/*file-system-id* `` . Example with sample data: ``arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567``  
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+
+              
+            
+
+            - **LifeCycleState** *(string) --* 
+
+              The lifecycle phase of the file system.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              You can add tags to a file system, including a ``Name`` tag. For more information, see  CreateFileSystem . If the file system has a ``Name`` tag, Amazon EFS returns the value in this field. 
+
+              
+            
+
+            - **NumberOfMountTargets** *(integer) --* 
+
+              The current number of mount targets that the file system has. For more information, see  CreateMountTarget .
+
+              
+            
+
+            - **SizeInBytes** *(dict) --* 
+
+              The latest known metered size (in bytes) of data stored in the file system, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. The ``SizeInBytes`` value doesn't represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, ``SizeInBytes`` represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. 
+
+              
+              
+
+              - **Value** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the file system.
+
+                
+              
+
+              - **Timestamp** *(datetime) --* 
+
+                The time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+
+                
+              
+
+              - **ValueInIA** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
+
+                
+              
+
+              - **ValueInStandard** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the Standard storage class.
+
+                
+          
+            
+
+            - **PerformanceMode** *(string) --* 
+
+              The performance mode of the file system.
+
+              
+            
+
+            - **Encrypted** *(boolean) --* 
+
+              A Boolean value that, if true, indicates that the file system is encrypted.
+
+              
+            
+
+            - **KmsKeyId** *(string) --* 
+
+              The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+
+              
+            
+
+            - **ThroughputMode** *(string) --* 
+
+              Displays the file system's throughput mode. For more information, see `Throughput modes <https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes>`__ in the *Amazon EFS User Guide* . 
+
+              
+            
+
+            - **ProvisionedThroughputInMibps** *(float) --* 
+
+              The amount of provisioned throughput, measured in MiB/s, for the file system. Valid for file systems using ``ThroughputMode`` set to ``provisioned`` .
+
+              
+            
+
+            - **AvailabilityZoneName** *(string) --* 
+
+              Describes the AWS Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see `Using EFS storage classes <https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html>`__ in the *Amazon EFS User Guide* .
+
+              
+            
+
+            - **AvailabilityZoneId** *(string) --* 
+
+              The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, ``use1-az1`` is an Availability Zone ID for the us-east-1 AWS Region, and it has the same location in every AWS account.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags associated with the file system, presented as an array of ``Tag`` objects.
+
+              
+              
+
+              - *(dict) --* 
+
+                A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key (String). The key can't start with ``aws:`` .
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The value of the tag key.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextMarker** *(string) --* 
+
+          Present if there are more file systems than returned in the response (String). You can use the ``NextMarker`` in the subsequent request to fetch the descriptions.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+
+    **Examples** 
+
+    This operation describes all of the EFS file systems in an account.
+    ::
+
+      response = client.describe_file_systems(
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'FileSystems': [
+              {
+                  'CreationTime': datetime(2016, 12, 16, 5, 38, 44, 4, 351, 0),
+                  'CreationToken': 'tokenstring',
+                  'FileSystemId': 'fs-01234567',
+                  'LifeCycleState': 'available',
+                  'Name': 'MyFileSystem',
+                  'NumberOfMountTargets': 1,
+                  'OwnerId': '012345678912',
+                  'PerformanceMode': 'generalPurpose',
+                  'SizeInBytes': {
+                      'Value': 6144,
+                  },
+                  'Tags': [
+                      {
+                          'Key': 'Name',
+                          'Value': 'MyFileSystem',
+                      },
+                  ],
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: describe_lifecycle_configuration(**kwargs)
+
+    
+
+    Returns the current ``LifecycleConfiguration`` object for the specified Amazon EFS file system. EFS lifecycle management uses the ``LifecycleConfiguration`` object to identify which files to move to the EFS Infrequent Access (IA) storage class. For a file system without a ``LifecycleConfiguration`` object, the call returns an empty array in the response.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeLifecycleConfiguration`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeLifecycleConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_lifecycle_configuration(
+          FileSystemId='string'
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system whose ``LifecycleConfiguration`` object you want to retrieve (String).
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LifecyclePolicies': [
+                {
+                    'TransitionToIA': 'AFTER_7_DAYS'|'AFTER_14_DAYS'|'AFTER_30_DAYS'|'AFTER_60_DAYS'|'AFTER_90_DAYS'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LifecyclePolicies** *(list) --* 
+
+          An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
+
+            
+            
+
+            - **TransitionToIA** *(string) --* 
+
+              A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don't count as file access events.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+
+    **Examples** 
+
+    This operation describes a file system's LifecycleConfiguration. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. 
+    ::
+
+      response = client.describe_lifecycle_configuration(
+          FileSystemId='fs-01234567',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'LifecyclePolicies': [
+              {
+                  'TransitionToIA': 'AFTER_30_DAYS',
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: describe_mount_target_security_groups(**kwargs)
+
+    
+
+    Returns the security groups currently in effect for a mount target. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not ``deleted`` .
+
+     
+
+    This operation requires permissions for the following actions:
+
+     
+
+     
+    * ``elasticfilesystem:DescribeMountTargetSecurityGroups`` action on the mount target's file system.  
+     
+    * ``ec2:DescribeNetworkInterfaceAttribute`` action on the mount target's network interface.  
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_mount_target_security_groups(
+          MountTargetId='string'
+      )
+    :type MountTargetId: string
+    :param MountTargetId: **[REQUIRED]** 
+
+      The ID of the mount target whose security groups you want to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'SecurityGroups': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **SecurityGroups** *(list) --* 
+
+          An array of security groups.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.MountTargetNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectMountTargetState`
+
+    
+
+    **Examples** 
+
+    This operation describes all of the security groups for a file system's mount target.
+    ::
+
+      response = client.describe_mount_target_security_groups(
+          MountTargetId='fsmt-12340abc',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'SecurityGroups': [
+              'sg-4567abcd',
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: describe_mount_targets(**kwargs)
+
+    
+
+    Returns the descriptions of all the current mount targets, or a specific mount target, for a file system. When requesting all of the current mount targets, the order of mount targets returned in the response is unspecified.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeMountTargets`` action, on either the file system ID that you specify in ``FileSystemId`` , or on the file system of the mount target that you specify in ``MountTargetId`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_mount_targets(
+          MaxItems=123,
+          Marker='string',
+          FileSystemId='string',
+          MountTargetId='string',
+          AccessPointId='string'
+      )
+    :type MaxItems: integer
+    :param MaxItems: 
+
+      (Optional) Maximum number of mount targets to return in the response. Currently, this number is automatically set to 10, and other values are ignored. The response is paginated at 100 per page if you have more than 100 mount targets.
+
+      
+
+    
+    :type Marker: string
+    :param Marker: 
+
+      (Optional) Opaque pagination token returned from a previous ``DescribeMountTargets`` operation (String). If present, it specifies to continue the list from where the previous returning call left off.
+
+      
+
+    
+    :type FileSystemId: string
+    :param FileSystemId: 
+
+      (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if an ``AccessPointId`` or ``MountTargetId`` is not included. Accepts either a file system ID or ARN as input.
+
+      
+
+    
+    :type MountTargetId: string
+    :param MountTargetId: 
+
+      (Optional) ID of the mount target that you want to have described (String). It must be included in your request if ``FileSystemId`` is not included. Accepts either a mount target ID or ARN as input.
+
+      
+
+    
+    :type AccessPointId: string
+    :param AccessPointId: 
+
+      (Optional) The ID of the access point whose mount targets that you want to list. It must be included in your request if a ``FileSystemId`` or ``MountTargetId`` is not included in your request. Accepts either an access point ID or ARN as input.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'MountTargets': [
+                {
+                    'OwnerId': 'string',
+                    'MountTargetId': 'string',
+                    'FileSystemId': 'string',
+                    'SubnetId': 'string',
+                    'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+                    'IpAddress': 'string',
+                    'NetworkInterfaceId': 'string',
+                    'AvailabilityZoneId': 'string',
+                    'AvailabilityZoneName': 'string',
+                    'VpcId': 'string'
+                },
+            ],
+            'NextMarker': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **Marker** *(string) --* 
+
+          If the request included the ``Marker`` , the response returns that value in this field.
+
+          
+        
+
+        - **MountTargets** *(list) --* 
+
+          Returns the file system's mount targets as an array of ``MountTargetDescription`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a description of a mount target.
+
+            
+            
+
+            - **OwnerId** *(string) --* 
+
+              AWS account ID that owns the resource.
+
+              
+            
+
+            - **MountTargetId** *(string) --* 
+
+              System-assigned mount target ID.
+
+              
+            
+
+            - **FileSystemId** *(string) --* 
+
+              The ID of the file system for which the mount target is intended.
+
+              
+            
+
+            - **SubnetId** *(string) --* 
+
+              The ID of the mount target's subnet.
+
+              
+            
+
+            - **LifeCycleState** *(string) --* 
+
+              Lifecycle state of the mount target.
+
+              
+            
+
+            - **IpAddress** *(string) --* 
+
+              Address at which the file system can be mounted by using the mount target.
+
+              
+            
+
+            - **NetworkInterfaceId** *(string) --* 
+
+              The ID of the network interface that Amazon EFS created when it created the mount target.
+
+              
+            
+
+            - **AvailabilityZoneId** *(string) --* 
+
+              The unique and consistent identifier of the Availability Zone that the mount target resides in. For example, ``use1-az1`` is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.
+
+              
+            
+
+            - **AvailabilityZoneName** *(string) --* 
+
+              The name of the Availability Zone in which the mount target is located. Availability Zones are independently mapped to names for each AWS account. For example, the Availability Zone ``us-east-1a`` for your AWS account might not be the same location as ``us-east-1a`` for another AWS account.
+
+              
+            
+
+            - **VpcId** *(string) --* 
+
+              The virtual private cloud (VPC) ID that the mount target is configured in.
+
+              
+        
+      
+        
+
+        - **NextMarker** *(string) --* 
+
+          If a value is present, there are more mount targets to return. In a subsequent request, you can provide ``Marker`` in your request with this value to retrieve the next set of mount targets.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.MountTargetNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+    **Examples** 
+
+    This operation describes all of a file system's mount targets.
+    ::
+
+      response = client.describe_mount_targets(
+          FileSystemId='fs-01234567',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'MountTargets': [
+              {
+                  'FileSystemId': 'fs-01234567',
+                  'IpAddress': '192.0.0.2',
+                  'LifeCycleState': 'available',
+                  'MountTargetId': 'fsmt-12340abc',
+                  'NetworkInterfaceId': 'eni-cedf6789',
+                  'OwnerId': '012345678912',
+                  'SubnetId': 'subnet-1234abcd',
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: describe_tags(**kwargs)
+
+    
+
+    .. note::
+
+       
+
+      DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the API action to remove tags from EFS resources.
+
+       
+
+     
+
+    Returns the tags associated with a file system. The order of tags returned in the response of one ``DescribeTags`` call and the order of tags returned across the responses of a multiple-call iteration (when using pagination) is unspecified. 
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeTags`` action. 
+
+    
+
+    .. danger::
+
+            This operation is deprecated and may not function as expected. This operation should not be used going forward and is only kept for the purpose of backwards compatiblity.
+
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_tags(
+          MaxItems=123,
+          Marker='string',
+          FileSystemId='string'
+      )
+    :type MaxItems: integer
+    :param MaxItems: 
+
+      (Optional) The maximum number of file system tags to return in the response. Currently, this number is automatically set to 100, and other values are ignored. The response is paginated at 100 per page if you have more than 100 tags.
+
+      
+
+    
+    :type Marker: string
+    :param Marker: 
+
+      (Optional) An opaque pagination token returned from a previous ``DescribeTags`` operation (String). If present, it specifies to continue the list from where the previous call left off.
+
+      
+
+    
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system whose tag set you want to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'NextMarker': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **Marker** *(string) --* 
+
+          If the request included a ``Marker`` , the response returns that value in this field.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          Returns tags associated with the file system as an array of ``Tag`` objects. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+        
+
+        - **NextMarker** *(string) --* 
+
+          If a value is present, there are more tags to return. In a subsequent request, you can provide the value of ``NextMarker`` as the value of the ``Marker`` parameter in your next request to retrieve the next set of tags.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+
+    **Examples** 
+
+    This operation describes all of a file system's tags.
+    ::
+
+      response = client.describe_tags(
+          FileSystemId='fs-01234567',
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'Tags': [
+              {
+                  'Key': 'Name',
+                  'Value': 'MyFileSystem',
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists all tags for a top-level EFS resource. You must provide the ID of the resource that you want to retrieve the tags for.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:DescribeAccessPoints`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      Specifies the EFS resource you want to retrieve tags for. You can retrieve tags for EFS file systems and access points using this API endpoint.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      (Optional) Specifies the maximum number of tag objects to return in the response. The default value is 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      (Optional) You can use ``NextToken`` in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          An array of the tags for the specified EFS resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+           ``NextToken`` is present if the response payload is paginated. You can use ``NextToken`` in a subsequent request to fetch the next page of access point descriptions.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+  .. py:method:: modify_mount_target_security_groups(**kwargs)
+
+    
+
+    Modifies the set of security groups in effect for a mount target.
+
+     
+
+    When you create a mount target, Amazon EFS also creates a new network interface. For more information, see  CreateMountTarget . This operation replaces the security groups in effect for the network interface associated with a mount target, with the ``SecurityGroups`` provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not ``deleted`` . 
+
+     
+
+    The operation requires permissions for the following actions:
+
+     
+
+     
+    * ``elasticfilesystem:ModifyMountTargetSecurityGroups`` action on the mount target's file system.  
+     
+    * ``ec2:ModifyNetworkInterfaceAttribute`` action on the mount target's network interface.  
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.modify_mount_target_security_groups(
+          MountTargetId='string',
+          SecurityGroups=[
+              'string',
+          ]
+      )
+    :type MountTargetId: string
+    :param MountTargetId: **[REQUIRED]** 
+
+      The ID of the mount target whose security groups you want to modify.
+
+      
+
+    
+    :type SecurityGroups: list
+    :param SecurityGroups: 
+
+      An array of up to five VPC security group IDs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.MountTargetNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectMountTargetState`
+
+    
+    *     :py:class:`EFS.Client.exceptions.SecurityGroupLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.SecurityGroupNotFound`
+
+    
+
+    **Examples** 
+
+    This operation modifies the security groups associated with a mount target for a file system.
+    ::
+
+      response = client.modify_mount_target_security_groups(
+          MountTargetId='fsmt-12340abc',
+          SecurityGroups=[
+              'sg-abcd1234',
+          ],
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: put_account_preferences(**kwargs)
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutAccountPreferences>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_account_preferences(
+          ResourceIdType='LONG_ID'|'SHORT_ID'
+      )
+    :type ResourceIdType: string
+    :param ResourceIdType: **[REQUIRED]** A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceIdPreference': {
+                'ResourceIdType': 'LONG_ID'|'SHORT_ID',
+                'Resources': [
+                    'FILE_SYSTEM'|'MOUNT_TARGET',
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceIdPreference** *(dict) --* 
+          
+
+          - **ResourceIdType** *(string) --* A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.
+          
+
+          - **Resources** *(list) --* EFS resources to which a preference applies to.
+            
+
+            - *(string) --* An EFS resource, for example a file system or a mount target.
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+
+  .. py:method:: put_backup_policy(**kwargs)
+
+    
+
+    Updates the file system's backup policy. Use this action to start or stop automatic backups of the file system. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutBackupPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_backup_policy(
+          FileSystemId='string',
+          BackupPolicy={
+              'Status': 'ENABLED'|'ENABLING'|'DISABLED'|'DISABLING'
+          }
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      Specifies which EFS file system to update the backup policy for.
+
+      
+
+    
+    :type BackupPolicy: dict
+    :param BackupPolicy: **[REQUIRED]** 
+
+      The backup policy included in the ``PutBackupPolicy`` request.
+
+      
+
+    
+      - **Status** *(string) --* **[REQUIRED]** 
+
+        Describes the status of the file system's backup policy.
+
+         
+
+         
+        * **``ENABLED`` ** - EFS is automatically backing up the file system. 
+         
+        * **``ENABLING`` ** - EFS is turning on automatic backups for the file system. 
+         
+        * **``DISABLED`` ** - automatic back ups are turned off for the file system. 
+         
+        * **``DISABLING`` ** - EFS is turning off automatic backups for the file system. 
+         
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BackupPolicy': {
+                'Status': 'ENABLED'|'ENABLING'|'DISABLED'|'DISABLING'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **BackupPolicy** *(dict) --* 
+
+          Describes the file system's backup policy, indicating whether automatic backups are turned on or off..
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            Describes the status of the file system's backup policy.
+
+             
+
+             
+            * **``ENABLED`` ** - EFS is automatically backing up the file system. 
+             
+            * **``ENABLING`` ** - EFS is turning on automatic backups for the file system. 
+             
+            * **``DISABLED`` ** - automatic back ups are turned off for the file system. 
+             
+            * **``DISABLING`` ** - EFS is turning off automatic backups for the file system. 
+             
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: put_file_system_policy(**kwargs)
+
+    
+
+    Applies an Amazon EFS ``FileSystemPolicy`` to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. EFS file system policies have a 20,000 character limit. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see `Default EFS File System Policy <https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy>`__ . 
+
+     
+
+    EFS file system policies have a 20,000 character limit.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:PutFileSystemPolicy`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutFileSystemPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_file_system_policy(
+          FileSystemId='string',
+          Policy='string',
+          BypassPolicyLockoutSafetyCheck=True|False
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the EFS file system that you want to create or update the ``FileSystemPolicy`` for.
+
+      
+
+    
+    :type Policy: string
+    :param Policy: **[REQUIRED]** 
+
+      The ``FileSystemPolicy`` that you're creating. Accepts a JSON formatted policy definition. EFS file system policies have a 20,000 character limit. To find out more about the elements that make up a file system policy, see `EFS Resource-based Policies <https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies>`__ . 
+
+      
+
+    
+    :type BypassPolicyLockoutSafetyCheck: boolean
+    :param BypassPolicyLockoutSafetyCheck: 
+
+      (Optional) A flag to indicate whether to bypass the ``FileSystemPolicy`` lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request will be locked out from making future ``PutFileSystemPolicy`` requests on the file system. Set ``BypassPolicyLockoutSafetyCheck`` to ``True`` only when you intend to prevent the principal that is making the request from making a subsequent ``PutFileSystemPolicy`` request on the file system. The default value is False. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'FileSystemId': 'string',
+            'Policy': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **FileSystemId** *(string) --* 
+
+          Specifies the EFS file system to which the ``FileSystemPolicy`` applies.
+
+          
+        
+
+        - **Policy** *(string) --* 
+
+          The JSON formatted ``FileSystemPolicy`` for the EFS file system.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InvalidPolicyException`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+
+  .. py:method:: put_lifecycle_configuration(**kwargs)
+
+    
+
+    Enables lifecycle management by creating a new ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A ``LifecycleConfiguration`` applies to all files in a file system.
+
+     
+
+    Each Amazon EFS file system supports one lifecycle configuration, which applies to all files in the file system. If a ``LifecycleConfiguration`` object already exists for the specified file system, a ``PutLifecycleConfiguration`` call modifies the existing configuration. A ``PutLifecycleConfiguration`` call with an empty ``LifecyclePolicies`` array in the request body deletes any existing ``LifecycleConfiguration`` and disables lifecycle management.
+
+     
+
+    In the request, specify the following: 
+
+     
+
+     
+    * The ID for the file system for which you are enabling, disabling, or modifying lifecycle management. 
+     
+    * A ``LifecyclePolicies`` array of ``LifecyclePolicy`` objects that define when files are moved to the IA storage class. The array can contain only one ``LifecyclePolicy`` item. 
+     
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:PutLifecycleConfiguration`` operation.
+
+     
+
+    To apply a ``LifecycleConfiguration`` object to an encrypted file system, you need the same AWS Key Management Service (AWS KMS) permissions as when you created the encrypted file system. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutLifecycleConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_lifecycle_configuration(
+          FileSystemId='string',
+          LifecyclePolicies=[
+              {
+                  'TransitionToIA': 'AFTER_7_DAYS'|'AFTER_14_DAYS'|'AFTER_30_DAYS'|'AFTER_60_DAYS'|'AFTER_90_DAYS'
+              },
+          ]
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system for which you are creating the ``LifecycleConfiguration`` object (String).
+
+      
+
+    
+    :type LifecyclePolicies: list
+    :param LifecyclePolicies: **[REQUIRED]** 
+
+      An array of ``LifecyclePolicy`` objects that define the file system's ``LifecycleConfiguration`` object. A ``LifecycleConfiguration`` object tells lifecycle management when to transition files from the Standard storage class to the Infrequent Access storage class.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
+
+        
+
+      
+        - **TransitionToIA** *(string) --* 
+
+          A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don't count as file access events.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LifecyclePolicies': [
+                {
+                    'TransitionToIA': 'AFTER_7_DAYS'|'AFTER_14_DAYS'|'AFTER_30_DAYS'|'AFTER_60_DAYS'|'AFTER_90_DAYS'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LifecyclePolicies** *(list) --* 
+
+          An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a policy used by EFS lifecycle management to transition files to the Infrequent Access (IA) storage class.
+
+            
+            
+
+            - **TransitionToIA** *(string) --* 
+
+              A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata operations such as listing the contents of a directory don't count as file access events.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+
+    **Examples** 
+
+    This operation enables lifecycle management on a file system by creating a new LifecycleConfiguration object. A LifecycleConfiguration object defines when files in an Amazon EFS file system are automatically transitioned to the lower-cost EFS Infrequent Access (IA) storage class. A LifecycleConfiguration applies to all files in a file system.
+    ::
+
+      response = client.put_lifecycle_configuration(
+          FileSystemId='fs-01234567',
+          LifecyclePolicies=[
+              {
+                  'TransitionToIA': 'AFTER_30_DAYS',
+              },
+          ],
+      )
+      
+      print(response)
+
+    
+    Expected Output:
+    ::
+
+      {
+          'LifecyclePolicies': [
+              {
+                  'TransitionToIA': 'AFTER_30_DAYS',
+              },
+          ],
+          'ResponseMetadata': {
+              '...': '...',
+          },
+      }
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Creates a tag for an EFS resource. You can create tags for EFS file systems and access points using this API operation.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:TagResource`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The ID specifying the EFS resource that you want to create a tag for.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      An array of ``Tag`` objects to add. Each ``Tag`` object is a key-value pair.
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag key (String). The key can't start with ``aws:`` .
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag key.
+
+          
+
+        
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from an EFS resource. You can remove tags from EFS file systems and access points using this API operation.
+
+     
+
+    This operation requires permissions for the ``elasticfilesystem:UntagResource`` action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceId='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      Specifies the EFS resource that you want to remove tags from.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The keys of the key-value tag pairs that you want to remove from the specified EFS resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.AccessPointNotFound`
+
+    
+
+  .. py:method:: update_file_system(**kwargs)
+
+    
+
+    Updates the throughput mode or the amount of provisioned throughput of an existing file system.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystem>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_file_system(
+          FileSystemId='string',
+          ThroughputMode='bursting'|'provisioned',
+          ProvisionedThroughputInMibps=123.0
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system that you want to update.
+
+      
+
+    
+    :type ThroughputMode: string
+    :param ThroughputMode: 
+
+      (Optional) Updates the file system's throughput mode. If you're not updating your throughput mode, you don't need to provide this value in your request. If you are changing the ``ThroughputMode`` to ``provisioned`` , you must also set a value for ``ProvisionedThroughputInMibps`` .
+
+      
+
+    
+    :type ProvisionedThroughputInMibps: float
+    :param ProvisionedThroughputInMibps: 
+
+      (Optional) Sets the amount of provisioned throughput, in MiB/s, for the file system. Valid values are 1-1024. If you are changing the throughput mode to provisioned, you must also provide the amount of provisioned throughput. Required if ``ThroughputMode`` is changed to ``provisioned`` on update.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OwnerId': 'string',
+            'CreationToken': 'string',
+            'FileSystemId': 'string',
+            'FileSystemArn': 'string',
+            'CreationTime': datetime(2015, 1, 1),
+            'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+            'Name': 'string',
+            'NumberOfMountTargets': 123,
+            'SizeInBytes': {
+                'Value': 123,
+                'Timestamp': datetime(2015, 1, 1),
+                'ValueInIA': 123,
+                'ValueInStandard': 123
+            },
+            'PerformanceMode': 'generalPurpose'|'maxIO',
+            'Encrypted': True|False,
+            'KmsKeyId': 'string',
+            'ThroughputMode': 'bursting'|'provisioned',
+            'ProvisionedThroughputInMibps': 123.0,
+            'AvailabilityZoneName': 'string',
+            'AvailabilityZoneId': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        A description of the file system.
+
+        
+        
+
+        - **OwnerId** *(string) --* 
+
+          The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+
+          
+        
+
+        - **CreationToken** *(string) --* 
+
+          The opaque string specified in the request.
+
+          
+        
+
+        - **FileSystemId** *(string) --* 
+
+          The ID of the file system, assigned by Amazon EFS.
+
+          
+        
+
+        - **FileSystemArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) for the EFS file system, in the format ``arn:aws:elasticfilesystem:*region* :*account-id* :file-system/*file-system-id* `` . Example with sample data: ``arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567``  
+
+          
+        
+
+        - **CreationTime** *(datetime) --* 
+
+          The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+
+          
+        
+
+        - **LifeCycleState** *(string) --* 
+
+          The lifecycle phase of the file system.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          You can add tags to a file system, including a ``Name`` tag. For more information, see  CreateFileSystem . If the file system has a ``Name`` tag, Amazon EFS returns the value in this field. 
+
+          
+        
+
+        - **NumberOfMountTargets** *(integer) --* 
+
+          The current number of mount targets that the file system has. For more information, see  CreateMountTarget .
+
+          
+        
+
+        - **SizeInBytes** *(dict) --* 
+
+          The latest known metered size (in bytes) of data stored in the file system, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. The ``SizeInBytes`` value doesn't represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, ``SizeInBytes`` represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. 
+
+          
+          
+
+          - **Value** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the file system.
+
+            
+          
+
+          - **Timestamp** *(datetime) --* 
+
+            The time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+
+            
+          
+
+          - **ValueInIA** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
+
+            
+          
+
+          - **ValueInStandard** *(integer) --* 
+
+            The latest known metered size (in bytes) of data stored in the Standard storage class.
+
+            
+      
+        
+
+        - **PerformanceMode** *(string) --* 
+
+          The performance mode of the file system.
+
+          
+        
+
+        - **Encrypted** *(boolean) --* 
+
+          A Boolean value that, if true, indicates that the file system is encrypted.
+
+          
+        
+
+        - **KmsKeyId** *(string) --* 
+
+          The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+
+          
+        
+
+        - **ThroughputMode** *(string) --* 
+
+          Displays the file system's throughput mode. For more information, see `Throughput modes <https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes>`__ in the *Amazon EFS User Guide* . 
+
+          
+        
+
+        - **ProvisionedThroughputInMibps** *(float) --* 
+
+          The amount of provisioned throughput, measured in MiB/s, for the file system. Valid for file systems using ``ThroughputMode`` set to ``provisioned`` .
+
+          
+        
+
+        - **AvailabilityZoneName** *(string) --* 
+
+          Describes the AWS Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see `Using EFS storage classes <https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html>`__ in the *Amazon EFS User Guide* .
+
+          
+        
+
+        - **AvailabilityZoneId** *(string) --* 
+
+          The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, ``use1-az1`` is an Availability Zone ID for the us-east-1 AWS Region, and it has the same location in every AWS account.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          The tags associated with the file system, presented as an array of ``Tag`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EFS.Client.exceptions.BadRequest`
+
+    
+    *     :py:class:`EFS.Client.exceptions.FileSystemNotFound`
+
+    
+    *     :py:class:`EFS.Client.exceptions.IncorrectFileSystemLifeCycleState`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InsufficientThroughputCapacity`
+
+    
+    *     :py:class:`EFS.Client.exceptions.InternalServerError`
+
+    
+    *     :py:class:`EFS.Client.exceptions.ThroughputLimitExceeded`
+
+    
+    *     :py:class:`EFS.Client.exceptions.TooManyRequests`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`EFS.Paginator.DescribeFileSystems`
+
+
+* :py:class:`EFS.Paginator.DescribeMountTargets`
+
+
+* :py:class:`EFS.Paginator.DescribeTags`
+
+
+
+.. py:class:: EFS.Paginator.DescribeFileSystems
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_file_systems')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EFS.Client.describe_file_systems`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          CreationToken='string',
+          FileSystemId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type CreationToken: string
+    :param CreationToken: 
+
+      (Optional) Restricts the list to the file system with this creation token (String). You specify a creation token when you create an Amazon EFS file system.
+
+      
+
+    
+    :type FileSystemId: string
+    :param FileSystemId: 
+
+      (Optional) ID of the file system whose description you want to retrieve (String).
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'FileSystems': [
+                {
+                    'OwnerId': 'string',
+                    'CreationToken': 'string',
+                    'FileSystemId': 'string',
+                    'FileSystemArn': 'string',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+                    'Name': 'string',
+                    'NumberOfMountTargets': 123,
+                    'SizeInBytes': {
+                        'Value': 123,
+                        'Timestamp': datetime(2015, 1, 1),
+                        'ValueInIA': 123,
+                        'ValueInStandard': 123
+                    },
+                    'PerformanceMode': 'generalPurpose'|'maxIO',
+                    'Encrypted': True|False,
+                    'KmsKeyId': 'string',
+                    'ThroughputMode': 'bursting'|'provisioned',
+                    'ProvisionedThroughputInMibps': 123.0,
+                    'AvailabilityZoneName': 'string',
+                    'AvailabilityZoneId': 'string',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Marker** *(string) --* 
+
+          Present if provided by caller in the request (String).
+
+          
+        
+
+        - **FileSystems** *(list) --* 
+
+          An array of file system descriptions.
+
+          
+          
+
+          - *(dict) --* 
+
+            A description of the file system.
+
+            
+            
+
+            - **OwnerId** *(string) --* 
+
+              The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
+
+              
+            
+
+            - **CreationToken** *(string) --* 
+
+              The opaque string specified in the request.
+
+              
+            
+
+            - **FileSystemId** *(string) --* 
+
+              The ID of the file system, assigned by Amazon EFS.
+
+              
+            
+
+            - **FileSystemArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) for the EFS file system, in the format ``arn:aws:elasticfilesystem:*region* :*account-id* :file-system/*file-system-id* `` . Example with sample data: ``arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567``  
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+
+              
+            
+
+            - **LifeCycleState** *(string) --* 
+
+              The lifecycle phase of the file system.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              You can add tags to a file system, including a ``Name`` tag. For more information, see  CreateFileSystem . If the file system has a ``Name`` tag, Amazon EFS returns the value in this field. 
+
+              
+            
+
+            - **NumberOfMountTargets** *(integer) --* 
+
+              The current number of mount targets that the file system has. For more information, see  CreateMountTarget .
+
+              
+            
+
+            - **SizeInBytes** *(dict) --* 
+
+              The latest known metered size (in bytes) of data stored in the file system, in its ``Value`` field, and the time at which that size was determined in its ``Timestamp`` field. The ``Timestamp`` value is the integer number of seconds since 1970-01-01T00:00:00Z. The ``SizeInBytes`` value doesn't represent the size of a consistent snapshot of the file system, but it is eventually consistent when there are no writes to the file system. That is, ``SizeInBytes`` represents actual size only if the file system is not modified for a period longer than a couple of hours. Otherwise, the value is not the exact size that the file system was at any point in time. 
+
+              
+              
+
+              - **Value** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the file system.
+
+                
+              
+
+              - **Timestamp** *(datetime) --* 
+
+                The time at which the size of data, returned in the ``Value`` field, was determined. The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+
+                
+              
+
+              - **ValueInIA** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the Infrequent Access storage class.
+
+                
+              
+
+              - **ValueInStandard** *(integer) --* 
+
+                The latest known metered size (in bytes) of data stored in the Standard storage class.
+
+                
+          
+            
+
+            - **PerformanceMode** *(string) --* 
+
+              The performance mode of the file system.
+
+              
+            
+
+            - **Encrypted** *(boolean) --* 
+
+              A Boolean value that, if true, indicates that the file system is encrypted.
+
+              
+            
+
+            - **KmsKeyId** *(string) --* 
+
+              The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the encrypted file system.
+
+              
+            
+
+            - **ThroughputMode** *(string) --* 
+
+              Displays the file system's throughput mode. For more information, see `Throughput modes <https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes>`__ in the *Amazon EFS User Guide* . 
+
+              
+            
+
+            - **ProvisionedThroughputInMibps** *(float) --* 
+
+              The amount of provisioned throughput, measured in MiB/s, for the file system. Valid for file systems using ``ThroughputMode`` set to ``provisioned`` .
+
+              
+            
+
+            - **AvailabilityZoneName** *(string) --* 
+
+              Describes the AWS Availability Zone in which the file system is located, and is valid only for file systems using One Zone storage classes. For more information, see `Using EFS storage classes <https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html>`__ in the *Amazon EFS User Guide* .
+
+              
+            
+
+            - **AvailabilityZoneId** *(string) --* 
+
+              The unique and consistent identifier of the Availability Zone in which the file system's One Zone storage classes exist. For example, ``use1-az1`` is an Availability Zone ID for the us-east-1 AWS Region, and it has the same location in every AWS account.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags associated with the file system, presented as an array of ``Tag`` objects.
+
+              
+              
+
+              - *(dict) --* 
+
+                A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key (String). The key can't start with ``aws:`` .
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The value of the tag key.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: EFS.Paginator.DescribeMountTargets
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_mount_targets')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EFS.Client.describe_mount_targets`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          FileSystemId='string',
+          MountTargetId='string',
+          AccessPointId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type FileSystemId: string
+    :param FileSystemId: 
+
+      (Optional) ID of the file system whose mount targets you want to list (String). It must be included in your request if an ``AccessPointId`` or ``MountTargetId`` is not included. Accepts either a file system ID or ARN as input.
+
+      
+
+    
+    :type MountTargetId: string
+    :param MountTargetId: 
+
+      (Optional) ID of the mount target that you want to have described (String). It must be included in your request if ``FileSystemId`` is not included. Accepts either a mount target ID or ARN as input.
+
+      
+
+    
+    :type AccessPointId: string
+    :param AccessPointId: 
+
+      (Optional) The ID of the access point whose mount targets that you want to list. It must be included in your request if a ``FileSystemId`` or ``MountTargetId`` is not included in your request. Accepts either an access point ID or ARN as input.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'MountTargets': [
+                {
+                    'OwnerId': 'string',
+                    'MountTargetId': 'string',
+                    'FileSystemId': 'string',
+                    'SubnetId': 'string',
+                    'LifeCycleState': 'creating'|'available'|'updating'|'deleting'|'deleted'|'error',
+                    'IpAddress': 'string',
+                    'NetworkInterfaceId': 'string',
+                    'AvailabilityZoneId': 'string',
+                    'AvailabilityZoneName': 'string',
+                    'VpcId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **Marker** *(string) --* 
+
+          If the request included the ``Marker`` , the response returns that value in this field.
+
+          
+        
+
+        - **MountTargets** *(list) --* 
+
+          Returns the file system's mount targets as an array of ``MountTargetDescription`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a description of a mount target.
+
+            
+            
+
+            - **OwnerId** *(string) --* 
+
+              AWS account ID that owns the resource.
+
+              
+            
+
+            - **MountTargetId** *(string) --* 
+
+              System-assigned mount target ID.
+
+              
+            
+
+            - **FileSystemId** *(string) --* 
+
+              The ID of the file system for which the mount target is intended.
+
+              
+            
+
+            - **SubnetId** *(string) --* 
+
+              The ID of the mount target's subnet.
+
+              
+            
+
+            - **LifeCycleState** *(string) --* 
+
+              Lifecycle state of the mount target.
+
+              
+            
+
+            - **IpAddress** *(string) --* 
+
+              Address at which the file system can be mounted by using the mount target.
+
+              
+            
+
+            - **NetworkInterfaceId** *(string) --* 
+
+              The ID of the network interface that Amazon EFS created when it created the mount target.
+
+              
+            
+
+            - **AvailabilityZoneId** *(string) --* 
+
+              The unique and consistent identifier of the Availability Zone that the mount target resides in. For example, ``use1-az1`` is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.
+
+              
+            
+
+            - **AvailabilityZoneName** *(string) --* 
+
+              The name of the Availability Zone in which the mount target is located. Availability Zones are independently mapped to names for each AWS account. For example, the Availability Zone ``us-east-1a`` for your AWS account might not be the same location as ``us-east-1a`` for another AWS account.
+
+              
+            
+
+            - **VpcId** *(string) --* 
+
+              The virtual private cloud (VPC) ID that the mount target is configured in.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: EFS.Paginator.DescribeTags
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_tags')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EFS.Client.describe_tags`.
+
+    .. danger::
+
+            This operation is deprecated and may not function as expected. This operation should not be used going forward and is only kept for the purpose of backwards compatiblity.
+
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          FileSystemId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type FileSystemId: string
+    :param FileSystemId: **[REQUIRED]** 
+
+      The ID of the file system whose tag set you want to retrieve.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Marker': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **Marker** *(string) --* 
+
+          If the request included a ``Marker`` , the response returns that value in this field.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          Returns tags associated with the file system as an array of ``Tag`` objects. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair. Allowed characters are letters, white space, and numbers that can be represented in UTF-8, and the following characters:``+ - = . _ : /`` .
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key (String). The key can't start with ``aws:`` .
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag key.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

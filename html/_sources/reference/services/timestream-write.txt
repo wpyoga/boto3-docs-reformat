@@ -1,0 +1,2301 @@
+
+
+***************
+TimestreamWrite
+***************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: TimestreamWrite.Client
+
+  A low-level client representing Amazon Timestream Write
+  
+
+  Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. You can analyze industrial telemetry to streamline equipment management and maintenance. You can also store and analyze log data and metrics to improve the performance and availability of your applications. Timestream is built from the ground up to effectively ingest, process, and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('timestream-write')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~TimestreamWrite.Client.can_paginate`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.create_database`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.create_table`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.delete_database`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.delete_table`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.describe_database`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.describe_endpoints`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.describe_table`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.get_paginator`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.get_waiter`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.list_databases`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.list_tables`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.tag_resource`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.untag_resource`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.update_database`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.update_table`
+
+  
+  *   :py:meth:`~TimestreamWrite.Client.write_records`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_database(**kwargs)
+
+    
+
+    Creates a new Timestream database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. Refer to `AWS managed KMS keys <https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk>`__ for more info. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateDatabase>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_database(
+          DatabaseName='string',
+          KmsKeyId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type KmsKeyId: string
+    :param KmsKeyId: 
+
+      The KMS key for the database. If the KMS key is not specified, the database will be encrypted with a Timestream managed KMS key located in your account. Refer to `AWS managed KMS keys <https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk>`__ for more info.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      A list of key-value pairs to label the table. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. 
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag. Tag keys are case sensitive. 
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag. Tag values are case-sensitive and can be null. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Database': {
+                'Arn': 'string',
+                'DatabaseName': 'string',
+                'TableCount': 123,
+                'KmsKeyId': 'string',
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Database** *(dict) --* 
+
+          The newly created Timestream database.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this database.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database.
+
+            
+          
+
+          - **TableCount** *(integer) --* 
+
+            The total number of tables found within a Timestream database. 
+
+            
+          
+
+          - **KmsKeyId** *(string) --* 
+
+            The identifier of the KMS key used to encrypt the data stored in the database.
+
+            
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the database was created, calculated from the Unix epoch time.
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The last time that this database was updated. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_table(**kwargs)
+
+    
+
+    The CreateTable operation adds a new table to an existing database in your account. In an AWS account, table names must be at least unique within each Region if they are in the same database. You may have identical table names in the same Region if the tables are in seperate databases. While creating the table, you must specify the table name, database name, and the retention properties. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/CreateTable>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_table(
+          DatabaseName='string',
+          TableName='string',
+          RetentionProperties={
+              'MemoryStoreRetentionPeriodInHours': 123,
+              'MagneticStoreRetentionPeriodInDays': 123
+          },
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type TableName: string
+    :param TableName: **[REQUIRED]** 
+
+      The name of the Timestream table.
+
+      
+
+    
+    :type RetentionProperties: dict
+    :param RetentionProperties: 
+
+      The duration for which your time series data must be stored in the memory store and the magnetic store.
+
+      
+
+    
+      - **MemoryStoreRetentionPeriodInHours** *(integer) --* **[REQUIRED]** 
+
+        The duration for which data must be stored in the memory store. 
+
+        
+
+      
+      - **MagneticStoreRetentionPeriodInDays** *(integer) --* **[REQUIRED]** 
+
+        The duration for which data must be stored in the magnetic store. 
+
+        
+
+      
+    
+    :type Tags: list
+    :param Tags: 
+
+      A list of key-value pairs to label the table. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. 
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag. Tag keys are case sensitive. 
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag. Tag values are case-sensitive and can be null. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Table': {
+                'Arn': 'string',
+                'TableName': 'string',
+                'DatabaseName': 'string',
+                'TableStatus': 'ACTIVE'|'DELETING',
+                'RetentionProperties': {
+                    'MemoryStoreRetentionPeriodInHours': 123,
+                    'MagneticStoreRetentionPeriodInDays': 123
+                },
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Table** *(dict) --* 
+
+          The newly created Timestream table.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this table.
+
+            
+          
+
+          - **TableName** *(string) --* 
+
+            The name of the Timestream table.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database that contains this table.
+
+            
+          
+
+          - **TableStatus** *(string) --* 
+
+            The current state of the table:
+
+             
+
+             
+            * ``DELETING`` - The table is being deleted. 
+             
+            * ``ACTIVE`` - The table is ready for use. 
+             
+
+            
+          
+
+          - **RetentionProperties** *(dict) --* 
+
+            The retention duration for the memory store and magnetic store.
+
+            
+            
+
+            - **MemoryStoreRetentionPeriodInHours** *(integer) --* 
+
+              The duration for which data must be stored in the memory store. 
+
+              
+            
+
+            - **MagneticStoreRetentionPeriodInDays** *(integer) --* 
+
+              The duration for which data must be stored in the magnetic store. 
+
+              
+        
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the Timestream table was created. 
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The time when the Timestream table was last updated.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: delete_database(**kwargs)
+
+    
+
+    Deletes a given Timestream database. *This is an irreversible operation. After a database is deleted, the time series data from its tables cannot be recovered.*  
+
+     
+
+    All tables in the database must be deleted first, or a ValidationException error will be thrown. 
+
+     
+
+    Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DeleteDatabase>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_database(
+          DatabaseName='string'
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database to be deleted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: delete_table(**kwargs)
+
+    
+
+    Deletes a given Timestream table. This is an irreversible operation. After a Timestream database table is deleted, the time series data stored in the table cannot be recovered. 
+
+     
+
+    Due to the nature of distributed retries, the operation can return either success or a ResourceNotFoundException. Clients should consider them equivalent.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DeleteTable>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_table(
+          DatabaseName='string',
+          TableName='string'
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the database where the Timestream database is to be deleted.
+
+      
+
+    
+    :type TableName: string
+    :param TableName: **[REQUIRED]** 
+
+      The name of the Timestream table to be deleted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: describe_database(**kwargs)
+
+    
+
+    Returns information about the database, including the database name, time that the database was created, and the total number of tables found within the database. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeDatabase>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_database(
+          DatabaseName='string'
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Database': {
+                'Arn': 'string',
+                'DatabaseName': 'string',
+                'TableCount': 123,
+                'KmsKeyId': 'string',
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Database** *(dict) --* 
+
+          The name of the Timestream table.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this database.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database.
+
+            
+          
+
+          - **TableCount** *(integer) --* 
+
+            The total number of tables found within a Timestream database. 
+
+            
+          
+
+          - **KmsKeyId** *(string) --* 
+
+            The identifier of the KMS key used to encrypt the data stored in the database.
+
+            
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the database was created, calculated from the Unix epoch time.
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The last time that this database was updated. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: describe_endpoints()
+
+    
+
+    DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query.
+
+     
+
+    Because Timestream’s SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, *it is not recommended that you use this API unless* :
+
+     
+
+     
+    * Your application uses a programming language that does not yet have SDK support 
+     
+    * You require better control over the client-side implementation 
+     
+
+     
+
+    For detailed information on how to use DescribeEndpoints, see `The Endpoint Discovery Pattern and REST APIs <https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_endpoints()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Endpoints': [
+                {
+                    'Address': 'string',
+                    'CachePeriodInMinutes': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Endpoints** *(list) --* 
+
+          An ``Endpoints`` object is returned when a ``DescribeEndpoints`` request is made.
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              An endpoint address.
+
+              
+            
+
+            - **CachePeriodInMinutes** *(integer) --* 
+
+              The TTL for the endpoint, in minutes.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_table(**kwargs)
+
+    
+
+    Returns information about the table, including the table name, database name, retention duration of the memory store and the magnetic store. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/DescribeTable>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_table(
+          DatabaseName='string',
+          TableName='string'
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type TableName: string
+    :param TableName: **[REQUIRED]** 
+
+      The name of the Timestream table.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Table': {
+                'Arn': 'string',
+                'TableName': 'string',
+                'DatabaseName': 'string',
+                'TableStatus': 'ACTIVE'|'DELETING',
+                'RetentionProperties': {
+                    'MemoryStoreRetentionPeriodInHours': 123,
+                    'MagneticStoreRetentionPeriodInDays': 123
+                },
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Table** *(dict) --* 
+
+          The Timestream table.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this table.
+
+            
+          
+
+          - **TableName** *(string) --* 
+
+            The name of the Timestream table.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database that contains this table.
+
+            
+          
+
+          - **TableStatus** *(string) --* 
+
+            The current state of the table:
+
+             
+
+             
+            * ``DELETING`` - The table is being deleted. 
+             
+            * ``ACTIVE`` - The table is ready for use. 
+             
+
+            
+          
+
+          - **RetentionProperties** *(dict) --* 
+
+            The retention duration for the memory store and magnetic store.
+
+            
+            
+
+            - **MemoryStoreRetentionPeriodInHours** *(integer) --* 
+
+              The duration for which data must be stored in the memory store. 
+
+              
+            
+
+            - **MagneticStoreRetentionPeriodInDays** *(integer) --* 
+
+              The duration for which data must be stored in the magnetic store. 
+
+              
+        
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the Timestream table was created. 
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The time when the Timestream table was last updated.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_databases(**kwargs)
+
+    
+
+    Returns a list of your Timestream databases. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListDatabases>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_databases(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Databases': [
+                {
+                    'Arn': 'string',
+                    'DatabaseName': 'string',
+                    'TableCount': 123,
+                    'KmsKeyId': 'string',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'LastUpdatedTime': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Databases** *(list) --* 
+
+          A list of database names.
+
+          
+          
+
+          - *(dict) --* 
+
+            A top level container for a table. Databases and tables are the fundamental management concepts in Amazon Timestream. All tables in a database are encrypted with the same KMS key.
+
+            
+            
+
+            - **Arn** *(string) --* 
+
+              The Amazon Resource Name that uniquely identifies this database.
+
+              
+            
+
+            - **DatabaseName** *(string) --* 
+
+              The name of the Timestream database.
+
+              
+            
+
+            - **TableCount** *(integer) --* 
+
+              The total number of tables found within a Timestream database. 
+
+              
+            
+
+            - **KmsKeyId** *(string) --* 
+
+              The identifier of the KMS key used to encrypt the data stored in the database.
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time when the database was created, calculated from the Unix epoch time.
+
+              
+            
+
+            - **LastUpdatedTime** *(datetime) --* 
+
+              The last time that this database was updated. 
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token. This parameter is returned when the response is truncated.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: list_tables(**kwargs)
+
+    
+
+    A list of tables, along with the name, status and retention properties of each table. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListTables>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tables(
+          DatabaseName='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type DatabaseName: string
+    :param DatabaseName: 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tables': [
+                {
+                    'Arn': 'string',
+                    'TableName': 'string',
+                    'DatabaseName': 'string',
+                    'TableStatus': 'ACTIVE'|'DELETING',
+                    'RetentionProperties': {
+                        'MemoryStoreRetentionPeriodInHours': 123,
+                        'MagneticStoreRetentionPeriodInDays': 123
+                    },
+                    'CreationTime': datetime(2015, 1, 1),
+                    'LastUpdatedTime': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tables** *(list) --* 
+
+          A list of tables.
+
+          
+          
+
+          - *(dict) --* 
+
+            Table represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table. 
+
+            
+            
+
+            - **Arn** *(string) --* 
+
+              The Amazon Resource Name that uniquely identifies this table.
+
+              
+            
+
+            - **TableName** *(string) --* 
+
+              The name of the Timestream table.
+
+              
+            
+
+            - **DatabaseName** *(string) --* 
+
+              The name of the Timestream database that contains this table.
+
+              
+            
+
+            - **TableStatus** *(string) --* 
+
+              The current state of the table:
+
+               
+
+               
+              * ``DELETING`` - The table is being deleted. 
+               
+              * ``ACTIVE`` - The table is ready for use. 
+               
+
+              
+            
+
+            - **RetentionProperties** *(dict) --* 
+
+              The retention duration for the memory store and magnetic store.
+
+              
+              
+
+              - **MemoryStoreRetentionPeriodInHours** *(integer) --* 
+
+                The duration for which data must be stored in the memory store. 
+
+                
+              
+
+              - **MagneticStoreRetentionPeriodInDays** *(integer) --* 
+
+                The duration for which data must be stored in the magnetic store. 
+
+                
+          
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time when the Timestream table was created. 
+
+              
+            
+
+            - **LastUpdatedTime** *(datetime) --* 
+
+              The time when the Timestream table was last updated.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    List all tags on a Timestream resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceARN='string'
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Timestream resource with tags to be listed. This value is an Amazon Resource Name (ARN). 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          The tags currently associated with the Timestream resource. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. 
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key of the tag. Tag keys are case sensitive. 
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag. Tag values are case-sensitive and can be null. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Associate a set of tags with a Timestream resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceARN='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      Identifies the Timestream resource to which tags should be added. This value is an Amazon Resource Name (ARN). 
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The tags to be assigned to the Timestream resource. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a label that you assign to a Timestream database and/or table. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize databases and/or tables, for example, by purpose, owner, or environment. 
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag. Tag keys are case sensitive. 
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag. Tag values are case-sensitive and can be null. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes the association of tags from a Timestream resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceARN='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Timestream resource that the tags will be removed from. This value is an Amazon Resource Name (ARN). 
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      A list of tags keys. Existing tags of the resource whose keys are members of this list will be removed from the Timestream resource. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: update_database(**kwargs)
+
+    
+
+    Modifies the KMS key for an existing database. While updating the database, you must specify the database name and the identifier of the new KMS key to be used (``KmsKeyId`` ). If there are any concurrent ``UpdateDatabase`` requests, first writer wins. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateDatabase>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_database(
+          DatabaseName='string',
+          KmsKeyId='string'
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the database. 
+
+      
+
+    
+    :type KmsKeyId: string
+    :param KmsKeyId: **[REQUIRED]** 
+
+      The identifier of the new KMS key (``KmsKeyId`` ) to be used to encrypt the data stored in the database. If the ``KmsKeyId`` currently registered with the database is the same as the ``KmsKeyId`` in the request, there will not be any update. 
+
+       
+
+      You can specify the ``KmsKeyId`` using any of the following:
+
+       
+
+       
+      * Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab``   
+       
+      * Key ARN: ``arn:aws:kms:us-east-1:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab``   
+       
+      * Alias name: ``alias/ExampleAlias``   
+       
+      * Alias ARN: ``arn:aws:kms:us-east-1:111122223333:alias/ExampleAlias``   
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Database': {
+                'Arn': 'string',
+                'DatabaseName': 'string',
+                'TableCount': 123,
+                'KmsKeyId': 'string',
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Database** *(dict) --* 
+
+          A top level container for a table. Databases and tables are the fundamental management concepts in Amazon Timestream. All tables in a database are encrypted with the same KMS key.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this database.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database.
+
+            
+          
+
+          - **TableCount** *(integer) --* 
+
+            The total number of tables found within a Timestream database. 
+
+            
+          
+
+          - **KmsKeyId** *(string) --* 
+
+            The identifier of the KMS key used to encrypt the data stored in the database.
+
+            
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the database was created, calculated from the Unix epoch time.
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The last time that this database was updated. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: update_table(**kwargs)
+
+    
+
+    Modifies the retention duration of the memory store and magnetic store for your Timestream table. Note that the change in retention duration takes effect immediately. For example, if the retention period of the memory store was initially set to 2 hours and then changed to 24 hours, the memory store will be capable of holding 24 hours of data, but will be populated with 24 hours of data 22 hours after this change was made. Timestream does not retrieve data from the magnetic store to populate the memory store. 
+
+     
+
+    Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/UpdateTable>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_table(
+          DatabaseName='string',
+          TableName='string',
+          RetentionProperties={
+              'MemoryStoreRetentionPeriodInHours': 123,
+              'MagneticStoreRetentionPeriodInDays': 123
+          }
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type TableName: string
+    :param TableName: **[REQUIRED]** 
+
+      The name of the Timesream table.
+
+      
+
+    
+    :type RetentionProperties: dict
+    :param RetentionProperties: **[REQUIRED]** 
+
+      The retention duration of the memory store and the magnetic store.
+
+      
+
+    
+      - **MemoryStoreRetentionPeriodInHours** *(integer) --* **[REQUIRED]** 
+
+        The duration for which data must be stored in the memory store. 
+
+        
+
+      
+      - **MagneticStoreRetentionPeriodInDays** *(integer) --* **[REQUIRED]** 
+
+        The duration for which data must be stored in the magnetic store. 
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Table': {
+                'Arn': 'string',
+                'TableName': 'string',
+                'DatabaseName': 'string',
+                'TableStatus': 'ACTIVE'|'DELETING',
+                'RetentionProperties': {
+                    'MemoryStoreRetentionPeriodInHours': 123,
+                    'MagneticStoreRetentionPeriodInDays': 123
+                },
+                'CreationTime': datetime(2015, 1, 1),
+                'LastUpdatedTime': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Table** *(dict) --* 
+
+          The updated Timestream table.
+
+          
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name that uniquely identifies this table.
+
+            
+          
+
+          - **TableName** *(string) --* 
+
+            The name of the Timestream table.
+
+            
+          
+
+          - **DatabaseName** *(string) --* 
+
+            The name of the Timestream database that contains this table.
+
+            
+          
+
+          - **TableStatus** *(string) --* 
+
+            The current state of the table:
+
+             
+
+             
+            * ``DELETING`` - The table is being deleted. 
+             
+            * ``ACTIVE`` - The table is ready for use. 
+             
+
+            
+          
+
+          - **RetentionProperties** *(dict) --* 
+
+            The retention duration for the memory store and magnetic store.
+
+            
+            
+
+            - **MemoryStoreRetentionPeriodInHours** *(integer) --* 
+
+              The duration for which data must be stored in the memory store. 
+
+              
+            
+
+            - **MagneticStoreRetentionPeriodInDays** *(integer) --* 
+
+              The duration for which data must be stored in the magnetic store. 
+
+              
+        
+          
+
+          - **CreationTime** *(datetime) --* 
+
+            The time when the Timestream table was created. 
+
+            
+          
+
+          - **LastUpdatedTime** *(datetime) --* 
+
+            The time when the Timestream table was last updated.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: write_records(**kwargs)
+
+    
+
+    The WriteRecords operation enables you to write your time series data into Timestream. You can specify a single data point or a batch of data points to be inserted into the system. Timestream offers you with a flexible schema that auto detects the column names and data types for your Timestream tables based on the dimension names and data types of the data points you specify when invoking writes into the database. Timestream support eventual consistency read semantics. This means that when you query data immediately after writing a batch of data into Timestream, the query results might not reflect the results of a recently completed write operation. The results may also include some stale data. If you repeat the query request after a short time, the results should return the latest data. Service quotas apply. For more information, see `Access Management <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html>`__ in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-write-2018-11-01/WriteRecords>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.write_records(
+          DatabaseName='string',
+          TableName='string',
+          CommonAttributes={
+              'Dimensions': [
+                  {
+                      'Name': 'string',
+                      'Value': 'string',
+                      'DimensionValueType': 'VARCHAR'
+                  },
+              ],
+              'MeasureName': 'string',
+              'MeasureValue': 'string',
+              'MeasureValueType': 'DOUBLE'|'BIGINT'|'VARCHAR'|'BOOLEAN',
+              'Time': 'string',
+              'TimeUnit': 'MILLISECONDS'|'SECONDS'|'MICROSECONDS'|'NANOSECONDS',
+              'Version': 123
+          },
+          Records=[
+              {
+                  'Dimensions': [
+                      {
+                          'Name': 'string',
+                          'Value': 'string',
+                          'DimensionValueType': 'VARCHAR'
+                      },
+                  ],
+                  'MeasureName': 'string',
+                  'MeasureValue': 'string',
+                  'MeasureValueType': 'DOUBLE'|'BIGINT'|'VARCHAR'|'BOOLEAN',
+                  'Time': 'string',
+                  'TimeUnit': 'MILLISECONDS'|'SECONDS'|'MICROSECONDS'|'NANOSECONDS',
+                  'Version': 123
+              },
+          ]
+      )
+    :type DatabaseName: string
+    :param DatabaseName: **[REQUIRED]** 
+
+      The name of the Timestream database.
+
+      
+
+    
+    :type TableName: string
+    :param TableName: **[REQUIRED]** 
+
+      The name of the Timesream table.
+
+      
+
+    
+    :type CommonAttributes: dict
+    :param CommonAttributes: 
+
+      A record containing the common measure and dimension attributes shared across all the records in the request. The measure and dimension attributes specified in here will be merged with the measure and dimension attributes in the records object when the data is written into Timestream. 
+
+      
+
+    
+      - **Dimensions** *(list) --* 
+
+        Contains the list of dimensions for time series data points.
+
+        
+
+      
+        - *(dict) --* 
+
+          Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. 
+
+          
+
+        
+          - **Name** *(string) --* **[REQUIRED]** 
+
+            Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. 
+
+             
+
+            For constraints on Dimension names, see `Naming Constraints <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming>`__ .
+
+            
+
+          
+          - **Value** *(string) --* **[REQUIRED]** 
+
+            The value of the dimension.
+
+            
+
+          
+          - **DimensionValueType** *(string) --* 
+
+            The data type of the dimension for the time series data point.
+
+            
+
+          
+        
+    
+      - **MeasureName** *(string) --* 
+
+        Measure represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. 
+
+        
+
+      
+      - **MeasureValue** *(string) --* 
+
+        Contains the measure value for the time series data point. 
+
+        
+
+      
+      - **MeasureValueType** *(string) --* 
+
+        Contains the data type of the measure value for the time series data point. 
+
+        
+
+      
+      - **Time** *(string) --* 
+
+        Contains the time at which the measure value for the data point was collected. The time value plus the unit provides the time elapsed since the epoch. For example, if the time value is ``12345`` and the unit is ``ms`` , then ``12345 ms`` have elapsed since the epoch. 
+
+        
+
+      
+      - **TimeUnit** *(string) --* 
+
+        The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. 
+
+        
+
+      
+      - **Version** *(integer) --* 
+
+        64-bit attribute used for record updates. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, ``Version`` will still be updated . Default value is to 1.
+
+        
+
+      
+    
+    :type Records: list
+    :param Records: **[REQUIRED]** 
+
+      An array of records containing the unique dimension and measure attributes for each time series data point. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Record represents a time series data point being written into Timestream. Each record contains an array of dimensions. Dimensions represent the meta data attributes of a time series data point such as the instance name or availability zone of an EC2 instance. A record also contains the measure name which is the name of the measure being collected for example the CPU utilization of an EC2 instance. A record also contains the measure value and the value type which is the data type of the measure value. In addition, the record contains the timestamp when the measure was collected that the timestamp unit which represents the granularity of the timestamp. 
+
+        
+
+      
+        - **Dimensions** *(list) --* 
+
+          Contains the list of dimensions for time series data points.
+
+          
+
+        
+          - *(dict) --* 
+
+            Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. 
+
+            
+
+          
+            - **Name** *(string) --* **[REQUIRED]** 
+
+              Dimension represents the meta data attributes of the time series. For example, the name and availability zone of an EC2 instance or the name of the manufacturer of a wind turbine are dimensions. 
+
+               
+
+              For constraints on Dimension names, see `Naming Constraints <https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming>`__ .
+
+              
+
+            
+            - **Value** *(string) --* **[REQUIRED]** 
+
+              The value of the dimension.
+
+              
+
+            
+            - **DimensionValueType** *(string) --* 
+
+              The data type of the dimension for the time series data point.
+
+              
+
+            
+          
+      
+        - **MeasureName** *(string) --* 
+
+          Measure represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. 
+
+          
+
+        
+        - **MeasureValue** *(string) --* 
+
+          Contains the measure value for the time series data point. 
+
+          
+
+        
+        - **MeasureValueType** *(string) --* 
+
+          Contains the data type of the measure value for the time series data point. 
+
+          
+
+        
+        - **Time** *(string) --* 
+
+          Contains the time at which the measure value for the data point was collected. The time value plus the unit provides the time elapsed since the epoch. For example, if the time value is ``12345`` and the unit is ``ms`` , then ``12345 ms`` have elapsed since the epoch. 
+
+          
+
+        
+        - **TimeUnit** *(string) --* 
+
+          The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. 
+
+          
+
+        
+        - **Version** *(integer) --* 
+
+          64-bit attribute used for record updates. Write requests for duplicate data with a higher version number will update the existing measure value and version. In cases where the measure value is the same, ``Version`` will still be updated . Default value is to 1.
+
+          
+
+        
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.RejectedRecordsException`
+
+    
+    *     :py:class:`TimestreamWrite.Client.exceptions.InvalidEndpointException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

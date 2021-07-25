@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Using alarm actions in Amazon CloudWatch &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon CloudWatch examples" href="cw-examples.html" />
+    <link rel="next" title="Getting metrics from Amazon CloudWatch" href="cw-example-metrics.html" />
+    <link rel="prev" title="Creating alarms in Amazon CloudWatch" href="cw-example-creating-alarms.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-metrics.html" title="Getting metrics from Amazon CloudWatch"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-creating-alarms.html" title="Creating alarms in Amazon CloudWatch"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" accesskey="U">Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="cw-examples.html">Amazon CloudWatch examples</a></li>
+              
+              <li>Using alarm actions in Amazon CloudWatch</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="using-alarm-actions-in-amazon-cloudwatch">
+<span id="aws-boto3-cw-using-alarms"></span><h1>Using alarm actions in Amazon CloudWatch<a class="headerlink" href="#using-alarm-actions-in-amazon-cloudwatch" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to:</p>
+<ul class="simple">
+<li>Create a CloudWatch alarm and enable actions</li>
+<li>Disable a CloudWatch alarm action</li>
+</ul>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>Using alarm actions, you can create alarms that automatically stop, terminate, reboot, or recover
+your Amazon EC2 instances. You can use the stop or terminate actions when you no longer need an EC2
+instance to be running. You can use the reboot and recover actions to automatically reboot those instances.</p>
+<p>In this example, Python code is used to define an alarm action in CloudWatch that
+triggers the reboot of an Amazon EC2 instance. The code uses the AWS SDK for Python to manage
+Amazon EC2 instances using these methods of the CloudWatch client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm">put_metric_alarm</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.disable_alarm_actions">disable_alarm_actions</a>.</li>
+</ul>
+<p>For more information about CloudWatch alarm actions, see
+<a class="reference external" href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingAlarmActions.html">Create Alarms to Stop, Terminate, Reboot, or Recover an Instance</a>
+in the <em>Amazon CloudWatch User Guide</em>.</p>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</li>
+<li><p class="first">Create an IAM role whose policy grants permission to describe, reboot, stop, or terminate an Amazon
+EC2 instance. For more information about creating an IAM role, see
+<a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html">Creating a Role to Delegate Permissions to an AWS Service</a>
+in the <em>IAM User Guide</em>.</p>
+<p>Use the following role policy when creating the IAM role.</p>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;cloudwatch:Describe*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ec2:Describe*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ec2:RebootInstances&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ec2:StopInstances*&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ec2:TerminateInstances&quot;</span>
+         <span class="p">],</span>
+         <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;*&quot;</span>
+         <span class="p">]</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="create-and-enable-actions-on-an-alarm">
+<h2>Create and enable actions on an alarm<a class="headerlink" href="#create-and-enable-actions-on-an-alarm" title="Permalink to this headline">¶</a></h2>
+<p>Create or update an alarm and associate it with the specified metric. Optionally, this operation
+can associate one or more Amazon SNS resources with the alarm.</p>
+<p>When this operation creates an alarm, the alarm state is immediately set to <tt class="code docutils literal"><span class="pre">INSUFFICIENT_DATA</span></tt>.
+The alarm is evaluated and its state is set appropriately. Any actions associated with the state are
+then executed.</p>
+<p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites
+the previous configuration of the alarm.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Create an alarm and enable actions using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm">put_metric_alarm</a>.</li>
+</ul>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatch client</span>
+<span class="n">cloudwatch</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create alarm with actions enabled</span>
+<span class="n">cloudwatch</span><span class="o">.</span><span class="n">put_metric_alarm</span><span class="p">(</span>
+    <span class="n">AlarmName</span><span class="o">=</span><span class="s1">&#39;Web_Server_CPU_Utilization&#39;</span><span class="p">,</span>
+    <span class="n">ComparisonOperator</span><span class="o">=</span><span class="s1">&#39;GreaterThanThreshold&#39;</span><span class="p">,</span>
+    <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">MetricName</span><span class="o">=</span><span class="s1">&#39;CPUUtilization&#39;</span><span class="p">,</span>
+    <span class="n">Namespace</span><span class="o">=</span><span class="s1">&#39;AWS/EC2&#39;</span><span class="p">,</span>
+    <span class="n">Period</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">Statistic</span><span class="o">=</span><span class="s1">&#39;Average&#39;</span><span class="p">,</span>
+    <span class="n">Threshold</span><span class="o">=</span><span class="mf">70.0</span><span class="p">,</span>
+    <span class="n">ActionsEnabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">AlarmActions</span><span class="o">=</span><span class="p">[</span>
+      <span class="s1">&#39;arn:aws:swf:us-west-2:</span><span class="si">{CUSTOMER_ACCOUNT}</span><span class="s1">:action/actions/AWS_EC2.InstanceId.Reboot/1.0&#39;</span>
+    <span class="p">],</span>
+    <span class="n">AlarmDescription</span><span class="o">=</span><span class="s1">&#39;Alarm when server CPU exceeds 70%&#39;</span><span class="p">,</span>
+    <span class="n">Dimensions</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="s1">&#39;InstanceId&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="s1">&#39;INSTANCE_ID&#39;</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">Unit</span><span class="o">=</span><span class="s1">&#39;Seconds&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="disable-actions-on-an-alarm">
+<h2>Disable actions on an alarm<a class="headerlink" href="#disable-actions-on-an-alarm" title="Permalink to this headline">¶</a></h2>
+<p>Disable the actions for the specified alarms. When an alarm's actions are disabled, the alarm actions
+do not execute when the alarm state changes.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Disable metric alarm actions using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.disable_alarm_actions">disable_alarm_actions</a>.</li>
+</ul>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatch client</span>
+<span class="n">cloudwatch</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">)</span>
+
+<span class="c1"># Disable alarm</span>
+<span class="n">cloudwatch</span><span class="o">.</span><span class="n">disable_alarm_actions</span><span class="p">(</span>
+  <span class="n">AlarmNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Web_Server_CPU_Utilization&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="cw-example-creating-alarms.html" title="previous chapter (use the left arrow)">Creating alarms in Amazon CloudWatch</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="cw-example-metrics.html" title="next chapter (use the right arrow)">Getting metrics from Amazon CloudWatch</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-metrics.html" title="Getting metrics from Amazon CloudWatch"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-creating-alarms.html" title="Creating alarms in Amazon CloudWatch"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" >Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

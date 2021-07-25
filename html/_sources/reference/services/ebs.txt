@@ -1,0 +1,1206 @@
+
+
+***
+EBS
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: EBS.Client
+
+  A low-level client representing Amazon Elastic Block Store (EBS)
+  
+
+  You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create EBS snapshots, write data directly to your snapshots, read data on your snapshots, and identify the differences or changes between two snapshots. If you’re an independent software vendor (ISV) who offers backup services for Amazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on your EBS volumes through snapshots. This can be done without having to create new volumes from snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.
+
+   
+
+  You can create incremental snapshots directly from data on-premises into EBS volumes and the cloud to use for quick disaster recovery. With the ability to write and read snapshots, you can write your on-premises data to an EBS snapshot during a disaster. Then after recovery, you can restore it back to AWS or on-premises from the snapshot. You no longer need to build and maintain complex mechanisms to copy data to and from Amazon EBS.
+
+   
+
+  This API reference provides detailed information about the actions, data types, parameters, and errors of the EBS direct APIs. For more information about the elements that make up the EBS direct APIs, and examples of how to use them effectively, see `Accessing the Contents of an EBS Snapshot <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html>`__ in the *Amazon Elastic Compute Cloud User Guide* . For more information about the supported AWS Regions, endpoints, and service quotas for the EBS direct APIs, see `Amazon Elastic Block Store Endpoints and Quotas <https://docs.aws.amazon.com/general/latest/gr/ebs-service.html>`__ in the *AWS General Reference* .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ebs')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~EBS.Client.can_paginate`
+
+  
+  *   :py:meth:`~EBS.Client.complete_snapshot`
+
+  
+  *   :py:meth:`~EBS.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~EBS.Client.get_paginator`
+
+  
+  *   :py:meth:`~EBS.Client.get_snapshot_block`
+
+  
+  *   :py:meth:`~EBS.Client.get_waiter`
+
+  
+  *   :py:meth:`~EBS.Client.list_changed_blocks`
+
+  
+  *   :py:meth:`~EBS.Client.list_snapshot_blocks`
+
+  
+  *   :py:meth:`~EBS.Client.put_snapshot_block`
+
+  
+  *   :py:meth:`~EBS.Client.start_snapshot`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: complete_snapshot(**kwargs)
+
+    
+
+    Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to ``completed`` . You cannot write new blocks to a snapshot after it has been completed.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/CompleteSnapshot>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.complete_snapshot(
+          SnapshotId='string',
+          ChangedBlocksCount=123,
+          Checksum='string',
+          ChecksumAlgorithm='SHA256',
+          ChecksumAggregationMethod='LINEAR'
+      )
+    :type SnapshotId: string
+    :param SnapshotId: **[REQUIRED]** 
+
+      The ID of the snapshot.
+
+      
+
+    
+    :type ChangedBlocksCount: integer
+    :param ChangedBlocksCount: **[REQUIRED]** 
+
+      The number of blocks that were written to the snapshot.
+
+      
+
+    
+    :type Checksum: string
+    :param Checksum: 
+
+      An aggregated Base-64 SHA256 checksum based on the checksums of each written block.
+
+       
+
+      To generate the aggregated checksum using the linear aggregation method, arrange the checksums for each written block in ascending order of their block index, concatenate them to form a single string, and then generate the checksum on the entire string using the SHA256 algorithm.
+
+      
+
+    
+    :type ChecksumAlgorithm: string
+    :param ChecksumAlgorithm: 
+
+      The algorithm used to generate the checksum. Currently, the only supported algorithm is ``SHA256`` .
+
+      
+
+    
+    :type ChecksumAggregationMethod: string
+    :param ChecksumAggregationMethod: 
+
+      The aggregation method used to generate the checksum. Currently, the only supported aggregation method is ``LINEAR`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Status': 'completed'|'pending'|'error'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Status** *(string) --* 
+
+          The status of the snapshot.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_snapshot_block(**kwargs)
+
+    
+
+    Returns the data in a block in an Amazon Elastic Block Store snapshot.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/GetSnapshotBlock>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_snapshot_block(
+          SnapshotId='string',
+          BlockIndex=123,
+          BlockToken='string'
+      )
+    :type SnapshotId: string
+    :param SnapshotId: **[REQUIRED]** 
+
+      The ID of the snapshot containing the block from which to get data.
+
+      
+
+    
+    :type BlockIndex: integer
+    :param BlockIndex: **[REQUIRED]** 
+
+      The block index of the block from which to get data.
+
+       
+
+      Obtain the ``BlockIndex`` by running the ``ListChangedBlocks`` or ``ListSnapshotBlocks`` operations.
+
+      
+
+    
+    :type BlockToken: string
+    :param BlockToken: **[REQUIRED]** 
+
+      The block token of the block from which to get data.
+
+       
+
+      Obtain the ``BlockToken`` by running the ``ListChangedBlocks`` or ``ListSnapshotBlocks`` operations.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DataLength': 123,
+            'BlockData': StreamingBody(),
+            'Checksum': 'string',
+            'ChecksumAlgorithm': 'SHA256'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DataLength** *(integer) --* 
+
+          The size of the data in the block.
+
+          
+        
+
+        - **BlockData** (:class:`.StreamingBody`) -- 
+
+          The data content of the block.
+
+          
+        
+
+        - **Checksum** *(string) --* 
+
+          The checksum generated for the block, which is Base64 encoded.
+
+          
+        
+
+        - **ChecksumAlgorithm** *(string) --* 
+
+          The algorithm used to generate the checksum for the block, such as SHA256.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_changed_blocks(**kwargs)
+
+    
+
+    Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListChangedBlocks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_changed_blocks(
+          FirstSnapshotId='string',
+          SecondSnapshotId='string',
+          NextToken='string',
+          MaxResults=123,
+          StartingBlockIndex=123
+      )
+    :type FirstSnapshotId: string
+    :param FirstSnapshotId: 
+
+      The ID of the first snapshot to use for the comparison.
+
+       
+
+      .. warning::
+
+         
+
+        The ``FirstSnapshotID`` parameter must be specified with a ``SecondSnapshotId`` parameter; otherwise, an error occurs.
+
+         
+
+      
+
+    
+    :type SecondSnapshotId: string
+    :param SecondSnapshotId: **[REQUIRED]** 
+
+      The ID of the second snapshot to use for the comparison.
+
+       
+
+      .. warning::
+
+         
+
+        The ``SecondSnapshotId`` parameter must be specified with a ``FirstSnapshotID`` parameter; otherwise, an error occurs.
+
+         
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to request the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The number of results to return.
+
+      
+
+    
+    :type StartingBlockIndex: integer
+    :param StartingBlockIndex: 
+
+      The block index from which the comparison should start.
+
+       
+
+      The list in the response will start from this block index or the next valid block index in the snapshots.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ChangedBlocks': [
+                {
+                    'BlockIndex': 123,
+                    'FirstBlockToken': 'string',
+                    'SecondBlockToken': 'string'
+                },
+            ],
+            'ExpiryTime': datetime(2015, 1, 1),
+            'VolumeSize': 123,
+            'BlockSize': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ChangedBlocks** *(list) --* 
+
+          An array of objects containing information about the changed blocks.
+
+          
+          
+
+          - *(dict) --* 
+
+            A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.
+
+            
+            
+
+            - **BlockIndex** *(integer) --* 
+
+              The block index.
+
+              
+            
+
+            - **FirstBlockToken** *(string) --* 
+
+              The block token for the block index of the ``FirstSnapshotId`` specified in the ``ListChangedBlocks`` operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.
+
+              
+            
+
+            - **SecondBlockToken** *(string) --* 
+
+              The block token for the block index of the ``SecondSnapshotId`` specified in the ``ListChangedBlocks`` operation.
+
+              
+        
+      
+        
+
+        - **ExpiryTime** *(datetime) --* 
+
+          The time when the ``BlockToken`` expires.
+
+          
+        
+
+        - **VolumeSize** *(integer) --* 
+
+          The size of the volume in GB.
+
+          
+        
+
+        - **BlockSize** *(integer) --* 
+
+          The size of the block.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_snapshot_blocks(**kwargs)
+
+    
+
+    Returns information about the blocks in an Amazon Elastic Block Store snapshot.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListSnapshotBlocks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_snapshot_blocks(
+          SnapshotId='string',
+          NextToken='string',
+          MaxResults=123,
+          StartingBlockIndex=123
+      )
+    :type SnapshotId: string
+    :param SnapshotId: **[REQUIRED]** 
+
+      The ID of the snapshot from which to get block indexes and block tokens.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to request the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The number of results to return.
+
+      
+
+    
+    :type StartingBlockIndex: integer
+    :param StartingBlockIndex: 
+
+      The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Blocks': [
+                {
+                    'BlockIndex': 123,
+                    'BlockToken': 'string'
+                },
+            ],
+            'ExpiryTime': datetime(2015, 1, 1),
+            'VolumeSize': 123,
+            'BlockSize': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Blocks** *(list) --* 
+
+          An array of objects containing information about the blocks.
+
+          
+          
+
+          - *(dict) --* 
+
+            A block of data in an Amazon Elastic Block Store snapshot.
+
+            
+            
+
+            - **BlockIndex** *(integer) --* 
+
+              The block index.
+
+              
+            
+
+            - **BlockToken** *(string) --* 
+
+              The block token for the block index.
+
+              
+        
+      
+        
+
+        - **ExpiryTime** *(datetime) --* 
+
+          The time when the ``BlockToken`` expires.
+
+          
+        
+
+        - **VolumeSize** *(integer) --* 
+
+          The size of the volume in GB.
+
+          
+        
+
+        - **BlockSize** *(integer) --* 
+
+          The size of the block.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: put_snapshot_block(**kwargs)
+
+    
+
+    Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the ``pending`` state.
+
+     
+
+    Data written to a snapshot must be aligned with 512-byte sectors.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/PutSnapshotBlock>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_snapshot_block(
+          SnapshotId='string',
+          BlockIndex=123,
+          BlockData=b'bytes'|file,
+          DataLength=123,
+          Progress=123,
+          Checksum='string',
+          ChecksumAlgorithm='SHA256'
+      )
+    :type SnapshotId: string
+    :param SnapshotId: **[REQUIRED]** 
+
+      The ID of the snapshot.
+
+      
+
+    
+    :type BlockIndex: integer
+    :param BlockIndex: **[REQUIRED]** 
+
+      The block index of the block in which to write the data. A block index is a logical index in units of ``512`` KiB blocks. To identify the block index, divide the logical offset of the data in the logical volume by the block size (logical offset of data/``524288`` ). The logical offset of the data must be ``512`` KiB aligned.
+
+      
+
+    
+    :type BlockData: bytes or seekable file-like object
+    :param BlockData: **[REQUIRED]** 
+
+      The data to write to the block.
+
+       
+
+      The block data is not signed as part of the Signature Version 4 signing process. As a result, you must generate and provide a Base64-encoded SHA256 checksum for the block data using the **x-amz-Checksum** header. Also, you must specify the checksum algorithm using the **x-amz-Checksum-Algorithm** header. The checksum that you provide is part of the Signature Version 4 signing process. It is validated against a checksum generated by Amazon EBS to ensure the validity and authenticity of the data. If the checksums do not correspond, the request fails. For more information, see `Using checksums with the EBS direct APIs <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-checksums>`__ in the *Amazon Elastic Compute Cloud User Guide* .
+
+      
+
+    
+    :type DataLength: integer
+    :param DataLength: **[REQUIRED]** 
+
+      The size of the data to write to the block, in bytes. Currently, the only supported size is ``524288`` .
+
+       
+
+      Valid values: ``524288``  
+
+      
+
+    
+    :type Progress: integer
+    :param Progress: 
+
+      The progress of the write process, as a percentage.
+
+      
+
+    
+    :type Checksum: string
+    :param Checksum: **[REQUIRED]** 
+
+      A Base64-encoded SHA256 checksum of the data. Only SHA256 checksums are supported.
+
+      
+
+    
+    :type ChecksumAlgorithm: string
+    :param ChecksumAlgorithm: **[REQUIRED]** 
+
+      The algorithm used to generate the checksum. Currently, the only supported algorithm is ``SHA256`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Checksum': 'string',
+            'ChecksumAlgorithm': 'SHA256'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Checksum** *(string) --* 
+
+          The SHA256 checksum generated for the block data by Amazon EBS.
+
+          
+        
+
+        - **ChecksumAlgorithm** *(string) --* 
+
+          The algorithm used by Amazon EBS to generate the checksum.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_snapshot(**kwargs)
+
+    
+
+    Creates a new Amazon EBS snapshot. The new snapshot enters the ``pending`` state after the request completes. 
+
+     
+
+    After creating the snapshot, use `PutSnapshotBlock <https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html>`__ to write blocks of data to the snapshot.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/StartSnapshot>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_snapshot(
+          VolumeSize=123,
+          ParentSnapshotId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ],
+          Description='string',
+          ClientToken='string',
+          Encrypted=True|False,
+          KmsKeyArn='string',
+          Timeout=123
+      )
+    :type VolumeSize: integer
+    :param VolumeSize: **[REQUIRED]** 
+
+      The size of the volume, in GiB. The maximum size is ``16384`` GiB (16 TiB).
+
+      
+
+    
+    :type ParentSnapshotId: string
+    :param ParentSnapshotId: 
+
+      The ID of the parent snapshot. If there is no parent snapshot, or if you are creating the first snapshot for an on-premises volume, omit this parameter.
+
+       
+
+      If your account is enabled for encryption by default, you cannot use an unencrypted snapshot as a parent snapshot. You must first create an encrypted copy of the parent snapshot using `CopySnapshot <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html>`__ .
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the snapshot.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The key of the tag.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    :type Description: string
+    :param Description: 
+
+      A description for the snapshot.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully. The subsequent retries with the same client token return the result from the original successful request and they have no additional effect.
+
+       
+
+      If you do not specify a client token, one is automatically generated by the AWS SDK.
+
+       
+
+      For more information, see `Idempotency for StartSnapshot API <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html>`__ in the *Amazon Elastic Compute Cloud User Guide* .
+
+      This field is autopopulated if not provided.
+
+    
+    :type Encrypted: boolean
+    :param Encrypted: 
+
+      Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify ``true`` . To create an unencrypted snapshot, omit this parameter.
+
+       
+
+      If you specify a value for **ParentSnapshotId** , omit this parameter.
+
+       
+
+      If you specify ``true`` , the snapshot is encrypted using the CMK specified using the **KmsKeyArn** parameter. If no value is specified for **KmsKeyArn** , the default CMK for your account is used. If no default CMK has been specified for your account, the AWS managed CMK is used. To set a default CMK for your account, use `ModifyEbsDefaultKmsKeyId <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html>`__ .
+
+       
+
+      If your account is enabled for encryption by default, you cannot set this parameter to ``false`` . In this case, you can omit this parameter.
+
+       
+
+      For more information, see `Using encryption <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption>`__ in the *Amazon Elastic Compute Cloud User Guide* .
+
+      
+
+    
+    :type KmsKeyArn: string
+    :param KmsKeyArn: 
+
+      The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to be used to encrypt the snapshot. If you do not specify a CMK, the default AWS managed CMK is used.
+
+       
+
+      If you specify a **ParentSnapshotId** , omit this parameter; the snapshot will be encrypted using the same CMK that was used to encrypt the parent snapshot.
+
+       
+
+      If **Encrypted** is set to ``true`` , you must specify a CMK ARN. 
+
+      
+
+    
+    :type Timeout: integer
+    :param Timeout: 
+
+      The amount of time (in minutes) after which the snapshot is automatically cancelled if:
+
+       
+
+       
+      * No blocks are written to the snapshot. 
+       
+      * The snapshot is not completed after writing the last block of data. 
+       
+
+       
+
+      If no value is specified, the timeout defaults to ``60`` minutes.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'SnapshotId': 'string',
+            'OwnerId': 'string',
+            'Status': 'completed'|'pending'|'error',
+            'StartTime': datetime(2015, 1, 1),
+            'VolumeSize': 123,
+            'BlockSize': 123,
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'ParentSnapshotId': 'string',
+            'KmsKeyArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Description** *(string) --* 
+
+          The description of the snapshot.
+
+          
+        
+
+        - **SnapshotId** *(string) --* 
+
+          The ID of the snapshot.
+
+          
+        
+
+        - **OwnerId** *(string) --* 
+
+          The AWS account ID of the snapshot owner.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the snapshot.
+
+          
+        
+
+        - **StartTime** *(datetime) --* 
+
+          The timestamp when the snapshot was created.
+
+          
+        
+
+        - **VolumeSize** *(integer) --* 
+
+          The size of the volume, in GiB.
+
+          
+        
+
+        - **BlockSize** *(integer) --* 
+
+          The size of the blocks in the snapshot, in bytes.
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          The tags applied to the snapshot. You can specify up to 50 tags per snapshot. For more information, see `Tagging your Amazon EC2 resources <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html>`__ in the *Amazon Elastic Compute Cloud User Guide* .
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a tag.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key of the tag.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag.
+
+              
+        
+      
+        
+
+        - **ParentSnapshotId** *(string) --* 
+
+          The ID of the parent snapshot.
+
+          
+        
+
+        - **KmsKeyArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the snapshot.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EBS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.RequestThrottledException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ConcurrentLimitExceededException`
+
+    
+    *     :py:class:`EBS.Client.exceptions.ConflictException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

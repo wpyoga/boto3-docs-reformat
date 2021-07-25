@@ -1,0 +1,4460 @@
+
+
+***
+IVS
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: IVS.Client
+
+  A low-level client representing Amazon Interactive Video Service (IVS)
+  
+
+   **Introduction**  
+
+   
+
+  The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors.
+
+   
+
+  The API is an AWS regional service, currently in these regions: us-west-2, us-east-1, and eu-west-1.
+
+   
+
+   * **All API request parameters and URLs are case sensitive.** *  
+
+   
+
+  For a summary of notable documentation changes in each release, see `Document History <https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html>`__ .
+
+   
+
+   **Service Endpoints**  
+
+   
+
+  The following are the Amazon IVS service endpoints (all HTTPS): 
+
+   
+
+  Region name: US West (Oregon)
+
+   
+
+   
+  * Region: ``us-west-2``   
+   
+  * Endpoint: ``ivs.us-west-2.amazonaws.com``   
+   
+
+   
+
+  Region name: US East (Virginia)
+
+   
+
+   
+  * Region: ``us-east-1``   
+   
+  * Endpoint: ``ivs.us-east-1.amazonaws.com``   
+   
+
+   
+
+  Region name: EU West (Dublin)
+
+   
+
+   
+  * Region: ``eu-west-1``   
+   
+  * Endpoint: ``ivs.eu-west-1.amazonaws.com``   
+   
+
+   
+
+   **Allowed Header Values**  
+
+   
+
+   
+  * ``**Accept:** `` application/json 
+   
+  * ``**Accept-Encoding:** `` gzip, deflate 
+   
+  * ``**Content-Type:** `` application/json 
+   
+
+   
+
+   **Resources**  
+
+   
+
+  The following resources contain information about your IVS live stream (see `Getting Started with Amazon IVS <https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html>`__ ):
+
+   
+
+   
+  * Channel — Stores configuration data related to your live stream. You first create a channel and then use the channel’s stream key to start your live stream. See the Channel endpoints for more information.  
+   
+  * Stream key — An identifier assigned by Amazon IVS when you create a channel, which is then used to authorize streaming. See the StreamKey endpoints for more information. * **Treat the stream key like a secret, since it allows anyone to stream to the channel.** *   
+   
+  * Playback key pair — Video playback may be restricted using playback-authorization tokens, which use public-key encryption. A playback key pair is the public-private pair of keys used to sign and validate the playback-authorization token. See the PlaybackKeyPair endpoints for more information. 
+   
+  * Recording configuration — Stores configuration related to recording a live stream and where to store the recorded content. Multiple channels can reference the same recording configuration. See the Recording Configuration endpoints for more information. 
+   
+
+   
+
+   **Tagging**  
+
+   
+
+  A *tag* is a metadata label that you assign to an AWS resource. A tag comprises a *key* and a *value* , both set by you. For example, you might set a tag as ``topic:nature`` to label a particular video category. See `Tagging AWS Resources <https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html>`__ for more information, including restrictions that apply to tags.
+
+   
+
+  Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see `Access Tags <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html>`__ ). 
+
+   
+
+  The Amazon IVS API has these tag-related endpoints:  TagResource ,  UntagResource , and  ListTagsForResource . The following resources support tagging: Channels, Stream Keys, Playback Key Pairs, and Recording Configurations.
+
+   
+
+   **Authentication versus Authorization**  
+
+   
+
+  Note the differences between these concepts:
+
+   
+
+   
+  * *Authentication* is about verifying identity. You need to be authenticated to sign Amazon IVS API requests. 
+   
+  * *Authorization* is about granting permissions. You need to be authorized to view `Amazon IVS private channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ . (Private channels are channels that are enabled for "playback authorization.") 
+   
+
+   
+
+   **Authentication**  
+
+   
+
+  All Amazon IVS API requests must be authenticated with a signature. The AWS Command-Line Interface (CLI) and Amazon IVS Player SDKs take care of signing the underlying API calls for you. However, if your application calls the Amazon IVS API directly, it’s your responsibility to sign the requests.
+
+   
+
+  You generate a signature using valid AWS credentials that have permission to perform the requested action. For example, you must sign PutMetadata requests with a signature generated from an IAM user account that has the ``ivs:PutMetadata`` permission.
+
+   
+
+  For more information:
+
+   
+
+   
+  * Authentication and generating signatures — See `Authenticating Requests (AWS Signature Version 4) <https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html>`__ in the *AWS General Reference* . 
+   
+  * Managing Amazon IVS permissions — See `Identity and Access Management <https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html>`__ on the Security page of the *Amazon IVS User Guide* . 
+   
+
+   
+
+   **Channel Endpoints**  
+
+   
+
+   
+  *  CreateChannel — Creates a new channel and an associated stream key to start streaming. 
+   
+  *  GetChannel — Gets the channel configuration for the specified channel ARN (Amazon Resource Name). 
+   
+  *  BatchGetChannel — Performs  GetChannel on multiple ARNs simultaneously. 
+   
+  *  ListChannels — Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 Conflict Exception). 
+   
+  *  UpdateChannel — Updates a channel's configuration. This does not affect an ongoing stream of this channel. You must stop and restart the stream for the changes to take effect. 
+   
+  *  DeleteChannel — Deletes the specified channel. 
+   
+
+   
+
+   **StreamKey Endpoints**  
+
+   
+
+   
+  *  CreateStreamKey — Creates a stream key, used to initiate a stream, for the specified channel ARN. 
+   
+  *  GetStreamKey — Gets stream key information for the specified ARN. 
+   
+  *  BatchGetStreamKey — Performs  GetStreamKey on multiple ARNs simultaneously. 
+   
+  *  ListStreamKeys — Gets summary information about stream keys for the specified channel. 
+   
+  *  DeleteStreamKey — Deletes the stream key for the specified ARN, so it can no longer be used to stream. 
+   
+
+   
+
+   **Stream Endpoints**  
+
+   
+
+   
+  *  GetStream — Gets information about the active (live) stream on a specified channel. 
+   
+  *  ListStreams — Gets summary information about live streams in your account, in the AWS region where the API request is processed. 
+   
+  *  StopStream — Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with  DeleteStreamKey to prevent further streaming to a channel. 
+   
+  *  PutMetadata — Inserts metadata into the active stream of the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) 
+   
+
+   
+
+   **PlaybackKeyPair Endpoints**  
+
+   
+
+  For more information, see `Setting Up Private Channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ in the *Amazon IVS User Guide* .
+
+   
+
+   
+  *  ImportPlaybackKeyPair — Imports the public portion of a new key pair and returns its ``arn`` and ``fingerprint`` . The ``privateKey`` can then be used to generate viewer authorization tokens, to grant viewers access to private channels (channels enabled for playback authorization). 
+   
+  *  GetPlaybackKeyPair — Gets a specified playback authorization key pair and returns the ``arn`` and ``fingerprint`` . The ``privateKey`` held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels. 
+   
+  *  ListPlaybackKeyPairs — Gets summary information about playback key pairs. 
+   
+  *  DeletePlaybackKeyPair — Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s ``privateKey`` . 
+   
+
+   
+
+   **RecordingConfiguration Endpoints**  
+
+   
+
+   
+  *  CreateRecordingConfiguration — Creates a new recording configuration, used to enable recording to Amazon S3. 
+   
+  *  GetRecordingConfiguration — Gets the recording-configuration metadata for the specified ARN. 
+   
+  *  ListRecordingConfigurations — Gets summary information about all recording configurations in your account, in the AWS region where the API request is processed. 
+   
+  *  DeleteRecordingConfiguration — Deletes the recording configuration for the specified ARN. 
+   
+
+   
+
+   **AWS Tags Endpoints**  
+
+   
+
+   
+  *  TagResource — Adds or updates tags for the AWS resource with the specified ARN. 
+   
+  *  UntagResource — Removes tags from the resource with the specified ARN. 
+   
+  *  ListTagsForResource — Gets information about AWS tags for the specified ARN. 
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ivs')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~IVS.Client.batch_get_channel`
+
+  
+  *   :py:meth:`~IVS.Client.batch_get_stream_key`
+
+  
+  *   :py:meth:`~IVS.Client.can_paginate`
+
+  
+  *   :py:meth:`~IVS.Client.create_channel`
+
+  
+  *   :py:meth:`~IVS.Client.create_recording_configuration`
+
+  
+  *   :py:meth:`~IVS.Client.create_stream_key`
+
+  
+  *   :py:meth:`~IVS.Client.delete_channel`
+
+  
+  *   :py:meth:`~IVS.Client.delete_playback_key_pair`
+
+  
+  *   :py:meth:`~IVS.Client.delete_recording_configuration`
+
+  
+  *   :py:meth:`~IVS.Client.delete_stream_key`
+
+  
+  *   :py:meth:`~IVS.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~IVS.Client.get_channel`
+
+  
+  *   :py:meth:`~IVS.Client.get_paginator`
+
+  
+  *   :py:meth:`~IVS.Client.get_playback_key_pair`
+
+  
+  *   :py:meth:`~IVS.Client.get_recording_configuration`
+
+  
+  *   :py:meth:`~IVS.Client.get_stream`
+
+  
+  *   :py:meth:`~IVS.Client.get_stream_key`
+
+  
+  *   :py:meth:`~IVS.Client.get_waiter`
+
+  
+  *   :py:meth:`~IVS.Client.import_playback_key_pair`
+
+  
+  *   :py:meth:`~IVS.Client.list_channels`
+
+  
+  *   :py:meth:`~IVS.Client.list_playback_key_pairs`
+
+  
+  *   :py:meth:`~IVS.Client.list_recording_configurations`
+
+  
+  *   :py:meth:`~IVS.Client.list_stream_keys`
+
+  
+  *   :py:meth:`~IVS.Client.list_streams`
+
+  
+  *   :py:meth:`~IVS.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~IVS.Client.put_metadata`
+
+  
+  *   :py:meth:`~IVS.Client.stop_stream`
+
+  
+  *   :py:meth:`~IVS.Client.tag_resource`
+
+  
+  *   :py:meth:`~IVS.Client.untag_resource`
+
+  
+  *   :py:meth:`~IVS.Client.update_channel`
+
+  
+
+  .. py:method:: batch_get_channel(**kwargs)
+
+    
+
+    Performs  GetChannel on multiple ARNs simultaneously.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_get_channel(
+          arns=[
+              'string',
+          ]
+      )
+    :type arns: list
+    :param arns: **[REQUIRED]** 
+
+      Array of ARNs, one per channel.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channels': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'latencyMode': 'NORMAL'|'LOW',
+                    'type': 'BASIC'|'STANDARD',
+                    'recordingConfigurationArn': 'string',
+                    'ingestEndpoint': 'string',
+                    'playbackUrl': 'string',
+                    'authorized': True|False,
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'errors': [
+                {
+                    'arn': 'string',
+                    'code': 'string',
+                    'message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channels** *(list) --* 
+          
+
+          - *(dict) --* 
+
+            Object specifying a channel.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Channel ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Channel name.
+
+              
+            
+
+            - **latencyMode** *(string) --* 
+
+              Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+              
+            
+
+            - **type** *(string) --* 
+
+              Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.* Default: ``STANDARD`` . Valid values:
+
+               
+
+               
+              * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+               
+              * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+               
+
+              
+            
+
+            - **recordingConfigurationArn** *(string) --* 
+
+              Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+              
+            
+
+            - **ingestEndpoint** *(string) --* 
+
+              Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+
+              
+            
+
+            - **playbackUrl** *(string) --* 
+
+              Channel playback URL.
+
+              
+            
+
+            - **authorized** *(boolean) --* 
+
+              Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **errors** *(list) --* 
+
+          Each error object is related to a specific ARN in the request.
+
+          
+          
+
+          - *(dict) --* 
+
+            Error related to a specific channel, specified by its ARN.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Channel ARN.
+
+              
+            
+
+            - **code** *(string) --* 
+
+              Error code.
+
+              
+            
+
+            - **message** *(string) --* 
+
+              Error message, determined by the application.
+
+              
+        
+      
+    
+
+  .. py:method:: batch_get_stream_key(**kwargs)
+
+    
+
+    Performs  GetStreamKey on multiple ARNs simultaneously.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/BatchGetStreamKey>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_get_stream_key(
+          arns=[
+              'string',
+          ]
+      )
+    :type arns: list
+    :param arns: **[REQUIRED]** 
+
+      Array of ARNs, one per channel.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streamKeys': [
+                {
+                    'arn': 'string',
+                    'value': 'string',
+                    'channelArn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'errors': [
+                {
+                    'arn': 'string',
+                    'code': 'string',
+                    'message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streamKeys** *(list) --* 
+          
+
+          - *(dict) --* 
+
+            Object specifying a stream key.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Stream-key ARN.
+
+              
+            
+
+            - **value** *(string) --* 
+
+              Stream-key value.
+
+              
+            
+
+            - **channelArn** *(string) --* 
+
+              Channel ARN for the stream.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **errors** *(list) --* 
+          
+
+          - *(dict) --* 
+
+            Error related to a specific channel, specified by its ARN.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Channel ARN.
+
+              
+            
+
+            - **code** *(string) --* 
+
+              Error code.
+
+              
+            
+
+            - **message** *(string) --* 
+
+              Error message, determined by the application.
+
+              
+        
+      
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_channel(**kwargs)
+
+    
+
+    Creates a new channel and an associated stream key to start streaming.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_channel(
+          name='string',
+          latencyMode='NORMAL'|'LOW',
+          type='BASIC'|'STANDARD',
+          authorized=True|False,
+          recordingConfigurationArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type name: string
+    :param name: 
+
+      Channel name.
+
+      
+
+    
+    :type latencyMode: string
+    :param latencyMode: 
+
+      Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.) Default: ``LOW`` .
+
+      
+
+    
+    :type type: string
+    :param type: 
+
+      Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.* Default: ``STANDARD`` . Valid values:
+
+       
+
+       
+      * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+       
+      * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+       
+
+      
+
+    
+    :type authorized: boolean
+    :param authorized: 
+
+      Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+      
+
+    
+    :type recordingConfigurationArn: string
+    :param recordingConfigurationArn: 
+
+      Recording-configuration ARN. Default: "" (empty string, recording is disabled).
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channel': {
+                'arn': 'string',
+                'name': 'string',
+                'latencyMode': 'NORMAL'|'LOW',
+                'type': 'BASIC'|'STANDARD',
+                'recordingConfigurationArn': 'string',
+                'ingestEndpoint': 'string',
+                'playbackUrl': 'string',
+                'authorized': True|False,
+                'tags': {
+                    'string': 'string'
+                }
+            },
+            'streamKey': {
+                'arn': 'string',
+                'value': 'string',
+                'channelArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channel** *(dict) --* 
+
+          Object specifying a channel.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Channel ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            Channel name.
+
+            
+          
+
+          - **latencyMode** *(string) --* 
+
+            Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+            
+          
+
+          - **type** *(string) --* 
+
+            Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.* Default: ``STANDARD`` . Valid values:
+
+             
+
+             
+            * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+             
+            * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+             
+
+            
+          
+
+          - **recordingConfigurationArn** *(string) --* 
+
+            Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+            
+          
+
+          - **ingestEndpoint** *(string) --* 
+
+            Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+
+            
+          
+
+          - **playbackUrl** *(string) --* 
+
+            Channel playback URL.
+
+            
+          
+
+          - **authorized** *(boolean) --* 
+
+            Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+        
+
+        - **streamKey** *(dict) --* 
+
+          Object specifying a stream key.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Stream-key ARN.
+
+            
+          
+
+          - **value** *(string) --* 
+
+            Stream-key value.
+
+            
+          
+
+          - **channelArn** *(string) --* 
+
+            Channel ARN for the stream.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: create_recording_configuration(**kwargs)
+
+    
+
+    Creates a new recording configuration, used to enable recording to Amazon S3.
+
+     
+
+     **Known issue:** In the us-east-1 region, if you use the AWS CLI to create a recording configuration, it returns success even if the S3 bucket is in a different region. In this case, the ``state`` of the recording configuration is ``CREATE_FAILED`` (instead of ``ACTIVE`` ). (In other regions, the CLI correctly returns failure if the bucket is in a different region.)
+
+     
+
+     **Workaround:** Ensure that your S3 bucket is in the same region as the recording configuration. If you create a recording configuration in a different region as your S3 bucket, delete that recording configuration and create a new one with an S3 bucket from the correct region.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_recording_configuration(
+          name='string',
+          destinationConfiguration={
+              's3': {
+                  'bucketName': 'string'
+              }
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type name: string
+    :param name: 
+
+      An arbitrary string (a nickname) that helps the customer identify that resource. The value does not need to be unique.
+
+      
+
+    
+    :type destinationConfiguration: dict
+    :param destinationConfiguration: **[REQUIRED]** 
+
+      A complex type that contains a destination configuration for where recorded video will be stored.
+
+      
+
+    
+      - **s3** *(dict) --* 
+
+        An S3 destination configuration where recorded videos will be stored.
+
+        
+
+      
+        - **bucketName** *(string) --* **[REQUIRED]** 
+
+          Location (S3 bucket name) where recorded videos will be stored.
+
+          
+
+        
+      
+    
+    :type tags: dict
+    :param tags: 
+
+      Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'recordingConfiguration': {
+                'arn': 'string',
+                'name': 'string',
+                'destinationConfiguration': {
+                    's3': {
+                        'bucketName': 'string'
+                    }
+                },
+                'state': 'CREATING'|'CREATE_FAILED'|'ACTIVE',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **recordingConfiguration** *(dict) --* 
+
+          An object representing a configuration to record a channel stream.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Recording-configuration ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
+
+            
+          
+
+          - **destinationConfiguration** *(dict) --* 
+
+            A complex type that contains information about where recorded video will be stored.
+
+            
+            
+
+            - **s3** *(dict) --* 
+
+              An S3 destination configuration where recorded videos will be stored.
+
+              
+              
+
+              - **bucketName** *(string) --* 
+
+                Location (S3 bucket name) where recorded videos will be stored.
+
+                
+          
+        
+          
+
+          - **state** *(string) --* 
+
+            Indicates the current state of the recording configuration. When the state is ``ACTIVE`` , the configuration is ready for recording a channel stream.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: create_stream_key(**kwargs)
+
+    
+
+    Creates a stream key, used to initiate a stream, for the specified channel ARN.
+
+     
+
+    Note that  CreateChannel creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use  DeleteStreamKey and then CreateStreamKey.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateStreamKey>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_stream_key(
+          channelArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      ARN of the channel for which to create the stream key.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streamKey': {
+                'arn': 'string',
+                'value': 'string',
+                'channelArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streamKey** *(dict) --* 
+
+          Stream key used to authenticate an RTMPS stream for ingestion.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Stream-key ARN.
+
+            
+          
+
+          - **value** *(string) --* 
+
+            Stream-key value.
+
+            
+          
+
+          - **channelArn** *(string) --* 
+
+            Channel ARN for the stream.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: delete_channel(**kwargs)
+
+    
+
+    Deletes the specified channel and its associated stream keys.
+
+     
+
+    If you try to delete a live channel, you will get an error (409 ConflictException). To delete a channel that is live, call  StopStream , wait for the Amazon EventBridge "Stream End" event (to verify that the stream's state was changed from Live to Offline), then call DeleteChannel. (See `Using EventBridge with Amazon IVS <https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html>`__ .) 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_channel(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the channel to be deleted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: delete_playback_key_pair(**kwargs)
+
+    
+
+    Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s ``privateKey`` . For more information, see `Setting Up Private Channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ in the *Amazon IVS User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackKeyPair>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_playback_key_pair(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the key pair to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: delete_recording_configuration(**kwargs)
+
+    
+
+    Deletes the recording configuration for the specified ARN.
+
+     
+
+    If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use  UpdateChannel to set the ``recordingConfigurationArn`` field to an empty string, then use DeleteRecordingConfiguration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteRecordingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_recording_configuration(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the recording configuration to be deleted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: delete_stream_key(**kwargs)
+
+    
+
+    Deletes the stream key for the specified ARN, so it can no longer be used to stream.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteStreamKey>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_stream_key(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the stream key to be deleted.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_channel(**kwargs)
+
+    
+
+    Gets the channel configuration for the specified channel ARN. See also  BatchGetChannel .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_channel(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the channel for which the configuration is to be retrieved.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channel': {
+                'arn': 'string',
+                'name': 'string',
+                'latencyMode': 'NORMAL'|'LOW',
+                'type': 'BASIC'|'STANDARD',
+                'recordingConfigurationArn': 'string',
+                'ingestEndpoint': 'string',
+                'playbackUrl': 'string',
+                'authorized': True|False,
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channel** *(dict) --* 
+
+          Object specifying a channel.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Channel ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            Channel name.
+
+            
+          
+
+          - **latencyMode** *(string) --* 
+
+            Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+            
+          
+
+          - **type** *(string) --* 
+
+            Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.* Default: ``STANDARD`` . Valid values:
+
+             
+
+             
+            * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+             
+            * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+             
+
+            
+          
+
+          - **recordingConfigurationArn** *(string) --* 
+
+            Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+            
+          
+
+          - **ingestEndpoint** *(string) --* 
+
+            Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+
+            
+          
+
+          - **playbackUrl** *(string) --* 
+
+            Channel playback URL.
+
+            
+          
+
+          - **authorized** *(boolean) --* 
+
+            Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_playback_key_pair(**kwargs)
+
+    
+
+    Gets a specified playback authorization key pair and returns the ``arn`` and ``fingerprint`` . The ``privateKey`` held by the caller can be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see `Setting Up Private Channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ in the *Amazon IVS User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackKeyPair>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_playback_key_pair(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the key pair to be returned.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'keyPair': {
+                'arn': 'string',
+                'name': 'string',
+                'fingerprint': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **keyPair** *(dict) --* 
+
+          A key pair used to sign and validate a playback authorization token.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Key-pair ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+
+            
+          
+
+          - **fingerprint** *(string) --* 
+
+            Key-pair identifier.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_recording_configuration(**kwargs)
+
+    
+
+    Gets the recording configuration for the specified ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_recording_configuration(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the recording configuration to be retrieved.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'recordingConfiguration': {
+                'arn': 'string',
+                'name': 'string',
+                'destinationConfiguration': {
+                    's3': {
+                        'bucketName': 'string'
+                    }
+                },
+                'state': 'CREATING'|'CREATE_FAILED'|'ACTIVE',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **recordingConfiguration** *(dict) --* 
+
+          An object representing a configuration to record a channel stream.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Recording-configuration ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
+
+            
+          
+
+          - **destinationConfiguration** *(dict) --* 
+
+            A complex type that contains information about where recorded video will be stored.
+
+            
+            
+
+            - **s3** *(dict) --* 
+
+              An S3 destination configuration where recorded videos will be stored.
+
+              
+              
+
+              - **bucketName** *(string) --* 
+
+                Location (S3 bucket name) where recorded videos will be stored.
+
+                
+          
+        
+          
+
+          - **state** *(string) --* 
+
+            Indicates the current state of the recording configuration. When the state is ``ACTIVE`` , the configuration is ready for recording a channel stream.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_stream(**kwargs)
+
+    
+
+    Gets information about the active (live) stream on a specified channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStream>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_stream(
+          channelArn='string'
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      Channel ARN for stream to be accessed.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'stream': {
+                'channelArn': 'string',
+                'playbackUrl': 'string',
+                'startTime': datetime(2015, 1, 1),
+                'state': 'LIVE'|'OFFLINE',
+                'health': 'HEALTHY'|'STARVING'|'UNKNOWN',
+                'viewerCount': 123
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **stream** *(dict) --* 
+
+          Specifies a live video stream that has been ingested and distributed.
+
+          
+          
+
+          - **channelArn** *(string) --* 
+
+            Channel ARN for the stream.
+
+            
+          
+
+          - **playbackUrl** *(string) --* 
+
+            URL of the master playlist, required by the video player to play the HLS stream.
+
+            
+          
+
+          - **startTime** *(datetime) --* 
+
+            ISO-8601 formatted timestamp of the stream’s start.
+
+            
+          
+
+          - **state** *(string) --* 
+
+            The stream’s state.
+
+            
+          
+
+          - **health** *(string) --* 
+
+            The stream’s health.
+
+            
+          
+
+          - **viewerCount** *(integer) --* 
+
+            Number of current viewers of the stream. A value of -1 indicates that the request timed out; in this case, retry.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ChannelNotBroadcasting`
+
+    
+
+  .. py:method:: get_stream_key(**kwargs)
+
+    
+
+    Gets stream-key information for a specified ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamKey>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_stream_key(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN for the stream key to be retrieved.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streamKey': {
+                'arn': 'string',
+                'value': 'string',
+                'channelArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streamKey** *(dict) --* 
+
+          Object specifying a stream key.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Stream-key ARN.
+
+            
+          
+
+          - **value** *(string) --* 
+
+            Stream-key value.
+
+            
+          
+
+          - **channelArn** *(string) --* 
+
+            Channel ARN for the stream.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: import_playback_key_pair(**kwargs)
+
+    
+
+    Imports the public portion of a new key pair and returns its ``arn`` and ``fingerprint`` . The ``privateKey`` can then be used to generate viewer authorization tokens, to grant viewers access to private channels. For more information, see `Setting Up Private Channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ in the *Amazon IVS User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ImportPlaybackKeyPair>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.import_playback_key_pair(
+          publicKeyMaterial='string',
+          name='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type publicKeyMaterial: string
+    :param publicKeyMaterial: **[REQUIRED]** 
+
+      The public portion of a customer-generated key pair.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Any tags provided with the request are added to the playback key pair tags.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'keyPair': {
+                'arn': 'string',
+                'name': 'string',
+                'fingerprint': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **keyPair** *(dict) --* 
+
+          A key pair used to sign and validate a playback authorization token.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Key-pair ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+
+            
+          
+
+          - **fingerprint** *(string) --* 
+
+            Key-pair identifier.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+  .. py:method:: list_channels(**kwargs)
+
+    
+
+    Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified name or recording-configuration ARN. Filters are mutually exclusive and cannot be used together. If you try to use both filters, you will get an error (409 ConflictException).
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_channels(
+          filterByName='string',
+          filterByRecordingConfigurationArn='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type filterByName: string
+    :param filterByName: 
+
+      Filters the channel list to match the specified name.
+
+      
+
+    
+    :type filterByRecordingConfigurationArn: string
+    :param filterByRecordingConfigurationArn: 
+
+      Filters the channel list to match the specified recording-configuration ARN.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The first channel to retrieve. This is used for pagination; see the ``nextToken`` response field.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of channels to return. Default: 50.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channels': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'latencyMode': 'NORMAL'|'LOW',
+                    'authorized': True|False,
+                    'recordingConfigurationArn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channels** *(list) --* 
+
+          List of the matching channels.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a channel.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Channel ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Channel name.
+
+              
+            
+
+            - **latencyMode** *(string) --* 
+
+              Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+              
+            
+
+            - **authorized** *(boolean) --* 
+
+              Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+              
+            
+
+            - **recordingConfigurationArn** *(string) --* 
+
+              Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more channels than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: list_playback_key_pairs(**kwargs)
+
+    
+
+    Gets summary information about playback key pairs. For more information, see `Setting Up Private Channels <https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html>`__ in the *Amazon IVS User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_playback_key_pairs(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      Maximum number of key pairs to return.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The first key pair to retrieve. This is used for pagination; see the ``nextToken`` response field. Default: 50.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'keyPairs': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **keyPairs** *(list) --* 
+
+          List of key pairs.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a playback key pair.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Key-pair ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more key pairs than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_recording_configurations(**kwargs)
+
+    
+
+    Gets summary information about all recording configurations in your account, in the AWS region where the API request is processed.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_recording_configurations(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The first recording configuration to retrieve. This is used for pagination; see the ``nextToken`` response field.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of recording configurations to return. Default: 50. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'recordingConfigurations': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'destinationConfiguration': {
+                        's3': {
+                            'bucketName': 'string'
+                        }
+                    },
+                    'state': 'CREATING'|'CREATE_FAILED'|'ACTIVE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **recordingConfigurations** *(list) --* 
+
+          List of the matching recording configurations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a RecordingConfiguration.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Recording-configuration ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
+
+              
+            
+
+            - **destinationConfiguration** *(dict) --* 
+
+              A complex type that contains information about where recorded video will be stored.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                An S3 destination configuration where recorded videos will be stored.
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Location (S3 bucket name) where recorded videos will be stored.
+
+                  
+            
+          
+            
+
+            - **state** *(string) --* 
+
+              Indicates the current state of the recording configuration. When the state is ``ACTIVE`` , the configuration is ready for recording a channel stream.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more recording configurations than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_stream_keys(**kwargs)
+
+    
+
+    Gets summary information about stream keys for the specified channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeys>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_stream_keys(
+          channelArn='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      Channel ARN used to filter the list.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The first stream key to retrieve. This is used for pagination; see the ``nextToken`` response field.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of streamKeys to return. Default: 50.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streamKeys': [
+                {
+                    'arn': 'string',
+                    'channelArn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streamKeys** *(list) --* 
+
+          List of stream keys.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a stream key.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Stream-key ARN.
+
+              
+            
+
+            - **channelArn** *(string) --* 
+
+              Channel ARN for the stream.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more stream keys than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_streams(**kwargs)
+
+    
+
+    Gets summary information about live streams in your account, in the AWS region where the API request is processed.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreams>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_streams(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The first stream to retrieve. This is used for pagination; see the ``nextToken`` response field.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of streams to return. Default: 50.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streams': [
+                {
+                    'channelArn': 'string',
+                    'state': 'LIVE'|'OFFLINE',
+                    'health': 'HEALTHY'|'STARVING'|'UNKNOWN',
+                    'viewerCount': 123,
+                    'startTime': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streams** *(list) --* 
+
+          List of streams.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a stream.
+
+            
+            
+
+            - **channelArn** *(string) --* 
+
+              Channel ARN for the stream.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The stream’s state.
+
+              
+            
+
+            - **health** *(string) --* 
+
+              The stream’s health.
+
+              
+            
+
+            - **viewerCount** *(integer) --* 
+
+              Number of current viewers of the stream. A value of -1 indicates that the request timed out; in this case, retry.
+
+              
+            
+
+            - **startTime** *(datetime) --* 
+
+              ISO-8601 formatted timestamp of the stream’s start.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more streams than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Gets information about AWS tags for the specified ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the resource to be retrieved.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The first tag to retrieve. This is used for pagination; see the ``nextToken`` response field.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of tags to return. Default: 50.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            },
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **nextToken** *(string) --* 
+
+          If there are more tags than ``maxResults`` , use ``nextToken`` in the request to get the next set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: put_metadata(**kwargs)
+
+    
+
+    Inserts metadata into the active stream of the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) Also see `Embedding Metadata within a Video Stream <https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html>`__ in the *Amazon IVS User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PutMetadata>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_metadata(
+          channelArn='string',
+          metadata='string'
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      ARN of the channel into which metadata is inserted. This channel must have an active stream.
+
+      
+
+    
+    :type metadata: string
+    :param metadata: **[REQUIRED]** 
+
+      Metadata to insert into the stream. Maximum: 1 KB per request.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ChannelNotBroadcasting`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: stop_stream(**kwargs)
+
+    
+
+    Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with  DeleteStreamKey to prevent further streaming to a channel.
+
+     
+
+    .. note::
+
+       
+
+      Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the ``streamKey`` attached to the channel.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/StopStream>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_stream(
+          channelArn='string'
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      ARN of the channel for which the stream is to be stopped.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ChannelNotBroadcasting`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.StreamUnavailable`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds or updates tags for the AWS resource with the specified ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      ARN of the resource for which tags are to be added or updated.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      Array of tags to be added or updated.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from the resource with the specified ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      ARN of the resource for which tags are to be removed.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      Array of tags to be removed.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_channel(**kwargs)
+
+    
+
+    Updates a channel's configuration. This does not affect an ongoing stream of this channel. You must stop and restart the stream for the changes to take effect.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_channel(
+          arn='string',
+          name='string',
+          latencyMode='NORMAL'|'LOW',
+          type='BASIC'|'STANDARD',
+          authorized=True|False,
+          recordingConfigurationArn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      ARN of the channel to be updated.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      Channel name.
+
+      
+
+    
+    :type latencyMode: string
+    :param latencyMode: 
+
+      Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+      
+
+    
+    :type type: string
+    :param type: 
+
+      Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately* . Valid values:
+
+       
+
+       
+      * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+       
+      * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+       
+
+      
+
+    
+    :type authorized: boolean
+    :param authorized: 
+
+      Whether the channel is private (enabled for playback authorization).
+
+      
+
+    
+    :type recordingConfigurationArn: string
+    :param recordingConfigurationArn: 
+
+      Recording-configuration ARN. If this is set to an empty string, recording is disabled. A value other than an empty string indicates that recording is enabled
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channel': {
+                'arn': 'string',
+                'name': 'string',
+                'latencyMode': 'NORMAL'|'LOW',
+                'type': 'BASIC'|'STANDARD',
+                'recordingConfigurationArn': 'string',
+                'ingestEndpoint': 'string',
+                'playbackUrl': 'string',
+                'authorized': True|False,
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channel** *(dict) --* 
+
+          Object specifying a channel.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            Channel ARN.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            Channel name.
+
+            
+          
+
+          - **latencyMode** *(string) --* 
+
+            Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+            
+          
+
+          - **type** *(string) --* 
+
+            Channel type, which determines the allowable resolution and bitrate. *If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.* Default: ``STANDARD`` . Valid values:
+
+             
+
+             
+            * ``STANDARD`` : Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps. 
+             
+            * ``BASIC`` : Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps. 
+             
+
+            
+          
+
+          - **recordingConfigurationArn** *(string) --* 
+
+            Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+            
+          
+
+          - **ingestEndpoint** *(string) --* 
+
+            Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+
+            
+          
+
+          - **playbackUrl** *(string) --* 
+
+            Channel playback URL.
+
+            
+          
+
+          - **authorized** *(boolean) --* 
+
+            Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IVS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IVS.Client.exceptions.PendingVerification`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`IVS.Paginator.ListChannels`
+
+
+* :py:class:`IVS.Paginator.ListPlaybackKeyPairs`
+
+
+* :py:class:`IVS.Paginator.ListRecordingConfigurations`
+
+
+* :py:class:`IVS.Paginator.ListStreamKeys`
+
+
+* :py:class:`IVS.Paginator.ListStreams`
+
+
+
+.. py:class:: IVS.Paginator.ListChannels
+
+  ::
+
+    
+    paginator = client.get_paginator('list_channels')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IVS.Client.list_channels`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          filterByName='string',
+          filterByRecordingConfigurationArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type filterByName: string
+    :param filterByName: 
+
+      Filters the channel list to match the specified name.
+
+      
+
+    
+    :type filterByRecordingConfigurationArn: string
+    :param filterByRecordingConfigurationArn: 
+
+      Filters the channel list to match the specified recording-configuration ARN.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'channels': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'latencyMode': 'NORMAL'|'LOW',
+                    'authorized': True|False,
+                    'recordingConfigurationArn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **channels** *(list) --* 
+
+          List of the matching channels.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a channel.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Channel ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Channel name.
+
+              
+            
+
+            - **latencyMode** *(string) --* 
+
+              Channel latency mode. Use ``NORMAL`` to broadcast and deliver live video up to Full HD. Use ``LOW`` for near-real-time interaction with viewers. Default: ``LOW`` . (Note: In the Amazon IVS console, ``LOW`` and ``NORMAL`` correspond to Ultra-low and Standard, respectively.)
+
+              
+            
+
+            - **authorized** *(boolean) --* 
+
+              Whether the channel is private (enabled for playback authorization). Default: ``false`` .
+
+              
+            
+
+            - **recordingConfigurationArn** *(string) --* 
+
+              Recording-configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (empty string, recording is disabled).
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: IVS.Paginator.ListPlaybackKeyPairs
+
+  ::
+
+    
+    paginator = client.get_paginator('list_playback_key_pairs')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IVS.Client.list_playback_key_pairs`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackKeyPairs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'keyPairs': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **keyPairs** *(list) --* 
+
+          List of key pairs.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a playback key pair.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Key-pair ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: IVS.Paginator.ListRecordingConfigurations
+
+  ::
+
+    
+    paginator = client.get_paginator('list_recording_configurations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IVS.Client.list_recording_configurations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListRecordingConfigurations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'recordingConfigurations': [
+                {
+                    'arn': 'string',
+                    'name': 'string',
+                    'destinationConfiguration': {
+                        's3': {
+                            'bucketName': 'string'
+                        }
+                    },
+                    'state': 'CREATING'|'CREATE_FAILED'|'ACTIVE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **recordingConfigurations** *(list) --* 
+
+          List of the matching recording configurations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a RecordingConfiguration.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Recording-configuration ARN.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              An arbitrary string (a nickname) assigned to a recording configuration that helps the customer identify that resource. The value does not need to be unique.
+
+              
+            
+
+            - **destinationConfiguration** *(dict) --* 
+
+              A complex type that contains information about where recorded video will be stored.
+
+              
+              
+
+              - **s3** *(dict) --* 
+
+                An S3 destination configuration where recorded videos will be stored.
+
+                
+                
+
+                - **bucketName** *(string) --* 
+
+                  Location (S3 bucket name) where recorded videos will be stored.
+
+                  
+            
+          
+            
+
+            - **state** *(string) --* 
+
+              Indicates the current state of the recording configuration. When the state is ``ACTIVE`` , the configuration is ready for recording a channel stream.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: IVS.Paginator.ListStreamKeys
+
+  ::
+
+    
+    paginator = client.get_paginator('list_stream_keys')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IVS.Client.list_stream_keys`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamKeys>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          channelArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type channelArn: string
+    :param channelArn: **[REQUIRED]** 
+
+      Channel ARN used to filter the list.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streamKeys': [
+                {
+                    'arn': 'string',
+                    'channelArn': 'string',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streamKeys** *(list) --* 
+
+          List of stream keys.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a stream key.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              Stream-key ARN.
+
+              
+            
+
+            - **channelArn** *(string) --* 
+
+              Channel ARN for the stream.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Array of 1-50 maps, each of the form ``string:string (key:value)`` .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: IVS.Paginator.ListStreams
+
+  ::
+
+    
+    paginator = client.get_paginator('list_streams')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IVS.Client.list_streams`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreams>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'streams': [
+                {
+                    'channelArn': 'string',
+                    'state': 'LIVE'|'OFFLINE',
+                    'health': 'HEALTHY'|'STARVING'|'UNKNOWN',
+                    'viewerCount': 123,
+                    'startTime': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **streams** *(list) --* 
+
+          List of streams.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about a stream.
+
+            
+            
+
+            - **channelArn** *(string) --* 
+
+              Channel ARN for the stream.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The stream’s state.
+
+              
+            
+
+            - **health** *(string) --* 
+
+              The stream’s health.
+
+              
+            
+
+            - **viewerCount** *(integer) --* 
+
+              Number of current viewers of the stream. A value of -1 indicates that the request timed out; in this case, retry.
+
+              
+            
+
+            - **startTime** *(datetime) --* 
+
+              ISO-8601 formatted timestamp of the stream’s start.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

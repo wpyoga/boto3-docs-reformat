@@ -1,0 +1,3171 @@
+
+
+*********
+Translate
+*********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Translate.Client
+
+  A low-level client representing Amazon Translate
+  
+
+  Provides translation between one source language and another of the same set of languages.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('translate')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Translate.Client.can_paginate`
+
+  
+  *   :py:meth:`~Translate.Client.create_parallel_data`
+
+  
+  *   :py:meth:`~Translate.Client.delete_parallel_data`
+
+  
+  *   :py:meth:`~Translate.Client.delete_terminology`
+
+  
+  *   :py:meth:`~Translate.Client.describe_text_translation_job`
+
+  
+  *   :py:meth:`~Translate.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Translate.Client.get_paginator`
+
+  
+  *   :py:meth:`~Translate.Client.get_parallel_data`
+
+  
+  *   :py:meth:`~Translate.Client.get_terminology`
+
+  
+  *   :py:meth:`~Translate.Client.get_waiter`
+
+  
+  *   :py:meth:`~Translate.Client.import_terminology`
+
+  
+  *   :py:meth:`~Translate.Client.list_parallel_data`
+
+  
+  *   :py:meth:`~Translate.Client.list_terminologies`
+
+  
+  *   :py:meth:`~Translate.Client.list_text_translation_jobs`
+
+  
+  *   :py:meth:`~Translate.Client.start_text_translation_job`
+
+  
+  *   :py:meth:`~Translate.Client.stop_text_translation_job`
+
+  
+  *   :py:meth:`~Translate.Client.translate_text`
+
+  
+  *   :py:meth:`~Translate.Client.update_parallel_data`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_parallel_data(**kwargs)
+
+    
+
+    Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/CreateParallelData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_parallel_data(
+          Name='string',
+          Description='string',
+          ParallelDataConfig={
+              'S3Uri': 'string',
+              'Format': 'TSV'|'CSV'|'TMX'
+          },
+          EncryptionKey={
+              'Type': 'KMS',
+              'Id': 'string'
+          },
+          ClientToken='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A custom description for the parallel data resource in Amazon Translate.
+
+      
+
+    
+    :type ParallelDataConfig: dict
+    :param ParallelDataConfig: **[REQUIRED]** 
+
+      Specifies the format and S3 location of the parallel data input file.
+
+      
+
+    
+      - **S3Uri** *(string) --* **[REQUIRED]** 
+
+        The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+
+        
+
+      
+      - **Format** *(string) --* **[REQUIRED]** 
+
+        The format of the parallel data input file.
+
+        
+
+      
+    
+    :type EncryptionKey: dict
+    :param EncryptionKey: 
+
+      The encryption key used to encrypt this object.
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+        
+
+      
+      - **Id** *(string) --* **[REQUIRED]** 
+
+        The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+        
+
+      
+    
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Name': 'string',
+            'Status': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Name** *(string) --* 
+
+          The custom name that you assigned to the parallel data resource.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the parallel data resource. When the resource is ready for you to use, the status is ``ACTIVE`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_parallel_data(**kwargs)
+
+    
+
+    Deletes a parallel data resource in Amazon Translate.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteParallelData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_parallel_data(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the parallel data resource that is being deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Name': 'string',
+            'Status': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Name** *(string) --* 
+
+          The name of the parallel data resource that is being deleted.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the parallel data deletion.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ConcurrentModificationException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_terminology(**kwargs)
+
+    
+
+    A synchronous action that deletes a custom terminology.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminology>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_terminology(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the custom terminology being deleted. 
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_text_translation_job(**kwargs)
+
+    
+
+    Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_text_translation_job(
+          JobId='string'
+      )
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The identifier that Amazon Translate generated for the job. The  StartTextTranslationJob operation returns this identifier in its response.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TextTranslationJobProperties': {
+                'JobId': 'string',
+                'JobName': 'string',
+                'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'COMPLETED_WITH_ERROR'|'FAILED'|'STOP_REQUESTED'|'STOPPED',
+                'JobDetails': {
+                    'TranslatedDocumentsCount': 123,
+                    'DocumentsWithErrorsCount': 123,
+                    'InputDocumentsCount': 123
+                },
+                'SourceLanguageCode': 'string',
+                'TargetLanguageCodes': [
+                    'string',
+                ],
+                'TerminologyNames': [
+                    'string',
+                ],
+                'ParallelDataNames': [
+                    'string',
+                ],
+                'Message': 'string',
+                'SubmittedTime': datetime(2015, 1, 1),
+                'EndTime': datetime(2015, 1, 1),
+                'InputDataConfig': {
+                    'S3Uri': 'string',
+                    'ContentType': 'string'
+                },
+                'OutputDataConfig': {
+                    'S3Uri': 'string'
+                },
+                'DataAccessRoleArn': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TextTranslationJobProperties** *(dict) --* 
+
+          An object that contains the properties associated with an asynchronous batch translation job.
+
+          
+          
+
+          - **JobId** *(string) --* 
+
+            The ID of the translation job.
+
+            
+          
+
+          - **JobName** *(string) --* 
+
+            The user-defined name of the translation job.
+
+            
+          
+
+          - **JobStatus** *(string) --* 
+
+            The status of the translation job.
+
+            
+          
+
+          - **JobDetails** *(dict) --* 
+
+            The number of documents successfully and unsuccessfully processed during the translation job.
+
+            
+            
+
+            - **TranslatedDocumentsCount** *(integer) --* 
+
+              The number of documents successfully processed during a translation job.
+
+              
+            
+
+            - **DocumentsWithErrorsCount** *(integer) --* 
+
+              The number of documents that could not be processed during a translation job.
+
+              
+            
+
+            - **InputDocumentsCount** *(integer) --* 
+
+              The number of documents used as input in a translation job.
+
+              
+        
+          
+
+          - **SourceLanguageCode** *(string) --* 
+
+            The language code of the language of the source text. The language must be a language supported by Amazon Translate.
+
+            
+          
+
+          - **TargetLanguageCodes** *(list) --* 
+
+            The language code of the language of the target text. The language must be a language supported by Amazon Translate.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **TerminologyNames** *(list) --* 
+
+            A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per  StartTextTranslationJob request at this time.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **ParallelDataNames** *(list) --* 
+
+            A list containing the names of the parallel data resources applied to the translation job.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **Message** *(string) --* 
+
+            An explanation of any errors that may have occured during the translation job.
+
+            
+          
+
+          - **SubmittedTime** *(datetime) --* 
+
+            The time at which the translation job was submitted.
+
+            
+          
+
+          - **EndTime** *(datetime) --* 
+
+            The time at which the translation job ended.
+
+            
+          
+
+          - **InputDataConfig** *(dict) --* 
+
+            The input configuration properties that were specified when the job was requested.
+
+            
+            
+
+            - **S3Uri** *(string) --* 
+
+              The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
+
+              
+            
+
+            - **ContentType** *(string) --* 
+
+              Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:
+
+               
+
+               
+              * ``text/html`` : The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the ``html`` element in each file. 
+               
+              * ``text/plain`` : The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input. 
+               
+              * ``application/vnd.openxmlformats-officedocument.wordprocessingml.document`` : The input data consists of one or more Word documents (.docx). 
+               
+              * ``application/vnd.openxmlformats-officedocument.presentationml.presentation`` : The input data consists of one or more PowerPoint Presentation files (.pptx). 
+               
+              * ``application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`` : The input data consists of one or more Excel Workbook files (.xlsx). 
+               
+
+               
+
+              .. warning::
+
+                 
+
+                If you structure your input data as HTML, ensure that you set this parameter to ``text/html`` . By doing so, you cut costs by limiting the translation to the contents of the ``html`` element in each file. Otherwise, if you set this parameter to ``text/plain`` , your costs will cover the translation of every character.
+
+                 
+
+              
+        
+          
+
+          - **OutputDataConfig** *(dict) --* 
+
+            The output configuration properties that were specified when the job was requested.
+
+            
+            
+
+            - **S3Uri** *(string) --* 
+
+              The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
+
+              
+        
+          
+
+          - **DataAccessRoleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_parallel_data(**kwargs)
+
+    
+
+    Provides information about a parallel data resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetParallelData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_parallel_data(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the parallel data resource that is being retrieved.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ParallelDataProperties': {
+                'Name': 'string',
+                'Arn': 'string',
+                'Description': 'string',
+                'Status': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+                'SourceLanguageCode': 'string',
+                'TargetLanguageCodes': [
+                    'string',
+                ],
+                'ParallelDataConfig': {
+                    'S3Uri': 'string',
+                    'Format': 'TSV'|'CSV'|'TMX'
+                },
+                'Message': 'string',
+                'ImportedDataSize': 123,
+                'ImportedRecordCount': 123,
+                'FailedRecordCount': 123,
+                'SkippedRecordCount': 123,
+                'EncryptionKey': {
+                    'Type': 'KMS',
+                    'Id': 'string'
+                },
+                'CreatedAt': datetime(2015, 1, 1),
+                'LastUpdatedAt': datetime(2015, 1, 1),
+                'LatestUpdateAttemptStatus': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+                'LatestUpdateAttemptAt': datetime(2015, 1, 1)
+            },
+            'DataLocation': {
+                'RepositoryType': 'string',
+                'Location': 'string'
+            },
+            'AuxiliaryDataLocation': {
+                'RepositoryType': 'string',
+                'Location': 'string'
+            },
+            'LatestUpdateAttemptAuxiliaryDataLocation': {
+                'RepositoryType': 'string',
+                'Location': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ParallelDataProperties** *(dict) --* 
+
+          The properties of the parallel data resource that is being retrieved.
+
+          
+          
+
+          - **Name** *(string) --* 
+
+            The custom name assigned to the parallel data resource.
+
+            
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the parallel data resource.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description assigned to the parallel data resource.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of the parallel data resource. When the parallel data is ready for you to use, the status is ``ACTIVE`` .
+
+            
+          
+
+          - **SourceLanguageCode** *(string) --* 
+
+            The source language of the translations in the parallel data file.
+
+            
+          
+
+          - **TargetLanguageCodes** *(list) --* 
+
+            The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **ParallelDataConfig** *(dict) --* 
+
+            Specifies the format and S3 location of the parallel data input file.
+
+            
+            
+
+            - **S3Uri** *(string) --* 
+
+              The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+
+              
+            
+
+            - **Format** *(string) --* 
+
+              The format of the parallel data input file.
+
+              
+        
+          
+
+          - **Message** *(string) --* 
+
+            Additional information from Amazon Translate about the parallel data resource. 
+
+            
+          
+
+          - **ImportedDataSize** *(integer) --* 
+
+            The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.
+
+            
+          
+
+          - **ImportedRecordCount** *(integer) --* 
+
+            The number of records successfully imported from the parallel data input file.
+
+            
+          
+
+          - **FailedRecordCount** *(integer) --* 
+
+            The number of records unsuccessfully imported from the parallel data input file.
+
+            
+          
+
+          - **SkippedRecordCount** *(integer) --* 
+
+            The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.
+
+            
+          
+
+          - **EncryptionKey** *(dict) --* 
+
+            The encryption key used to encrypt this object.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+              
+        
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The time at which the parallel data resource was created.
+
+            
+          
+
+          - **LastUpdatedAt** *(datetime) --* 
+
+            The time at which the parallel data resource was last updated.
+
+            
+          
+
+          - **LatestUpdateAttemptStatus** *(string) --* 
+
+            The status of the most recent update attempt for the parallel data resource.
+
+            
+          
+
+          - **LatestUpdateAttemptAt** *(datetime) --* 
+
+            The time that the most recent update was attempted.
+
+            
+      
+        
+
+        - **DataLocation** *(dict) --* 
+
+          The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+
+          
+          
+
+          - **RepositoryType** *(string) --* 
+
+            Describes the repository that contains the parallel data input file.
+
+            
+          
+
+          - **Location** *(string) --* 
+
+            The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+
+            
+      
+        
+
+        - **AuxiliaryDataLocation** *(dict) --* 
+
+          The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+
+          
+          
+
+          - **RepositoryType** *(string) --* 
+
+            Describes the repository that contains the parallel data input file.
+
+            
+          
+
+          - **Location** *(string) --* 
+
+            The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+
+            
+      
+        
+
+        - **LatestUpdateAttemptAuxiliaryDataLocation** *(dict) --* 
+
+          The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+
+          
+          
+
+          - **RepositoryType** *(string) --* 
+
+            Describes the repository that contains the parallel data input file.
+
+            
+          
+
+          - **Location** *(string) --* 
+
+            The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_terminology(**kwargs)
+
+    
+
+    Retrieves a custom terminology.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminology>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_terminology(
+          Name='string',
+          TerminologyDataFormat='CSV'|'TMX'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the custom terminology being retrieved.
+
+      
+
+    
+    :type TerminologyDataFormat: string
+    :param TerminologyDataFormat: **[REQUIRED]** 
+
+      The data format of the custom terminology being retrieved, either CSV or TMX.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TerminologyProperties': {
+                'Name': 'string',
+                'Description': 'string',
+                'Arn': 'string',
+                'SourceLanguageCode': 'string',
+                'TargetLanguageCodes': [
+                    'string',
+                ],
+                'EncryptionKey': {
+                    'Type': 'KMS',
+                    'Id': 'string'
+                },
+                'SizeBytes': 123,
+                'TermCount': 123,
+                'CreatedAt': datetime(2015, 1, 1),
+                'LastUpdatedAt': datetime(2015, 1, 1)
+            },
+            'TerminologyDataLocation': {
+                'RepositoryType': 'string',
+                'Location': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TerminologyProperties** *(dict) --* 
+
+          The properties of the custom terminology being retrieved.
+
+          
+          
+
+          - **Name** *(string) --* 
+
+            The name of the custom terminology.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the custom terminology properties.
+
+            
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the custom terminology. 
+
+            
+          
+
+          - **SourceLanguageCode** *(string) --* 
+
+            The language code for the source text of the translation request for which the custom terminology is being used.
+
+            
+          
+
+          - **TargetLanguageCodes** *(list) --* 
+
+            The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **EncryptionKey** *(dict) --* 
+
+            The encryption key for the custom terminology.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+              
+        
+          
+
+          - **SizeBytes** *(integer) --* 
+
+            The size of the file used when importing a custom terminology.
+
+            
+          
+
+          - **TermCount** *(integer) --* 
+
+            The number of terms included in the custom terminology.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The time at which the custom terminology was created, based on the timestamp.
+
+            
+          
+
+          - **LastUpdatedAt** *(datetime) --* 
+
+            The time at which the custom terminology was last update, based on the timestamp.
+
+            
+      
+        
+
+        - **TerminologyDataLocation** *(dict) --* 
+
+          The data location of the custom terminology being retrieved. The custom terminology file is returned in a presigned url that has a 30 minute expiration.
+
+          
+          
+
+          - **RepositoryType** *(string) --* 
+
+            The repository type for the custom terminology data.
+
+            
+          
+
+          - **Location** *(string) --* 
+
+            The location of the custom terminology data.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: import_terminology(**kwargs)
+
+    
+
+    Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.
+
+     
+
+    If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminology>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.import_terminology(
+          Name='string',
+          MergeStrategy='OVERWRITE',
+          Description='string',
+          TerminologyData={
+              'File': b'bytes',
+              'Format': 'CSV'|'TMX'
+          },
+          EncryptionKey={
+              'Type': 'KMS',
+              'Id': 'string'
+          }
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the custom terminology being imported.
+
+      
+
+    
+    :type MergeStrategy: string
+    :param MergeStrategy: **[REQUIRED]** 
+
+      The merge strategy of the custom terminology being imported. Currently, only the OVERWRITE merge strategy is supported. In this case, the imported terminology will overwrite an existing terminology of the same name.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the custom terminology being imported.
+
+      
+
+    
+    :type TerminologyData: dict
+    :param TerminologyData: **[REQUIRED]** 
+
+      The terminology data for the custom terminology being imported.
+
+      
+
+    
+      - **File** *(bytes) --* **[REQUIRED]** 
+
+        The file containing the custom terminology data. Your version of the AWS SDK performs a Base64-encoding on this field before sending a request to the AWS service. Users of the SDK should not perform Base64-encoding themselves.
+
+        
+
+      
+      - **Format** *(string) --* **[REQUIRED]** 
+
+        The data format of the custom terminology. Either CSV or TMX.
+
+        
+
+      
+    
+    :type EncryptionKey: dict
+    :param EncryptionKey: 
+
+      The encryption key for the custom terminology being imported.
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+        
+
+      
+      - **Id** *(string) --* **[REQUIRED]** 
+
+        The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TerminologyProperties': {
+                'Name': 'string',
+                'Description': 'string',
+                'Arn': 'string',
+                'SourceLanguageCode': 'string',
+                'TargetLanguageCodes': [
+                    'string',
+                ],
+                'EncryptionKey': {
+                    'Type': 'KMS',
+                    'Id': 'string'
+                },
+                'SizeBytes': 123,
+                'TermCount': 123,
+                'CreatedAt': datetime(2015, 1, 1),
+                'LastUpdatedAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TerminologyProperties** *(dict) --* 
+
+          The properties of the custom terminology being imported.
+
+          
+          
+
+          - **Name** *(string) --* 
+
+            The name of the custom terminology.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the custom terminology properties.
+
+            
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the custom terminology. 
+
+            
+          
+
+          - **SourceLanguageCode** *(string) --* 
+
+            The language code for the source text of the translation request for which the custom terminology is being used.
+
+            
+          
+
+          - **TargetLanguageCodes** *(list) --* 
+
+            The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **EncryptionKey** *(dict) --* 
+
+            The encryption key for the custom terminology.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+              
+        
+          
+
+          - **SizeBytes** *(integer) --* 
+
+            The size of the file used when importing a custom terminology.
+
+            
+          
+
+          - **TermCount** *(integer) --* 
+
+            The number of terms included in the custom terminology.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The time at which the custom terminology was created, based on the timestamp.
+
+            
+          
+
+          - **LastUpdatedAt** *(datetime) --* 
+
+            The time at which the custom terminology was last update, based on the timestamp.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_parallel_data(**kwargs)
+
+    
+
+    Provides a list of your parallel data resources in Amazon Translate.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListParallelData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_parallel_data(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      A string that specifies the next page of results to return in a paginated response.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of parallel data resources returned for each request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ParallelDataPropertiesList': [
+                {
+                    'Name': 'string',
+                    'Arn': 'string',
+                    'Description': 'string',
+                    'Status': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+                    'SourceLanguageCode': 'string',
+                    'TargetLanguageCodes': [
+                        'string',
+                    ],
+                    'ParallelDataConfig': {
+                        'S3Uri': 'string',
+                        'Format': 'TSV'|'CSV'|'TMX'
+                    },
+                    'Message': 'string',
+                    'ImportedDataSize': 123,
+                    'ImportedRecordCount': 123,
+                    'FailedRecordCount': 123,
+                    'SkippedRecordCount': 123,
+                    'EncryptionKey': {
+                        'Type': 'KMS',
+                        'Id': 'string'
+                    },
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'LastUpdatedAt': datetime(2015, 1, 1),
+                    'LatestUpdateAttemptStatus': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+                    'LatestUpdateAttemptAt': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ParallelDataPropertiesList** *(list) --* 
+
+          The properties of the parallel data resources returned by this request.
+
+          
+          
+
+          - *(dict) --* 
+
+            The properties of a parallel data resource.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The custom name assigned to the parallel data resource.
+
+              
+            
+
+            - **Arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the parallel data resource.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description assigned to the parallel data resource.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the parallel data resource. When the parallel data is ready for you to use, the status is ``ACTIVE`` .
+
+              
+            
+
+            - **SourceLanguageCode** *(string) --* 
+
+              The source language of the translations in the parallel data file.
+
+              
+            
+
+            - **TargetLanguageCodes** *(list) --* 
+
+              The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **ParallelDataConfig** *(dict) --* 
+
+              Specifies the format and S3 location of the parallel data input file.
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+
+                
+              
+
+              - **Format** *(string) --* 
+
+                The format of the parallel data input file.
+
+                
+          
+            
+
+            - **Message** *(string) --* 
+
+              Additional information from Amazon Translate about the parallel data resource. 
+
+              
+            
+
+            - **ImportedDataSize** *(integer) --* 
+
+              The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.
+
+              
+            
+
+            - **ImportedRecordCount** *(integer) --* 
+
+              The number of records successfully imported from the parallel data input file.
+
+              
+            
+
+            - **FailedRecordCount** *(integer) --* 
+
+              The number of records unsuccessfully imported from the parallel data input file.
+
+              
+            
+
+            - **SkippedRecordCount** *(integer) --* 
+
+              The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.
+
+              
+            
+
+            - **EncryptionKey** *(dict) --* 
+
+              The encryption key used to encrypt this object.
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+                
+              
+
+              - **Id** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+                
+          
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The time at which the parallel data resource was created.
+
+              
+            
+
+            - **LastUpdatedAt** *(datetime) --* 
+
+              The time at which the parallel data resource was last updated.
+
+              
+            
+
+            - **LatestUpdateAttemptStatus** *(string) --* 
+
+              The status of the most recent update attempt for the parallel data resource.
+
+              
+            
+
+            - **LatestUpdateAttemptAt** *(datetime) --* 
+
+              The time that the most recent update was attempted.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_terminologies(**kwargs)
+
+    
+
+    Provides a list of custom terminologies associated with your account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_terminologies(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      If the result of the request to ListTerminologies was truncated, include the NextToken to fetch the next group of custom terminologies. 
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of custom terminologies returned per list request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TerminologyPropertiesList': [
+                {
+                    'Name': 'string',
+                    'Description': 'string',
+                    'Arn': 'string',
+                    'SourceLanguageCode': 'string',
+                    'TargetLanguageCodes': [
+                        'string',
+                    ],
+                    'EncryptionKey': {
+                        'Type': 'KMS',
+                        'Id': 'string'
+                    },
+                    'SizeBytes': 123,
+                    'TermCount': 123,
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'LastUpdatedAt': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TerminologyPropertiesList** *(list) --* 
+
+          The properties list of the custom terminologies returned on the list request.
+
+          
+          
+
+          - *(dict) --* 
+
+            The properties of the custom terminology.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the custom terminology.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the custom terminology properties.
+
+              
+            
+
+            - **Arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the custom terminology. 
+
+              
+            
+
+            - **SourceLanguageCode** *(string) --* 
+
+              The language code for the source text of the translation request for which the custom terminology is being used.
+
+              
+            
+
+            - **TargetLanguageCodes** *(list) --* 
+
+              The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **EncryptionKey** *(dict) --* 
+
+              The encryption key for the custom terminology.
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+                
+              
+
+              - **Id** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+                
+          
+            
+
+            - **SizeBytes** *(integer) --* 
+
+              The size of the file used when importing a custom terminology.
+
+              
+            
+
+            - **TermCount** *(integer) --* 
+
+              The number of terms included in the custom terminology.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The time at which the custom terminology was created, based on the timestamp.
+
+              
+            
+
+            - **LastUpdatedAt** *(datetime) --* 
+
+              The time at which the custom terminology was last update, based on the timestamp.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If the response to the ListTerminologies was truncated, the NextToken fetches the next group of custom terminologies.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_text_translation_jobs(**kwargs)
+
+    
+
+    Gets a list of the batch translation jobs that you have submitted.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTextTranslationJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_text_translation_jobs(
+          Filter={
+              'JobName': 'string',
+              'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'COMPLETED_WITH_ERROR'|'FAILED'|'STOP_REQUESTED'|'STOPPED',
+              'SubmittedBeforeTime': datetime(2015, 1, 1),
+              'SubmittedAfterTime': datetime(2015, 1, 1)
+          },
+          NextToken='string',
+          MaxResults=123
+      )
+    :type Filter: dict
+    :param Filter: 
+
+      The parameters that specify which batch translation jobs to retrieve. Filters include job name, job status, and submission time. You can only set one filter at a time.
+
+      
+
+    
+      - **JobName** *(string) --* 
+
+        Filters the list of jobs by name.
+
+        
+
+      
+      - **JobStatus** *(string) --* 
+
+        Filters the list of jobs based by job status.
+
+        
+
+      
+      - **SubmittedBeforeTime** *(datetime) --* 
+
+        Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+
+        
+
+      
+      - **SubmittedAfterTime** *(datetime) --* 
+
+        Filters the list of jobs based on the time that the job was submitted for processing and returns only the jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+
+        
+
+      
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to request the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in each page. The default value is 100.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TextTranslationJobPropertiesList': [
+                {
+                    'JobId': 'string',
+                    'JobName': 'string',
+                    'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'COMPLETED_WITH_ERROR'|'FAILED'|'STOP_REQUESTED'|'STOPPED',
+                    'JobDetails': {
+                        'TranslatedDocumentsCount': 123,
+                        'DocumentsWithErrorsCount': 123,
+                        'InputDocumentsCount': 123
+                    },
+                    'SourceLanguageCode': 'string',
+                    'TargetLanguageCodes': [
+                        'string',
+                    ],
+                    'TerminologyNames': [
+                        'string',
+                    ],
+                    'ParallelDataNames': [
+                        'string',
+                    ],
+                    'Message': 'string',
+                    'SubmittedTime': datetime(2015, 1, 1),
+                    'EndTime': datetime(2015, 1, 1),
+                    'InputDataConfig': {
+                        'S3Uri': 'string',
+                        'ContentType': 'string'
+                    },
+                    'OutputDataConfig': {
+                        'S3Uri': 'string'
+                    },
+                    'DataAccessRoleArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TextTranslationJobPropertiesList** *(list) --* 
+
+          A list containing the properties of each job that is returned.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about a translation job.
+
+            
+            
+
+            - **JobId** *(string) --* 
+
+              The ID of the translation job.
+
+              
+            
+
+            - **JobName** *(string) --* 
+
+              The user-defined name of the translation job.
+
+              
+            
+
+            - **JobStatus** *(string) --* 
+
+              The status of the translation job.
+
+              
+            
+
+            - **JobDetails** *(dict) --* 
+
+              The number of documents successfully and unsuccessfully processed during the translation job.
+
+              
+              
+
+              - **TranslatedDocumentsCount** *(integer) --* 
+
+                The number of documents successfully processed during a translation job.
+
+                
+              
+
+              - **DocumentsWithErrorsCount** *(integer) --* 
+
+                The number of documents that could not be processed during a translation job.
+
+                
+              
+
+              - **InputDocumentsCount** *(integer) --* 
+
+                The number of documents used as input in a translation job.
+
+                
+          
+            
+
+            - **SourceLanguageCode** *(string) --* 
+
+              The language code of the language of the source text. The language must be a language supported by Amazon Translate.
+
+              
+            
+
+            - **TargetLanguageCodes** *(list) --* 
+
+              The language code of the language of the target text. The language must be a language supported by Amazon Translate.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **TerminologyNames** *(list) --* 
+
+              A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per  StartTextTranslationJob request at this time.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **ParallelDataNames** *(list) --* 
+
+              A list containing the names of the parallel data resources applied to the translation job.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **Message** *(string) --* 
+
+              An explanation of any errors that may have occured during the translation job.
+
+              
+            
+
+            - **SubmittedTime** *(datetime) --* 
+
+              The time at which the translation job was submitted.
+
+              
+            
+
+            - **EndTime** *(datetime) --* 
+
+              The time at which the translation job ended.
+
+              
+            
+
+            - **InputDataConfig** *(dict) --* 
+
+              The input configuration properties that were specified when the job was requested.
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
+
+                
+              
+
+              - **ContentType** *(string) --* 
+
+                Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:
+
+                 
+
+                 
+                * ``text/html`` : The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the ``html`` element in each file. 
+                 
+                * ``text/plain`` : The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input. 
+                 
+                * ``application/vnd.openxmlformats-officedocument.wordprocessingml.document`` : The input data consists of one or more Word documents (.docx). 
+                 
+                * ``application/vnd.openxmlformats-officedocument.presentationml.presentation`` : The input data consists of one or more PowerPoint Presentation files (.pptx). 
+                 
+                * ``application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`` : The input data consists of one or more Excel Workbook files (.xlsx). 
+                 
+
+                 
+
+                .. warning::
+
+                   
+
+                  If you structure your input data as HTML, ensure that you set this parameter to ``text/html`` . By doing so, you cut costs by limiting the translation to the contents of the ``html`` element in each file. Otherwise, if you set this parameter to ``text/plain`` , your costs will cover the translation of every character.
+
+                   
+
+                
+          
+            
+
+            - **OutputDataConfig** *(dict) --* 
+
+              The output configuration properties that were specified when the job was requested.
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
+
+                
+          
+            
+
+            - **DataAccessRoleArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retreive the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidFilterException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_text_translation_job(**kwargs)
+
+    
+
+    Starts an asynchronous batch translation job. Batch translation jobs can be used to translate large volumes of text across multiple documents at once. For more information, see  async .
+
+     
+
+    Batch translation jobs can be described with the  DescribeTextTranslationJob operation, listed with the  ListTextTranslationJobs operation, and stopped with the  StopTextTranslationJob operation.
+
+     
+
+    .. note::
+
+       
+
+      Amazon Translate does not support batch translation of multiple source languages at once.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StartTextTranslationJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_text_translation_job(
+          JobName='string',
+          InputDataConfig={
+              'S3Uri': 'string',
+              'ContentType': 'string'
+          },
+          OutputDataConfig={
+              'S3Uri': 'string'
+          },
+          DataAccessRoleArn='string',
+          SourceLanguageCode='string',
+          TargetLanguageCodes=[
+              'string',
+          ],
+          TerminologyNames=[
+              'string',
+          ],
+          ParallelDataNames=[
+              'string',
+          ],
+          ClientToken='string'
+      )
+    :type JobName: string
+    :param JobName: 
+
+      The name of the batch translation job to be performed.
+
+      
+
+    
+    :type InputDataConfig: dict
+    :param InputDataConfig: **[REQUIRED]** 
+
+      Specifies the format and S3 location of the input documents for the translation job.
+
+      
+
+    
+      - **S3Uri** *(string) --* **[REQUIRED]** 
+
+        The URI of the AWS S3 folder that contains the input file. The folder must be in the same Region as the API endpoint you are calling.
+
+        
+
+      
+      - **ContentType** *(string) --* **[REQUIRED]** 
+
+        Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:
+
+         
+
+         
+        * ``text/html`` : The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the ``html`` element in each file. 
+         
+        * ``text/plain`` : The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input. 
+         
+        * ``application/vnd.openxmlformats-officedocument.wordprocessingml.document`` : The input data consists of one or more Word documents (.docx). 
+         
+        * ``application/vnd.openxmlformats-officedocument.presentationml.presentation`` : The input data consists of one or more PowerPoint Presentation files (.pptx). 
+         
+        * ``application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`` : The input data consists of one or more Excel Workbook files (.xlsx). 
+         
+
+         
+
+        .. warning::
+
+           
+
+          If you structure your input data as HTML, ensure that you set this parameter to ``text/html`` . By doing so, you cut costs by limiting the translation to the contents of the ``html`` element in each file. Otherwise, if you set this parameter to ``text/plain`` , your costs will cover the translation of every character.
+
+           
+
+        
+
+      
+    
+    :type OutputDataConfig: dict
+    :param OutputDataConfig: **[REQUIRED]** 
+
+      Specifies the S3 folder to which your job output will be saved. 
+
+      
+
+    
+      - **S3Uri** *(string) --* **[REQUIRED]** 
+
+        The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
+
+        
+
+      
+    
+    :type DataAccessRoleArn: string
+    :param DataAccessRoleArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that grants Amazon Translate read access to your input data. For more nformation, see  identity-and-access-management .
+
+      
+
+    
+    :type SourceLanguageCode: string
+    :param SourceLanguageCode: **[REQUIRED]** 
+
+      The language code of the input language. For a list of language codes, see  what-is-languages .
+
+       
+
+      Amazon Translate does not automatically detect a source language during batch translation jobs.
+
+      
+
+    
+    :type TargetLanguageCodes: list
+    :param TargetLanguageCodes: **[REQUIRED]** 
+
+      The language code of the output language.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type TerminologyNames: list
+    :param TerminologyNames: 
+
+      The name of the terminology to use in the batch translation job. For a list of available terminologies, use the  ListTerminologies operation.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type ParallelDataNames: list
+    :param ParallelDataNames: 
+
+      The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the  ListParallelData operation.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'JobId': 'string',
+            'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'COMPLETED_WITH_ERROR'|'FAILED'|'STOP_REQUESTED'|'STOPPED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **JobId** *(string) --* 
+
+          The identifier generated for the job. To get the status of a job, use this ID with the  DescribeTextTranslationJob operation.
+
+          
+        
+
+        - **JobStatus** *(string) --* 
+
+          The status of the job. Possible values include:
+
+           
+
+           
+          * ``SUBMITTED`` - The job has been received and is queued for processing. 
+           
+          * ``IN_PROGRESS`` - Amazon Translate is processing the job. 
+           
+          * ``COMPLETED`` - The job was successfully completed and the output is available. 
+           
+          * ``COMPLETED_WITH_ERROR`` - The job was completed with errors. The errors can be analyzed in the job's output. 
+           
+          * ``FAILED`` - The job did not complete. To get details, use the  DescribeTextTranslationJob operation. 
+           
+          * ``STOP_REQUESTED`` - The user who started the job has requested that it be stopped. 
+           
+          * ``STOPPED`` - The job has been stopped. 
+           
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.UnsupportedLanguagePairException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: stop_text_translation_job(**kwargs)
+
+    
+
+    Stops an asynchronous batch translation job that is in progress.
+
+     
+
+    If the job's state is ``IN_PROGRESS`` , the job will be marked for termination and put into the ``STOP_REQUESTED`` state. If the job completes before it can be stopped, it is put into the ``COMPLETED`` state. Otherwise, the job is put into the ``STOPPED`` state.
+
+     
+
+    Asynchronous batch translation jobs are started with the  StartTextTranslationJob operation. You can use the  DescribeTextTranslationJob or  ListTextTranslationJobs operations to get a batch translation job's ``JobId`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/StopTextTranslationJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_text_translation_job(
+          JobId='string'
+      )
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The job ID of the job to be stopped.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'JobId': 'string',
+            'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'COMPLETED_WITH_ERROR'|'FAILED'|'STOP_REQUESTED'|'STOPPED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **JobId** *(string) --* 
+
+          The job ID of the stopped batch translation job.
+
+          
+        
+
+        - **JobStatus** *(string) --* 
+
+          The status of the designated job. Upon successful completion, the job's status will be ``STOPPED`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: translate_text(**kwargs)
+
+    
+
+    Translates input text from the source language to the target language. For a list of available languages and language codes, see  what-is-languages .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.translate_text(
+          Text='string',
+          TerminologyNames=[
+              'string',
+          ],
+          SourceLanguageCode='string',
+          TargetLanguageCode='string'
+      )
+    :type Text: string
+    :param Text: **[REQUIRED]** 
+
+      The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on your character set, this may be fewer than 5,000 characters.
+
+      
+
+    
+    :type TerminologyNames: list
+    :param TerminologyNames: 
+
+      The name of the terminology list file to be used in the TranslateText request. You can use 1 terminology list at most in a ``TranslateText`` request. Terminology lists can contain a maximum of 256 terms.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type SourceLanguageCode: string
+    :param SourceLanguageCode: **[REQUIRED]** 
+
+      The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see  what-is-languages .
+
+       
+
+      To have Amazon Translate determine the source language of your text, you can specify ``auto`` in the ``SourceLanguageCode`` field. If you specify ``auto`` , Amazon Translate will call `Amazon Comprehend <https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html>`__ to determine the source language.
+
+      
+
+    
+    :type TargetLanguageCode: string
+    :param TargetLanguageCode: **[REQUIRED]** 
+
+      The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TranslatedText': 'string',
+            'SourceLanguageCode': 'string',
+            'TargetLanguageCode': 'string',
+            'AppliedTerminologies': [
+                {
+                    'Name': 'string',
+                    'Terms': [
+                        {
+                            'SourceText': 'string',
+                            'TargetText': 'string'
+                        },
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TranslatedText** *(string) --* 
+
+          The translated text.
+
+          
+        
+
+        - **SourceLanguageCode** *(string) --* 
+
+          The language code for the language of the source text.
+
+          
+        
+
+        - **TargetLanguageCode** *(string) --* 
+
+          The language code for the language of the target text. 
+
+          
+        
+
+        - **AppliedTerminologies** *(list) --* 
+
+          The names of the custom terminologies applied to the input text by Amazon Translate for the translated text response.
+
+          
+          
+
+          - *(dict) --* 
+
+            The custom terminology applied to the input text by Amazon Translate for the translated text response. This is optional in the response and will only be present if you specified terminology input in the request. Currently, only one terminology can be applied per TranslateText request.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the custom terminology applied to the input text by Amazon Translate for the translated text response.
+
+              
+            
+
+            - **Terms** *(list) --* 
+
+              The specific terms of the custom terminology applied to the input text by Amazon Translate for the translated text response. A maximum of 250 terms will be returned, and the specific terms applied will be the first 250 terms in the source text. 
+
+              
+              
+
+              - *(dict) --* 
+
+                The term being translated by the custom terminology.
+
+                
+                
+
+                - **SourceText** *(string) --* 
+
+                  The source text of the term being translated by the custom terminology.
+
+                  
+                
+
+                - **TargetText** *(string) --* 
+
+                  The target text of the term being translated by the custom terminology.
+
+                  
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TextSizeLimitExceededException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.UnsupportedLanguagePairException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.DetectedLanguageLowConfidenceException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: update_parallel_data(**kwargs)
+
+    
+
+    Updates a previously created parallel data resource by importing a new input file from Amazon S3.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/UpdateParallelData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_parallel_data(
+          Name='string',
+          Description='string',
+          ParallelDataConfig={
+              'S3Uri': 'string',
+              'Format': 'TSV'|'CSV'|'TMX'
+          },
+          ClientToken='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the parallel data resource being updated.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A custom description for the parallel data resource in Amazon Translate.
+
+      
+
+    
+    :type ParallelDataConfig: dict
+    :param ParallelDataConfig: **[REQUIRED]** 
+
+      Specifies the format and S3 location of the parallel data input file.
+
+      
+
+    
+      - **S3Uri** *(string) --* **[REQUIRED]** 
+
+        The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+
+        
+
+      
+      - **Format** *(string) --* **[REQUIRED]** 
+
+        The format of the parallel data input file.
+
+        
+
+      
+    
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Name': 'string',
+            'Status': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+            'LatestUpdateAttemptStatus': 'CREATING'|'UPDATING'|'ACTIVE'|'DELETING'|'FAILED',
+            'LatestUpdateAttemptAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Name** *(string) --* 
+
+          The name of the parallel data resource being updated.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either ``ACTIVE`` or ``FAILED`` .
+
+          
+        
+
+        - **LatestUpdateAttemptStatus** *(string) --* 
+
+          The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is ``ACTIVE`` .
+
+          
+        
+
+        - **LatestUpdateAttemptAt** *(datetime) --* 
+
+          The time that the most recent update was attempted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Translate.Client.exceptions.ConcurrentModificationException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidParameterValueException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Translate.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`Translate.Paginator.ListTerminologies`
+
+
+
+.. py:class:: Translate.Paginator.ListTerminologies
+
+  ::
+
+    
+    paginator = client.get_paginator('list_terminologies')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Translate.Client.list_terminologies`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TerminologyPropertiesList': [
+                {
+                    'Name': 'string',
+                    'Description': 'string',
+                    'Arn': 'string',
+                    'SourceLanguageCode': 'string',
+                    'TargetLanguageCodes': [
+                        'string',
+                    ],
+                    'EncryptionKey': {
+                        'Type': 'KMS',
+                        'Id': 'string'
+                    },
+                    'SizeBytes': 123,
+                    'TermCount': 123,
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'LastUpdatedAt': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TerminologyPropertiesList** *(list) --* 
+
+          The properties list of the custom terminologies returned on the list request.
+
+          
+          
+
+          - *(dict) --* 
+
+            The properties of the custom terminology.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the custom terminology.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the custom terminology properties.
+
+              
+            
+
+            - **Arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the custom terminology. 
+
+              
+            
+
+            - **SourceLanguageCode** *(string) --* 
+
+              The language code for the source text of the translation request for which the custom terminology is being used.
+
+              
+            
+
+            - **TargetLanguageCodes** *(list) --* 
+
+              The language codes for the target languages available with the custom terminology file. All possible target languages are returned in array.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **EncryptionKey** *(dict) --* 
+
+              The encryption key for the custom terminology.
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+
+                
+              
+
+              - **Id** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+
+                
+          
+            
+
+            - **SizeBytes** *(integer) --* 
+
+              The size of the file used when importing a custom terminology.
+
+              
+            
+
+            - **TermCount** *(integer) --* 
+
+              The number of terms included in the custom terminology.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The time at which the custom terminology was created, based on the timestamp.
+
+              
+            
+
+            - **LastUpdatedAt** *(datetime) --* 
+
+              The time at which the custom terminology was last update, based on the timestamp.
+
+              
+        
+      
+    

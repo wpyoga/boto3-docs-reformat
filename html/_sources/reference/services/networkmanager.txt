@@ -1,0 +1,9568 @@
+
+
+**************
+NetworkManager
+**************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: NetworkManager.Client
+
+  A low-level client representing AWS Network Manager (NetworkManager)
+  
+
+  Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.
+
+   
+
+  The Network Manager APIs are supported in the US West (Oregon) Region only. You must specify the ``us-west-2`` Region in all requests made to Network Manager.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('networkmanager')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~NetworkManager.Client.associate_customer_gateway`
+
+  
+  *   :py:meth:`~NetworkManager.Client.associate_link`
+
+  
+  *   :py:meth:`~NetworkManager.Client.associate_transit_gateway_connect_peer`
+
+  
+  *   :py:meth:`~NetworkManager.Client.can_paginate`
+
+  
+  *   :py:meth:`~NetworkManager.Client.create_connection`
+
+  
+  *   :py:meth:`~NetworkManager.Client.create_device`
+
+  
+  *   :py:meth:`~NetworkManager.Client.create_global_network`
+
+  
+  *   :py:meth:`~NetworkManager.Client.create_link`
+
+  
+  *   :py:meth:`~NetworkManager.Client.create_site`
+
+  
+  *   :py:meth:`~NetworkManager.Client.delete_connection`
+
+  
+  *   :py:meth:`~NetworkManager.Client.delete_device`
+
+  
+  *   :py:meth:`~NetworkManager.Client.delete_global_network`
+
+  
+  *   :py:meth:`~NetworkManager.Client.delete_link`
+
+  
+  *   :py:meth:`~NetworkManager.Client.delete_site`
+
+  
+  *   :py:meth:`~NetworkManager.Client.deregister_transit_gateway`
+
+  
+  *   :py:meth:`~NetworkManager.Client.describe_global_networks`
+
+  
+  *   :py:meth:`~NetworkManager.Client.disassociate_customer_gateway`
+
+  
+  *   :py:meth:`~NetworkManager.Client.disassociate_link`
+
+  
+  *   :py:meth:`~NetworkManager.Client.disassociate_transit_gateway_connect_peer`
+
+  
+  *   :py:meth:`~NetworkManager.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_connections`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_customer_gateway_associations`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_devices`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_link_associations`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_links`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_paginator`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_sites`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_transit_gateway_connect_peer_associations`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_transit_gateway_registrations`
+
+  
+  *   :py:meth:`~NetworkManager.Client.get_waiter`
+
+  
+  *   :py:meth:`~NetworkManager.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~NetworkManager.Client.register_transit_gateway`
+
+  
+  *   :py:meth:`~NetworkManager.Client.tag_resource`
+
+  
+  *   :py:meth:`~NetworkManager.Client.untag_resource`
+
+  
+  *   :py:meth:`~NetworkManager.Client.update_connection`
+
+  
+  *   :py:meth:`~NetworkManager.Client.update_device`
+
+  
+  *   :py:meth:`~NetworkManager.Client.update_global_network`
+
+  
+  *   :py:meth:`~NetworkManager.Client.update_link`
+
+  
+  *   :py:meth:`~NetworkManager.Client.update_site`
+
+  
+
+  .. py:method:: associate_customer_gateway(**kwargs)
+
+    
+
+    Associates a customer gateway with a device and optionally, with a link. If you specify a link, it must be associated with the specified device. 
+
+     
+
+    You can only associate customer gateways that are connected to a VPN attachment on a transit gateway. The transit gateway must be registered in your global network. When you register a transit gateway, customer gateways that are connected to the transit gateway are automatically included in the global network. To list customer gateways that are connected to a transit gateway, use the `DescribeVpnConnections <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html>`__ EC2 API and filter by ``transit-gateway-id`` .
+
+     
+
+    You cannot associate a customer gateway with more than one device and link. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateCustomerGateway>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_customer_gateway(
+          CustomerGatewayArn='string',
+          GlobalNetworkId='string',
+          DeviceId='string',
+          LinkId='string'
+      )
+    :type CustomerGatewayArn: string
+    :param CustomerGatewayArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the customer gateway. For more information, see `Resources Defined by Amazon EC2 <https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies>`__ .
+
+      
+
+    
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CustomerGatewayAssociation': {
+                'CustomerGatewayArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CustomerGatewayAssociation** *(dict) --* 
+
+          The customer gateway association.
+
+          
+          
+
+          - **CustomerGatewayArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the customer gateway.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The association state.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: associate_link(**kwargs)
+
+    
+
+    Associates a link to a device. A device can be associated to multiple links and a link can be associated to multiple devices. The device and link must be in the same global network and the same site.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateLink>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_link(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          LinkId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: **[REQUIRED]** 
+
+      The ID of the link.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LinkAssociation': {
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'LinkAssociationState': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LinkAssociation** *(dict) --* 
+
+          The link association.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The device ID for the link association.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **LinkAssociationState** *(string) --* 
+
+            The state of the association.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: associate_transit_gateway_connect_peer(**kwargs)
+
+    
+
+    Associates a transit gateway Connect peer with a device, and optionally, with a link. If you specify a link, it must be associated with the specified device. 
+
+     
+
+    You can only associate transit gateway Connect peers that have been created on a transit gateway that's registered in your global network.
+
+     
+
+    You cannot associate a transit gateway Connect peer with more than one device and link. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateTransitGatewayConnectPeer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_transit_gateway_connect_peer(
+          GlobalNetworkId='string',
+          TransitGatewayConnectPeerArn='string',
+          DeviceId='string',
+          LinkId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayConnectPeerArn: string
+    :param TransitGatewayConnectPeerArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the Connect peer.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayConnectPeerAssociation': {
+                'TransitGatewayConnectPeerArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayConnectPeerAssociation** *(dict) --* 
+
+          The transit gateway Connect peer association.
+
+          
+          
+
+          - **TransitGatewayConnectPeerArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the association.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_connection(**kwargs)
+
+    
+
+    Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_connection(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          ConnectedDeviceId='string',
+          LinkId='string',
+          ConnectedLinkId='string',
+          Description='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the first device in the connection.
+
+      
+
+    
+    :type ConnectedDeviceId: string
+    :param ConnectedDeviceId: **[REQUIRED]** 
+
+      The ID of the second device in the connection.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link for the first device.
+
+      
+
+    
+    :type ConnectedLinkId: string
+    :param ConnectedLinkId: 
+
+      The ID of the link for the second device.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the connection.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the resource during creation.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connection': {
+                'ConnectionId': 'string',
+                'ConnectionArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'ConnectedDeviceId': 'string',
+                'LinkId': 'string',
+                'ConnectedLinkId': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connection** *(dict) --* 
+
+          Information about the connection.
+
+          
+          
+
+          - **ConnectionId** *(string) --* 
+
+            The ID of the connection.
+
+            
+          
+
+          - **ConnectionArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the connection.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the first device in the connection.
+
+            
+          
+
+          - **ConnectedDeviceId** *(string) --* 
+
+            The ID of the second device in the connection.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link for the first device in the connection.
+
+            
+          
+
+          - **ConnectedLinkId** *(string) --* 
+
+            The ID of the link for the second device in the connection.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the connection.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the connection was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the connection.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the connection.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_device(**kwargs)
+
+    
+
+    Creates a new device in a global network. If you specify both a site ID and a location, the location of the site is used for visualization in the Network Manager console.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_device(
+          GlobalNetworkId='string',
+          AWSLocation={
+              'Zone': 'string',
+              'SubnetArn': 'string'
+          },
+          Description='string',
+          Type='string',
+          Vendor='string',
+          Model='string',
+          SerialNumber='string',
+          Location={
+              'Address': 'string',
+              'Latitude': 'string',
+              'Longitude': 'string'
+          },
+          SiteId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type AWSLocation: dict
+    :param AWSLocation: 
+
+      The AWS location of the device.
+
+      
+
+    
+      - **Zone** *(string) --* 
+
+        The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+        
+
+      
+      - **SubnetArn** *(string) --* 
+
+        The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+        
+
+      
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the device.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of the device.
+
+      
+
+    
+    :type Vendor: string
+    :param Vendor: 
+
+      The vendor of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Model: string
+    :param Model: 
+
+      The model of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type SerialNumber: string
+    :param SerialNumber: 
+
+      The serial number of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Location: dict
+    :param Location: 
+
+      The location of the device.
+
+      
+
+    
+      - **Address** *(string) --* 
+
+        The physical address.
+
+        
+
+      
+      - **Latitude** *(string) --* 
+
+        The latitude.
+
+        
+
+      
+      - **Longitude** *(string) --* 
+
+        The longitude.
+
+        
+
+      
+    
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the resource during creation.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Device': {
+                'DeviceId': 'string',
+                'DeviceArn': 'string',
+                'GlobalNetworkId': 'string',
+                'AWSLocation': {
+                    'Zone': 'string',
+                    'SubnetArn': 'string'
+                },
+                'Description': 'string',
+                'Type': 'string',
+                'Vendor': 'string',
+                'Model': 'string',
+                'SerialNumber': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'SiteId': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Device** *(dict) --* 
+
+          Information about the device.
+
+          
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **DeviceArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the device.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **AWSLocation** *(dict) --* 
+
+            The AWS location of the device.
+
+            
+            
+
+            - **Zone** *(string) --* 
+
+              The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+              
+            
+
+            - **SubnetArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+              
+        
+          
+
+          - **Description** *(string) --* 
+
+            The description of the device.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The device type.
+
+            
+          
+
+          - **Vendor** *(string) --* 
+
+            The device vendor.
+
+            
+          
+
+          - **Model** *(string) --* 
+
+            The device model.
+
+            
+          
+
+          - **SerialNumber** *(string) --* 
+
+            The device serial number.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The site location.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **SiteId** *(string) --* 
+
+            The site ID.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The device state.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the device.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_global_network(**kwargs)
+
+    
+
+    Creates a new, empty global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateGlobalNetwork>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_global_network(
+          Description='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type Description: string
+    :param Description: 
+
+      A description of the global network.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the resource during creation.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GlobalNetwork': {
+                'GlobalNetworkId': 'string',
+                'GlobalNetworkArn': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GlobalNetwork** *(dict) --* 
+
+          Information about the global network object.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **GlobalNetworkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the global network.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the global network was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the global network.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the global network.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_link(**kwargs)
+
+    
+
+    Creates a new link for a specified site.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateLink>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_link(
+          GlobalNetworkId='string',
+          Description='string',
+          Type='string',
+          Bandwidth={
+              'UploadSpeed': 123,
+              'DownloadSpeed': 123
+          },
+          Provider='string',
+          SiteId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the link.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of the link.
+
+       
+
+      Constraints: Cannot include the following characters: | \ ^
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Bandwidth: dict
+    :param Bandwidth: **[REQUIRED]** 
+
+      The upload speed and download speed in Mbps. 
+
+      
+
+    
+      - **UploadSpeed** *(integer) --* 
+
+        Upload speed in Mbps.
+
+        
+
+      
+      - **DownloadSpeed** *(integer) --* 
+
+        Download speed in Mbps.
+
+        
+
+      
+    
+    :type Provider: string
+    :param Provider: 
+
+      The provider of the link.
+
+       
+
+      Constraints: Cannot include the following characters: | \ ^
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type SiteId: string
+    :param SiteId: **[REQUIRED]** 
+
+      The ID of the site.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the resource during creation.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Link': {
+                'LinkId': 'string',
+                'LinkArn': 'string',
+                'GlobalNetworkId': 'string',
+                'SiteId': 'string',
+                'Description': 'string',
+                'Type': 'string',
+                'Bandwidth': {
+                    'UploadSpeed': 123,
+                    'DownloadSpeed': 123
+                },
+                'Provider': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Link** *(dict) --* 
+
+          Information about the link.
+
+          
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **LinkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the link.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the link.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The type of the link.
+
+            
+          
+
+          - **Bandwidth** *(dict) --* 
+
+            The bandwidth for the link.
+
+            
+            
+
+            - **UploadSpeed** *(integer) --* 
+
+              Upload speed in Mbps.
+
+              
+            
+
+            - **DownloadSpeed** *(integer) --* 
+
+              Download speed in Mbps.
+
+              
+        
+          
+
+          - **Provider** *(string) --* 
+
+            The provider of the link.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the link was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the link.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the link.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_site(**kwargs)
+
+    
+
+    Creates a new site in a global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateSite>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_site(
+          GlobalNetworkId='string',
+          Description='string',
+          Location={
+              'Address': 'string',
+              'Latitude': 'string',
+              'Longitude': 'string'
+          },
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of your site.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Location: dict
+    :param Location: 
+
+      The site location. This information is used for visualization in the Network Manager console. If you specify the address, the latitude and longitude are automatically calculated.
+
+       
+
+       
+      * ``Address`` : The physical address of the site. 
+       
+      * ``Latitude`` : The latitude of the site.  
+       
+      * ``Longitude`` : The longitude of the site. 
+       
+
+      
+
+    
+      - **Address** *(string) --* 
+
+        The physical address.
+
+        
+
+      
+      - **Latitude** *(string) --* 
+
+        The latitude.
+
+        
+
+      
+      - **Longitude** *(string) --* 
+
+        The longitude.
+
+        
+
+      
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to apply to the resource during creation.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Site': {
+                'SiteId': 'string',
+                'SiteArn': 'string',
+                'GlobalNetworkId': 'string',
+                'Description': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Site** *(dict) --* 
+
+          Information about the site.
+
+          
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **SiteArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the site.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the site.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The location of the site.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the site.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the site.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_connection(**kwargs)
+
+    
+
+    Deletes the specified connection in your global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_connection(
+          GlobalNetworkId='string',
+          ConnectionId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type ConnectionId: string
+    :param ConnectionId: **[REQUIRED]** 
+
+      The ID of the connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connection': {
+                'ConnectionId': 'string',
+                'ConnectionArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'ConnectedDeviceId': 'string',
+                'LinkId': 'string',
+                'ConnectedLinkId': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connection** *(dict) --* 
+
+          Information about the connection.
+
+          
+          
+
+          - **ConnectionId** *(string) --* 
+
+            The ID of the connection.
+
+            
+          
+
+          - **ConnectionArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the connection.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the first device in the connection.
+
+            
+          
+
+          - **ConnectedDeviceId** *(string) --* 
+
+            The ID of the second device in the connection.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link for the first device in the connection.
+
+            
+          
+
+          - **ConnectedLinkId** *(string) --* 
+
+            The ID of the link for the second device in the connection.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the connection.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the connection was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the connection.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the connection.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_device(**kwargs)
+
+    
+
+    Deletes an existing device. You must first disassociate the device from any links and customer gateways.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_device(
+          GlobalNetworkId='string',
+          DeviceId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Device': {
+                'DeviceId': 'string',
+                'DeviceArn': 'string',
+                'GlobalNetworkId': 'string',
+                'AWSLocation': {
+                    'Zone': 'string',
+                    'SubnetArn': 'string'
+                },
+                'Description': 'string',
+                'Type': 'string',
+                'Vendor': 'string',
+                'Model': 'string',
+                'SerialNumber': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'SiteId': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Device** *(dict) --* 
+
+          Information about the device.
+
+          
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **DeviceArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the device.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **AWSLocation** *(dict) --* 
+
+            The AWS location of the device.
+
+            
+            
+
+            - **Zone** *(string) --* 
+
+              The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+              
+            
+
+            - **SubnetArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+              
+        
+          
+
+          - **Description** *(string) --* 
+
+            The description of the device.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The device type.
+
+            
+          
+
+          - **Vendor** *(string) --* 
+
+            The device vendor.
+
+            
+          
+
+          - **Model** *(string) --* 
+
+            The device model.
+
+            
+          
+
+          - **SerialNumber** *(string) --* 
+
+            The device serial number.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The site location.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **SiteId** *(string) --* 
+
+            The site ID.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The device state.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the device.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_global_network(**kwargs)
+
+    
+
+    Deletes an existing global network. You must first delete all global network objects (devices, links, and sites) and deregister all transit gateways.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteGlobalNetwork>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_global_network(
+          GlobalNetworkId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GlobalNetwork': {
+                'GlobalNetworkId': 'string',
+                'GlobalNetworkArn': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GlobalNetwork** *(dict) --* 
+
+          Information about the global network.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **GlobalNetworkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the global network.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the global network was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the global network.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the global network.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_link(**kwargs)
+
+    
+
+    Deletes an existing link. You must first disassociate the link from any devices and customer gateways.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteLink>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_link(
+          GlobalNetworkId='string',
+          LinkId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: **[REQUIRED]** 
+
+      The ID of the link.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Link': {
+                'LinkId': 'string',
+                'LinkArn': 'string',
+                'GlobalNetworkId': 'string',
+                'SiteId': 'string',
+                'Description': 'string',
+                'Type': 'string',
+                'Bandwidth': {
+                    'UploadSpeed': 123,
+                    'DownloadSpeed': 123
+                },
+                'Provider': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Link** *(dict) --* 
+
+          Information about the link.
+
+          
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **LinkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the link.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the link.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The type of the link.
+
+            
+          
+
+          - **Bandwidth** *(dict) --* 
+
+            The bandwidth for the link.
+
+            
+            
+
+            - **UploadSpeed** *(integer) --* 
+
+              Upload speed in Mbps.
+
+              
+            
+
+            - **DownloadSpeed** *(integer) --* 
+
+              Download speed in Mbps.
+
+              
+        
+          
+
+          - **Provider** *(string) --* 
+
+            The provider of the link.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the link was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the link.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the link.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_site(**kwargs)
+
+    
+
+    Deletes an existing site. The site cannot be associated with any device or link.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteSite>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_site(
+          GlobalNetworkId='string',
+          SiteId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type SiteId: string
+    :param SiteId: **[REQUIRED]** 
+
+      The ID of the site.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Site': {
+                'SiteId': 'string',
+                'SiteArn': 'string',
+                'GlobalNetworkId': 'string',
+                'Description': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Site** *(dict) --* 
+
+          Information about the site.
+
+          
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **SiteArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the site.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the site.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The location of the site.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the site.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the site.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: deregister_transit_gateway(**kwargs)
+
+    
+
+    Deregisters a transit gateway from your global network. This action does not delete your transit gateway, or modify any of its attachments. This action removes any customer gateway associations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeregisterTransitGateway>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.deregister_transit_gateway(
+          GlobalNetworkId='string',
+          TransitGatewayArn='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayArn: string
+    :param TransitGatewayArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the transit gateway.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayRegistration': {
+                'GlobalNetworkId': 'string',
+                'TransitGatewayArn': 'string',
+                'State': {
+                    'Code': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'|'FAILED',
+                    'Message': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayRegistration** *(dict) --* 
+
+          The transit gateway registration information.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **TransitGatewayArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the transit gateway.
+
+            
+          
+
+          - **State** *(dict) --* 
+
+            The state of the transit gateway registration.
+
+            
+            
+
+            - **Code** *(string) --* 
+
+              The code for the state reason.
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              The message for the state reason.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_global_networks(**kwargs)
+
+    
+
+    Describes one or more global networks. By default, all global networks are described. To describe the objects in your global network, you must use the appropriate ``Get*`` action. For example, to list the transit gateways in your global network, use  GetTransitGatewayRegistrations .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DescribeGlobalNetworks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_global_networks(
+          GlobalNetworkIds=[
+              'string',
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkIds: list
+    :param GlobalNetworkIds: 
+
+      The IDs of one or more global networks. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GlobalNetworks': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'GlobalNetworkArn': 'string',
+                    'Description': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GlobalNetworks** *(list) --* 
+
+          Information about the global networks.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a global network.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **GlobalNetworkArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the global network.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the global network.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the global network was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the global network.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the global network.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: disassociate_customer_gateway(**kwargs)
+
+    
+
+    Disassociates a customer gateway from a device and a link.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateCustomerGateway>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_customer_gateway(
+          GlobalNetworkId='string',
+          CustomerGatewayArn='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type CustomerGatewayArn: string
+    :param CustomerGatewayArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the customer gateway. For more information, see `Resources Defined by Amazon EC2 <https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies>`__ .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CustomerGatewayAssociation': {
+                'CustomerGatewayArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CustomerGatewayAssociation** *(dict) --* 
+
+          Information about the customer gateway association.
+
+          
+          
+
+          - **CustomerGatewayArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the customer gateway.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The association state.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: disassociate_link(**kwargs)
+
+    
+
+    Disassociates an existing device from a link. You must first disassociate any customer gateways that are associated with the link.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateLink>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_link(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          LinkId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: **[REQUIRED]** 
+
+      The ID of the link.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LinkAssociation': {
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'LinkAssociationState': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LinkAssociation** *(dict) --* 
+
+          Information about the link association.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The device ID for the link association.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **LinkAssociationState** *(string) --* 
+
+            The state of the association.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: disassociate_transit_gateway_connect_peer(**kwargs)
+
+    
+
+    Disassociates a transit gateway Connect peer from a device and link.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateTransitGatewayConnectPeer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_transit_gateway_connect_peer(
+          GlobalNetworkId='string',
+          TransitGatewayConnectPeerArn='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayConnectPeerArn: string
+    :param TransitGatewayConnectPeerArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayConnectPeerAssociation': {
+                'TransitGatewayConnectPeerArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'LinkId': 'string',
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayConnectPeerAssociation** *(dict) --* 
+
+          The transit gateway Connect peer association.
+
+          
+          
+
+          - **TransitGatewayConnectPeerArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the association.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_connections(**kwargs)
+
+    
+
+    Gets information about one or more of your connections in a global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnections>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_connections(
+          GlobalNetworkId='string',
+          ConnectionIds=[
+              'string',
+          ],
+          DeviceId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type ConnectionIds: list
+    :param ConnectionIds: 
+
+      One or more connection IDs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceId: string
+    :param DeviceId: 
+
+      The ID of the device.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connections': [
+                {
+                    'ConnectionId': 'string',
+                    'ConnectionArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'ConnectedDeviceId': 'string',
+                    'LinkId': 'string',
+                    'ConnectedLinkId': 'string',
+                    'Description': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connections** *(list) --* 
+
+          Information about the connections.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a connection.
+
+            
+            
+
+            - **ConnectionId** *(string) --* 
+
+              The ID of the connection.
+
+              
+            
+
+            - **ConnectionArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the connection.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the first device in the connection.
+
+              
+            
+
+            - **ConnectedDeviceId** *(string) --* 
+
+              The ID of the second device in the connection.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link for the first device in the connection.
+
+              
+            
+
+            - **ConnectedLinkId** *(string) --* 
+
+              The ID of the link for the second device in the connection.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the connection.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the connection was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the connection.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the connection.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_customer_gateway_associations(**kwargs)
+
+    
+
+    Gets the association information for customer gateways that are associated with devices and links in your global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCustomerGatewayAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_customer_gateway_associations(
+          GlobalNetworkId='string',
+          CustomerGatewayArns=[
+              'string',
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type CustomerGatewayArns: list
+    :param CustomerGatewayArns: 
+
+      One or more customer gateway Amazon Resource Names (ARNs). For more information, see `Resources Defined by Amazon EC2 <https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies>`__ . The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CustomerGatewayAssociations': [
+                {
+                    'CustomerGatewayArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CustomerGatewayAssociations** *(list) --* 
+
+          The customer gateway associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the association between a customer gateway, a device, and a link.
+
+            
+            
+
+            - **CustomerGatewayArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the customer gateway.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The association state.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_devices(**kwargs)
+
+    
+
+    Gets information about one or more of your devices in a global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_devices(
+          GlobalNetworkId='string',
+          DeviceIds=[
+              'string',
+          ],
+          SiteId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceIds: list
+    :param DeviceIds: 
+
+      One or more device IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Devices': [
+                {
+                    'DeviceId': 'string',
+                    'DeviceArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'AWSLocation': {
+                        'Zone': 'string',
+                        'SubnetArn': 'string'
+                    },
+                    'Description': 'string',
+                    'Type': 'string',
+                    'Vendor': 'string',
+                    'Model': 'string',
+                    'SerialNumber': 'string',
+                    'Location': {
+                        'Address': 'string',
+                        'Latitude': 'string',
+                        'Longitude': 'string'
+                    },
+                    'SiteId': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Devices** *(list) --* 
+
+          The devices.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a device.
+
+            
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **DeviceArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the device.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **AWSLocation** *(dict) --* 
+
+              The AWS location of the device.
+
+              
+              
+
+              - **Zone** *(string) --* 
+
+                The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+                
+              
+
+              - **SubnetArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+                
+          
+            
+
+            - **Description** *(string) --* 
+
+              The description of the device.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The device type.
+
+              
+            
+
+            - **Vendor** *(string) --* 
+
+              The device vendor.
+
+              
+            
+
+            - **Model** *(string) --* 
+
+              The device model.
+
+              
+            
+
+            - **SerialNumber** *(string) --* 
+
+              The device serial number.
+
+              
+            
+
+            - **Location** *(dict) --* 
+
+              The site location.
+
+              
+              
+
+              - **Address** *(string) --* 
+
+                The physical address.
+
+                
+              
+
+              - **Latitude** *(string) --* 
+
+                The latitude.
+
+                
+              
+
+              - **Longitude** *(string) --* 
+
+                The longitude.
+
+                
+          
+            
+
+            - **SiteId** *(string) --* 
+
+              The site ID.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the site was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The device state.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the device.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_link_associations(**kwargs)
+
+    
+
+    Gets the link associations for a device or a link. Either the device ID or the link ID must be specified.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetLinkAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_link_associations(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          LinkId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LinkAssociations': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'LinkAssociationState': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LinkAssociations** *(list) --* 
+
+          The link associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the association between a device and a link.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The device ID for the link association.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **LinkAssociationState** *(string) --* 
+
+              The state of the association.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_links(**kwargs)
+
+    
+
+    Gets information about one or more links in a specified global network.
+
+     
+
+    If you specify the site ID, you cannot specify the type or provider in the same request. You can specify the type and provider in the same request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetLinks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_links(
+          GlobalNetworkId='string',
+          LinkIds=[
+              'string',
+          ],
+          SiteId='string',
+          Type='string',
+          Provider='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type LinkIds: list
+    :param LinkIds: 
+
+      One or more link IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The link type.
+
+      
+
+    
+    :type Provider: string
+    :param Provider: 
+
+      The link provider.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Links': [
+                {
+                    'LinkId': 'string',
+                    'LinkArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'SiteId': 'string',
+                    'Description': 'string',
+                    'Type': 'string',
+                    'Bandwidth': {
+                        'UploadSpeed': 123,
+                        'DownloadSpeed': 123
+                    },
+                    'Provider': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Links** *(list) --* 
+
+          The links.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a link.
+
+            
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **LinkArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the link.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the link.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the link.
+
+              
+            
+
+            - **Bandwidth** *(dict) --* 
+
+              The bandwidth for the link.
+
+              
+              
+
+              - **UploadSpeed** *(integer) --* 
+
+                Upload speed in Mbps.
+
+                
+              
+
+              - **DownloadSpeed** *(integer) --* 
+
+                Download speed in Mbps.
+
+                
+          
+            
+
+            - **Provider** *(string) --* 
+
+              The provider of the link.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the link was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the link.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the link.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_sites(**kwargs)
+
+    
+
+    Gets information about one or more of your sites in a global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSites>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_sites(
+          GlobalNetworkId='string',
+          SiteIds=[
+              'string',
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type SiteIds: list
+    :param SiteIds: 
+
+      One or more site IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Sites': [
+                {
+                    'SiteId': 'string',
+                    'SiteArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'Description': 'string',
+                    'Location': {
+                        'Address': 'string',
+                        'Latitude': 'string',
+                        'Longitude': 'string'
+                    },
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Sites** *(list) --* 
+
+          The sites.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a site.
+
+            
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **SiteArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the site.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the site.
+
+              
+            
+
+            - **Location** *(dict) --* 
+
+              The location of the site.
+
+              
+              
+
+              - **Address** *(string) --* 
+
+                The physical address.
+
+                
+              
+
+              - **Latitude** *(string) --* 
+
+                The latitude.
+
+                
+              
+
+              - **Longitude** *(string) --* 
+
+                The longitude.
+
+                
+          
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the site was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the site.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the site.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_transit_gateway_connect_peer_associations(**kwargs)
+
+    
+
+    Gets information about one or more of your transit gateway Connect peer associations in a global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayConnectPeerAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_transit_gateway_connect_peer_associations(
+          GlobalNetworkId='string',
+          TransitGatewayConnectPeerArns=[
+              'string',
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayConnectPeerArns: list
+    :param TransitGatewayConnectPeerArns: 
+
+      One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayConnectPeerAssociations': [
+                {
+                    'TransitGatewayConnectPeerArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayConnectPeerAssociations** *(list) --* 
+
+          Information about the transit gateway Connect peer associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a transit gateway Connect peer association.
+
+            
+            
+
+            - **TransitGatewayConnectPeerArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the association.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_transit_gateway_registrations(**kwargs)
+
+    
+
+    Gets information about the transit gateway registrations in a specified global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayRegistrations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_transit_gateway_registrations(
+          GlobalNetworkId='string',
+          TransitGatewayArns=[
+              'string',
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayArns: list
+    :param TransitGatewayArns: 
+
+      The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayRegistrations': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'TransitGatewayArn': 'string',
+                    'State': {
+                        'Code': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'|'FAILED',
+                        'Message': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayRegistrations** *(list) --* 
+
+          The transit gateway registrations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the registration of a transit gateway to a global network.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **TransitGatewayArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the transit gateway.
+
+              
+            
+
+            - **State** *(dict) --* 
+
+              The state of the transit gateway registration.
+
+              
+              
+
+              - **Code** *(string) --* 
+
+                The code for the state reason.
+
+                
+              
+
+              - **Message** *(string) --* 
+
+                The message for the state reason.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags for a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TagList': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TagList** *(list) --* 
+
+          The list of tags.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a tag.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag key.
+
+               
+
+              Length Constraints: Maximum length of 128 characters.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The tag value.
+
+               
+
+              Length Constraints: Maximum length of 256 characters.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: register_transit_gateway(**kwargs)
+
+    
+
+    Registers a transit gateway in your global network. The transit gateway can be in any AWS Region, but it must be owned by the same AWS account that owns the global network. You cannot register a transit gateway in more than one global network.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RegisterTransitGateway>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.register_transit_gateway(
+          GlobalNetworkId='string',
+          TransitGatewayArn='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayArn: string
+    :param TransitGatewayArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the transit gateway. For more information, see `Resources Defined by Amazon EC2 <https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies>`__ .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayRegistration': {
+                'GlobalNetworkId': 'string',
+                'TransitGatewayArn': 'string',
+                'State': {
+                    'Code': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'|'FAILED',
+                    'Message': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayRegistration** *(dict) --* 
+
+          Information about the transit gateway registration.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **TransitGatewayArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the transit gateway.
+
+            
+          
+
+          - **State** *(dict) --* 
+
+            The state of the transit gateway registration.
+
+            
+            
+
+            - **Code** *(string) --* 
+
+              The code for the state reason.
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              The message for the state reason.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Tags a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The tags to apply to the specified resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The tag key.
+
+           
+
+          Length Constraints: Maximum length of 128 characters.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The tag value.
+
+           
+
+          Length Constraints: Maximum length of 256 characters.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The tag keys to remove from the specified resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_connection(**kwargs)
+
+    
+
+    Updates the information for an existing connection. To remove information for any of the parameters, specify an empty string.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_connection(
+          GlobalNetworkId='string',
+          ConnectionId='string',
+          LinkId='string',
+          ConnectedLinkId='string',
+          Description='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type ConnectionId: string
+    :param ConnectionId: **[REQUIRED]** 
+
+      The ID of the connection.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link for the first device in the connection.
+
+      
+
+    
+    :type ConnectedLinkId: string
+    :param ConnectedLinkId: 
+
+      The ID of the link for the second device in the connection.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the connection.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connection': {
+                'ConnectionId': 'string',
+                'ConnectionArn': 'string',
+                'GlobalNetworkId': 'string',
+                'DeviceId': 'string',
+                'ConnectedDeviceId': 'string',
+                'LinkId': 'string',
+                'ConnectedLinkId': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connection** *(dict) --* 
+
+          Information about the connection.
+
+          
+          
+
+          - **ConnectionId** *(string) --* 
+
+            The ID of the connection.
+
+            
+          
+
+          - **ConnectionArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the connection.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the first device in the connection.
+
+            
+          
+
+          - **ConnectedDeviceId** *(string) --* 
+
+            The ID of the second device in the connection.
+
+            
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link for the first device in the connection.
+
+            
+          
+
+          - **ConnectedLinkId** *(string) --* 
+
+            The ID of the link for the second device in the connection.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the connection.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the connection was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the connection.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the connection.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_device(**kwargs)
+
+    
+
+    Updates the details for an existing device. To remove information for any of the parameters, specify an empty string.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_device(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          AWSLocation={
+              'Zone': 'string',
+              'SubnetArn': 'string'
+          },
+          Description='string',
+          Type='string',
+          Vendor='string',
+          Model='string',
+          SerialNumber='string',
+          Location={
+              'Address': 'string',
+              'Latitude': 'string',
+              'Longitude': 'string'
+          },
+          SiteId='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: **[REQUIRED]** 
+
+      The ID of the device.
+
+      
+
+    
+    :type AWSLocation: dict
+    :param AWSLocation: 
+
+      The AWS location of the device.
+
+      
+
+    
+      - **Zone** *(string) --* 
+
+        The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+        
+
+      
+      - **SubnetArn** *(string) --* 
+
+        The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+        
+
+      
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the device.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of the device.
+
+      
+
+    
+    :type Vendor: string
+    :param Vendor: 
+
+      The vendor of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Model: string
+    :param Model: 
+
+      The model of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type SerialNumber: string
+    :param SerialNumber: 
+
+      The serial number of the device.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Location: dict
+    :param Location: 
+
+      Describes a location.
+
+      
+
+    
+      - **Address** *(string) --* 
+
+        The physical address.
+
+        
+
+      
+      - **Latitude** *(string) --* 
+
+        The latitude.
+
+        
+
+      
+      - **Longitude** *(string) --* 
+
+        The longitude.
+
+        
+
+      
+    
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Device': {
+                'DeviceId': 'string',
+                'DeviceArn': 'string',
+                'GlobalNetworkId': 'string',
+                'AWSLocation': {
+                    'Zone': 'string',
+                    'SubnetArn': 'string'
+                },
+                'Description': 'string',
+                'Type': 'string',
+                'Vendor': 'string',
+                'Model': 'string',
+                'SerialNumber': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'SiteId': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Device** *(dict) --* 
+
+          Information about the device.
+
+          
+          
+
+          - **DeviceId** *(string) --* 
+
+            The ID of the device.
+
+            
+          
+
+          - **DeviceArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the device.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **AWSLocation** *(dict) --* 
+
+            The AWS location of the device.
+
+            
+            
+
+            - **Zone** *(string) --* 
+
+              The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+              
+            
+
+            - **SubnetArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+              
+        
+          
+
+          - **Description** *(string) --* 
+
+            The description of the device.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The device type.
+
+            
+          
+
+          - **Vendor** *(string) --* 
+
+            The device vendor.
+
+            
+          
+
+          - **Model** *(string) --* 
+
+            The device model.
+
+            
+          
+
+          - **SerialNumber** *(string) --* 
+
+            The device serial number.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The site location.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **SiteId** *(string) --* 
+
+            The site ID.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The device state.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the device.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_global_network(**kwargs)
+
+    
+
+    Updates an existing global network. To remove information for any of the parameters, specify an empty string.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateGlobalNetwork>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_global_network(
+          GlobalNetworkId='string',
+          Description='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of your global network.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the global network.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GlobalNetwork': {
+                'GlobalNetworkId': 'string',
+                'GlobalNetworkArn': 'string',
+                'Description': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GlobalNetwork** *(dict) --* 
+
+          Information about the global network object.
+
+          
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **GlobalNetworkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the global network.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the global network was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the global network.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the global network.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_link(**kwargs)
+
+    
+
+    Updates the details for an existing link. To remove information for any of the parameters, specify an empty string.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateLink>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_link(
+          GlobalNetworkId='string',
+          LinkId='string',
+          Description='string',
+          Type='string',
+          Bandwidth={
+              'UploadSpeed': 123,
+              'DownloadSpeed': 123
+          },
+          Provider='string'
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: **[REQUIRED]** 
+
+      The ID of the link.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the link.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of the link.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    :type Bandwidth: dict
+    :param Bandwidth: 
+
+      The upload and download speed in Mbps. 
+
+      
+
+    
+      - **UploadSpeed** *(integer) --* 
+
+        Upload speed in Mbps.
+
+        
+
+      
+      - **DownloadSpeed** *(integer) --* 
+
+        Download speed in Mbps.
+
+        
+
+      
+    
+    :type Provider: string
+    :param Provider: 
+
+      The provider of the link.
+
+       
+
+      Length Constraints: Maximum length of 128 characters.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Link': {
+                'LinkId': 'string',
+                'LinkArn': 'string',
+                'GlobalNetworkId': 'string',
+                'SiteId': 'string',
+                'Description': 'string',
+                'Type': 'string',
+                'Bandwidth': {
+                    'UploadSpeed': 123,
+                    'DownloadSpeed': 123
+                },
+                'Provider': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Link** *(dict) --* 
+
+          Information about the link.
+
+          
+          
+
+          - **LinkId** *(string) --* 
+
+            The ID of the link.
+
+            
+          
+
+          - **LinkArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the link.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the link.
+
+            
+          
+
+          - **Type** *(string) --* 
+
+            The type of the link.
+
+            
+          
+
+          - **Bandwidth** *(dict) --* 
+
+            The bandwidth for the link.
+
+            
+            
+
+            - **UploadSpeed** *(integer) --* 
+
+              Upload speed in Mbps.
+
+              
+            
+
+            - **DownloadSpeed** *(integer) --* 
+
+              Download speed in Mbps.
+
+              
+        
+          
+
+          - **Provider** *(string) --* 
+
+            The provider of the link.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the link was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the link.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the link.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_site(**kwargs)
+
+    
+
+    Updates the information for an existing site. To remove information for any of the parameters, specify an empty string.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateSite>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_site(
+          GlobalNetworkId='string',
+          SiteId='string',
+          Description='string',
+          Location={
+              'Address': 'string',
+              'Latitude': 'string',
+              'Longitude': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type SiteId: string
+    :param SiteId: **[REQUIRED]** 
+
+      The ID of your site.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of your site.
+
+       
+
+      Length Constraints: Maximum length of 256 characters.
+
+      
+
+    
+    :type Location: dict
+    :param Location: 
+
+      The site location:
+
+       
+
+       
+      * ``Address`` : The physical address of the site. 
+       
+      * ``Latitude`` : The latitude of the site.  
+       
+      * ``Longitude`` : The longitude of the site. 
+       
+
+      
+
+    
+      - **Address** *(string) --* 
+
+        The physical address.
+
+        
+
+      
+      - **Latitude** *(string) --* 
+
+        The latitude.
+
+        
+
+      
+      - **Longitude** *(string) --* 
+
+        The longitude.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Site': {
+                'SiteId': 'string',
+                'SiteArn': 'string',
+                'GlobalNetworkId': 'string',
+                'Description': 'string',
+                'Location': {
+                    'Address': 'string',
+                    'Latitude': 'string',
+                    'Longitude': 'string'
+                },
+                'CreatedAt': datetime(2015, 1, 1),
+                'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                'Tags': [
+                    {
+                        'Key': 'string',
+                        'Value': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Site** *(dict) --* 
+
+          Information about the site.
+
+          
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **SiteArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the site.
+
+            
+          
+
+          - **GlobalNetworkId** *(string) --* 
+
+            The ID of the global network.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the site.
+
+            
+          
+
+          - **Location** *(dict) --* 
+
+            The location of the site.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              The physical address.
+
+              
+            
+
+            - **Latitude** *(string) --* 
+
+              The latitude.
+
+              
+            
+
+            - **Longitude** *(string) --* 
+
+              The longitude.
+
+              
+        
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The date and time that the site was created.
+
+            
+          
+
+          - **State** *(string) --* 
+
+            The state of the site.
+
+            
+          
+
+          - **Tags** *(list) --* 
+
+            The tags for the site.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a tag.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The tag key.
+
+                 
+
+                Length Constraints: Maximum length of 128 characters.
+
+                
+              
+
+              - **Value** *(string) --* 
+
+                The tag value.
+
+                 
+
+                Length Constraints: Maximum length of 256 characters.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`NetworkManager.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`NetworkManager.Paginator.DescribeGlobalNetworks`
+
+
+* :py:class:`NetworkManager.Paginator.GetConnections`
+
+
+* :py:class:`NetworkManager.Paginator.GetCustomerGatewayAssociations`
+
+
+* :py:class:`NetworkManager.Paginator.GetDevices`
+
+
+* :py:class:`NetworkManager.Paginator.GetLinkAssociations`
+
+
+* :py:class:`NetworkManager.Paginator.GetLinks`
+
+
+* :py:class:`NetworkManager.Paginator.GetSites`
+
+
+* :py:class:`NetworkManager.Paginator.GetTransitGatewayConnectPeerAssociations`
+
+
+* :py:class:`NetworkManager.Paginator.GetTransitGatewayRegistrations`
+
+
+
+.. py:class:: NetworkManager.Paginator.DescribeGlobalNetworks
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_global_networks')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.describe_global_networks`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DescribeGlobalNetworks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkIds=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkIds: list
+    :param GlobalNetworkIds: 
+
+      The IDs of one or more global networks. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GlobalNetworks': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'GlobalNetworkArn': 'string',
+                    'Description': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GlobalNetworks** *(list) --* 
+
+          Information about the global networks.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a global network.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **GlobalNetworkArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the global network.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the global network.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the global network was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the global network.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the global network.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetConnections
+
+  ::
+
+    
+    paginator = client.get_paginator('get_connections')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_connections`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnections>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          ConnectionIds=[
+              'string',
+          ],
+          DeviceId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type ConnectionIds: list
+    :param ConnectionIds: 
+
+      One or more connection IDs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceId: string
+    :param DeviceId: 
+
+      The ID of the device.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connections': [
+                {
+                    'ConnectionId': 'string',
+                    'ConnectionArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'ConnectedDeviceId': 'string',
+                    'LinkId': 'string',
+                    'ConnectedLinkId': 'string',
+                    'Description': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connections** *(list) --* 
+
+          Information about the connections.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a connection.
+
+            
+            
+
+            - **ConnectionId** *(string) --* 
+
+              The ID of the connection.
+
+              
+            
+
+            - **ConnectionArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the connection.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the first device in the connection.
+
+              
+            
+
+            - **ConnectedDeviceId** *(string) --* 
+
+              The ID of the second device in the connection.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link for the first device in the connection.
+
+              
+            
+
+            - **ConnectedLinkId** *(string) --* 
+
+              The ID of the link for the second device in the connection.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the connection.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the connection was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the connection.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the connection.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetCustomerGatewayAssociations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_customer_gateway_associations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_customer_gateway_associations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCustomerGatewayAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          CustomerGatewayArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type CustomerGatewayArns: list
+    :param CustomerGatewayArns: 
+
+      One or more customer gateway Amazon Resource Names (ARNs). For more information, see `Resources Defined by Amazon EC2 <https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies>`__ . The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CustomerGatewayAssociations': [
+                {
+                    'CustomerGatewayArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CustomerGatewayAssociations** *(list) --* 
+
+          The customer gateway associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the association between a customer gateway, a device, and a link.
+
+            
+            
+
+            - **CustomerGatewayArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the customer gateway.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The association state.
+
+              
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetDevices
+
+  ::
+
+    
+    paginator = client.get_paginator('get_devices')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_devices`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          DeviceIds=[
+              'string',
+          ],
+          SiteId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceIds: list
+    :param DeviceIds: 
+
+      One or more device IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Devices': [
+                {
+                    'DeviceId': 'string',
+                    'DeviceArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'AWSLocation': {
+                        'Zone': 'string',
+                        'SubnetArn': 'string'
+                    },
+                    'Description': 'string',
+                    'Type': 'string',
+                    'Vendor': 'string',
+                    'Model': 'string',
+                    'SerialNumber': 'string',
+                    'Location': {
+                        'Address': 'string',
+                        'Latitude': 'string',
+                        'Longitude': 'string'
+                    },
+                    'SiteId': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Devices** *(list) --* 
+
+          The devices.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a device.
+
+            
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **DeviceArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the device.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **AWSLocation** *(dict) --* 
+
+              The AWS location of the device.
+
+              
+              
+
+              - **Zone** *(string) --* 
+
+                The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
+                
+              
+
+              - **SubnetArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the subnet the device is located in.
+
+                
+          
+            
+
+            - **Description** *(string) --* 
+
+              The description of the device.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The device type.
+
+              
+            
+
+            - **Vendor** *(string) --* 
+
+              The device vendor.
+
+              
+            
+
+            - **Model** *(string) --* 
+
+              The device model.
+
+              
+            
+
+            - **SerialNumber** *(string) --* 
+
+              The device serial number.
+
+              
+            
+
+            - **Location** *(dict) --* 
+
+              The site location.
+
+              
+              
+
+              - **Address** *(string) --* 
+
+                The physical address.
+
+                
+              
+
+              - **Latitude** *(string) --* 
+
+                The latitude.
+
+                
+              
+
+              - **Longitude** *(string) --* 
+
+                The longitude.
+
+                
+          
+            
+
+            - **SiteId** *(string) --* 
+
+              The site ID.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the site was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The device state.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the device.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetLinkAssociations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_link_associations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_link_associations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetLinkAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          DeviceId='string',
+          LinkId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type DeviceId: string
+    :param DeviceId: 
+
+      The ID of the device.
+
+      
+
+    
+    :type LinkId: string
+    :param LinkId: 
+
+      The ID of the link.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LinkAssociations': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'LinkAssociationState': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LinkAssociations** *(list) --* 
+
+          The link associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the association between a device and a link.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The device ID for the link association.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **LinkAssociationState** *(string) --* 
+
+              The state of the association.
+
+              
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetLinks
+
+  ::
+
+    
+    paginator = client.get_paginator('get_links')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_links`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetLinks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          LinkIds=[
+              'string',
+          ],
+          SiteId='string',
+          Type='string',
+          Provider='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type LinkIds: list
+    :param LinkIds: 
+
+      One or more link IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type SiteId: string
+    :param SiteId: 
+
+      The ID of the site.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The link type.
+
+      
+
+    
+    :type Provider: string
+    :param Provider: 
+
+      The link provider.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Links': [
+                {
+                    'LinkId': 'string',
+                    'LinkArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'SiteId': 'string',
+                    'Description': 'string',
+                    'Type': 'string',
+                    'Bandwidth': {
+                        'UploadSpeed': 123,
+                        'DownloadSpeed': 123
+                    },
+                    'Provider': 'string',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Links** *(list) --* 
+
+          The links.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a link.
+
+            
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **LinkArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the link.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the link.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the link.
+
+              
+            
+
+            - **Bandwidth** *(dict) --* 
+
+              The bandwidth for the link.
+
+              
+              
+
+              - **UploadSpeed** *(integer) --* 
+
+                Upload speed in Mbps.
+
+                
+              
+
+              - **DownloadSpeed** *(integer) --* 
+
+                Download speed in Mbps.
+
+                
+          
+            
+
+            - **Provider** *(string) --* 
+
+              The provider of the link.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the link was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the link.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the link.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetSites
+
+  ::
+
+    
+    paginator = client.get_paginator('get_sites')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_sites`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSites>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          SiteIds=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type SiteIds: list
+    :param SiteIds: 
+
+      One or more site IDs. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Sites': [
+                {
+                    'SiteId': 'string',
+                    'SiteArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'Description': 'string',
+                    'Location': {
+                        'Address': 'string',
+                        'Latitude': 'string',
+                        'Longitude': 'string'
+                    },
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'UPDATING',
+                    'Tags': [
+                        {
+                            'Key': 'string',
+                            'Value': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Sites** *(list) --* 
+
+          The sites.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a site.
+
+            
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **SiteArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the site.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the site.
+
+              
+            
+
+            - **Location** *(dict) --* 
+
+              The location of the site.
+
+              
+              
+
+              - **Address** *(string) --* 
+
+                The physical address.
+
+                
+              
+
+              - **Latitude** *(string) --* 
+
+                The latitude.
+
+                
+              
+
+              - **Longitude** *(string) --* 
+
+                The longitude.
+
+                
+          
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The date and time that the site was created.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the site.
+
+              
+            
+
+            - **Tags** *(list) --* 
+
+              The tags for the site.
+
+              
+              
+
+              - *(dict) --* 
+
+                Describes a tag.
+
+                
+                
+
+                - **Key** *(string) --* 
+
+                  The tag key.
+
+                   
+
+                  Length Constraints: Maximum length of 128 characters.
+
+                  
+                
+
+                - **Value** *(string) --* 
+
+                  The tag value.
+
+                   
+
+                  Length Constraints: Maximum length of 256 characters.
+
+                  
+            
+          
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetTransitGatewayConnectPeerAssociations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_transit_gateway_connect_peer_associations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_transit_gateway_connect_peer_associations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayConnectPeerAssociations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          TransitGatewayConnectPeerArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayConnectPeerArns: list
+    :param TransitGatewayConnectPeerArns: 
+
+      One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayConnectPeerAssociations': [
+                {
+                    'TransitGatewayConnectPeerArn': 'string',
+                    'GlobalNetworkId': 'string',
+                    'DeviceId': 'string',
+                    'LinkId': 'string',
+                    'State': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayConnectPeerAssociations** *(list) --* 
+
+          Information about the transit gateway Connect peer associations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a transit gateway Connect peer association.
+
+            
+            
+
+            - **TransitGatewayConnectPeerArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+
+              
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **DeviceId** *(string) --* 
+
+              The ID of the device.
+
+              
+            
+
+            - **LinkId** *(string) --* 
+
+              The ID of the link.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the association.
+
+              
+        
+      
+    
+
+.. py:class:: NetworkManager.Paginator.GetTransitGatewayRegistrations
+
+  ::
+
+    
+    paginator = client.get_paginator('get_transit_gateway_registrations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`NetworkManager.Client.get_transit_gateway_registrations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetTransitGatewayRegistrations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GlobalNetworkId='string',
+          TransitGatewayArns=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GlobalNetworkId: string
+    :param GlobalNetworkId: **[REQUIRED]** 
+
+      The ID of the global network.
+
+      
+
+    
+    :type TransitGatewayArns: list
+    :param TransitGatewayArns: 
+
+      The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is 10.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'TransitGatewayRegistrations': [
+                {
+                    'GlobalNetworkId': 'string',
+                    'TransitGatewayArn': 'string',
+                    'State': {
+                        'Code': 'PENDING'|'AVAILABLE'|'DELETING'|'DELETED'|'FAILED',
+                        'Message': 'string'
+                    }
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **TransitGatewayRegistrations** *(list) --* 
+
+          The transit gateway registrations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes the registration of a transit gateway to a global network.
+
+            
+            
+
+            - **GlobalNetworkId** *(string) --* 
+
+              The ID of the global network.
+
+              
+            
+
+            - **TransitGatewayArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the transit gateway.
+
+              
+            
+
+            - **State** *(dict) --* 
+
+              The state of the transit gateway registration.
+
+              
+              
+
+              - **Code** *(string) --* 
+
+                The code for the state reason.
+
+                
+              
+
+              - **Message** *(string) --* 
+
+                The message for the state reason.
+
+                
+          
+        
+      
+    

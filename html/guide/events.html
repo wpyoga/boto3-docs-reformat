@@ -1,0 +1,596 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Extensibility guide &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Cloud9" href="cloud9.html" />
+    <link rel="prev" title="Retries" href="retries.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cloud9.html" title="Cloud9"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="retries.html" title="Retries"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#sdk-features">SDK features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clients.html">Low-level clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginators.html">Paginators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="retries.html">Retries</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Extensibility guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#migrations">Migrations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="index.html">Developer guide</a></li>
+              
+              <li>Extensibility guide</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="extensibility-guide">
+<h1>Extensibility guide<a class="headerlink" href="#extensibility-guide" title="Permalink to this headline">¶</a></h1>
+<p>All of Boto3's resource and client classes are generated at runtime.
+This means that you cannot directly inherit and then extend the
+functionality of these classes because they do not exist until the
+program actually starts running.</p>
+<p>However it is still possible to extend the functionality of classes through
+Boto3's event system.</p>
+<div class="section" id="an-introduction-to-the-event-system">
+<h2>An introduction to the event system<a class="headerlink" href="#an-introduction-to-the-event-system" title="Permalink to this headline">¶</a></h2>
+<p>Boto3's event system allows users to register a function to
+a specific event. Then once the running program reaches a line that
+emits that specific event, Boto3 will call every function
+registered to the event in the order in which they were registered.
+When Boto3 calls each of these registered functions,
+it will call each of them with a specific set of
+keyword arguments that are associated with that event.
+Then once the registered function
+is called, the function may modify the keyword arguments passed to that
+function or return a value.
+Here is an example of how the event system works:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="c1"># Access the event system on the S3 client</span>
+<span class="n">event_system</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span>
+
+<span class="c1"># Create a function</span>
+<span class="k">def</span> <span class="nf">add_my_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Add the name of the bucket you want to default to.</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mybucket&#39;</span>
+
+<span class="c1"># Register the function to an event</span>
+<span class="n">event_system</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;provide-client-params.s3.ListObjects&#39;</span><span class="p">,</span> <span class="n">add_my_bucket</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In this example, the handler <tt class="docutils literal"><span class="pre">add_my_bucket</span></tt>
+is registered such that the handler will inject the
+value <tt class="docutils literal"><span class="pre">'mybucket</span></tt> for the <tt class="docutils literal"><span class="pre">Bucket</span></tt> parameter whenever the
+<tt class="docutils literal"><span class="pre">list_objects</span></tt> client call is made without the <tt class="docutils literal"><span class="pre">Bucket</span></tt> parameter. Note
+that if the same <tt class="docutils literal"><span class="pre">list_objects</span></tt> call is made without the <tt class="docutils literal"><span class="pre">Bucket</span></tt>
+parameter and the registered handler, it will result in a validation error.</p>
+<p>Here are the takeaways from this example:</p>
+<ul class="simple">
+<li>All clients have their own event system that you can use to fire events
+and register functions. You can access the event system through the
+<tt class="docutils literal"><span class="pre">meta.events</span></tt> attribute on the client.</li>
+<li>All functions registered to the event system must have <tt class="docutils literal"><span class="pre">**kwargs</span></tt> in
+the function signature. This is because emitting an event can have any
+number of keyword arguments emitted alongside it, and so if your
+function is called without <tt class="docutils literal"><span class="pre">**kwargs</span></tt>, its signature will have to
+match every keyword argument emitted by the event. This also allows for
+more keyword arguments to be added to the emitted event in the future
+without breaking existing handlers.</li>
+<li>To register a function to an event, call the <tt class="docutils literal"><span class="pre">register</span></tt> method on the
+event system with the name of the event you want to register the
+function to and the function handle. Note that if you register the event
+after the event is emitted, the function will not be called unless the
+event is emitted again. In the example, the <tt class="docutils literal"><span class="pre">add_my_bucket</span></tt> handler
+was registered to the <tt class="docutils literal"><span class="pre">'provide-client-params.s3.ListObjects'</span></tt> event,
+which is an event that can be used to inject and modify parameters passed
+in by the client method. To read more about the event refer to
+<a class="reference internal" href="#provide-client-params">provide-client-params</a></li>
+</ul>
+</div>
+<div class="section" id="a-hierarchical-structure">
+<h2>A hierarchical structure<a class="headerlink" href="#a-hierarchical-structure" title="Permalink to this headline">¶</a></h2>
+<p>The event system also provides a hierarchy for registering events such that
+you can register a function to a set of events depending on the event name
+hierarchy.</p>
+<p>An event name can have its own hierarchy by specifying <tt class="docutils literal"><span class="pre">.</span></tt> in its name. For
+example, take the event name <tt class="docutils literal"><span class="pre">'general.specific.more_specific'</span></tt>. When
+this event is emitted, the registered functions will be called in the order
+from most specific to least specific registration. So in this example, the
+functions will be called in the following order:</p>
+<ol class="arabic simple">
+<li>Functions registered to <tt class="docutils literal"><span class="pre">'general.specific.more_specific'</span></tt></li>
+<li>Functions registered to <tt class="docutils literal"><span class="pre">'general.specific'</span></tt></li>
+<li>Functions registered to <tt class="docutils literal"><span class="pre">'general'</span></tt></li>
+</ol>
+<p>Here is a deeper example of how the event system works with respect to
+its hierarchical structure:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="c1"># Access the event system on the S3 client</span>
+<span class="n">event_system</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span>
+
+<span class="k">def</span> <span class="nf">add_my_general_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mybucket&#39;</span>
+
+<span class="k">def</span> <span class="nf">add_my_specific_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;myspecificbucket&#39;</span>
+
+<span class="n">event_system</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;provide-client-params.s3&#39;</span><span class="p">,</span> <span class="n">add_my_general_bucket</span><span class="p">)</span>
+<span class="n">event_system</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;provide-client-params.s3.ListObjects&#39;</span><span class="p">,</span> <span class="n">add_my_specific_bucket</span><span class="p">)</span>
+
+<span class="n">list_obj_response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+<span class="n">put_obj_response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="s1">&#39;mykey&#39;</span><span class="p">,</span> <span class="n">Body</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;my body&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, the <tt class="docutils literal"><span class="pre">list_objects</span></tt> method call will use the
+<tt class="docutils literal"><span class="pre">'myspecificbucket'</span></tt> for the bucket instead of <tt class="docutils literal"><span class="pre">'mybucket'</span></tt> because
+the <tt class="docutils literal"><span class="pre">add_my_specific_bucket</span></tt> method was registered to the
+<tt class="docutils literal"><span class="pre">'provide-client-params.s3.ListObjects'</span></tt> event which is more specific than
+the <tt class="docutils literal"><span class="pre">'provide-client-params.s3'</span></tt> event. Thus, the
+<tt class="docutils literal"><span class="pre">add_my_specific_bucket</span></tt> function is called before the
+<tt class="docutils literal"><span class="pre">add_my_general_bucket</span></tt> function is called when the event is emitted.</p>
+<p>However for the <tt class="docutils literal"><span class="pre">put_object</span></tt> call, the bucket used is <tt class="docutils literal"><span class="pre">'mybucket'</span></tt>. This
+is because the event emitted for the <tt class="docutils literal"><span class="pre">put_object</span></tt> client call is
+<tt class="docutils literal"><span class="pre">'provide-client-params.s3.PutObject'</span></tt> and the <tt class="docutils literal"><span class="pre">add_my_general_bucket</span></tt>
+method is called via its registration to <tt class="docutils literal"><span class="pre">'provide-client-params.s3'</span></tt>. The
+<tt class="docutils literal"><span class="pre">'provide-client-params.s3.ListObjects'</span></tt> event is never emitted so the
+registered <tt class="docutils literal"><span class="pre">add_my_specific_bucket</span></tt> function is never called.</p>
+</div>
+<div class="section" id="wildcard-matching">
+<h2>Wildcard matching<a class="headerlink" href="#wildcard-matching" title="Permalink to this headline">¶</a></h2>
+<p>Another aspect of Boto3's event system is that it has the capability
+to do wildcard matching using the <tt class="docutils literal"><span class="pre">'*'</span></tt> notation. Here is an example
+of using wildcards in the event system:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="c1"># Access the event system on the S3 client</span>
+<span class="n">event_system</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span>
+
+<span class="k">def</span> <span class="nf">add_my_wildcard_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mybucket&#39;</span>
+
+<span class="n">event_system</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;provide-client-params.s3.*&#39;</span><span class="p">,</span> <span class="n">add_my_wildcard_bucket</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">'*'</span></tt> allows you to register to a group of events without having to
+know the actual name of the event. This is useful when you have to apply
+the same handler in multiple places. Also note that if the wildcard is used,
+it must be isolated. It does not handle globbing with additional characters.
+So in the previous example, if the <tt class="docutils literal"><span class="pre">my_wildcard_function</span></tt> was registered
+to <tt class="docutils literal"><span class="pre">'provide-client-params.s3.*objects'</span></tt>, the handler would not be
+called because it will consider <tt class="docutils literal"><span class="pre">'provide-client-params.s3.*objects'</span></tt> to be
+a specific event.</p>
+<p>The wildcard also respects the hierarchical structure of the event system.
+If another handler was registered to the <tt class="docutils literal"><span class="pre">'provide-client-params.s3'</span></tt> event,
+the <tt class="docutils literal"><span class="pre">add_my_wildcard_bucket</span></tt> would be called first because it is registered
+to <tt class="docutils literal"><span class="pre">'provide-client-params.s3.*'</span></tt> which is more specific than the event
+<tt class="docutils literal"><span class="pre">'provide-client.s3'</span></tt>.</p>
+</div>
+<div class="section" id="isolation-of-event-systems">
+<h2>Isolation of event systems<a class="headerlink" href="#isolation-of-event-systems" title="Permalink to this headline">¶</a></h2>
+<p>The event system in Boto3 has the notion of isolation:
+all clients maintain their own set of registered handlers. For example if a
+handler is registered to one client's event system, it will not be registered
+to another client's event system:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">client1</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">client2</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_my_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mybucket&#39;</span>
+
+<span class="k">def</span> <span class="nf">add_my_other_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;myotherbucket&#39;</span>
+
+<span class="n">client1</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
+    <span class="s1">&#39;provide-client-params.s3.ListObjects&#39;</span><span class="p">,</span> <span class="n">add_my_bucket</span><span class="p">)</span>
+<span class="n">client2</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
+    <span class="s1">&#39;provide-client-params.s3.ListObjects&#39;</span><span class="p">,</span> <span class="n">add_my_other_bucket</span><span class="p">)</span>
+
+<span class="n">client1_response</span> <span class="o">=</span> <span class="n">client1</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+<span class="n">client2_response</span> <span class="o">=</span> <span class="n">client2</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Thanks to the isolation of clients' event systems, <tt class="docutils literal"><span class="pre">client1</span></tt> will inject
+<tt class="docutils literal"><span class="pre">'mybucket'</span></tt> for its <tt class="docutils literal"><span class="pre">list_objects</span></tt> method call while <tt class="docutils literal"><span class="pre">client2</span></tt> will
+inject <tt class="docutils literal"><span class="pre">'myotherbucket'</span></tt> for its <tt class="docutils literal"><span class="pre">list_objects</span></tt> method call because
+<tt class="docutils literal"><span class="pre">add_my_bucket</span></tt> was registered to <tt class="docutils literal"><span class="pre">client1</span></tt> while <tt class="docutils literal"><span class="pre">add_my_other_bucket</span></tt>
+was registered to <tt class="docutils literal"><span class="pre">client2</span></tt>.</p>
+</div>
+<div class="section" id="boto3-specific-events">
+<h2>Boto3 specific events<a class="headerlink" href="#boto3-specific-events" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 emits a set of events that users can register to
+customize clients or resources and modify the behavior of method calls.</p>
+<p>Here is the list of events that users of Boto3 can register handlers to:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">'creating-client-class</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'creating-resource-class</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'provide-client-params'</span></tt></li>
+</ul>
+<div class="section" id="creating-client-class">
+<h3><cite>creating-client-class</cite><a class="headerlink" href="#creating-client-class" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Full Event Name</dt><dd class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">'creating-client-class.service-name'</span></tt></p>
+<p>Note: <tt class="docutils literal"><span class="pre">service-name</span></tt> refers to the value used to instantiate a client i.e.
+<tt class="docutils literal"><span class="pre">boto3.client('service-name')</span></tt></p>
+</dd>
+<dt class="field-name">Description</dt><dd class="field-body"><p class="first">This event is emitted upon creation of the client class for a service. The
+client class for a service is not created until the first instantiation of
+the client class. Use this event for adding methods to the client class
+or adding classes for the client class to inherit from.</p>
+</dd>
+<dt class="field-name">Keyword Arguments Emitted</dt><dd class="field-body"><dl class="first docutils field-list" frame="void" rules="none">
+<dt class="field-name">type class_attributes</dt><dd class="field-body">dict</dd>
+<dt class="field-name">param class_attributes</dt><dd class="field-body">A dictionary where the keys are the names of the
+attributes of the class and the values are the actual attributes of
+the class.</dd>
+<dt class="field-name">type base_classes</dt><dd class="field-body">list</dd>
+<dt class="field-name">param base_classes</dt><dd class="field-body">A list of classes that the client class will inherit
+from where the order of inheritance is the same as the order of the list.</dd>
+</dl>
+</dd>
+<dt class="field-name">Expected Return Value</dt><dd class="field-body"><p class="first">Do not return anything.</p>
+</dd>
+<dt class="field-name">Example</dt><dd class="field-body"><p class="first">Here is an example of how to add a method to the client class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">def</span> <span class="nf">custom_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is my custom method&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_custom_method</span><span class="p">(</span><span class="n">class_attributes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">class_attributes</span><span class="p">[</span><span class="s1">&#39;my_method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">custom_method</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;creating-client-class.s3&#39;</span><span class="p">,</span> <span class="n">add_custom_method</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">my_method</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This should output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>This is my custom method
+</pre></div>
+</div>
+<p>Here is an example of how to add a new class for the client class to
+inherit from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Client instantiated!&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_custom_class</span><span class="p">(</span><span class="n">base_classes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">base_classes</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">MyClass</span><span class="p">)</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;creating-client-class.s3&#39;</span><span class="p">,</span> <span class="n">add_custom_class</span><span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This should output:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span>Client instantiated!
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="creating-resource-class">
+<h3><cite>creating-resource-class</cite><a class="headerlink" href="#creating-resource-class" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Full Event Name</dt><dd class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">'creating-resource-class.service-name.resource-name'</span></tt></p>
+<p>Note: <tt class="docutils literal"><span class="pre">service-name</span></tt> refers to the value used to instantiate a service
+resource i.e. <tt class="docutils literal"><span class="pre">boto3.resource('service-name')</span></tt> and <tt class="docutils literal"><span class="pre">resource-name</span></tt>
+refers to the name of the resource class.</p>
+</dd>
+<dt class="field-name">Description</dt><dd class="field-body"><p class="first">This event is emitted upon creation of the resource class. The
+resource class is not created until the first instantiation of
+the resource class. Use this event for adding methods to the resource
+class or adding classes for the resource class to inherit from.</p>
+</dd>
+<dt class="field-name">Keyword Arguments Emitted</dt><dd class="field-body"><dl class="first docutils field-list" frame="void" rules="none">
+<dt class="field-name">type class_attributes</dt><dd class="field-body">dict</dd>
+<dt class="field-name">param class_attributes</dt><dd class="field-body">A dictionary where the keys are the names of the
+attributes of the class and the values are the actual attributes of
+the class.</dd>
+<dt class="field-name">type base_classes</dt><dd class="field-body">list</dd>
+<dt class="field-name">param base_classes</dt><dd class="field-body">A list of classes that the resource class will inherit
+from where the order of inheritance is the same as the order of the list.</dd>
+</dl>
+</dd>
+<dt class="field-name">Expected Return Value</dt><dd class="field-body"><p class="first">Do not return anything.</p>
+</dd>
+<dt class="field-name">Example</dt><dd class="field-body"><p class="first">Here is an example of how to add a method to a resource class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">def</span> <span class="nf">custom_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is my custom method&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_custom_method</span><span class="p">(</span><span class="n">class_attributes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">class_attributes</span><span class="p">[</span><span class="s1">&#39;my_method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">custom_method</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;creating-resource-class.s3.ServiceResource&#39;</span><span class="p">,</span>
+                        <span class="n">add_custom_method</span><span class="p">)</span>
+
+<span class="n">resource</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">resource</span><span class="o">.</span><span class="n">my_method</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This should output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>This is my custom method
+</pre></div>
+</div>
+<p>Here is an example of how to add a new class for a resource class to
+inherit from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Resource instantiated!&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_custom_class</span><span class="p">(</span><span class="n">base_classes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">base_classes</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">MyClass</span><span class="p">)</span>
+
+<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;creating-resource-class.s3.ServiceResource&#39;</span><span class="p">,</span>
+                        <span class="n">add_custom_class</span><span class="p">)</span>
+
+<span class="n">resource</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This should output:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span>Resource instantiated!
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="provide-client-params">
+<h3><cite>provide-client-params</cite><a class="headerlink" href="#provide-client-params" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils field-list" frame="void" rules="none">
+<dt class="field-name">Full Event Name</dt><dd class="field-body"><p class="first"><tt class="docutils literal"><span class="pre">'provide-client-params.service-name.operation-name'</span></tt></p>
+<p>Note: <tt class="docutils literal"><span class="pre">service-name</span></tt> refers to the value used to instantiate a client i.e.
+<tt class="docutils literal"><span class="pre">boto3.client('service-name')</span></tt>. <tt class="docutils literal"><span class="pre">operation-name</span></tt> refers to the
+underlying API operation of the corresponding client method. To access
+the operation API name, retrieve the value from the
+<tt class="docutils literal"><span class="pre">client.meta.method_to_api_mapping</span></tt> dictionary using the name of the
+desired client method as the key.</p>
+</dd>
+<dt class="field-name">Description</dt><dd class="field-body"><p class="first">This event is emitted before validation of the parameters passed to
+client method. Use this event to inject or modify parameters prior
+to the parameters being validated and built into a request that is sent
+over the wire.</p>
+</dd>
+<dt class="field-name">Keyword Arguments Emitted</dt><dd class="field-body"><dl class="first docutils field-list" frame="void" rules="none">
+<dt class="field-name">type params</dt><dd class="field-body">dict</dd>
+<dt class="field-name">param params</dt><dd class="field-body">A dictionary where the keys are the names of the
+parameters passed through the client method and the values are the values
+of those parameters.</dd>
+<dt class="field-name">type model</dt><dd class="field-body"><tt class="docutils literal"><span class="pre">botocore.model.OperationModel</span></tt></dd>
+<dt class="field-name">param model</dt><dd class="field-body">A model representing the underlying API operation of the
+client method.</dd>
+</dl>
+</dd>
+<dt class="field-name">Expected Return Value</dt><dd class="field-body"><p class="first">Do not return anything or return a new dictionary of
+parameters to use when making the request.</p>
+</dd>
+<dt class="field-name">Example</dt><dd class="field-body"><p class="first">Here is an example of how to inject a parameter using the event:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="c1"># Access the event system on the S3 client</span>
+<span class="n">event_system</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">events</span>
+
+<span class="c1"># Create a function</span>
+<span class="k">def</span> <span class="nf">add_my_bucket</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Add the name of the bucket you want to default to.</span>
+    <span class="k">if</span> <span class="s1">&#39;Bucket&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">params</span><span class="p">[</span><span class="s1">&#39;Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mybucket&#39;</span>
+
+<span class="c1"># Register the function to an event</span>
+<span class="n">event_system</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;provide-client-params.s3.ListObjects&#39;</span><span class="p">,</span> <span class="n">add_my_bucket</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">list_objects</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="retries.html" title="previous chapter (use the left arrow)">Retries</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="cloud9.html" title="next chapter (use the right arrow)">Cloud9</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cloud9.html" title="Cloud9"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="retries.html" title="Retries"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

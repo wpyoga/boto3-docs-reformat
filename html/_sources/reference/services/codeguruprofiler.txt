@@ -1,0 +1,4151 @@
+
+
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentConfiguration.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentConfiguration.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Anomaly.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Anomaly.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html
+.. _https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html
+
+
+****************
+CodeGuruProfiler
+****************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: CodeGuruProfiler.Client
+
+  A low-level client representing Amazon CodeGuru Profiler
+  
+
+  This section provides documentation for the Amazon CodeGuru Profiler API operations. 
+
+   
+
+  Amazon CodeGuru Profiler collects runtime performance data from your live applications, and provides recommendations that can help you fine-tune your application performance. Using machine learning algorithms, CodeGuru Profiler can help you find your most expensive lines of code and suggest ways you can improve efficiency and remove CPU bottlenecks. 
+
+   
+
+  Amazon CodeGuru Profiler provides different visualizations of profiling data to help you identify what code is running on the CPU, see how much time is consumed, and suggest ways to reduce CPU utilization. 
+
+   
+
+  .. note::
+
+     
+
+    Amazon CodeGuru Profiler currently supports applications written in all Java virtual machine (JVM) languages and Python. While CodeGuru Profiler supports both visualizations and recommendations for applications written in Java, it can also generate visualizations and a subset of recommendations for applications written in other JVM languages and Python.
+
+     
+
+   
+
+  For more information, see `What is Amazon CodeGuru Profiler <https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html>`__ in the *Amazon CodeGuru Profiler User Guide* . 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('codeguruprofiler')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.add_notification_channels`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.batch_get_frame_metric_data`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.can_paginate`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.configure_agent`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.create_profiling_group`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.delete_profiling_group`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.describe_profiling_group`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_findings_report_account_summary`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_notification_configuration`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_paginator`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_policy`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_profile`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_recommendations`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.get_waiter`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.list_findings_reports`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.list_profile_times`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.list_profiling_groups`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.post_agent_profile`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.put_permission`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.remove_notification_channel`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.remove_permission`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.submit_feedback`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.tag_resource`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.untag_resource`
+
+  
+  *   :py:meth:`~CodeGuruProfiler.Client.update_profiling_group`
+
+  
+
+  .. py:method:: add_notification_channels(**kwargs)
+
+    
+
+    Add up to 2 anomaly notifications channels for a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/AddNotificationChannels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.add_notification_channels(
+          channels=[
+              {
+                  'eventPublishers': [
+                      'AnomalyDetection',
+                  ],
+                  'id': 'string',
+                  'uri': 'string'
+              },
+          ],
+          profilingGroupName='string'
+      )
+    :type channels: list
+    :param channels: **[REQUIRED]** 
+
+      One or 2 channels to report to when anomalies are detected.
+
+      
+
+    
+      - *(dict) --* 
+
+        Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.
+
+        
+
+      
+        - **eventPublishers** *(list) --* **[REQUIRED]** 
+
+          List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **id** *(string) --* 
+
+          Unique identifier for each ``Channel`` in the notification configuration of a Profiling Group. A random UUID for channelId is used when adding a channel to the notification configuration if not specified in the request.
+
+          
+
+        
+        - **uri** *(string) --* **[REQUIRED]** 
+
+          Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
+
+          
+
+        
+      
+  
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group that we are setting up notifications for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'notificationConfiguration': {
+                'channels': [
+                    {
+                        'eventPublishers': [
+                            'AnomalyDetection',
+                        ],
+                        'id': 'string',
+                        'uri': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the AddNotificationChannelsResponse.
+
+        
+        
+
+        - **notificationConfiguration** *(dict) --* 
+
+          The new notification configuration for this profiling group.
+
+          
+          
+
+          - **channels** *(list) --* 
+
+            List of up to two channels to be used for sending notifications for events detected from the application profile.
+
+            
+            
+
+            - *(dict) --* 
+
+              Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.
+
+              
+              
+
+              - **eventPublishers** *(list) --* 
+
+                List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **id** *(string) --* 
+
+                Unique identifier for each ``Channel`` in the notification configuration of a Profiling Group. A random UUID for channelId is used when adding a channel to the notification configuration if not specified in the request.
+
+                
+              
+
+              - **uri** *(string) --* 
+
+                Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: batch_get_frame_metric_data(**kwargs)
+
+    
+
+    Returns the time series of values for a requested list of frame metrics from a time period.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/BatchGetFrameMetricData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_get_frame_metric_data(
+          endTime=datetime(2015, 1, 1),
+          frameMetrics=[
+              {
+                  'frameName': 'string',
+                  'threadStates': [
+                      'string',
+                  ],
+                  'type': 'AggregatedRelativeTotalTime'
+              },
+          ],
+          period='string',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1),
+          targetResolution='PT5M'|'PT1H'|'P1D'
+      )
+    :type endTime: datetime
+    :param endTime: 
+
+      The end time of the time period for the returned time series values. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    :type frameMetrics: list
+    :param frameMetrics: 
+
+      The details of the metrics that are used to request a time series of values. The metric includes the name of the frame, the aggregation type to calculate the metric value for the frame, and the thread states to use to get the count for the metric value of the frame.
+
+      
+
+    
+      - *(dict) --* 
+
+        The frame name, metric type, and thread states. These are used to derive the value of the metric for the frame.
+
+        
+
+      
+        - **frameName** *(string) --* **[REQUIRED]** 
+
+          Name of the method common across the multiple occurrences of a frame in an application profile.
+
+          
+
+        
+        - **threadStates** *(list) --* **[REQUIRED]** 
+
+          List of application runtime thread states used to get the counts for a frame a derive a metric value.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **type** *(string) --* **[REQUIRED]** 
+
+          A type of aggregation that specifies how a metric for a frame is analyzed. The supported value ``AggregatedRelativeTotalTime`` is an aggregation of the metric value for one frame that is calculated across the occurrences of all frames in a profile. 
+
+          
+
+        
+      
+  
+    :type period: string
+    :param period: 
+
+      The duration of the frame metrics used to return the time series values. Specify using the ISO 8601 format. The maximum period duration is one day (``PT24H`` or ``P1D`` ). 
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group associated with the the frame metrics used to return the time series values. 
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: 
+
+      The start time of the time period for the frame metrics used to return the time series values. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    :type targetResolution: string
+    :param targetResolution: 
+
+      The requested resolution of time steps for the returned time series of values. If the requested target resolution is not available due to data not being retained we provide a best effort result by falling back to the most granular available resolution after the target resolution. There are 3 valid values. 
+
+       
+
+       
+      * ``P1D`` — 1 day  
+       
+      * ``PT1H`` — 1 hour  
+       
+      * ``PT5M`` — 5 minutes  
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'endTime': datetime(2015, 1, 1),
+            'endTimes': [
+                {
+                    'value': datetime(2015, 1, 1)
+                },
+            ],
+            'frameMetricData': [
+                {
+                    'frameMetric': {
+                        'frameName': 'string',
+                        'threadStates': [
+                            'string',
+                        ],
+                        'type': 'AggregatedRelativeTotalTime'
+                    },
+                    'values': [
+                        123.0,
+                    ]
+                },
+            ],
+            'resolution': 'PT5M'|'PT1H'|'P1D',
+            'startTime': datetime(2015, 1, 1),
+            'unprocessedEndTimes': {
+                'string': [
+                    {
+                        'value': datetime(2015, 1, 1)
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the BatchGetFrameMetricDataResponse.
+
+        
+        
+
+        - **endTime** *(datetime) --* 
+
+          The end time of the time period for the returned time series values. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+          
+        
+
+        - **endTimes** *(list) --* 
+
+          List of instances, or time steps, in the time series. For example, if the ``period`` is one day (``PT24H)`` ), and the ``resolution`` is five minutes (``PT5M`` ), then there are 288 ``endTimes`` in the list that are each five minutes appart. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A data type that contains a ``Timestamp`` object. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+            
+
+            - **value** *(datetime) --* 
+
+              A ``Timestamp`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+              
+        
+      
+        
+
+        - **frameMetricData** *(list) --* 
+
+          Details of the metrics to request a time series of values. The metric includes the name of the frame, the aggregation type to calculate the metric value for the frame, and the thread states to use to get the count for the metric value of the frame.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a frame metric and its values. 
+
+            
+            
+
+            - **frameMetric** *(dict) --* 
+
+              The frame name, metric type, and thread states. These are used to derive the value of the metric for the frame.
+
+              
+              
+
+              - **frameName** *(string) --* 
+
+                Name of the method common across the multiple occurrences of a frame in an application profile.
+
+                
+              
+
+              - **threadStates** *(list) --* 
+
+                List of application runtime thread states used to get the counts for a frame a derive a metric value.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **type** *(string) --* 
+
+                A type of aggregation that specifies how a metric for a frame is analyzed. The supported value ``AggregatedRelativeTotalTime`` is an aggregation of the metric value for one frame that is calculated across the occurrences of all frames in a profile. 
+
+                
+          
+            
+
+            - **values** *(list) --* 
+
+              A list of values that are associated with a frame metric. 
+
+              
+              
+
+              - *(float) --* 
+          
+        
+      
+        
+
+        - **resolution** *(string) --* 
+
+          Resolution or granularity of the profile data used to generate the time series. This is the value used to jump through time steps in a time series. There are 3 valid values. 
+
+           
+
+           
+          * ``P1D`` — 1 day  
+           
+          * ``PT1H`` — 1 hour  
+           
+          * ``PT5M`` — 5 minutes  
+           
+
+          
+        
+
+        - **startTime** *(datetime) --* 
+
+          The start time of the time period for the returned time series values. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+          
+        
+
+        - **unprocessedEndTimes** *(dict) --* 
+
+          List of instances which remained unprocessed. This will create a missing time step in the list of end times.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(list) --* 
+              
+
+              - *(dict) --* 
+
+                A data type that contains a ``Timestamp`` object. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                
+                
+
+                - **value** *(datetime) --* 
+
+                  A ``Timestamp`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                  
+            
+          
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: configure_agent(**kwargs)
+
+    
+
+    Used by profiler agents to report their current state and to receive remote configuration updates. For example, ``ConfigureAgent`` can be used to tell an agent whether to profile or not and for how long to return profiling data. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ConfigureAgent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.configure_agent(
+          fleetInstanceId='string',
+          metadata={
+              'string': 'string'
+          },
+          profilingGroupName='string'
+      )
+    :type fleetInstanceId: string
+    :param fleetInstanceId: 
+
+      A universally unique identifier (UUID) for a profiling instance. For example, if the profiling instance is an Amazon EC2 instance, it is the instance ID. If it is an AWS Fargate container, it is the container's task ID. 
+
+      
+
+    
+    :type metadata: dict
+    :param metadata: 
+
+      Metadata captured about the compute platform the agent is running on. It includes information about sampling and reporting. The valid fields are:
+
+       
+
+       
+      * ``COMPUTE_PLATFORM`` - The compute platform on which the agent is running  
+       
+      * ``AGENT_ID`` - The ID for an agent instance.  
+       
+      * ``AWS_REQUEST_ID`` - The AWS request ID of a Lambda invocation.  
+       
+      * ``EXECUTION_ENVIRONMENT`` - The execution environment a Lambda function is running on.  
+       
+      * ``LAMBDA_FUNCTION_ARN`` - The Amazon Resource Name (ARN) that is used to invoke a Lambda function.  
+       
+      * ``LAMBDA_MEMORY_LIMIT_IN_MB`` - The memory allocated to a Lambda function.  
+       
+      * ``LAMBDA_REMAINING_TIME_IN_MILLISECONDS`` - The time in milliseconds before execution of a Lambda function times out.  
+       
+      * ``LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS`` - The time in milliseconds between two invocations of a Lambda function.  
+       
+      * ``LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS`` - The time in milliseconds for the previous Lambda invocation.  
+       
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group for which the configured agent is collecting profiling data. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configuration': {
+                'agentParameters': {
+                    'string': 'string'
+                },
+                'periodInSeconds': 123,
+                'shouldProfile': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the configureAgentResponse.
+
+        
+        
+
+        - **configuration** *(dict) --* 
+
+          An ` ``AgentConfiguration`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentConfiguration.html`__ object that specifies if an agent profiles or not and for how long to return profiling data. 
+
+          
+          
+
+          - **agentParameters** *(dict) --* 
+
+            Parameters used by the profiler. The valid parameters are: 
+
+             
+
+             
+            * ``MaxStackDepth`` - The maximum depth of the stacks in the code that is represented in the profile. For example, if CodeGuru Profiler finds a method ``A`` , which calls method ``B`` , which calls method ``C`` , which calls method ``D`` , then the depth is 4. If the ``maxDepth`` is set to 2, then the profiler evaluates ``A`` and ``B`` .  
+             
+            * ``MemoryUsageLimitPercent`` - The percentage of memory that is used by the profiler. 
+             
+            * ``MinimumTimeForReportingInMilliseconds`` - The minimum time in milliseconds between sending reports.  
+             
+            * ``ReportingIntervalInMilliseconds`` - The reporting interval in milliseconds used to report profiles.  
+             
+            * ``SamplingIntervalInMilliseconds`` - The sampling interval in milliseconds that is used to profile samples.  
+             
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **periodInSeconds** *(integer) --* 
+
+            How long a profiling agent should send profiling data using ` ``ConfigureAgent`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html`__ . For example, if this is set to 300, the profiling agent calls ` ``ConfigureAgent`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html`__ every 5 minutes to submit the profiled data collected during that period. 
+
+            
+          
+
+          - **shouldProfile** *(boolean) --* 
+
+            A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: create_profiling_group(**kwargs)
+
+    
+
+    Creates a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/CreateProfilingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_profiling_group(
+          agentOrchestrationConfig={
+              'profilingEnabled': True|False
+          },
+          clientToken='string',
+          computePlatform='Default'|'AWSLambda',
+          profilingGroupName='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type agentOrchestrationConfig: dict
+    :param agentOrchestrationConfig: 
+
+      Specifies whether profiling is enabled or disabled for the created profiling group. 
+
+      
+
+    
+      - **profilingEnabled** *(boolean) --* **[REQUIRED]** 
+
+        A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+        
+
+      
+    
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the accidental creation of duplicate profiling groups if there are failures and retries. 
+
+      This field is autopopulated if not provided.
+
+    
+    :type computePlatform: string
+    :param computePlatform: 
+
+      The compute platform of the profiling group. Use ``AWSLambda`` if your application runs on AWS Lambda. Use ``Default`` if your application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. If not specified, ``Default`` is used. 
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to create.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      A list of tags to add to the created profiling group. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profilingGroup': {
+                'agentOrchestrationConfig': {
+                    'profilingEnabled': True|False
+                },
+                'arn': 'string',
+                'computePlatform': 'Default'|'AWSLambda',
+                'createdAt': datetime(2015, 1, 1),
+                'name': 'string',
+                'profilingStatus': {
+                    'latestAgentOrchestratedAt': datetime(2015, 1, 1),
+                    'latestAgentProfileReportedAt': datetime(2015, 1, 1),
+                    'latestAggregatedProfile': {
+                        'period': 'PT5M'|'PT1H'|'P1D',
+                        'start': datetime(2015, 1, 1)
+                    }
+                },
+                'tags': {
+                    'string': 'string'
+                },
+                'updatedAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the createProfilingGroupResponse.
+
+        
+        
+
+        - **profilingGroup** *(dict) --* 
+
+          The returned ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ object that contains information about the created profiling group. 
+
+          
+          
+
+          - **agentOrchestrationConfig** *(dict) --* 
+
+            An ` ``AgentOrchestrationConfig`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html`__ object that indicates if the profiling group is enabled for profiled or not. 
+
+            
+            
+
+            - **profilingEnabled** *(boolean) --* 
+
+              A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+              
+        
+          
+
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) identifying the profiling group resource.
+
+            
+          
+
+          - **computePlatform** *(string) --* 
+
+            The compute platform of the profiling group. If it is set to ``AWSLambda`` , then the profiled application runs on AWS Lambda. If it is set to ``Default`` , then the profiled application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. The default is ``Default`` . 
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The time when the profiling group was created. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the profiling group.
+
+            
+          
+
+          - **profilingStatus** *(dict) --* 
+
+            A ` ``ProfilingStatus`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html`__ object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. 
+
+            
+            
+
+            - **latestAgentOrchestratedAt** *(datetime) --* 
+
+              The date and time when the profiling agent most recently pinged back. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAgentProfileReportedAt** *(datetime) --* 
+
+              The date and time when the most recent profile was received. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAggregatedProfile** *(dict) --* 
+
+              An ` ``AggregatedProfileTime`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html`__ object that contains the aggregation period and start time for an aggregated profile. 
+
+              
+              
+
+              - **period** *(string) --* 
+
+                The aggregation period. This indicates the period during which an aggregation profile collects posted agent profiles for a profiling group. Use one of three valid durations that are specified using the ISO 8601 format. 
+
+                 
+
+                 
+                * ``P1D`` — 1 day  
+                 
+                * ``PT1H`` — 1 hour  
+                 
+                * ``PT5M`` — 5 minutes  
+                 
+
+                
+              
+
+              - **start** *(datetime) --* 
+
+                The time that aggregation of posted agent profiles for a profiling group starts. The aggregation profile contains profiles posted by the agent starting at this time for an aggregation period specified by the ``period`` property of the ``AggregatedProfileTime`` object. 
+
+                 
+
+                Specify ``start`` using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                
+          
+        
+          
+
+          - **tags** *(dict) --* 
+
+            A list of the tags that belong to this profiling group. 
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **updatedAt** *(datetime) --* 
+
+            The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: delete_profiling_group(**kwargs)
+
+    
+
+    Deletes a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DeleteProfilingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_profiling_group(
+          profilingGroupName='string'
+      )
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the deleteProfilingGroupResponse.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: describe_profiling_group(**kwargs)
+
+    
+
+    Returns a ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ object that contains information about the requested profiling group. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DescribeProfilingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_profiling_group(
+          profilingGroupName='string'
+      )
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to get information about. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profilingGroup': {
+                'agentOrchestrationConfig': {
+                    'profilingEnabled': True|False
+                },
+                'arn': 'string',
+                'computePlatform': 'Default'|'AWSLambda',
+                'createdAt': datetime(2015, 1, 1),
+                'name': 'string',
+                'profilingStatus': {
+                    'latestAgentOrchestratedAt': datetime(2015, 1, 1),
+                    'latestAgentProfileReportedAt': datetime(2015, 1, 1),
+                    'latestAggregatedProfile': {
+                        'period': 'PT5M'|'PT1H'|'P1D',
+                        'start': datetime(2015, 1, 1)
+                    }
+                },
+                'tags': {
+                    'string': 'string'
+                },
+                'updatedAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the describeProfilingGroupResponse.
+
+        
+        
+
+        - **profilingGroup** *(dict) --* 
+
+          The returned ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ object that contains information about the requested profiling group. 
+
+          
+          
+
+          - **agentOrchestrationConfig** *(dict) --* 
+
+            An ` ``AgentOrchestrationConfig`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html`__ object that indicates if the profiling group is enabled for profiled or not. 
+
+            
+            
+
+            - **profilingEnabled** *(boolean) --* 
+
+              A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+              
+        
+          
+
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) identifying the profiling group resource.
+
+            
+          
+
+          - **computePlatform** *(string) --* 
+
+            The compute platform of the profiling group. If it is set to ``AWSLambda`` , then the profiled application runs on AWS Lambda. If it is set to ``Default`` , then the profiled application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. The default is ``Default`` . 
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The time when the profiling group was created. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the profiling group.
+
+            
+          
+
+          - **profilingStatus** *(dict) --* 
+
+            A ` ``ProfilingStatus`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html`__ object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. 
+
+            
+            
+
+            - **latestAgentOrchestratedAt** *(datetime) --* 
+
+              The date and time when the profiling agent most recently pinged back. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAgentProfileReportedAt** *(datetime) --* 
+
+              The date and time when the most recent profile was received. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAggregatedProfile** *(dict) --* 
+
+              An ` ``AggregatedProfileTime`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html`__ object that contains the aggregation period and start time for an aggregated profile. 
+
+              
+              
+
+              - **period** *(string) --* 
+
+                The aggregation period. This indicates the period during which an aggregation profile collects posted agent profiles for a profiling group. Use one of three valid durations that are specified using the ISO 8601 format. 
+
+                 
+
+                 
+                * ``P1D`` — 1 day  
+                 
+                * ``PT1H`` — 1 hour  
+                 
+                * ``PT5M`` — 5 minutes  
+                 
+
+                
+              
+
+              - **start** *(datetime) --* 
+
+                The time that aggregation of posted agent profiles for a profiling group starts. The aggregation profile contains profiles posted by the agent starting at this time for an aggregation period specified by the ``period`` property of the ``AggregatedProfileTime`` object. 
+
+                 
+
+                Specify ``start`` using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                
+          
+        
+          
+
+          - **tags** *(dict) --* 
+
+            A list of the tags that belong to this profiling group. 
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **updatedAt** *(datetime) --* 
+
+            The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_findings_report_account_summary(**kwargs)
+
+    
+
+    Returns a list of ` ``FindingsReportSummary`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html`__ objects that contain analysis results for all profiling groups in your AWS account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetFindingsReportAccountSummary>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_findings_report_account_summary(
+          dailyReportsOnly=True|False,
+          maxResults=123,
+          nextToken='string'
+      )
+    :type dailyReportsOnly: boolean
+    :param dailyReportsOnly: 
+
+      A ``Boolean`` value indicating whether to only return reports from daily profiles. If set to ``True`` , only analysis data from daily profiles is returned. If set to ``False`` , analysis data is returned from smaller time windows (for example, one hour).
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results returned by ``GetFindingsReportAccountSummary`` in paginated output. When this parameter is used, ``GetFindingsReportAccountSummary`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``GetFindingsReportAccountSummary`` request with the returned ``nextToken`` value.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``GetFindingsReportAccountSummary`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. 
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'reportSummaries': [
+                {
+                    'id': 'string',
+                    'profileEndTime': datetime(2015, 1, 1),
+                    'profileStartTime': datetime(2015, 1, 1),
+                    'profilingGroupName': 'string',
+                    'totalNumberOfFindings': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the GetFindingsReportAccountSummaryResponse.
+
+        
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``GetFindingsReportAccountSummary`` request. When the results of a ``GetFindingsReportAccountSummary`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+        
+
+        - **reportSummaries** *(list) --* 
+
+          The return list of ` ``FindingsReportSummary`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html`__ objects taht contain summaries of analysis results for all profiling groups in your AWS account.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about potential recommendations that might be created from the analysis of profiling data. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The universally unique identifier (UUID) of the recommendation report.
+
+              
+            
+
+            - **profileEndTime** *(datetime) --* 
+
+              The end time of the period during which the metric is flagged as anomalous. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+              
+            
+
+            - **profileStartTime** *(datetime) --* 
+
+              The start time of the profile the analysis data is about. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **profilingGroupName** *(string) --* 
+
+              The name of the profiling group that is associated with the analysis data.
+
+              
+            
+
+            - **totalNumberOfFindings** *(integer) --* 
+
+              The total number of different recommendations that were found by the analysis.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_notification_configuration(**kwargs)
+
+    
+
+    Get the current configuration for anomaly notifications for a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetNotificationConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_notification_configuration(
+          profilingGroupName='string'
+      )
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group we want to get the notification configuration for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'notificationConfiguration': {
+                'channels': [
+                    {
+                        'eventPublishers': [
+                            'AnomalyDetection',
+                        ],
+                        'id': 'string',
+                        'uri': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the GetNotificationConfigurationResponse.
+
+        
+        
+
+        - **notificationConfiguration** *(dict) --* 
+
+          The current notification configuration for this profiling group.
+
+          
+          
+
+          - **channels** *(list) --* 
+
+            List of up to two channels to be used for sending notifications for events detected from the application profile.
+
+            
+            
+
+            - *(dict) --* 
+
+              Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.
+
+              
+              
+
+              - **eventPublishers** *(list) --* 
+
+                List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **id** *(string) --* 
+
+                Unique identifier for each ``Channel`` in the notification configuration of a Profiling Group. A random UUID for channelId is used when adding a channel to the notification configuration if not specified in the request.
+
+                
+              
+
+              - **uri** *(string) --* 
+
+                Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_policy(**kwargs)
+
+    
+
+    Returns the JSON-formatted resource-based policy on a profiling group. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_policy(
+          profilingGroupName='string'
+      )
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policy': 'string',
+            'revisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the ``getPolicyResponse`` .
+
+        
+        
+
+        - **policy** *(string) --* 
+
+          The JSON-formatted resource-based policy attached to the ``ProfilingGroup`` .
+
+          
+        
+
+        - **revisionId** *(string) --* 
+
+          A unique identifier for the current revision of the returned policy.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_profile(**kwargs)
+
+    
+
+    Gets the aggregated profile of a profiling group for a specified time range. Amazon CodeGuru Profiler collects posted agent profiles for a profiling group into aggregated profiles. 
+
+     ``<note> <p> Because aggregated profiles expire over time <code>GetProfile</code> is not idempotent. </p> </note> <p> Specify the time range for the requested aggregated profile using 1 or 2 of the following parameters: <code>startTime</code>, <code>endTime</code>, <code>period</code>. The maximum time range allowed is 7 days. If you specify all 3 parameters, an exception is thrown. If you specify only <code>period</code>, the latest aggregated profile is returned. </p> <p> Aggregated profiles are available with aggregation periods of 5 minutes, 1 hour, and 1 day, aligned to UTC. The aggregation period of an aggregated profile determines how long it is retained. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html"> <code>AggregatedProfileTime</code> </a>. The aggregated profile's aggregation period determines how long it is retained by CodeGuru Profiler. </p> <ul> <li> <p> If the aggregation period is 5 minutes, the aggregated profile is retained for 15 days. </p> </li> <li> <p> If the aggregation period is 1 hour, the aggregated profile is retained for 60 days. </p> </li> <li> <p> If the aggregation period is 1 day, the aggregated profile is retained for 3 years. </p> </li> </ul> <p>There are two use cases for calling <code>GetProfile</code>.</p> <ol> <li> <p> If you want to return an aggregated profile that already exists, use <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ListProfileTimes.html"> <code>ListProfileTimes</code> </a> to view the time ranges of existing aggregated profiles. Use them in a <code>GetProfile</code> request to return a specific, existing aggregated profile. </p> </li> <li> <p> If you want to return an aggregated profile for a time range that doesn't align with an existing aggregated profile, then CodeGuru Profiler makes a best effort to combine existing aggregated profiles from the requested time range and return them as one aggregated profile. </p> <p> If aggregated profiles do not exist for the full time range requested, then aggregated profiles for a smaller time range are returned. For example, if the requested time range is from 00:00 to 00:20, and the existing aggregated profiles are from 00:15 and 00:25, then the aggregated profiles from 00:15 to 00:20 are returned. </p> </li> </ol>`` 
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_profile(
+          accept='string',
+          endTime=datetime(2015, 1, 1),
+          maxDepth=123,
+          period='string',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1)
+      )
+    :type accept: string
+    :param accept: 
+
+      The format of the returned profiling data. The format maps to the ``Accept`` and ``Content-Type`` headers of the HTTP request. You can specify one of the following: or the default . 
+
+       ``<ul> <li> <p> <code>application/json</code> — standard JSON format </p> </li> <li> <p> <code>application/x-amzn-ion</code> — the Amazon Ion data format. For more information, see <a href="http://amzn.github.io/ion-docs/">Amazon Ion</a>. </p> </li> </ul>`` 
+
+    
+    :type endTime: datetime
+    :param endTime: 
+
+      The end time of the requested profile. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+       
+
+      If you specify ``endTime`` , then you must also specify ``period`` or ``startTime`` , but not both. 
+
+      
+
+    
+    :type maxDepth: integer
+    :param maxDepth: 
+
+      The maximum depth of the stacks in the code that is represented in the aggregated profile. For example, if CodeGuru Profiler finds a method ``A`` , which calls method ``B`` , which calls method ``C`` , which calls method ``D`` , then the depth is 4. If the ``maxDepth`` is set to 2, then the aggregated profile contains representations of methods ``A`` and ``B`` . 
+
+      
+
+    
+    :type period: string
+    :param period: 
+
+      Used with ``startTime`` or ``endTime`` to specify the time range for the returned aggregated profile. Specify using the ISO 8601 format. For example, ``P1DT1H1M1S`` . 
+
+       ``<p> To get the latest aggregated profile, specify only <code>period</code>. </p>`` 
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to get.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: 
+
+      The start time of the profile to get. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+       ``<p> If you specify <code>startTime</code>, then you must also specify <code>period</code> or <code>endTime</code>, but not both. </p>`` 
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contentEncoding': 'string',
+            'contentType': 'string',
+            'profile': StreamingBody()
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the getProfileResponse.
+
+        
+        
+
+        - **contentEncoding** *(string) --* 
+
+          The content encoding of the profile.
+
+          
+        
+
+        - **contentType** *(string) --* 
+
+          The content type of the profile in the payload. It is either ``application/json`` or the default ``application/x-amzn-ion`` .
+
+          
+        
+
+        - **profile** (:class:`.StreamingBody`) -- 
+
+          Information about the profile.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_recommendations(**kwargs)
+
+    
+
+    Returns a list of ` ``Recommendation`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html`__ objects that contain recommendations for a profiling group for a given time period. A list of ` ``Anomaly`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Anomaly.html`__ objects that contains details about anomalies detected in the profiling group for the same time period is also returned. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetRecommendations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_recommendations(
+          endTime=datetime(2015, 1, 1),
+          locale='string',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1)
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      The start time of the profile to get analysis data about. You must specify ``startTime`` and ``endTime`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    :type locale: string
+    :param locale: 
+
+      The language used to provide analysis. Specify using a string that is one of the following ``BCP 47`` language codes. 
+
+       
+
+       
+      * ``de-DE`` - German, Germany  
+       
+      * ``en-GB`` - English, United Kingdom  
+       
+      * ``en-US`` - English, United States  
+       
+      * ``es-ES`` - Spanish, Spain  
+       
+      * ``fr-FR`` - French, France  
+       
+      * ``it-IT`` - Italian, Italy  
+       
+      * ``ja-JP`` - Japanese, Japan  
+       
+      * ``ko-KR`` - Korean, Republic of Korea  
+       
+      * ``pt-BR`` - Portugese, Brazil  
+       
+      * ``zh-CN`` - Chinese, China  
+       
+      * ``zh-TW`` - Chinese, Taiwan  
+       
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to get analysis data about. 
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      The end time of the profile to get analysis data about. You must specify ``startTime`` and ``endTime`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'anomalies': [
+                {
+                    'instances': [
+                        {
+                            'endTime': datetime(2015, 1, 1),
+                            'id': 'string',
+                            'startTime': datetime(2015, 1, 1),
+                            'userFeedback': {
+                                'type': 'Positive'|'Negative'
+                            }
+                        },
+                    ],
+                    'metric': {
+                        'frameName': 'string',
+                        'threadStates': [
+                            'string',
+                        ],
+                        'type': 'AggregatedRelativeTotalTime'
+                    },
+                    'reason': 'string'
+                },
+            ],
+            'profileEndTime': datetime(2015, 1, 1),
+            'profileStartTime': datetime(2015, 1, 1),
+            'profilingGroupName': 'string',
+            'recommendations': [
+                {
+                    'allMatchesCount': 123,
+                    'allMatchesSum': 123.0,
+                    'endTime': datetime(2015, 1, 1),
+                    'pattern': {
+                        'countersToAggregate': [
+                            'string',
+                        ],
+                        'description': 'string',
+                        'id': 'string',
+                        'name': 'string',
+                        'resolutionSteps': 'string',
+                        'targetFrames': [
+                            [
+                                'string',
+                            ],
+                        ],
+                        'thresholdPercent': 123.0
+                    },
+                    'startTime': datetime(2015, 1, 1),
+                    'topMatches': [
+                        {
+                            'frameAddress': 'string',
+                            'targetFramesIndex': 123,
+                            'thresholdBreachValue': 123.0
+                        },
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the GetRecommendationsResponse.
+
+        
+        
+
+        - **anomalies** *(list) --* 
+
+          The list of anomalies that the analysis has found for this profile. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Details about an anomaly in a specific metric of application profile. The anomaly is detected using analysis of the metric data over a period of time. 
+
+            
+            
+
+            - **instances** *(list) --* 
+
+              A list of the instances of the detected anomalies during the requested period. 
+
+              
+              
+
+              - *(dict) --* 
+
+                The specific duration in which the metric is flagged as anomalous.
+
+                
+                
+
+                - **endTime** *(datetime) --* 
+
+                  The end time of the period during which the metric is flagged as anomalous. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                  
+                
+
+                - **id** *(string) --* 
+
+                  The universally unique identifier (UUID) of an instance of an anomaly in a metric. 
+
+                  
+                
+
+                - **startTime** *(datetime) --* 
+
+                  The start time of the period during which the metric is flagged as anomalous. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                  
+                
+
+                - **userFeedback** *(dict) --* 
+
+                  Feedback type on a specific instance of anomaly submitted by the user.
+
+                  
+                  
+
+                  - **type** *(string) --* 
+
+                    Optional ``Positive`` or ``Negative`` feedback submitted by the user about whether the recommendation is useful or not.
+
+                    
+              
+            
+          
+            
+
+            - **metric** *(dict) --* 
+
+              Details about the metric that the analysis used when it detected the anomaly. The metric includes the name of the frame that was analyzed with the type and thread states used to derive the metric value for that frame. 
+
+              
+              
+
+              - **frameName** *(string) --* 
+
+                The name of the method that appears as a frame in any stack in a profile. 
+
+                
+              
+
+              - **threadStates** *(list) --* 
+
+                The list of application runtime thread states that is used to calculate the metric value for the frame. 
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **type** *(string) --* 
+
+                A type that specifies how a metric for a frame is analyzed. The supported value ``AggregatedRelativeTotalTime`` is an aggregation of the metric value for one frame that is calculated across the occurences of all frames in a profile.
+
+                
+          
+            
+
+            - **reason** *(string) --* 
+
+              The reason for which metric was flagged as anomalous.
+
+              
+        
+      
+        
+
+        - **profileEndTime** *(datetime) --* 
+
+          The end time of the profile the analysis data is about. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+          
+        
+
+        - **profileStartTime** *(datetime) --* 
+
+          The start time of the profile the analysis data is about. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+          
+        
+
+        - **profilingGroupName** *(string) --* 
+
+          The name of the profiling group the analysis data is about.
+
+          
+        
+
+        - **recommendations** *(list) --* 
+
+          The list of recommendations that the analysis found for this profile.
+
+          
+          
+
+          - *(dict) --* 
+
+            A potential improvement that was found from analyzing the profiling data.
+
+            
+            
+
+            - **allMatchesCount** *(integer) --* 
+
+              How many different places in the profile graph triggered a match.
+
+              
+            
+
+            - **allMatchesSum** *(float) --* 
+
+              How much of the total sample count is potentially affected.
+
+              
+            
+
+            - **endTime** *(datetime) --* 
+
+              End time of the profile that was used by this analysis. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **pattern** *(dict) --* 
+
+              The pattern that analysis recognized in the profile to make this recommendation.
+
+              
+              
+
+              - **countersToAggregate** *(list) --* 
+
+                A list of the different counters used to determine if there is a match. 
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **description** *(string) --* 
+
+                The description of the recommendation. This explains a potential inefficiency in a profiled application.
+
+                
+              
+
+              - **id** *(string) --* 
+
+                The universally unique identifier (UUID) of this pattern.
+
+                
+              
+
+              - **name** *(string) --* 
+
+                The name for this pattern.
+
+                
+              
+
+              - **resolutionSteps** *(string) --* 
+
+                A string that contains the steps recommended to address the potential inefficiency. 
+
+                
+              
+
+              - **targetFrames** *(list) --* 
+
+                A list of frame names that were searched during the analysis that generated a recommendation.
+
+                
+                
+
+                - *(list) --* 
+                  
+
+                  - *(string) --* 
+              
+            
+              
+
+              - **thresholdPercent** *(float) --* 
+
+                The percentage of time an application spends in one method that triggers a recommendation. The percentage of time is the same as the percentage of the total gathered sample counts during analysis. 
+
+                
+          
+            
+
+            - **startTime** *(datetime) --* 
+
+              The start time of the profile that was used by this analysis. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **topMatches** *(list) --* 
+
+              List of the matches with most impact. 
+
+              
+              
+
+              - *(dict) --* 
+
+                The part of a profile that contains a recommendation found during analysis.
+
+                
+                
+
+                - **frameAddress** *(string) --* 
+
+                  The location in the profiling graph that contains a recommendation found during analysis.
+
+                  
+                
+
+                - **targetFramesIndex** *(integer) --* 
+
+                  The target frame that triggered a match.
+
+                  
+                
+
+                - **thresholdBreachValue** *(float) --* 
+
+                  The value in the profile data that exceeded the recommendation threshold.
+
+                  
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_findings_reports(**kwargs)
+
+    
+
+    List the available reports for a given profiling group and time range.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListFindingsReports>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_findings_reports(
+          dailyReportsOnly=True|False,
+          endTime=datetime(2015, 1, 1),
+          maxResults=123,
+          nextToken='string',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1)
+      )
+    :type dailyReportsOnly: boolean
+    :param dailyReportsOnly: 
+
+      A ``Boolean`` value indicating whether to only return reports from daily profiles. If set to ``True`` , only analysis data from daily profiles is returned. If set to ``False`` , analysis data is returned from smaller time windows (for example, one hour).
+
+      
+
+    
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      The end time of the profile to get analysis data about. You must specify ``startTime`` and ``endTime`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of report results returned by ``ListFindingsReports`` in paginated output. When this parameter is used, ``ListFindingsReports`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``ListFindingsReports`` request with the returned ``nextToken`` value.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``ListFindingsReportsRequest`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. 
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group from which to search for analysis data.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      The start time of the profile to get analysis data about. You must specify ``startTime`` and ``endTime`` . This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'findingsReportSummaries': [
+                {
+                    'id': 'string',
+                    'profileEndTime': datetime(2015, 1, 1),
+                    'profileStartTime': datetime(2015, 1, 1),
+                    'profilingGroupName': 'string',
+                    'totalNumberOfFindings': 123
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the ListFindingsReportsResponse.
+
+        
+        
+
+        - **findingsReportSummaries** *(list) --* 
+
+          The list of analysis results summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about potential recommendations that might be created from the analysis of profiling data. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The universally unique identifier (UUID) of the recommendation report.
+
+              
+            
+
+            - **profileEndTime** *(datetime) --* 
+
+              The end time of the period during which the metric is flagged as anomalous. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+              
+            
+
+            - **profileStartTime** *(datetime) --* 
+
+              The start time of the profile the analysis data is about. This is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **profilingGroupName** *(string) --* 
+
+              The name of the profiling group that is associated with the analysis data.
+
+              
+            
+
+            - **totalNumberOfFindings** *(integer) --* 
+
+              The total number of different recommendations that were found by the analysis.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``ListFindingsReports`` request. When the results of a ``ListFindingsReports`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_profile_times(**kwargs)
+
+    
+
+    Lists the start times of the available aggregated profiles of a profiling group for an aggregation period within the specified time range.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfileTimes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_profile_times(
+          endTime=datetime(2015, 1, 1),
+          maxResults=123,
+          nextToken='string',
+          orderBy='TimestampDescending'|'TimestampAscending',
+          period='PT5M'|'PT1H'|'P1D',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1)
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      The end time of the time range from which to list the profiles.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of profile time results returned by ``ListProfileTimes`` in paginated output. When this parameter is used, ``ListProfileTimes`` only returns ``maxResults`` results in a single page with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``ListProfileTimes`` request with the returned ``nextToken`` value. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``ListProfileTimes`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. 
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    :type orderBy: string
+    :param orderBy: 
+
+      The order (ascending or descending by start time of the profile) to use when listing profiles. Defaults to ``TIMESTAMP_DESCENDING`` . 
+
+      
+
+    
+    :type period: string
+    :param period: **[REQUIRED]** 
+
+      The aggregation period. This specifies the period during which an aggregation profile collects posted agent profiles for a profiling group. There are 3 valid values. 
+
+       
+
+       
+      * ``P1D`` — 1 day  
+       
+      * ``PT1H`` — 1 hour  
+       
+      * ``PT5M`` — 5 minutes  
+       
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      The start time of the time range from which to list the profiles.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'profileTimes': [
+                {
+                    'start': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the listProfileTimesResponse.
+
+        
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``ListProfileTimes`` request. When the results of a ``ListProfileTimes`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return. 
+
+          
+        
+
+        - **profileTimes** *(list) --* 
+
+          The list of start times of the available profiles for the aggregation period in the specified time range. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains the start time of a profile. 
+
+            
+            
+
+            - **start** *(datetime) --* 
+
+              The start time of a profile. It is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_profiling_groups(**kwargs)
+
+    
+
+    Returns a list of profiling groups. The profiling groups are returned as ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ objects. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfilingGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_profiling_groups(
+          includeDescription=True|False,
+          maxResults=123,
+          nextToken='string'
+      )
+    :type includeDescription: boolean
+    :param includeDescription: 
+
+      A ``Boolean`` value indicating whether to include a description. If ``true`` , then a list of ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ objects that contain detailed information about profiling groups is returned. If ``false`` , then a list of profiling group names is returned.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of profiling groups results returned by ``ListProfilingGroups`` in paginated output. When this parameter is used, ``ListProfilingGroups`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``ListProfilingGroups`` request with the returned ``nextToken`` value. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``ListProfilingGroups`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. 
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'profilingGroupNames': [
+                'string',
+            ],
+            'profilingGroups': [
+                {
+                    'agentOrchestrationConfig': {
+                        'profilingEnabled': True|False
+                    },
+                    'arn': 'string',
+                    'computePlatform': 'Default'|'AWSLambda',
+                    'createdAt': datetime(2015, 1, 1),
+                    'name': 'string',
+                    'profilingStatus': {
+                        'latestAgentOrchestratedAt': datetime(2015, 1, 1),
+                        'latestAgentProfileReportedAt': datetime(2015, 1, 1),
+                        'latestAggregatedProfile': {
+                            'period': 'PT5M'|'PT1H'|'P1D',
+                            'start': datetime(2015, 1, 1)
+                        }
+                    },
+                    'tags': {
+                        'string': 'string'
+                    },
+                    'updatedAt': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the listProfilingGroupsResponse.
+
+        
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``ListProfilingGroups`` request. When the results of a ``ListProfilingGroups`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return. 
+
+          
+        
+
+        - **profilingGroupNames** *(list) --* 
+
+          A returned list of profiling group names. A list of the names is returned only if ``includeDescription`` is ``false`` , otherwise a list of ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ objects is returned. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **profilingGroups** *(list) --* 
+
+          A returned list ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ objects. A list of ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ objects is returned only if ``includeDescription`` is ``true`` , otherwise a list of profiling group names is returned. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a profiling group. 
+
+            
+            
+
+            - **agentOrchestrationConfig** *(dict) --* 
+
+              An ` ``AgentOrchestrationConfig`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html`__ object that indicates if the profiling group is enabled for profiled or not. 
+
+              
+              
+
+              - **profilingEnabled** *(boolean) --* 
+
+                A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+                
+          
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) identifying the profiling group resource.
+
+              
+            
+
+            - **computePlatform** *(string) --* 
+
+              The compute platform of the profiling group. If it is set to ``AWSLambda`` , then the profiled application runs on AWS Lambda. If it is set to ``Default`` , then the profiled application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. The default is ``Default`` . 
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time when the profiling group was created. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the profiling group.
+
+              
+            
+
+            - **profilingStatus** *(dict) --* 
+
+              A ` ``ProfilingStatus`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html`__ object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. 
+
+              
+              
+
+              - **latestAgentOrchestratedAt** *(datetime) --* 
+
+                The date and time when the profiling agent most recently pinged back. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+                
+              
+
+              - **latestAgentProfileReportedAt** *(datetime) --* 
+
+                The date and time when the most recent profile was received. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+                
+              
+
+              - **latestAggregatedProfile** *(dict) --* 
+
+                An ` ``AggregatedProfileTime`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html`__ object that contains the aggregation period and start time for an aggregated profile. 
+
+                
+                
+
+                - **period** *(string) --* 
+
+                  The aggregation period. This indicates the period during which an aggregation profile collects posted agent profiles for a profiling group. Use one of three valid durations that are specified using the ISO 8601 format. 
+
+                   
+
+                   
+                  * ``P1D`` — 1 day  
+                   
+                  * ``PT1H`` — 1 hour  
+                   
+                  * ``PT5M`` — 5 minutes  
+                   
+
+                  
+                
+
+                - **start** *(datetime) --* 
+
+                  The time that aggregation of posted agent profiles for a profiling group starts. The aggregation profile contains profiles posted by the agent starting at this time for an aggregation period specified by the ``period`` property of the ``AggregatedProfileTime`` object. 
+
+                   
+
+                  Specify ``start`` using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                  
+            
+          
+            
+
+            - **tags** *(dict) --* 
+
+              A list of the tags that belong to this profiling group. 
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **updatedAt** *(datetime) --* 
+
+              The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of the tags that are assigned to a specified resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource that contains the tags to return. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The list of tags assigned to the specified resource. This is the list of tags returned in the response. 
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: post_agent_profile(**kwargs)
+
+    
+
+    Submits profiling data to an aggregated profile of a profiling group. To get an aggregated profile that is created with this profiling data, use ` ``GetProfile`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html`__ . 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PostAgentProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.post_agent_profile(
+          agentProfile=b'bytes'|file,
+          contentType='string',
+          profileToken='string',
+          profilingGroupName='string'
+      )
+    :type agentProfile: bytes or seekable file-like object
+    :param agentProfile: **[REQUIRED]** 
+
+      The submitted profiling data. 
+
+      
+
+    
+    :type contentType: string
+    :param contentType: **[REQUIRED]** 
+
+      The format of the submitted profiling data. The format maps to the ``Accept`` and ``Content-Type`` headers of the HTTP request. You can specify one of the following: or the default . 
+
+       ``<ul> <li> <p> <code>application/json</code> — standard JSON format </p> </li> <li> <p> <code>application/x-amzn-ion</code> — the Amazon Ion data format. For more information, see <a href="http://amzn.github.io/ion-docs/">Amazon Ion</a>. </p> </li> </ul>`` 
+
+    
+    :type profileToken: string
+    :param profileToken: 
+
+      Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to prevent the accidental submission of duplicate profiling data if there are failures and retries. 
+
+      This field is autopopulated if not provided.
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group with the aggregated profile that receives the submitted profiling data. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the postAgentProfileResponse.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: put_permission(**kwargs)
+
+    
+
+    Adds permissions to a profiling group's resource-based policy that are provided using an action group. If a profiling group doesn't have a resource-based policy, one is created for it using the permissions in the action group and the roles and users in the ``principals`` parameter. 
+
+     ``<p> The one supported action group that can be added is <code>agentPermission</code> which grants <code>ConfigureAgent</code> and <code>PostAgent</code> permissions. For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html">Resource-based policies in CodeGuru Profiler</a> in the <i>Amazon CodeGuru Profiler User Guide</i>, <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html"> <code>ConfigureAgent</code> </a>, and <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html"> <code>PostAgentProfile</code> </a>. </p> <p> The first time you call <code>PutPermission</code> on a profiling group, do not specify a <code>revisionId</code> because it doesn't have a resource-based policy. Subsequent calls must provide a <code>revisionId</code> to specify which revision of the resource-based policy to add the permissions to. </p> <p> The response contains the profiling group's JSON-formatted resource policy. </p>`` 
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PutPermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_permission(
+          actionGroup='agentPermissions',
+          principals=[
+              'string',
+          ],
+          profilingGroupName='string',
+          revisionId='string'
+      )
+    :type actionGroup: string
+    :param actionGroup: **[REQUIRED]** 
+
+      Specifies an action group that contains permissions to add to a profiling group resource. One action group is supported, ``agentPermissions`` , which grants permission to perform actions required by the profiling agent, ``ConfigureAgent`` and ``PostAgentProfile`` permissions. 
+
+      
+
+    
+    :type principals: list
+    :param principals: **[REQUIRED]** 
+
+      A list ARNs for the roles and users you want to grant access to the profiling group. Wildcards are not are supported in the ARNs. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to grant access to.
+
+      
+
+    
+    :type revisionId: string
+    :param revisionId: 
+
+      A universally unique identifier (UUID) for the revision of the policy you are adding to the profiling group. Do not specify this when you add permissions to a profiling group for the first time. If a policy already exists on the profiling group, you must specify the ``revisionId`` . 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policy': 'string',
+            'revisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the ``putPermissionResponse`` .
+
+        
+        
+
+        - **policy** *(string) --* 
+
+          The JSON-formatted resource-based policy on the profiling group that includes the added permissions. 
+
+          
+        
+
+        - **revisionId** *(string) --* 
+
+          A universally unique identifier (UUID) for the revision of the resource-based policy that includes the added permissions. The JSON-formatted policy is in the ``policy`` element of the response. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: remove_notification_channel(**kwargs)
+
+    
+
+    Remove one anomaly notifications channel for a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/RemoveNotificationChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.remove_notification_channel(
+          channelId='string',
+          profilingGroupName='string'
+      )
+    :type channelId: string
+    :param channelId: **[REQUIRED]** 
+
+      The id of the channel that we want to stop receiving notifications.
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group we want to change notification configuration for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'notificationConfiguration': {
+                'channels': [
+                    {
+                        'eventPublishers': [
+                            'AnomalyDetection',
+                        ],
+                        'id': 'string',
+                        'uri': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the RemoveNotificationChannelResponse.
+
+        
+        
+
+        - **notificationConfiguration** *(dict) --* 
+
+          The new notification configuration for this profiling group.
+
+          
+          
+
+          - **channels** *(list) --* 
+
+            List of up to two channels to be used for sending notifications for events detected from the application profile.
+
+            
+            
+
+            - *(dict) --* 
+
+              Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.
+
+              
+              
+
+              - **eventPublishers** *(list) --* 
+
+                List of publishers for different type of events that may be detected in an application from the profile. Anomaly detection is the only event publisher in Profiler.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **id** *(string) --* 
+
+                Unique identifier for each ``Channel`` in the notification configuration of a Profiling Group. A random UUID for channelId is used when adding a channel to the notification configuration if not specified in the request.
+
+                
+              
+
+              - **uri** *(string) --* 
+
+                Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: remove_permission(**kwargs)
+
+    
+
+    Removes permissions from a profiling group's resource-based policy that are provided using an action group. The one supported action group that can be removed is ``agentPermission`` which grants ``ConfigureAgent`` and ``PostAgent`` permissions. For more information, see `Resource-based policies in CodeGuru Profiler <https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html>`__ in the *Amazon CodeGuru Profiler User Guide* , ` ``ConfigureAgent`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html`__ , and ` ``PostAgentProfile`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html`__ . 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/RemovePermission>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.remove_permission(
+          actionGroup='agentPermissions',
+          profilingGroupName='string',
+          revisionId='string'
+      )
+    :type actionGroup: string
+    :param actionGroup: **[REQUIRED]** 
+
+      Specifies an action group that contains the permissions to remove from a profiling group's resource-based policy. One action group is supported, ``agentPermissions`` , which grants ``ConfigureAgent`` and ``PostAgentProfile`` permissions. 
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group.
+
+      
+
+    
+    :type revisionId: string
+    :param revisionId: **[REQUIRED]** 
+
+      A universally unique identifier (UUID) for the revision of the resource-based policy from which you want to remove permissions. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policy': 'string',
+            'revisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the ``removePermissionResponse`` .
+
+        
+        
+
+        - **policy** *(string) --* 
+
+          The JSON-formatted resource-based policy on the profiling group after the specified permissions were removed. 
+
+          
+        
+
+        - **revisionId** *(string) --* 
+
+          A universally unique identifier (UUID) for the revision of the resource-based policy after the specified permissions were removed. The updated JSON-formatted policy is in the ``policy`` element of the response. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: submit_feedback(**kwargs)
+
+    
+
+    Sends feedback to CodeGuru Profiler about whether the anomaly detected by the analysis is useful or not.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/SubmitFeedback>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.submit_feedback(
+          anomalyInstanceId='string',
+          comment='string',
+          profilingGroupName='string',
+          type='Positive'|'Negative'
+      )
+    :type anomalyInstanceId: string
+    :param anomalyInstanceId: **[REQUIRED]** 
+
+      The universally unique identifier (UUID) of the ` ``AnomalyInstance`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html`__ object that is included in the analysis data.
+
+      
+
+    
+    :type comment: string
+    :param comment: 
+
+      Optional feedback about this anomaly.
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group that is associated with the analysis data.
+
+      
+
+    
+    :type type: string
+    :param type: **[REQUIRED]** 
+
+      The feedback tpye. Thee are two valid values, ``Positive`` and ``Negative`` . 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the SubmitFeedbackResponse.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Use to assign one or more tags to a resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource that the tags are added to. 
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The list of tags that are added to the specified resource. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Use to remove one or more tags from a resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource that contains the tags to remove. 
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      A list of tag keys. Existing tags of resources with keys in this list are removed from the specified resource. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_profiling_group(**kwargs)
+
+    
+
+    Updates a profiling group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UpdateProfilingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_profiling_group(
+          agentOrchestrationConfig={
+              'profilingEnabled': True|False
+          },
+          profilingGroupName='string'
+      )
+    :type agentOrchestrationConfig: dict
+    :param agentOrchestrationConfig: **[REQUIRED]** 
+
+      Specifies whether profiling is enabled or disabled for a profiling group. 
+
+      
+
+    
+      - **profilingEnabled** *(boolean) --* **[REQUIRED]** 
+
+        A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+        
+
+      
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group to update.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profilingGroup': {
+                'agentOrchestrationConfig': {
+                    'profilingEnabled': True|False
+                },
+                'arn': 'string',
+                'computePlatform': 'Default'|'AWSLambda',
+                'createdAt': datetime(2015, 1, 1),
+                'name': 'string',
+                'profilingStatus': {
+                    'latestAgentOrchestratedAt': datetime(2015, 1, 1),
+                    'latestAgentProfileReportedAt': datetime(2015, 1, 1),
+                    'latestAggregatedProfile': {
+                        'period': 'PT5M'|'PT1H'|'P1D',
+                        'start': datetime(2015, 1, 1)
+                    }
+                },
+                'tags': {
+                    'string': 'string'
+                },
+                'updatedAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the updateProfilingGroupResponse.
+
+        
+        
+
+        - **profilingGroup** *(dict) --* 
+
+          A ` ``ProfilingGroupDescription`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html`__ that contains information about the returned updated profiling group. 
+
+          
+          
+
+          - **agentOrchestrationConfig** *(dict) --* 
+
+            An ` ``AgentOrchestrationConfig`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentOrchestrationConfig.html`__ object that indicates if the profiling group is enabled for profiled or not. 
+
+            
+            
+
+            - **profilingEnabled** *(boolean) --* 
+
+              A ``Boolean`` that specifies whether the profiling agent collects profiling data or not. Set to ``true`` to enable profiling. 
+
+              
+        
+          
+
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) identifying the profiling group resource.
+
+            
+          
+
+          - **computePlatform** *(string) --* 
+
+            The compute platform of the profiling group. If it is set to ``AWSLambda`` , then the profiled application runs on AWS Lambda. If it is set to ``Default`` , then the profiled application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. The default is ``Default`` . 
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The time when the profiling group was created. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the profiling group.
+
+            
+          
+
+          - **profilingStatus** *(dict) --* 
+
+            A ` ``ProfilingStatus`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html`__ object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. 
+
+            
+            
+
+            - **latestAgentOrchestratedAt** *(datetime) --* 
+
+              The date and time when the profiling agent most recently pinged back. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAgentProfileReportedAt** *(datetime) --* 
+
+              The date and time when the most recent profile was received. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+            
+
+            - **latestAggregatedProfile** *(dict) --* 
+
+              An ` ``AggregatedProfileTime`` https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html`__ object that contains the aggregation period and start time for an aggregated profile. 
+
+              
+              
+
+              - **period** *(string) --* 
+
+                The aggregation period. This indicates the period during which an aggregation profile collects posted agent profiles for a profiling group. Use one of three valid durations that are specified using the ISO 8601 format. 
+
+                 
+
+                 
+                * ``P1D`` — 1 day  
+                 
+                * ``PT1H`` — 1 hour  
+                 
+                * ``PT5M`` — 5 minutes  
+                 
+
+                
+              
+
+              - **start** *(datetime) --* 
+
+                The time that aggregation of posted agent profiles for a profiling group starts. The aggregation profile contains profiles posted by the agent starting at this time for an aggregation period specified by the ``period`` property of the ``AggregatedProfileTime`` object. 
+
+                 
+
+                Specify ``start`` using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+                
+          
+        
+          
+
+          - **tags** *(dict) --* 
+
+            A list of the tags that belong to this profiling group. 
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **updatedAt** *(datetime) --* 
+
+            The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`CodeGuruProfiler.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`CodeGuruProfiler.Paginator.ListProfileTimes`
+
+
+
+.. py:class:: CodeGuruProfiler.Paginator.ListProfileTimes
+
+  ::
+
+    
+    paginator = client.get_paginator('list_profile_times')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`CodeGuruProfiler.Client.list_profile_times`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfileTimes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          endTime=datetime(2015, 1, 1),
+          orderBy='TimestampDescending'|'TimestampAscending',
+          period='PT5M'|'PT1H'|'P1D',
+          profilingGroupName='string',
+          startTime=datetime(2015, 1, 1),
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      The end time of the time range from which to list the profiles.
+
+      
+
+    
+    :type orderBy: string
+    :param orderBy: 
+
+      The order (ascending or descending by start time of the profile) to use when listing profiles. Defaults to ``TIMESTAMP_DESCENDING`` . 
+
+      
+
+    
+    :type period: string
+    :param period: **[REQUIRED]** 
+
+      The aggregation period. This specifies the period during which an aggregation profile collects posted agent profiles for a profiling group. There are 3 valid values. 
+
+       
+
+       
+      * ``P1D`` — 1 day  
+       
+      * ``PT1H`` — 1 hour  
+       
+      * ``PT5M`` — 5 minutes  
+       
+
+      
+
+    
+    :type profilingGroupName: string
+    :param profilingGroupName: **[REQUIRED]** 
+
+      The name of the profiling group.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      The start time of the time range from which to list the profiles.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'profileTimes': [
+                {
+                    'start': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        The structure representing the listProfileTimesResponse.
+
+        
+        
+
+        - **profileTimes** *(list) --* 
+
+          The list of start times of the available profiles for the aggregation period in the specified time range. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains the start time of a profile. 
+
+            
+            
+
+            - **start** *(datetime) --* 
+
+              The start time of a profile. It is specified using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

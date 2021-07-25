@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Error handling &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Retries" href="retries.html" />
+    <link rel="prev" title="Paginators" href="paginators.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="retries.html" title="Retries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="paginators.html" title="Paginators"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#sdk-features">SDK features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clients.html">Low-level clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginators.html">Paginators</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="retries.html">Retries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Extensibility guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#migrations">Migrations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="index.html">Developer guide</a></li>
+              
+              <li>Error handling</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="error-handling">
+<span id="guide-error-handling"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 provides many features to assist in navigating the errors and exceptions that you might encounter when interacting with AWS services.</p>
+<p>Specifically, this guide provides details on the following:</p>
+<ul class="simple">
+<li>How to find what exceptions could be thrown by both Boto3 and AWS services</li>
+<li>How to catch and handle exceptions thrown by both Boto3 and AWS services</li>
+<li>How to parse error responses from AWS services</li>
+</ul>
+<div class="section" id="why-catch-exceptions-from-aws-and-boto">
+<h3>Why catch exceptions from AWS and Boto<a class="headerlink" href="#why-catch-exceptions-from-aws-and-boto" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><em>Service limits and quotas</em> - Your call rate to an AWS service might be too frequent, or you might have reached a specific AWS service quota. In either case, without proper error handling you wouldn’t know or wouldn’t handle them.</li>
+<li><em>Parameter validation and checking</em> - API requirements can change, especially across API versions. Catching these errors helps to identify if there’s an issue with the parameters you provide to any given API call.</li>
+<li><em>Proper logging and messaging</em> - Catching errors and exceptions means you can log them. This can be instrumental in troubleshooting any code you write when interacting with AWS services.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="determining-what-exceptions-to-catch">
+<h2>Determining what exceptions to catch<a class="headerlink" href="#determining-what-exceptions-to-catch" title="Permalink to this headline">¶</a></h2>
+<p>Exceptions that you might encounter when using Boto3 will come from one of two sources: botocore or the AWS services your client is interacting with.</p>
+<div class="section" id="botocore-exceptions">
+<h3>Botocore exceptions<a class="headerlink" href="#botocore-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>These exceptions are statically defined within the botocore package, a dependency of Boto3. The exceptions are related to issues with client-side behaviors, configurations, or validations. You can generate a list of the statically defined botocore exceptions using the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">botocore.exceptions</span>
+
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">botocore</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<details>
+<summary>Click to see a full list of static exceptions</summary><div class="highlight-text"><div class="highlight"><pre><span></span>AliasConflictParameterError
+ApiVersionNotFoundError
+BaseEndpointResolverError
+BotoCoreError
+ChecksumError
+ClientError
+ConfigNotFound
+ConfigParseError
+ConnectTimeoutError
+ConnectionClosedError
+ConnectionError
+CredentialRetrievalError
+DataNotFoundError
+EndpointConnectionError
+EventStreamError
+HTTPClientError
+ImminentRemovalWarning
+IncompleteReadError
+InfiniteLoopConfigError
+InvalidConfigError
+InvalidDNSNameError
+InvalidExpressionError
+InvalidMaxRetryAttemptsError
+InvalidRetryConfigurationError
+InvalidS3AddressingStyleError
+InvalidS3UsEast1RegionalEndpointConfigError
+InvalidSTSRegionalEndpointsConfigError
+MD5UnavailableError
+MetadataRetrievalError
+MissingParametersError
+MissingServiceIdError
+NoCredentialsError
+NoRegionError
+OperationNotPageableError
+PaginationError
+ParamValidationError
+PartialCredentialsError
+ProfileNotFound
+ProxyConnectionError
+RangeError
+ReadTimeoutError
+RefreshWithMFAUnsupportedError
+SSLError
+ServiceNotInRegionError
+StubAssertionError
+StubResponseError
+UnStubbedResponseError
+UndefinedModelAttributeError
+UnknownClientMethodError
+UnknownCredentialError
+UnknownEndpointError
+UnknownKeyError
+UnknownParameterError
+UnknownServiceError
+UnknownServiceStyle
+UnknownSignatureVersionError
+UnseekableStreamError
+UnsupportedS3AccesspointConfigurationError
+UnsupportedS3ArnError
+UnsupportedSignatureVersionError
+UnsupportedTLSVersionWarning
+ValidationError
+WaiterConfigError
+WaiterError
+</pre></div>
+</div>
+<div class="last"></details></div></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can view available descriptions of the botocore static exceptions <a class="reference external" href="https://github.com/boto/botocore/blob/develop/botocore/exceptions.py">here</a>.</p>
+</div>
+</div>
+<div class="section" id="aws-service-exceptions">
+<h3>AWS service exceptions<a class="headerlink" href="#aws-service-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>AWS service exceptions are caught with the underlying botocore exception, <tt class="docutils literal"><span class="pre">ClientError</span></tt>. After you catch this exception, you can parse through the response for specifics around that error, including the service-specific exception. Exceptions and errors from AWS services vary widely. You can quickly get a list of an AWS service’s exceptions using Boto3.</p>
+<p>For a complete list of error responses from the services you’re using, consult the individual service’s <a class="reference external" href="https://docs.aws.amazon.com/">AWS documentation</a>, specifically the error response section of the AWS service’s API reference. These references also provide context around the exceptions and errors.</p>
+</div>
+</div>
+<div class="section" id="catching-exceptions-when-using-a-low-level-client">
+<h2>Catching exceptions when using a low-level client<a class="headerlink" href="#catching-exceptions-when-using-a-low-level-client" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="catching-botocore-exceptions">
+<h3>Catching botocore exceptions<a class="headerlink" href="#catching-botocore-exceptions" title="Permalink to this headline">¶</a></h3>
+<p>Botocore exceptions are statically defined in the botocore package. Any Boto3 clients you create will use these same statically defined exception classes. The most common botocore exception you’ll encounter is <tt class="docutils literal"><span class="pre">ClientError</span></tt>. This is a general exception when an error response is provided by an AWS service to your Boto3 client’s request.</p>
+<p>Additional client-side issues with SSL negotiation, client misconfiguration, or AWS service validation errors will also throw botocore exceptions. Here’s a generic example of how you might catch botocore exceptions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">botocore</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;aws_service_name&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">some_api_call</span><span class="p">(</span><span class="n">SomeParam</span><span class="o">=</span><span class="s1">&#39;some_param&#39;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">botocore</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="c1"># Put your error handling logic here</span>
+    <span class="k">raise</span> <span class="n">error</span>
+
+<span class="k">except</span> <span class="n">botocore</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ParamValidationError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The parameters you provided are incorrect: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parsing-error-responses-and-catching-exceptions-from-aws-services">
+<h3>Parsing error responses and catching exceptions from AWS services<a class="headerlink" href="#parsing-error-responses-and-catching-exceptions-from-aws-services" title="Permalink to this headline">¶</a></h3>
+<p>Unlike botocore exceptions, AWS service exceptions aren't statically defined in Boto3. This is due to errors and exceptions from AWS services varying widely and being subject to change. To properly catch an exception from an AWS service, you must parse the error response from the service. The error response provided to your client from the AWS service follows a common structure and is minimally processed and not obfuscated by Boto3.</p>
+<p>Using Boto3, the error response from an AWS service will look similar to a success response, except that an <tt class="docutils literal"><span class="pre">Error</span></tt> nested dictionary will appear with the <tt class="docutils literal"><span class="pre">ResponseMetadata</span></tt> nested dictionary. Here is an example of what an error response might look like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;Error&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Code&#39;</span><span class="p">:</span> <span class="s1">&#39;SomeServiceException&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Message&#39;</span><span class="p">:</span> <span class="s1">&#39;Details/context around the exception or error&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;ResponseMetadata&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;RequestId&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890ABCDEF&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HostId&#39;</span><span class="p">:</span> <span class="s1">&#39;host ID data will appear here as a hash&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HTTPStatusCode&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="s1">&#39;HTTPHeaders&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;header metadata key/values will appear here&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;RetryAttempts&#39;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Boto3 classifies all AWS service errors and exceptions as <tt class="docutils literal"><span class="pre">ClientError</span></tt> exceptions. When attempting to catch AWS service exceptions, one way is to catch <tt class="docutils literal"><span class="pre">ClientError</span></tt> and then parse the error response for the AWS service-specific exception.</p>
+<p>Using Amazon Kinesis as an example service, you can use Boto3 to catch the exception <tt class="docutils literal"><span class="pre">LimitExceededException</span></tt> and insert your own logging message when your code experiences request throttling from the AWS service.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">botocore</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># Set up our logger</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Calling DescribeStream API on myDataStream&#39;</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">describe_stream</span><span class="p">(</span><span class="n">StreamName</span><span class="o">=</span><span class="s1">&#39;myDataStream&#39;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">botocore</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ClientError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">error</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Error&#39;</span><span class="p">][</span><span class="s1">&#39;Code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;LimitExceededException&#39;</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;API call limit exceeded; backing off and retrying...&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">error</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Boto3 <tt class="docutils literal"><span class="pre">standard</span></tt> retry mode will catch throttling errors and exceptions, and will back off and retry them for you.</p>
+</div>
+<p>Additionally, you can also access some of the dynamic service-side exceptions from the client’s exception property. Using the previous example, you would need to modify only the <tt class="docutils literal"><span class="pre">except</span></tt> clause.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">except</span> <span class="n">client</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">LimitExceedException</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;API call limit exceeded; backing off and retrying...&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Catching exceptions through <tt class="docutils literal"><span class="pre">ClientError</span></tt> and parsing for error codes is still the best way to catch <strong>all</strong> service-side exceptions and errors.</p>
+</div>
+</div>
+</div>
+<div class="section" id="catching-exceptions-when-using-a-resource-client">
+<h2>Catching exceptions when using a resource client<a class="headerlink" href="#catching-exceptions-when-using-a-resource-client" title="Permalink to this headline">¶</a></h2>
+<p>When using <tt class="docutils literal"><span class="pre">Resource</span></tt> classes to interact with certain AWS services, catching exceptions and errors is a similar experience to using a low-level client.</p>
+<p>Parsing for error responses uses the same exact methodology outlined in the low-level client section. Catching exceptions through the client’s <tt class="docutils literal"><span class="pre">exceptions</span></tt> property is slightly different, as you’ll need to access the client’s <tt class="docutils literal"><span class="pre">meta</span></tt> property to get to the exceptions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">SomeServiceException</span>
+</pre></div>
+</div>
+<p>Using Amazon S3 as an example resource service, you can use the client’s exception property to catch the <tt class="docutils literal"><span class="pre">BucketAlreadyExists</span></tt> exception. And you can still parse the error response to get the bucket name that's passed in the original request.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">botocore</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span><span class="n">BucketName</span><span class="o">=</span><span class="s1">&#39;myTestBucket&#39;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">client</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">BucketAlreadyExists</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bucket </span><span class="si">{}</span><span class="s2"> already exists!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Error&#39;</span><span class="p">][</span><span class="s1">&#39;BucketName&#39;</span><span class="p">]))</span>
+    <span class="k">raise</span> <span class="n">err</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="discerning-useful-information-from-error-responses">
+<h2>Discerning useful information from error responses<a class="headerlink" href="#discerning-useful-information-from-error-responses" title="Permalink to this headline">¶</a></h2>
+<p>As stated previously in this guide, for details and context around specific AWS service exceptions, see the individual service’s <a class="reference external" href="https://docs.aws.amazon.com/">AWS documentation</a>, specifically the error response section of the AWS service’s API reference.</p>
+<p>Botocore exceptions will have detailed error messaging when those exceptions are thrown. These error messages provide details and context around the specific exception thrown. Descriptions of these exceptions can be viewed <a class="reference external" href="https://github.com/boto/botocore/blob/develop/botocore/exceptions.py">here</a>.</p>
+<p>Outside of specific error or exception details and messaging, you might want to extract additional metadata from error responses:</p>
+<ul class="simple">
+<li><em>Exception class and error message</em> - You can use this data to build logic around, or in response to, these errors and exceptions.</li>
+<li><em>Request ID and HTTP status code</em> - AWS service exceptions might still be vague or lacking in details. If this occurs, contacting customer support and providing the AWS service name, error, error message, and request ID could allow a support engineer to further look into your issue.</li>
+</ul>
+<p>Using a low-level Amazon SQS client, here’s an example of catching a generic or vague exception from the AWS service, and parsing out useful metadata from the error response.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">botocore</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+<span class="n">queue_url</span> <span class="o">=</span> <span class="s1">&#39;SQS_QUEUE_URL&#39;</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">QueueUrl</span><span class="o">=</span><span class="n">queue_url</span><span class="p">,</span> <span class="n">MessageBody</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;some_message&#39;</span><span class="p">))</span>
+
+<span class="k">except</span> <span class="n">botocore</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ClientError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Error&#39;</span><span class="p">][</span><span class="s1">&#39;Code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;InternalError&#39;</span><span class="p">:</span> <span class="c1"># Generic error</span>
+        <span class="c1"># We grab the message, request ID, and HTTP code to give to customer support</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error Message: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Error&#39;</span><span class="p">][</span><span class="s1">&#39;Message&#39;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Request ID: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;ResponseMetadata&#39;</span><span class="p">][</span><span class="s1">&#39;RequestId&#39;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Http code: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;ResponseMetadata&#39;</span><span class="p">][</span><span class="s1">&#39;HTTPStatusCode&#39;</span><span class="p">]))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">err</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="paginators.html" title="previous chapter (use the left arrow)">Paginators</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="retries.html" title="next chapter (use the right arrow)">Retries</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="retries.html" title="Retries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="paginators.html" title="Paginators"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

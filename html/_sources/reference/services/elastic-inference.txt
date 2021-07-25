@@ -1,0 +1,1008 @@
+
+
+****************
+ElasticInference
+****************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ElasticInference.Client
+
+  A low-level client representing Amazon Elastic  Inference (Elastic Inference)
+  
+
+  Elastic Inference public APIs. 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('elastic-inference')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ElasticInference.Client.can_paginate`
+
+  
+  *   :py:meth:`~ElasticInference.Client.describe_accelerator_offerings`
+
+  
+  *   :py:meth:`~ElasticInference.Client.describe_accelerator_types`
+
+  
+  *   :py:meth:`~ElasticInference.Client.describe_accelerators`
+
+  
+  *   :py:meth:`~ElasticInference.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ElasticInference.Client.get_paginator`
+
+  
+  *   :py:meth:`~ElasticInference.Client.get_waiter`
+
+  
+  *   :py:meth:`~ElasticInference.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~ElasticInference.Client.tag_resource`
+
+  
+  *   :py:meth:`~ElasticInference.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: describe_accelerator_offerings(**kwargs)
+
+    
+
+    Describes the locations in which a given accelerator type or set of types is present in a given region. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAcceleratorOfferings>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_accelerator_offerings(
+          locationType='region'|'availability-zone'|'availability-zone-id',
+          acceleratorTypes=[
+              'string',
+          ]
+      )
+    :type locationType: string
+    :param locationType: **[REQUIRED]** 
+
+      The location type that you want to describe accelerator type offerings for. It can assume the following values: region: will return the accelerator type offering at the regional level. availability-zone: will return the accelerator type offering at the availability zone level. availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id. 
+
+      
+
+    
+    :type acceleratorTypes: list
+    :param acceleratorTypes: 
+
+      The list of accelerator types to describe. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'acceleratorTypeOfferings': [
+                {
+                    'acceleratorType': 'string',
+                    'locationType': 'region'|'availability-zone'|'availability-zone-id',
+                    'location': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **acceleratorTypeOfferings** *(list) --* 
+
+          The list of accelerator type offerings for a specific location. 
+
+          
+          
+
+          - *(dict) --* 
+
+            The offering for an Elastic Inference Accelerator type. 
+
+            
+            
+
+            - **acceleratorType** *(string) --* 
+
+              The name of the Elastic Inference Accelerator type. 
+
+              
+            
+
+            - **locationType** *(string) --* 
+
+              The location type for the offering. It can assume the following values: region: defines that the offering is at the regional level. availability-zone: defines that the offering is at the availability zone level. availability-zone-id: defines that the offering is at the availability zone level, defined by the availability zone id. 
+
+              
+            
+
+            - **location** *(string) --* 
+
+              The location for the offering. It will return either the region, availability zone or availability zone id for the offering depending on the locationType value. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_accelerator_types()
+
+    
+
+    Describes the accelerator types available in a given region, as well as their characteristics, such as memory and throughput. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAcceleratorTypes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_accelerator_types()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'acceleratorTypes': [
+                {
+                    'acceleratorTypeName': 'string',
+                    'memoryInfo': {
+                        'sizeInMiB': 123
+                    },
+                    'throughputInfo': [
+                        {
+                            'key': 'string',
+                            'value': 123
+                        },
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **acceleratorTypes** *(list) --* 
+
+          The available accelerator types. 
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of an Elastic Inference Accelerator type. 
+
+            
+            
+
+            - **acceleratorTypeName** *(string) --* 
+
+              The name of the Elastic Inference Accelerator type. 
+
+              
+            
+
+            - **memoryInfo** *(dict) --* 
+
+              The memory information of the Elastic Inference Accelerator type. 
+
+              
+              
+
+              - **sizeInMiB** *(integer) --* 
+
+                The size in mebibytes of the Elastic Inference Accelerator type. 
+
+                
+          
+            
+
+            - **throughputInfo** *(list) --* 
+
+              The throughput information of the Elastic Inference Accelerator type. 
+
+              
+              
+
+              - *(dict) --* 
+
+                A throughput entry for an Elastic Inference Accelerator type. 
+
+                
+                
+
+                - **key** *(string) --* 
+
+                  The throughput value of the Elastic Inference Accelerator type. It can assume the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS. TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS. 
+
+                  
+                
+
+                - **value** *(integer) --* 
+
+                  The throughput value of the Elastic Inference Accelerator type. 
+
+                  
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_accelerators(**kwargs)
+
+    
+
+    Describes information over a provided set of accelerators belonging to an account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAccelerators>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_accelerators(
+          acceleratorIds=[
+              'string',
+          ],
+          filters=[
+              {
+                  'name': 'string',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type acceleratorIds: list
+    :param acceleratorIds: 
+
+      The IDs of the accelerators to describe. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type filters: list
+    :param filters: 
+
+      One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter expression for the Elastic Inference Accelerator list. 
+
+        
+
+      
+        - **name** *(string) --* 
+
+          The filter name for the Elastic Inference Accelerator list. It can assume the following values: accelerator-type: the type of Elastic Inference Accelerator to filter for. instance-id: an EC2 instance id to filter for. 
+
+          
+
+        
+        - **values** *(list) --* 
+
+          The values for the filter of the Elastic Inference Accelerator list. 
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The total number of items to return in the command's output. If the total number of items available is more than the value specified, a NextToken is provided in the command's output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the AWS CLI. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'acceleratorSet': [
+                {
+                    'acceleratorHealth': {
+                        'status': 'string'
+                    },
+                    'acceleratorType': 'string',
+                    'acceleratorId': 'string',
+                    'availabilityZone': 'string',
+                    'attachedResource': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **acceleratorSet** *(list) --* 
+
+          The details of the Elastic Inference Accelerators. 
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of an Elastic Inference Accelerator. 
+
+            
+            
+
+            - **acceleratorHealth** *(dict) --* 
+
+              The health of the Elastic Inference Accelerator. 
+
+              
+              
+
+              - **status** *(string) --* 
+
+                The health status of the Elastic Inference Accelerator. 
+
+                
+          
+            
+
+            - **acceleratorType** *(string) --* 
+
+              The type of the Elastic Inference Accelerator. 
+
+              
+            
+
+            - **acceleratorId** *(string) --* 
+
+              The ID of the Elastic Inference Accelerator. 
+
+              
+            
+
+            - **availabilityZone** *(string) --* 
+
+              The availability zone where the Elastic Inference Accelerator is present. 
+
+              
+            
+
+            - **attachedResource** *(string) --* 
+
+              The ARN of the resource that the Elastic Inference Accelerator is attached to. 
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token to specify where to start paginating. This is the NextToken from a previously truncated response. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns all tags of an Elastic Inference Accelerator. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the Elastic Inference Accelerator to list the tags for. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The tags of the Elastic Inference Accelerator. 
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds the specified tags to an Elastic Inference Accelerator. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the Elastic Inference Accelerator to tag. 
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The tags to add to the Elastic Inference Accelerator. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes the specified tags from an Elastic Inference Accelerator. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the Elastic Inference Accelerator to untag. 
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The list of tags to remove from the Elastic Inference Accelerator. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ElasticInference.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ElasticInference.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`ElasticInference.Paginator.DescribeAccelerators`
+
+
+
+.. py:class:: ElasticInference.Paginator.DescribeAccelerators
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_accelerators')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ElasticInference.Client.describe_accelerators`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/elastic-inference-2017-07-25/DescribeAccelerators>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          acceleratorIds=[
+              'string',
+          ],
+          filters=[
+              {
+                  'name': 'string',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type acceleratorIds: list
+    :param acceleratorIds: 
+
+      The IDs of the accelerators to describe. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type filters: list
+    :param filters: 
+
+      One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter expression for the Elastic Inference Accelerator list. 
+
+        
+
+      
+        - **name** *(string) --* 
+
+          The filter name for the Elastic Inference Accelerator list. It can assume the following values: accelerator-type: the type of Elastic Inference Accelerator to filter for. instance-id: an EC2 instance id to filter for. 
+
+          
+
+        
+        - **values** *(list) --* 
+
+          The values for the filter of the Elastic Inference Accelerator list. 
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'acceleratorSet': [
+                {
+                    'acceleratorHealth': {
+                        'status': 'string'
+                    },
+                    'acceleratorType': 'string',
+                    'acceleratorId': 'string',
+                    'availabilityZone': 'string',
+                    'attachedResource': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **acceleratorSet** *(list) --* 
+
+          The details of the Elastic Inference Accelerators. 
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of an Elastic Inference Accelerator. 
+
+            
+            
+
+            - **acceleratorHealth** *(dict) --* 
+
+              The health of the Elastic Inference Accelerator. 
+
+              
+              
+
+              - **status** *(string) --* 
+
+                The health status of the Elastic Inference Accelerator. 
+
+                
+          
+            
+
+            - **acceleratorType** *(string) --* 
+
+              The type of the Elastic Inference Accelerator. 
+
+              
+            
+
+            - **acceleratorId** *(string) --* 
+
+              The ID of the Elastic Inference Accelerator. 
+
+              
+            
+
+            - **availabilityZone** *(string) --* 
+
+              The availability zone where the Elastic Inference Accelerator is present. 
+
+              
+            
+
+            - **attachedResource** *(string) --* 
+
+              The ARN of the resource that the Elastic Inference Accelerator is attached to. 
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

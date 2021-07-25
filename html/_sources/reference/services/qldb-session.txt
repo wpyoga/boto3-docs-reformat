@@ -1,0 +1,819 @@
+
+
+***********
+QLDBSession
+***********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: QLDBSession.Client
+
+  A low-level client representing Amazon QLDB Session
+  
+
+  The transactional data APIs for Amazon QLDB
+
+   
+
+  .. note::
+
+     
+
+    Instead of interacting directly with this API, we recommend using the QLDB driver or the QLDB shell to execute data transactions on a ledger.
+
+     
+
+     
+    * If you are working with an AWS SDK, use the QLDB driver. The driver provides a high-level abstraction layer above this *QLDB Session* data plane and manages ``SendCommand`` API calls for you. For information and a list of supported programming languages, see `Getting started with the driver <https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html>`__ in the *Amazon QLDB Developer Guide* . 
+     
+    * If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB shell. The shell is a command line interface that uses the QLDB driver to interact with a ledger. For information, see `Accessing Amazon QLDB using the QLDB shell <https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html>`__ . 
+     
+
+     
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('qldb-session')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~QLDBSession.Client.can_paginate`
+
+  
+  *   :py:meth:`~QLDBSession.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~QLDBSession.Client.get_paginator`
+
+  
+  *   :py:meth:`~QLDBSession.Client.get_waiter`
+
+  
+  *   :py:meth:`~QLDBSession.Client.send_command`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: send_command(**kwargs)
+
+    
+
+    Sends a command to an Amazon QLDB ledger.
+
+     
+
+    .. note::
+
+       
+
+      Instead of interacting directly with this API, we recommend using the QLDB driver or the QLDB shell to execute data transactions on a ledger.
+
+       
+
+       
+      * If you are working with an AWS SDK, use the QLDB driver. The driver provides a high-level abstraction layer above this *QLDB Session* data plane and manages ``SendCommand`` API calls for you. For information and a list of supported programming languages, see `Getting started with the driver <https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html>`__ in the *Amazon QLDB Developer Guide* . 
+       
+      * If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB shell. The shell is a command line interface that uses the QLDB driver to interact with a ledger. For information, see `Accessing Amazon QLDB using the QLDB shell <https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html>`__ . 
+       
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/qldb-session-2019-07-11/SendCommand>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.send_command(
+          SessionToken='string',
+          StartSession={
+              'LedgerName': 'string'
+          },
+          StartTransaction={}
+          ,
+          EndSession={}
+          ,
+          CommitTransaction={
+              'TransactionId': 'string',
+              'CommitDigest': b'bytes'
+          },
+          AbortTransaction={}
+          ,
+          ExecuteStatement={
+              'TransactionId': 'string',
+              'Statement': 'string',
+              'Parameters': [
+                  {
+                      'IonBinary': b'bytes',
+                      'IonText': 'string'
+                  },
+              ]
+          },
+          FetchPage={
+              'TransactionId': 'string',
+              'NextPageToken': 'string'
+          }
+      )
+    :type SessionToken: string
+    :param SessionToken: 
+
+      Specifies the session token for the current command. A session token is constant throughout the life of the session.
+
+       
+
+      To obtain a session token, run the ``StartSession`` command. This ``SessionToken`` is required for every subsequent command that is issued during the current session.
+
+      
+
+    
+    :type StartSession: dict
+    :param StartSession: 
+
+      Command to start a new session. A session token is obtained as part of the response.
+
+      
+
+    
+      - **LedgerName** *(string) --* **[REQUIRED]** 
+
+        The name of the ledger to start a new session against.
+
+        
+
+      
+    
+    :type StartTransaction: dict
+    :param StartTransaction: 
+
+      Command to start a new transaction.
+
+      
+
+    
+    
+    :type EndSession: dict
+    :param EndSession: 
+
+      Command to end the current session.
+
+      
+
+    
+    
+    :type CommitTransaction: dict
+    :param CommitTransaction: 
+
+      Command to commit the specified transaction.
+
+      
+
+    
+      - **TransactionId** *(string) --* **[REQUIRED]** 
+
+        Specifies the transaction ID of the transaction to commit.
+
+        
+
+      
+      - **CommitDigest** *(bytes) --* **[REQUIRED]** 
+
+        Specifies the commit digest for the transaction to commit. For every active transaction, the commit digest must be passed. QLDB validates ``CommitDigest`` and rejects the commit with an error if the digest computed on the client does not match the digest computed by QLDB.
+
+         
+
+        The purpose of the ``CommitDigest`` parameter is to ensure that QLDB commits a transaction if and only if the server has processed the exact set of statements sent by the client, in the same order that client sent them, and with no duplicates.
+
+        
+
+      
+    
+    :type AbortTransaction: dict
+    :param AbortTransaction: 
+
+      Command to abort the current transaction.
+
+      
+
+    
+    
+    :type ExecuteStatement: dict
+    :param ExecuteStatement: 
+
+      Command to execute a statement in the specified transaction.
+
+      
+
+    
+      - **TransactionId** *(string) --* **[REQUIRED]** 
+
+        Specifies the transaction ID of the request.
+
+        
+
+      
+      - **Statement** *(string) --* **[REQUIRED]** 
+
+        Specifies the statement of the request.
+
+        
+
+      
+      - **Parameters** *(list) --* 
+
+        Specifies the parameters for the parameterized statement in the request.
+
+        
+
+      
+        - *(dict) --* 
+
+          A structure that can contain a value in multiple encoding formats.
+
+          
+
+        
+          - **IonBinary** *(bytes) --* 
+
+            An Amazon Ion binary value contained in a ``ValueHolder`` structure.
+
+            
+
+          
+          - **IonText** *(string) --* 
+
+            An Amazon Ion plaintext value contained in a ``ValueHolder`` structure.
+
+            
+
+          
+        
+    
+    
+    :type FetchPage: dict
+    :param FetchPage: 
+
+      Command to fetch a page.
+
+      
+
+    
+      - **TransactionId** *(string) --* **[REQUIRED]** 
+
+        Specifies the transaction ID of the page to be fetched.
+
+        
+
+      
+      - **NextPageToken** *(string) --* **[REQUIRED]** 
+
+        Specifies the next page token of the page to be fetched.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'StartSession': {
+                'SessionToken': 'string',
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                }
+            },
+            'StartTransaction': {
+                'TransactionId': 'string',
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                }
+            },
+            'EndSession': {
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                }
+            },
+            'CommitTransaction': {
+                'TransactionId': 'string',
+                'CommitDigest': b'bytes',
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                },
+                'ConsumedIOs': {
+                    'ReadIOs': 123,
+                    'WriteIOs': 123
+                }
+            },
+            'AbortTransaction': {
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                }
+            },
+            'ExecuteStatement': {
+                'FirstPage': {
+                    'Values': [
+                        {
+                            'IonBinary': b'bytes',
+                            'IonText': 'string'
+                        },
+                    ],
+                    'NextPageToken': 'string'
+                },
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                },
+                'ConsumedIOs': {
+                    'ReadIOs': 123,
+                    'WriteIOs': 123
+                }
+            },
+            'FetchPage': {
+                'Page': {
+                    'Values': [
+                        {
+                            'IonBinary': b'bytes',
+                            'IonText': 'string'
+                        },
+                    ],
+                    'NextPageToken': 'string'
+                },
+                'TimingInformation': {
+                    'ProcessingTimeMilliseconds': 123
+                },
+                'ConsumedIOs': {
+                    'ReadIOs': 123,
+                    'WriteIOs': 123
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **StartSession** *(dict) --* 
+
+          Contains the details of the started session that includes a session token. This ``SessionToken`` is required for every subsequent command that is issued during the current session.
+
+          
+          
+
+          - **SessionToken** *(string) --* 
+
+            Session token of the started session. This ``SessionToken`` is required for every subsequent command that is issued during the current session.
+
+            
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+      
+        
+
+        - **StartTransaction** *(dict) --* 
+
+          Contains the details of the started transaction.
+
+          
+          
+
+          - **TransactionId** *(string) --* 
+
+            The transaction ID of the started transaction.
+
+            
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+      
+        
+
+        - **EndSession** *(dict) --* 
+
+          Contains the details of the ended session.
+
+          
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+      
+        
+
+        - **CommitTransaction** *(dict) --* 
+
+          Contains the details of the committed transaction.
+
+          
+          
+
+          - **TransactionId** *(string) --* 
+
+            The transaction ID of the committed transaction.
+
+            
+          
+
+          - **CommitDigest** *(bytes) --* 
+
+            The commit digest of the committed transaction.
+
+            
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+          
+
+          - **ConsumedIOs** *(dict) --* 
+
+            Contains metrics about the number of I/O requests that were consumed.
+
+            
+            
+
+            - **ReadIOs** *(integer) --* 
+
+              The number of read I/O requests that the command made.
+
+              
+            
+
+            - **WriteIOs** *(integer) --* 
+
+              The number of write I/O requests that the command made.
+
+              
+        
+      
+        
+
+        - **AbortTransaction** *(dict) --* 
+
+          Contains the details of the aborted transaction.
+
+          
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+      
+        
+
+        - **ExecuteStatement** *(dict) --* 
+
+          Contains the details of the executed statement.
+
+          
+          
+
+          - **FirstPage** *(dict) --* 
+
+            Contains the details of the first fetched page.
+
+            
+            
+
+            - **Values** *(list) --* 
+
+              A structure that contains values in multiple encoding formats.
+
+              
+              
+
+              - *(dict) --* 
+
+                A structure that can contain a value in multiple encoding formats.
+
+                
+                
+
+                - **IonBinary** *(bytes) --* 
+
+                  An Amazon Ion binary value contained in a ``ValueHolder`` structure.
+
+                  
+                
+
+                - **IonText** *(string) --* 
+
+                  An Amazon Ion plaintext value contained in a ``ValueHolder`` structure.
+
+                  
+            
+          
+            
+
+            - **NextPageToken** *(string) --* 
+
+              The token of the next page.
+
+              
+        
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+          
+
+          - **ConsumedIOs** *(dict) --* 
+
+            Contains metrics about the number of I/O requests that were consumed.
+
+            
+            
+
+            - **ReadIOs** *(integer) --* 
+
+              The number of read I/O requests that the command made.
+
+              
+            
+
+            - **WriteIOs** *(integer) --* 
+
+              The number of write I/O requests that the command made.
+
+              
+        
+      
+        
+
+        - **FetchPage** *(dict) --* 
+
+          Contains the details of the fetched page.
+
+          
+          
+
+          - **Page** *(dict) --* 
+
+            Contains details of the fetched page.
+
+            
+            
+
+            - **Values** *(list) --* 
+
+              A structure that contains values in multiple encoding formats.
+
+              
+              
+
+              - *(dict) --* 
+
+                A structure that can contain a value in multiple encoding formats.
+
+                
+                
+
+                - **IonBinary** *(bytes) --* 
+
+                  An Amazon Ion binary value contained in a ``ValueHolder`` structure.
+
+                  
+                
+
+                - **IonText** *(string) --* 
+
+                  An Amazon Ion plaintext value contained in a ``ValueHolder`` structure.
+
+                  
+            
+          
+            
+
+            - **NextPageToken** *(string) --* 
+
+              The token of the next page.
+
+              
+        
+          
+
+          - **TimingInformation** *(dict) --* 
+
+            Contains server-side performance information for the command.
+
+            
+            
+
+            - **ProcessingTimeMilliseconds** *(integer) --* 
+
+              The amount of time that QLDB spent on processing the command, measured in milliseconds.
+
+              
+        
+          
+
+          - **ConsumedIOs** *(dict) --* 
+
+            Contains metrics about the number of I/O requests that were consumed.
+
+            
+            
+
+            - **ReadIOs** *(integer) --* 
+
+              The number of read I/O requests that the command made.
+
+              
+            
+
+            - **WriteIOs** *(integer) --* 
+
+              The number of write I/O requests that the command made.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`QLDBSession.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`QLDBSession.Client.exceptions.InvalidSessionException`
+
+    
+    *     :py:class:`QLDBSession.Client.exceptions.OccConflictException`
+
+    
+    *     :py:class:`QLDBSession.Client.exceptions.RateExceededException`
+
+    
+    *     :py:class:`QLDBSession.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`QLDBSession.Client.exceptions.CapacityExceededException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

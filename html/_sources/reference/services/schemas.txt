@@ -1,0 +1,4644 @@
+
+
+*******
+Schemas
+*******
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Schemas.Client
+
+  A low-level client representing Schemas
+  
+
+  Amazon EventBridge Schema Registry
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('schemas')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Schemas.Client.can_paginate`
+
+  
+  *   :py:meth:`~Schemas.Client.create_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.create_registry`
+
+  
+  *   :py:meth:`~Schemas.Client.create_schema`
+
+  
+  *   :py:meth:`~Schemas.Client.delete_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.delete_registry`
+
+  
+  *   :py:meth:`~Schemas.Client.delete_resource_policy`
+
+  
+  *   :py:meth:`~Schemas.Client.delete_schema`
+
+  
+  *   :py:meth:`~Schemas.Client.delete_schema_version`
+
+  
+  *   :py:meth:`~Schemas.Client.describe_code_binding`
+
+  
+  *   :py:meth:`~Schemas.Client.describe_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.describe_registry`
+
+  
+  *   :py:meth:`~Schemas.Client.describe_schema`
+
+  
+  *   :py:meth:`~Schemas.Client.export_schema`
+
+  
+  *   :py:meth:`~Schemas.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Schemas.Client.get_code_binding_source`
+
+  
+  *   :py:meth:`~Schemas.Client.get_discovered_schema`
+
+  
+  *   :py:meth:`~Schemas.Client.get_paginator`
+
+  
+  *   :py:meth:`~Schemas.Client.get_resource_policy`
+
+  
+  *   :py:meth:`~Schemas.Client.get_waiter`
+
+  
+  *   :py:meth:`~Schemas.Client.list_discoverers`
+
+  
+  *   :py:meth:`~Schemas.Client.list_registries`
+
+  
+  *   :py:meth:`~Schemas.Client.list_schema_versions`
+
+  
+  *   :py:meth:`~Schemas.Client.list_schemas`
+
+  
+  *   :py:meth:`~Schemas.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~Schemas.Client.put_code_binding`
+
+  
+  *   :py:meth:`~Schemas.Client.put_resource_policy`
+
+  
+  *   :py:meth:`~Schemas.Client.search_schemas`
+
+  
+  *   :py:meth:`~Schemas.Client.start_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.stop_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.tag_resource`
+
+  
+  *   :py:meth:`~Schemas.Client.untag_resource`
+
+  
+  *   :py:meth:`~Schemas.Client.update_discoverer`
+
+  
+  *   :py:meth:`~Schemas.Client.update_registry`
+
+  
+  *   :py:meth:`~Schemas.Client.update_schema`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_discoverer(**kwargs)
+
+    
+
+    Creates a discoverer.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/CreateDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_discoverer(
+          Description='string',
+          SourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Description: string
+    :param Description: 
+
+      A description for the discoverer.
+
+      
+
+    
+    :type SourceArn: string
+    :param SourceArn: **[REQUIRED]** 
+
+      The ARN of the event bus.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Tags associated with the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'DiscovererArn': 'string',
+            'DiscovererId': 'string',
+            'SourceArn': 'string',
+            'State': 'STARTED'|'STOPPED',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        201 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the discoverer.
+
+          
+        
+
+        - **DiscovererArn** *(string) --* 
+
+          The ARN of the discoverer.
+
+          
+        
+
+        - **DiscovererId** *(string) --* 
+
+          The ID of the discoverer.
+
+          
+        
+
+        - **SourceArn** *(string) --* 
+
+          The ARN of the event bus.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the discoverer.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: create_registry(**kwargs)
+
+    
+
+    Creates a registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/CreateRegistry>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_registry(
+          Description='string',
+          RegistryName='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Description: string
+    :param Description: 
+
+      A description of the registry to be created.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Tags to associate with the registry.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'RegistryArn': 'string',
+            'RegistryName': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        201 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the registry.
+
+          
+        
+
+        - **RegistryArn** *(string) --* 
+
+          The ARN of the registry.
+
+          
+        
+
+        - **RegistryName** *(string) --* 
+
+          The name of the registry.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the registry.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: create_schema(**kwargs)
+
+    
+
+    Creates a schema definition.
+
+     
+
+    .. note::
+
+      
+
+      Inactive schemas will be deleted after two years.
+
+      
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/CreateSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_schema(
+          Content='string',
+          Description='string',
+          RegistryName='string',
+          SchemaName='string',
+          Tags={
+              'string': 'string'
+          },
+          Type='OpenApi3'|'JSONSchemaDraft4'
+      )
+    :type Content: string
+    :param Content: **[REQUIRED]** 
+
+      The source of the schema definition.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the schema.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Tags associated with the schema.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+      The type of schema.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'LastModified': datetime(2015, 1, 1),
+            'SchemaArn': 'string',
+            'SchemaName': 'string',
+            'SchemaVersion': 'string',
+            'Tags': {
+                'string': 'string'
+            },
+            'Type': 'string',
+            'VersionCreatedDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        201 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the schema.
+
+          
+        
+
+        - **LastModified** *(datetime) --* 
+
+          The date and time that schema was modified.
+
+          
+        
+
+        - **SchemaArn** *(string) --* 
+
+          The ARN of the schema.
+
+          
+        
+
+        - **SchemaName** *(string) --* 
+
+          The name of the schema.
+
+          
+        
+
+        - **SchemaVersion** *(string) --* 
+
+          The version number of the schema
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Key-value pairs associated with a resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **Type** *(string) --* 
+
+          The type of the schema.
+
+          
+        
+
+        - **VersionCreatedDate** *(datetime) --* 
+
+          The date the schema version was created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: delete_discoverer(**kwargs)
+
+    
+
+    Deletes a discoverer.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_discoverer(
+          DiscovererId='string'
+      )
+    :type DiscovererId: string
+    :param DiscovererId: **[REQUIRED]** 
+
+      The ID of the discoverer.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: delete_registry(**kwargs)
+
+    
+
+    Deletes a Registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteRegistry>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_registry(
+          RegistryName='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: delete_resource_policy(**kwargs)
+
+    
+
+    Delete the resource-based policy attached to the specified registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteResourcePolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_resource_policy(
+          RegistryName='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: delete_schema(**kwargs)
+
+    
+
+    Delete a schema definition.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_schema(
+          RegistryName='string',
+          SchemaName='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: delete_schema_version(**kwargs)
+
+    
+
+    Delete the schema version definition
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DeleteSchemaVersion>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_schema_version(
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: **[REQUIRED]** The version number of the schema
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: describe_code_binding(**kwargs)
+
+    
+
+    Describe the code binding URI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeCodeBinding>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_code_binding(
+          Language='string',
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string'
+      )
+    :type Language: string
+    :param Language: **[REQUIRED]** 
+
+      The language of the code binding.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CreationDate': datetime(2015, 1, 1),
+            'LastModified': datetime(2015, 1, 1),
+            'SchemaVersion': 'string',
+            'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **CreationDate** *(datetime) --* 
+
+          The time and date that the code binding was created.
+
+          
+        
+
+        - **LastModified** *(datetime) --* 
+
+          The date and time that code bindings were modified.
+
+          
+        
+
+        - **SchemaVersion** *(string) --* 
+
+          The version number of the schema.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of code binding generation.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: describe_discoverer(**kwargs)
+
+    
+
+    Describes the discoverer.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_discoverer(
+          DiscovererId='string'
+      )
+    :type DiscovererId: string
+    :param DiscovererId: **[REQUIRED]** 
+
+      The ID of the discoverer.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'DiscovererArn': 'string',
+            'DiscovererId': 'string',
+            'SourceArn': 'string',
+            'State': 'STARTED'|'STOPPED',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the discoverer.
+
+          
+        
+
+        - **DiscovererArn** *(string) --* 
+
+          The ARN of the discoverer.
+
+          
+        
+
+        - **DiscovererId** *(string) --* 
+
+          The ID of the discoverer.
+
+          
+        
+
+        - **SourceArn** *(string) --* 
+
+          The ARN of the event bus.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the discoverer.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: describe_registry(**kwargs)
+
+    
+
+    Describes the registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeRegistry>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_registry(
+          RegistryName='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'RegistryArn': 'string',
+            'RegistryName': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the registry.
+
+          
+        
+
+        - **RegistryArn** *(string) --* 
+
+          The ARN of the registry.
+
+          
+        
+
+        - **RegistryName** *(string) --* 
+
+          The name of the registry.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the registry.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: describe_schema(**kwargs)
+
+    
+
+    Retrieve the schema definition.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_schema(
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Content': 'string',
+            'Description': 'string',
+            'LastModified': datetime(2015, 1, 1),
+            'SchemaArn': 'string',
+            'SchemaName': 'string',
+            'SchemaVersion': 'string',
+            'Tags': {
+                'string': 'string'
+            },
+            'Type': 'string',
+            'VersionCreatedDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Content** *(string) --* 
+
+          The source of the schema definition.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the schema.
+
+          
+        
+
+        - **LastModified** *(datetime) --* 
+
+          The date and time that schema was modified.
+
+          
+        
+
+        - **SchemaArn** *(string) --* 
+
+          The ARN of the schema.
+
+          
+        
+
+        - **SchemaName** *(string) --* 
+
+          The name of the schema.
+
+          
+        
+
+        - **SchemaVersion** *(string) --* 
+
+          The version number of the schema
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **Type** *(string) --* 
+
+          The type of the schema.
+
+          
+        
+
+        - **VersionCreatedDate** *(datetime) --* 
+
+          The date the schema version was created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: export_schema(**kwargs)
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ExportSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.export_schema(
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string',
+          Type='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Content': 'string',
+            'SchemaArn': 'string',
+            'SchemaName': 'string',
+            'SchemaVersion': 'string',
+            'Type': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Content** *(string) --* 
+        
+
+        - **SchemaArn** *(string) --* 
+        
+
+        - **SchemaName** *(string) --* 
+        
+
+        - **SchemaVersion** *(string) --* 
+        
+
+        - **Type** *(string) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_code_binding_source(**kwargs)
+
+    
+
+    Get the code binding source URI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetCodeBindingSource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_code_binding_source(
+          Language='string',
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string'
+      )
+    :type Language: string
+    :param Language: **[REQUIRED]** 
+
+      The language of the code binding.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Body': StreamingBody()
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Body** (:class:`.StreamingBody`) -- 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: get_discovered_schema(**kwargs)
+
+    
+
+    Get the discovered schema that was generated based on sampled events.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetDiscoveredSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_discovered_schema(
+          Events=[
+              'string',
+          ],
+          Type='OpenApi3'|'JSONSchemaDraft4'
+      )
+    :type Events: list
+    :param Events: **[REQUIRED]** 
+
+      An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+      The type of event.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Content': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Content** *(string) --* 
+
+          The source of the schema definition.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_resource_policy(**kwargs)
+
+    
+
+    Retrieves the resource-based policy attached to a given registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/GetResourcePolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_policy(
+          RegistryName='string'
+      )
+    :type RegistryName: string
+    :param RegistryName: 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Policy': 'string',
+            'RevisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Get Resource-Based Policy Response
+
+        
+        
+
+        - **Policy** *(string) --* 
+
+          The resource-based policy.
+
+          
+        
+
+        - **RevisionId** *(string) --* 
+
+          The revision ID.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_discoverers(**kwargs)
+
+    
+
+    List the discoverers.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListDiscoverers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_discoverers(
+          DiscovererIdPrefix='string',
+          Limit=123,
+          NextToken='string',
+          SourceArnPrefix='string'
+      )
+    :type DiscovererIdPrefix: string
+    :param DiscovererIdPrefix: 
+
+      Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
+
+      
+
+    
+    :type Limit: integer
+    :param Limit: 
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+      
+
+    
+    :type SourceArnPrefix: string
+    :param SourceArnPrefix: 
+
+      Specifying this limits the results to only those ARNs that start with the specified prefix.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Discoverers': [
+                {
+                    'DiscovererArn': 'string',
+                    'DiscovererId': 'string',
+                    'SourceArn': 'string',
+                    'State': 'STARTED'|'STOPPED',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Discoverers** *(list) --* 
+
+          An array of DiscovererSummary information.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **DiscovererArn** *(string) --* 
+
+              The ARN of the discoverer.
+
+              
+            
+
+            - **DiscovererId** *(string) --* 
+
+              The ID of the discoverer.
+
+              
+            
+
+            - **SourceArn** *(string) --* 
+
+              The ARN of the event bus.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the discoverer.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the resource.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_registries(**kwargs)
+
+    
+
+    List the registries.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListRegistries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_registries(
+          Limit=123,
+          NextToken='string',
+          RegistryNamePrefix='string',
+          Scope='string'
+      )
+    :type Limit: integer
+    :param Limit: 
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+      
+
+    
+    :type RegistryNamePrefix: string
+    :param RegistryNamePrefix: 
+
+      Specifying this limits the results to only those registry names that start with the specified prefix.
+
+      
+
+    
+    :type Scope: string
+    :param Scope: 
+
+      Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Registries': [
+                {
+                    'RegistryArn': 'string',
+                    'RegistryName': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+          
+        
+
+        - **Registries** *(list) --* 
+
+          An array of registry summaries.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **RegistryArn** *(string) --* 
+
+              The ARN of the registry.
+
+              
+            
+
+            - **RegistryName** *(string) --* 
+
+              The name of the registry.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the registry.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_schema_versions(**kwargs)
+
+    
+
+    Provides a list of the schema versions and related information.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListSchemaVersions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_schema_versions(
+          Limit=123,
+          NextToken='string',
+          RegistryName='string',
+          SchemaName='string'
+      )
+    :type Limit: integer
+    :param Limit: 
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'SchemaVersions': [
+                {
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'SchemaVersion': 'string',
+                    'Type': 'OpenApi3'|'JSONSchemaDraft4'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+          
+        
+
+        - **SchemaVersions** *(list) --* 
+
+          An array of schema version summaries.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema version.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **SchemaVersion** *(string) --* 
+
+              The version number of the schema.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of schema.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: list_schemas(**kwargs)
+
+    
+
+    List the schemas.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListSchemas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_schemas(
+          Limit=123,
+          NextToken='string',
+          RegistryName='string',
+          SchemaNamePrefix='string'
+      )
+    :type Limit: integer
+    :param Limit: 
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaNamePrefix: string
+    :param SchemaNamePrefix: 
+
+      Specifying this limits the results to only those schema names that start with the specified prefix.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Schemas': [
+                {
+                    'LastModified': datetime(2015, 1, 1),
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    },
+                    'VersionCount': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+          
+        
+
+        - **Schemas** *(list) --* 
+
+          An array of schema summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of schema details.
+
+            
+            
+
+            - **LastModified** *(datetime) --* 
+
+              The date and time that schema was modified.
+
+              
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the schema.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **VersionCount** *(integer) --* 
+
+              The number of versions available for the schema.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Get tags for resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Tags** *(dict) --* 
+
+          Key-value pairs associated with a resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: put_code_binding(**kwargs)
+
+    
+
+    Put code binding URI
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutCodeBinding>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_code_binding(
+          Language='string',
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string'
+      )
+    :type Language: string
+    :param Language: **[REQUIRED]** 
+
+      The language of the code binding.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CreationDate': datetime(2015, 1, 1),
+            'LastModified': datetime(2015, 1, 1),
+            'SchemaVersion': 'string',
+            'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        202 response
+
+        
+        
+
+        - **CreationDate** *(datetime) --* 
+
+          The time and date that the code binding was created.
+
+          
+        
+
+        - **LastModified** *(datetime) --* 
+
+          The date and time that code bindings were modified.
+
+          
+        
+
+        - **SchemaVersion** *(string) --* 
+
+          The version number of the schema.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of code binding generation.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.GoneException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: put_resource_policy(**kwargs)
+
+    
+
+    The name of the policy.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/PutResourcePolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_resource_policy(
+          Policy='string',
+          RegistryName='string',
+          RevisionId='string'
+      )
+    :type Policy: string
+    :param Policy: **[REQUIRED]** 
+
+      The resource-based policy.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: 
+
+      The name of the registry.
+
+      
+
+    
+    :type RevisionId: string
+    :param RevisionId: 
+
+      The revision ID of the policy.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Policy': 'string',
+            'RevisionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Policy** *(string) --* 
+
+          The resource-based policy.
+
+          
+        
+
+        - **RevisionId** *(string) --* 
+
+          The revision ID of the policy.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.PreconditionFailedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: search_schemas(**kwargs)
+
+    
+
+    Search the schemas
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/SearchSchemas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.search_schemas(
+          Keywords='string',
+          Limit=123,
+          NextToken='string',
+          RegistryName='string'
+      )
+    :type Keywords: string
+    :param Keywords: **[REQUIRED]** 
+
+      Specifying this limits the results to only schemas that include the provided keywords.
+
+      
+
+    
+    :type Limit: integer
+    :param Limit: 
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Schemas': [
+                {
+                    'RegistryName': 'string',
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'SchemaVersions': [
+                        {
+                            'CreatedDate': datetime(2015, 1, 1),
+                            'SchemaVersion': 'string',
+                            'Type': 'OpenApi3'|'JSONSchemaDraft4'
+                        },
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+
+          
+        
+
+        - **Schemas** *(list) --* 
+
+          An array of SearchSchemaSummary information.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **RegistryName** *(string) --* 
+
+              The name of the registry.
+
+              
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **SchemaVersions** *(list) --* 
+
+              An array of schema version summaries.
+
+              
+              
+
+              - *(dict) --* 
+                
+
+                - **CreatedDate** *(datetime) --* 
+
+                  The date the schema version was created.
+
+                  
+                
+
+                - **SchemaVersion** *(string) --* 
+
+                  The version number of the schema
+
+                  
+                
+
+                - **Type** *(string) --* 
+
+                  The type of schema.
+
+                  
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: start_discoverer(**kwargs)
+
+    
+
+    Starts the discoverer
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/StartDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_discoverer(
+          DiscovererId='string'
+      )
+    :type DiscovererId: string
+    :param DiscovererId: **[REQUIRED]** 
+
+      The ID of the discoverer.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DiscovererId': 'string',
+            'State': 'STARTED'|'STOPPED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **DiscovererId** *(string) --* 
+
+          The ID of the discoverer.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the discoverer.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: stop_discoverer(**kwargs)
+
+    
+
+    Stops the discoverer
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/StopDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_discoverer(
+          DiscovererId='string'
+      )
+    :type DiscovererId: string
+    :param DiscovererId: **[REQUIRED]** 
+
+      The ID of the discoverer.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DiscovererId': 'string',
+            'State': 'STARTED'|'STOPPED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **DiscovererId** *(string) --* 
+
+          The ID of the discoverer.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the discoverer.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Add tags to a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      Tags associated with the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      Keys of key-value pairs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: update_discoverer(**kwargs)
+
+    
+
+    Updates the discoverer
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UpdateDiscoverer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_discoverer(
+          Description='string',
+          DiscovererId='string'
+      )
+    :type Description: string
+    :param Description: 
+
+      The description of the discoverer to update.
+
+      
+
+    
+    :type DiscovererId: string
+    :param DiscovererId: **[REQUIRED]** 
+
+      The ID of the discoverer.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'DiscovererArn': 'string',
+            'DiscovererId': 'string',
+            'SourceArn': 'string',
+            'State': 'STARTED'|'STOPPED',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the discoverer.
+
+          
+        
+
+        - **DiscovererArn** *(string) --* 
+
+          The ARN of the discoverer.
+
+          
+        
+
+        - **DiscovererId** *(string) --* 
+
+          The ID of the discoverer.
+
+          
+        
+
+        - **SourceArn** *(string) --* 
+
+          The ARN of the event bus.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the discoverer.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: update_registry(**kwargs)
+
+    
+
+    Updates a registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UpdateRegistry>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_registry(
+          Description='string',
+          RegistryName='string'
+      )
+    :type Description: string
+    :param Description: 
+
+      The description of the registry to update.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'RegistryArn': 'string',
+            'RegistryName': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the registry.
+
+          
+        
+
+        - **RegistryArn** *(string) --* 
+
+          The ARN of the registry.
+
+          
+        
+
+        - **RegistryName** *(string) --* 
+
+          The name of the registry.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Tags associated with the registry.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+  .. py:method:: update_schema(**kwargs)
+
+    
+
+    Updates the schema definition
+
+     
+
+    .. note::
+
+      
+
+      Inactive schemas will be deleted after two years.
+
+      
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/UpdateSchema>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_schema(
+          ClientTokenId='string',
+          Content='string',
+          Description='string',
+          RegistryName='string',
+          SchemaName='string',
+          Type='OpenApi3'|'JSONSchemaDraft4'
+      )
+    :type ClientTokenId: string
+    :param ClientTokenId: 
+
+      The ID of the client token.
+
+      This field is autopopulated if not provided.
+
+    
+    :type Content: string
+    :param Content: 
+
+      The source of the schema definition.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the schema.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The schema type for the events schema.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Description': 'string',
+            'LastModified': datetime(2015, 1, 1),
+            'SchemaArn': 'string',
+            'SchemaName': 'string',
+            'SchemaVersion': 'string',
+            'Tags': {
+                'string': 'string'
+            },
+            'Type': 'string',
+            'VersionCreatedDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Description** *(string) --* 
+
+          The description of the schema.
+
+          
+        
+
+        - **LastModified** *(datetime) --* 
+
+          The date and time that schema was modified.
+
+          
+        
+
+        - **SchemaArn** *(string) --* 
+
+          The ARN of the schema.
+
+          
+        
+
+        - **SchemaName** *(string) --* 
+
+          The name of the schema.
+
+          
+        
+
+        - **SchemaVersion** *(string) --* 
+
+          The version number of the schema
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          Key-value pairs associated with a resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **Type** *(string) --* 
+
+          The type of the schema.
+
+          
+        
+
+        - **VersionCreatedDate** *(datetime) --* 
+
+          The date the schema version was created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Schemas.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Schemas.Client.exceptions.ServiceUnavailableException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`Schemas.Paginator.ListDiscoverers`
+
+
+* :py:class:`Schemas.Paginator.ListRegistries`
+
+
+* :py:class:`Schemas.Paginator.ListSchemaVersions`
+
+
+* :py:class:`Schemas.Paginator.ListSchemas`
+
+
+* :py:class:`Schemas.Paginator.SearchSchemas`
+
+
+
+.. py:class:: Schemas.Paginator.ListDiscoverers
+
+  ::
+
+    
+    paginator = client.get_paginator('list_discoverers')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Schemas.Client.list_discoverers`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListDiscoverers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          DiscovererIdPrefix='string',
+          SourceArnPrefix='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type DiscovererIdPrefix: string
+    :param DiscovererIdPrefix: 
+
+      Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
+
+      
+
+    
+    :type SourceArnPrefix: string
+    :param SourceArnPrefix: 
+
+      Specifying this limits the results to only those ARNs that start with the specified prefix.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Discoverers': [
+                {
+                    'DiscovererArn': 'string',
+                    'DiscovererId': 'string',
+                    'SourceArn': 'string',
+                    'State': 'STARTED'|'STOPPED',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Discoverers** *(list) --* 
+
+          An array of DiscovererSummary information.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **DiscovererArn** *(string) --* 
+
+              The ARN of the discoverer.
+
+              
+            
+
+            - **DiscovererId** *(string) --* 
+
+              The ID of the discoverer.
+
+              
+            
+
+            - **SourceArn** *(string) --* 
+
+              The ARN of the event bus.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the discoverer.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the resource.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+
+.. py:class:: Schemas.Paginator.ListRegistries
+
+  ::
+
+    
+    paginator = client.get_paginator('list_registries')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Schemas.Client.list_registries`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListRegistries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          RegistryNamePrefix='string',
+          Scope='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type RegistryNamePrefix: string
+    :param RegistryNamePrefix: 
+
+      Specifying this limits the results to only those registry names that start with the specified prefix.
+
+      
+
+    
+    :type Scope: string
+    :param Scope: 
+
+      Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Registries': [
+                {
+                    'RegistryArn': 'string',
+                    'RegistryName': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Registries** *(list) --* 
+
+          An array of registry summaries.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **RegistryArn** *(string) --* 
+
+              The ARN of the registry.
+
+              
+            
+
+            - **RegistryName** *(string) --* 
+
+              The name of the registry.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the registry.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+
+.. py:class:: Schemas.Paginator.ListSchemaVersions
+
+  ::
+
+    
+    paginator = client.get_paginator('list_schema_versions')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Schemas.Client.list_schema_versions`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListSchemaVersions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          RegistryName='string',
+          SchemaName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'SchemaVersions': [
+                {
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'SchemaVersion': 'string',
+                    'Type': 'OpenApi3'|'JSONSchemaDraft4'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **SchemaVersions** *(list) --* 
+
+          An array of schema version summaries.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema version.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **SchemaVersion** *(string) --* 
+
+              The version number of the schema.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of schema.
+
+              
+        
+      
+    
+
+.. py:class:: Schemas.Paginator.ListSchemas
+
+  ::
+
+    
+    paginator = client.get_paginator('list_schemas')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Schemas.Client.list_schemas`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/ListSchemas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          RegistryName='string',
+          SchemaNamePrefix='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaNamePrefix: string
+    :param SchemaNamePrefix: 
+
+      Specifying this limits the results to only those schema names that start with the specified prefix.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Schemas': [
+                {
+                    'LastModified': datetime(2015, 1, 1),
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    },
+                    'VersionCount': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Schemas** *(list) --* 
+
+          An array of schema summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of schema details.
+
+            
+            
+
+            - **LastModified** *(datetime) --* 
+
+              The date and time that schema was modified.
+
+              
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              Tags associated with the schema.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **VersionCount** *(integer) --* 
+
+              The number of versions available for the schema.
+
+              
+        
+      
+    
+
+.. py:class:: Schemas.Paginator.SearchSchemas
+
+  ::
+
+    
+    paginator = client.get_paginator('search_schemas')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Schemas.Client.search_schemas`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/SearchSchemas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          Keywords='string',
+          RegistryName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type Keywords: string
+    :param Keywords: **[REQUIRED]** 
+
+      Specifying this limits the results to only schemas that include the provided keywords.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Schemas': [
+                {
+                    'RegistryName': 'string',
+                    'SchemaArn': 'string',
+                    'SchemaName': 'string',
+                    'SchemaVersions': [
+                        {
+                            'CreatedDate': datetime(2015, 1, 1),
+                            'SchemaVersion': 'string',
+                            'Type': 'OpenApi3'|'JSONSchemaDraft4'
+                        },
+                    ]
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Schemas** *(list) --* 
+
+          An array of SearchSchemaSummary information.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **RegistryName** *(string) --* 
+
+              The name of the registry.
+
+              
+            
+
+            - **SchemaArn** *(string) --* 
+
+              The ARN of the schema.
+
+              
+            
+
+            - **SchemaName** *(string) --* 
+
+              The name of the schema.
+
+              
+            
+
+            - **SchemaVersions** *(list) --* 
+
+              An array of schema version summaries.
+
+              
+              
+
+              - *(dict) --* 
+                
+
+                - **CreatedDate** *(datetime) --* 
+
+                  The date the schema version was created.
+
+                  
+                
+
+                - **SchemaVersion** *(string) --* 
+
+                  The version number of the schema
+
+                  
+                
+
+                - **Type** *(string) --* 
+
+                  The type of schema.
+
+                  
+            
+          
+        
+      
+    
+
+=======
+Waiters
+=======
+
+
+The available waiters are:
+
+* :py:class:`Schemas.Waiter.CodeBindingExists`
+
+
+
+.. py:class:: Schemas.Waiter.CodeBindingExists
+
+  ::
+
+    
+    waiter = client.get_waiter('code_binding_exists')
+
+  
+  
+
+  .. py:method:: wait(**kwargs)
+
+    Polls :py:meth:`Schemas.Client.describe_code_binding` every 2 seconds until a successful state is reached. An error is returned after 30 failed checks.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/schemas-2019-12-02/DescribeCodeBinding>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      waiter.wait(
+          Language='string',
+          RegistryName='string',
+          SchemaName='string',
+          SchemaVersion='string',
+          WaiterConfig={
+              'Delay': 123,
+              'MaxAttempts': 123
+          }
+      )
+    :type Language: string
+    :param Language: **[REQUIRED]** 
+
+      The language of the code binding.
+
+      
+
+    
+    :type RegistryName: string
+    :param RegistryName: **[REQUIRED]** 
+
+      The name of the registry.
+
+      
+
+    
+    :type SchemaName: string
+    :param SchemaName: **[REQUIRED]** 
+
+      The name of the schema.
+
+      
+
+    
+    :type SchemaVersion: string
+    :param SchemaVersion: 
+
+      Specifying this limits the results to only this schema version.
+
+      
+
+    
+    :type WaiterConfig: dict
+    :param WaiterConfig: 
+
+      A dictionary that provides parameters to control waiting behavior.
+
+      
+
+    
+      - **Delay** *(integer) --* 
+
+        The amount of time in seconds to wait between attempts. Default: 2
+
+        
+
+      
+      - **MaxAttempts** *(integer) --* 
+
+        The maximum number of attempts to be made. Default: 30
+
+        
+
+      
+    
+    
+    :returns: None

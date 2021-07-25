@@ -1,0 +1,666 @@
+
+
+**********
+S3Outposts
+**********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: S3Outposts.Client
+
+  A low-level client representing Amazon S3 on Outposts (S3 Outposts)
+  
+
+  Amazon S3 on Outposts provides access to S3 on Outposts operations.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('s3outposts')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~S3Outposts.Client.can_paginate`
+
+  
+  *   :py:meth:`~S3Outposts.Client.create_endpoint`
+
+  
+  *   :py:meth:`~S3Outposts.Client.delete_endpoint`
+
+  
+  *   :py:meth:`~S3Outposts.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~S3Outposts.Client.get_paginator`
+
+  
+  *   :py:meth:`~S3Outposts.Client.get_waiter`
+
+  
+  *   :py:meth:`~S3Outposts.Client.list_endpoints`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_endpoint(**kwargs)
+
+    
+
+    S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). 
+
+     
+
+    This action creates an endpoint and associates it with the specified Outpost. 
+
+     
+
+    
+
+     
+
+    Related actions include:
+
+     
+
+     
+    * `DeleteEndpoint <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html>`__   
+     
+    * `ListEndpoints <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html>`__   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/CreateEndpoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_endpoint(
+          OutpostId='string',
+          SubnetId='string',
+          SecurityGroupId='string'
+      )
+    :type OutpostId: string
+    :param OutpostId: **[REQUIRED]** 
+
+      The ID of the AWS Outpost. 
+
+      
+
+    
+    :type SubnetId: string
+    :param SubnetId: **[REQUIRED]** 
+
+      The ID of the subnet in the selected VPC.
+
+      
+
+    
+    :type SecurityGroupId: string
+    :param SecurityGroupId: **[REQUIRED]** 
+
+      The ID of the security group to use with the endpoint.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'EndpointArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **EndpointArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the endpoint.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`S3Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: delete_endpoint(**kwargs)
+
+    
+
+    S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). 
+
+     
+
+    This action deletes an endpoint. 
+
+     
+
+    
+
+     
+
+    Related actions include:
+
+     
+
+     
+    * `CreateEndpoint <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html>`__   
+     
+    * `ListEndpoints <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html>`__   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/DeleteEndpoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_endpoint(
+          EndpointId='string',
+          OutpostId='string'
+      )
+    :type EndpointId: string
+    :param EndpointId: **[REQUIRED]** 
+
+      The ID of the end point.
+
+      
+
+    
+    :type OutpostId: string
+    :param OutpostId: **[REQUIRED]** 
+
+      The ID of the AWS Outpost. 
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`S3Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_endpoints(**kwargs)
+
+    
+
+    S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). 
+
+     
+
+    This action lists endpoints associated with the Outpost. 
+
+     
+
+    
+
+     
+
+    Related actions include:
+
+     
+
+     
+    * `CreateEndpoint <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html>`__   
+     
+    * `DeleteEndpoint <https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html>`__   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_endpoints(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The next endpoint requested in the list.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The max number of endpoints that can be returned on the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Endpoints': [
+                {
+                    'EndpointArn': 'string',
+                    'OutpostsId': 'string',
+                    'CidrBlock': 'string',
+                    'Status': 'PENDING'|'AVAILABLE',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'NetworkInterfaces': [
+                        {
+                            'NetworkInterfaceId': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Endpoints** *(list) --* 
+
+          Returns an array of endpoints associated with AWS Outpost.
+
+          
+          
+
+          - *(dict) --* 
+
+            S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). 
+
+            
+            
+
+            - **EndpointArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the endpoint.
+
+              
+            
+
+            - **OutpostsId** *(string) --* 
+
+              The ID of the AWS Outpost.
+
+              
+            
+
+            - **CidrBlock** *(string) --* 
+
+              The VPC CIDR committed by this endpoint.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the endpoint.
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time the endpoint was created.
+
+              
+            
+
+            - **NetworkInterfaces** *(list) --* 
+
+              The network interface of the endpoint.
+
+              
+              
+
+              - *(dict) --* 
+
+                The container for the network interface.
+
+                
+                
+
+                - **NetworkInterfaceId** *(string) --* 
+
+                  The ID for the network interface.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The next endpoint returned in the list.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`S3Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`S3Outposts.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`S3Outposts.Paginator.ListEndpoints`
+
+
+
+.. py:class:: S3Outposts.Paginator.ListEndpoints
+
+  ::
+
+    
+    paginator = client.get_paginator('list_endpoints')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`S3Outposts.Client.list_endpoints`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Endpoints': [
+                {
+                    'EndpointArn': 'string',
+                    'OutpostsId': 'string',
+                    'CidrBlock': 'string',
+                    'Status': 'PENDING'|'AVAILABLE',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'NetworkInterfaces': [
+                        {
+                            'NetworkInterfaceId': 'string'
+                        },
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Endpoints** *(list) --* 
+
+          Returns an array of endpoints associated with AWS Outpost.
+
+          
+          
+
+          - *(dict) --* 
+
+            S3 on Outposts access points simplify managing data access at scale for shared datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). 
+
+            
+            
+
+            - **EndpointArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the endpoint.
+
+              
+            
+
+            - **OutpostsId** *(string) --* 
+
+              The ID of the AWS Outpost.
+
+              
+            
+
+            - **CidrBlock** *(string) --* 
+
+              The VPC CIDR committed by this endpoint.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the endpoint.
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              The time the endpoint was created.
+
+              
+            
+
+            - **NetworkInterfaces** *(list) --* 
+
+              The network interface of the endpoint.
+
+              
+              
+
+              - *(dict) --* 
+
+                The container for the network interface.
+
+                
+                
+
+                - **NetworkInterfaceId** *(string) --* 
+
+                  The ID for the network interface.
+
+                  
+            
+          
+        
+      
+    

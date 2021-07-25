@@ -1,0 +1,1254 @@
+
+
+*****
+Macie
+*****
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Macie.Client
+
+  A low-level client representing Amazon Macie
+   
+
+  Amazon Macie Classic is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Macie Classic recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. For more information, see the `Amazon Macie Classic User Guide <https://docs.aws.amazon.com/macie/latest/userguide/what-is-macie.html>`__ . 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('macie')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Macie.Client.associate_member_account`
+
+  
+  *   :py:meth:`~Macie.Client.associate_s3_resources`
+
+  
+  *   :py:meth:`~Macie.Client.can_paginate`
+
+  
+  *   :py:meth:`~Macie.Client.disassociate_member_account`
+
+  
+  *   :py:meth:`~Macie.Client.disassociate_s3_resources`
+
+  
+  *   :py:meth:`~Macie.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Macie.Client.get_paginator`
+
+  
+  *   :py:meth:`~Macie.Client.get_waiter`
+
+  
+  *   :py:meth:`~Macie.Client.list_member_accounts`
+
+  
+  *   :py:meth:`~Macie.Client.list_s3_resources`
+
+  
+  *   :py:meth:`~Macie.Client.update_s3_resources`
+
+  
+
+  .. py:method:: associate_member_account(**kwargs)
+
+    
+
+    Associates a specified AWS account with Amazon Macie Classic as a member account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateMemberAccount>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_member_account(
+          memberAccountId='string'
+      )
+    :type memberAccountId: string
+    :param memberAccountId: **[REQUIRED]** 
+
+      The ID of the AWS account that you want to associate with Amazon Macie Classic as a member account.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+  .. py:method:: associate_s3_resources(**kwargs)
+
+    
+
+    Associates specified S3 resources with Amazon Macie Classic for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action associates specified S3 resources with Macie Classic for the specified member account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/AssociateS3Resources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_s3_resources(
+          memberAccountId='string',
+          s3Resources=[
+              {
+                  'bucketName': 'string',
+                  'prefix': 'string',
+                  'classificationType': {
+                      'oneTime': 'FULL'|'NONE',
+                      'continuous': 'FULL'
+                  }
+              },
+          ]
+      )
+    :type memberAccountId: string
+    :param memberAccountId: 
+
+      The ID of the Amazon Macie Classic member account whose resources you want to associate with Macie Classic. 
+
+      
+
+    
+    :type s3Resources: list
+    :param s3Resources: **[REQUIRED]** 
+
+      The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. 
+
+      
+
+    
+      - *(dict) --* 
+
+        The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. 
+
+        
+
+      
+        - **bucketName** *(string) --* **[REQUIRED]** 
+
+          The name of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          The prefix of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+          
+
+        
+        - **classificationType** *(dict) --* **[REQUIRED]** 
+
+          The classification type that you want to specify for the resource associated with Amazon Macie Classic. 
+
+          
+
+        
+          - **oneTime** *(string) --* **[REQUIRED]** 
+
+            A one-time classification of all of the existing objects in a specified S3 bucket. 
+
+            
+
+          
+          - **continuous** *(string) --* **[REQUIRED]** 
+
+            A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. 
+
+            
+
+          
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'failedS3Resources': [
+                {
+                    'failedItem': {
+                        'bucketName': 'string',
+                        'prefix': 'string'
+                    },
+                    'errorCode': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **failedS3Resources** *(list) --* 
+
+          S3 resources that couldn't be associated with Amazon Macie Classic. An error code and an error message are provided for each failed item. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes details about the failed S3 resources.
+
+            
+            
+
+            - **failedItem** *(dict) --* 
+
+              The failed S3 resources.
+
+              
+              
+
+              - **bucketName** *(string) --* 
+
+                The name of the S3 bucket.
+
+                
+              
+
+              - **prefix** *(string) --* 
+
+                The prefix of the S3 bucket. 
+
+                
+          
+            
+
+            - **errorCode** *(string) --* 
+
+              The status code of a failed item.
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message of a failed item.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: disassociate_member_account(**kwargs)
+
+    
+
+    Removes the specified member account from Amazon Macie Classic.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateMemberAccount>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_member_account(
+          memberAccountId='string'
+      )
+    :type memberAccountId: string
+    :param memberAccountId: **[REQUIRED]** 
+
+      The ID of the member account that you want to remove from Amazon Macie Classic.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+  .. py:method:: disassociate_s3_resources(**kwargs)
+
+    
+
+    Removes specified S3 resources from being monitored by Amazon Macie Classic. If memberAccountId isn't specified, the action removes specified S3 resources from Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action removes specified S3 resources from Macie Classic for the specified member account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/DisassociateS3Resources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_s3_resources(
+          memberAccountId='string',
+          associatedS3Resources=[
+              {
+                  'bucketName': 'string',
+                  'prefix': 'string'
+              },
+          ]
+      )
+    :type memberAccountId: string
+    :param memberAccountId: 
+
+      The ID of the Amazon Macie Classic member account whose resources you want to remove from being monitored by Macie Classic. 
+
+      
+
+    
+    :type associatedS3Resources: list
+    :param associatedS3Resources: **[REQUIRED]** 
+
+      The S3 resources (buckets or prefixes) that you want to remove from being monitored and classified by Amazon Macie Classic. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Contains information about the S3 resource. This data type is used as a request parameter in the DisassociateS3Resources action and can be used as a response parameter in the AssociateS3Resources and UpdateS3Resources actions. 
+
+        
+
+      
+        - **bucketName** *(string) --* **[REQUIRED]** 
+
+          The name of the S3 bucket.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          The prefix of the S3 bucket. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'failedS3Resources': [
+                {
+                    'failedItem': {
+                        'bucketName': 'string',
+                        'prefix': 'string'
+                    },
+                    'errorCode': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **failedS3Resources** *(list) --* 
+
+          S3 resources that couldn't be removed from being monitored and classified by Amazon Macie Classic. An error code and an error message are provided for each failed item. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes details about the failed S3 resources.
+
+            
+            
+
+            - **failedItem** *(dict) --* 
+
+              The failed S3 resources.
+
+              
+              
+
+              - **bucketName** *(string) --* 
+
+                The name of the S3 bucket.
+
+                
+              
+
+              - **prefix** *(string) --* 
+
+                The prefix of the S3 bucket. 
+
+                
+          
+            
+
+            - **errorCode** *(string) --* 
+
+              The status code of a failed item.
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message of a failed item.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_member_accounts(**kwargs)
+
+    
+
+    Lists all Amazon Macie Classic member accounts for the current Macie Classic administrator account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListMemberAccounts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_member_accounts(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      Use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMemberAccounts action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. 
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'memberAccounts': [
+                {
+                    'accountId': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **memberAccounts** *(list) --* 
+
+          A list of the Amazon Macie Classic member accounts returned by the action. The current Macie Classic administrator account is also included in this list. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the Amazon Macie Classic member account.
+
+            
+            
+
+            - **accountId** *(string) --* 
+
+              The AWS account ID of the Amazon Macie Classic member account.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+
+  .. py:method:: list_s3_resources(**kwargs)
+
+    
+
+    Lists all the S3 resources associated with Amazon Macie Classic. If memberAccountId isn't specified, the action lists the S3 resources associated with Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action lists the S3 resources associated with Macie Classic for the specified member account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3Resources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_s3_resources(
+          memberAccountId='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type memberAccountId: string
+    :param memberAccountId: 
+
+      The Amazon Macie Classic member account ID whose associated S3 resources you want to list. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Use this parameter when paginating results. Set its value to null on your first call to the ListS3Resources action. Subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data. 
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Use this parameter to indicate the maximum number of items that you want in the response. The default value is 250. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            's3Resources': [
+                {
+                    'bucketName': 'string',
+                    'prefix': 'string',
+                    'classificationType': {
+                        'oneTime': 'FULL'|'NONE',
+                        'continuous': 'FULL'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **s3Resources** *(list) --* 
+
+          A list of the associated S3 resources returned by the action.
+
+          
+          
+
+          - *(dict) --* 
+
+            The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. 
+
+            
+            
+
+            - **bucketName** *(string) --* 
+
+              The name of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+              
+            
+
+            - **prefix** *(string) --* 
+
+              The prefix of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+              
+            
+
+            - **classificationType** *(dict) --* 
+
+              The classification type that you want to specify for the resource associated with Amazon Macie Classic. 
+
+              
+              
+
+              - **oneTime** *(string) --* 
+
+                A one-time classification of all of the existing objects in a specified S3 bucket. 
+
+                
+              
+
+              - **continuous** *(string) --* 
+
+                A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. 
+
+                
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          When a response is generated, if there is more data to be listed, this parameter is present in the response and contains the value to use for the nextToken parameter in a subsequent pagination request. If there is no more data to be listed, this parameter is set to null. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+  .. py:method:: update_s3_resources(**kwargs)
+
+    
+
+    Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie Classic for the current Macie Classic administrator account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Macie Classic for the specified member account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/UpdateS3Resources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_s3_resources(
+          memberAccountId='string',
+          s3ResourcesUpdate=[
+              {
+                  'bucketName': 'string',
+                  'prefix': 'string',
+                  'classificationTypeUpdate': {
+                      'oneTime': 'FULL'|'NONE',
+                      'continuous': 'FULL'
+                  }
+              },
+          ]
+      )
+    :type memberAccountId: string
+    :param memberAccountId: 
+
+      The AWS ID of the Amazon Macie Classic member account whose S3 resources' classification types you want to update. 
+
+      
+
+    
+    :type s3ResourcesUpdate: list
+    :param s3ResourcesUpdate: **[REQUIRED]** 
+
+      The S3 resources whose classification types you want to update.
+
+      
+
+    
+      - *(dict) --* 
+
+        The S3 resources whose classification types you want to update. This data type is used as a request parameter in the UpdateS3Resources action. 
+
+        
+
+      
+        - **bucketName** *(string) --* **[REQUIRED]** 
+
+          The name of the S3 bucket whose classification types you want to update.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          The prefix of the S3 bucket whose classification types you want to update.
+
+          
+
+        
+        - **classificationTypeUpdate** *(dict) --* **[REQUIRED]** 
+
+          The classification type that you want to update for the resource associated with Amazon Macie Classic. 
+
+          
+
+        
+          - **oneTime** *(string) --* 
+
+            A one-time classification of all of the existing objects in a specified S3 bucket. 
+
+            
+
+          
+          - **continuous** *(string) --* 
+
+            A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. 
+
+            
+
+          
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'failedS3Resources': [
+                {
+                    'failedItem': {
+                        'bucketName': 'string',
+                        'prefix': 'string'
+                    },
+                    'errorCode': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **failedS3Resources** *(list) --* 
+
+          The S3 resources whose classification types can't be updated. An error code and an error message are provided for each failed item. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes details about the failed S3 resources.
+
+            
+            
+
+            - **failedItem** *(dict) --* 
+
+              The failed S3 resources.
+
+              
+              
+
+              - **bucketName** *(string) --* 
+
+                The name of the S3 bucket.
+
+                
+              
+
+              - **prefix** *(string) --* 
+
+                The prefix of the S3 bucket. 
+
+                
+          
+            
+
+            - **errorCode** *(string) --* 
+
+              The status code of a failed item.
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message of a failed item.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Macie.Client.exceptions.InvalidInputException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Macie.Client.exceptions.InternalException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`Macie.Paginator.ListMemberAccounts`
+
+
+* :py:class:`Macie.Paginator.ListS3Resources`
+
+
+
+.. py:class:: Macie.Paginator.ListMemberAccounts
+
+  ::
+
+    
+    paginator = client.get_paginator('list_member_accounts')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Macie.Client.list_member_accounts`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListMemberAccounts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'memberAccounts': [
+                {
+                    'accountId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **memberAccounts** *(list) --* 
+
+          A list of the Amazon Macie Classic member accounts returned by the action. The current Macie Classic administrator account is also included in this list. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about the Amazon Macie Classic member account.
+
+            
+            
+
+            - **accountId** *(string) --* 
+
+              The AWS account ID of the Amazon Macie Classic member account.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: Macie.Paginator.ListS3Resources
+
+  ::
+
+    
+    paginator = client.get_paginator('list_s3_resources')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Macie.Client.list_s3_resources`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/macie-2017-12-19/ListS3Resources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          memberAccountId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type memberAccountId: string
+    :param memberAccountId: 
+
+      The Amazon Macie Classic member account ID whose associated S3 resources you want to list. 
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            's3Resources': [
+                {
+                    'bucketName': 'string',
+                    'prefix': 'string',
+                    'classificationType': {
+                        'oneTime': 'FULL'|'NONE',
+                        'continuous': 'FULL'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **s3Resources** *(list) --* 
+
+          A list of the associated S3 resources returned by the action.
+
+          
+          
+
+          - *(dict) --* 
+
+            The S3 resources that you want to associate with Amazon Macie Classic for monitoring and data classification. This data type is used as a request parameter in the AssociateS3Resources action and a response parameter in the ListS3Resources action. 
+
+            
+            
+
+            - **bucketName** *(string) --* 
+
+              The name of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+              
+            
+
+            - **prefix** *(string) --* 
+
+              The prefix of the S3 bucket that you want to associate with Amazon Macie Classic.
+
+              
+            
+
+            - **classificationType** *(dict) --* 
+
+              The classification type that you want to specify for the resource associated with Amazon Macie Classic. 
+
+              
+              
+
+              - **oneTime** *(string) --* 
+
+                A one-time classification of all of the existing objects in a specified S3 bucket. 
+
+                
+              
+
+              - **continuous** *(string) --* 
+
+                A continuous classification of the objects that are added to a specified S3 bucket. Amazon Macie Classic begins performing continuous classification after a bucket is successfully associated with Macie Classic. 
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

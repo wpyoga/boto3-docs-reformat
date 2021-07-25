@@ -1,0 +1,4569 @@
+
+
+***********
+SSMContacts
+***********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SSMContacts.Client
+
+  A low-level client representing AWS Systems Manager Incident Manager Contacts (SSM Contacts)
+  
+
+  
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ssm-contacts')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SSMContacts.Client.accept_page`
+
+  
+  *   :py:meth:`~SSMContacts.Client.activate_contact_channel`
+
+  
+  *   :py:meth:`~SSMContacts.Client.can_paginate`
+
+  
+  *   :py:meth:`~SSMContacts.Client.create_contact`
+
+  
+  *   :py:meth:`~SSMContacts.Client.create_contact_channel`
+
+  
+  *   :py:meth:`~SSMContacts.Client.deactivate_contact_channel`
+
+  
+  *   :py:meth:`~SSMContacts.Client.delete_contact`
+
+  
+  *   :py:meth:`~SSMContacts.Client.delete_contact_channel`
+
+  
+  *   :py:meth:`~SSMContacts.Client.describe_engagement`
+
+  
+  *   :py:meth:`~SSMContacts.Client.describe_page`
+
+  
+  *   :py:meth:`~SSMContacts.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SSMContacts.Client.get_contact`
+
+  
+  *   :py:meth:`~SSMContacts.Client.get_contact_channel`
+
+  
+  *   :py:meth:`~SSMContacts.Client.get_contact_policy`
+
+  
+  *   :py:meth:`~SSMContacts.Client.get_paginator`
+
+  
+  *   :py:meth:`~SSMContacts.Client.get_waiter`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_contact_channels`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_contacts`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_engagements`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_page_receipts`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_pages_by_contact`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_pages_by_engagement`
+
+  
+  *   :py:meth:`~SSMContacts.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~SSMContacts.Client.put_contact_policy`
+
+  
+  *   :py:meth:`~SSMContacts.Client.send_activation_code`
+
+  
+  *   :py:meth:`~SSMContacts.Client.start_engagement`
+
+  
+  *   :py:meth:`~SSMContacts.Client.stop_engagement`
+
+  
+  *   :py:meth:`~SSMContacts.Client.tag_resource`
+
+  
+  *   :py:meth:`~SSMContacts.Client.untag_resource`
+
+  
+  *   :py:meth:`~SSMContacts.Client.update_contact`
+
+  
+  *   :py:meth:`~SSMContacts.Client.update_contact_channel`
+
+  
+
+  .. py:method:: accept_page(**kwargs)
+
+    
+
+    Used to acknowledge an engagement to a contact channel during an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/AcceptPage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.accept_page(
+          PageId='string',
+          ContactChannelId='string',
+          AcceptType='DELIVERED'|'READ',
+          Note='string',
+          AcceptCode='string'
+      )
+    :type PageId: string
+    :param PageId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement to a contact channel.
+
+      
+
+    
+    :type ContactChannelId: string
+    :param ContactChannelId: 
+
+      The ARN of the contact channel.
+
+      
+
+    
+    :type AcceptType: string
+    :param AcceptType: **[REQUIRED]** 
+
+      The type indicates if the page was ``DELIVERED`` or ``READ`` .
+
+      
+
+    
+    :type Note: string
+    :param Note: 
+
+      Information provided by the user when the user acknowledges the page.
+
+      
+
+    
+    :type AcceptCode: string
+    :param AcceptCode: **[REQUIRED]** 
+
+      The accept code is a 6-digit code used to acknowledge the page.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: activate_contact_channel(**kwargs)
+
+    
+
+    Activates a contact's contact channel. Incident Manager can't engage a contact until the contact channel has been activated.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ActivateContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.activate_contact_channel(
+          ContactChannelId='string',
+          ActivationCode='string'
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel.
+
+      
+
+    
+    :type ActivationCode: string
+    :param ActivationCode: **[REQUIRED]** 
+
+      The code sent to the contact channel when it was created in the contact. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_contact(**kwargs)
+
+    
+
+    Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/CreateContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_contact(
+          Alias='string',
+          DisplayName='string',
+          Type='PERSONAL'|'ESCALATION',
+          Plan={
+              'Stages': [
+                  {
+                      'DurationInMinutes': 123,
+                      'Targets': [
+                          {
+                              'ChannelTargetInfo': {
+                                  'ContactChannelId': 'string',
+                                  'RetryIntervalInMinutes': 123
+                              },
+                              'ContactTargetInfo': {
+                                  'ContactId': 'string',
+                                  'IsEssential': True|False
+                              }
+                          },
+                      ]
+                  },
+              ]
+          },
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ],
+          IdempotencyToken='string'
+      )
+    :type Alias: string
+    :param Alias: **[REQUIRED]** 
+
+      The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable. 
+
+      
+
+    
+    :type DisplayName: string
+    :param DisplayName: 
+
+      The full name of the contact or escalation plan. 
+
+      
+
+    
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+      To create an escalation plan use ``ESCALATION`` . To create a contact use ``PERSONAL`` .
+
+      
+
+    
+    :type Plan: dict
+    :param Plan: **[REQUIRED]** 
+
+      A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts. 
+
+      
+
+    
+      - **Stages** *(list) --* **[REQUIRED]** 
+
+        A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
+
+        
+
+      
+        - *(dict) --* 
+
+          A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
+
+          
+
+        
+          - **DurationInMinutes** *(integer) --* **[REQUIRED]** 
+
+            The time to wait until beginning the next stage.
+
+            
+
+          
+          - **Targets** *(list) --* **[REQUIRED]** 
+
+            The contacts or contact methods that the escalation plan or engagement plan is engaging.
+
+            
+
+          
+            - *(dict) --* 
+
+              The contact or contact channel that is being engaged.
+
+              
+
+            
+              - **ChannelTargetInfo** *(dict) --* 
+
+                Information about the contact channel Incident Manager is engaging.
+
+                
+
+              
+                - **ContactChannelId** *(string) --* **[REQUIRED]** 
+
+                  The Amazon Resource Name (ARN) of the contact channel.
+
+                  
+
+                
+                - **RetryIntervalInMinutes** *(integer) --* 
+
+                  The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
+
+                  
+
+                
+              
+              - **ContactTargetInfo** *(dict) --* 
+
+                Information about the contact that Incident Manager is engaging.
+
+                
+
+              
+                - **ContactId** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the contact.
+
+                  
+
+                
+                - **IsEssential** *(boolean) --* **[REQUIRED]** 
+
+                  A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+
+                  
+
+                
+              
+            
+        
+        
+    
+    
+    :type Tags: list
+    :param Tags: 
+
+      Adds a tag to the target. You can only tag resources created in the first Region of your replication set. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A container of a key-value name pair.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          Name of the object key.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          Value of the tag.
+
+          
+
+        
+      
+  
+    :type IdempotencyToken: string
+    :param IdempotencyToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the created contact or escalation plan.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+
+  .. py:method:: create_contact_channel(**kwargs)
+
+    
+
+    A contact channel is the method that Incident Manager uses to engage your contact.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/CreateContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_contact_channel(
+          ContactId='string',
+          Name='string',
+          Type='SMS'|'VOICE'|'EMAIL',
+          DeliveryAddress={
+              'SimpleAddress': 'string'
+          },
+          DeferActivation=True|False,
+          IdempotencyToken='string'
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the contact channel.
+
+      
+
+    
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+      Incident Manager supports three types of contact channels:
+
+       
+
+       
+      * ``SMS``   
+       
+      * ``VOICE``   
+       
+      * ``EMAIL``   
+       
+
+      
+
+    
+    :type DeliveryAddress: dict
+    :param DeliveryAddress: **[REQUIRED]** 
+
+      The details that Incident Manager uses when trying to engage the contact channel. The format is dependent on the type of the contact channel. The following are the expected formats:
+
+       
+
+       
+      * SMS - '+' followed by the country code and phone number 
+       
+      * VOICE - '+' followed by the country code and phone number 
+       
+      * EMAIL - any standard email format 
+       
+
+      
+
+    
+      - **SimpleAddress** *(string) --* 
+
+        The format is dependent on the type of the contact channel. The following are the expected formats:
+
+         
+
+         
+        * SMS - '+' followed by the country code and phone number 
+         
+        * VOICE - '+' followed by the country code and phone number 
+         
+        * EMAIL - any standard email format 
+         
+
+        
+
+      
+    
+    :type DeferActivation: boolean
+    :param DeferActivation: 
+
+      If you want to activate the channel at a later time, you can choose to defer activation. Incident Manager can't engage your contact channel until it has been activated.
+
+      
+
+    
+    :type IdempotencyToken: string
+    :param IdempotencyToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactChannelArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactChannelArn** *(string) --* 
+
+          The ARN of the contact channel.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: deactivate_contact_channel(**kwargs)
+
+    
+
+    To no longer receive Incident Manager engagements to a contact channel, you can deactivate the channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/DeactivateContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.deactivate_contact_channel(
+          ContactChannelId='string'
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel you're deactivating.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: delete_contact(**kwargs)
+
+    
+
+    To remove a contact from Incident Manager, you can delete the contact. Deleting a contact removes them from all escalation plans and related response plans. Deleting an escalation plan removes it from all related response plans. You will have to recreate the contact and its contact channels before you can use it again.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/DeleteContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_contact(
+          ContactId='string'
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact that you're deleting.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: delete_contact_channel(**kwargs)
+
+    
+
+    To no longer receive engagements on a contact channel, you can delete the channel from a contact. Deleting the contact channel removes it from the contact's engagement plan. If you delete the only contact channel for a contact, you won't be able to engage that contact during an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/DeleteContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_contact_channel(
+          ContactChannelId='string'
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: describe_engagement(**kwargs)
+
+    
+
+    Incident Manager uses engagements to engage contacts and escalation plans during an incident. Use this command to describe the engagement that occurred during an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/DescribeEngagement>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_engagement(
+          EngagementId='string'
+      )
+    :type EngagementId: string
+    :param EngagementId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement you want the details of.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactArn': 'string',
+            'EngagementArn': 'string',
+            'Sender': 'string',
+            'Subject': 'string',
+            'Content': 'string',
+            'PublicSubject': 'string',
+            'PublicContent': 'string',
+            'IncidentId': 'string',
+            'StartTime': datetime(2015, 1, 1),
+            'StopTime': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactArn** *(string) --* 
+
+          The ARN of the escalation plan or contacts involved in the engagement.
+
+          
+        
+
+        - **EngagementArn** *(string) --* 
+
+          The ARN of the engagement.
+
+          
+        
+
+        - **Sender** *(string) --* 
+
+          The user that started the engagement.
+
+          
+        
+
+        - **Subject** *(string) --* 
+
+          The secure subject of the message that was sent to the contact. Use this field for engagements to ``VOICE`` and ``EMAIL`` .
+
+          
+        
+
+        - **Content** *(string) --* 
+
+          The secure content of the message that was sent to the contact. Use this field for engagements to ``VOICE`` and ``EMAIL`` .
+
+          
+        
+
+        - **PublicSubject** *(string) --* 
+
+          The insecure subject of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+          
+        
+
+        - **PublicContent** *(string) --* 
+
+          The insecure content of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+          
+        
+
+        - **IncidentId** *(string) --* 
+
+          The ARN of the incident in which the engagement occurred.
+
+          
+        
+
+        - **StartTime** *(datetime) --* 
+
+          The time that the engagement started.
+
+          
+        
+
+        - **StopTime** *(datetime) --* 
+
+          The time that the engagement ended.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: describe_page(**kwargs)
+
+    
+
+    Lists details of the engagement to a contact channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/DescribePage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_page(
+          PageId='string'
+      )
+    :type PageId: string
+    :param PageId: **[REQUIRED]** 
+
+      The ID of the engagement to a contact channel.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PageArn': 'string',
+            'EngagementArn': 'string',
+            'ContactArn': 'string',
+            'Sender': 'string',
+            'Subject': 'string',
+            'Content': 'string',
+            'PublicSubject': 'string',
+            'PublicContent': 'string',
+            'IncidentId': 'string',
+            'SentTime': datetime(2015, 1, 1),
+            'ReadTime': datetime(2015, 1, 1),
+            'DeliveryTime': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PageArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the engagement to a contact channel.
+
+          
+        
+
+        - **EngagementArn** *(string) --* 
+
+          The ARN of the engagement that engaged the contact channel.
+
+          
+        
+
+        - **ContactArn** *(string) --* 
+
+          The ARN of the contact that was engaged.
+
+          
+        
+
+        - **Sender** *(string) --* 
+
+          The user that started the engagement.
+
+          
+        
+
+        - **Subject** *(string) --* 
+
+          The secure subject of the message that was sent to the contact. Use this field for engagements to ``VOICE`` and ``EMAIL`` .
+
+          
+        
+
+        - **Content** *(string) --* 
+
+          The secure content of the message that was sent to the contact. Use this field for engagements to ``VOICE`` and ``EMAIL`` .
+
+          
+        
+
+        - **PublicSubject** *(string) --* 
+
+          The insecure subject of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+          
+        
+
+        - **PublicContent** *(string) --* 
+
+          The insecure content of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+          
+        
+
+        - **IncidentId** *(string) --* 
+
+          The ARN of the incident that engaged the contact channel.
+
+          
+        
+
+        - **SentTime** *(datetime) --* 
+
+          The time the engagement was sent to the contact channel.
+
+          
+        
+
+        - **ReadTime** *(datetime) --* 
+
+          The time that the contact channel acknowledged the engagement.
+
+          
+        
+
+        - **DeliveryTime** *(datetime) --* 
+
+          The time that the contact channel received the engagement.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_contact(**kwargs)
+
+    
+
+    Retrieves information about the specified contact or escalation plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/GetContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_contact(
+          ContactId='string'
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactArn': 'string',
+            'Alias': 'string',
+            'DisplayName': 'string',
+            'Type': 'PERSONAL'|'ESCALATION',
+            'Plan': {
+                'Stages': [
+                    {
+                        'DurationInMinutes': 123,
+                        'Targets': [
+                            {
+                                'ChannelTargetInfo': {
+                                    'ContactChannelId': 'string',
+                                    'RetryIntervalInMinutes': 123
+                                },
+                                'ContactTargetInfo': {
+                                    'ContactId': 'string',
+                                    'IsEssential': True|False
+                                }
+                            },
+                        ]
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactArn** *(string) --* 
+
+          The ARN of the contact or escalation plan.
+
+          
+        
+
+        - **Alias** *(string) --* 
+
+          The alias of the contact or escalation plan. The alias is unique and identifiable.
+
+          
+        
+
+        - **DisplayName** *(string) --* 
+
+          The full name of the contact or escalation plan.
+
+          
+        
+
+        - **Type** *(string) --* 
+
+          The type of contact, either ``PERSONAL`` or ``ESCALATION`` . 
+
+          
+        
+
+        - **Plan** *(dict) --* 
+
+          Details about the specific timing or stages and targets of the escalation plan or engagement plan.
+
+          
+          
+
+          - **Stages** *(list) --* 
+
+            A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
+
+            
+            
+
+            - *(dict) --* 
+
+              A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
+
+              
+              
+
+              - **DurationInMinutes** *(integer) --* 
+
+                The time to wait until beginning the next stage.
+
+                
+              
+
+              - **Targets** *(list) --* 
+
+                The contacts or contact methods that the escalation plan or engagement plan is engaging.
+
+                
+                
+
+                - *(dict) --* 
+
+                  The contact or contact channel that is being engaged.
+
+                  
+                  
+
+                  - **ChannelTargetInfo** *(dict) --* 
+
+                    Information about the contact channel Incident Manager is engaging.
+
+                    
+                    
+
+                    - **ContactChannelId** *(string) --* 
+
+                      The Amazon Resource Name (ARN) of the contact channel.
+
+                      
+                    
+
+                    - **RetryIntervalInMinutes** *(integer) --* 
+
+                      The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
+
+                      
+                
+                  
+
+                  - **ContactTargetInfo** *(dict) --* 
+
+                    Information about the contact that Incident Manager is engaging.
+
+                    
+                    
+
+                    - **ContactId** *(string) --* 
+
+                      The Amazon Resource Name (ARN) of the contact.
+
+                      
+                    
+
+                    - **IsEssential** *(boolean) --* 
+
+                      A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+
+                      
+                
+              
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+
+  .. py:method:: get_contact_channel(**kwargs)
+
+    
+
+    List details about a specific contact channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/GetContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_contact_channel(
+          ContactChannelId='string'
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel you want information about.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactArn': 'string',
+            'ContactChannelArn': 'string',
+            'Name': 'string',
+            'Type': 'SMS'|'VOICE'|'EMAIL',
+            'DeliveryAddress': {
+                'SimpleAddress': 'string'
+            },
+            'ActivationStatus': 'ACTIVATED'|'NOT_ACTIVATED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactArn** *(string) --* 
+
+          The ARN of the contact that the channel belongs to.
+
+          
+        
+
+        - **ContactChannelArn** *(string) --* 
+
+          The ARN of the contact channel.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the contact channel
+
+          
+        
+
+        - **Type** *(string) --* 
+
+          The type of contact channel. The type is ``SMS`` , ``VOICE`` , or ``EMAIL`` .
+
+          
+        
+
+        - **DeliveryAddress** *(dict) --* 
+
+          The details that Incident Manager uses when trying to engage the contact channel. 
+
+          
+          
+
+          - **SimpleAddress** *(string) --* 
+
+            The format is dependent on the type of the contact channel. The following are the expected formats:
+
+             
+
+             
+            * SMS - '+' followed by the country code and phone number 
+             
+            * VOICE - '+' followed by the country code and phone number 
+             
+            * EMAIL - any standard email format 
+             
+
+            
+      
+        
+
+        - **ActivationStatus** *(string) --* 
+
+          A Boolean value indicating if the contact channel has been activated or not.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_contact_policy(**kwargs)
+
+    
+
+    Retrieves the resource policies attached to the specified contact or escalation plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/GetContactPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_contact_policy(
+          ContactArn='string'
+      )
+    :type ContactArn: string
+    :param ContactArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactArn': 'string',
+            'Policy': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactArn** *(string) --* 
+
+          The ARN of the contact or escalation plan.
+
+          
+        
+
+        - **Policy** *(string) --* 
+
+          Details about the resource policy attached to the contact or escalation plan.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_contact_channels(**kwargs)
+
+    
+
+    Lists all contact channels for the specified contact.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListContactChannels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_contact_channels(
+          ContactId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of contact channels per page.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'ContactChannels': [
+                {
+                    'ContactChannelArn': 'string',
+                    'ContactArn': 'string',
+                    'Name': 'string',
+                    'Type': 'SMS'|'VOICE'|'EMAIL',
+                    'DeliveryAddress': {
+                        'SimpleAddress': 'string'
+                    },
+                    'ActivationStatus': 'ACTIVATED'|'NOT_ACTIVATED'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **ContactChannels** *(list) --* 
+
+          A list of contact channels related to the specified contact.
+
+          
+          
+
+          - *(dict) --* 
+
+            The method that Incident Manager uses to engage a contact.
+
+            
+            
+
+            - **ContactChannelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact channel.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that contains the contact channel.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the contact channel.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the contact channel. Incident Manager supports three contact methods:
+
+               
+
+               
+              * SMS 
+               
+              * VOICE 
+               
+              * EMAIL 
+               
+
+              
+            
+
+            - **DeliveryAddress** *(dict) --* 
+
+              The details that Incident Manager uses when trying to engage the contact channel.
+
+              
+              
+
+              - **SimpleAddress** *(string) --* 
+
+                The format is dependent on the type of the contact channel. The following are the expected formats:
+
+                 
+
+                 
+                * SMS - '+' followed by the country code and phone number 
+                 
+                * VOICE - '+' followed by the country code and phone number 
+                 
+                * EMAIL - any standard email format 
+                 
+
+                
+          
+            
+
+            - **ActivationStatus** *(string) --* 
+
+              A Boolean value describing if the contact channel has been activated or not. If the contact channel isn't activated, Incident Manager can't engage the contact through it. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_contacts(**kwargs)
+
+    
+
+    Lists all contacts and escalation plans in Incident Manager.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListContacts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_contacts(
+          NextToken='string',
+          MaxResults=123,
+          AliasPrefix='string',
+          Type='PERSONAL'|'ESCALATION'
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of contacts and escalation plans per page of results.
+
+      
+
+    
+    :type AliasPrefix: string
+    :param AliasPrefix: 
+
+      Used to list only contacts who's aliases start with the specified prefix.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of contact. A contact is type ``PERSONAL`` and an escalation plan is type ``ESCALATION`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Contacts': [
+                {
+                    'ContactArn': 'string',
+                    'Alias': 'string',
+                    'DisplayName': 'string',
+                    'Type': 'PERSONAL'|'ESCALATION'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **Contacts** *(list) --* 
+
+          A list of the contacts and escalation plans in your Incident Manager account.
+
+          
+          
+
+          - *(dict) --* 
+
+            A personal contact or escalation plan that Incident Manager engages during an incident.
+
+            
+            
+
+            - **ContactArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+              
+            
+
+            - **Alias** *(string) --* 
+
+              The unique and identifiable alias of the contact or escalation plan.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              The full name of the contact or escalation plan.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              Refers to the type of contact. A single contact is type ``PERSONAL`` and an escalation plan is type ``ESCALATION`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_engagements(**kwargs)
+
+    
+
+    Lists all engagements that have happened in an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListEngagements>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_engagements(
+          NextToken='string',
+          MaxResults=123,
+          IncidentId='string',
+          TimeRangeValue={
+              'StartTime': datetime(2015, 1, 1),
+              'EndTime': datetime(2015, 1, 1)
+          }
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of engagements per page of results.
+
+      
+
+    
+    :type IncidentId: string
+    :param IncidentId: 
+
+      The Amazon Resource Name (ARN) of the incident you're listing engagements for.
+
+      
+
+    
+    :type TimeRangeValue: dict
+    :param TimeRangeValue: 
+
+      The time range to lists engagements for an incident.
+
+      
+
+    
+      - **StartTime** *(datetime) --* 
+
+        The start of the time range.
+
+        
+
+      
+      - **EndTime** *(datetime) --* 
+
+        The end of the time range.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Engagements': [
+                {
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'StartTime': datetime(2015, 1, 1),
+                    'StopTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **Engagements** *(list) --* 
+
+          A list of each engagement that occurred during the specified time range of an incident.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager reaching out to a contact or escalation plan to engage contact during an incident.
+
+            
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the engagement.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the escalation plan or contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact.
+
+              
+            
+
+            - **StartTime** *(datetime) --* 
+
+              The time that the engagement began.
+
+              
+            
+
+            - **StopTime** *(datetime) --* 
+
+              The time that the engagement ended.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_page_receipts(**kwargs)
+
+    
+
+    Lists all of the engagements to contact channels that have been acknowledged. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPageReceipts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_page_receipts(
+          PageId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type PageId: string
+    :param PageId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement to a specific contact channel.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of acknowledgements per page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Receipts': [
+                {
+                    'ContactChannelArn': 'string',
+                    'ReceiptType': 'DELIVERED'|'ERROR'|'READ'|'SENT'|'STOP',
+                    'ReceiptInfo': 'string',
+                    'ReceiptTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **Receipts** *(list) --* 
+
+          A list of each acknowledgement.
+
+          
+          
+
+          - *(dict) --* 
+
+            Records events during an engagement.
+
+            
+            
+
+            - **ContactChannelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact channel Incident Manager engaged.
+
+              
+            
+
+            - **ReceiptType** *(string) --* 
+
+              The type follows the engagement cycle, ``SENT`` , ``DELIVERED`` , and ``READ`` .
+
+              
+            
+
+            - **ReceiptInfo** *(string) --* 
+
+              Information provided during the page acknowledgement.
+
+              
+            
+
+            - **ReceiptTime** *(datetime) --* 
+
+              The time receipt was ``SENT`` , ``DELIVERED`` , or ``READ`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_pages_by_contact(**kwargs)
+
+    
+
+    Lists the engagements to a contact's contact channels.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPagesByContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_pages_by_contact(
+          ContactId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of engagements to contact channels to list per page of results. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Pages': [
+                {
+                    'PageArn': 'string',
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'SentTime': datetime(2015, 1, 1),
+                    'DeliveryTime': datetime(2015, 1, 1),
+                    'ReadTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **Pages** *(list) --* 
+
+          The list of engagements to a contact's contact channel.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager engaging a contact's contact channel.
+
+            
+            
+
+            - **PageArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the page to the contact channel.
+
+              
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The ARN of the engagement that this page is part of.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact channel.
+
+              
+            
+
+            - **SentTime** *(datetime) --* 
+
+              The time that Incident Manager engaged the contact channel.
+
+              
+            
+
+            - **DeliveryTime** *(datetime) --* 
+
+              The time the message was delivered to the contact channel.
+
+              
+            
+
+            - **ReadTime** *(datetime) --* 
+
+              The time that the contact channel acknowledged engagement.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_pages_by_engagement(**kwargs)
+
+    
+
+    Lists the engagements to contact channels that occurred by engaging a contact.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPagesByEngagement>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_pages_by_engagement(
+          EngagementId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type EngagementId: string
+    :param EngagementId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of engagements to contact channels to list per page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Pages': [
+                {
+                    'PageArn': 'string',
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'SentTime': datetime(2015, 1, 1),
+                    'DeliveryTime': datetime(2015, 1, 1),
+                    'ReadTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **Pages** *(list) --* 
+
+          The list of engagements to contact channels.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager engaging a contact's contact channel.
+
+            
+            
+
+            - **PageArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the page to the contact channel.
+
+              
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The ARN of the engagement that this page is part of.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact channel.
+
+              
+            
+
+            - **SentTime** *(datetime) --* 
+
+              The time that Incident Manager engaged the contact channel.
+
+              
+            
+
+            - **DeliveryTime** *(datetime) --* 
+
+              The time the message was delivered to the contact channel.
+
+              
+            
+
+            - **ReadTime** *(datetime) --* 
+
+              The time that the contact channel acknowledged engagement.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags of an escalation plan or contact.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceARN='string'
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          The tags related to the contact or escalation plan.
+
+          
+          
+
+          - *(dict) --* 
+
+            A container of a key-value name pair.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              Name of the object key.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              Value of the tag.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: put_contact_policy(**kwargs)
+
+    
+
+    Adds a resource to the specified contact or escalation plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/PutContactPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_contact_policy(
+          ContactArn='string',
+          Policy='string'
+      )
+    :type ContactArn: string
+    :param ContactArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    :type Policy: string
+    :param Policy: **[REQUIRED]** 
+
+      Details of the resource policy.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: send_activation_code(**kwargs)
+
+    
+
+    Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the ``ActivateChannel`` action. Incident Manager can't engage a contact channel until it has been activated.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/SendActivationCode>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.send_activation_code(
+          ContactChannelId='string'
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: start_engagement(**kwargs)
+
+    
+
+    Starts an engagement to a contact or escalation plan. The engagement engages each contact specified in the incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/StartEngagement>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_engagement(
+          ContactId='string',
+          Sender='string',
+          Subject='string',
+          Content='string',
+          PublicSubject='string',
+          PublicContent='string',
+          IncidentId='string',
+          IdempotencyToken='string'
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact being engaged.
+
+      
+
+    
+    :type Sender: string
+    :param Sender: **[REQUIRED]** 
+
+      The user that started the engagement.
+
+      
+
+    
+    :type Subject: string
+    :param Subject: **[REQUIRED]** 
+
+      The secure subject of the message that was sent to the contact. Use this field for engagements to ``VOICE`` or ``EMAIL`` .
+
+      
+
+    
+    :type Content: string
+    :param Content: **[REQUIRED]** 
+
+      The secure content of the message that was sent to the contact. Use this field for engagements to ``VOICE`` or ``EMAIL`` .
+
+      
+
+    
+    :type PublicSubject: string
+    :param PublicSubject: 
+
+      The insecure subject of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+      
+
+    
+    :type PublicContent: string
+    :param PublicContent: 
+
+      The insecure content of the message that was sent to the contact. Use this field for engagements to ``SMS`` .
+
+      
+
+    
+    :type IncidentId: string
+    :param IncidentId: 
+
+      The ARN of the incident that the engagement is part of.
+
+      
+
+    
+    :type IdempotencyToken: string
+    :param IdempotencyToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'EngagementArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **EngagementArn** *(string) --* 
+
+          The ARN of the engagement.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: stop_engagement(**kwargs)
+
+    
+
+    Stops an engagement before it finishes the final stage of the escalation plan or engagement plan. Further contacts aren't engaged.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/StopEngagement>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_engagement(
+          EngagementId='string',
+          Reason='string'
+      )
+    :type EngagementId: string
+    :param EngagementId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement.
+
+      
+
+    
+    :type Reason: string
+    :param Reason: 
+
+      The reason that you're stopping the engagement. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceARN='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      A list of tags that you are adding to the contact or escalation plan.
+
+      
+
+    
+      - *(dict) --* 
+
+        A container of a key-value name pair.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          Name of the object key.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          Value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from the specified resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceARN='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The key of the tag that you want to remove.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_contact(**kwargs)
+
+    
+
+    Updates the contact or escalation plan specified. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/UpdateContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_contact(
+          ContactId='string',
+          DisplayName='string',
+          Plan={
+              'Stages': [
+                  {
+                      'DurationInMinutes': 123,
+                      'Targets': [
+                          {
+                              'ChannelTargetInfo': {
+                                  'ContactChannelId': 'string',
+                                  'RetryIntervalInMinutes': 123
+                              },
+                              'ContactTargetInfo': {
+                                  'ContactId': 'string',
+                                  'IsEssential': True|False
+                              }
+                          },
+                      ]
+                  },
+              ]
+          }
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact or escalation plan you're updating.
+
+      
+
+    
+    :type DisplayName: string
+    :param DisplayName: 
+
+      The full name of the contact or escalation plan.
+
+      
+
+    
+    :type Plan: dict
+    :param Plan: 
+
+      A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. 
+
+      
+
+    
+      - **Stages** *(list) --* **[REQUIRED]** 
+
+        A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
+
+        
+
+      
+        - *(dict) --* 
+
+          A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.
+
+          
+
+        
+          - **DurationInMinutes** *(integer) --* **[REQUIRED]** 
+
+            The time to wait until beginning the next stage.
+
+            
+
+          
+          - **Targets** *(list) --* **[REQUIRED]** 
+
+            The contacts or contact methods that the escalation plan or engagement plan is engaging.
+
+            
+
+          
+            - *(dict) --* 
+
+              The contact or contact channel that is being engaged.
+
+              
+
+            
+              - **ChannelTargetInfo** *(dict) --* 
+
+                Information about the contact channel Incident Manager is engaging.
+
+                
+
+              
+                - **ContactChannelId** *(string) --* **[REQUIRED]** 
+
+                  The Amazon Resource Name (ARN) of the contact channel.
+
+                  
+
+                
+                - **RetryIntervalInMinutes** *(integer) --* 
+
+                  The number of minutes to wait to retry sending engagement in the case the engagement initially fails.
+
+                  
+
+                
+              
+              - **ContactTargetInfo** *(dict) --* 
+
+                Information about the contact that Incident Manager is engaging.
+
+                
+
+              
+                - **ContactId** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the contact.
+
+                  
+
+                
+                - **IsEssential** *(boolean) --* **[REQUIRED]** 
+
+                  A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
+
+                  
+
+                
+              
+            
+        
+        
+    
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+
+  .. py:method:: update_contact_channel(**kwargs)
+
+    
+
+    Updates a contact's contact channel.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/UpdateContactChannel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_contact_channel(
+          ContactChannelId='string',
+          Name='string',
+          DeliveryAddress={
+              'SimpleAddress': 'string'
+          }
+      )
+    :type ContactChannelId: string
+    :param ContactChannelId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact channel you want to update.
+
+      
+
+    
+    :type Name: string
+    :param Name: 
+
+      The name of the contact channel
+
+      
+
+    
+    :type DeliveryAddress: dict
+    :param DeliveryAddress: 
+
+      The details that Incident Manager uses when trying to engage the contact channel. 
+
+      
+
+    
+      - **SimpleAddress** *(string) --* 
+
+        The format is dependent on the type of the contact channel. The following are the expected formats:
+
+         
+
+         
+        * SMS - '+' followed by the country code and phone number 
+         
+        * VOICE - '+' followed by the country code and phone number 
+         
+        * EMAIL - any standard email format 
+         
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMContacts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.DataEncryptionException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMContacts.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`SSMContacts.Paginator.ListContactChannels`
+
+
+* :py:class:`SSMContacts.Paginator.ListContacts`
+
+
+* :py:class:`SSMContacts.Paginator.ListEngagements`
+
+
+* :py:class:`SSMContacts.Paginator.ListPageReceipts`
+
+
+* :py:class:`SSMContacts.Paginator.ListPagesByContact`
+
+
+* :py:class:`SSMContacts.Paginator.ListPagesByEngagement`
+
+
+
+.. py:class:: SSMContacts.Paginator.ListContactChannels
+
+  ::
+
+    
+    paginator = client.get_paginator('list_contact_channels')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_contact_channels`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListContactChannels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ContactId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact. 
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ContactChannels': [
+                {
+                    'ContactChannelArn': 'string',
+                    'ContactArn': 'string',
+                    'Name': 'string',
+                    'Type': 'SMS'|'VOICE'|'EMAIL',
+                    'DeliveryAddress': {
+                        'SimpleAddress': 'string'
+                    },
+                    'ActivationStatus': 'ACTIVATED'|'NOT_ACTIVATED'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ContactChannels** *(list) --* 
+
+          A list of contact channels related to the specified contact.
+
+          
+          
+
+          - *(dict) --* 
+
+            The method that Incident Manager uses to engage a contact.
+
+            
+            
+
+            - **ContactChannelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact channel.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that contains the contact channel.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the contact channel.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the contact channel. Incident Manager supports three contact methods:
+
+               
+
+               
+              * SMS 
+               
+              * VOICE 
+               
+              * EMAIL 
+               
+
+              
+            
+
+            - **DeliveryAddress** *(dict) --* 
+
+              The details that Incident Manager uses when trying to engage the contact channel.
+
+              
+              
+
+              - **SimpleAddress** *(string) --* 
+
+                The format is dependent on the type of the contact channel. The following are the expected formats:
+
+                 
+
+                 
+                * SMS - '+' followed by the country code and phone number 
+                 
+                * VOICE - '+' followed by the country code and phone number 
+                 
+                * EMAIL - any standard email format 
+                 
+
+                
+          
+            
+
+            - **ActivationStatus** *(string) --* 
+
+              A Boolean value describing if the contact channel has been activated or not. If the contact channel isn't activated, Incident Manager can't engage the contact through it. 
+
+              
+        
+      
+    
+
+.. py:class:: SSMContacts.Paginator.ListContacts
+
+  ::
+
+    
+    paginator = client.get_paginator('list_contacts')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_contacts`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListContacts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          AliasPrefix='string',
+          Type='PERSONAL'|'ESCALATION',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type AliasPrefix: string
+    :param AliasPrefix: 
+
+      Used to list only contacts who's aliases start with the specified prefix.
+
+      
+
+    
+    :type Type: string
+    :param Type: 
+
+      The type of contact. A contact is type ``PERSONAL`` and an escalation plan is type ``ESCALATION`` .
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Contacts': [
+                {
+                    'ContactArn': 'string',
+                    'Alias': 'string',
+                    'DisplayName': 'string',
+                    'Type': 'PERSONAL'|'ESCALATION'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Contacts** *(list) --* 
+
+          A list of the contacts and escalation plans in your Incident Manager account.
+
+          
+          
+
+          - *(dict) --* 
+
+            A personal contact or escalation plan that Incident Manager engages during an incident.
+
+            
+            
+
+            - **ContactArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact or escalation plan.
+
+              
+            
+
+            - **Alias** *(string) --* 
+
+              The unique and identifiable alias of the contact or escalation plan.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              The full name of the contact or escalation plan.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              Refers to the type of contact. A single contact is type ``PERSONAL`` and an escalation plan is type ``ESCALATION`` .
+
+              
+        
+      
+    
+
+.. py:class:: SSMContacts.Paginator.ListEngagements
+
+  ::
+
+    
+    paginator = client.get_paginator('list_engagements')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_engagements`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListEngagements>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          IncidentId='string',
+          TimeRangeValue={
+              'StartTime': datetime(2015, 1, 1),
+              'EndTime': datetime(2015, 1, 1)
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type IncidentId: string
+    :param IncidentId: 
+
+      The Amazon Resource Name (ARN) of the incident you're listing engagements for.
+
+      
+
+    
+    :type TimeRangeValue: dict
+    :param TimeRangeValue: 
+
+      The time range to lists engagements for an incident.
+
+      
+
+    
+      - **StartTime** *(datetime) --* 
+
+        The start of the time range.
+
+        
+
+      
+      - **EndTime** *(datetime) --* 
+
+        The end of the time range.
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Engagements': [
+                {
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'StartTime': datetime(2015, 1, 1),
+                    'StopTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Engagements** *(list) --* 
+
+          A list of each engagement that occurred during the specified time range of an incident.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager reaching out to a contact or escalation plan to engage contact during an incident.
+
+            
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the engagement.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the escalation plan or contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact.
+
+              
+            
+
+            - **StartTime** *(datetime) --* 
+
+              The time that the engagement began.
+
+              
+            
+
+            - **StopTime** *(datetime) --* 
+
+              The time that the engagement ended.
+
+              
+        
+      
+    
+
+.. py:class:: SSMContacts.Paginator.ListPageReceipts
+
+  ::
+
+    
+    paginator = client.get_paginator('list_page_receipts')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_page_receipts`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPageReceipts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PageId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PageId: string
+    :param PageId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement to a specific contact channel.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Receipts': [
+                {
+                    'ContactChannelArn': 'string',
+                    'ReceiptType': 'DELIVERED'|'ERROR'|'READ'|'SENT'|'STOP',
+                    'ReceiptInfo': 'string',
+                    'ReceiptTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Receipts** *(list) --* 
+
+          A list of each acknowledgement.
+
+          
+          
+
+          - *(dict) --* 
+
+            Records events during an engagement.
+
+            
+            
+
+            - **ContactChannelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the contact channel Incident Manager engaged.
+
+              
+            
+
+            - **ReceiptType** *(string) --* 
+
+              The type follows the engagement cycle, ``SENT`` , ``DELIVERED`` , and ``READ`` .
+
+              
+            
+
+            - **ReceiptInfo** *(string) --* 
+
+              Information provided during the page acknowledgement.
+
+              
+            
+
+            - **ReceiptTime** *(datetime) --* 
+
+              The time receipt was ``SENT`` , ``DELIVERED`` , or ``READ`` .
+
+              
+        
+      
+    
+
+.. py:class:: SSMContacts.Paginator.ListPagesByContact
+
+  ::
+
+    
+    paginator = client.get_paginator('list_pages_by_contact')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_pages_by_contact`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPagesByContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ContactId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Pages': [
+                {
+                    'PageArn': 'string',
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'SentTime': datetime(2015, 1, 1),
+                    'DeliveryTime': datetime(2015, 1, 1),
+                    'ReadTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Pages** *(list) --* 
+
+          The list of engagements to a contact's contact channel.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager engaging a contact's contact channel.
+
+            
+            
+
+            - **PageArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the page to the contact channel.
+
+              
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The ARN of the engagement that this page is part of.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact channel.
+
+              
+            
+
+            - **SentTime** *(datetime) --* 
+
+              The time that Incident Manager engaged the contact channel.
+
+              
+            
+
+            - **DeliveryTime** *(datetime) --* 
+
+              The time the message was delivered to the contact channel.
+
+              
+            
+
+            - **ReadTime** *(datetime) --* 
+
+              The time that the contact channel acknowledged engagement.
+
+              
+        
+      
+    
+
+.. py:class:: SSMContacts.Paginator.ListPagesByEngagement
+
+  ::
+
+    
+    paginator = client.get_paginator('list_pages_by_engagement')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMContacts.Client.list_pages_by_engagement`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-contacts-2021-05-03/ListPagesByEngagement>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          EngagementId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type EngagementId: string
+    :param EngagementId: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the engagement.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Pages': [
+                {
+                    'PageArn': 'string',
+                    'EngagementArn': 'string',
+                    'ContactArn': 'string',
+                    'Sender': 'string',
+                    'IncidentId': 'string',
+                    'SentTime': datetime(2015, 1, 1),
+                    'DeliveryTime': datetime(2015, 1, 1),
+                    'ReadTime': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Pages** *(list) --* 
+
+          The list of engagements to contact channels.
+
+          
+          
+
+          - *(dict) --* 
+
+            Incident Manager engaging a contact's contact channel.
+
+            
+            
+
+            - **PageArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the page to the contact channel.
+
+              
+            
+
+            - **EngagementArn** *(string) --* 
+
+              The ARN of the engagement that this page is part of.
+
+              
+            
+
+            - **ContactArn** *(string) --* 
+
+              The ARN of the contact that Incident Manager is engaging.
+
+              
+            
+
+            - **Sender** *(string) --* 
+
+              The user that started the engagement.
+
+              
+            
+
+            - **IncidentId** *(string) --* 
+
+              The ARN of the incident that's engaging the contact channel.
+
+              
+            
+
+            - **SentTime** *(datetime) --* 
+
+              The time that Incident Manager engaged the contact channel.
+
+              
+            
+
+            - **DeliveryTime** *(datetime) --* 
+
+              The time the message was delivered to the contact channel.
+
+              
+            
+
+            - **ReadTime** *(datetime) --* 
+
+              The time that the contact channel acknowledged engagement.
+
+              
+        
+      
+    

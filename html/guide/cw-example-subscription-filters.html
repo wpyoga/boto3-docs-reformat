@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Using subscription filters in Amazon CloudWatch Logs &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon CloudWatch examples" href="cw-examples.html" />
+    <link rel="next" title="Amazon DynamoDB" href="dynamodb.html" />
+    <link rel="prev" title="Sending events to Amazon CloudWatch Events" href="cw-example-events.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dynamodb.html" title="Amazon DynamoDB"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-events.html" title="Sending events to Amazon CloudWatch Events"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" accesskey="U">Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="cw-examples.html">Amazon CloudWatch examples</a></li>
+              
+              <li>Using subscription filters in Amazon CloudWatch Logs</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="using-subscription-filters-in-amazon-cloudwatch-logs">
+<span id="aws-boto3-cw-subscription-filters"></span><h1>Using subscription filters in Amazon CloudWatch Logs<a class="headerlink" href="#using-subscription-filters-in-amazon-cloudwatch-logs" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to create and delete filters for log events in CloudWatch Logs.</p>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>Subscriptions provide access to a real-time feed of log events from CloudWatch Logs and deliver that
+feed to other services, such as an Amazon Kinesis stream or AWS Lambda, for custom processing,
+analysis, or loading to other systems. A subscription filter defines the pattern to use for filtering
+which log events are delivered to your AWS resource.</p>
+<p>In this example, Python code is used to list, create, and delete a subscription
+filter in CloudWatch Logs. The destination for the log events is a Lambda function.
+The code uses the AWS SDK for Python to manage subscription filters using these methods of the
+CloudWatchLogs client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.get_paginator">get_paginator('describe_subscription_filters')</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.put_subscription_filter">put_subscription_filter</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.delete_subscription_filter">delete_subscription_filter</a>.</li>
+</ul>
+<p>For more information about CloudWatch Logs subscriptions, see
+Real-time <a class="reference external" href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions.html">Processing of Log Data with Subscriptions</a>
+in the Amazon CloudWatch Logs User Guide.</p>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</li>
+<li><p class="first">Create a Lambda function as the destination for log events. You will need to use the ARN of this
+function. For more information about setting up a Lambda function, see
+<a class="reference external" href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample">Subscription Filters with AWS Lambda</a>
+in the <em>Amazon CloudWatch Logs User Guide</em>.</p>
+</li>
+<li><p class="first">Create an IAM role whose policy grants permission to invoke the Lambda function you created and
+grants full access to CloudWatch Logs or apply the following policy to the execution role you create
+for the Lambda function. For more information about creating an IAM role, see
+Creating a Role to <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html">Delegate Permissions to an AWS Service</a>
+in the <em>IAM User Guide</em>.</p>
+<p>Use the following role policy when creating the IAM role.</p>
+</li>
+</ul>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;logs:CreateLogGroup&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;logs:CreateLogStream&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;logs:PutLogEvents&quot;</span>
+         <span class="p">],</span>
+         <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:logs:*:*:*&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+         <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;lambda:InvokeFunction&quot;</span>
+         <span class="p">],</span>
+         <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;*&quot;</span>
+         <span class="p">]</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="list-existing-subscription-filters">
+<h2>List existing subscription filters<a class="headerlink" href="#list-existing-subscription-filters" title="Permalink to this headline">¶</a></h2>
+<p>List the subscription filters for the specified log group.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>List subscription filters using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.get_paginator">get_paginator('describe_subscription_filters')</a>.</li>
+</ul>
+<p>For more information about paginators see, <a class="reference internal" href="paginators.html"><em>Paginators</em></a></p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatchLogs client</span>
+<span class="n">cloudwatch_logs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;logs&#39;</span><span class="p">)</span>
+
+<span class="c1"># List subscription filters through the pagination interface</span>
+<span class="n">paginator</span> <span class="o">=</span> <span class="n">cloudwatch_logs</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_subscription_filters&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">paginator</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">logGroupName</span><span class="o">=</span><span class="s1">&#39;GROUP_NAME&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;subscriptionFilters&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-subscription-filter">
+<h2>Create a subscription filter<a class="headerlink" href="#create-a-subscription-filter" title="Permalink to this headline">¶</a></h2>
+<p>Create or update a subscription filter and associate it with the specified log group.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Create a subscription filter using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.put_subscription_filter">put_subscription_filter</a>.</li>
+</ul>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatchLogs client</span>
+<span class="n">cloudwatch_logs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;logs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a subscription filter</span>
+<span class="n">cloudwatch_logs</span><span class="o">.</span><span class="n">put_subscription_filter</span><span class="p">(</span>
+    <span class="n">destinationArn</span><span class="o">=</span><span class="s1">&#39;LAMBDA_FUNCTION_ARN&#39;</span><span class="p">,</span>
+    <span class="n">filterName</span><span class="o">=</span><span class="s1">&#39;FILTER_NAME&#39;</span><span class="p">,</span>
+    <span class="n">filterPattern</span><span class="o">=</span><span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+    <span class="n">logGroupName</span><span class="o">=</span><span class="s1">&#39;LOG_GROUP&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="delete-a-subscription-filter">
+<h2>Delete a subscription filter<a class="headerlink" href="#delete-a-subscription-filter" title="Permalink to this headline">¶</a></h2>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Delete a subscription filter. using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/logs.html#CloudWatchLogs.Client.delete_subscription_filter">delete_subscription_filter</a>.</li>
+</ul>
+<div class="section" id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatchLogs client</span>
+<span class="n">cloudwatch_logs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;logs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Delete a subscription filter</span>
+<span class="n">cloudwatch_logs</span><span class="o">.</span><span class="n">delete_subscription_filter</span><span class="p">(</span>
+    <span class="n">filterName</span><span class="o">=</span><span class="s1">&#39;FILTER_NAME&#39;</span><span class="p">,</span>
+    <span class="n">logGroupName</span><span class="o">=</span><span class="s1">&#39;LOG_GROUP&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="cw-example-events.html" title="previous chapter (use the left arrow)">Sending events to Amazon CloudWatch Events</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="dynamodb.html" title="next chapter (use the right arrow)">Amazon DynamoDB</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dynamodb.html" title="Amazon DynamoDB"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-events.html" title="Sending events to Amazon CloudWatch Events"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" >Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

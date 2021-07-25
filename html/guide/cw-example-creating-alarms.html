@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Creating alarms in Amazon CloudWatch &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon CloudWatch examples" href="cw-examples.html" />
+    <link rel="next" title="Using alarm actions in Amazon CloudWatch" href="cw-example-using-alarms.html" />
+    <link rel="prev" title="Amazon CloudWatch examples" href="cw-examples.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-using-alarms.html" title="Using alarm actions in Amazon CloudWatch"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cw-examples.html" title="Amazon CloudWatch examples"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" accesskey="U">Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="cw-examples.html">Amazon CloudWatch examples</a></li>
+              
+              <li>Creating alarms in Amazon CloudWatch</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="creating-alarms-in-amazon-cloudwatch">
+<span id="aws-boto3-cw-creating-alarms"></span><h1>Creating alarms in Amazon CloudWatch<a class="headerlink" href="#creating-alarms-in-amazon-cloudwatch" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to:</p>
+<ul class="simple">
+<li>Get basic information about your CloudWatch alarms</li>
+<li>Create and delete a CloudWatch alarm</li>
+</ul>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>An alarm watches a single metric over a time period you specify, and performs one or more actions
+based on the value of the metric relative to a given threshold over a number of time periods.</p>
+<p>In this example, Python code is used to create alarms in CloudWatch. The code
+uses the AWS SDK for Python to create alarms using these methods of the AWS.CloudWatch client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.paginate">paginate(StateValue='INSUFFICIENT_DATA')</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm">put_metric_alarm</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.delete_alarms">delete_alarms</a>.</li>
+</ul>
+<p>For more information about CloudWatch alarms, see <a class="reference external" href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html">Creating Amazon CloudWatch Alarms</a>
+in the <em>Amazon CloudWatch User Guide</em>.</p>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</div>
+<div class="section" id="describe-alarms">
+<h2>Describe alarms<a class="headerlink" href="#describe-alarms" title="Permalink to this headline">¶</a></h2>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>List metric alarms for insufficient data using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.paginate">paginate(StateValue='INSUFFICIENT_DATA')</a>.</li>
+</ul>
+<p>For more information about paginators see, <a class="reference internal" href="paginators.html"><em>Paginators</em></a></p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatch client</span>
+<span class="n">cloudwatch</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">)</span>
+
+<span class="c1"># List alarms of insufficient data through the pagination interface</span>
+<span class="n">paginator</span> <span class="o">=</span> <span class="n">cloudwatch</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_alarms&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">paginator</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">StateValue</span><span class="o">=</span><span class="s1">&#39;INSUFFICIENT_DATA&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;MetricAlarms&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-an-alarm-for-a-cloudwatch-metric-alarm">
+<h2>Create an alarm for a CloudWatch Metric alarm<a class="headerlink" href="#create-an-alarm-for-a-cloudwatch-metric-alarm" title="Permalink to this headline">¶</a></h2>
+<p>Create or update an alarm and associate it with the specified metric alarm. Optionally, this operation
+can associate one or more Amazon SNS resources with the alarm.</p>
+<p>When this operation creates an alarm, the alarm state is immediately set to <tt class="code docutils literal"><span class="pre">INSUFFICIENT_DATA</span></tt>.
+The alarm is evaluated and its state is set appropriately. Any actions associated with the state are
+then executed.</p>
+<p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites
+the previous configuration of the alarm.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Create or update a metric alarm using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.put_metric_alarm">put_metric_alarm</a>.</li>
+</ul>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatch client</span>
+<span class="n">cloudwatch</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create alarm</span>
+<span class="n">cloudwatch</span><span class="o">.</span><span class="n">put_metric_alarm</span><span class="p">(</span>
+    <span class="n">AlarmName</span><span class="o">=</span><span class="s1">&#39;Web_Server_CPU_Utilization&#39;</span><span class="p">,</span>
+    <span class="n">ComparisonOperator</span><span class="o">=</span><span class="s1">&#39;GreaterThanThreshold&#39;</span><span class="p">,</span>
+    <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">MetricName</span><span class="o">=</span><span class="s1">&#39;CPUUtilization&#39;</span><span class="p">,</span>
+    <span class="n">Namespace</span><span class="o">=</span><span class="s1">&#39;AWS/EC2&#39;</span><span class="p">,</span>
+    <span class="n">Period</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">Statistic</span><span class="o">=</span><span class="s1">&#39;Average&#39;</span><span class="p">,</span>
+    <span class="n">Threshold</span><span class="o">=</span><span class="mf">70.0</span><span class="p">,</span>
+    <span class="n">ActionsEnabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">AlarmDescription</span><span class="o">=</span><span class="s1">&#39;Alarm when server CPU exceeds 70%&#39;</span><span class="p">,</span>
+    <span class="n">Dimensions</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="s1">&#39;InstanceId&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="s1">&#39;INSTANCE_ID&#39;</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">Unit</span><span class="o">=</span><span class="s1">&#39;Seconds&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="delete-an-alarm">
+<h2>Delete an alarm<a class="headerlink" href="#delete-an-alarm" title="Permalink to this headline">¶</a></h2>
+<p>Delete the specified alarms. In the event of an error, no alarms are deleted.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Delete a metric alarm using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.delete_alarms">delete_alarms</a>.</li>
+</ul>
+<div class="section" id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create CloudWatch client</span>
+<span class="n">cloudwatch</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;cloudwatch&#39;</span><span class="p">)</span>
+
+<span class="c1"># Delete alarm</span>
+<span class="n">cloudwatch</span><span class="o">.</span><span class="n">delete_alarms</span><span class="p">(</span>
+  <span class="n">AlarmNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Web_Server_CPU_Utilization&#39;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="cw-examples.html" title="previous chapter (use the left arrow)">Amazon CloudWatch examples</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="cw-example-using-alarms.html" title="next chapter (use the right arrow)">Using alarm actions in Amazon CloudWatch</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cw-example-using-alarms.html" title="Using alarm actions in Amazon CloudWatch"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cw-examples.html" title="Amazon CloudWatch examples"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="cw-examples.html" >Amazon CloudWatch examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

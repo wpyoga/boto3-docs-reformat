@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Use the Amazon SES API to manage email filters." name="description" />
+<meta content="SES Python" name="keywords" />
+
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Managing email filters with SES API &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon SES examples" href="ses-examples.html" />
+    <link rel="next" title="Creating and managing email rules with the SES API" href="ses-rules.html" />
+    <link rel="prev" title="Creating custom email templates with Amazon SES" href="ses-template.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ses-rules.html" title="Creating and managing email rules with the SES API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ses-template.html" title="Creating custom email templates with Amazon SES"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ses-examples.html" accesskey="U">Amazon SES examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="ses-examples.html">Amazon SES examples</a></li>
+              
+              <li>Managing email filters with SES API</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="managing-email-filters-with-ses-api">
+<span id="aws-boto3-ses-filters"></span><h1>Managing email filters with SES API<a class="headerlink" href="#managing-email-filters-with-ses-api" title="Permalink to this headline">¶</a></h1>
+<p>In addition to sending emails, you can also receive email with Amazon Simple
+Email Service (SES). An IP address filter enables you to optionally specify
+whether to accept or reject mail that originates from an IP address or range
+of IP addresses. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html">Managing IP Address Filters for
+Amazon SES Email
+Receiving</a>.</p>
+<p>The following examples show how to:</p>
+<ul class="simple">
+<li>Create an email filter using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.create_receipt_filter">create_receipt_filter()</a>.</li>
+<li>List all email filters using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.list_receipt_filters">list_receipt_filters()</a>.</li>
+<li>Remove an email filter using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ses.html#SES.Client.delete_receipt_filter">delete_receipt_filter()</a>.</li>
+</ul>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first complete these tasks:</p>
+<ul class="simple">
+<li>Configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="create-an-email-filter">
+<h2>Create an email filter<a class="headerlink" href="#create-an-email-filter" title="Permalink to this headline">¶</a></h2>
+<p>To allow or block emails from a specific IP address, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptFilter.html">CreateReceiptFilter</a>
+operation. Provide the IP address or range of addresses and a unique name to
+identify this filter.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create receipt filter</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">create_receipt_filter</span><span class="p">(</span>
+  <span class="n">Filter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;NAME&#39;</span>     <span class="p">:</span> <span class="s1">&#39;NAME&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IpFilter&#39;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="s1">&#39;Cidr&#39;</span>   <span class="p">:</span> <span class="s1">&#39;IP_ADDRESS_OR_RANGE&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Policy&#39;</span> <span class="p">:</span> <span class="s1">&#39;Allow&#39;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="list-all-email-filters">
+<h2>List all email filters<a class="headerlink" href="#list-all-email-filters" title="Permalink to this headline">¶</a></h2>
+<p>To list the IP address filters associated with your AWS account in the current
+AWS Region, use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_ListReceiptFilters.html">ListReceiptFilters</a>
+operation.</p>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">list_receipt_filters</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="delete-an-email-filter">
+<h2>Delete an email filter<a class="headerlink" href="#delete-an-email-filter" title="Permalink to this headline">¶</a></h2>
+<p>To remove an existing filter for a specific IP address use the
+<a class="reference external" href="https://docs.aws.amazon.com/ses/latest/APIReference/API_DeleteReceiptFilter.html">DeleteReceiptFilter</a>
+operation. Provide the unique filter name to identify the receipt filter to
+delete.</p>
+<p>If you need to change the range of addresses that are filtered, you can delete
+a receipt filter and create a new one.</p>
+<div class="section" id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SES client</span>
+<span class="n">ses</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ses&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">delete_receipt_filter</span><span class="p">(</span>
+  <span class="n">FilterName</span> <span class="o">=</span> <span class="s1">&#39;NAME&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="ses-template.html" title="previous chapter (use the left arrow)">Creating custom email templates with Amazon SES</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="ses-rules.html" title="next chapter (use the right arrow)">Creating and managing email rules with the SES API</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ses-rules.html" title="Creating and managing email rules with the SES API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ses-template.html" title="Creating custom email templates with Amazon SES"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="ses-examples.html" >Amazon SES examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

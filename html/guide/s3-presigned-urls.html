@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Presigned URLs &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon S3 examples" href="s3-examples.html" />
+    <link rel="next" title="Bucket policies" href="s3-example-bucket-policies.html" />
+    <link rel="prev" title="File transfer configuration" href="s3.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-example-bucket-policies.html" title="Bucket policies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="s3.html" title="File transfer configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="s3-examples.html" accesskey="U">Amazon S3 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="s3-examples.html">Amazon S3 examples</a></li>
+              
+              <li>Presigned URLs</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="presigned-urls">
+<h1>Presigned URLs<a class="headerlink" href="#presigned-urls" title="Permalink to this headline">¶</a></h1>
+<p>A user who does not have AWS credentials or permission to access an S3 object
+can be granted temporary access by using a presigned URL.</p>
+<p>A presigned URL is generated by an AWS user who has access to the object. The
+generated URL is then given to the unauthorized user. The presigned URL can be
+entered in a browser or used by a program or HTML webpage. The credentials
+used by the presigned URL are those of the AWS user who generated the URL.</p>
+<p>A presigned URL remains valid for a limited period of time which is specified
+when the URL is generated.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+
+
+<span class="k">def</span> <span class="nf">create_presigned_url</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">expiration</span><span class="o">=</span><span class="mi">3600</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a presigned URL to share an S3 object</span>
+
+<span class="sd">    :param bucket_name: string</span>
+<span class="sd">    :param object_name: string</span>
+<span class="sd">    :param expiration: Time in seconds for the presigned URL to remain valid</span>
+<span class="sd">    :return: Presigned URL as string. If error, returns None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate a presigned URL for the S3 object</span>
+    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_presigned_url</span><span class="p">(</span><span class="s1">&#39;get_object&#39;</span><span class="p">,</span>
+                                                    <span class="n">Params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Bucket&#39;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                                                            <span class="s1">&#39;Key&#39;</span><span class="p">:</span> <span class="n">object_name</span><span class="p">},</span>
+                                                    <span class="n">ExpiresIn</span><span class="o">=</span><span class="n">expiration</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># The response contains the presigned URL</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+<p>The user can download the S3 object by entering the presigned URL in a browser.
+A program or HTML page can download the S3 object by using the presigned URL
+as part of an HTTP GET request.</p>
+<p>The following code demonstrates using the Python <tt class="docutils literal"><span class="pre">requests</span></tt> package to
+perform a GET request.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>    <span class="c1"># To install: pip install requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">create_presigned_url</span><span class="p">(</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;OBJECT_NAME&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="using-presigned-urls-to-perform-other-s3-operations">
+<h2>Using presigned URLs to perform other S3 operations<a class="headerlink" href="#using-presigned-urls-to-perform-other-s3-operations" title="Permalink to this headline">¶</a></h2>
+<p>The main purpose of presigned URLs is to grant a user temporary access to an
+S3 object. However, presigned URLs can be used to grant permission to perform
+additional operations on S3 buckets and objects.</p>
+<p>The <tt class="docutils literal"><span class="pre">create_presigned_url_expanded</span></tt> method shown below generates a presigned
+URL to perform a specified S3 operation. The method accepts the name of the S3
+<tt class="docutils literal"><span class="pre">Client</span></tt> method to perform, such as 'list_buckets' or 'get_bucket_location.'
+The parameters to pass to the method are specified in the
+<tt class="docutils literal"><span class="pre">method_parameters</span></tt> dictionary argument. The HTTP method to use (GET, PUT,
+etc.) can be specified, but the AWS SDK for Python will automatically select
+the appropriate method so this argument is not normally required.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+
+
+<span class="k">def</span> <span class="nf">create_presigned_url_expanded</span><span class="p">(</span><span class="n">client_method_name</span><span class="p">,</span> <span class="n">method_parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">expiration</span><span class="o">=</span><span class="mi">3600</span><span class="p">,</span> <span class="n">http_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a presigned URL to invoke an S3.Client method</span>
+
+<span class="sd">    Not all the client methods provided in the AWS Python SDK are supported.</span>
+
+<span class="sd">    :param client_method_name: Name of the S3.Client method, e.g., &#39;list_buckets&#39;</span>
+<span class="sd">    :param method_parameters: Dictionary of parameters to send to the method</span>
+<span class="sd">    :param expiration: Time in seconds for the presigned URL to remain valid</span>
+<span class="sd">    :param http_method: HTTP method to use (GET, etc.)</span>
+<span class="sd">    :return: Presigned URL as string. If error, returns None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate a presigned URL for the S3 client method</span>
+    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_presigned_url</span><span class="p">(</span><span class="n">ClientMethod</span><span class="o">=</span><span class="n">client_method_name</span><span class="p">,</span>
+                                                    <span class="n">Params</span><span class="o">=</span><span class="n">method_parameters</span><span class="p">,</span>
+                                                    <span class="n">ExpiresIn</span><span class="o">=</span><span class="n">expiration</span><span class="p">,</span>
+                                                    <span class="n">HttpMethod</span><span class="o">=</span><span class="n">http_method</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># The response contains the presigned URL</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-a-presigned-url-to-upload-a-file">
+<h2>Generating a presigned URL to upload a file<a class="headerlink" href="#generating-a-presigned-url-to-upload-a-file" title="Permalink to this headline">¶</a></h2>
+<p>A user who does not have AWS credentials to upload a file can use a
+presigned URL to perform the upload. The upload operation makes an HTTP POST
+request and requires additional parameters to be sent as part of the request.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.exceptions</span> <span class="kn">import</span> <span class="n">ClientError</span>
+
+
+<span class="k">def</span> <span class="nf">create_presigned_post</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span>
+                          <span class="n">fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conditions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">expiration</span><span class="o">=</span><span class="mi">3600</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a presigned URL S3 POST request to upload a file</span>
+
+<span class="sd">    :param bucket_name: string</span>
+<span class="sd">    :param object_name: string</span>
+<span class="sd">    :param fields: Dictionary of prefilled form fields</span>
+<span class="sd">    :param conditions: List of conditions to include in the policy</span>
+<span class="sd">    :param expiration: Time in seconds for the presigned URL to remain valid</span>
+<span class="sd">    :return: Dictionary with the following keys:</span>
+<span class="sd">        url: URL to post to</span>
+<span class="sd">        fields: Dictionary of form fields and values to submit with the POST</span>
+<span class="sd">    :return: None if error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate a presigned S3 POST URL</span>
+    <span class="n">s3_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_presigned_post</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span>
+                                                     <span class="n">object_name</span><span class="p">,</span>
+                                                     <span class="n">Fields</span><span class="o">=</span><span class="n">fields</span><span class="p">,</span>
+                                                     <span class="n">Conditions</span><span class="o">=</span><span class="n">conditions</span><span class="p">,</span>
+                                                     <span class="n">ExpiresIn</span><span class="o">=</span><span class="n">expiration</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># The response contains the presigned URL and required fields</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+<p>The generated presigned URL includes both a URL and additional fields that
+must be passed as part of the subsequent HTTP POST request.</p>
+<p>The following code demonstrates how to use the <tt class="docutils literal"><span class="pre">requests</span></tt> package with a
+presigned POST URL to perform a POST request to upload a file to S3.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>    <span class="c1"># To install: pip install requests</span>
+
+<span class="c1"># Generate a presigned S3 POST URL</span>
+<span class="n">object_name</span> <span class="o">=</span> <span class="s1">&#39;OBJECT_NAME&#39;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">create_presigned_post</span><span class="p">(</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">,</span> <span class="n">object_name</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Demonstrate how another Python program can use the presigned URL to upload a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">object_name</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;file&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">object_name</span><span class="p">,</span> <span class="n">f</span><span class="p">)}</span>
+    <span class="n">http_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">],</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span class="c1"># If successful, returns HTTP status code 204</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File upload HTTP status code: </span><span class="si">{</span><span class="n">http_response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The presigned POST URL and fields values can also be used in an HTML page.</p>
+<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Copy the &#39;url&#39; value returned by S3Client.generate_presigned_post() --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;URL_VALUE&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="p">&gt;</span>
+      <span class="c">&lt;!-- Copy the &#39;fields&#39; key:values returned by S3Client.generate_presigned_post() --&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;key&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;VALUE&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;AWSAccessKeyId&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;VALUE&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;policy&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;VALUE&quot;</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;signature&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;VALUE&quot;</span> <span class="p">/&gt;</span>
+    File:
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span>   <span class="na">name</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="p">/&gt;</span> <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Upload to Amazon S3&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="s3.html" title="previous chapter (use the left arrow)">File transfer configuration</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="s3-example-bucket-policies.html" title="next chapter (use the right arrow)">Bucket policies</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-example-bucket-policies.html" title="Bucket policies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="s3.html" title="File transfer configuration"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="s3-examples.html" >Amazon S3 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

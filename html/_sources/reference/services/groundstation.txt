@@ -1,0 +1,6141 @@
+
+
+*************
+GroundStation
+*************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: GroundStation.Client
+
+  A low-level client representing AWS Ground Station
+  
+
+  Welcome to the AWS Ground Station API Reference. AWS Ground Station is a fully managed service that enables you to control satellite communications, downlink and process satellite data, and scale your satellite operations efficiently and cost-effectively without having to build or manage your own ground station infrastructure.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('groundstation')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~GroundStation.Client.can_paginate`
+
+  
+  *   :py:meth:`~GroundStation.Client.cancel_contact`
+
+  
+  *   :py:meth:`~GroundStation.Client.create_config`
+
+  
+  *   :py:meth:`~GroundStation.Client.create_dataflow_endpoint_group`
+
+  
+  *   :py:meth:`~GroundStation.Client.create_mission_profile`
+
+  
+  *   :py:meth:`~GroundStation.Client.delete_config`
+
+  
+  *   :py:meth:`~GroundStation.Client.delete_dataflow_endpoint_group`
+
+  
+  *   :py:meth:`~GroundStation.Client.delete_mission_profile`
+
+  
+  *   :py:meth:`~GroundStation.Client.describe_contact`
+
+  
+  *   :py:meth:`~GroundStation.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_config`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_dataflow_endpoint_group`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_minute_usage`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_mission_profile`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_paginator`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_satellite`
+
+  
+  *   :py:meth:`~GroundStation.Client.get_waiter`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_configs`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_contacts`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_dataflow_endpoint_groups`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_ground_stations`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_mission_profiles`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_satellites`
+
+  
+  *   :py:meth:`~GroundStation.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~GroundStation.Client.reserve_contact`
+
+  
+  *   :py:meth:`~GroundStation.Client.tag_resource`
+
+  
+  *   :py:meth:`~GroundStation.Client.untag_resource`
+
+  
+  *   :py:meth:`~GroundStation.Client.update_config`
+
+  
+  *   :py:meth:`~GroundStation.Client.update_mission_profile`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_contact(**kwargs)
+
+    
+
+    Cancels a contact with a specified contact ID.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CancelContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_contact(
+          contactId='string'
+      )
+    :type contactId: string
+    :param contactId: **[REQUIRED]** 
+
+      UUID of a contact.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactId** *(string) --* 
+
+          UUID of a contact.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: create_config(**kwargs)
+
+    
+
+    Creates a ``Config`` with the specified ``configData`` parameters.
+
+     
+
+    Only one type of ``configData`` can be specified.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_config(
+          configData={
+              'antennaDownlinkConfig': {
+                  'spectrumConfig': {
+                      'bandwidth': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  }
+              },
+              'antennaDownlinkDemodDecodeConfig': {
+                  'decodeConfig': {
+                      'unvalidatedJSON': 'string'
+                  },
+                  'demodulationConfig': {
+                      'unvalidatedJSON': 'string'
+                  },
+                  'spectrumConfig': {
+                      'bandwidth': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  }
+              },
+              'antennaUplinkConfig': {
+                  'spectrumConfig': {
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  },
+                  'targetEirp': {
+                      'units': 'dBW',
+                      'value': 123.0
+                  },
+                  'transmitDisabled': True|False
+              },
+              'dataflowEndpointConfig': {
+                  'dataflowEndpointName': 'string',
+                  'dataflowEndpointRegion': 'string'
+              },
+              's3RecordingConfig': {
+                  'bucketArn': 'string',
+                  'prefix': 'string',
+                  'roleArn': 'string'
+              },
+              'trackingConfig': {
+                  'autotrack': 'PREFERRED'|'REMOVED'|'REQUIRED'
+              },
+              'uplinkEchoConfig': {
+                  'antennaUplinkConfigArn': 'string',
+                  'enabled': True|False
+              }
+          },
+          name='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type configData: dict
+    :param configData: **[REQUIRED]** 
+
+      Parameters of a ``Config`` .
+
+      
+
+    
+      - **antennaDownlinkConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+
+        
+
+      
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Object that describes a spectral ``Config`` .
+
+          
+
+        
+          - **bandwidth** *(dict) --* **[REQUIRED]** 
+
+            Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+             
+
+             
+            * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+             
+            * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+             
+            * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+             
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency bandwidth units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+               
+
+               
+              * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+               
+              * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+              * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+
+              
+
+            
+          
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+      
+      - **antennaDownlinkDemodDecodeConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+
+        
+
+      
+        - **decodeConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the decode ``Config`` .
+
+          
+
+        
+          - **unvalidatedJSON** *(string) --* **[REQUIRED]** 
+
+            Unvalidated JSON of a decode ``Config`` .
+
+            
+
+          
+        
+        - **demodulationConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the demodulation ``Config`` .
+
+          
+
+        
+          - **unvalidatedJSON** *(string) --* **[REQUIRED]** 
+
+            Unvalidated JSON of a demodulation ``Config`` .
+
+            
+
+          
+        
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the spectral ``Config`` .
+
+          
+
+        
+          - **bandwidth** *(dict) --* **[REQUIRED]** 
+
+            Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+             
+
+             
+            * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+             
+            * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+             
+            * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+             
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency bandwidth units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+               
+
+               
+              * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+               
+              * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+              * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+
+              
+
+            
+          
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+      
+      - **antennaUplinkConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+
+        
+
+      
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the uplink spectral ``Config`` .
+
+          
+
+        
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of an uplink spectral ``Config`` . Valid values are between 2025 to 2120 MHz.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of an uplink spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+        - **targetEirp** *(dict) --* **[REQUIRED]** 
+
+          EIRP of the target.
+
+          
+
+        
+          - **units** *(string) --* **[REQUIRED]** 
+
+            Units of an EIRP.
+
+            
+
+          
+          - **value** *(float) --* **[REQUIRED]** 
+
+            Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
+
+            
+
+          
+        
+        - **transmitDisabled** *(boolean) --* 
+
+          Whether or not uplink transmit is disabled.
+
+          
+
+        
+      
+      - **dataflowEndpointConfig** *(dict) --* 
+
+        Information about the dataflow endpoint ``Config`` .
+
+        
+
+      
+        - **dataflowEndpointName** *(string) --* **[REQUIRED]** 
+
+          Name of a dataflow endpoint.
+
+          
+
+        
+        - **dataflowEndpointRegion** *(string) --* 
+
+          Region of a dataflow endpoint.
+
+          
+
+        
+      
+      - **s3RecordingConfig** *(dict) --* 
+
+        Information about an S3 recording ``Config`` .
+
+        
+
+      
+        - **bucketArn** *(string) --* **[REQUIRED]** 
+
+          ARN of the bucket to record to.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          S3 Key prefix to prefice data files.
+
+          
+
+        
+        - **roleArn** *(string) --* **[REQUIRED]** 
+
+          ARN of the role Ground Station assumes to write data to the bucket.
+
+          
+
+        
+      
+      - **trackingConfig** *(dict) --* 
+
+        Object that determines whether tracking should be used during a contact executed with this ``Config`` in the mission profile. 
+
+        
+
+      
+        - **autotrack** *(string) --* **[REQUIRED]** 
+
+          Current setting for autotrack.
+
+          
+
+        
+      
+      - **uplinkEchoConfig** *(dict) --* 
+
+        Information about an uplink echo ``Config`` .
+
+         
+
+        Parameters from the ``AntennaUplinkConfig`` , corresponding to the specified ``AntennaUplinkConfigArn`` , are used when this ``UplinkEchoConfig`` is used in a contact.
+
+        
+
+      
+        - **antennaUplinkConfigArn** *(string) --* **[REQUIRED]** 
+
+          ARN of an uplink ``Config`` .
+
+          
+
+        
+        - **enabled** *(boolean) --* **[REQUIRED]** 
+
+          Whether or not an uplink ``Config`` is enabled.
+
+          
+
+        
+      
+    
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      Name of a ``Config`` .
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Tags assigned to a ``Config`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configArn': 'string',
+            'configId': 'string',
+            'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configArn** *(string) --* 
+
+          ARN of a ``Config`` .
+
+          
+        
+
+        - **configId** *(string) --* 
+
+          UUID of a ``Config`` .
+
+          
+        
+
+        - **configType** *(string) --* 
+
+          Type of a ``Config`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceLimitExceededException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: create_dataflow_endpoint_group(**kwargs)
+
+    
+
+    Creates a ``DataflowEndpoint`` group containing the specified list of ``DataflowEndpoint`` objects.
+
+     
+
+    The ``name`` field in each endpoint is used in your mission profile ``DataflowEndpointConfig`` to specify which endpoints to use during a contact.
+
+     
+
+    When a contact uses multiple ``DataflowEndpointConfig`` objects, each ``Config`` must match a ``DataflowEndpoint`` in the same group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateDataflowEndpointGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_dataflow_endpoint_group(
+          endpointDetails=[
+              {
+                  'endpoint': {
+                      'address': {
+                          'name': 'string',
+                          'port': 123
+                      },
+                      'mtu': 123,
+                      'name': 'string',
+                      'status': 'created'|'creating'|'deleted'|'deleting'|'failed'
+                  },
+                  'securityDetails': {
+                      'roleArn': 'string',
+                      'securityGroupIds': [
+                          'string',
+                      ],
+                      'subnetIds': [
+                          'string',
+                      ]
+                  }
+              },
+          ],
+          tags={
+              'string': 'string'
+          }
+      )
+    :type endpointDetails: list
+    :param endpointDetails: **[REQUIRED]** 
+
+      Endpoint details of each endpoint in the dataflow endpoint group.
+
+      
+
+    
+      - *(dict) --* 
+
+        Information about the endpoint details.
+
+        
+
+      
+        - **endpoint** *(dict) --* 
+
+          A dataflow endpoint.
+
+          
+
+        
+          - **address** *(dict) --* 
+
+            Socket address of a dataflow endpoint.
+
+            
+
+          
+            - **name** *(string) --* **[REQUIRED]** 
+
+              Name of a socket address.
+
+              
+
+            
+            - **port** *(integer) --* **[REQUIRED]** 
+
+              Port of a socket address.
+
+              
+
+            
+          
+          - **mtu** *(integer) --* 
+
+            Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+
+            
+
+          
+          - **name** *(string) --* 
+
+            Name of a dataflow endpoint.
+
+            
+
+          
+          - **status** *(string) --* 
+
+            Status of a dataflow endpoint.
+
+            
+
+          
+        
+        - **securityDetails** *(dict) --* 
+
+          Endpoint security details.
+
+          
+
+        
+          - **roleArn** *(string) --* **[REQUIRED]** 
+
+            ARN to a role needed for connecting streams to your instances. 
+
+            
+
+          
+          - **securityGroupIds** *(list) --* **[REQUIRED]** 
+
+            The security groups to attach to the elastic network interfaces.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **subnetIds** *(list) --* **[REQUIRED]** 
+
+            A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+        
+      
+  
+    :type tags: dict
+    :param tags: 
+
+      Tags of a dataflow endpoint group.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'dataflowEndpointGroupId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **dataflowEndpointGroupId** *(string) --* 
+
+          UUID of a dataflow endpoint group.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: create_mission_profile(**kwargs)
+
+    
+
+    Creates a mission profile.
+
+     
+
+     ``dataflowEdges`` is a list of lists of strings. Each lower level list of strings has two elements: a *from* ARN and a *to* ARN.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/CreateMissionProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_mission_profile(
+          contactPostPassDurationSeconds=123,
+          contactPrePassDurationSeconds=123,
+          dataflowEdges=[
+              [
+                  'string',
+              ],
+          ],
+          minimumViableContactDurationSeconds=123,
+          name='string',
+          tags={
+              'string': 'string'
+          },
+          trackingConfigArn='string'
+      )
+    :type contactPostPassDurationSeconds: integer
+    :param contactPostPassDurationSeconds: 
+
+      Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+      
+
+    
+    :type contactPrePassDurationSeconds: integer
+    :param contactPrePassDurationSeconds: 
+
+      Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+
+      
+
+    
+    :type dataflowEdges: list
+    :param dataflowEdges: **[REQUIRED]** 
+
+      A list of lists of ARNs. Each list of ARNs is an edge, with a *from*  ``Config`` and a *to*  ``Config`` .
+
+      
+
+    
+      - *(list) --* 
+
+      
+        - *(string) --* 
+
+        
+    
+  
+    :type minimumViableContactDurationSeconds: integer
+    :param minimumViableContactDurationSeconds: **[REQUIRED]** 
+
+      Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+
+      
+
+    
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      Name of a mission profile.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Tags assigned to a mission profile.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type trackingConfigArn: string
+    :param trackingConfigArn: **[REQUIRED]** 
+
+      ARN of a tracking ``Config`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'missionProfileId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **missionProfileId** *(string) --* 
+
+          UUID of a mission profile.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: delete_config(**kwargs)
+
+    
+
+    Deletes a ``Config`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_config(
+          configId='string',
+          configType='antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording'
+      )
+    :type configId: string
+    :param configId: **[REQUIRED]** 
+
+      UUID of a ``Config`` .
+
+      
+
+    
+    :type configType: string
+    :param configType: **[REQUIRED]** 
+
+      Type of a ``Config`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configArn': 'string',
+            'configId': 'string',
+            'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configArn** *(string) --* 
+
+          ARN of a ``Config`` .
+
+          
+        
+
+        - **configId** *(string) --* 
+
+          UUID of a ``Config`` .
+
+          
+        
+
+        - **configType** *(string) --* 
+
+          Type of a ``Config`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: delete_dataflow_endpoint_group(**kwargs)
+
+    
+
+    Deletes a dataflow endpoint group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteDataflowEndpointGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_dataflow_endpoint_group(
+          dataflowEndpointGroupId='string'
+      )
+    :type dataflowEndpointGroupId: string
+    :param dataflowEndpointGroupId: **[REQUIRED]** 
+
+      UUID of a dataflow endpoint group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'dataflowEndpointGroupId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **dataflowEndpointGroupId** *(string) --* 
+
+          UUID of a dataflow endpoint group.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: delete_mission_profile(**kwargs)
+
+    
+
+    Deletes a mission profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DeleteMissionProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_mission_profile(
+          missionProfileId='string'
+      )
+    :type missionProfileId: string
+    :param missionProfileId: **[REQUIRED]** 
+
+      UUID of a mission profile.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'missionProfileId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **missionProfileId** *(string) --* 
+
+          UUID of a mission profile.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: describe_contact(**kwargs)
+
+    
+
+    Describes an existing contact.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_contact(
+          contactId='string'
+      )
+    :type contactId: string
+    :param contactId: **[REQUIRED]** 
+
+      UUID of a contact.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactId': 'string',
+            'contactStatus': 'AVAILABLE'|'AWS_CANCELLED'|'AWS_FAILED'|'CANCELLED'|'CANCELLING'|'COMPLETED'|'FAILED'|'FAILED_TO_SCHEDULE'|'PASS'|'POSTPASS'|'PREPASS'|'SCHEDULED'|'SCHEDULING',
+            'dataflowList': [
+                {
+                    'destination': {
+                        'configDetails': {
+                            'antennaDemodDecodeDetails': {
+                                'outputNode': 'string'
+                            },
+                            'endpointDetails': {
+                                'endpoint': {
+                                    'address': {
+                                        'name': 'string',
+                                        'port': 123
+                                    },
+                                    'mtu': 123,
+                                    'name': 'string',
+                                    'status': 'created'|'creating'|'deleted'|'deleting'|'failed'
+                                },
+                                'securityDetails': {
+                                    'roleArn': 'string',
+                                    'securityGroupIds': [
+                                        'string',
+                                    ],
+                                    'subnetIds': [
+                                        'string',
+                                    ]
+                                }
+                            },
+                            's3RecordingDetails': {
+                                'bucketArn': 'string',
+                                'keyTemplate': 'string'
+                            }
+                        },
+                        'configId': 'string',
+                        'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+                        'dataflowDestinationRegion': 'string'
+                    },
+                    'errorMessage': 'string',
+                    'source': {
+                        'configDetails': {
+                            'antennaDemodDecodeDetails': {
+                                'outputNode': 'string'
+                            },
+                            'endpointDetails': {
+                                'endpoint': {
+                                    'address': {
+                                        'name': 'string',
+                                        'port': 123
+                                    },
+                                    'mtu': 123,
+                                    'name': 'string',
+                                    'status': 'created'|'creating'|'deleted'|'deleting'|'failed'
+                                },
+                                'securityDetails': {
+                                    'roleArn': 'string',
+                                    'securityGroupIds': [
+                                        'string',
+                                    ],
+                                    'subnetIds': [
+                                        'string',
+                                    ]
+                                }
+                            },
+                            's3RecordingDetails': {
+                                'bucketArn': 'string',
+                                'keyTemplate': 'string'
+                            }
+                        },
+                        'configId': 'string',
+                        'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+                        'dataflowSourceRegion': 'string'
+                    }
+                },
+            ],
+            'endTime': datetime(2015, 1, 1),
+            'errorMessage': 'string',
+            'groundStation': 'string',
+            'maximumElevation': {
+                'unit': 'DEGREE_ANGLE'|'RADIAN',
+                'value': 123.0
+            },
+            'missionProfileArn': 'string',
+            'postPassEndTime': datetime(2015, 1, 1),
+            'prePassStartTime': datetime(2015, 1, 1),
+            'region': 'string',
+            'satelliteArn': 'string',
+            'startTime': datetime(2015, 1, 1),
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactId** *(string) --* 
+
+          UUID of a contact.
+
+          
+        
+
+        - **contactStatus** *(string) --* 
+
+          Status of a contact.
+
+          
+        
+
+        - **dataflowList** *(list) --* 
+
+          List describing source and destination details for each dataflow edge.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a dataflow edge used in a contact.
+
+            
+            
+
+            - **destination** *(dict) --* 
+
+              Dataflow details for the destination side.
+
+              
+              
+
+              - **configDetails** *(dict) --* 
+
+                Additional details for a ``Config`` , if type is dataflow endpoint or antenna demod decode.
+
+                
+                
+
+                - **antennaDemodDecodeDetails** *(dict) --* 
+
+                  Details for antenna demod decode ``Config`` in a contact.
+
+                  
+                  
+
+                  - **outputNode** *(string) --* 
+
+                    Name of an antenna demod decode output node used in a contact.
+
+                    
+              
+                
+
+                - **endpointDetails** *(dict) --* 
+
+                  Information about the endpoint details.
+
+                  
+                  
+
+                  - **endpoint** *(dict) --* 
+
+                    A dataflow endpoint.
+
+                    
+                    
+
+                    - **address** *(dict) --* 
+
+                      Socket address of a dataflow endpoint.
+
+                      
+                      
+
+                      - **name** *(string) --* 
+
+                        Name of a socket address.
+
+                        
+                      
+
+                      - **port** *(integer) --* 
+
+                        Port of a socket address.
+
+                        
+                  
+                    
+
+                    - **mtu** *(integer) --* 
+
+                      Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+
+                      
+                    
+
+                    - **name** *(string) --* 
+
+                      Name of a dataflow endpoint.
+
+                      
+                    
+
+                    - **status** *(string) --* 
+
+                      Status of a dataflow endpoint.
+
+                      
+                
+                  
+
+                  - **securityDetails** *(dict) --* 
+
+                    Endpoint security details.
+
+                    
+                    
+
+                    - **roleArn** *(string) --* 
+
+                      ARN to a role needed for connecting streams to your instances. 
+
+                      
+                    
+
+                    - **securityGroupIds** *(list) --* 
+
+                      The security groups to attach to the elastic network interfaces.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                    
+
+                    - **subnetIds** *(list) --* 
+
+                      A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **s3RecordingDetails** *(dict) --* 
+
+                  Details for an S3 recording ``Config`` in a contact.
+
+                  
+                  
+
+                  - **bucketArn** *(string) --* 
+
+                    ARN of the bucket used.
+
+                    
+                  
+
+                  - **keyTemplate** *(string) --* 
+
+                    Template of the S3 key used.
+
+                    
+              
+            
+              
+
+              - **configId** *(string) --* 
+
+                UUID of a ``Config`` .
+
+                
+              
+
+              - **configType** *(string) --* 
+
+                Type of a ``Config`` .
+
+                
+              
+
+              - **dataflowDestinationRegion** *(string) --* 
+
+                Region of a dataflow destination.
+
+                
+          
+            
+
+            - **errorMessage** *(string) --* 
+
+              Error message for a dataflow.
+
+              
+            
+
+            - **source** *(dict) --* 
+
+              Dataflow details for the source side.
+
+              
+              
+
+              - **configDetails** *(dict) --* 
+
+                Additional details for a ``Config`` , if type is dataflow endpoint or antenna demod decode.
+
+                
+                
+
+                - **antennaDemodDecodeDetails** *(dict) --* 
+
+                  Details for antenna demod decode ``Config`` in a contact.
+
+                  
+                  
+
+                  - **outputNode** *(string) --* 
+
+                    Name of an antenna demod decode output node used in a contact.
+
+                    
+              
+                
+
+                - **endpointDetails** *(dict) --* 
+
+                  Information about the endpoint details.
+
+                  
+                  
+
+                  - **endpoint** *(dict) --* 
+
+                    A dataflow endpoint.
+
+                    
+                    
+
+                    - **address** *(dict) --* 
+
+                      Socket address of a dataflow endpoint.
+
+                      
+                      
+
+                      - **name** *(string) --* 
+
+                        Name of a socket address.
+
+                        
+                      
+
+                      - **port** *(integer) --* 
+
+                        Port of a socket address.
+
+                        
+                  
+                    
+
+                    - **mtu** *(integer) --* 
+
+                      Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+
+                      
+                    
+
+                    - **name** *(string) --* 
+
+                      Name of a dataflow endpoint.
+
+                      
+                    
+
+                    - **status** *(string) --* 
+
+                      Status of a dataflow endpoint.
+
+                      
+                
+                  
+
+                  - **securityDetails** *(dict) --* 
+
+                    Endpoint security details.
+
+                    
+                    
+
+                    - **roleArn** *(string) --* 
+
+                      ARN to a role needed for connecting streams to your instances. 
+
+                      
+                    
+
+                    - **securityGroupIds** *(list) --* 
+
+                      The security groups to attach to the elastic network interfaces.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                    
+
+                    - **subnetIds** *(list) --* 
+
+                      A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **s3RecordingDetails** *(dict) --* 
+
+                  Details for an S3 recording ``Config`` in a contact.
+
+                  
+                  
+
+                  - **bucketArn** *(string) --* 
+
+                    ARN of the bucket used.
+
+                    
+                  
+
+                  - **keyTemplate** *(string) --* 
+
+                    Template of the S3 key used.
+
+                    
+              
+            
+              
+
+              - **configId** *(string) --* 
+
+                UUID of a ``Config`` .
+
+                
+              
+
+              - **configType** *(string) --* 
+
+                Type of a ``Config`` .
+
+                
+              
+
+              - **dataflowSourceRegion** *(string) --* 
+
+                Region of a dataflow source.
+
+                
+          
+        
+      
+        
+
+        - **endTime** *(datetime) --* 
+
+          End time of a contact.
+
+          
+        
+
+        - **errorMessage** *(string) --* 
+
+          Error message for a contact.
+
+          
+        
+
+        - **groundStation** *(string) --* 
+
+          Ground station for a contact.
+
+          
+        
+
+        - **maximumElevation** *(dict) --* 
+
+          Maximum elevation angle of a contact.
+
+          
+          
+
+          - **unit** *(string) --* 
+
+            Elevation angle units.
+
+            
+          
+
+          - **value** *(float) --* 
+
+            Elevation angle value.
+
+            
+      
+        
+
+        - **missionProfileArn** *(string) --* 
+
+          ARN of a mission profile.
+
+          
+        
+
+        - **postPassEndTime** *(datetime) --* 
+
+          Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+          
+        
+
+        - **prePassStartTime** *(datetime) --* 
+
+          Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+
+          
+        
+
+        - **region** *(string) --* 
+
+          Region of a contact.
+
+          
+        
+
+        - **satelliteArn** *(string) --* 
+
+          ARN of a satellite.
+
+          
+        
+
+        - **startTime** *(datetime) --* 
+
+          Start time of a contact.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          Tags assigned to a contact.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_config(**kwargs)
+
+    
+
+    Returns ``Config`` information.
+
+     
+
+    Only one ``Config`` response can be returned.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_config(
+          configId='string',
+          configType='antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording'
+      )
+    :type configId: string
+    :param configId: **[REQUIRED]** 
+
+      UUID of a ``Config`` .
+
+      
+
+    
+    :type configType: string
+    :param configType: **[REQUIRED]** 
+
+      Type of a ``Config`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configArn': 'string',
+            'configData': {
+                'antennaDownlinkConfig': {
+                    'spectrumConfig': {
+                        'bandwidth': {
+                            'units': 'GHz'|'MHz'|'kHz',
+                            'value': 123.0
+                        },
+                        'centerFrequency': {
+                            'units': 'GHz'|'MHz'|'kHz',
+                            'value': 123.0
+                        },
+                        'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                    }
+                },
+                'antennaDownlinkDemodDecodeConfig': {
+                    'decodeConfig': {
+                        'unvalidatedJSON': 'string'
+                    },
+                    'demodulationConfig': {
+                        'unvalidatedJSON': 'string'
+                    },
+                    'spectrumConfig': {
+                        'bandwidth': {
+                            'units': 'GHz'|'MHz'|'kHz',
+                            'value': 123.0
+                        },
+                        'centerFrequency': {
+                            'units': 'GHz'|'MHz'|'kHz',
+                            'value': 123.0
+                        },
+                        'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                    }
+                },
+                'antennaUplinkConfig': {
+                    'spectrumConfig': {
+                        'centerFrequency': {
+                            'units': 'GHz'|'MHz'|'kHz',
+                            'value': 123.0
+                        },
+                        'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                    },
+                    'targetEirp': {
+                        'units': 'dBW',
+                        'value': 123.0
+                    },
+                    'transmitDisabled': True|False
+                },
+                'dataflowEndpointConfig': {
+                    'dataflowEndpointName': 'string',
+                    'dataflowEndpointRegion': 'string'
+                },
+                's3RecordingConfig': {
+                    'bucketArn': 'string',
+                    'prefix': 'string',
+                    'roleArn': 'string'
+                },
+                'trackingConfig': {
+                    'autotrack': 'PREFERRED'|'REMOVED'|'REQUIRED'
+                },
+                'uplinkEchoConfig': {
+                    'antennaUplinkConfigArn': 'string',
+                    'enabled': True|False
+                }
+            },
+            'configId': 'string',
+            'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+            'name': 'string',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configArn** *(string) --* 
+
+          ARN of a ``Config``  
+
+          
+        
+
+        - **configData** *(dict) --* 
+
+          Data elements in a ``Config`` .
+
+          
+          
+
+          - **antennaDownlinkConfig** *(dict) --* 
+
+            Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+
+            
+            
+
+            - **spectrumConfig** *(dict) --* 
+
+              Object that describes a spectral ``Config`` .
+
+              
+              
+
+              - **bandwidth** *(dict) --* 
+
+                Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+                 
+
+                 
+                * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+                 
+                * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+                 
+                * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+                 
+
+                
+                
+
+                - **units** *(string) --* 
+
+                  Frequency bandwidth units.
+
+                  
+                
+
+                - **value** *(float) --* 
+
+                  Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+                   
+
+                   
+                  * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+                   
+                  * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+                   
+                  * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+                   
+
+                  
+            
+              
+
+              - **centerFrequency** *(dict) --* 
+
+                Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+                
+                
+
+                - **units** *(string) --* 
+
+                  Frequency units.
+
+                  
+                
+
+                - **value** *(float) --* 
+
+                  Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+                  
+            
+              
+
+              - **polarization** *(string) --* 
+
+                Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+                
+          
+        
+          
+
+          - **antennaDownlinkDemodDecodeConfig** *(dict) --* 
+
+            Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+
+            
+            
+
+            - **decodeConfig** *(dict) --* 
+
+              Information about the decode ``Config`` .
+
+              
+              
+
+              - **unvalidatedJSON** *(string) --* 
+
+                Unvalidated JSON of a decode ``Config`` .
+
+                
+          
+            
+
+            - **demodulationConfig** *(dict) --* 
+
+              Information about the demodulation ``Config`` .
+
+              
+              
+
+              - **unvalidatedJSON** *(string) --* 
+
+                Unvalidated JSON of a demodulation ``Config`` .
+
+                
+          
+            
+
+            - **spectrumConfig** *(dict) --* 
+
+              Information about the spectral ``Config`` .
+
+              
+              
+
+              - **bandwidth** *(dict) --* 
+
+                Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+                 
+
+                 
+                * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+                 
+                * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+                 
+                * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+                 
+
+                
+                
+
+                - **units** *(string) --* 
+
+                  Frequency bandwidth units.
+
+                  
+                
+
+                - **value** *(float) --* 
+
+                  Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+                   
+
+                   
+                  * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+                   
+                  * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+                   
+                  * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+                   
+
+                  
+            
+              
+
+              - **centerFrequency** *(dict) --* 
+
+                Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+                
+                
+
+                - **units** *(string) --* 
+
+                  Frequency units.
+
+                  
+                
+
+                - **value** *(float) --* 
+
+                  Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+                  
+            
+              
+
+              - **polarization** *(string) --* 
+
+                Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+                
+          
+        
+          
+
+          - **antennaUplinkConfig** *(dict) --* 
+
+            Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+
+            
+            
+
+            - **spectrumConfig** *(dict) --* 
+
+              Information about the uplink spectral ``Config`` .
+
+              
+              
+
+              - **centerFrequency** *(dict) --* 
+
+                Center frequency of an uplink spectral ``Config`` . Valid values are between 2025 to 2120 MHz.
+
+                
+                
+
+                - **units** *(string) --* 
+
+                  Frequency units.
+
+                  
+                
+
+                - **value** *(float) --* 
+
+                  Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+                  
+            
+              
+
+              - **polarization** *(string) --* 
+
+                Polarization of an uplink spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+                
+          
+            
+
+            - **targetEirp** *(dict) --* 
+
+              EIRP of the target.
+
+              
+              
+
+              - **units** *(string) --* 
+
+                Units of an EIRP.
+
+                
+              
+
+              - **value** *(float) --* 
+
+                Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
+
+                
+          
+            
+
+            - **transmitDisabled** *(boolean) --* 
+
+              Whether or not uplink transmit is disabled.
+
+              
+        
+          
+
+          - **dataflowEndpointConfig** *(dict) --* 
+
+            Information about the dataflow endpoint ``Config`` .
+
+            
+            
+
+            - **dataflowEndpointName** *(string) --* 
+
+              Name of a dataflow endpoint.
+
+              
+            
+
+            - **dataflowEndpointRegion** *(string) --* 
+
+              Region of a dataflow endpoint.
+
+              
+        
+          
+
+          - **s3RecordingConfig** *(dict) --* 
+
+            Information about an S3 recording ``Config`` .
+
+            
+            
+
+            - **bucketArn** *(string) --* 
+
+              ARN of the bucket to record to.
+
+              
+            
+
+            - **prefix** *(string) --* 
+
+              S3 Key prefix to prefice data files.
+
+              
+            
+
+            - **roleArn** *(string) --* 
+
+              ARN of the role Ground Station assumes to write data to the bucket.
+
+              
+        
+          
+
+          - **trackingConfig** *(dict) --* 
+
+            Object that determines whether tracking should be used during a contact executed with this ``Config`` in the mission profile. 
+
+            
+            
+
+            - **autotrack** *(string) --* 
+
+              Current setting for autotrack.
+
+              
+        
+          
+
+          - **uplinkEchoConfig** *(dict) --* 
+
+            Information about an uplink echo ``Config`` .
+
+             
+
+            Parameters from the ``AntennaUplinkConfig`` , corresponding to the specified ``AntennaUplinkConfigArn`` , are used when this ``UplinkEchoConfig`` is used in a contact.
+
+            
+            
+
+            - **antennaUplinkConfigArn** *(string) --* 
+
+              ARN of an uplink ``Config`` .
+
+              
+            
+
+            - **enabled** *(boolean) --* 
+
+              Whether or not an uplink ``Config`` is enabled.
+
+              
+        
+      
+        
+
+        - **configId** *(string) --* 
+
+          UUID of a ``Config`` .
+
+          
+        
+
+        - **configType** *(string) --* 
+
+          Type of a ``Config`` .
+
+          
+        
+
+        - **name** *(string) --* 
+
+          Name of a ``Config`` .
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          Tags assigned to a ``Config`` .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_dataflow_endpoint_group(**kwargs)
+
+    
+
+    Returns the dataflow endpoint group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetDataflowEndpointGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_dataflow_endpoint_group(
+          dataflowEndpointGroupId='string'
+      )
+    :type dataflowEndpointGroupId: string
+    :param dataflowEndpointGroupId: **[REQUIRED]** 
+
+      UUID of a dataflow endpoint group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'dataflowEndpointGroupArn': 'string',
+            'dataflowEndpointGroupId': 'string',
+            'endpointsDetails': [
+                {
+                    'endpoint': {
+                        'address': {
+                            'name': 'string',
+                            'port': 123
+                        },
+                        'mtu': 123,
+                        'name': 'string',
+                        'status': 'created'|'creating'|'deleted'|'deleting'|'failed'
+                    },
+                    'securityDetails': {
+                        'roleArn': 'string',
+                        'securityGroupIds': [
+                            'string',
+                        ],
+                        'subnetIds': [
+                            'string',
+                        ]
+                    }
+                },
+            ],
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **dataflowEndpointGroupArn** *(string) --* 
+
+          ARN of a dataflow endpoint group.
+
+          
+        
+
+        - **dataflowEndpointGroupId** *(string) --* 
+
+          UUID of a dataflow endpoint group.
+
+          
+        
+
+        - **endpointsDetails** *(list) --* 
+
+          Details of a dataflow endpoint.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the endpoint details.
+
+            
+            
+
+            - **endpoint** *(dict) --* 
+
+              A dataflow endpoint.
+
+              
+              
+
+              - **address** *(dict) --* 
+
+                Socket address of a dataflow endpoint.
+
+                
+                
+
+                - **name** *(string) --* 
+
+                  Name of a socket address.
+
+                  
+                
+
+                - **port** *(integer) --* 
+
+                  Port of a socket address.
+
+                  
+            
+              
+
+              - **mtu** *(integer) --* 
+
+                Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+
+                
+              
+
+              - **name** *(string) --* 
+
+                Name of a dataflow endpoint.
+
+                
+              
+
+              - **status** *(string) --* 
+
+                Status of a dataflow endpoint.
+
+                
+          
+            
+
+            - **securityDetails** *(dict) --* 
+
+              Endpoint security details.
+
+              
+              
+
+              - **roleArn** *(string) --* 
+
+                ARN to a role needed for connecting streams to your instances. 
+
+                
+              
+
+              - **securityGroupIds** *(list) --* 
+
+                The security groups to attach to the elastic network interfaces.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **subnetIds** *(list) --* 
+
+                A list of subnets where AWS Ground Station places elastic network interfaces to send streams to your instances.
+
+                
+                
+
+                - *(string) --* 
+            
+          
+        
+      
+        
+
+        - **tags** *(dict) --* 
+
+          Tags assigned to a dataflow endpoint group.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_minute_usage(**kwargs)
+
+    
+
+    Returns the number of minutes used by account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_minute_usage(
+          month=123,
+          year=123
+      )
+    :type month: integer
+    :param month: **[REQUIRED]** 
+
+      The month being requested, with a value of 1-12.
+
+      
+
+    
+    :type year: integer
+    :param year: **[REQUIRED]** 
+
+      The year being requested, in the format of YYYY.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'estimatedMinutesRemaining': 123,
+            'isReservedMinutesCustomer': True|False,
+            'totalReservedMinuteAllocation': 123,
+            'totalScheduledMinutes': 123,
+            'upcomingMinutesScheduled': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **estimatedMinutesRemaining** *(integer) --* 
+
+          Estimated number of minutes remaining for an account, specific to the month being requested.
+
+          
+        
+
+        - **isReservedMinutesCustomer** *(boolean) --* 
+
+          Returns whether or not an account has signed up for the reserved minutes pricing plan, specific to the month being requested.
+
+          
+        
+
+        - **totalReservedMinuteAllocation** *(integer) --* 
+
+          Total number of reserved minutes allocated, specific to the month being requested.
+
+          
+        
+
+        - **totalScheduledMinutes** *(integer) --* 
+
+          Total scheduled minutes for an account, specific to the month being requested.
+
+          
+        
+
+        - **upcomingMinutesScheduled** *(integer) --* 
+
+          Upcoming minutes scheduled for an account, specific to the month being requested.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_mission_profile(**kwargs)
+
+    
+
+    Returns a mission profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMissionProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_mission_profile(
+          missionProfileId='string'
+      )
+    :type missionProfileId: string
+    :param missionProfileId: **[REQUIRED]** 
+
+      UUID of a mission profile.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactPostPassDurationSeconds': 123,
+            'contactPrePassDurationSeconds': 123,
+            'dataflowEdges': [
+                [
+                    'string',
+                ],
+            ],
+            'minimumViableContactDurationSeconds': 123,
+            'missionProfileArn': 'string',
+            'missionProfileId': 'string',
+            'name': 'string',
+            'region': 'string',
+            'tags': {
+                'string': 'string'
+            },
+            'trackingConfigArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactPostPassDurationSeconds** *(integer) --* 
+
+          Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+          
+        
+
+        - **contactPrePassDurationSeconds** *(integer) --* 
+
+          Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+
+          
+        
+
+        - **dataflowEdges** *(list) --* 
+
+          A list of lists of ARNs. Each list of ARNs is an edge, with a *from*  ``Config`` and a *to*  ``Config`` .
+
+          
+          
+
+          - *(list) --* 
+            
+
+            - *(string) --* 
+        
+      
+        
+
+        - **minimumViableContactDurationSeconds** *(integer) --* 
+
+          Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+
+          
+        
+
+        - **missionProfileArn** *(string) --* 
+
+          ARN of a mission profile.
+
+          
+        
+
+        - **missionProfileId** *(string) --* 
+
+          UUID of a mission profile.
+
+          
+        
+
+        - **name** *(string) --* 
+
+          Name of a mission profile.
+
+          
+        
+
+        - **region** *(string) --* 
+
+          Region of a mission profile.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          Tags assigned to a mission profile.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **trackingConfigArn** *(string) --* 
+
+          ARN of a tracking ``Config`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_satellite(**kwargs)
+
+    
+
+    Returns a satellite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetSatellite>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_satellite(
+          satelliteId='string'
+      )
+    :type satelliteId: string
+    :param satelliteId: **[REQUIRED]** 
+
+      UUID of a satellite.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'groundStations': [
+                'string',
+            ],
+            'noradSatelliteID': 123,
+            'satelliteArn': 'string',
+            'satelliteId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **groundStations** *(list) --* 
+
+          A list of ground stations to which the satellite is on-boarded.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **noradSatelliteID** *(integer) --* 
+
+          NORAD satellite ID number.
+
+          
+        
+
+        - **satelliteArn** *(string) --* 
+
+          ARN of a satellite.
+
+          
+        
+
+        - **satelliteId** *(string) --* 
+
+          UUID of a satellite.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_configs(**kwargs)
+
+    
+
+    Returns a list of ``Config`` objects.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListConfigs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_configs(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of ``Configs`` returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token returned in the request of a previous ``ListConfigs`` call. Used to get the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configList': [
+                {
+                    'configArn': 'string',
+                    'configId': 'string',
+                    'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+                    'name': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configList** *(list) --* 
+
+          List of ``Config`` items.
+
+          
+          
+
+          - *(dict) --* 
+
+            An item in a list of ``Config`` objects.
+
+            
+            
+
+            - **configArn** *(string) --* 
+
+              ARN of a ``Config`` .
+
+              
+            
+
+            - **configId** *(string) --* 
+
+              UUID of a ``Config`` .
+
+              
+            
+
+            - **configType** *(string) --* 
+
+              Type of a ``Config`` .
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Name of a ``Config`` .
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token returned in the response of a previous ``ListConfigs`` call. Used to get the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_contacts(**kwargs)
+
+    
+
+    Returns a list of contacts.
+
+     
+
+    If ``statusList`` contains AVAILABLE, the request must include ``groundStation`` , ``missionprofileArn`` , and ``satelliteArn`` . 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListContacts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_contacts(
+          endTime=datetime(2015, 1, 1),
+          groundStation='string',
+          maxResults=123,
+          missionProfileArn='string',
+          nextToken='string',
+          satelliteArn='string',
+          startTime=datetime(2015, 1, 1),
+          statusList=[
+              'AVAILABLE'|'AWS_CANCELLED'|'AWS_FAILED'|'CANCELLED'|'CANCELLING'|'COMPLETED'|'FAILED'|'FAILED_TO_SCHEDULE'|'PASS'|'POSTPASS'|'PREPASS'|'SCHEDULED'|'SCHEDULING',
+          ]
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      End time of a contact.
+
+      
+
+    
+    :type groundStation: string
+    :param groundStation: 
+
+      Name of a ground station.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of contacts returned.
+
+      
+
+    
+    :type missionProfileArn: string
+    :param missionProfileArn: 
+
+      ARN of a mission profile.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token returned in the request of a previous ``ListContacts`` call. Used to get the next page of results.
+
+      
+
+    
+    :type satelliteArn: string
+    :param satelliteArn: 
+
+      ARN of a satellite.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      Start time of a contact.
+
+      
+
+    
+    :type statusList: list
+    :param statusList: **[REQUIRED]** 
+
+      Status of a contact reservation.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactList': [
+                {
+                    'contactId': 'string',
+                    'contactStatus': 'AVAILABLE'|'AWS_CANCELLED'|'AWS_FAILED'|'CANCELLED'|'CANCELLING'|'COMPLETED'|'FAILED'|'FAILED_TO_SCHEDULE'|'PASS'|'POSTPASS'|'PREPASS'|'SCHEDULED'|'SCHEDULING',
+                    'endTime': datetime(2015, 1, 1),
+                    'errorMessage': 'string',
+                    'groundStation': 'string',
+                    'maximumElevation': {
+                        'unit': 'DEGREE_ANGLE'|'RADIAN',
+                        'value': 123.0
+                    },
+                    'missionProfileArn': 'string',
+                    'postPassEndTime': datetime(2015, 1, 1),
+                    'prePassStartTime': datetime(2015, 1, 1),
+                    'region': 'string',
+                    'satelliteArn': 'string',
+                    'startTime': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactList** *(list) --* 
+
+          List of contacts.
+
+          
+          
+
+          - *(dict) --* 
+
+            Data describing a contact.
+
+            
+            
+
+            - **contactId** *(string) --* 
+
+              UUID of a contact.
+
+              
+            
+
+            - **contactStatus** *(string) --* 
+
+              Status of a contact.
+
+              
+            
+
+            - **endTime** *(datetime) --* 
+
+              End time of a contact.
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              Error message of a contact.
+
+              
+            
+
+            - **groundStation** *(string) --* 
+
+              Name of a ground station.
+
+              
+            
+
+            - **maximumElevation** *(dict) --* 
+
+              Maximum elevation angle of a contact.
+
+              
+              
+
+              - **unit** *(string) --* 
+
+                Elevation angle units.
+
+                
+              
+
+              - **value** *(float) --* 
+
+                Elevation angle value.
+
+                
+          
+            
+
+            - **missionProfileArn** *(string) --* 
+
+              ARN of a mission profile.
+
+              
+            
+
+            - **postPassEndTime** *(datetime) --* 
+
+              Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+              
+            
+
+            - **prePassStartTime** *(datetime) --* 
+
+              Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Region of a contact.
+
+              
+            
+
+            - **satelliteArn** *(string) --* 
+
+              ARN of a satellite.
+
+              
+            
+
+            - **startTime** *(datetime) --* 
+
+              Start time of a contact.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Tags assigned to a contact.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token returned in the response of a previous ``ListContacts`` call. Used to get the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_dataflow_endpoint_groups(**kwargs)
+
+    
+
+    Returns a list of ``DataflowEndpoint`` groups.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListDataflowEndpointGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_dataflow_endpoint_groups(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of dataflow endpoint groups returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token returned in the request of a previous ``ListDataflowEndpointGroups`` call. Used to get the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'dataflowEndpointGroupList': [
+                {
+                    'dataflowEndpointGroupArn': 'string',
+                    'dataflowEndpointGroupId': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **dataflowEndpointGroupList** *(list) --* 
+
+          A list of dataflow endpoint groups.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of ``DataflowEndpoint`` groups.
+
+            
+            
+
+            - **dataflowEndpointGroupArn** *(string) --* 
+
+              ARN of a dataflow endpoint group.
+
+              
+            
+
+            - **dataflowEndpointGroupId** *(string) --* 
+
+              UUID of a dataflow endpoint group.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token returned in the response of a previous ``ListDataflowEndpointGroups`` call. Used to get the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_ground_stations(**kwargs)
+
+    
+
+    Returns a list of ground stations. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_ground_stations(
+          maxResults=123,
+          nextToken='string',
+          satelliteId='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of ground stations returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token that can be supplied in the next call to get the next page of ground stations.
+
+      
+
+    
+    :type satelliteId: string
+    :param satelliteId: 
+
+      Satellite ID to retrieve on-boarded ground stations.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'groundStationList': [
+                {
+                    'groundStationId': 'string',
+                    'groundStationName': 'string',
+                    'region': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **groundStationList** *(list) --* 
+
+          List of ground stations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the ground station data.
+
+            
+            
+
+            - **groundStationId** *(string) --* 
+
+              UUID of a ground station.
+
+              
+            
+
+            - **groundStationName** *(string) --* 
+
+              Name of a ground station.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Ground station Region.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token that can be supplied in the next call to get the next page of ground stations.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_mission_profiles(**kwargs)
+
+    
+
+    Returns a list of mission profiles.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListMissionProfiles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_mission_profiles(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of mission profiles returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token returned in the request of a previous ``ListMissionProfiles`` call. Used to get the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'missionProfileList': [
+                {
+                    'missionProfileArn': 'string',
+                    'missionProfileId': 'string',
+                    'name': 'string',
+                    'region': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **missionProfileList** *(list) --* 
+
+          List of mission profiles.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of mission profiles.
+
+            
+            
+
+            - **missionProfileArn** *(string) --* 
+
+              ARN of a mission profile.
+
+              
+            
+
+            - **missionProfileId** *(string) --* 
+
+              UUID of a mission profile.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Name of a mission profile.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Region of a mission profile.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token returned in the response of a previous ``ListMissionProfiles`` call. Used to get the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_satellites(**kwargs)
+
+    
+
+    Returns a list of satellites.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_satellites(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of satellites returned.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Next token that can be supplied in the next call to get the next page of satellites.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'satellites': [
+                {
+                    'groundStations': [
+                        'string',
+                    ],
+                    'noradSatelliteID': 123,
+                    'satelliteArn': 'string',
+                    'satelliteId': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **nextToken** *(string) --* 
+
+          Next token that can be supplied in the next call to get the next page of satellites.
+
+          
+        
+
+        - **satellites** *(list) --* 
+
+          List of satellites.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of satellites.
+
+            
+            
+
+            - **groundStations** *(list) --* 
+
+              A list of ground stations to which the satellite is on-boarded.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **noradSatelliteID** *(integer) --* 
+
+              NORAD satellite ID number.
+
+              
+            
+
+            - **satelliteArn** *(string) --* 
+
+              ARN of a satellite.
+
+              
+            
+
+            - **satelliteId** *(string) --* 
+
+              UUID of a satellite.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of tags for a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      ARN of a resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **tags** *(dict) --* 
+
+          Tags assigned to a resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: reserve_contact(**kwargs)
+
+    
+
+    Reserves a contact using specified parameters.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ReserveContact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.reserve_contact(
+          endTime=datetime(2015, 1, 1),
+          groundStation='string',
+          missionProfileArn='string',
+          satelliteArn='string',
+          startTime=datetime(2015, 1, 1),
+          tags={
+              'string': 'string'
+          }
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      End time of a contact.
+
+      
+
+    
+    :type groundStation: string
+    :param groundStation: **[REQUIRED]** 
+
+      Name of a ground station.
+
+      
+
+    
+    :type missionProfileArn: string
+    :param missionProfileArn: **[REQUIRED]** 
+
+      ARN of a mission profile.
+
+      
+
+    
+    :type satelliteArn: string
+    :param satelliteArn: **[REQUIRED]** 
+
+      ARN of a satellite
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      Start time of a contact.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Tags assigned to a contact.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactId** *(string) --* 
+
+          UUID of a contact.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Assigns a tag to a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      ARN of a resource tag.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      Tags assigned to a resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Deassigns a resource tag.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      ARN of a resource.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      Keys of a resource tag.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_config(**kwargs)
+
+    
+
+    Updates the ``Config`` used when scheduling contacts.
+
+     
+
+    Updating a ``Config`` will not update the execution parameters for existing future contacts scheduled with this ``Config`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_config(
+          configData={
+              'antennaDownlinkConfig': {
+                  'spectrumConfig': {
+                      'bandwidth': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  }
+              },
+              'antennaDownlinkDemodDecodeConfig': {
+                  'decodeConfig': {
+                      'unvalidatedJSON': 'string'
+                  },
+                  'demodulationConfig': {
+                      'unvalidatedJSON': 'string'
+                  },
+                  'spectrumConfig': {
+                      'bandwidth': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  }
+              },
+              'antennaUplinkConfig': {
+                  'spectrumConfig': {
+                      'centerFrequency': {
+                          'units': 'GHz'|'MHz'|'kHz',
+                          'value': 123.0
+                      },
+                      'polarization': 'LEFT_HAND'|'NONE'|'RIGHT_HAND'
+                  },
+                  'targetEirp': {
+                      'units': 'dBW',
+                      'value': 123.0
+                  },
+                  'transmitDisabled': True|False
+              },
+              'dataflowEndpointConfig': {
+                  'dataflowEndpointName': 'string',
+                  'dataflowEndpointRegion': 'string'
+              },
+              's3RecordingConfig': {
+                  'bucketArn': 'string',
+                  'prefix': 'string',
+                  'roleArn': 'string'
+              },
+              'trackingConfig': {
+                  'autotrack': 'PREFERRED'|'REMOVED'|'REQUIRED'
+              },
+              'uplinkEchoConfig': {
+                  'antennaUplinkConfigArn': 'string',
+                  'enabled': True|False
+              }
+          },
+          configId='string',
+          configType='antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+          name='string'
+      )
+    :type configData: dict
+    :param configData: **[REQUIRED]** 
+
+      Parameters of a ``Config`` .
+
+      
+
+    
+      - **antennaDownlinkConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should configure an antenna for downlink during a contact.
+
+        
+
+      
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Object that describes a spectral ``Config`` .
+
+          
+
+        
+          - **bandwidth** *(dict) --* **[REQUIRED]** 
+
+            Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+             
+
+             
+            * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+             
+            * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+             
+            * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+             
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency bandwidth units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+               
+
+               
+              * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+               
+              * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+              * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+
+              
+
+            
+          
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+      
+      - **antennaDownlinkDemodDecodeConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.
+
+        
+
+      
+        - **decodeConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the decode ``Config`` .
+
+          
+
+        
+          - **unvalidatedJSON** *(string) --* **[REQUIRED]** 
+
+            Unvalidated JSON of a decode ``Config`` .
+
+            
+
+          
+        
+        - **demodulationConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the demodulation ``Config`` .
+
+          
+
+        
+          - **unvalidatedJSON** *(string) --* **[REQUIRED]** 
+
+            Unvalidated JSON of a demodulation ``Config`` .
+
+            
+
+          
+        
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the spectral ``Config`` .
+
+          
+
+        
+          - **bandwidth** *(dict) --* **[REQUIRED]** 
+
+            Bandwidth of a spectral ``Config`` . AWS Ground Station currently has the following bandwidth limitations:
+
+             
+
+             
+            * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+             
+            * For ``AntennaDownlinkconfig`` valid values are between 10 kHz to 54 MHz. 
+             
+            * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+             
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency bandwidth units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:
+
+               
+
+               
+              * For ``AntennaDownlinkDemodDecodeconfig`` , valid values are between 125 kHz to 650 MHz. 
+               
+              * For ``AntennaDownlinkconfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+              * For ``AntennaUplinkConfig`` , valid values are between 10 kHz to 54 MHz. 
+               
+
+              
+
+            
+          
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of a spectral ``Config`` . Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of a spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+      
+      - **antennaUplinkConfig** *(dict) --* 
+
+        Information about how AWS Ground Station should conﬁgure an antenna for uplink during a contact.
+
+        
+
+      
+        - **spectrumConfig** *(dict) --* **[REQUIRED]** 
+
+          Information about the uplink spectral ``Config`` .
+
+          
+
+        
+          - **centerFrequency** *(dict) --* **[REQUIRED]** 
+
+            Center frequency of an uplink spectral ``Config`` . Valid values are between 2025 to 2120 MHz.
+
+            
+
+          
+            - **units** *(string) --* **[REQUIRED]** 
+
+              Frequency units.
+
+              
+
+            
+            - **value** *(float) --* **[REQUIRED]** 
+
+              Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
+
+              
+
+            
+          
+          - **polarization** *(string) --* 
+
+            Polarization of an uplink spectral ``Config`` . Capturing both ``"RIGHT_HAND"`` and ``"LEFT_HAND"`` polarization requires two separate configs.
+
+            
+
+          
+        
+        - **targetEirp** *(dict) --* **[REQUIRED]** 
+
+          EIRP of the target.
+
+          
+
+        
+          - **units** *(string) --* **[REQUIRED]** 
+
+            Units of an EIRP.
+
+            
+
+          
+          - **value** *(float) --* **[REQUIRED]** 
+
+            Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
+
+            
+
+          
+        
+        - **transmitDisabled** *(boolean) --* 
+
+          Whether or not uplink transmit is disabled.
+
+          
+
+        
+      
+      - **dataflowEndpointConfig** *(dict) --* 
+
+        Information about the dataflow endpoint ``Config`` .
+
+        
+
+      
+        - **dataflowEndpointName** *(string) --* **[REQUIRED]** 
+
+          Name of a dataflow endpoint.
+
+          
+
+        
+        - **dataflowEndpointRegion** *(string) --* 
+
+          Region of a dataflow endpoint.
+
+          
+
+        
+      
+      - **s3RecordingConfig** *(dict) --* 
+
+        Information about an S3 recording ``Config`` .
+
+        
+
+      
+        - **bucketArn** *(string) --* **[REQUIRED]** 
+
+          ARN of the bucket to record to.
+
+          
+
+        
+        - **prefix** *(string) --* 
+
+          S3 Key prefix to prefice data files.
+
+          
+
+        
+        - **roleArn** *(string) --* **[REQUIRED]** 
+
+          ARN of the role Ground Station assumes to write data to the bucket.
+
+          
+
+        
+      
+      - **trackingConfig** *(dict) --* 
+
+        Object that determines whether tracking should be used during a contact executed with this ``Config`` in the mission profile. 
+
+        
+
+      
+        - **autotrack** *(string) --* **[REQUIRED]** 
+
+          Current setting for autotrack.
+
+          
+
+        
+      
+      - **uplinkEchoConfig** *(dict) --* 
+
+        Information about an uplink echo ``Config`` .
+
+         
+
+        Parameters from the ``AntennaUplinkConfig`` , corresponding to the specified ``AntennaUplinkConfigArn`` , are used when this ``UplinkEchoConfig`` is used in a contact.
+
+        
+
+      
+        - **antennaUplinkConfigArn** *(string) --* **[REQUIRED]** 
+
+          ARN of an uplink ``Config`` .
+
+          
+
+        
+        - **enabled** *(boolean) --* **[REQUIRED]** 
+
+          Whether or not an uplink ``Config`` is enabled.
+
+          
+
+        
+      
+    
+    :type configId: string
+    :param configId: **[REQUIRED]** 
+
+      UUID of a ``Config`` .
+
+      
+
+    
+    :type configType: string
+    :param configType: **[REQUIRED]** 
+
+      Type of a ``Config`` .
+
+      
+
+    
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      Name of a ``Config`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configArn': 'string',
+            'configId': 'string',
+            'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configArn** *(string) --* 
+
+          ARN of a ``Config`` .
+
+          
+        
+
+        - **configId** *(string) --* 
+
+          UUID of a ``Config`` .
+
+          
+        
+
+        - **configType** *(string) --* 
+
+          Type of a ``Config`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_mission_profile(**kwargs)
+
+    
+
+    Updates a mission profile.
+
+     
+
+    Updating a mission profile will not update the execution parameters for existing future contacts.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UpdateMissionProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_mission_profile(
+          contactPostPassDurationSeconds=123,
+          contactPrePassDurationSeconds=123,
+          dataflowEdges=[
+              [
+                  'string',
+              ],
+          ],
+          minimumViableContactDurationSeconds=123,
+          missionProfileId='string',
+          name='string',
+          trackingConfigArn='string'
+      )
+    :type contactPostPassDurationSeconds: integer
+    :param contactPostPassDurationSeconds: 
+
+      Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+      
+
+    
+    :type contactPrePassDurationSeconds: integer
+    :param contactPrePassDurationSeconds: 
+
+      Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+      
+
+    
+    :type dataflowEdges: list
+    :param dataflowEdges: 
+
+      A list of lists of ARNs. Each list of ARNs is an edge, with a *from*  ``Config`` and a *to*  ``Config`` .
+
+      
+
+    
+      - *(list) --* 
+
+      
+        - *(string) --* 
+
+        
+    
+  
+    :type minimumViableContactDurationSeconds: integer
+    :param minimumViableContactDurationSeconds: 
+
+      Smallest amount of time in seconds that you’d like to see for an available contact. AWS Ground Station will not present you with contacts shorter than this duration.
+
+      
+
+    
+    :type missionProfileId: string
+    :param missionProfileId: **[REQUIRED]** 
+
+      UUID of a mission profile.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      Name of a mission profile.
+
+      
+
+    
+    :type trackingConfigArn: string
+    :param trackingConfigArn: 
+
+      ARN of a tracking ``Config`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'missionProfileId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **missionProfileId** *(string) --* 
+
+          UUID of a mission profile.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GroundStation.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.DependencyException`
+
+    
+    *     :py:class:`GroundStation.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`GroundStation.Paginator.ListConfigs`
+
+
+* :py:class:`GroundStation.Paginator.ListContacts`
+
+
+* :py:class:`GroundStation.Paginator.ListDataflowEndpointGroups`
+
+
+* :py:class:`GroundStation.Paginator.ListGroundStations`
+
+
+* :py:class:`GroundStation.Paginator.ListMissionProfiles`
+
+
+* :py:class:`GroundStation.Paginator.ListSatellites`
+
+
+
+.. py:class:: GroundStation.Paginator.ListConfigs
+
+  ::
+
+    
+    paginator = client.get_paginator('list_configs')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_configs`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListConfigs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'configList': [
+                {
+                    'configArn': 'string',
+                    'configId': 'string',
+                    'configType': 'antenna-downlink'|'antenna-downlink-demod-decode'|'antenna-uplink'|'dataflow-endpoint'|'tracking'|'uplink-echo'|'s3-recording',
+                    'name': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **configList** *(list) --* 
+
+          List of ``Config`` items.
+
+          
+          
+
+          - *(dict) --* 
+
+            An item in a list of ``Config`` objects.
+
+            
+            
+
+            - **configArn** *(string) --* 
+
+              ARN of a ``Config`` .
+
+              
+            
+
+            - **configId** *(string) --* 
+
+              UUID of a ``Config`` .
+
+              
+            
+
+            - **configType** *(string) --* 
+
+              Type of a ``Config`` .
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Name of a ``Config`` .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GroundStation.Paginator.ListContacts
+
+  ::
+
+    
+    paginator = client.get_paginator('list_contacts')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_contacts`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListContacts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          endTime=datetime(2015, 1, 1),
+          groundStation='string',
+          missionProfileArn='string',
+          satelliteArn='string',
+          startTime=datetime(2015, 1, 1),
+          statusList=[
+              'AVAILABLE'|'AWS_CANCELLED'|'AWS_FAILED'|'CANCELLED'|'CANCELLING'|'COMPLETED'|'FAILED'|'FAILED_TO_SCHEDULE'|'PASS'|'POSTPASS'|'PREPASS'|'SCHEDULED'|'SCHEDULING',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type endTime: datetime
+    :param endTime: **[REQUIRED]** 
+
+      End time of a contact.
+
+      
+
+    
+    :type groundStation: string
+    :param groundStation: 
+
+      Name of a ground station.
+
+      
+
+    
+    :type missionProfileArn: string
+    :param missionProfileArn: 
+
+      ARN of a mission profile.
+
+      
+
+    
+    :type satelliteArn: string
+    :param satelliteArn: 
+
+      ARN of a satellite.
+
+      
+
+    
+    :type startTime: datetime
+    :param startTime: **[REQUIRED]** 
+
+      Start time of a contact.
+
+      
+
+    
+    :type statusList: list
+    :param statusList: **[REQUIRED]** 
+
+      Status of a contact reservation.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contactList': [
+                {
+                    'contactId': 'string',
+                    'contactStatus': 'AVAILABLE'|'AWS_CANCELLED'|'AWS_FAILED'|'CANCELLED'|'CANCELLING'|'COMPLETED'|'FAILED'|'FAILED_TO_SCHEDULE'|'PASS'|'POSTPASS'|'PREPASS'|'SCHEDULED'|'SCHEDULING',
+                    'endTime': datetime(2015, 1, 1),
+                    'errorMessage': 'string',
+                    'groundStation': 'string',
+                    'maximumElevation': {
+                        'unit': 'DEGREE_ANGLE'|'RADIAN',
+                        'value': 123.0
+                    },
+                    'missionProfileArn': 'string',
+                    'postPassEndTime': datetime(2015, 1, 1),
+                    'prePassStartTime': datetime(2015, 1, 1),
+                    'region': 'string',
+                    'satelliteArn': 'string',
+                    'startTime': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **contactList** *(list) --* 
+
+          List of contacts.
+
+          
+          
+
+          - *(dict) --* 
+
+            Data describing a contact.
+
+            
+            
+
+            - **contactId** *(string) --* 
+
+              UUID of a contact.
+
+              
+            
+
+            - **contactStatus** *(string) --* 
+
+              Status of a contact.
+
+              
+            
+
+            - **endTime** *(datetime) --* 
+
+              End time of a contact.
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              Error message of a contact.
+
+              
+            
+
+            - **groundStation** *(string) --* 
+
+              Name of a ground station.
+
+              
+            
+
+            - **maximumElevation** *(dict) --* 
+
+              Maximum elevation angle of a contact.
+
+              
+              
+
+              - **unit** *(string) --* 
+
+                Elevation angle units.
+
+                
+              
+
+              - **value** *(float) --* 
+
+                Elevation angle value.
+
+                
+          
+            
+
+            - **missionProfileArn** *(string) --* 
+
+              ARN of a mission profile.
+
+              
+            
+
+            - **postPassEndTime** *(datetime) --* 
+
+              Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.
+
+              
+            
+
+            - **prePassStartTime** *(datetime) --* 
+
+              Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Region of a contact.
+
+              
+            
+
+            - **satelliteArn** *(string) --* 
+
+              ARN of a satellite.
+
+              
+            
+
+            - **startTime** *(datetime) --* 
+
+              Start time of a contact.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Tags assigned to a contact.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GroundStation.Paginator.ListDataflowEndpointGroups
+
+  ::
+
+    
+    paginator = client.get_paginator('list_dataflow_endpoint_groups')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_dataflow_endpoint_groups`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListDataflowEndpointGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'dataflowEndpointGroupList': [
+                {
+                    'dataflowEndpointGroupArn': 'string',
+                    'dataflowEndpointGroupId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **dataflowEndpointGroupList** *(list) --* 
+
+          A list of dataflow endpoint groups.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of ``DataflowEndpoint`` groups.
+
+            
+            
+
+            - **dataflowEndpointGroupArn** *(string) --* 
+
+              ARN of a dataflow endpoint group.
+
+              
+            
+
+            - **dataflowEndpointGroupId** *(string) --* 
+
+              UUID of a dataflow endpoint group.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GroundStation.Paginator.ListGroundStations
+
+  ::
+
+    
+    paginator = client.get_paginator('list_ground_stations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_ground_stations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          satelliteId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type satelliteId: string
+    :param satelliteId: 
+
+      Satellite ID to retrieve on-boarded ground stations.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'groundStationList': [
+                {
+                    'groundStationId': 'string',
+                    'groundStationName': 'string',
+                    'region': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **groundStationList** *(list) --* 
+
+          List of ground stations.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the ground station data.
+
+            
+            
+
+            - **groundStationId** *(string) --* 
+
+              UUID of a ground station.
+
+              
+            
+
+            - **groundStationName** *(string) --* 
+
+              Name of a ground station.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Ground station Region.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GroundStation.Paginator.ListMissionProfiles
+
+  ::
+
+    
+    paginator = client.get_paginator('list_mission_profiles')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_mission_profiles`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListMissionProfiles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'missionProfileList': [
+                {
+                    'missionProfileArn': 'string',
+                    'missionProfileId': 'string',
+                    'name': 'string',
+                    'region': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **missionProfileList** *(list) --* 
+
+          List of mission profiles.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of mission profiles.
+
+            
+            
+
+            - **missionProfileArn** *(string) --* 
+
+              ARN of a mission profile.
+
+              
+            
+
+            - **missionProfileId** *(string) --* 
+
+              UUID of a mission profile.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              Name of a mission profile.
+
+              
+            
+
+            - **region** *(string) --* 
+
+              Region of a mission profile.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GroundStation.Paginator.ListSatellites
+
+  ::
+
+    
+    paginator = client.get_paginator('list_satellites')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GroundStation.Client.list_satellites`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'satellites': [
+                {
+                    'groundStations': [
+                        'string',
+                    ],
+                    'noradSatelliteID': 123,
+                    'satelliteArn': 'string',
+                    'satelliteId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        
+
+        
+        
+
+        - **satellites** *(list) --* 
+
+          List of satellites.
+
+          
+          
+
+          - *(dict) --* 
+
+            Item in a list of satellites.
+
+            
+            
+
+            - **groundStations** *(list) --* 
+
+              A list of ground stations to which the satellite is on-boarded.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **noradSatelliteID** *(integer) --* 
+
+              NORAD satellite ID number.
+
+              
+            
+
+            - **satelliteArn** *(string) --* 
+
+              ARN of a satellite.
+
+              
+            
+
+            - **satelliteId** *(string) --* 
+
+              UUID of a satellite.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

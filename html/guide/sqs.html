@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>A sample tutorial &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="next" title="Code examples" href="examples.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Code examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">A sample tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sqs">SQS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-queue">Creating a queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-an-existing-queue">Using an existing queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-messages">Sending messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#processing-messages">Processing messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+              <li>A sample tutorial</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="a-sample-tutorial">
+<span id="sample-tutorial"></span><h1>A sample tutorial<a class="headerlink" href="#a-sample-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial will show you how to use Boto3 with an AWS service. In this
+sample tutorial, you will learn how to use Boto3 with
+<a class="reference external" href="http://aws.amazon.com/documentation/sqs/">Amazon Simple Queue Service (SQS)</a></p>
+<div class="section" id="sqs">
+<h2>SQS<a class="headerlink" href="#sqs" title="Permalink to this headline">¶</a></h2>
+<p>SQS allows you to queue and then process messages. This tutorial covers how to
+create a new queue, get and use an existing queue, push new messages onto the
+queue, and process messages from the queue by using
+<a class="reference internal" href="resources.html#guide-resources"><em>Resources</em></a> and <a class="reference internal" href="collections.html#guide-collections"><em>Collections</em></a>.</p>
+</div>
+<div class="section" id="creating-a-queue">
+<h2>Creating a queue<a class="headerlink" href="#creating-a-queue" title="Permalink to this headline">¶</a></h2>
+<p>Queues are created with a name. You may also optionally set queue
+attributes, such as the number of seconds to wait before an item may be
+processed. The examples below will use the queue name <tt class="docutils literal"><span class="pre">test</span></tt>.
+Before creating a queue, you must first get the SQS service resource:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Get the service resource</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create the queue. This returns an SQS.Queue instance</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">create_queue</span><span class="p">(</span><span class="n">QueueName</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">Attributes</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DelaySeconds&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">})</span>
+
+<span class="c1"># You can now access identifiers and attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DelaySeconds&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Reference: <a class="reference internal" href="../reference/services/sqs.html#SQS.ServiceResource.create_queue" title="SQS.ServiceResource.create_queue"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.ServiceResource.create_queue()</span></tt></a></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The code above may throw an exception if you already have a queue named
+<tt class="docutils literal"><span class="pre">test</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="using-an-existing-queue">
+<h2>Using an existing queue<a class="headerlink" href="#using-an-existing-queue" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to look up a queue by its name. If the queue does not exist,
+then an exception will be thrown:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Get the service resource</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the queue. This returns an SQS.Queue instance</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">get_queue_by_name</span><span class="p">(</span><span class="n">QueueName</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+<span class="c1"># You can now access identifiers and attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;DelaySeconds&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>It is also possible to list all of your existing queues:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Print out each queue name, which is part of its ARN</span>
+<span class="k">for</span> <span class="n">queue</span> <span class="ow">in</span> <span class="n">sqs</span><span class="o">.</span><span class="n">queues</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">queue</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To get the name from a queue, you must use its ARN, which is available
+in the queue's <tt class="docutils literal"><span class="pre">attributes</span></tt> attribute. Using
+<tt class="docutils literal"><span class="pre">queue.attributes['QueueArn'].split(':')[-1]</span></tt> will return its name.</p>
+</div>
+<p>Reference: <a class="reference internal" href="../reference/services/sqs.html#SQS.ServiceResource.get_queue_by_name" title="SQS.ServiceResource.get_queue_by_name"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.ServiceResource.get_queue_by_name()</span></tt></a>,
+<a class="reference internal" href="../reference/services/sqs.html#SQS.ServiceResource.queues" title="SQS.ServiceResource.queues"><tt class="xref py py-attr docutils literal"><span class="pre">SQS.ServiceResource.queues</span></tt></a></p>
+</div>
+<div class="section" id="sending-messages">
+<h2>Sending messages<a class="headerlink" href="#sending-messages" title="Permalink to this headline">¶</a></h2>
+<p>Sending a message adds it to the end of the queue:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Get the service resource</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the queue</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">get_queue_by_name</span><span class="p">(</span><span class="n">QueueName</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a new message</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">MessageBody</span><span class="o">=</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+
+<span class="c1"># The response is NOT a resource, but gives you a message ID and MD5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MessageId&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MD5OfMessageBody&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can also create messages with custom attributes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">queue</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">MessageBody</span><span class="o">=</span><span class="s1">&#39;boto3&#39;</span><span class="p">,</span> <span class="n">MessageAttributes</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;StringValue&#39;</span><span class="p">:</span> <span class="s1">&#39;Daniel&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>Messages can also be sent in batches. For example, sending the two messages
+described above in a single request would look like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">send_messages</span><span class="p">(</span><span class="n">Entries</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;Id&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MessageBody&#39;</span><span class="p">:</span> <span class="s1">&#39;world&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;Id&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MessageBody&#39;</span><span class="p">:</span> <span class="s1">&#39;boto3&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MessageAttributes&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;StringValue&#39;</span><span class="p">:</span> <span class="s1">&#39;Daniel&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+
+<span class="c1"># Print out any failures</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Failed&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In this case, the response contains lists of <tt class="docutils literal"><span class="pre">Successful</span></tt> and <tt class="docutils literal"><span class="pre">Failed</span></tt>
+messages, so you can retry failures if needed.</p>
+<p>Reference: <a class="reference internal" href="../reference/services/sqs.html#SQS.Queue.send_message" title="SQS.Queue.send_message"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.Queue.send_message()</span></tt></a>,
+<a class="reference internal" href="../reference/services/sqs.html#SQS.Queue.send_messages" title="SQS.Queue.send_messages"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.Queue.send_messages()</span></tt></a></p>
+</div>
+<div class="section" id="processing-messages">
+<h2>Processing messages<a class="headerlink" href="#processing-messages" title="Permalink to this headline">¶</a></h2>
+<p>Messages are processed in batches:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Get the service resource</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the queue</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">get_queue_by_name</span><span class="p">(</span><span class="n">QueueName</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+
+<span class="c1"># Process messages by printing out body and optional author name</span>
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">queue</span><span class="o">.</span><span class="n">receive_messages</span><span class="p">(</span><span class="n">MessageAttributeNames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Author&#39;</span><span class="p">]):</span>
+    <span class="c1"># Get the custom author message attribute if it was set</span>
+    <span class="n">author_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">message_attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">author_name</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">message_attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Author&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;StringValue&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">author_name</span><span class="p">:</span>
+            <span class="n">author_text</span> <span class="o">=</span> <span class="s1">&#39; (</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">author_name</span><span class="p">)</span>
+
+    <span class="c1"># Print out the body and author (if set)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, </span><span class="si">{0}</span><span class="s1">!</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">body</span><span class="p">,</span> <span class="n">author_text</span><span class="p">))</span>
+
+    <span class="c1"># Let the queue know that the message is processed</span>
+    <span class="n">message</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Given <em>only</em> the messages that were sent in a batch with
+<a class="reference internal" href="../reference/services/sqs.html#SQS.Queue.send_messages" title="SQS.Queue.send_messages"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.Queue.send_messages()</span></tt></a> in the previous section, the above code
+will print out:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Hello, world!
+Hello, boto3! (Daniel)
+</pre></div>
+</div>
+<p>Reference: <a class="reference internal" href="../reference/services/sqs.html#SQS.Queue.receive_messages" title="SQS.Queue.receive_messages"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.Queue.receive_messages()</span></tt></a>,
+<a class="reference internal" href="../reference/services/sqs.html#SQS.Message.delete" title="SQS.Message.delete"><tt class="xref py py-meth docutils literal"><span class="pre">SQS.Message.delete()</span></tt></a></p>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="quickstart.html" title="previous chapter (use the left arrow)">Quickstart</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="examples.html" title="next chapter (use the right arrow)">Code examples</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="Code examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

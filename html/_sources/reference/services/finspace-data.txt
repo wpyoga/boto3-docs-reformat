@@ -1,0 +1,691 @@
+
+
+************
+FinSpaceData
+************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: FinSpaceData.Client
+
+  A low-level client representing FinSpace Public API (FinSpace Data)
+  
+
+  The FinSpace APIs let you take actions inside the FinSpace environment. 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('finspace-data')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~FinSpaceData.Client.can_paginate`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.create_changeset`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.get_paginator`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.get_programmatic_access_credentials`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.get_waiter`
+
+  
+  *   :py:meth:`~FinSpaceData.Client.get_working_location`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_changeset(**kwargs)
+
+    
+
+    Creates a new changeset in a FinSpace dataset.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateChangeset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_changeset(
+          datasetId='string',
+          changeType='REPLACE'|'APPEND'|'MODIFY',
+          sourceType='S3',
+          sourceParams={
+              'string': 'string'
+          },
+          formatType='CSV'|'JSON'|'PARQUET'|'XML',
+          formatParams={
+              'string': 'string'
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type datasetId: string
+    :param datasetId: **[REQUIRED]** 
+
+      The unique identifier for the FinSpace dataset in which the changeset will be created.
+
+      
+
+    
+    :type changeType: string
+    :param changeType: **[REQUIRED]** 
+
+      Option to indicate how a changeset will be applied to a dataset.
+
+       
+
+       
+      * ``REPLACE`` - Changeset will be considered as a replacement to all prior loaded changesets. 
+       
+      * ``APPEND`` - Changeset will be considered as an addition to the end of all prior loaded changesets. 
+       
+
+      
+
+    
+    :type sourceType: string
+    :param sourceType: **[REQUIRED]** 
+
+      Type of the data source from which the files to create the changeset will be sourced.
+
+       
+
+       
+      * ``S3`` - Amazon S3. 
+       
+
+      
+
+    
+    :type sourceParams: dict
+    :param sourceParams: **[REQUIRED]** 
+
+      Source path from which the files to create the changeset will be sourced.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type formatType: string
+    :param formatType: 
+
+      Format type of the input files being loaded into the changeset.
+
+      
+
+    
+    :type formatParams: dict
+    :param formatParams: 
+
+      Options that define the structure of the source file(s).
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type tags: dict
+    :param tags: 
+
+      Metadata tags to apply to this changeset.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'changeset': {
+                'id': 'string',
+                'changesetArn': 'string',
+                'datasetId': 'string',
+                'changeType': 'REPLACE'|'APPEND'|'MODIFY',
+                'sourceType': 'S3',
+                'sourceParams': {
+                    'string': 'string'
+                },
+                'formatType': 'CSV'|'JSON'|'PARQUET'|'XML',
+                'formatParams': {
+                    'string': 'string'
+                },
+                'createTimestamp': datetime(2015, 1, 1),
+                'status': 'PENDING'|'FAILED'|'SUCCESS'|'RUNNING'|'STOP_REQUESTED',
+                'errorInfo': {
+                    'errorMessage': 'string',
+                    'errorCategory': 'The_inputs_to_this_request_are_invalid'|'Service_limits_have_been_exceeded'|'Missing_required_permission_to_perform_this_request'|'One_or_more_inputs_to_this_request_were_not_found'|'The_system_temporarily_lacks_sufficient_resources_to_process_the_request'|'An_internal_error_has_occurred'|'Cancelled'|'A_user_recoverable_error_has_occurred'
+                },
+                'changesetLabels': {
+                    'string': 'string'
+                },
+                'updatesChangesetId': 'string',
+                'updatedByChangesetId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **changeset** *(dict) --* 
+
+          Returns the changeset details.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            Unique identifier for a changeset.
+
+            
+          
+
+          - **changesetArn** *(string) --* 
+
+            The ARN identifier of the changeset.
+
+            
+          
+
+          - **datasetId** *(string) --* 
+
+            The unique identifier for the FinSpace dataset in which the changeset is created.
+
+            
+          
+
+          - **changeType** *(string) --* 
+
+            Change type indicates how a changeset is applied to a dataset.
+
+             
+
+             
+            * ``REPLACE`` - Changeset is considered as a replacement to all prior loaded changesets. 
+             
+            * ``APPEND`` - Changeset is considered as an addition to the end of all prior loaded changesets. 
+             
+            * ``MODIFY`` - Changeset is considered as a replacement to a specific prior ingested changeset. 
+             
+
+            
+          
+
+          - **sourceType** *(string) --* 
+
+            Type of the data source from which the files to create the changeset are sourced.
+
+             
+
+             
+            * ``S3`` - Amazon S3. 
+             
+
+            
+          
+
+          - **sourceParams** *(dict) --* 
+
+            Source path from which the files to create the changeset are sourced.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **formatType** *(string) --* 
+
+            Format type of the input files loaded into the changeset.
+
+            
+          
+
+          - **formatParams** *(dict) --* 
+
+            Structure of the source file(s).
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **createTimestamp** *(datetime) --* 
+
+            The timestamp at which the changeset was created in FinSpace.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of changeset creation operation.
+
+            
+          
+
+          - **errorInfo** *(dict) --* 
+
+            The structure with error messages.
+
+            
+            
+
+            - **errorMessage** *(string) --* 
+
+              The text of the error message.
+
+              
+            
+
+            - **errorCategory** *(string) --* 
+
+              The category of the error.
+
+               
+
+               
+              * ``VALIDATION`` -The inputs to this request are invalid. 
+               
+              * ``SERVICE_QUOTA_EXCEEDED`` - Service quotas have been exceeded. Please contact AWS support to increase quotas. 
+               
+              * ``ACCESS_DENIED`` - Missing required permission to perform this request. 
+               
+              * ``RESOURCE_NOT_FOUND`` - One or more inputs to this request were not found. 
+               
+              * ``THROTTLING`` - The system temporarily lacks sufficient resources to process the request. 
+               
+              * ``INTERNAL_SERVICE_EXCEPTION`` - An internal service error has occurred. 
+               
+              * ``CANCELLED`` - A user recoverable error has occurred. 
+               
+
+              
+        
+          
+
+          - **changesetLabels** *(dict) --* 
+
+            Tags associated with the changeset.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **updatesChangesetId** *(string) --* 
+
+            Unique identifier of the changeset that is updated.
+
+            
+          
+
+          - **updatedByChangesetId** *(string) --* 
+
+            Unique identifier of the changeset that is updated a changeset.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_programmatic_access_credentials(**kwargs)
+
+    
+
+    Request programmatic credentials to use with Habanero SDK.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetProgrammaticAccessCredentials>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_programmatic_access_credentials(
+          durationInMinutes=123,
+          environmentId='string'
+      )
+    :type durationInMinutes: integer
+    :param durationInMinutes: 
+
+      The time duration in which the credentials remain valid. 
+
+      
+
+    
+    :type environmentId: string
+    :param environmentId: **[REQUIRED]** 
+
+      The habanero environment identifier.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'credentials': {
+                'accessKeyId': 'string',
+                'secretAccessKey': 'string',
+                'sessionToken': 'string'
+            },
+            'durationInMinutes': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **credentials** *(dict) --* 
+
+          Returns the programmatic credentials.
+
+          
+          
+
+          - **accessKeyId** *(string) --* 
+
+            The access key identifier.
+
+            
+          
+
+          - **secretAccessKey** *(string) --* 
+
+            The access key.
+
+            
+          
+
+          - **sessionToken** *(string) --* 
+
+            The session token.
+
+            
+      
+        
+
+        - **durationInMinutes** *(integer) --* 
+
+          Returns the duration in which the credentials will remain valid.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: get_working_location(**kwargs)
+
+    
+
+    A temporary Amazon S3 location to copy your files from a source location to stage or use as a scratch space in Habanero notebook.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetWorkingLocation>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_working_location(
+          locationType='INGESTION'|'SAGEMAKER'
+      )
+    :type locationType: string
+    :param locationType: 
+
+      Specify the type of the working location.
+
+       
+
+       
+      * ``SAGEMAKER`` - Use the Amazon S3 location as a temporary location to store data content when working with FinSpace Notebooks that run on SageMaker studio. 
+       
+      * ``INGESTION`` - Use the Amazon S3 location as a staging location to copy your data content and then use the location with the changeset creation operation. 
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            's3Uri': 'string',
+            's3Path': 'string',
+            's3Bucket': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **s3Uri** *(string) --* 
+
+          Returns the Amazon S3 URI for the working location.
+
+          
+        
+
+        - **s3Path** *(string) --* 
+
+          Returns the Amazon S3 Path for the working location.
+
+          
+        
+
+        - **s3Bucket** *(string) --* 
+
+          Returns the Amazon S3 bucket name for the working location.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`FinSpaceData.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,4155 @@
+
+
+**************
+ResourceGroups
+**************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ResourceGroups.Client
+
+  A low-level client representing AWS Resource Groups
+   
+
+  AWS Resource Groups lets you organize AWS resources such as Amazon EC2 instances, Amazon Relational Database Service databases, and Amazon S3 buckets into groups using criteria that you define as tags. A resource group is a collection of resources that match the resource types specified in a query, and share one or more tags or portions of tags. You can create a group of resources based on their roles in your cloud infrastructure, lifecycle stages, regions, application layers, or virtually any criteria. Resource Groups enable you to automate management tasks, such as those in AWS Systems Manager Automation documents, on tag-related resources in AWS Systems Manager. Groups of tagged resources also let you quickly view a custom console in AWS Systems Manager that shows AWS Config compliance and other monitoring data about member resources.
+
+   
+
+  To create a resource group, build a resource query, and specify tags that identify the criteria that members of the group have in common. Tags are key-value pairs.
+
+   
+
+  For more information about Resource Groups, see the `AWS Resource Groups User Guide <https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html>`__ .
+
+   
+
+  AWS Resource Groups uses a REST-compliant API that you can use to perform the following types of operations.
+
+   
+
+   
+  * Create, Read, Update, and Delete (CRUD) operations on resource groups and resource query entities 
+   
+  * Applying, editing, and removing tags from resource groups 
+   
+  * Resolving resource group member ARNs so they can be returned as search results 
+   
+  * Getting data about resources that are members of a group 
+   
+  * Searching AWS resources based on a resource query 
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('resource-groups')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ResourceGroups.Client.can_paginate`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.create_group`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.delete_group`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_group`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_group_configuration`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_group_query`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_paginator`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_tags`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.get_waiter`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.group_resources`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.list_group_resources`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.list_groups`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.put_group_configuration`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.search_resources`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.tag`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.ungroup_resources`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.untag`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.update_group`
+
+  
+  *   :py:meth:`~ResourceGroups.Client.update_group_query`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_group(**kwargs)
+
+    
+
+    Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration. For more information about constructing a resource query, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ . For more information about service configurations, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:CreateGroup``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_group(
+          Name='string',
+          Description='string',
+          ResourceQuery={
+              'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+              'Query': 'string'
+          },
+          Tags={
+              'string': 'string'
+          },
+          Configuration=[
+              {
+                  'Type': 'string',
+                  'Parameters': [
+                      {
+                          'Name': 'string',
+                          'Values': [
+                              'string',
+                          ]
+                      },
+                  ]
+              },
+          ]
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the group, which is the identifier of the group in other operations. You can't change the name of a resource group after you create it. A resource group name can consist of letters, numbers, hyphens, periods, and underscores. The name cannot start with ``AWS`` or ``aws`` ; these are reserved. A resource group name must be unique within each AWS Region in your AWS account.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the resource group. Descriptions can consist of letters, numbers, hyphens, underscores, periods, and spaces.
+
+      
+
+    
+    :type ResourceQuery: dict
+    :param ResourceQuery: 
+
+      The resource query that determines which AWS resources are members of this group. For more information about resource queries, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ . 
+
+       
+
+      .. note::
+
+         
+
+        A resource group can contain either a ``ResourceQuery`` or a ``Configuration`` , but not both.
+
+         
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of the query. You can use the following values:
+
+         
+
+         
+        * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+         
+        * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+           
+          * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+           
+          * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+           
+
+         
+
+        The query would not include the following items in the results, however. 
+
+         
+
+           
+          * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+           
+          * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+           
+
+         
+         
+
+        
+
+      
+      - **Query** *(string) --* **[REQUIRED]** 
+
+        The query that defines a group or a search.
+
+        
+
+      
+    
+    :type Tags: dict
+    :param Tags: 
+
+      The tags to add to the group. A tag is key-value pair string.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type Configuration: list
+    :param Configuration: 
+
+      A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of  GroupConfigurationItem elements. For details about the syntax of service configurations, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+       
+
+      .. note::
+
+         
+
+        A resource group can contain either a ``Configuration`` or a ``ResourceQuery`` , but not both.
+
+         
+
+      
+
+    
+      - *(dict) --* 
+
+        An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+        
+
+      
+        - **Type** *(string) --* **[REQUIRED]** 
+
+          Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+          
+
+        
+        - **Parameters** *(list) --* 
+
+          A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+          
+
+        
+          - *(dict) --* 
+
+            A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+            
+
+          
+            - **Name** *(string) --* **[REQUIRED]** 
+
+              The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+              
+
+            
+            - **Values** *(list) --* 
+
+              The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+      
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Group': {
+                'GroupArn': 'string',
+                'Name': 'string',
+                'Description': 'string'
+            },
+            'ResourceQuery': {
+                'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+                'Query': 'string'
+            },
+            'Tags': {
+                'string': 'string'
+            },
+            'GroupConfiguration': {
+                'Configuration': [
+                    {
+                        'Type': 'string',
+                        'Parameters': [
+                            {
+                                'Name': 'string',
+                                'Values': [
+                                    'string',
+                                ]
+                            },
+                        ]
+                    },
+                ],
+                'ProposedConfiguration': [
+                    {
+                        'Type': 'string',
+                        'Parameters': [
+                            {
+                                'Name': 'string',
+                                'Values': [
+                                    'string',
+                                ]
+                            },
+                        ]
+                    },
+                ],
+                'Status': 'UPDATING'|'UPDATE_COMPLETE'|'UPDATE_FAILED',
+                'FailureReason': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Group** *(dict) --* 
+
+          The description of the resource group.
+
+          
+          
+
+          - **GroupArn** *(string) --* 
+
+            The ARN of the resource group.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the resource group.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the resource group.
+
+            
+      
+        
+
+        - **ResourceQuery** *(dict) --* 
+
+          The resource query associated with the group. For more information about resource queries, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ . 
+
+          
+          
+
+          - **Type** *(string) --* 
+
+            The type of the query. You can use the following values:
+
+             
+
+             
+            * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+             
+            * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+               
+              * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+               
+              * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+               
+
+             
+
+            The query would not include the following items in the results, however. 
+
+             
+
+               
+              * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+               
+              * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+               
+
+             
+             
+
+            
+          
+
+          - **Query** *(string) --* 
+
+            The query that defines a group or a search.
+
+            
+      
+        
+
+        - **Tags** *(dict) --* 
+
+          The tags associated with the group.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **GroupConfiguration** *(dict) --* 
+
+          The service configuration associated with the resource group. For details about the syntax of a service configuration, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+          
+          
+
+          - **Configuration** *(list) --* 
+
+            The configuration currently associated with the group and in effect.
+
+            
+            
+
+            - *(dict) --* 
+
+              An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+              
+
+              - **Parameters** *(list) --* 
+
+                A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+                
+
+                - *(dict) --* 
+
+                  A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+                  
+                  
+
+                  - **Name** *(string) --* 
+
+                    The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                  
+
+                  - **Values** *(list) --* 
+
+                    The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                    
+
+                    - *(string) --* 
+                
+              
+            
+          
+        
+          
+
+          - **ProposedConfiguration** *(list) --* 
+
+            If present, the new configuration that is in the process of being applied to the group.
+
+            
+            
+
+            - *(dict) --* 
+
+              An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+              
+
+              - **Parameters** *(list) --* 
+
+                A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+                
+
+                - *(dict) --* 
+
+                  A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+                  
+                  
+
+                  - **Name** *(string) --* 
+
+                    The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                  
+
+                  - **Values** *(list) --* 
+
+                    The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                    
+
+                    - *(string) --* 
+                
+              
+            
+          
+        
+          
+
+          - **Status** *(string) --* 
+
+            The current status of an attempt to update the group configuration.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            If present, the reason why a request to update the group configuration failed.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: delete_group(**kwargs)
+
+    
+
+    Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:DeleteGroup``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_group(
+          GroupName='string',
+          Group='string'
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      Deprecated - don't use this parameter. Use ``Group`` instead.
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Group': {
+                'GroupArn': 'string',
+                'Name': 'string',
+                'Description': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Group** *(dict) --* 
+
+          A full description of the deleted resource group.
+
+          
+          
+
+          - **GroupArn** *(string) --* 
+
+            The ARN of the resource group.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the resource group.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the resource group.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_group(**kwargs)
+
+    
+
+    Returns information about a specified resource group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:GetGroup``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_group(
+          GroupName='string',
+          Group='string'
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      Deprecated - don't use this parameter. Use ``Group`` instead.
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Group': {
+                'GroupArn': 'string',
+                'Name': 'string',
+                'Description': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Group** *(dict) --* 
+
+          A full description of the resource group.
+
+          
+          
+
+          - **GroupArn** *(string) --* 
+
+            The ARN of the resource group.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the resource group.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the resource group.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: get_group_configuration(**kwargs)
+
+    
+
+    Returns the service configuration associated with the specified resource group. For details about the service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:GetGroupConfiguration``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_group_configuration(
+          Group='string'
+      )
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupConfiguration': {
+                'Configuration': [
+                    {
+                        'Type': 'string',
+                        'Parameters': [
+                            {
+                                'Name': 'string',
+                                'Values': [
+                                    'string',
+                                ]
+                            },
+                        ]
+                    },
+                ],
+                'ProposedConfiguration': [
+                    {
+                        'Type': 'string',
+                        'Parameters': [
+                            {
+                                'Name': 'string',
+                                'Values': [
+                                    'string',
+                                ]
+                            },
+                        ]
+                    },
+                ],
+                'Status': 'UPDATING'|'UPDATE_COMPLETE'|'UPDATE_FAILED',
+                'FailureReason': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupConfiguration** *(dict) --* 
+
+          The service configuration associated with the specified group. For details about the service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+          
+          
+
+          - **Configuration** *(list) --* 
+
+            The configuration currently associated with the group and in effect.
+
+            
+            
+
+            - *(dict) --* 
+
+              An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+              
+
+              - **Parameters** *(list) --* 
+
+                A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+                
+
+                - *(dict) --* 
+
+                  A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+                  
+                  
+
+                  - **Name** *(string) --* 
+
+                    The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                  
+
+                  - **Values** *(list) --* 
+
+                    The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                    
+
+                    - *(string) --* 
+                
+              
+            
+          
+        
+          
+
+          - **ProposedConfiguration** *(list) --* 
+
+            If present, the new configuration that is in the process of being applied to the group.
+
+            
+            
+
+            - *(dict) --* 
+
+              An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+              
+
+              - **Parameters** *(list) --* 
+
+                A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                
+                
+
+                - *(dict) --* 
+
+                  A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+                  
+                  
+
+                  - **Name** *(string) --* 
+
+                    The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                  
+
+                  - **Values** *(list) --* 
+
+                    The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+                    
+                    
+
+                    - *(string) --* 
+                
+              
+            
+          
+        
+          
+
+          - **Status** *(string) --* 
+
+            The current status of an attempt to update the group configuration.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            If present, the reason why a request to update the group configuration failed.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: get_group_query(**kwargs)
+
+    
+
+    Retrieves the resource query associated with the specified resource group. For more information about resource queries, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ .
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:GetGroupQuery``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQuery>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_group_query(
+          GroupName='string',
+          Group='string'
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      Don't use this parameter. Use ``Group`` instead.
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group to query.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupQuery': {
+                'GroupName': 'string',
+                'ResourceQuery': {
+                    'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+                    'Query': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupQuery** *(dict) --* 
+
+          The resource query associated with the specified group. For more information about resource queries, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ .
+
+          
+          
+
+          - **GroupName** *(string) --* 
+
+            The name of the resource group that is associated with the specified resource query.
+
+            
+          
+
+          - **ResourceQuery** *(dict) --* 
+
+            The resource query that determines which AWS resources are members of the associated resource group.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of the query. You can use the following values:
+
+               
+
+               
+              * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+               
+              * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+                 
+                * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+                 
+                * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+                 
+
+               
+
+              The query would not include the following items in the results, however. 
+
+               
+
+                 
+                * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+                 
+                * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+                 
+
+               
+               
+
+              
+            
+
+            - **Query** *(string) --* 
+
+              The query that defines a group or a search.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_tags(**kwargs)
+
+    
+
+    Returns a list of tags that are associated with a resource group, specified by an ARN.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:GetTags``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_tags(
+          Arn='string'
+      )
+    :type Arn: string
+    :param Arn: **[REQUIRED]** 
+
+      The ARN of the resource group whose tags you want to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Arn** *(string) --* 
+
+          The ARN of the tagged resource group.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          The tags associated with the specified resource group.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: group_resources(**kwargs)
+
+    
+
+    Adds the specified resources to the specified group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:GroupResources``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.group_resources(
+          Group='string',
+          ResourceArns=[
+              'string',
+          ]
+      )
+    :type Group: string
+    :param Group: **[REQUIRED]** 
+
+      The name or the ARN of the resource group to add resources to.
+
+      
+
+    
+    :type ResourceArns: list
+    :param ResourceArns: **[REQUIRED]** 
+
+      The list of ARNs for resources to be added to the group. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Succeeded': [
+                'string',
+            ],
+            'Failed': [
+                {
+                    'ResourceArn': 'string',
+                    'ErrorMessage': 'string',
+                    'ErrorCode': 'string'
+                },
+            ],
+            'Pending': [
+                {
+                    'ResourceArn': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Succeeded** *(list) --* 
+
+          A list of ARNs of resources that were successfully added to the group by this operation.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **Failed** *(list) --* 
+
+          A list of ARNs of any resources that failed to be added to the group by this operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource that failed to be added to or removed from a group.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of the resource that failed to be added or removed.
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message text associated with the failure.
+
+              
+            
+
+            - **ErrorCode** *(string) --* 
+
+              The error code associated with the failure.
+
+              
+        
+      
+        
+
+        - **Pending** *(list) --* 
+
+          A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the ``  ListGroupResources `` operation, and checking the ``Resources`` array in the response and the ``Status`` field of each object in that array. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that identifies a resource that is currently pending addition to the group as a member. Adding a resource to a resource group happens asynchronously as a background task and this one isn't completed yet.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The Amazon resource name (ARN) of the resource that's in a pending state.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: list_group_resources(**kwargs)
+
+    
+
+    Returns a list of ARNs of the resources that are members of a specified resource group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:ListGroupResources``   
+     
+    * ``cloudformation:DescribeStacks``   
+     
+    * ``cloudformation:ListStackResources``   
+     
+    * ``tag:GetResources``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_group_resources(
+          GroupName='string',
+          Group='string',
+          Filters=[
+              {
+                  'Name': 'resource-type',
+                  'Values': [
+                      'string',
+                  ]
+              },
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      .. warning::
+
+         
+
+         * **Deprecated - don't use this parameter. Use the ``Group`` request field instead.** *  
+
+         
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group
+
+      
+
+    
+    :type Filters: list
+    :param Filters: 
+
+      Filters, formatted as  ResourceFilter objects, that you want to apply to a ``ListGroupResources`` operation. Filters the results to include only those of the specified resource types.
+
+       
+
+       
+      * ``resource-type`` - Filter resources by their type. Specify up to five resource types in the format ``AWS::ServiceCode::ResourceType`` . For example, ``AWS::EC2::Instance`` , or ``AWS::S3::Bucket`` .  
+       
+
+       
+
+      When you specify a ``resource-type`` filter for ``ListGroupResources`` , AWS Resource Groups validates your filter resource types against the types that are defined in the query associated with the group. For example, if a group contains only S3 buckets because its query specifies only that resource type, but your ``resource-type`` filter includes EC2 instances, AWS Resource Groups does not filter for EC2 instances. In this case, a ``ListGroupResources`` request returns a ``BadRequestException`` error with a message similar to the following:
+
+       
+
+       ``The resource types specified as filters in the request are not valid.``  
+
+       
+
+      The error includes a list of resource types that failed the validation because they are not part of the query associated with the group. This validation doesn't occur when the group query specifies ``AWS::AllSupported`` , because a group based on such a query can contain any of the allowed resource types for the query type (tag-based or AWS CloudFormation stack-based queries).
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter name and value pair that is used to obtain more specific results from a list of resources.
+
+        
+
+      
+        - **Name** *(string) --* **[REQUIRED]** 
+
+          The name of the filter. Filter names are case-sensitive.
+
+          
+
+        
+        - **Values** *(list) --* **[REQUIRED]** 
+
+          One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the ``NextToken`` response element is present and has a value (is not null). Include that value as the ``NextToken`` request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check ``NextToken`` after every operation to ensure that you receive all of the results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The parameter for receiving additional results if you receive a ``NextToken`` response in a previous request. A ``NextToken`` response indicates that more output is available. Set this parameter to the value provided by a previous call's ``NextToken`` response to indicate where the output should continue from.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Resources': [
+                {
+                    'Identifier': {
+                        'ResourceArn': 'string',
+                        'ResourceType': 'string'
+                    },
+                    'Status': {
+                        'Name': 'PENDING'
+                    }
+                },
+            ],
+            'ResourceIdentifiers': [
+                {
+                    'ResourceArn': 'string',
+                    'ResourceType': 'string'
+                },
+            ],
+            'NextToken': 'string',
+            'QueryErrors': [
+                {
+                    'ErrorCode': 'CLOUDFORMATION_STACK_INACTIVE'|'CLOUDFORMATION_STACK_NOT_EXISTING',
+                    'Message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Resources** *(list) --* 
+
+          An array of resources from which you can determine each resource's identity, type, and group membership status.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure returned by the  ListGroupResources operation that contains identity and group membership status information for one of the resources in the group.
+
+            
+            
+
+            - **Identifier** *(dict) --* 
+
+              A structure that contains the ARN of a resource and its resource type.
+
+              
+              
+
+              - **ResourceArn** *(string) --* 
+
+                The ARN of a resource.
+
+                
+              
+
+              - **ResourceType** *(string) --* 
+
+                The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+                
+          
+            
+
+            - **Status** *(dict) --* 
+
+              A structure that contains the status of this resource's membership in the group.
+
+               
+
+              .. note::
+
+                 
+
+                This field is present in the response only if the group is of type ``AWS::EC2::HostManagement`` .
+
+                 
+
+              
+              
+
+              - **Name** *(string) --* 
+
+                The current status.
+
+                
+          
+        
+      
+        
+
+        - **ResourceIdentifiers** *(list) --* 
+
+          .. warning::
+
+             
+
+             ** *Deprecated - don't use this parameter. Use the ``Resources`` response field instead.* **  
+
+             
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that contains the ARN of a resource and its resource type.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of a resource.
+
+              
+            
+
+            - **ResourceType** *(string) --* 
+
+              The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If present, indicates that more output is available than is included in the current response. Use this value in the ``NextToken`` request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the ``NextToken`` response element comes back as ``null`` .
+
+          
+        
+
+        - **QueryErrors** *(list) --* 
+
+          A list of ``QueryError`` objects. Each error is an object that contains ``ErrorCode`` and ``Message`` structures. Possible values for ``ErrorCode`` are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            A two-part error structure that can occur in ``ListGroupResources`` or ``SearchResources`` operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A ``QueryError`` occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Possible values are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              A message that explains the ``ErrorCode`` value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For ``CLOUDFORMATION_STACK_INACTIVE`` , the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as ``CREATE_FAILED`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: list_groups(**kwargs)
+
+    
+
+    Returns a list of existing resource groups in your account.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:ListGroups``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_groups(
+          Filters=[
+              {
+                  'Name': 'resource-type'|'configuration-type',
+                  'Values': [
+                      'string',
+                  ]
+              },
+          ],
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type Filters: list
+    :param Filters: 
+
+      Filters, formatted as  GroupFilter objects, that you want to apply to a ``ListGroups`` operation.
+
+       
+
+       
+      * ``resource-type`` - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format ``AWS::*ServiceCode* ::*ResourceType* `` . For example, ``AWS::EC2::Instance`` , or ``AWS::S3::Bucket`` . 
+       
+      * ``configuration-type`` - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are: 
+
+         
+        * ``AWS:EC2::CapacityReservationPool``   
+         
+        * ``AWS:EC2::HostManagement``   
+         
+
+       
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter collection that you can use to restrict the results from a ``List`` operation to only those you want to include.
+
+        
+
+      
+        - **Name** *(string) --* **[REQUIRED]** 
+
+          The name of the filter. Filter names are case-sensitive.
+
+          
+
+        
+        - **Values** *(list) --* **[REQUIRED]** 
+
+          One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the ``NextToken`` response element is present and has a value (is not null). Include that value as the ``NextToken`` request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check ``NextToken`` after every operation to ensure that you receive all of the results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The parameter for receiving additional results if you receive a ``NextToken`` response in a previous request. A ``NextToken`` response indicates that more output is available. Set this parameter to the value provided by a previous call's ``NextToken`` response to indicate where the output should continue from.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupIdentifiers': [
+                {
+                    'GroupName': 'string',
+                    'GroupArn': 'string'
+                },
+            ],
+            'Groups': [
+                {
+                    'GroupArn': 'string',
+                    'Name': 'string',
+                    'Description': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupIdentifiers** *(list) --* 
+
+          A list of  GroupIdentifier objects. Each identifier is an object that contains both the ``Name`` and the ``GroupArn`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            The unique identifiers for a resource group.
+
+            
+            
+
+            - **GroupName** *(string) --* 
+
+              The name of the resource group.
+
+              
+            
+
+            - **GroupArn** *(string) --* 
+
+              The ARN of the resource group.
+
+              
+        
+      
+        
+
+        - **Groups** *(list) --* 
+
+          .. warning::
+
+             
+
+             * **Deprecated - don't use this field. Use the ``GroupIdentifiers`` response field instead.** *  
+
+             
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:
+
+             
+
+             
+            *  ResourceQuery - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group, or later by using the  PutGroupConfiguration operation. 
+             
+            *  GroupConfiguration - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group. 
+             
+
+            
+            
+
+            - **GroupArn** *(string) --* 
+
+              The ARN of the resource group.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the resource group.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the resource group.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If present, indicates that more output is available than is included in the current response. Use this value in the ``NextToken`` request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the ``NextToken`` response element comes back as ``null`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: put_group_configuration(**kwargs)
+
+    
+
+    Attaches a service configuration to the specified group. This occurs asynchronously, and can take time to complete. You can use  GetGroupConfiguration to check the status of the update.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:PutGroupConfiguration``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/PutGroupConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_group_configuration(
+          Group='string',
+          Configuration=[
+              {
+                  'Type': 'string',
+                  'Parameters': [
+                      {
+                          'Name': 'string',
+                          'Values': [
+                              'string',
+                          ]
+                      },
+                  ]
+              },
+          ]
+      )
+    :type Group: string
+    :param Group: 
+
+      The name or ARN of the resource group with the configuration that you want to update.
+
+      
+
+    
+    :type Configuration: list
+    :param Configuration: 
+
+      The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of  GroupConfigurationItem elements.
+
+       
+
+      For information about the syntax of a service configuration, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+       
+
+      .. note::
+
+         
+
+        A resource group can contain either a ``Configuration`` or a ``ResourceQuery`` , but not both.
+
+         
+
+      
+
+    
+      - *(dict) --* 
+
+        An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+        
+
+      
+        - **Type** *(string) --* **[REQUIRED]** 
+
+          Specifies the type of group configuration item. Each item must have a unique value for ``type`` . For the list of types that you can specify for a configuration item, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+          
+
+        
+        - **Parameters** *(list) --* 
+
+          A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+          
+
+        
+          - *(dict) --* 
+
+            A parameter for a group configuration item. For details about group service configuration syntax, see `Service configurations for resource groups <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html>`__ .
+
+            
+
+          
+            - **Name** *(string) --* **[REQUIRED]** 
+
+              The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+              
+
+            
+            - **Values** *(list) --* 
+
+              The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see `Supported resource types and parameters <https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types>`__ .
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+      
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: search_resources(**kwargs)
+
+    
+
+    Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:SearchResources``   
+     
+    * ``cloudformation:DescribeStacks``   
+     
+    * ``cloudformation:ListStackResources``   
+     
+    * ``tag:GetResources``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.search_resources(
+          ResourceQuery={
+              'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+              'Query': 'string'
+          },
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ResourceQuery: dict
+    :param ResourceQuery: **[REQUIRED]** 
+
+      The search query, using the same formats that are supported for resource group definition. For more information, see  CreateGroup .
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of the query. You can use the following values:
+
+         
+
+         
+        * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+         
+        * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+           
+          * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+           
+          * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+           
+
+         
+
+        The query would not include the following items in the results, however. 
+
+         
+
+           
+          * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+           
+          * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+           
+
+         
+         
+
+        
+
+      
+      - **Query** *(string) --* **[REQUIRED]** 
+
+        The query that defines a group or a search.
+
+        
+
+      
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the ``NextToken`` response element is present and has a value (is not null). Include that value as the ``NextToken`` request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check ``NextToken`` after every operation to ensure that you receive all of the results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The parameter for receiving additional results if you receive a ``NextToken`` response in a previous request. A ``NextToken`` response indicates that more output is available. Set this parameter to the value provided by a previous call's ``NextToken`` response to indicate where the output should continue from.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceIdentifiers': [
+                {
+                    'ResourceArn': 'string',
+                    'ResourceType': 'string'
+                },
+            ],
+            'NextToken': 'string',
+            'QueryErrors': [
+                {
+                    'ErrorCode': 'CLOUDFORMATION_STACK_INACTIVE'|'CLOUDFORMATION_STACK_NOT_EXISTING',
+                    'Message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceIdentifiers** *(list) --* 
+
+          The ARNs and resource types of resources that are members of the group that you specified.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that contains the ARN of a resource and its resource type.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of a resource.
+
+              
+            
+
+            - **ResourceType** *(string) --* 
+
+              The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If present, indicates that more output is available than is included in the current response. Use this value in the ``NextToken`` request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the ``NextToken`` response element comes back as ``null`` .
+
+          
+        
+
+        - **QueryErrors** *(list) --* 
+
+          A list of ``QueryError`` objects. Each error is an object that contains ``ErrorCode`` and ``Message`` structures. Possible values for ``ErrorCode`` are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            A two-part error structure that can occur in ``ListGroupResources`` or ``SearchResources`` operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A ``QueryError`` occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Possible values are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              A message that explains the ``ErrorCode`` value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For ``CLOUDFORMATION_STACK_INACTIVE`` , the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as ``CREATE_FAILED`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: tag(**kwargs)
+
+    
+
+    Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.
+
+     
+
+    .. warning::
+
+       
+
+      Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.
+
+       
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:Tag``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/Tag>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag(
+          Arn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Arn: string
+    :param Arn: **[REQUIRED]** 
+
+      The ARN of the resource group to which to add tags.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      The tags to add to the specified resource group. A tag is a string-to-string map of key-value pairs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Arn** *(string) --* 
+
+          The ARN of the tagged resource.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          The tags that have been added to the specified resource group.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: ungroup_resources(**kwargs)
+
+    
+
+    Removes the specified resources from the specified group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:UngroupResources``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UngroupResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.ungroup_resources(
+          Group='string',
+          ResourceArns=[
+              'string',
+          ]
+      )
+    :type Group: string
+    :param Group: **[REQUIRED]** 
+
+      The name or the ARN of the resource group from which to remove the resources.
+
+      
+
+    
+    :type ResourceArns: list
+    :param ResourceArns: **[REQUIRED]** 
+
+      The ARNs of the resources to be removed from the group.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Succeeded': [
+                'string',
+            ],
+            'Failed': [
+                {
+                    'ResourceArn': 'string',
+                    'ErrorMessage': 'string',
+                    'ErrorCode': 'string'
+                },
+            ],
+            'Pending': [
+                {
+                    'ResourceArn': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Succeeded** *(list) --* 
+
+          A list of resources that were successfully removed from the group by this operation.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **Failed** *(list) --* 
+
+          A list of any resources that failed to be removed from the group by this operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource that failed to be added to or removed from a group.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of the resource that failed to be added or removed.
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message text associated with the failure.
+
+              
+            
+
+            - **ErrorCode** *(string) --* 
+
+              The error code associated with the failure.
+
+              
+        
+      
+        
+
+        - **Pending** *(list) --* 
+
+          A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the ``  ListGroupResources `` operation. After the resource is successfully removed, it no longer appears in the response.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that identifies a resource that is currently pending addition to the group as a member. Adding a resource to a resource group happens asynchronously as a background task and this one isn't completed yet.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The Amazon resource name (ARN) of the resource that's in a pending state.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: untag(**kwargs)
+
+    
+
+    Deletes tags from a specified resource group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:Untag``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/Untag>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag(
+          Arn='string',
+          Keys=[
+              'string',
+          ]
+      )
+    :type Arn: string
+    :param Arn: **[REQUIRED]** 
+
+      The ARN of the resource group from which to remove tags. The command removed both the specified keys and any values associated with those keys.
+
+      
+
+    
+    :type Keys: list
+    :param Keys: **[REQUIRED]** 
+
+      The keys of the tags to be removed.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Keys': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Arn** *(string) --* 
+
+          The ARN of the resource group from which tags have been removed.
+
+          
+        
+
+        - **Keys** *(list) --* 
+
+          The keys of the tags that were removed.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: update_group(**kwargs)
+
+    
+
+    Updates the description for an existing group. You cannot update the name of a resource group.
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:UpdateGroup``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_group(
+          GroupName='string',
+          Group='string',
+          Description='string'
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      Don't use this parameter. Use ``Group`` instead.
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group to modify.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The new description that you want to update the resource group with. Descriptions can contain letters, numbers, hyphens, underscores, periods, and spaces.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Group': {
+                'GroupArn': 'string',
+                'Name': 'string',
+                'Description': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Group** *(dict) --* 
+
+          The update description of the resource group.
+
+          
+          
+
+          - **GroupArn** *(string) --* 
+
+            The ARN of the resource group.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the resource group.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the resource group.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+  .. py:method:: update_group_query(**kwargs)
+
+    
+
+    Updates the resource query of a group. For more information about resource queries, see `Create a tag-based group in Resource Groups <https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag>`__ .
+
+     
+
+     **Minimum permissions**  
+
+     
+
+    To run this command, you must have the following permissions:
+
+     
+
+     
+    * ``resource-groups:UpdateGroupQuery``   
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQuery>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_group_query(
+          GroupName='string',
+          Group='string',
+          ResourceQuery={
+              'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+              'Query': 'string'
+          }
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      Don't use this parameter. Use ``Group`` instead.
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group to query.
+
+      
+
+    
+    :type ResourceQuery: dict
+    :param ResourceQuery: **[REQUIRED]** 
+
+      The resource query to determine which AWS resources are members of this resource group.
+
+       
+
+      .. note::
+
+         
+
+        A resource group can contain either a ``Configuration`` or a ``ResourceQuery`` , but not both.
+
+         
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of the query. You can use the following values:
+
+         
+
+         
+        * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+         
+        * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+           
+          * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+           
+          * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+           
+
+         
+
+        The query would not include the following items in the results, however. 
+
+         
+
+           
+          * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+           
+          * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+           
+
+         
+         
+
+        
+
+      
+      - **Query** *(string) --* **[REQUIRED]** 
+
+        The query that defines a group or a search.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupQuery': {
+                'GroupName': 'string',
+                'ResourceQuery': {
+                    'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+                    'Query': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupQuery** *(dict) --* 
+
+          The updated resource query associated with the resource group after the update.
+
+          
+          
+
+          - **GroupName** *(string) --* 
+
+            The name of the resource group that is associated with the specified resource query.
+
+            
+          
+
+          - **ResourceQuery** *(dict) --* 
+
+            The resource query that determines which AWS resources are members of the associated resource group.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of the query. You can use the following values:
+
+               
+
+               
+              * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+               
+              * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+                 
+                * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+                 
+                * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+                 
+
+               
+
+              The query would not include the following items in the results, however. 
+
+               
+
+                 
+                * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+                 
+                * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+                 
+
+               
+               
+
+              
+            
+
+            - **Query** *(string) --* 
+
+              The query that defines a group or a search.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.MethodNotAllowedException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ResourceGroups.Client.exceptions.InternalServerErrorException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`ResourceGroups.Paginator.ListGroupResources`
+
+
+* :py:class:`ResourceGroups.Paginator.ListGroups`
+
+
+* :py:class:`ResourceGroups.Paginator.SearchResources`
+
+
+
+.. py:class:: ResourceGroups.Paginator.ListGroupResources
+
+  ::
+
+    
+    paginator = client.get_paginator('list_group_resources')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ResourceGroups.Client.list_group_resources`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          GroupName='string',
+          Group='string',
+          Filters=[
+              {
+                  'Name': 'resource-type',
+                  'Values': [
+                      'string',
+                  ]
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type GroupName: string
+    :param GroupName: 
+
+      .. warning::
+
+         
+
+         * **Deprecated - don't use this parameter. Use the ``Group`` request field instead.** *  
+
+         
+
+      
+
+    
+    :type Group: string
+    :param Group: 
+
+      The name or the ARN of the resource group
+
+      
+
+    
+    :type Filters: list
+    :param Filters: 
+
+      Filters, formatted as  ResourceFilter objects, that you want to apply to a ``ListGroupResources`` operation. Filters the results to include only those of the specified resource types.
+
+       
+
+       
+      * ``resource-type`` - Filter resources by their type. Specify up to five resource types in the format ``AWS::ServiceCode::ResourceType`` . For example, ``AWS::EC2::Instance`` , or ``AWS::S3::Bucket`` .  
+       
+
+       
+
+      When you specify a ``resource-type`` filter for ``ListGroupResources`` , AWS Resource Groups validates your filter resource types against the types that are defined in the query associated with the group. For example, if a group contains only S3 buckets because its query specifies only that resource type, but your ``resource-type`` filter includes EC2 instances, AWS Resource Groups does not filter for EC2 instances. In this case, a ``ListGroupResources`` request returns a ``BadRequestException`` error with a message similar to the following:
+
+       
+
+       ``The resource types specified as filters in the request are not valid.``  
+
+       
+
+      The error includes a list of resource types that failed the validation because they are not part of the query associated with the group. This validation doesn't occur when the group query specifies ``AWS::AllSupported`` , because a group based on such a query can contain any of the allowed resource types for the query type (tag-based or AWS CloudFormation stack-based queries).
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter name and value pair that is used to obtain more specific results from a list of resources.
+
+        
+
+      
+        - **Name** *(string) --* **[REQUIRED]** 
+
+          The name of the filter. Filter names are case-sensitive.
+
+          
+
+        
+        - **Values** *(list) --* **[REQUIRED]** 
+
+          One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Resources': [
+                {
+                    'Identifier': {
+                        'ResourceArn': 'string',
+                        'ResourceType': 'string'
+                    },
+                    'Status': {
+                        'Name': 'PENDING'
+                    }
+                },
+            ],
+            'ResourceIdentifiers': [
+                {
+                    'ResourceArn': 'string',
+                    'ResourceType': 'string'
+                },
+            ],
+            'QueryErrors': [
+                {
+                    'ErrorCode': 'CLOUDFORMATION_STACK_INACTIVE'|'CLOUDFORMATION_STACK_NOT_EXISTING',
+                    'Message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Resources** *(list) --* 
+
+          An array of resources from which you can determine each resource's identity, type, and group membership status.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure returned by the  ListGroupResources operation that contains identity and group membership status information for one of the resources in the group.
+
+            
+            
+
+            - **Identifier** *(dict) --* 
+
+              A structure that contains the ARN of a resource and its resource type.
+
+              
+              
+
+              - **ResourceArn** *(string) --* 
+
+                The ARN of a resource.
+
+                
+              
+
+              - **ResourceType** *(string) --* 
+
+                The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+                
+          
+            
+
+            - **Status** *(dict) --* 
+
+              A structure that contains the status of this resource's membership in the group.
+
+               
+
+              .. note::
+
+                 
+
+                This field is present in the response only if the group is of type ``AWS::EC2::HostManagement`` .
+
+                 
+
+              
+              
+
+              - **Name** *(string) --* 
+
+                The current status.
+
+                
+          
+        
+      
+        
+
+        - **ResourceIdentifiers** *(list) --* 
+
+          .. warning::
+
+             
+
+             ** *Deprecated - don't use this parameter. Use the ``Resources`` response field instead.* **  
+
+             
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that contains the ARN of a resource and its resource type.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of a resource.
+
+              
+            
+
+            - **ResourceType** *(string) --* 
+
+              The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+              
+        
+      
+        
+
+        - **QueryErrors** *(list) --* 
+
+          A list of ``QueryError`` objects. Each error is an object that contains ``ErrorCode`` and ``Message`` structures. Possible values for ``ErrorCode`` are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            A two-part error structure that can occur in ``ListGroupResources`` or ``SearchResources`` operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A ``QueryError`` occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Possible values are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              A message that explains the ``ErrorCode`` value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For ``CLOUDFORMATION_STACK_INACTIVE`` , the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as ``CREATE_FAILED`` .
+
+              
+        
+      
+    
+
+.. py:class:: ResourceGroups.Paginator.ListGroups
+
+  ::
+
+    
+    paginator = client.get_paginator('list_groups')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ResourceGroups.Client.list_groups`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          Filters=[
+              {
+                  'Name': 'resource-type'|'configuration-type',
+                  'Values': [
+                      'string',
+                  ]
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type Filters: list
+    :param Filters: 
+
+      Filters, formatted as  GroupFilter objects, that you want to apply to a ``ListGroups`` operation.
+
+       
+
+       
+      * ``resource-type`` - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format ``AWS::*ServiceCode* ::*ResourceType* `` . For example, ``AWS::EC2::Instance`` , or ``AWS::S3::Bucket`` . 
+       
+      * ``configuration-type`` - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are: 
+
+         
+        * ``AWS:EC2::CapacityReservationPool``   
+         
+        * ``AWS:EC2::HostManagement``   
+         
+
+       
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter collection that you can use to restrict the results from a ``List`` operation to only those you want to include.
+
+        
+
+      
+        - **Name** *(string) --* **[REQUIRED]** 
+
+          The name of the filter. Filter names are case-sensitive.
+
+          
+
+        
+        - **Values** *(list) --* **[REQUIRED]** 
+
+          One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupIdentifiers': [
+                {
+                    'GroupName': 'string',
+                    'GroupArn': 'string'
+                },
+            ],
+            'Groups': [
+                {
+                    'GroupArn': 'string',
+                    'Name': 'string',
+                    'Description': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupIdentifiers** *(list) --* 
+
+          A list of  GroupIdentifier objects. Each identifier is an object that contains both the ``Name`` and the ``GroupArn`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            The unique identifiers for a resource group.
+
+            
+            
+
+            - **GroupName** *(string) --* 
+
+              The name of the resource group.
+
+              
+            
+
+            - **GroupArn** *(string) --* 
+
+              The ARN of the resource group.
+
+              
+        
+      
+        
+
+        - **Groups** *(list) --* 
+
+          .. warning::
+
+             
+
+             * **Deprecated - don't use this field. Use the ``GroupIdentifiers`` response field instead.** *  
+
+             
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:
+
+             
+
+             
+            *  ResourceQuery - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group, or later by using the  PutGroupConfiguration operation. 
+             
+            *  GroupConfiguration - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group. 
+             
+
+            
+            
+
+            - **GroupArn** *(string) --* 
+
+              The ARN of the resource group.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the resource group.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the resource group.
+
+              
+        
+      
+    
+
+.. py:class:: ResourceGroups.Paginator.SearchResources
+
+  ::
+
+    
+    paginator = client.get_paginator('search_resources')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ResourceGroups.Client.search_resources`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ResourceQuery={
+              'Type': 'TAG_FILTERS_1_0'|'CLOUDFORMATION_STACK_1_0',
+              'Query': 'string'
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ResourceQuery: dict
+    :param ResourceQuery: **[REQUIRED]** 
+
+      The search query, using the same formats that are supported for resource group definition. For more information, see  CreateGroup .
+
+      
+
+    
+      - **Type** *(string) --* **[REQUIRED]** 
+
+        The type of the query. You can use the following values:
+
+         
+
+         
+        * *``CLOUDFORMATION_STACK_1_0:`` * Specifies that the ``Query`` contains an ARN for a CloudFormation stack. 
+         
+        * *``TAG_FILTERS_1_0:`` * Specifies that the ``Query`` parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the `` `GetResources <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html>`__ `` operation, but uses only the `` `ResourceTypeFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters>`__ `` and `` `TagFilters <https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-TagFiltersTagFilters>`__ `` fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches *any* of the specified values. For example, consider the following sample query for resources that have two tags, ``Stage`` and ``Version`` , with two values each:  ``[{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]``   The results of this query could include the following. 
+
+           
+          * An EC2 instance that has the following two tags: ``{"Stage":"Deploy"}`` , and ``{"Version":"2"}``   
+           
+          * An S3 bucket that has the following two tags: ``{"Stage":"Test"}`` , and ``{"Version":"1"}``   
+           
+
+         
+
+        The query would not include the following items in the results, however. 
+
+         
+
+           
+          * An EC2 instance that has only the following tag: ``{"Stage":"Deploy"}`` . The instance does not have **all** of the tag keys specified in the filter, so it is excluded from the results. 
+           
+          * An RDS database that has the following two tags: ``{"Stage":"Archived"}`` and ``{"Version":"4"}``   The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter. 
+           
+
+         
+         
+
+        
+
+      
+      - **Query** *(string) --* **[REQUIRED]** 
+
+        The query that defines a group or a search.
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceIdentifiers': [
+                {
+                    'ResourceArn': 'string',
+                    'ResourceType': 'string'
+                },
+            ],
+            'QueryErrors': [
+                {
+                    'ErrorCode': 'CLOUDFORMATION_STACK_INACTIVE'|'CLOUDFORMATION_STACK_NOT_EXISTING',
+                    'Message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceIdentifiers** *(list) --* 
+
+          The ARNs and resource types of resources that are members of the group that you specified.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that contains the ARN of a resource and its resource type.
+
+            
+            
+
+            - **ResourceArn** *(string) --* 
+
+              The ARN of a resource.
+
+              
+            
+
+            - **ResourceType** *(string) --* 
+
+              The resource type of a resource, such as ``AWS::EC2::Instance`` .
+
+              
+        
+      
+        
+
+        - **QueryErrors** *(list) --* 
+
+          A list of ``QueryError`` objects. Each error is an object that contains ``ErrorCode`` and ``Message`` structures. Possible values for ``ErrorCode`` are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+          
+          
+
+          - *(dict) --* 
+
+            A two-part error structure that can occur in ``ListGroupResources`` or ``SearchResources`` operations on CloudFormation stack-based queries. The error occurs if the CloudFormation stack on which the query is based either does not exist, or has a status that renders the stack inactive. A ``QueryError`` occurrence does not necessarily mean that AWS Resource Groups could not complete the operation, but the resulting group might have no member resources.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Possible values are ``CLOUDFORMATION_STACK_INACTIVE`` and ``CLOUDFORMATION_STACK_NOT_EXISTING`` .
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              A message that explains the ``ErrorCode`` value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For ``CLOUDFORMATION_STACK_INACTIVE`` , the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as ``CREATE_FAILED`` .
+
+              
+        
+      
+    

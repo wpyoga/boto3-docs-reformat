@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>File transfer configuration &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon S3 examples" href="s3-examples.html" />
+    <link rel="next" title="Presigned URLs" href="s3-presigned-urls.html" />
+    <link rel="prev" title="Downloading files" href="s3-example-download-file.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-presigned-urls.html" title="Presigned URLs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="s3-example-download-file.html" title="Downloading files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="s3-examples.html" accesskey="U">Amazon S3 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="s3-examples.html">Amazon S3 examples</a></li>
+              
+              <li>File transfer configuration</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="file-transfer-configuration">
+<h1>File transfer configuration<a class="headerlink" href="#file-transfer-configuration" title="Permalink to this headline">¶</a></h1>
+<p>When uploading, downloading, or copying a file or S3 object, the AWS SDK for
+Python automatically manages retries and multipart and non-multipart transfers.</p>
+<p>The management operations are performed by using reasonable default settings
+that are well-suited for most scenarios. To handle a special case, the default
+settings can be configured to meet requirements.</p>
+<p>Configuration settings are stored in a
+<a class="reference internal" href="../reference/customizations/s3.html#boto3.s3.transfer.TransferConfig" title="boto3.s3.transfer.TransferConfig"><tt class="xref py py-class docutils literal"><span class="pre">boto3.s3.transfer.TransferConfig</span></tt></a> object. The object is passed to
+a transfer method (<tt class="docutils literal"><span class="pre">upload_file</span></tt>, <tt class="docutils literal"><span class="pre">download_file</span></tt>, etc.) in the <tt class="docutils literal"><span class="pre">Config=</span></tt>
+parameter.</p>
+<p>The remaining sections demonstrate how to configure various transfer operations
+with the <tt class="docutils literal"><span class="pre">TransferConfig</span></tt> object.</p>
+<div class="section" id="multipart-transfers">
+<h2>Multipart transfers<a class="headerlink" href="#multipart-transfers" title="Permalink to this headline">¶</a></h2>
+<p>Multipart transfers occur when the file size exceeds the value of the
+<tt class="docutils literal"><span class="pre">multipart_threshold</span></tt> attribute.</p>
+<p>The following example configures an <tt class="docutils literal"><span class="pre">upload_file</span></tt> transfer to be multipart
+if the file size is larger than the threshold specified in the
+<tt class="docutils literal"><span class="pre">TransferConfig</span></tt> object.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">boto3.s3.transfer</span> <span class="kn">import</span> <span class="n">TransferConfig</span>
+
+<span class="c1"># Set the desired multipart threshold value (5GB)</span>
+<span class="n">GB</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">TransferConfig</span><span class="p">(</span><span class="n">multipart_threshold</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="n">GB</span><span class="p">)</span>
+
+<span class="c1"># Perform the transfer</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s1">&#39;FILE_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;OBJECT_NAME&#39;</span><span class="p">,</span> <span class="n">Config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="concurrent-transfer-operations">
+<h2>Concurrent transfer operations<a class="headerlink" href="#concurrent-transfer-operations" title="Permalink to this headline">¶</a></h2>
+<p>The maximum number of concurrent S3 API transfer operations can be tuned to
+adjust for the connection speed. Set the <tt class="docutils literal"><span class="pre">max_concurrency</span></tt> attribute to
+increase or decrease bandwidth usage.</p>
+<p>The attribute's default setting is 10. To reduce bandwidth usage, reduce the
+value; to increase usage, increase it.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># To consume less downstream bandwidth, decrease the maximum concurrency</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">TransferConfig</span><span class="p">(</span><span class="n">max_concurrency</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Download an S3 object</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;OBJECT_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;FILE_NAME&#39;</span><span class="p">,</span> <span class="n">Config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="threads">
+<h2>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
+<p>Transfer operations use threads to implement concurrency. Thread use can be
+disabled by setting the <tt class="docutils literal"><span class="pre">use_threads</span></tt> attribute to <tt class="docutils literal"><span class="pre">False.</span></tt></p>
+<p>If thread use is disabled, transfer concurrency does not occur. Accordingly,
+the value of the <tt class="docutils literal"><span class="pre">max_concurrency</span></tt> attribute is ignored.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Disable thread use/transfer concurrency</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">TransferConfig</span><span class="p">(</span><span class="n">use_threads</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;BUCKET_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;OBJECT_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;FILE_NAME&#39;</span><span class="p">,</span> <span class="n">Config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="s3-example-download-file.html" title="previous chapter (use the left arrow)">Downloading files</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="s3-presigned-urls.html" title="next chapter (use the right arrow)">Presigned URLs</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-presigned-urls.html" title="Presigned URLs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="s3-example-download-file.html" title="Downloading files"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="s3-examples.html" >Amazon S3 examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

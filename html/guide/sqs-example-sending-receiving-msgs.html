@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Sending and receiving messages in Amazon SQS &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Amazon SQS examples" href="sqs-examples.html" />
+    <link rel="next" title="Managing visibility timeout in Amazon SQS" href="sqs-example-visibility-timeout.html" />
+    <link rel="prev" title="Using queues in Amazon SQS" href="sqs-example-using-queues.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sqs-example-visibility-timeout.html" title="Managing visibility timeout in Amazon SQS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sqs-example-using-queues.html" title="Using queues in Amazon SQS"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="sqs-examples.html" accesskey="U">Amazon SQS examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="sqs-examples.html">Amazon SQS examples</a></li>
+              
+              <li>Sending and receiving messages in Amazon SQS</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="sending-and-receiving-messages-in-amazon-sqs">
+<span id="aws-boto3-sqs-messages"></span><h1>Sending and receiving messages in Amazon SQS<a class="headerlink" href="#sending-and-receiving-messages-in-amazon-sqs" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to send, receive, and delete messages in a queue.</p>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>In this example, Python code is used to send and receive messages. The code uses the AWS SDK for Python
+to send and receive messages by using these methods of the AWS.SQS client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.send_message">send_message</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.receive_message">receive_message</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.delete_message">delete_message</a>.</li>
+</ul>
+<p>For more information about Amazon SQS messages, see
+<a class="reference external" href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-send-message.html">Sending a Message to an Amazon SQS Queue</a>
+and <a class="reference external" href="http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-receive-delete-message.html">Receiving and Deleting a Message from an Amazon SQS Queue</a>
+in the <em>Amazon Simple Queue Service Developer Guide</em>.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first complete these tasks:</p>
+<ul class="simple">
+<li>Create an Amazon SQS queue. For an example of creating an Amazon SQS
+queue, see <a class="reference internal" href="sqs-example-using-queues.html#aws-boto3-sqs-create-queue"><em>Create a queue</em></a>.</li>
+</ul>
+</div>
+<div class="section" id="send-a-message-to-a-queue">
+<span id="aws-boto3-sqs-send-message"></span><h2>Send a message to a queue<a class="headerlink" href="#send-a-message-to-a-queue" title="Permalink to this headline">¶</a></h2>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Send a message to a queue using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.send_message">send_message</a>.</li>
+</ul>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SQS client</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="n">queue_url</span> <span class="o">=</span> <span class="s1">&#39;SQS_QUEUE_URL&#39;</span>
+
+<span class="c1"># Send message to SQS queue</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span>
+    <span class="n">QueueUrl</span><span class="o">=</span><span class="n">queue_url</span><span class="p">,</span>
+    <span class="n">DelaySeconds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">MessageAttributes</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;StringValue&#39;</span><span class="p">:</span> <span class="s1">&#39;The Whistler&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="s1">&#39;String&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;StringValue&#39;</span><span class="p">:</span> <span class="s1">&#39;John Grisham&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;WeeksOn&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;DataType&#39;</span><span class="p">:</span> <span class="s1">&#39;Number&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;StringValue&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">MessageBody</span><span class="o">=</span><span class="p">(</span>
+        <span class="s1">&#39;Information about current NY Times fiction bestseller for &#39;</span>
+        <span class="s1">&#39;week of 12/11/2016.&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;MessageId&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="receive-and-delete-messages-from-a-queue">
+<h2>Receive and delete messages from a queue<a class="headerlink" href="#receive-and-delete-messages-from-a-queue" title="Permalink to this headline">¶</a></h2>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Receive a message from a queue using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.receive_message">receive_message</a>.</li>
+<li>Delete a message from a queue using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sqs.html#SQS.Client.delete_message">delete_message</a>.</li>
+</ul>
+<div class="section" id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create SQS client</span>
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="n">queue_url</span> <span class="o">=</span> <span class="s1">&#39;SQS_QUEUE_URL&#39;</span>
+
+<span class="c1"># Receive message from SQS queue</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">sqs</span><span class="o">.</span><span class="n">receive_message</span><span class="p">(</span>
+    <span class="n">QueueUrl</span><span class="o">=</span><span class="n">queue_url</span><span class="p">,</span>
+    <span class="n">AttributeNames</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;SentTimestamp&#39;</span>
+    <span class="p">],</span>
+    <span class="n">MaxNumberOfMessages</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">MessageAttributeNames</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;All&#39;</span>
+    <span class="p">],</span>
+    <span class="n">VisibilityTimeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">WaitTimeSeconds</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Messages&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">receipt_handle</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;ReceiptHandle&#39;</span><span class="p">]</span>
+
+<span class="c1"># Delete received message from queue</span>
+<span class="n">sqs</span><span class="o">.</span><span class="n">delete_message</span><span class="p">(</span>
+    <span class="n">QueueUrl</span><span class="o">=</span><span class="n">queue_url</span><span class="p">,</span>
+    <span class="n">ReceiptHandle</span><span class="o">=</span><span class="n">receipt_handle</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Received and deleted message: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="sqs-example-using-queues.html" title="previous chapter (use the left arrow)">Using queues in Amazon SQS</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="sqs-example-visibility-timeout.html" title="next chapter (use the right arrow)">Managing visibility timeout in Amazon SQS</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sqs-example-visibility-timeout.html" title="Managing visibility timeout in Amazon SQS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sqs-example-using-queues.html" title="Using queues in Amazon SQS"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="sqs-examples.html" >Amazon SQS examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

@@ -1,0 +1,837 @@
+
+
+*****************
+PrometheusService
+*****************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: PrometheusService.Client
+
+  A low-level client representing Amazon Prometheus Service
+  
+
+  Amazon Managed Service for Prometheus
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('amp')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~PrometheusService.Client.can_paginate`
+
+  
+  *   :py:meth:`~PrometheusService.Client.create_workspace`
+
+  
+  *   :py:meth:`~PrometheusService.Client.delete_workspace`
+
+  
+  *   :py:meth:`~PrometheusService.Client.describe_workspace`
+
+  
+  *   :py:meth:`~PrometheusService.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~PrometheusService.Client.get_paginator`
+
+  
+  *   :py:meth:`~PrometheusService.Client.get_waiter`
+
+  
+  *   :py:meth:`~PrometheusService.Client.list_workspaces`
+
+  
+  *   :py:meth:`~PrometheusService.Client.update_workspace_alias`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_workspace(**kwargs)
+
+    
+
+    Creates a new AMP workspace.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateWorkspace>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_workspace(
+          alias='string',
+          clientToken='string'
+      )
+    :type alias: string
+    :param alias: 
+
+      An optional user-assigned alias for this workspace. This alias is for user reference and does not need to be unique.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string',
+            'status': {
+                'statusCode': 'CREATING'|'ACTIVE'|'UPDATING'|'DELETING'|'CREATION_FAILED'
+            },
+            'workspaceId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Represents the output of a CreateWorkspace operation.
+
+        
+        
+
+        - **arn** *(string) --* 
+
+          The ARN of the workspace that was just created.
+
+          
+        
+
+        - **status** *(dict) --* 
+
+          The status of the workspace that was just created (usually CREATING).
+
+          
+          
+
+          - **statusCode** *(string) --* 
+
+            Status code of this workspace.
+
+            
+      
+        
+
+        - **workspaceId** *(string) --* 
+
+          The generated ID of the workspace that was just created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: delete_workspace(**kwargs)
+
+    
+
+    Deletes an AMP workspace.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DeleteWorkspace>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_workspace(
+          clientToken='string',
+          workspaceId='string'
+      )
+    :type clientToken: string
+    :param clientToken: 
+
+      Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type workspaceId: string
+    :param workspaceId: **[REQUIRED]** 
+
+      The ID of the workspace to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_workspace(**kwargs)
+
+    
+
+    Describes an existing AMP workspace.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/DescribeWorkspace>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_workspace(
+          workspaceId='string'
+      )
+    :type workspaceId: string
+    :param workspaceId: **[REQUIRED]** 
+
+      The ID of the workspace to describe.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workspace': {
+                'alias': 'string',
+                'arn': 'string',
+                'createdAt': datetime(2015, 1, 1),
+                'prometheusEndpoint': 'string',
+                'status': {
+                    'statusCode': 'CREATING'|'ACTIVE'|'UPDATING'|'DELETING'|'CREATION_FAILED'
+                },
+                'workspaceId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Represents the output of a DescribeWorkspace operation.
+
+        
+        
+
+        - **workspace** *(dict) --* 
+
+          The properties of the selected workspace.
+
+          
+          
+
+          - **alias** *(string) --* 
+
+            Alias of this workspace.
+
+            
+          
+
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of this workspace.
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The time when the workspace was created.
+
+            
+          
+
+          - **prometheusEndpoint** *(string) --* 
+
+            Prometheus endpoint URI.
+
+            
+          
+
+          - **status** *(dict) --* 
+
+            The status of this workspace.
+
+            
+            
+
+            - **statusCode** *(string) --* 
+
+              Status code of this workspace.
+
+              
+        
+          
+
+          - **workspaceId** *(string) --* 
+
+            Unique string identifying this workspace.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_workspaces(**kwargs)
+
+    
+
+    Lists all AMP workspaces, including workspaces being created or deleted.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspaces>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_workspaces(
+          alias='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type alias: string
+    :param alias: 
+
+      Optional filter for workspace alias. Only the workspaces with aliases that begin with this value will be returned.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum results to return in response (default=100, maximum=1000).
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'workspaces': [
+                {
+                    'alias': 'string',
+                    'arn': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'status': {
+                        'statusCode': 'CREATING'|'ACTIVE'|'UPDATING'|'DELETING'|'CREATION_FAILED'
+                    },
+                    'workspaceId': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Represents the output of a ListWorkspaces operation.
+
+        
+        
+
+        - **nextToken** *(string) --* 
+
+          Pagination token to use when requesting the next page in this list.
+
+          
+        
+
+        - **workspaces** *(list) --* 
+
+          The list of existing workspaces, including those undergoing creation or deletion.
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents a summary of the properties of a workspace.
+
+            
+            
+
+            - **alias** *(string) --* 
+
+              Alias of this workspace.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The AmazonResourceName of this workspace.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time when the workspace was created.
+
+              
+            
+
+            - **status** *(dict) --* 
+
+              The status of this workspace.
+
+              
+              
+
+              - **statusCode** *(string) --* 
+
+                Status code of this workspace.
+
+                
+          
+            
+
+            - **workspaceId** *(string) --* 
+
+              Unique string identifying this workspace.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_workspace_alias(**kwargs)
+
+    
+
+    Updates an AMP workspace alias.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateWorkspaceAlias>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_workspace_alias(
+          alias='string',
+          clientToken='string',
+          workspaceId='string'
+      )
+    :type alias: string
+    :param alias: 
+
+      The new alias of the workspace.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type workspaceId: string
+    :param workspaceId: **[REQUIRED]** 
+
+      The ID of the workspace being updated.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`PrometheusService.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`PrometheusService.Paginator.ListWorkspaces`
+
+
+
+.. py:class:: PrometheusService.Paginator.ListWorkspaces
+
+  ::
+
+    
+    paginator = client.get_paginator('list_workspaces')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`PrometheusService.Client.list_workspaces`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListWorkspaces>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          alias='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type alias: string
+    :param alias: 
+
+      Optional filter for workspace alias. Only the workspaces with aliases that begin with this value will be returned.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workspaces': [
+                {
+                    'alias': 'string',
+                    'arn': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'status': {
+                        'statusCode': 'CREATING'|'ACTIVE'|'UPDATING'|'DELETING'|'CREATION_FAILED'
+                    },
+                    'workspaceId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Represents the output of a ListWorkspaces operation.
+
+        
+        
+
+        - **workspaces** *(list) --* 
+
+          The list of existing workspaces, including those undergoing creation or deletion.
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents a summary of the properties of a workspace.
+
+            
+            
+
+            - **alias** *(string) --* 
+
+              Alias of this workspace.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The AmazonResourceName of this workspace.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time when the workspace was created.
+
+              
+            
+
+            - **status** *(dict) --* 
+
+              The status of this workspace.
+
+              
+              
+
+              - **statusCode** *(string) --* 
+
+                Status code of this workspace.
+
+                
+          
+            
+
+            - **workspaceId** *(string) --* 
+
+              Unique string identifying this workspace.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

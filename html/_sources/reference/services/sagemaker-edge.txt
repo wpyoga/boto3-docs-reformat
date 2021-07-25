@@ -1,0 +1,414 @@
+
+
+********************
+SagemakerEdgeManager
+********************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SagemakerEdgeManager.Client
+
+  A low-level client representing Amazon Sagemaker Edge Manager
+  
+
+  SageMaker Edge Manager dataplane service for communicating with active agents.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('sagemaker-edge')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.can_paginate`
+
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.get_device_registration`
+
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.get_paginator`
+
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.get_waiter`
+
+  
+  *   :py:meth:`~SagemakerEdgeManager.Client.send_heartbeat`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_device_registration(**kwargs)
+
+    
+
+    Use to check if a device is registered with SageMaker Edge Manager.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/GetDeviceRegistration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_device_registration(
+          DeviceName='string',
+          DeviceFleetName='string'
+      )
+    :type DeviceName: string
+    :param DeviceName: **[REQUIRED]** 
+
+      The unique name of the device you want to get the registration status from.
+
+      
+
+    
+    :type DeviceFleetName: string
+    :param DeviceFleetName: **[REQUIRED]** 
+
+      The name of the fleet that the device belongs to.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DeviceRegistration': 'string',
+            'CacheTTL': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DeviceRegistration** *(string) --* 
+
+          Describes if the device is currently registered with SageMaker Edge Manager.
+
+          
+        
+
+        - **CacheTTL** *(string) --* 
+
+          The amount of time, in seconds, that the registration status is stored on the device’s cache before it is refreshed.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SagemakerEdgeManager.Client.exceptions.InternalServiceException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: send_heartbeat(**kwargs)
+
+    
+
+    Use to get the current status of devices registered on SageMaker Edge Manager.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-edge-2020-09-23/SendHeartbeat>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.send_heartbeat(
+          AgentMetrics=[
+              {
+                  'Dimension': 'string',
+                  'MetricName': 'string',
+                  'Value': 123.0,
+                  'Timestamp': datetime(2015, 1, 1)
+              },
+          ],
+          Models=[
+              {
+                  'ModelName': 'string',
+                  'ModelVersion': 'string',
+                  'LatestSampleTime': datetime(2015, 1, 1),
+                  'LatestInference': datetime(2015, 1, 1),
+                  'ModelMetrics': [
+                      {
+                          'Dimension': 'string',
+                          'MetricName': 'string',
+                          'Value': 123.0,
+                          'Timestamp': datetime(2015, 1, 1)
+                      },
+                  ]
+              },
+          ],
+          AgentVersion='string',
+          DeviceName='string',
+          DeviceFleetName='string'
+      )
+    :type AgentMetrics: list
+    :param AgentMetrics: 
+
+      For internal use. Returns a list of SageMaker Edge Manager agent operating metrics.
+
+      
+
+    
+      - *(dict) --* 
+
+        Information required for edge device metrics.
+
+        
+
+      
+        - **Dimension** *(string) --* 
+
+          The dimension of metrics published.
+
+          
+
+        
+        - **MetricName** *(string) --* 
+
+          Returns the name of the metric.
+
+          
+
+        
+        - **Value** *(float) --* 
+
+          Returns the value of the metric.
+
+          
+
+        
+        - **Timestamp** *(datetime) --* 
+
+          Timestamp of when the metric was requested.
+
+          
+
+        
+      
+  
+    :type Models: list
+    :param Models: 
+
+      Returns a list of models deployed on the the device.
+
+      
+
+    
+      - *(dict) --* 
+
+        Information about a model deployed on an edge device that is registered with SageMaker Edge Manager.
+
+        
+
+      
+        - **ModelName** *(string) --* 
+
+          The name of the model.
+
+          
+
+        
+        - **ModelVersion** *(string) --* 
+
+          The version of the model.
+
+          
+
+        
+        - **LatestSampleTime** *(datetime) --* 
+
+          The timestamp of the last data sample taken.
+
+          
+
+        
+        - **LatestInference** *(datetime) --* 
+
+          The timestamp of the last inference that was made.
+
+          
+
+        
+        - **ModelMetrics** *(list) --* 
+
+          Information required for model metrics.
+
+          
+
+        
+          - *(dict) --* 
+
+            Information required for edge device metrics.
+
+            
+
+          
+            - **Dimension** *(string) --* 
+
+              The dimension of metrics published.
+
+              
+
+            
+            - **MetricName** *(string) --* 
+
+              Returns the name of the metric.
+
+              
+
+            
+            - **Value** *(float) --* 
+
+              Returns the value of the metric.
+
+              
+
+            
+            - **Timestamp** *(datetime) --* 
+
+              Timestamp of when the metric was requested.
+
+              
+
+            
+          
+      
+      
+  
+    :type AgentVersion: string
+    :param AgentVersion: **[REQUIRED]** 
+
+      Returns the version of the agent.
+
+      
+
+    
+    :type DeviceName: string
+    :param DeviceName: **[REQUIRED]** 
+
+      The unique name of the device.
+
+      
+
+    
+    :type DeviceFleetName: string
+    :param DeviceFleetName: **[REQUIRED]** 
+
+      The name of the fleet that the device belongs to.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`SagemakerEdgeManager.Client.exceptions.InternalServiceException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

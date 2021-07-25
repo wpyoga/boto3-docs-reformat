@@ -1,0 +1,4537 @@
+
+
+*************
+EMRContainers
+*************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: EMRContainers.Client
+
+  A low-level client representing Amazon EMR Containers
+  
+
+  Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications. For more information about Amazon EMR on EKS concepts and tasks, see `What is Amazon EMR on EKS <https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html>`__ .
+
+   
+
+   *Amazon EMR containers* is the API name for Amazon EMR on EKS. The ``emr-containers`` prefix is used in the following scenarios: 
+
+   
+
+   
+  * It is the prefix in the CLI commands for Amazon EMR on EKS. For example, ``aws emr-containers start-job-run`` . 
+   
+  * It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, ``"Action": [ "emr-containers:StartJobRun"]`` . For more information, see `Policy actions for Amazon EMR on EKS <https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions>`__ . 
+   
+  * It is the prefix used in Amazon EMR on EKS service endpoints. For example, ``emr-containers.us-east-2.amazonaws.com`` . For more information, see `Amazon EMR on EKS Service Endpoints <https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints>`__ . 
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('emr-containers')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~EMRContainers.Client.can_paginate`
+
+  
+  *   :py:meth:`~EMRContainers.Client.cancel_job_run`
+
+  
+  *   :py:meth:`~EMRContainers.Client.create_managed_endpoint`
+
+  
+  *   :py:meth:`~EMRContainers.Client.create_virtual_cluster`
+
+  
+  *   :py:meth:`~EMRContainers.Client.delete_managed_endpoint`
+
+  
+  *   :py:meth:`~EMRContainers.Client.delete_virtual_cluster`
+
+  
+  *   :py:meth:`~EMRContainers.Client.describe_job_run`
+
+  
+  *   :py:meth:`~EMRContainers.Client.describe_managed_endpoint`
+
+  
+  *   :py:meth:`~EMRContainers.Client.describe_virtual_cluster`
+
+  
+  *   :py:meth:`~EMRContainers.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~EMRContainers.Client.get_paginator`
+
+  
+  *   :py:meth:`~EMRContainers.Client.get_waiter`
+
+  
+  *   :py:meth:`~EMRContainers.Client.list_job_runs`
+
+  
+  *   :py:meth:`~EMRContainers.Client.list_managed_endpoints`
+
+  
+  *   :py:meth:`~EMRContainers.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~EMRContainers.Client.list_virtual_clusters`
+
+  
+  *   :py:meth:`~EMRContainers.Client.start_job_run`
+
+  
+  *   :py:meth:`~EMRContainers.Client.tag_resource`
+
+  
+  *   :py:meth:`~EMRContainers.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_job_run(**kwargs)
+
+    
+
+    Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CancelJobRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_job_run(
+          id='string',
+          virtualClusterId='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the job run to cancel.
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster for which the job run will be canceled.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string',
+            'virtualClusterId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          The output contains the ID of the cancelled job run.
+
+          
+        
+
+        - **virtualClusterId** *(string) --* 
+
+          The output contains the virtual cluster ID for which the job run is cancelled.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_managed_endpoint(**kwargs)
+
+    
+
+    Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateManagedEndpoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_managed_endpoint(
+          name='string',
+          virtualClusterId='string',
+          type='string',
+          releaseLabel='string',
+          executionRoleArn='string',
+          certificateArn='string',
+          configurationOverrides={
+              'applicationConfiguration': [
+                  {
+                      'classification': 'string',
+                      'properties': {
+                          'string': 'string'
+                      },
+                      'configurations': {'... recursive ...'}
+                  },
+              ],
+              'monitoringConfiguration': {
+                  'persistentAppUI': 'ENABLED'|'DISABLED',
+                  'cloudWatchMonitoringConfiguration': {
+                      'logGroupName': 'string',
+                      'logStreamNamePrefix': 'string'
+                  },
+                  's3MonitoringConfiguration': {
+                      'logUri': 'string'
+                  }
+              }
+          },
+          clientToken='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      The name of the managed endpoint.
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster for which a managed endpoint is created.
+
+      
+
+    
+    :type type: string
+    :param type: **[REQUIRED]** 
+
+      The type of the managed endpoint.
+
+      
+
+    
+    :type releaseLabel: string
+    :param releaseLabel: **[REQUIRED]** 
+
+      The Amazon EMR release version.
+
+      
+
+    
+    :type executionRoleArn: string
+    :param executionRoleArn: **[REQUIRED]** 
+
+      The ARN of the execution role.
+
+      
+
+    
+    :type certificateArn: string
+    :param certificateArn: **[REQUIRED]** 
+
+      The certificate ARN of the managed endpoint.
+
+      
+
+    
+    :type configurationOverrides: dict
+    :param configurationOverrides: 
+
+      The configuration settings that will be used to override existing configurations.
+
+      
+
+    
+      - **applicationConfiguration** *(list) --* 
+
+        The configurations for the application running by the job run. 
+
+        
+
+      
+        - *(dict) --* 
+
+          A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+          
+
+        
+          - **classification** *(string) --* **[REQUIRED]** 
+
+            The classification within a configuration.
+
+            
+
+          
+          - **properties** *(dict) --* 
+
+            A set of properties specified within a configuration classification.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **configurations** *(list) --* 
+
+            A list of additional configurations to apply within a configuration object.
+
+            
+
+          
+        
+    
+      - **monitoringConfiguration** *(dict) --* 
+
+        The configurations for monitoring.
+
+        
+
+      
+        - **persistentAppUI** *(string) --* 
+
+          Monitoring configurations for the persistent application UI. 
+
+          
+
+        
+        - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+          Monitoring configurations for CloudWatch.
+
+          
+
+        
+          - **logGroupName** *(string) --* **[REQUIRED]** 
+
+            The name of the log group for log publishing.
+
+            
+
+          
+          - **logStreamNamePrefix** *(string) --* 
+
+            The specified name prefix for log streams.
+
+            
+
+          
+        
+        - **s3MonitoringConfiguration** *(dict) --* 
+
+          Amazon S3 configuration for monitoring log publishing.
+
+          
+
+        
+          - **logUri** *(string) --* **[REQUIRED]** 
+
+            Amazon S3 destination URI for log publishing.
+
+            
+
+          
+        
+      
+    
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      The client idempotency token for this create call.
+
+      This field is autopopulated if not provided.
+
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags of the managed endpoint. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string',
+            'name': 'string',
+            'arn': 'string',
+            'virtualClusterId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          The output contains the ID of the managed endpoint.
+
+          
+        
+
+        - **name** *(string) --* 
+
+          The output contains the name of the managed endpoint.
+
+          
+        
+
+        - **arn** *(string) --* 
+
+          The output contains the ARN of the managed endpoint.
+
+          
+        
+
+        - **virtualClusterId** *(string) --* 
+
+          The output contains the ID of the virtual cluster.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_virtual_cluster(**kwargs)
+
+    
+
+    Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateVirtualCluster>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_virtual_cluster(
+          name='string',
+          containerProvider={
+              'type': 'EKS',
+              'id': 'string',
+              'info': {
+                  'eksInfo': {
+                      'namespace': 'string'
+                  }
+              }
+          },
+          clientToken='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      The specified name of the virtual cluster.
+
+      
+
+    
+    :type containerProvider: dict
+    :param containerProvider: **[REQUIRED]** 
+
+      The container provider of the virtual cluster.
+
+      
+
+    
+      - **type** *(string) --* **[REQUIRED]** 
+
+        The type of the container provider. EKS is the only supported type as of now.
+
+        
+
+      
+      - **id** *(string) --* **[REQUIRED]** 
+
+        The ID of the container cluster.
+
+        
+
+      
+      - **info** *(dict) --* 
+
+        The information about the container cluster.
+
+        
+
+      
+        - **eksInfo** *(dict) --* 
+
+          The information about the EKS cluster.
+
+          
+
+        
+          - **namespace** *(string) --* 
+
+            The namespaces of the EKS cluster.
+
+            
+
+          
+        
+      
+    
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      The client token of the virtual cluster.
+
+      This field is autopopulated if not provided.
+
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags assigned to the virtual cluster.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string',
+            'name': 'string',
+            'arn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          This output contains the virtual cluster ID.
+
+          
+        
+
+        - **name** *(string) --* 
+
+          This output contains the name of the virtual cluster.
+
+          
+        
+
+        - **arn** *(string) --* 
+
+          This output contains the ARN of virtual cluster.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_managed_endpoint(**kwargs)
+
+    
+
+    Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteManagedEndpoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_managed_endpoint(
+          id='string',
+          virtualClusterId='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the managed endpoint.
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the endpoint's virtual cluster.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string',
+            'virtualClusterId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          The output displays the ID of the managed endpoint.
+
+          
+        
+
+        - **virtualClusterId** *(string) --* 
+
+          The output displays the ID of the endpoint's virtual cluster.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_virtual_cluster(**kwargs)
+
+    
+
+    Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DeleteVirtualCluster>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_virtual_cluster(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the virtual cluster that will be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          This output contains the ID of the virtual cluster that will be deleted. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_job_run(**kwargs)
+
+    
+
+    Displays detailed information about a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeJobRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_job_run(
+          id='string',
+          virtualClusterId='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the job run request. 
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster for which the job run is submitted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobRun': {
+                'id': 'string',
+                'name': 'string',
+                'virtualClusterId': 'string',
+                'arn': 'string',
+                'state': 'PENDING'|'SUBMITTED'|'RUNNING'|'FAILED'|'CANCELLED'|'CANCEL_PENDING'|'COMPLETED',
+                'clientToken': 'string',
+                'executionRoleArn': 'string',
+                'releaseLabel': 'string',
+                'configurationOverrides': {
+                    'applicationConfiguration': [
+                        {
+                            'classification': 'string',
+                            'properties': {
+                                'string': 'string'
+                            },
+                            'configurations': {'... recursive ...'}
+                        },
+                    ],
+                    'monitoringConfiguration': {
+                        'persistentAppUI': 'ENABLED'|'DISABLED',
+                        'cloudWatchMonitoringConfiguration': {
+                            'logGroupName': 'string',
+                            'logStreamNamePrefix': 'string'
+                        },
+                        's3MonitoringConfiguration': {
+                            'logUri': 'string'
+                        }
+                    }
+                },
+                'jobDriver': {
+                    'sparkSubmitJobDriver': {
+                        'entryPoint': 'string',
+                        'entryPointArguments': [
+                            'string',
+                        ],
+                        'sparkSubmitParameters': 'string'
+                    }
+                },
+                'createdAt': datetime(2015, 1, 1),
+                'createdBy': 'string',
+                'finishedAt': datetime(2015, 1, 1),
+                'stateDetails': 'string',
+                'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobRun** *(dict) --* 
+
+          The output displays information about a job run.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the job run.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the job run.
+
+            
+          
+
+          - **virtualClusterId** *(string) --* 
+
+            The ID of the job run's virtual cluster.
+
+            
+          
+
+          - **arn** *(string) --* 
+
+            The ARN of job run.
+
+            
+          
+
+          - **state** *(string) --* 
+
+            The state of the job run. 
+
+            
+          
+
+          - **clientToken** *(string) --* 
+
+            The client token used to start a job run.
+
+            
+          
+
+          - **executionRoleArn** *(string) --* 
+
+            The execution role ARN of the job run.
+
+            
+          
+
+          - **releaseLabel** *(string) --* 
+
+            The release version of Amazon EMR.
+
+            
+          
+
+          - **configurationOverrides** *(dict) --* 
+
+            The configuration settings that are used to override default configuration.
+
+            
+            
+
+            - **applicationConfiguration** *(list) --* 
+
+              The configurations for the application running by the job run. 
+
+              
+              
+
+              - *(dict) --* 
+
+                A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                
+                
+
+                - **classification** *(string) --* 
+
+                  The classification within a configuration.
+
+                  
+                
+
+                - **properties** *(dict) --* 
+
+                  A set of properties specified within a configuration classification.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **configurations** *(list) --* 
+
+                  A list of additional configurations to apply within a configuration object.
+
+                  
+            
+          
+            
+
+            - **monitoringConfiguration** *(dict) --* 
+
+              The configurations for monitoring.
+
+              
+              
+
+              - **persistentAppUI** *(string) --* 
+
+                Monitoring configurations for the persistent application UI. 
+
+                
+              
+
+              - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                Monitoring configurations for CloudWatch.
+
+                
+                
+
+                - **logGroupName** *(string) --* 
+
+                  The name of the log group for log publishing.
+
+                  
+                
+
+                - **logStreamNamePrefix** *(string) --* 
+
+                  The specified name prefix for log streams.
+
+                  
+            
+              
+
+              - **s3MonitoringConfiguration** *(dict) --* 
+
+                Amazon S3 configuration for monitoring log publishing.
+
+                
+                
+
+                - **logUri** *(string) --* 
+
+                  Amazon S3 destination URI for log publishing.
+
+                  
+            
+          
+        
+          
+
+          - **jobDriver** *(dict) --* 
+
+            Parameters of job driver for the job run.
+
+            
+            
+
+            - **sparkSubmitJobDriver** *(dict) --* 
+
+              The job driver parameters specified for spark submit.
+
+              
+              
+
+              - **entryPoint** *(string) --* 
+
+                The entry point of job application.
+
+                
+              
+
+              - **entryPointArguments** *(list) --* 
+
+                The arguments for job application.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **sparkSubmitParameters** *(string) --* 
+
+                The Spark submit parameters that are used for job runs.
+
+                
+          
+        
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The date and time when the job run was created.
+
+            
+          
+
+          - **createdBy** *(string) --* 
+
+            The user who created the job run.
+
+            
+          
+
+          - **finishedAt** *(datetime) --* 
+
+            The date and time when the job run has finished.
+
+            
+          
+
+          - **stateDetails** *(string) --* 
+
+            Additional details of the job run state.
+
+            
+          
+
+          - **failureReason** *(string) --* 
+
+            The reasons why the job run has failed.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The assigned tags of the job run.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_managed_endpoint(**kwargs)
+
+    
+
+    Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeManagedEndpoint>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_managed_endpoint(
+          id='string',
+          virtualClusterId='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      This output displays ID of the managed endpoint.
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the endpoint's virtual cluster.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'endpoint': {
+                'id': 'string',
+                'name': 'string',
+                'arn': 'string',
+                'virtualClusterId': 'string',
+                'type': 'string',
+                'state': 'CREATING'|'ACTIVE'|'TERMINATING'|'TERMINATED'|'TERMINATED_WITH_ERRORS',
+                'releaseLabel': 'string',
+                'executionRoleArn': 'string',
+                'certificateArn': 'string',
+                'configurationOverrides': {
+                    'applicationConfiguration': [
+                        {
+                            'classification': 'string',
+                            'properties': {
+                                'string': 'string'
+                            },
+                            'configurations': {'... recursive ...'}
+                        },
+                    ],
+                    'monitoringConfiguration': {
+                        'persistentAppUI': 'ENABLED'|'DISABLED',
+                        'cloudWatchMonitoringConfiguration': {
+                            'logGroupName': 'string',
+                            'logStreamNamePrefix': 'string'
+                        },
+                        's3MonitoringConfiguration': {
+                            'logUri': 'string'
+                        }
+                    }
+                },
+                'serverUrl': 'string',
+                'createdAt': datetime(2015, 1, 1),
+                'securityGroup': 'string',
+                'subnetIds': [
+                    'string',
+                ],
+                'stateDetails': 'string',
+                'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **endpoint** *(dict) --* 
+
+          This output displays information about a managed endpoint.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the endpoint.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the endpoint.
+
+            
+          
+
+          - **arn** *(string) --* 
+
+            The ARN of the endpoint.
+
+            
+          
+
+          - **virtualClusterId** *(string) --* 
+
+            The ID of the endpoint's virtual cluster.
+
+            
+          
+
+          - **type** *(string) --* 
+
+            The type of the endpoint.
+
+            
+          
+
+          - **state** *(string) --* 
+
+            The state of the endpoint.
+
+            
+          
+
+          - **releaseLabel** *(string) --* 
+
+            The EMR release version to be used for the endpoint.
+
+            
+          
+
+          - **executionRoleArn** *(string) --* 
+
+            The execution role ARN of the endpoint.
+
+            
+          
+
+          - **certificateArn** *(string) --* 
+
+            The certificate ARN of the endpoint.
+
+            
+          
+
+          - **configurationOverrides** *(dict) --* 
+
+            The configuration settings that are used to override existing configurations for endpoints.
+
+            
+            
+
+            - **applicationConfiguration** *(list) --* 
+
+              The configurations for the application running by the job run. 
+
+              
+              
+
+              - *(dict) --* 
+
+                A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                
+                
+
+                - **classification** *(string) --* 
+
+                  The classification within a configuration.
+
+                  
+                
+
+                - **properties** *(dict) --* 
+
+                  A set of properties specified within a configuration classification.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **configurations** *(list) --* 
+
+                  A list of additional configurations to apply within a configuration object.
+
+                  
+            
+          
+            
+
+            - **monitoringConfiguration** *(dict) --* 
+
+              The configurations for monitoring.
+
+              
+              
+
+              - **persistentAppUI** *(string) --* 
+
+                Monitoring configurations for the persistent application UI. 
+
+                
+              
+
+              - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                Monitoring configurations for CloudWatch.
+
+                
+                
+
+                - **logGroupName** *(string) --* 
+
+                  The name of the log group for log publishing.
+
+                  
+                
+
+                - **logStreamNamePrefix** *(string) --* 
+
+                  The specified name prefix for log streams.
+
+                  
+            
+              
+
+              - **s3MonitoringConfiguration** *(dict) --* 
+
+                Amazon S3 configuration for monitoring log publishing.
+
+                
+                
+
+                - **logUri** *(string) --* 
+
+                  Amazon S3 destination URI for log publishing.
+
+                  
+            
+          
+        
+          
+
+          - **serverUrl** *(string) --* 
+
+            The server URL of the endpoint.
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The date and time when the endpoint was created.
+
+            
+          
+
+          - **securityGroup** *(string) --* 
+
+            The security group configuration of the endpoint. 
+
+            
+          
+
+          - **subnetIds** *(list) --* 
+
+            The subnet IDs of the endpoint. 
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **stateDetails** *(string) --* 
+
+            Additional details of the endpoint state. 
+
+            
+          
+
+          - **failureReason** *(string) --* 
+
+            The reasons why the endpoint has failed. 
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags of the endpoint. 
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_virtual_cluster(**kwargs)
+
+    
+
+    Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeVirtualCluster>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_virtual_cluster(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the virtual cluster that will be described.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'virtualCluster': {
+                'id': 'string',
+                'name': 'string',
+                'arn': 'string',
+                'state': 'RUNNING'|'TERMINATING'|'TERMINATED'|'ARRESTED',
+                'containerProvider': {
+                    'type': 'EKS',
+                    'id': 'string',
+                    'info': {
+                        'eksInfo': {
+                            'namespace': 'string'
+                        }
+                    }
+                },
+                'createdAt': datetime(2015, 1, 1),
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **virtualCluster** *(dict) --* 
+
+          This output displays information about the specified virtual cluster.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the virtual cluster.
+
+            
+          
+
+          - **name** *(string) --* 
+
+            The name of the virtual cluster.
+
+            
+          
+
+          - **arn** *(string) --* 
+
+            The ARN of the virtual cluster.
+
+            
+          
+
+          - **state** *(string) --* 
+
+            The state of the virtual cluster.
+
+            
+          
+
+          - **containerProvider** *(dict) --* 
+
+            The container provider of the virtual cluster.
+
+            
+            
+
+            - **type** *(string) --* 
+
+              The type of the container provider. EKS is the only supported type as of now.
+
+              
+            
+
+            - **id** *(string) --* 
+
+              The ID of the container cluster.
+
+              
+            
+
+            - **info** *(dict) --* 
+
+              The information about the container cluster.
+
+              
+              
+
+              - **eksInfo** *(dict) --* 
+
+                The information about the EKS cluster.
+
+                
+                
+
+                - **namespace** *(string) --* 
+
+                  The namespaces of the EKS cluster.
+
+                  
+            
+          
+        
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The date and time when the virtual cluster is created.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The assigned tags of the virtual cluster.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_job_runs(**kwargs)
+
+    
+
+    Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobRuns>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_job_runs(
+          virtualClusterId='string',
+          createdBefore=datetime(2015, 1, 1),
+          createdAfter=datetime(2015, 1, 1),
+          name='string',
+          states=[
+              'PENDING'|'SUBMITTED'|'RUNNING'|'FAILED'|'CANCELLED'|'CANCEL_PENDING'|'COMPLETED',
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster for which to list the job run. 
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the job runs were submitted.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the job runs were submitted.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the job run.
+
+      
+
+    
+    :type states: list
+    :param states: 
+
+      The states of the job run.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of job runs that can be listed.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next set of job runs to return.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobRuns': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'virtualClusterId': 'string',
+                    'arn': 'string',
+                    'state': 'PENDING'|'SUBMITTED'|'RUNNING'|'FAILED'|'CANCELLED'|'CANCEL_PENDING'|'COMPLETED',
+                    'clientToken': 'string',
+                    'executionRoleArn': 'string',
+                    'releaseLabel': 'string',
+                    'configurationOverrides': {
+                        'applicationConfiguration': [
+                            {
+                                'classification': 'string',
+                                'properties': {
+                                    'string': 'string'
+                                },
+                                'configurations': {'... recursive ...'}
+                            },
+                        ],
+                        'monitoringConfiguration': {
+                            'persistentAppUI': 'ENABLED'|'DISABLED',
+                            'cloudWatchMonitoringConfiguration': {
+                                'logGroupName': 'string',
+                                'logStreamNamePrefix': 'string'
+                            },
+                            's3MonitoringConfiguration': {
+                                'logUri': 'string'
+                            }
+                        }
+                    },
+                    'jobDriver': {
+                        'sparkSubmitJobDriver': {
+                            'entryPoint': 'string',
+                            'entryPointArguments': [
+                                'string',
+                            ],
+                            'sparkSubmitParameters': 'string'
+                        }
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'createdBy': 'string',
+                    'finishedAt': datetime(2015, 1, 1),
+                    'stateDetails': 'string',
+                    'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobRuns** *(list) --* 
+
+          This output lists information about the specified job runs.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the job run.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the job run.
+
+              
+            
+
+            - **virtualClusterId** *(string) --* 
+
+              The ID of the job run's virtual cluster.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of job run.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the job run. 
+
+              
+            
+
+            - **clientToken** *(string) --* 
+
+              The client token used to start a job run.
+
+              
+            
+
+            - **executionRoleArn** *(string) --* 
+
+              The execution role ARN of the job run.
+
+              
+            
+
+            - **releaseLabel** *(string) --* 
+
+              The release version of Amazon EMR.
+
+              
+            
+
+            - **configurationOverrides** *(dict) --* 
+
+              The configuration settings that are used to override default configuration.
+
+              
+              
+
+              - **applicationConfiguration** *(list) --* 
+
+                The configurations for the application running by the job run. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                  
+                  
+
+                  - **classification** *(string) --* 
+
+                    The classification within a configuration.
+
+                    
+                  
+
+                  - **properties** *(dict) --* 
+
+                    A set of properties specified within a configuration classification.
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+                  
+
+                  - **configurations** *(list) --* 
+
+                    A list of additional configurations to apply within a configuration object.
+
+                    
+              
+            
+              
+
+              - **monitoringConfiguration** *(dict) --* 
+
+                The configurations for monitoring.
+
+                
+                
+
+                - **persistentAppUI** *(string) --* 
+
+                  Monitoring configurations for the persistent application UI. 
+
+                  
+                
+
+                - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                  Monitoring configurations for CloudWatch.
+
+                  
+                  
+
+                  - **logGroupName** *(string) --* 
+
+                    The name of the log group for log publishing.
+
+                    
+                  
+
+                  - **logStreamNamePrefix** *(string) --* 
+
+                    The specified name prefix for log streams.
+
+                    
+              
+                
+
+                - **s3MonitoringConfiguration** *(dict) --* 
+
+                  Amazon S3 configuration for monitoring log publishing.
+
+                  
+                  
+
+                  - **logUri** *(string) --* 
+
+                    Amazon S3 destination URI for log publishing.
+
+                    
+              
+            
+          
+            
+
+            - **jobDriver** *(dict) --* 
+
+              Parameters of job driver for the job run.
+
+              
+              
+
+              - **sparkSubmitJobDriver** *(dict) --* 
+
+                The job driver parameters specified for spark submit.
+
+                
+                
+
+                - **entryPoint** *(string) --* 
+
+                  The entry point of job application.
+
+                  
+                
+
+                - **entryPointArguments** *(list) --* 
+
+                  The arguments for job application.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **sparkSubmitParameters** *(string) --* 
+
+                  The Spark submit parameters that are used for job runs.
+
+                  
+            
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the job run was created.
+
+              
+            
+
+            - **createdBy** *(string) --* 
+
+              The user who created the job run.
+
+              
+            
+
+            - **finishedAt** *(datetime) --* 
+
+              The date and time when the job run has finished.
+
+              
+            
+
+            - **stateDetails** *(string) --* 
+
+              Additional details of the job run state.
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reasons why the job run has failed.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The assigned tags of the job run.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          This output displays the token for the next set of job runs.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_managed_endpoints(**kwargs)
+
+    
+
+    Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListManagedEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_managed_endpoints(
+          virtualClusterId='string',
+          createdBefore=datetime(2015, 1, 1),
+          createdAfter=datetime(2015, 1, 1),
+          types=[
+              'string',
+          ],
+          states=[
+              'CREATING'|'ACTIVE'|'TERMINATING'|'TERMINATED'|'TERMINATED_WITH_ERRORS',
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster.
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the endpoints are created.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the endpoints are created.
+
+      
+
+    
+    :type types: list
+    :param types: 
+
+      The types of the managed endpoints.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type states: list
+    :param states: 
+
+      The states of the managed endpoints.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of managed endpoints that can be listed.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next set of managed endpoints to return. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'endpoints': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'arn': 'string',
+                    'virtualClusterId': 'string',
+                    'type': 'string',
+                    'state': 'CREATING'|'ACTIVE'|'TERMINATING'|'TERMINATED'|'TERMINATED_WITH_ERRORS',
+                    'releaseLabel': 'string',
+                    'executionRoleArn': 'string',
+                    'certificateArn': 'string',
+                    'configurationOverrides': {
+                        'applicationConfiguration': [
+                            {
+                                'classification': 'string',
+                                'properties': {
+                                    'string': 'string'
+                                },
+                                'configurations': {'... recursive ...'}
+                            },
+                        ],
+                        'monitoringConfiguration': {
+                            'persistentAppUI': 'ENABLED'|'DISABLED',
+                            'cloudWatchMonitoringConfiguration': {
+                                'logGroupName': 'string',
+                                'logStreamNamePrefix': 'string'
+                            },
+                            's3MonitoringConfiguration': {
+                                'logUri': 'string'
+                            }
+                        }
+                    },
+                    'serverUrl': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'securityGroup': 'string',
+                    'subnetIds': [
+                        'string',
+                    ],
+                    'stateDetails': 'string',
+                    'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **endpoints** *(list) --* 
+
+          The managed endpoints to be listed.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity represents the endpoint that is managed by Amazon EMR on EKS.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the endpoint.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the endpoint.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the endpoint.
+
+              
+            
+
+            - **virtualClusterId** *(string) --* 
+
+              The ID of the endpoint's virtual cluster.
+
+              
+            
+
+            - **type** *(string) --* 
+
+              The type of the endpoint.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the endpoint.
+
+              
+            
+
+            - **releaseLabel** *(string) --* 
+
+              The EMR release version to be used for the endpoint.
+
+              
+            
+
+            - **executionRoleArn** *(string) --* 
+
+              The execution role ARN of the endpoint.
+
+              
+            
+
+            - **certificateArn** *(string) --* 
+
+              The certificate ARN of the endpoint.
+
+              
+            
+
+            - **configurationOverrides** *(dict) --* 
+
+              The configuration settings that are used to override existing configurations for endpoints.
+
+              
+              
+
+              - **applicationConfiguration** *(list) --* 
+
+                The configurations for the application running by the job run. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                  
+                  
+
+                  - **classification** *(string) --* 
+
+                    The classification within a configuration.
+
+                    
+                  
+
+                  - **properties** *(dict) --* 
+
+                    A set of properties specified within a configuration classification.
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+                  
+
+                  - **configurations** *(list) --* 
+
+                    A list of additional configurations to apply within a configuration object.
+
+                    
+              
+            
+              
+
+              - **monitoringConfiguration** *(dict) --* 
+
+                The configurations for monitoring.
+
+                
+                
+
+                - **persistentAppUI** *(string) --* 
+
+                  Monitoring configurations for the persistent application UI. 
+
+                  
+                
+
+                - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                  Monitoring configurations for CloudWatch.
+
+                  
+                  
+
+                  - **logGroupName** *(string) --* 
+
+                    The name of the log group for log publishing.
+
+                    
+                  
+
+                  - **logStreamNamePrefix** *(string) --* 
+
+                    The specified name prefix for log streams.
+
+                    
+              
+                
+
+                - **s3MonitoringConfiguration** *(dict) --* 
+
+                  Amazon S3 configuration for monitoring log publishing.
+
+                  
+                  
+
+                  - **logUri** *(string) --* 
+
+                    Amazon S3 destination URI for log publishing.
+
+                    
+              
+            
+          
+            
+
+            - **serverUrl** *(string) --* 
+
+              The server URL of the endpoint.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the endpoint was created.
+
+              
+            
+
+            - **securityGroup** *(string) --* 
+
+              The security group configuration of the endpoint. 
+
+              
+            
+
+            - **subnetIds** *(list) --* 
+
+              The subnet IDs of the endpoint. 
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **stateDetails** *(string) --* 
+
+              Additional details of the endpoint state. 
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reasons why the endpoint has failed. 
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The tags of the endpoint. 
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of endpoints to return. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags assigned to the resources.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of tagged resources.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The tags assigned to resources.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_virtual_clusters(**kwargs)
+
+    
+
+    Lists information about the specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClusters>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_virtual_clusters(
+          containerProviderId='string',
+          containerProviderType='EKS',
+          createdAfter=datetime(2015, 1, 1),
+          createdBefore=datetime(2015, 1, 1),
+          states=[
+              'RUNNING'|'TERMINATING'|'TERMINATED'|'ARRESTED',
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type containerProviderId: string
+    :param containerProviderId: 
+
+      The container provider ID of the virtual cluster.
+
+      
+
+    
+    :type containerProviderType: string
+    :param containerProviderType: 
+
+      The container provider type of the virtual cluster. EKS is the only supported type as of now.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the virtual clusters are created.
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the virtual clusters are created.
+
+      
+
+    
+    :type states: list
+    :param states: 
+
+      The states of the requested virtual clusters.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of virtual clusters that can be listed.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next set of virtual clusters to return. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'virtualClusters': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'arn': 'string',
+                    'state': 'RUNNING'|'TERMINATING'|'TERMINATED'|'ARRESTED',
+                    'containerProvider': {
+                        'type': 'EKS',
+                        'id': 'string',
+                        'info': {
+                            'eksInfo': {
+                                'namespace': 'string'
+                            }
+                        }
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **virtualClusters** *(list) --* 
+
+          This output lists the specified virtual clusters.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the virtual cluster.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the virtual cluster.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the virtual cluster.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the virtual cluster.
+
+              
+            
+
+            - **containerProvider** *(dict) --* 
+
+              The container provider of the virtual cluster.
+
+              
+              
+
+              - **type** *(string) --* 
+
+                The type of the container provider. EKS is the only supported type as of now.
+
+                
+              
+
+              - **id** *(string) --* 
+
+                The ID of the container cluster.
+
+                
+              
+
+              - **info** *(dict) --* 
+
+                The information about the container cluster.
+
+                
+                
+
+                - **eksInfo** *(dict) --* 
+
+                  The information about the EKS cluster.
+
+                  
+                  
+
+                  - **namespace** *(string) --* 
+
+                    The namespaces of the EKS cluster.
+
+                    
+              
+            
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the virtual cluster is created.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The assigned tags of the virtual cluster.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          This output displays the token for the next set of virtual clusters.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_job_run(**kwargs)
+
+    
+
+    Starts a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/StartJobRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_job_run(
+          name='string',
+          virtualClusterId='string',
+          clientToken='string',
+          executionRoleArn='string',
+          releaseLabel='string',
+          jobDriver={
+              'sparkSubmitJobDriver': {
+                  'entryPoint': 'string',
+                  'entryPointArguments': [
+                      'string',
+                  ],
+                  'sparkSubmitParameters': 'string'
+              }
+          },
+          configurationOverrides={
+              'applicationConfiguration': [
+                  {
+                      'classification': 'string',
+                      'properties': {
+                          'string': 'string'
+                      },
+                      'configurations': {'... recursive ...'}
+                  },
+              ],
+              'monitoringConfiguration': {
+                  'persistentAppUI': 'ENABLED'|'DISABLED',
+                  'cloudWatchMonitoringConfiguration': {
+                      'logGroupName': 'string',
+                      'logStreamNamePrefix': 'string'
+                  },
+                  's3MonitoringConfiguration': {
+                      'logUri': 'string'
+                  }
+              }
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type name: string
+    :param name: 
+
+      The name of the job run.
+
+      
+
+    
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The virtual cluster ID for which the job run request is submitted.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      The client idempotency token of the job run request. 
+
+      This field is autopopulated if not provided.
+
+    
+    :type executionRoleArn: string
+    :param executionRoleArn: **[REQUIRED]** 
+
+      The execution role ARN for the job run.
+
+      
+
+    
+    :type releaseLabel: string
+    :param releaseLabel: **[REQUIRED]** 
+
+      The Amazon EMR release version to use for the job run.
+
+      
+
+    
+    :type jobDriver: dict
+    :param jobDriver: **[REQUIRED]** 
+
+      The job driver for the job run.
+
+      
+
+    
+      - **sparkSubmitJobDriver** *(dict) --* 
+
+        The job driver parameters specified for spark submit.
+
+        
+
+      
+        - **entryPoint** *(string) --* **[REQUIRED]** 
+
+          The entry point of job application.
+
+          
+
+        
+        - **entryPointArguments** *(list) --* 
+
+          The arguments for job application.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **sparkSubmitParameters** *(string) --* 
+
+          The Spark submit parameters that are used for job runs.
+
+          
+
+        
+      
+    
+    :type configurationOverrides: dict
+    :param configurationOverrides: 
+
+      The configuration overrides for the job run.
+
+      
+
+    
+      - **applicationConfiguration** *(list) --* 
+
+        The configurations for the application running by the job run. 
+
+        
+
+      
+        - *(dict) --* 
+
+          A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+          
+
+        
+          - **classification** *(string) --* **[REQUIRED]** 
+
+            The classification within a configuration.
+
+            
+
+          
+          - **properties** *(dict) --* 
+
+            A set of properties specified within a configuration classification.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **configurations** *(list) --* 
+
+            A list of additional configurations to apply within a configuration object.
+
+            
+
+          
+        
+    
+      - **monitoringConfiguration** *(dict) --* 
+
+        The configurations for monitoring.
+
+        
+
+      
+        - **persistentAppUI** *(string) --* 
+
+          Monitoring configurations for the persistent application UI. 
+
+          
+
+        
+        - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+          Monitoring configurations for CloudWatch.
+
+          
+
+        
+          - **logGroupName** *(string) --* **[REQUIRED]** 
+
+            The name of the log group for log publishing.
+
+            
+
+          
+          - **logStreamNamePrefix** *(string) --* 
+
+            The specified name prefix for log streams.
+
+            
+
+          
+        
+        - **s3MonitoringConfiguration** *(dict) --* 
+
+          Amazon S3 configuration for monitoring log publishing.
+
+          
+
+        
+          - **logUri** *(string) --* **[REQUIRED]** 
+
+            Amazon S3 destination URI for log publishing.
+
+            
+
+          
+        
+      
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags assigned to job runs.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'id': 'string',
+            'name': 'string',
+            'arn': 'string',
+            'virtualClusterId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **id** *(string) --* 
+
+          This output displays the started job run ID.
+
+          
+        
+
+        - **name** *(string) --* 
+
+          This output displays the name of the started job run.
+
+          
+        
+
+        - **arn** *(string) --* 
+
+          This output lists the ARN of job run.
+
+          
+        
+
+        - **virtualClusterId** *(string) --* 
+
+          This output displays the virtual cluster ID for which the job run was submitted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of resources.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The tags assigned to resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from resources.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of resources.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The tag keys of the resources.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`EMRContainers.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`EMRContainers.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`EMRContainers.Paginator.ListJobRuns`
+
+
+* :py:class:`EMRContainers.Paginator.ListManagedEndpoints`
+
+
+* :py:class:`EMRContainers.Paginator.ListVirtualClusters`
+
+
+
+.. py:class:: EMRContainers.Paginator.ListJobRuns
+
+  ::
+
+    
+    paginator = client.get_paginator('list_job_runs')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EMRContainers.Client.list_job_runs`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListJobRuns>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          virtualClusterId='string',
+          createdBefore=datetime(2015, 1, 1),
+          createdAfter=datetime(2015, 1, 1),
+          name='string',
+          states=[
+              'PENDING'|'SUBMITTED'|'RUNNING'|'FAILED'|'CANCELLED'|'CANCEL_PENDING'|'COMPLETED',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster for which to list the job run. 
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the job runs were submitted.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the job runs were submitted.
+
+      
+
+    
+    :type name: string
+    :param name: 
+
+      The name of the job run.
+
+      
+
+    
+    :type states: list
+    :param states: 
+
+      The states of the job run.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobRuns': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'virtualClusterId': 'string',
+                    'arn': 'string',
+                    'state': 'PENDING'|'SUBMITTED'|'RUNNING'|'FAILED'|'CANCELLED'|'CANCEL_PENDING'|'COMPLETED',
+                    'clientToken': 'string',
+                    'executionRoleArn': 'string',
+                    'releaseLabel': 'string',
+                    'configurationOverrides': {
+                        'applicationConfiguration': [
+                            {
+                                'classification': 'string',
+                                'properties': {
+                                    'string': 'string'
+                                },
+                                'configurations': {'... recursive ...'}
+                            },
+                        ],
+                        'monitoringConfiguration': {
+                            'persistentAppUI': 'ENABLED'|'DISABLED',
+                            'cloudWatchMonitoringConfiguration': {
+                                'logGroupName': 'string',
+                                'logStreamNamePrefix': 'string'
+                            },
+                            's3MonitoringConfiguration': {
+                                'logUri': 'string'
+                            }
+                        }
+                    },
+                    'jobDriver': {
+                        'sparkSubmitJobDriver': {
+                            'entryPoint': 'string',
+                            'entryPointArguments': [
+                                'string',
+                            ],
+                            'sparkSubmitParameters': 'string'
+                        }
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'createdBy': 'string',
+                    'finishedAt': datetime(2015, 1, 1),
+                    'stateDetails': 'string',
+                    'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobRuns** *(list) --* 
+
+          This output lists information about the specified job runs.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the job run.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the job run.
+
+              
+            
+
+            - **virtualClusterId** *(string) --* 
+
+              The ID of the job run's virtual cluster.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of job run.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the job run. 
+
+              
+            
+
+            - **clientToken** *(string) --* 
+
+              The client token used to start a job run.
+
+              
+            
+
+            - **executionRoleArn** *(string) --* 
+
+              The execution role ARN of the job run.
+
+              
+            
+
+            - **releaseLabel** *(string) --* 
+
+              The release version of Amazon EMR.
+
+              
+            
+
+            - **configurationOverrides** *(dict) --* 
+
+              The configuration settings that are used to override default configuration.
+
+              
+              
+
+              - **applicationConfiguration** *(list) --* 
+
+                The configurations for the application running by the job run. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                  
+                  
+
+                  - **classification** *(string) --* 
+
+                    The classification within a configuration.
+
+                    
+                  
+
+                  - **properties** *(dict) --* 
+
+                    A set of properties specified within a configuration classification.
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+                  
+
+                  - **configurations** *(list) --* 
+
+                    A list of additional configurations to apply within a configuration object.
+
+                    
+              
+            
+              
+
+              - **monitoringConfiguration** *(dict) --* 
+
+                The configurations for monitoring.
+
+                
+                
+
+                - **persistentAppUI** *(string) --* 
+
+                  Monitoring configurations for the persistent application UI. 
+
+                  
+                
+
+                - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                  Monitoring configurations for CloudWatch.
+
+                  
+                  
+
+                  - **logGroupName** *(string) --* 
+
+                    The name of the log group for log publishing.
+
+                    
+                  
+
+                  - **logStreamNamePrefix** *(string) --* 
+
+                    The specified name prefix for log streams.
+
+                    
+              
+                
+
+                - **s3MonitoringConfiguration** *(dict) --* 
+
+                  Amazon S3 configuration for monitoring log publishing.
+
+                  
+                  
+
+                  - **logUri** *(string) --* 
+
+                    Amazon S3 destination URI for log publishing.
+
+                    
+              
+            
+          
+            
+
+            - **jobDriver** *(dict) --* 
+
+              Parameters of job driver for the job run.
+
+              
+              
+
+              - **sparkSubmitJobDriver** *(dict) --* 
+
+                The job driver parameters specified for spark submit.
+
+                
+                
+
+                - **entryPoint** *(string) --* 
+
+                  The entry point of job application.
+
+                  
+                
+
+                - **entryPointArguments** *(list) --* 
+
+                  The arguments for job application.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **sparkSubmitParameters** *(string) --* 
+
+                  The Spark submit parameters that are used for job runs.
+
+                  
+            
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the job run was created.
+
+              
+            
+
+            - **createdBy** *(string) --* 
+
+              The user who created the job run.
+
+              
+            
+
+            - **finishedAt** *(datetime) --* 
+
+              The date and time when the job run has finished.
+
+              
+            
+
+            - **stateDetails** *(string) --* 
+
+              Additional details of the job run state.
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reasons why the job run has failed.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The assigned tags of the job run.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: EMRContainers.Paginator.ListManagedEndpoints
+
+  ::
+
+    
+    paginator = client.get_paginator('list_managed_endpoints')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EMRContainers.Client.list_managed_endpoints`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListManagedEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          virtualClusterId='string',
+          createdBefore=datetime(2015, 1, 1),
+          createdAfter=datetime(2015, 1, 1),
+          types=[
+              'string',
+          ],
+          states=[
+              'CREATING'|'ACTIVE'|'TERMINATING'|'TERMINATED'|'TERMINATED_WITH_ERRORS',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type virtualClusterId: string
+    :param virtualClusterId: **[REQUIRED]** 
+
+      The ID of the virtual cluster.
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the endpoints are created.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the endpoints are created.
+
+      
+
+    
+    :type types: list
+    :param types: 
+
+      The types of the managed endpoints.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type states: list
+    :param states: 
+
+      The states of the managed endpoints.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'endpoints': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'arn': 'string',
+                    'virtualClusterId': 'string',
+                    'type': 'string',
+                    'state': 'CREATING'|'ACTIVE'|'TERMINATING'|'TERMINATED'|'TERMINATED_WITH_ERRORS',
+                    'releaseLabel': 'string',
+                    'executionRoleArn': 'string',
+                    'certificateArn': 'string',
+                    'configurationOverrides': {
+                        'applicationConfiguration': [
+                            {
+                                'classification': 'string',
+                                'properties': {
+                                    'string': 'string'
+                                },
+                                'configurations': {'... recursive ...'}
+                            },
+                        ],
+                        'monitoringConfiguration': {
+                            'persistentAppUI': 'ENABLED'|'DISABLED',
+                            'cloudWatchMonitoringConfiguration': {
+                                'logGroupName': 'string',
+                                'logStreamNamePrefix': 'string'
+                            },
+                            's3MonitoringConfiguration': {
+                                'logUri': 'string'
+                            }
+                        }
+                    },
+                    'serverUrl': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'securityGroup': 'string',
+                    'subnetIds': [
+                        'string',
+                    ],
+                    'stateDetails': 'string',
+                    'failureReason': 'INTERNAL_ERROR'|'USER_ERROR'|'VALIDATION_ERROR'|'CLUSTER_UNAVAILABLE',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **endpoints** *(list) --* 
+
+          The managed endpoints to be listed.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity represents the endpoint that is managed by Amazon EMR on EKS.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the endpoint.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the endpoint.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the endpoint.
+
+              
+            
+
+            - **virtualClusterId** *(string) --* 
+
+              The ID of the endpoint's virtual cluster.
+
+              
+            
+
+            - **type** *(string) --* 
+
+              The type of the endpoint.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the endpoint.
+
+              
+            
+
+            - **releaseLabel** *(string) --* 
+
+              The EMR release version to be used for the endpoint.
+
+              
+            
+
+            - **executionRoleArn** *(string) --* 
+
+              The execution role ARN of the endpoint.
+
+              
+            
+
+            - **certificateArn** *(string) --* 
+
+              The certificate ARN of the endpoint.
+
+              
+            
+
+            - **configurationOverrides** *(dict) --* 
+
+              The configuration settings that are used to override existing configurations for endpoints.
+
+              
+              
+
+              - **applicationConfiguration** *(list) --* 
+
+                The configurations for the application running by the job run. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.
+
+                  
+                  
+
+                  - **classification** *(string) --* 
+
+                    The classification within a configuration.
+
+                    
+                  
+
+                  - **properties** *(dict) --* 
+
+                    A set of properties specified within a configuration classification.
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+                  
+
+                  - **configurations** *(list) --* 
+
+                    A list of additional configurations to apply within a configuration object.
+
+                    
+              
+            
+              
+
+              - **monitoringConfiguration** *(dict) --* 
+
+                The configurations for monitoring.
+
+                
+                
+
+                - **persistentAppUI** *(string) --* 
+
+                  Monitoring configurations for the persistent application UI. 
+
+                  
+                
+
+                - **cloudWatchMonitoringConfiguration** *(dict) --* 
+
+                  Monitoring configurations for CloudWatch.
+
+                  
+                  
+
+                  - **logGroupName** *(string) --* 
+
+                    The name of the log group for log publishing.
+
+                    
+                  
+
+                  - **logStreamNamePrefix** *(string) --* 
+
+                    The specified name prefix for log streams.
+
+                    
+              
+                
+
+                - **s3MonitoringConfiguration** *(dict) --* 
+
+                  Amazon S3 configuration for monitoring log publishing.
+
+                  
+                  
+
+                  - **logUri** *(string) --* 
+
+                    Amazon S3 destination URI for log publishing.
+
+                    
+              
+            
+          
+            
+
+            - **serverUrl** *(string) --* 
+
+              The server URL of the endpoint.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the endpoint was created.
+
+              
+            
+
+            - **securityGroup** *(string) --* 
+
+              The security group configuration of the endpoint. 
+
+              
+            
+
+            - **subnetIds** *(list) --* 
+
+              The subnet IDs of the endpoint. 
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **stateDetails** *(string) --* 
+
+              Additional details of the endpoint state. 
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reasons why the endpoint has failed. 
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The tags of the endpoint. 
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: EMRContainers.Paginator.ListVirtualClusters
+
+  ::
+
+    
+    paginator = client.get_paginator('list_virtual_clusters')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`EMRContainers.Client.list_virtual_clusters`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClusters>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          containerProviderId='string',
+          containerProviderType='EKS',
+          createdAfter=datetime(2015, 1, 1),
+          createdBefore=datetime(2015, 1, 1),
+          states=[
+              'RUNNING'|'TERMINATING'|'TERMINATED'|'ARRESTED',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type containerProviderId: string
+    :param containerProviderId: 
+
+      The container provider ID of the virtual cluster.
+
+      
+
+    
+    :type containerProviderType: string
+    :param containerProviderType: 
+
+      The container provider type of the virtual cluster. EKS is the only supported type as of now.
+
+      
+
+    
+    :type createdAfter: datetime
+    :param createdAfter: 
+
+      The date and time after which the virtual clusters are created.
+
+      
+
+    
+    :type createdBefore: datetime
+    :param createdBefore: 
+
+      The date and time before which the virtual clusters are created.
+
+      
+
+    
+    :type states: list
+    :param states: 
+
+      The states of the requested virtual clusters.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'virtualClusters': [
+                {
+                    'id': 'string',
+                    'name': 'string',
+                    'arn': 'string',
+                    'state': 'RUNNING'|'TERMINATING'|'TERMINATED'|'ARRESTED',
+                    'containerProvider': {
+                        'type': 'EKS',
+                        'id': 'string',
+                        'info': {
+                            'eksInfo': {
+                                'namespace': 'string'
+                            }
+                        }
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **virtualClusters** *(list) --* 
+
+          This output lists the specified virtual clusters.
+
+          
+          
+
+          - *(dict) --* 
+
+            This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the virtual cluster.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the virtual cluster.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The ARN of the virtual cluster.
+
+              
+            
+
+            - **state** *(string) --* 
+
+              The state of the virtual cluster.
+
+              
+            
+
+            - **containerProvider** *(dict) --* 
+
+              The container provider of the virtual cluster.
+
+              
+              
+
+              - **type** *(string) --* 
+
+                The type of the container provider. EKS is the only supported type as of now.
+
+                
+              
+
+              - **id** *(string) --* 
+
+                The ID of the container cluster.
+
+                
+              
+
+              - **info** *(dict) --* 
+
+                The information about the container cluster.
+
+                
+                
+
+                - **eksInfo** *(dict) --* 
+
+                  The information about the EKS cluster.
+
+                  
+                  
+
+                  - **namespace** *(string) --* 
+
+                    The namespaces of the EKS cluster.
+
+                    
+              
+            
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time when the virtual cluster is created.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The assigned tags of the virtual cluster.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

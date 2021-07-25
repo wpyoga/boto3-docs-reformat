@@ -1,0 +1,4659 @@
+
+
+**
+MQ
+**
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: MQ.Client
+
+  A low-level client representing AmazonMQ
+  
+
+  Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('mq')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~MQ.Client.can_paginate`
+
+  
+  *   :py:meth:`~MQ.Client.create_broker`
+
+  
+  *   :py:meth:`~MQ.Client.create_configuration`
+
+  
+  *   :py:meth:`~MQ.Client.create_tags`
+
+  
+  *   :py:meth:`~MQ.Client.create_user`
+
+  
+  *   :py:meth:`~MQ.Client.delete_broker`
+
+  
+  *   :py:meth:`~MQ.Client.delete_tags`
+
+  
+  *   :py:meth:`~MQ.Client.delete_user`
+
+  
+  *   :py:meth:`~MQ.Client.describe_broker`
+
+  
+  *   :py:meth:`~MQ.Client.describe_broker_engine_types`
+
+  
+  *   :py:meth:`~MQ.Client.describe_broker_instance_options`
+
+  
+  *   :py:meth:`~MQ.Client.describe_configuration`
+
+  
+  *   :py:meth:`~MQ.Client.describe_configuration_revision`
+
+  
+  *   :py:meth:`~MQ.Client.describe_user`
+
+  
+  *   :py:meth:`~MQ.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~MQ.Client.get_paginator`
+
+  
+  *   :py:meth:`~MQ.Client.get_waiter`
+
+  
+  *   :py:meth:`~MQ.Client.list_brokers`
+
+  
+  *   :py:meth:`~MQ.Client.list_configuration_revisions`
+
+  
+  *   :py:meth:`~MQ.Client.list_configurations`
+
+  
+  *   :py:meth:`~MQ.Client.list_tags`
+
+  
+  *   :py:meth:`~MQ.Client.list_users`
+
+  
+  *   :py:meth:`~MQ.Client.reboot_broker`
+
+  
+  *   :py:meth:`~MQ.Client.update_broker`
+
+  
+  *   :py:meth:`~MQ.Client.update_configuration`
+
+  
+  *   :py:meth:`~MQ.Client.update_user`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_broker(**kwargs)
+
+    
+
+    Creates a broker. Note: This API is asynchronous.
+
+     
+
+    To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy.
+
+     
+
+    
+    * ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account.
+     
+    * ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance.
+     
+    * ec2:DeleteNetworkInterface
+     
+    * ec2:DeleteNetworkInterfacePermission
+     
+    * ec2:DetachNetworkInterface
+     
+    * ec2:DescribeInternetGateways
+     
+    * ec2:DescribeNetworkInterfaces
+     
+    * ec2:DescribeNetworkInterfacePermissions
+     
+    * ec2:DescribeRouteTables
+     
+    * ec2:DescribeSecurityGroups
+     
+    * ec2:DescribeSubnets
+     
+    * ec2:DescribeVpcs
+    
+
+     
+
+    For more information, see `Create an IAM User and Get Your AWS Credentials <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user>`__ and `Never Modify or Delete the Amazon MQ Elastic Network Interface <https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface>`__ in the *Amazon MQ Developer Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBroker>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_broker(
+          AuthenticationStrategy='SIMPLE'|'LDAP',
+          AutoMinorVersionUpgrade=True|False,
+          BrokerName='string',
+          Configuration={
+              'Id': 'string',
+              'Revision': 123
+          },
+          CreatorRequestId='string',
+          DeploymentMode='SINGLE_INSTANCE'|'ACTIVE_STANDBY_MULTI_AZ'|'CLUSTER_MULTI_AZ',
+          EncryptionOptions={
+              'KmsKeyId': 'string',
+              'UseAwsOwnedKey': True|False
+          },
+          EngineType='ACTIVEMQ'|'RABBITMQ',
+          EngineVersion='string',
+          HostInstanceType='string',
+          LdapServerMetadata={
+              'Hosts': [
+                  'string',
+              ],
+              'RoleBase': 'string',
+              'RoleName': 'string',
+              'RoleSearchMatching': 'string',
+              'RoleSearchSubtree': True|False,
+              'ServiceAccountPassword': 'string',
+              'ServiceAccountUsername': 'string',
+              'UserBase': 'string',
+              'UserRoleName': 'string',
+              'UserSearchMatching': 'string',
+              'UserSearchSubtree': True|False
+          },
+          Logs={
+              'Audit': True|False,
+              'General': True|False
+          },
+          MaintenanceWindowStartTime={
+              'DayOfWeek': 'MONDAY'|'TUESDAY'|'WEDNESDAY'|'THURSDAY'|'FRIDAY'|'SATURDAY'|'SUNDAY',
+              'TimeOfDay': 'string',
+              'TimeZone': 'string'
+          },
+          PubliclyAccessible=True|False,
+          SecurityGroups=[
+              'string',
+          ],
+          StorageType='EBS'|'EFS',
+          SubnetIds=[
+              'string',
+          ],
+          Tags={
+              'string': 'string'
+          },
+          Users=[
+              {
+                  'ConsoleAccess': True|False,
+                  'Groups': [
+                      'string',
+                  ],
+                  'Password': 'string',
+                  'Username': 'string'
+              },
+          ]
+      )
+    :type AuthenticationStrategy: string
+    :param AuthenticationStrategy: 
+
+      Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
+
+      
+
+    
+    :type AutoMinorVersionUpgrade: boolean
+    :param AutoMinorVersionUpgrade: **[REQUIRED]** 
+
+      Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.
+
+      
+
+    
+    :type BrokerName: string
+    :param BrokerName: **[REQUIRED]** 
+
+      Required. The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+
+      
+
+    
+    :type Configuration: dict
+    :param Configuration: 
+
+      A list of information about the configuration.
+
+      
+
+    
+      - **Id** *(string) --* **[REQUIRED]** 
+
+        Required. The unique ID that Amazon MQ generates for the configuration.
+
+        
+
+      
+      - **Revision** *(integer) --* 
+
+        The revision number of the configuration.
+
+        
+
+      
+    
+    :type CreatorRequestId: string
+    :param CreatorRequestId: 
+
+      The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
+
+      This field is autopopulated if not provided.
+
+    
+    :type DeploymentMode: string
+    :param DeploymentMode: **[REQUIRED]** 
+
+      Required. The broker's deployment mode.
+
+      
+
+    
+    :type EncryptionOptions: dict
+    :param EncryptionOptions: 
+
+      Encryption options for the broker. Does not apply to RabbitMQ brokers.
+
+      
+
+    
+      - **KmsKeyId** *(string) --* 
+
+        The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+
+        
+
+      
+      - **UseAwsOwnedKey** *(boolean) --* **[REQUIRED]** 
+
+        Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.
+
+        
+
+      
+    
+    :type EngineType: string
+    :param EngineType: **[REQUIRED]** 
+
+      Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+
+      
+
+    
+    :type EngineVersion: string
+    :param EngineVersion: **[REQUIRED]** 
+
+      Required. The broker engine's version. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+      
+
+    
+    :type HostInstanceType: string
+    :param HostInstanceType: **[REQUIRED]** 
+
+      Required. The broker's instance type.
+
+      
+
+    
+    :type LdapServerMetadata: dict
+    :param LdapServerMetadata: 
+
+      Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
+
+      
+
+    
+      - **Hosts** *(list) --* **[REQUIRED]** 
+
+        Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **RoleBase** *(string) --* **[REQUIRED]** 
+
+        The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **RoleName** *(string) --* 
+
+        Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+
+        
+
+      
+      - **RoleSearchMatching** *(string) --* **[REQUIRED]** 
+
+        The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
+
+        
+
+      
+      - **RoleSearchSubtree** *(boolean) --* 
+
+        The directory search scope for the role. If set to true, scope is to search the entire subtree.
+
+        
+
+      
+      - **ServiceAccountPassword** *(string) --* **[REQUIRED]** 
+
+        Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **ServiceAccountUsername** *(string) --* **[REQUIRED]** 
+
+        Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserBase** *(string) --* **[REQUIRED]** 
+
+        Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserRoleName** *(string) --* 
+
+        Specifies the name of the LDAP attribute for the user group membership.
+
+        
+
+      
+      - **UserSearchMatching** *(string) --* **[REQUIRED]** 
+
+        The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserSearchSubtree** *(boolean) --* 
+
+        The directory search scope for the user. If set to true, scope is to search the entire subtree.
+
+        
+
+      
+    
+    :type Logs: dict
+    :param Logs: 
+
+      Enables Amazon CloudWatch logging for brokers.
+
+      
+
+    
+      - **Audit** *(boolean) --* 
+
+        Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
+
+        
+
+      
+      - **General** *(boolean) --* 
+
+        Enables general logging.
+
+        
+
+      
+    
+    :type MaintenanceWindowStartTime: dict
+    :param MaintenanceWindowStartTime: 
+
+      The parameters that determine the WeeklyStartTime.
+
+      
+
+    
+      - **DayOfWeek** *(string) --* **[REQUIRED]** 
+
+        Required. The day of the week.
+
+        
+
+      
+      - **TimeOfDay** *(string) --* **[REQUIRED]** 
+
+        Required. The time, in 24-hour format.
+
+        
+
+      
+      - **TimeZone** *(string) --* 
+
+        The time zone, UTC by default, in either the Country/City format, or the UTC offset format.
+
+        
+
+      
+    
+    :type PubliclyAccessible: boolean
+    :param PubliclyAccessible: **[REQUIRED]** 
+
+      Enables connections from applications outside of the VPC that hosts the broker's subnets. Set to false by default, if no value is provided.
+
+      
+
+    
+    :type SecurityGroups: list
+    :param SecurityGroups: 
+
+      The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type StorageType: string
+    :param StorageType: 
+
+      The broker's storage type.
+
+      
+
+    
+    :type SubnetIds: list
+    :param SubnetIds: 
+
+      The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.
+
+       
+
+      .. warning::
+
+        
+
+        If you specify subnets in a `shared VPC <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html>`__ for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.
+
+        
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type Tags: dict
+    :param Tags: 
+
+      Create tags when creating the broker.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type Users: list
+    :param Users: **[REQUIRED]** 
+
+      Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+       
+
+      .. warning::
+
+        Amazon MQ for RabbitMQ 
+
+        When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.
+
+        
+
+      
+
+    
+      - *(dict) --* 
+
+        A user associated with the broker. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.
+
+        
+
+      
+        - **ConsoleAccess** *(boolean) --* 
+
+          Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply to RabbitMQ brokers.
+
+          
+
+        
+        - **Groups** *(list) --* 
+
+          The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. Does not apply to RabbitMQ brokers.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **Password** *(string) --* **[REQUIRED]** 
+
+          Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
+
+          
+
+        
+        - **Username** *(string) --* **[REQUIRED]** 
+
+          important>Amazon MQ for ActiveMQ For ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+          /important> 
+
+          .. warning::
+
+            Amazon MQ for RabbitMQ 
+
+            For RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.
+
+            
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerArn': 'string',
+            'BrokerId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerArn** *(string) --* 
+
+          The broker's Amazon Resource Name (ARN).
+
+          
+        
+
+        - **BrokerId** *(string) --* 
+
+          The unique ID that Amazon MQ generates for the broker.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: create_configuration(**kwargs)
+
+    
+
+    Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_configuration(
+          AuthenticationStrategy='SIMPLE'|'LDAP',
+          EngineType='ACTIVEMQ'|'RABBITMQ',
+          EngineVersion='string',
+          Name='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type AuthenticationStrategy: string
+    :param AuthenticationStrategy: 
+
+      Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
+
+      
+
+    
+    :type EngineType: string
+    :param EngineType: **[REQUIRED]** 
+
+      Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+
+      
+
+    
+    :type EngineVersion: string
+    :param EngineVersion: **[REQUIRED]** 
+
+      Required. The broker engine's version. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Create tags when creating the configuration.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'AuthenticationStrategy': 'SIMPLE'|'LDAP',
+            'Created': datetime(2015, 1, 1),
+            'Id': 'string',
+            'LatestRevision': {
+                'Created': datetime(2015, 1, 1),
+                'Description': 'string',
+                'Revision': 123
+            },
+            'Name': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **Arn** *(string) --* 
+
+          Required. The Amazon Resource Name (ARN) of the configuration.
+
+          
+        
+
+        - **AuthenticationStrategy** *(string) --* 
+
+          Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
+
+          
+        
+
+        - **Created** *(datetime) --* 
+
+          Required. The date and time of the configuration.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the configuration.
+
+          
+        
+
+        - **LatestRevision** *(dict) --* 
+
+          The latest revision of the configuration.
+
+          
+          
+
+          - **Created** *(datetime) --* 
+
+            Required. The date and time of the configuration revision.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the configuration revision.
+
+            
+          
+
+          - **Revision** *(integer) --* 
+
+            Required. The revision number of the configuration.
+
+            
+      
+        
+
+        - **Name** *(string) --* 
+
+          Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: create_tags(**kwargs)
+
+    
+
+    Add a tag to a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_tags(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource tag.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      The key-value pair for the resource tag.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: create_user(**kwargs)
+
+    
+
+    Creates an ActiveMQ user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_user(
+          BrokerId='string',
+          ConsoleAccess=True|False,
+          Groups=[
+              'string',
+          ],
+          Password='string',
+          Username='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type ConsoleAccess: boolean
+    :param ConsoleAccess: 
+
+      Enables access to the ActiveMQ Web Console for the ActiveMQ user.
+
+      
+
+    
+    :type Groups: list
+    :param Groups: 
+
+      The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type Password: string
+    :param Password: **[REQUIRED]** 
+
+      Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
+
+      
+
+    
+    :type Username: string
+    :param Username: **[REQUIRED]** 
+
+      The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: delete_broker(**kwargs)
+
+    
+
+    Deletes a broker. Note: This API is asynchronous.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteBroker>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_broker(
+          BrokerId='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerId** *(string) --* 
+
+          The unique ID that Amazon MQ generates for the broker.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: delete_tags(**kwargs)
+
+    
+
+    Removes a tag from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_tags(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource tag.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      An array of tag keys to delete
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: delete_user(**kwargs)
+
+    
+
+    Deletes an ActiveMQ user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_user(
+          BrokerId='string',
+          Username='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type Username: string
+    :param Username: **[REQUIRED]** 
+
+      The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_broker(**kwargs)
+
+    
+
+    Returns information about the specified broker.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBroker>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_broker(
+          BrokerId='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AuthenticationStrategy': 'SIMPLE'|'LDAP',
+            'AutoMinorVersionUpgrade': True|False,
+            'BrokerArn': 'string',
+            'BrokerId': 'string',
+            'BrokerInstances': [
+                {
+                    'ConsoleURL': 'string',
+                    'Endpoints': [
+                        'string',
+                    ],
+                    'IpAddress': 'string'
+                },
+            ],
+            'BrokerName': 'string',
+            'BrokerState': 'CREATION_IN_PROGRESS'|'CREATION_FAILED'|'DELETION_IN_PROGRESS'|'RUNNING'|'REBOOT_IN_PROGRESS',
+            'Configurations': {
+                'Current': {
+                    'Id': 'string',
+                    'Revision': 123
+                },
+                'History': [
+                    {
+                        'Id': 'string',
+                        'Revision': 123
+                    },
+                ],
+                'Pending': {
+                    'Id': 'string',
+                    'Revision': 123
+                }
+            },
+            'Created': datetime(2015, 1, 1),
+            'DeploymentMode': 'SINGLE_INSTANCE'|'ACTIVE_STANDBY_MULTI_AZ'|'CLUSTER_MULTI_AZ',
+            'EncryptionOptions': {
+                'KmsKeyId': 'string',
+                'UseAwsOwnedKey': True|False
+            },
+            'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+            'EngineVersion': 'string',
+            'HostInstanceType': 'string',
+            'LdapServerMetadata': {
+                'Hosts': [
+                    'string',
+                ],
+                'RoleBase': 'string',
+                'RoleName': 'string',
+                'RoleSearchMatching': 'string',
+                'RoleSearchSubtree': True|False,
+                'ServiceAccountUsername': 'string',
+                'UserBase': 'string',
+                'UserRoleName': 'string',
+                'UserSearchMatching': 'string',
+                'UserSearchSubtree': True|False
+            },
+            'Logs': {
+                'Audit': True|False,
+                'AuditLogGroup': 'string',
+                'General': True|False,
+                'GeneralLogGroup': 'string',
+                'Pending': {
+                    'Audit': True|False,
+                    'General': True|False
+                }
+            },
+            'MaintenanceWindowStartTime': {
+                'DayOfWeek': 'MONDAY'|'TUESDAY'|'WEDNESDAY'|'THURSDAY'|'FRIDAY'|'SATURDAY'|'SUNDAY',
+                'TimeOfDay': 'string',
+                'TimeZone': 'string'
+            },
+            'PendingAuthenticationStrategy': 'SIMPLE'|'LDAP',
+            'PendingEngineVersion': 'string',
+            'PendingHostInstanceType': 'string',
+            'PendingLdapServerMetadata': {
+                'Hosts': [
+                    'string',
+                ],
+                'RoleBase': 'string',
+                'RoleName': 'string',
+                'RoleSearchMatching': 'string',
+                'RoleSearchSubtree': True|False,
+                'ServiceAccountUsername': 'string',
+                'UserBase': 'string',
+                'UserRoleName': 'string',
+                'UserSearchMatching': 'string',
+                'UserSearchSubtree': True|False
+            },
+            'PendingSecurityGroups': [
+                'string',
+            ],
+            'PubliclyAccessible': True|False,
+            'SecurityGroups': [
+                'string',
+            ],
+            'StorageType': 'EBS'|'EFS',
+            'SubnetIds': [
+                'string',
+            ],
+            'Tags': {
+                'string': 'string'
+            },
+            'Users': [
+                {
+                    'PendingChange': 'CREATE'|'UPDATE'|'DELETE',
+                    'Username': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **AuthenticationStrategy** *(string) --* 
+
+          The authentication strategy used to secure the broker. The default is SIMPLE.
+
+          
+        
+
+        - **AutoMinorVersionUpgrade** *(boolean) --* 
+
+          Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.
+
+          
+        
+
+        - **BrokerArn** *(string) --* 
+
+          The broker's Amazon Resource Name (ARN).
+
+          
+        
+
+        - **BrokerId** *(string) --* 
+
+          The unique ID that Amazon MQ generates for the broker.
+
+          
+        
+
+        - **BrokerInstances** *(list) --* 
+
+          A list of information about allocated brokers.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about all brokers.
+
+            
+            
+
+            - **ConsoleURL** *(string) --* 
+
+              The brokers web console URL.
+
+              
+            
+
+            - **Endpoints** *(list) --* 
+
+              The broker's wire-level protocol endpoints.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **IpAddress** *(string) --* 
+
+              The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers.
+
+              
+        
+      
+        
+
+        - **BrokerName** *(string) --* 
+
+          The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+
+          
+        
+
+        - **BrokerState** *(string) --* 
+
+          The broker's status.
+
+          
+        
+
+        - **Configurations** *(dict) --* 
+
+          The list of all revisions for the specified configuration.
+
+          
+          
+
+          - **Current** *(dict) --* 
+
+            The broker's current configuration.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              Required. The unique ID that Amazon MQ generates for the configuration.
+
+              
+            
+
+            - **Revision** *(integer) --* 
+
+              The revision number of the configuration.
+
+              
+        
+          
+
+          - **History** *(list) --* 
+
+            The history of configurations applied to the broker.
+
+            
+            
+
+            - *(dict) --* 
+
+              A list of information about the configuration.
+
+               
+
+              .. warning::
+
+                
+
+                Does not apply to RabbitMQ brokers.
+
+                
+
+              
+              
+
+              - **Id** *(string) --* 
+
+                Required. The unique ID that Amazon MQ generates for the configuration.
+
+                
+              
+
+              - **Revision** *(integer) --* 
+
+                The revision number of the configuration.
+
+                
+          
+        
+          
+
+          - **Pending** *(dict) --* 
+
+            The broker's pending configuration.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              Required. The unique ID that Amazon MQ generates for the configuration.
+
+              
+            
+
+            - **Revision** *(integer) --* 
+
+              The revision number of the configuration.
+
+              
+        
+      
+        
+
+        - **Created** *(datetime) --* 
+
+          The time when the broker was created.
+
+          
+        
+
+        - **DeploymentMode** *(string) --* 
+
+          The broker's deployment mode.
+
+          
+        
+
+        - **EncryptionOptions** *(dict) --* 
+
+          Encryption options for the broker. Does not apply to RabbitMQ brokers.
+
+          
+          
+
+          - **KmsKeyId** *(string) --* 
+
+            The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+
+            
+          
+
+          - **UseAwsOwnedKey** *(boolean) --* 
+
+            Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.
+
+            
+      
+        
+
+        - **EngineType** *(string) --* 
+
+          The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+
+          
+        
+
+        - **EngineVersion** *(string) --* 
+
+          The broker engine's version. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+          
+        
+
+        - **HostInstanceType** *(string) --* 
+
+          The broker's instance type.
+
+          
+        
+
+        - **LdapServerMetadata** *(dict) --* 
+
+          The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+
+          
+          
+
+          - **Hosts** *(list) --* 
+
+            Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **RoleBase** *(string) --* 
+
+            The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **RoleName** *(string) --* 
+
+            Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+
+            
+          
+
+          - **RoleSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
+
+            
+          
+
+          - **RoleSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the role. If set to true, scope is to search the entire subtree.
+
+            
+          
+
+          - **ServiceAccountUsername** *(string) --* 
+
+            Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserBase** *(string) --* 
+
+            Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserRoleName** *(string) --* 
+
+            Specifies the name of the LDAP attribute for the user group membership.
+
+            
+          
+
+          - **UserSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the user. If set to true, scope is to search the entire subtree.
+
+            
+      
+        
+
+        - **Logs** *(dict) --* 
+
+          The list of information about logs currently enabled and pending to be deployed for the specified broker.
+
+          
+          
+
+          - **Audit** *(boolean) --* 
+
+            Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+
+            
+          
+
+          - **AuditLogGroup** *(string) --* 
+
+            The location of the CloudWatch Logs log group where audit logs are sent.
+
+            
+          
+
+          - **General** *(boolean) --* 
+
+            Enables general logging.
+
+            
+          
+
+          - **GeneralLogGroup** *(string) --* 
+
+            The location of the CloudWatch Logs log group where general logs are sent.
+
+            
+          
+
+          - **Pending** *(dict) --* 
+
+            The list of information about logs pending to be deployed for the specified broker.
+
+            
+            
+
+            - **Audit** *(boolean) --* 
+
+              Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+
+              
+            
+
+            - **General** *(boolean) --* 
+
+              Enables general logging.
+
+              
+        
+      
+        
+
+        - **MaintenanceWindowStartTime** *(dict) --* 
+
+          The parameters that determine the WeeklyStartTime.
+
+          
+          
+
+          - **DayOfWeek** *(string) --* 
+
+            Required. The day of the week.
+
+            
+          
+
+          - **TimeOfDay** *(string) --* 
+
+            Required. The time, in 24-hour format.
+
+            
+          
+
+          - **TimeZone** *(string) --* 
+
+            The time zone, UTC by default, in either the Country/City format, or the UTC offset format.
+
+            
+      
+        
+
+        - **PendingAuthenticationStrategy** *(string) --* 
+
+          The authentication strategy that will be applied when the broker is rebooted. The default is SIMPLE.
+
+          
+        
+
+        - **PendingEngineVersion** *(string) --* 
+
+          The broker engine version to upgrade to. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+          
+        
+
+        - **PendingHostInstanceType** *(string) --* 
+
+          The broker's host instance type to upgrade to. For a list of supported instance types, see `Broker instance types <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types>`__ .
+
+          
+        
+
+        - **PendingLdapServerMetadata** *(dict) --* 
+
+          The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker after it is rebooted.
+
+          
+          
+
+          - **Hosts** *(list) --* 
+
+            Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **RoleBase** *(string) --* 
+
+            The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **RoleName** *(string) --* 
+
+            Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+
+            
+          
+
+          - **RoleSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
+
+            
+          
+
+          - **RoleSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the role. If set to true, scope is to search the entire subtree.
+
+            
+          
+
+          - **ServiceAccountUsername** *(string) --* 
+
+            Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserBase** *(string) --* 
+
+            Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserRoleName** *(string) --* 
+
+            Specifies the name of the LDAP attribute for the user group membership.
+
+            
+          
+
+          - **UserSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the user. If set to true, scope is to search the entire subtree.
+
+            
+      
+        
+
+        - **PendingSecurityGroups** *(list) --* 
+
+          The list of pending security groups to authorize connections to brokers.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **PubliclyAccessible** *(boolean) --* 
+
+          Enables connections from applications outside of the VPC that hosts the broker's subnets.
+
+          
+        
+
+        - **SecurityGroups** *(list) --* 
+
+          The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **StorageType** *(string) --* 
+
+          The broker's storage type.
+
+          
+        
+
+        - **SubnetIds** *(list) --* 
+
+          The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **Tags** *(dict) --* 
+
+          The list of all tags associated with this broker.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **Users** *(list) --* 
+
+          The list of all broker usernames for the specified broker.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns a list of all broker users. Does not apply to RabbitMQ brokers.
+
+            
+            
+
+            - **PendingChange** *(string) --* 
+
+              The type of change pending for the broker user.
+
+              
+            
+
+            - **Username** *(string) --* 
+
+              Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_broker_engine_types(**kwargs)
+
+    
+
+    Describe available engine types and versions.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerEngineTypes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_broker_engine_types(
+          EngineType='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type EngineType: string
+    :param EngineType: 
+
+      Filter response by engine type.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerEngineTypes': [
+                {
+                    'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+                    'EngineVersions': [
+                        {
+                            'Name': 'string'
+                        },
+                    ]
+                },
+            ],
+            'MaxResults': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerEngineTypes** *(list) --* 
+
+          List of available engine types and versions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Types of broker engines.
+
+            
+            
+
+            - **EngineType** *(string) --* 
+
+              The broker's engine type.
+
+              
+            
+
+            - **EngineVersions** *(list) --* 
+
+              The list of engine versions.
+
+              
+              
+
+              - *(dict) --* 
+
+                Id of the engine version.
+
+                
+                
+
+                - **Name** *(string) --* 
+
+                  Id for the version.
+
+                  
+            
+          
+        
+      
+        
+
+        - **MaxResults** *(integer) --* 
+
+          Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_broker_instance_options(**kwargs)
+
+    
+
+    Describe available broker instance options.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_broker_instance_options(
+          EngineType='string',
+          HostInstanceType='string',
+          MaxResults=123,
+          NextToken='string',
+          StorageType='string'
+      )
+    :type EngineType: string
+    :param EngineType: 
+
+      Filter response by engine type.
+
+      
+
+    
+    :type HostInstanceType: string
+    :param HostInstanceType: 
+
+      Filter response by host instance type.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    :type StorageType: string
+    :param StorageType: 
+
+      Filter response by storage type.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerInstanceOptions': [
+                {
+                    'AvailabilityZones': [
+                        {
+                            'Name': 'string'
+                        },
+                    ],
+                    'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+                    'HostInstanceType': 'string',
+                    'StorageType': 'EBS'|'EFS',
+                    'SupportedDeploymentModes': [
+                        'SINGLE_INSTANCE'|'ACTIVE_STANDBY_MULTI_AZ'|'CLUSTER_MULTI_AZ',
+                    ],
+                    'SupportedEngineVersions': [
+                        'string',
+                    ]
+                },
+            ],
+            'MaxResults': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerInstanceOptions** *(list) --* 
+
+          List of available broker instance options.
+
+          
+          
+
+          - *(dict) --* 
+
+            Option for host instance type.
+
+            
+            
+
+            - **AvailabilityZones** *(list) --* 
+
+              The list of available az.
+
+              
+              
+
+              - *(dict) --* 
+
+                Name of the availability zone.
+
+                
+                
+
+                - **Name** *(string) --* 
+
+                  Id for the availability zone.
+
+                  
+            
+          
+            
+
+            - **EngineType** *(string) --* 
+
+              The broker's engine type.
+
+              
+            
+
+            - **HostInstanceType** *(string) --* 
+
+              The broker's instance type.
+
+              
+            
+
+            - **StorageType** *(string) --* 
+
+              The broker's storage type.
+
+              
+            
+
+            - **SupportedDeploymentModes** *(list) --* 
+
+              The list of supported deployment modes.
+
+              
+              
+
+              - *(string) --* 
+
+                The broker's deployment mode.
+
+                
+          
+            
+
+            - **SupportedEngineVersions** *(list) --* 
+
+              The list of supported engine versions.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+      
+        
+
+        - **MaxResults** *(integer) --* 
+
+          Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_configuration(**kwargs)
+
+    
+
+    Returns information about the specified configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_configuration(
+          ConfigurationId='string'
+      )
+    :type ConfigurationId: string
+    :param ConfigurationId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the configuration.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'AuthenticationStrategy': 'SIMPLE'|'LDAP',
+            'Created': datetime(2015, 1, 1),
+            'Description': 'string',
+            'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+            'EngineVersion': 'string',
+            'Id': 'string',
+            'LatestRevision': {
+                'Created': datetime(2015, 1, 1),
+                'Description': 'string',
+                'Revision': 123
+            },
+            'Name': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **Arn** *(string) --* 
+
+          Required. The ARN of the configuration.
+
+          
+        
+
+        - **AuthenticationStrategy** *(string) --* 
+
+          Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
+
+          
+        
+
+        - **Created** *(datetime) --* 
+
+          Required. The date and time of the configuration revision.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          Required. The description of the configuration.
+
+          
+        
+
+        - **EngineType** *(string) --* 
+
+          Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+
+          
+        
+
+        - **EngineVersion** *(string) --* 
+
+          Required. The broker engine's version. For a list of supported engine versions, see, `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the configuration.
+
+          
+        
+
+        - **LatestRevision** *(dict) --* 
+
+          Required. The latest revision of the configuration.
+
+          
+          
+
+          - **Created** *(datetime) --* 
+
+            Required. The date and time of the configuration revision.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the configuration revision.
+
+            
+          
+
+          - **Revision** *(integer) --* 
+
+            Required. The revision number of the configuration.
+
+            
+      
+        
+
+        - **Name** *(string) --* 
+
+          Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+
+          
+        
+
+        - **Tags** *(dict) --* 
+
+          The list of all tags associated with this configuration.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_configuration_revision(**kwargs)
+
+    
+
+    Returns the specified configuration revision for the specified configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRevision>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_configuration_revision(
+          ConfigurationId='string',
+          ConfigurationRevision='string'
+      )
+    :type ConfigurationId: string
+    :param ConfigurationId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the configuration.
+
+      
+
+    
+    :type ConfigurationRevision: string
+    :param ConfigurationRevision: **[REQUIRED]** 
+
+      The revision of the configuration.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ConfigurationId': 'string',
+            'Created': datetime(2015, 1, 1),
+            'Data': 'string',
+            'Description': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **ConfigurationId** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the configuration.
+
+          
+        
+
+        - **Created** *(datetime) --* 
+
+          Required. The date and time of the configuration.
+
+          
+        
+
+        - **Data** *(string) --* 
+
+          Required. The base64-encoded XML configuration.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the configuration.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: describe_user(**kwargs)
+
+    
+
+    Returns information about an ActiveMQ user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_user(
+          BrokerId='string',
+          Username='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type Username: string
+    :param Username: **[REQUIRED]** 
+
+      The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerId': 'string',
+            'ConsoleAccess': True|False,
+            'Groups': [
+                'string',
+            ],
+            'Pending': {
+                'ConsoleAccess': True|False,
+                'Groups': [
+                    'string',
+                ],
+                'PendingChange': 'CREATE'|'UPDATE'|'DELETE'
+            },
+            'Username': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerId** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the broker.
+
+          
+        
+
+        - **ConsoleAccess** *(boolean) --* 
+
+          Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+
+          
+        
+
+        - **Groups** *(list) --* 
+
+          The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **Pending** *(dict) --* 
+
+          The status of the changes pending for the ActiveMQ user.
+
+          
+          
+
+          - **ConsoleAccess** *(boolean) --* 
+
+            Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+
+            
+          
+
+          - **Groups** *(list) --* 
+
+            The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **PendingChange** *(string) --* 
+
+            Required. The type of change pending for the ActiveMQ user.
+
+            
+      
+        
+
+        - **Username** *(string) --* 
+
+          Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_brokers(**kwargs)
+
+    
+
+    Returns a list of all brokers.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_brokers(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerSummaries': [
+                {
+                    'BrokerArn': 'string',
+                    'BrokerId': 'string',
+                    'BrokerName': 'string',
+                    'BrokerState': 'CREATION_IN_PROGRESS'|'CREATION_FAILED'|'DELETION_IN_PROGRESS'|'RUNNING'|'REBOOT_IN_PROGRESS',
+                    'Created': datetime(2015, 1, 1),
+                    'DeploymentMode': 'SINGLE_INSTANCE'|'ACTIVE_STANDBY_MULTI_AZ'|'CLUSTER_MULTI_AZ',
+                    'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+                    'HostInstanceType': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerSummaries** *(list) --* 
+
+          A list of information about all brokers.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about all brokers.
+
+            
+            
+
+            - **BrokerArn** *(string) --* 
+
+              The broker's Amazon Resource Name (ARN).
+
+              
+            
+
+            - **BrokerId** *(string) --* 
+
+              The unique ID that Amazon MQ generates for the broker.
+
+              
+            
+
+            - **BrokerName** *(string) --* 
+
+              The broker's name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+
+              
+            
+
+            - **BrokerState** *(string) --* 
+
+              The broker's status.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The time when the broker was created.
+
+              
+            
+
+            - **DeploymentMode** *(string) --* 
+
+              The broker's deployment mode.
+
+              
+            
+
+            - **EngineType** *(string) --* 
+
+              The type of broker engine.
+
+              
+            
+
+            - **HostInstanceType** *(string) --* 
+
+              The broker's instance type.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_configuration_revisions(**kwargs)
+
+    
+
+    Returns a list of all revisions for the specified configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_configuration_revisions(
+          ConfigurationId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ConfigurationId: string
+    :param ConfigurationId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the configuration.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ConfigurationId': 'string',
+            'MaxResults': 123,
+            'NextToken': 'string',
+            'Revisions': [
+                {
+                    'Created': datetime(2015, 1, 1),
+                    'Description': 'string',
+                    'Revision': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **ConfigurationId** *(string) --* 
+
+          The unique ID that Amazon MQ generates for the configuration.
+
+          
+        
+
+        - **MaxResults** *(integer) --* 
+
+          The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+        
+
+        - **Revisions** *(list) --* 
+
+          The list of all revisions for the specified configuration.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about the specified configuration revision.
+
+            
+            
+
+            - **Created** *(datetime) --* 
+
+              Required. The date and time of the configuration revision.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the configuration revision.
+
+              
+            
+
+            - **Revision** *(integer) --* 
+
+              Required. The revision number of the configuration.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_configurations(**kwargs)
+
+    
+
+    Returns a list of all configurations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_configurations(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Configurations': [
+                {
+                    'Arn': 'string',
+                    'AuthenticationStrategy': 'SIMPLE'|'LDAP',
+                    'Created': datetime(2015, 1, 1),
+                    'Description': 'string',
+                    'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+                    'EngineVersion': 'string',
+                    'Id': 'string',
+                    'LatestRevision': {
+                        'Created': datetime(2015, 1, 1),
+                        'Description': 'string',
+                        'Revision': 123
+                    },
+                    'Name': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'MaxResults': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **Configurations** *(list) --* 
+
+          The list of all revisions for the specified configuration.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about all configurations.
+
+            
+            
+
+            - **Arn** *(string) --* 
+
+              Required. The ARN of the configuration.
+
+              
+            
+
+            - **AuthenticationStrategy** *(string) --* 
+
+              Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              Required. The date and time of the configuration revision.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              Required. The description of the configuration.
+
+              
+            
+
+            - **EngineType** *(string) --* 
+
+              Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+
+              
+            
+
+            - **EngineVersion** *(string) --* 
+
+              Required. The broker engine's version. For a list of supported engine versions, see, `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              Required. The unique ID that Amazon MQ generates for the configuration.
+
+              
+            
+
+            - **LatestRevision** *(dict) --* 
+
+              Required. The latest revision of the configuration.
+
+              
+              
+
+              - **Created** *(datetime) --* 
+
+                Required. The date and time of the configuration revision.
+
+                
+              
+
+              - **Description** *(string) --* 
+
+                The description of the configuration revision.
+
+                
+              
+
+              - **Revision** *(integer) --* 
+
+                Required. The revision number of the configuration.
+
+                
+          
+            
+
+            - **Name** *(string) --* 
+
+              Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              The list of all tags associated with this configuration.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **MaxResults** *(integer) --* 
+
+          The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_tags(**kwargs)
+
+    
+
+    Lists tags for a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource tag.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **Tags** *(dict) --* 
+
+          The key-value pair for the resource tag.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: list_users(**kwargs)
+
+    
+
+    Returns a list of all ActiveMQ users.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_users(
+          BrokerId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerId': 'string',
+            'MaxResults': 123,
+            'NextToken': 'string',
+            'Users': [
+                {
+                    'PendingChange': 'CREATE'|'UPDATE'|'DELETE',
+                    'Username': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerId** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the broker.
+
+          
+        
+
+        - **MaxResults** *(integer) --* 
+
+          Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+
+          
+        
+
+        - **Users** *(list) --* 
+
+          Required. The list of all ActiveMQ usernames for the specified broker. Does not apply to RabbitMQ brokers.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns a list of all broker users. Does not apply to RabbitMQ brokers.
+
+            
+            
+
+            - **PendingChange** *(string) --* 
+
+              The type of change pending for the broker user.
+
+              
+            
+
+            - **Username** *(string) --* 
+
+              Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: reboot_broker(**kwargs)
+
+    
+
+    Reboots a broker. Note: This API is asynchronous.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBroker>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.reboot_broker(
+          BrokerId='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: update_broker(**kwargs)
+
+    
+
+    Adds a pending configuration change to a broker.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBroker>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_broker(
+          AuthenticationStrategy='SIMPLE'|'LDAP',
+          AutoMinorVersionUpgrade=True|False,
+          BrokerId='string',
+          Configuration={
+              'Id': 'string',
+              'Revision': 123
+          },
+          EngineVersion='string',
+          HostInstanceType='string',
+          LdapServerMetadata={
+              'Hosts': [
+                  'string',
+              ],
+              'RoleBase': 'string',
+              'RoleName': 'string',
+              'RoleSearchMatching': 'string',
+              'RoleSearchSubtree': True|False,
+              'ServiceAccountPassword': 'string',
+              'ServiceAccountUsername': 'string',
+              'UserBase': 'string',
+              'UserRoleName': 'string',
+              'UserSearchMatching': 'string',
+              'UserSearchSubtree': True|False
+          },
+          Logs={
+              'Audit': True|False,
+              'General': True|False
+          },
+          MaintenanceWindowStartTime={
+              'DayOfWeek': 'MONDAY'|'TUESDAY'|'WEDNESDAY'|'THURSDAY'|'FRIDAY'|'SATURDAY'|'SUNDAY',
+              'TimeOfDay': 'string',
+              'TimeZone': 'string'
+          },
+          SecurityGroups=[
+              'string',
+          ]
+      )
+    :type AuthenticationStrategy: string
+    :param AuthenticationStrategy: 
+
+      Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
+
+      
+
+    
+    :type AutoMinorVersionUpgrade: boolean
+    :param AutoMinorVersionUpgrade: 
+
+      Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.
+
+      
+
+    
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type Configuration: dict
+    :param Configuration: 
+
+      A list of information about the configuration.
+
+      
+
+    
+      - **Id** *(string) --* **[REQUIRED]** 
+
+        Required. The unique ID that Amazon MQ generates for the configuration.
+
+        
+
+      
+      - **Revision** *(integer) --* 
+
+        The revision number of the configuration.
+
+        
+
+      
+    
+    :type EngineVersion: string
+    :param EngineVersion: 
+
+      The broker engine version. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+      
+
+    
+    :type HostInstanceType: string
+    :param HostInstanceType: 
+
+      The broker's host instance type to upgrade to. For a list of supported instance types, see `Broker instance types <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types>`__ .
+
+      
+
+    
+    :type LdapServerMetadata: dict
+    :param LdapServerMetadata: 
+
+      Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
+
+      
+
+    
+      - **Hosts** *(list) --* **[REQUIRED]** 
+
+        Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **RoleBase** *(string) --* **[REQUIRED]** 
+
+        The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **RoleName** *(string) --* 
+
+        Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+
+        
+
+      
+      - **RoleSearchMatching** *(string) --* **[REQUIRED]** 
+
+        The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
+
+        
+
+      
+      - **RoleSearchSubtree** *(boolean) --* 
+
+        The directory search scope for the role. If set to true, scope is to search the entire subtree.
+
+        
+
+      
+      - **ServiceAccountPassword** *(string) --* **[REQUIRED]** 
+
+        Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **ServiceAccountUsername** *(string) --* **[REQUIRED]** 
+
+        Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserBase** *(string) --* **[REQUIRED]** 
+
+        Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserRoleName** *(string) --* 
+
+        Specifies the name of the LDAP attribute for the user group membership.
+
+        
+
+      
+      - **UserSearchMatching** *(string) --* **[REQUIRED]** 
+
+        The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example, dc=com.
+
+        
+
+      
+      - **UserSearchSubtree** *(boolean) --* 
+
+        The directory search scope for the user. If set to true, scope is to search the entire subtree.
+
+        
+
+      
+    
+    :type Logs: dict
+    :param Logs: 
+
+      Enables Amazon CloudWatch logging for brokers.
+
+      
+
+    
+      - **Audit** *(boolean) --* 
+
+        Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
+
+        
+
+      
+      - **General** *(boolean) --* 
+
+        Enables general logging.
+
+        
+
+      
+    
+    :type MaintenanceWindowStartTime: dict
+    :param MaintenanceWindowStartTime: 
+
+      The parameters that determine the WeeklyStartTime.
+
+      
+
+    
+      - **DayOfWeek** *(string) --* **[REQUIRED]** 
+
+        Required. The day of the week.
+
+        
+
+      
+      - **TimeOfDay** *(string) --* **[REQUIRED]** 
+
+        Required. The time, in 24-hour format.
+
+        
+
+      
+      - **TimeZone** *(string) --* 
+
+        The time zone, UTC by default, in either the Country/City format, or the UTC offset format.
+
+        
+
+      
+    
+    :type SecurityGroups: list
+    :param SecurityGroups: 
+
+      The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AuthenticationStrategy': 'SIMPLE'|'LDAP',
+            'AutoMinorVersionUpgrade': True|False,
+            'BrokerId': 'string',
+            'Configuration': {
+                'Id': 'string',
+                'Revision': 123
+            },
+            'EngineVersion': 'string',
+            'HostInstanceType': 'string',
+            'LdapServerMetadata': {
+                'Hosts': [
+                    'string',
+                ],
+                'RoleBase': 'string',
+                'RoleName': 'string',
+                'RoleSearchMatching': 'string',
+                'RoleSearchSubtree': True|False,
+                'ServiceAccountUsername': 'string',
+                'UserBase': 'string',
+                'UserRoleName': 'string',
+                'UserSearchMatching': 'string',
+                'UserSearchSubtree': True|False
+            },
+            'Logs': {
+                'Audit': True|False,
+                'General': True|False
+            },
+            'MaintenanceWindowStartTime': {
+                'DayOfWeek': 'MONDAY'|'TUESDAY'|'WEDNESDAY'|'THURSDAY'|'FRIDAY'|'SATURDAY'|'SUNDAY',
+                'TimeOfDay': 'string',
+                'TimeZone': 'string'
+            },
+            'SecurityGroups': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **AuthenticationStrategy** *(string) --* 
+
+          Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
+
+          
+        
+
+        - **AutoMinorVersionUpgrade** *(boolean) --* 
+
+          The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.
+
+          
+        
+
+        - **BrokerId** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the broker.
+
+          
+        
+
+        - **Configuration** *(dict) --* 
+
+          The ID of the updated configuration.
+
+          
+          
+
+          - **Id** *(string) --* 
+
+            Required. The unique ID that Amazon MQ generates for the configuration.
+
+            
+          
+
+          - **Revision** *(integer) --* 
+
+            The revision number of the configuration.
+
+            
+      
+        
+
+        - **EngineVersion** *(string) --* 
+
+          The broker engine version to upgrade to. For a list of supported engine versions, see `Supported engines <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html>`__ .
+
+          
+        
+
+        - **HostInstanceType** *(string) --* 
+
+          The broker's host instance type to upgrade to. For a list of supported instance types, see `Broker instance types <https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types>`__ .
+
+          
+        
+
+        - **LdapServerMetadata** *(dict) --* 
+
+          Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
+
+          
+          
+
+          - **Hosts** *(list) --* 
+
+            Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **RoleBase** *(string) --* 
+
+            The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **RoleName** *(string) --* 
+
+            Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+
+            
+          
+
+          - **RoleSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
+
+            
+          
+
+          - **RoleSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the role. If set to true, scope is to search the entire subtree.
+
+            
+          
+
+          - **ServiceAccountUsername** *(string) --* 
+
+            Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserBase** *(string) --* 
+
+            Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp, dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserRoleName** *(string) --* 
+
+            Specifies the name of the LDAP attribute for the user group membership.
+
+            
+          
+
+          - **UserSearchMatching** *(string) --* 
+
+            The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example, dc=com.
+
+            
+          
+
+          - **UserSearchSubtree** *(boolean) --* 
+
+            The directory search scope for the user. If set to true, scope is to search the entire subtree.
+
+            
+      
+        
+
+        - **Logs** *(dict) --* 
+
+          The list of information about logs to be enabled for the specified broker.
+
+          
+          
+
+          - **Audit** *(boolean) --* 
+
+            Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
+
+            
+          
+
+          - **General** *(boolean) --* 
+
+            Enables general logging.
+
+            
+      
+        
+
+        - **MaintenanceWindowStartTime** *(dict) --* 
+
+          The parameters that determine the WeeklyStartTime.
+
+          
+          
+
+          - **DayOfWeek** *(string) --* 
+
+            Required. The day of the week.
+
+            
+          
+
+          - **TimeOfDay** *(string) --* 
+
+            Required. The time, in 24-hour format.
+
+            
+          
+
+          - **TimeZone** *(string) --* 
+
+            The time zone, UTC by default, in either the Country/City format, or the UTC offset format.
+
+            
+      
+        
+
+        - **SecurityGroups** *(list) --* 
+
+          The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: update_configuration(**kwargs)
+
+    
+
+    Updates the specified configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_configuration(
+          ConfigurationId='string',
+          Data='string',
+          Description='string'
+      )
+    :type ConfigurationId: string
+    :param ConfigurationId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the configuration.
+
+      
+
+    
+    :type Data: string
+    :param Data: **[REQUIRED]** 
+
+      Required. The base64-encoded XML configuration.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the configuration.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Created': datetime(2015, 1, 1),
+            'Id': 'string',
+            'LatestRevision': {
+                'Created': datetime(2015, 1, 1),
+                'Description': 'string',
+                'Revision': 123
+            },
+            'Name': 'string',
+            'Warnings': [
+                {
+                    'AttributeName': 'string',
+                    'ElementName': 'string',
+                    'Reason': 'DISALLOWED_ELEMENT_REMOVED'|'DISALLOWED_ATTRIBUTE_REMOVED'|'INVALID_ATTRIBUTE_VALUE_REMOVED'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **Arn** *(string) --* 
+
+          Required. The Amazon Resource Name (ARN) of the configuration.
+
+          
+        
+
+        - **Created** *(datetime) --* 
+
+          Required. The date and time of the configuration.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          Required. The unique ID that Amazon MQ generates for the configuration.
+
+          
+        
+
+        - **LatestRevision** *(dict) --* 
+
+          The latest revision of the configuration.
+
+          
+          
+
+          - **Created** *(datetime) --* 
+
+            Required. The date and time of the configuration revision.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the configuration revision.
+
+            
+          
+
+          - **Revision** *(integer) --* 
+
+            Required. The revision number of the configuration.
+
+            
+      
+        
+
+        - **Name** *(string) --* 
+
+          Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+
+          
+        
+
+        - **Warnings** *(list) --* 
+
+          The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about the XML element or attribute that was sanitized in the configuration.
+
+            
+            
+
+            - **AttributeName** *(string) --* 
+
+              The name of the XML attribute that has been sanitized.
+
+              
+            
+
+            - **ElementName** *(string) --* 
+
+              The name of the XML element that has been sanitized.
+
+              
+            
+
+            - **Reason** *(string) --* 
+
+              Required. The reason for which the XML elements or attributes were sanitized.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+  .. py:method:: update_user(**kwargs)
+
+    
+
+    Updates the information for an ActiveMQ user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_user(
+          BrokerId='string',
+          ConsoleAccess=True|False,
+          Groups=[
+              'string',
+          ],
+          Password='string',
+          Username='string'
+      )
+    :type BrokerId: string
+    :param BrokerId: **[REQUIRED]** 
+
+      The unique ID that Amazon MQ generates for the broker.
+
+      
+
+    
+    :type ConsoleAccess: boolean
+    :param ConsoleAccess: 
+
+      Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+
+      
+
+    
+    :type Groups: list
+    :param Groups: 
+
+      The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type Password: string
+    :param Password: 
+
+      The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
+
+      
+
+    
+    :type Username: string
+    :param Username: **[REQUIRED]** 
+
+      The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+    
+    **Exceptions** 
+    
+    *     :py:class:`MQ.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`MQ.Client.exceptions.ForbiddenException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`MQ.Paginator.ListBrokers`
+
+
+
+.. py:class:: MQ.Paginator.ListBrokers
+
+  ::
+
+    
+    paginator = client.get_paginator('list_brokers')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`MQ.Client.list_brokers`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'BrokerSummaries': [
+                {
+                    'BrokerArn': 'string',
+                    'BrokerId': 'string',
+                    'BrokerName': 'string',
+                    'BrokerState': 'CREATION_IN_PROGRESS'|'CREATION_FAILED'|'DELETION_IN_PROGRESS'|'RUNNING'|'REBOOT_IN_PROGRESS',
+                    'Created': datetime(2015, 1, 1),
+                    'DeploymentMode': 'SINGLE_INSTANCE'|'ACTIVE_STANDBY_MULTI_AZ'|'CLUSTER_MULTI_AZ',
+                    'EngineType': 'ACTIVEMQ'|'RABBITMQ',
+                    'HostInstanceType': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        HTTP Status Code 200: OK.
+
+        
+        
+
+        - **BrokerSummaries** *(list) --* 
+
+          A list of information about all brokers.
+
+          
+          
+
+          - *(dict) --* 
+
+            Returns information about all brokers.
+
+            
+            
+
+            - **BrokerArn** *(string) --* 
+
+              The broker's Amazon Resource Name (ARN).
+
+              
+            
+
+            - **BrokerId** *(string) --* 
+
+              The unique ID that Amazon MQ generates for the broker.
+
+              
+            
+
+            - **BrokerName** *(string) --* 
+
+              The broker's name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+
+              
+            
+
+            - **BrokerState** *(string) --* 
+
+              The broker's status.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The time when the broker was created.
+
+              
+            
+
+            - **DeploymentMode** *(string) --* 
+
+              The broker's deployment mode.
+
+              
+            
+
+            - **EngineType** *(string) --* 
+
+              The type of broker engine.
+
+              
+            
+
+            - **HostInstanceType** *(string) --* 
+
+              The broker's instance type.
+
+              
+        
+      
+    

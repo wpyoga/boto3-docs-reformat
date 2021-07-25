@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Amazon DynamoDB &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Code examples" href="examples.html" />
+    <link rel="next" title="Amazon EC2 examples" href="ec2-examples.html" />
+    <link rel="prev" title="Using subscription filters in Amazon CloudWatch Logs" href="cw-example-subscription-filters.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ec2-examples.html" title="Amazon EC2 examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-subscription-filters.html" title="Using subscription filters in Amazon CloudWatch Logs"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" accesskey="U">Code examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+              <li>Amazon DynamoDB</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="amazon-dynamodb">
+<span id="dynamodb-guide"></span><h1>Amazon DynamoDB<a class="headerlink" href="#amazon-dynamodb" title="Permalink to this headline">¶</a></h1>
+<p>By following this guide, you will learn how to use the
+<a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.ServiceResource" title="DynamoDB.ServiceResource"><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.ServiceResource</span></tt></a> and <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table" title="DynamoDB.Table"><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Table</span></tt></a>
+resources in order to create tables, write items to tables, modify existing
+items, retrieve items, and query/filter the items in the table.</p>
+<div class="section" id="creating-a-new-table">
+<h2>Creating a new table<a class="headerlink" href="#creating-a-new-table" title="Permalink to this headline">¶</a></h2>
+<p>In order to create a new table, use the
+<a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.ServiceResource.create_table" title="DynamoDB.ServiceResource.create_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.ServiceResource.create_table()</span></tt></a> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Get the service resource.</span>
+<span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create the DynamoDB table.</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+    <span class="n">TableName</span><span class="o">=</span><span class="s1">&#39;users&#39;</span><span class="p">,</span>
+    <span class="n">KeySchema</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;KeyType&#39;</span><span class="p">:</span> <span class="s1">&#39;HASH&#39;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;KeyType&#39;</span><span class="p">:</span> <span class="s1">&#39;RANGE&#39;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="n">AttributeDefinitions</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">ProvisionedThroughput</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;ReadCapacityUnits&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s1">&#39;WriteCapacityUnits&#39;</span><span class="p">:</span> <span class="mi">5</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Wait until the table exists.</span>
+<span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;table_exists&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">TableName</span><span class="o">=</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print out some data about the table.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">item_count</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>This creates a table named <tt class="docutils literal"><span class="pre">users</span></tt> that respectively has the hash and
+range primary keys <tt class="docutils literal"><span class="pre">username</span></tt> and <tt class="docutils literal"><span class="pre">last_name</span></tt>.
+This method will return a <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table" title="DynamoDB.Table"><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Table</span></tt></a> resource to call
+additional methods on the created table.</p>
+</div>
+<div class="section" id="using-an-existing-table">
+<h2>Using an existing table<a class="headerlink" href="#using-an-existing-table" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to create a <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table" title="DynamoDB.Table"><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Table</span></tt></a> resource from
+an existing table:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Get the service resource.</span>
+<span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
+
+<span class="c1"># Instantiate a table resource object without actually</span>
+<span class="c1"># creating a DynamoDB table. Note that the attributes of this table</span>
+<span class="c1"># are lazy-loaded: a request is not made nor are the attribute</span>
+<span class="c1"># values populated until the attributes</span>
+<span class="c1"># on the table resource are accessed or its load() method is called.</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print out some data about the table.</span>
+<span class="c1"># This will cause a request to be made to DynamoDB and its attribute</span>
+<span class="c1"># values will be set based on the response.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">creation_date_time</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output (Please note that the actual times will probably not match up):</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>2015-06-26 12:42:45.149000-07:00
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-new-item">
+<h2>Creating a new item<a class="headerlink" href="#creating-a-new-item" title="Permalink to this headline">¶</a></h2>
+<p>Once you have a <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table" title="DynamoDB.Table"><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Table</span></tt></a> resource you can add new items
+to the table using <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.put_item" title="DynamoDB.Table.put_item"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.put_item()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+   <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+        <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>For all of the valid types that can be used for an item, refer to
+<a class="reference internal" href="../reference/customizations/dynamodb.html#ref-valid-dynamodb-types"><em>Valid DynamoDB types</em></a>.</p>
+</div>
+<div class="section" id="getting-an-item">
+<h2>Getting an item<a class="headerlink" href="#getting-an-item" title="Permalink to this headline">¶</a></h2>
+<p>You can then retrieve the object using <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.get_item" title="DynamoDB.Table.get_item"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.get_item()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span>
+    <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;25&#39;</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating-an-item">
+<h2>Updating an item<a class="headerlink" href="#updating-an-item" title="Permalink to this headline">¶</a></h2>
+<p>You can then update attributes of the item in the table:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">update_item</span><span class="p">(</span>
+    <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span>
+    <span class="p">},</span>
+    <span class="n">UpdateExpression</span><span class="o">=</span><span class="s1">&#39;SET age = :val1&#39;</span><span class="p">,</span>
+    <span class="n">ExpressionAttributeValues</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;:val1&#39;</span><span class="p">:</span> <span class="mi">26</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Then if you retrieve the item again, it will be updated appropriately:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span>
+    <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">item</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+ <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;26&#39;</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-an-item">
+<h2>Deleting an item<a class="headerlink" href="#deleting-an-item" title="Permalink to this headline">¶</a></h2>
+<p>You can also delete the item using <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.delete_item" title="DynamoDB.Table.delete_item"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.delete_item()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span>
+    <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoe&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="batch-writing">
+<h2>Batch writing<a class="headerlink" href="#batch-writing" title="Permalink to this headline">¶</a></h2>
+<p>If you are loading a lot of data at a time, you can make use of
+<a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.batch_writer" title="DynamoDB.Table.batch_writer"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.batch_writer()</span></tt></a> so you can both speed up the process and
+reduce the number of write requests made to the service.</p>
+<p>This method returns a handle to a batch writer object that will automatically
+handle buffering and sending items in batches.  In addition, the
+batch writer will also automatically handle any unprocessed items and
+resend them as needed.  All you need to do is call <tt class="docutils literal"><span class="pre">put_item</span></tt> for any
+items you want to add, and <tt class="docutils literal"><span class="pre">delete_item</span></tt> for any items you want to delete:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">table</span><span class="o">.</span><span class="n">batch_writer</span><span class="p">()</span> <span class="k">as</span> <span class="n">batch</span><span class="p">:</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="mi">90001</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;super_user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;janedoering&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doering&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="s1">&#39;2 Washington Avenue&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Seattle&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;WA&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="mi">98109</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;bobsmith&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span>  <span class="s1">&#39;Smith&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="s1">&#39;3 Madison Lane&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Louisville&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;KY&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="mi">40213</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;super_user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;alicedoe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="mi">90001</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The batch writer is even able to handle a very large amount of writes to the
+table.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">table</span><span class="o">.</span><span class="n">batch_writer</span><span class="p">()</span> <span class="k">as</span> <span class="n">batch</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+        <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+            <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;user&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+                <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>The batch writer can help to de-duplicate request by specifying <tt class="docutils literal"><span class="pre">overwrite_by_pkeys=['partition_key',</span> <span class="pre">'sort_key']</span></tt>
+if you want to bypass no duplication limitation of single batch write request as
+<tt class="docutils literal"><span class="pre">botocore.exceptions.ClientError:</span> <span class="pre">An</span> <span class="pre">error</span> <span class="pre">occurred</span> <span class="pre">(ValidationException)</span> <span class="pre">when</span> <span class="pre">calling</span> <span class="pre">the</span> <span class="pre">BatchWriteItem</span> <span class="pre">operation:</span> <span class="pre">Provided</span> <span class="pre">list</span> <span class="pre">of</span> <span class="pre">item</span> <span class="pre">keys</span> <span class="pre">contains</span> <span class="pre">duplicates</span></tt>.</p>
+<p>It will drop request items in the buffer if their primary keys(composite) values are
+the same as newly added one, as eventually consistent with streams of individual
+put/delete operations on the same item.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">table</span><span class="o">.</span><span class="n">batch_writer</span><span class="p">(</span><span class="n">overwrite_by_pkeys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;partition_key&#39;</span><span class="p">,</span> <span class="s1">&#39;sort_key&#39;</span><span class="p">])</span> <span class="k">as</span> <span class="n">batch</span><span class="p">:</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;111&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;222&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span>
+        <span class="n">Key</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+        <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;444&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>after de-duplicate:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+    <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;222&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">batch</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span>
+    <span class="n">Item</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;partition_key&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sort_key&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="s1">&#39;444&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="querying-and-scanning">
+<h2>Querying and scanning<a class="headerlink" href="#querying-and-scanning" title="Permalink to this headline">¶</a></h2>
+<p>With the table full of items, you can then query or scan the items in the table
+using the <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.query" title="DynamoDB.Table.query"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.query()</span></tt></a> or <a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.scan" title="DynamoDB.Table.scan"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.scan()</span></tt></a>
+methods respectively. To add conditions to scanning and querying the table,
+you will need to import the <a class="reference internal" href="../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Key" title="boto3.dynamodb.conditions.Key"><tt class="xref py py-class docutils literal"><span class="pre">boto3.dynamodb.conditions.Key</span></tt></a> and
+<a class="reference internal" href="../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr" title="boto3.dynamodb.conditions.Attr"><tt class="xref py py-class docutils literal"><span class="pre">boto3.dynamodb.conditions.Attr</span></tt></a> classes. The
+<a class="reference internal" href="../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Key" title="boto3.dynamodb.conditions.Key"><tt class="xref py py-class docutils literal"><span class="pre">boto3.dynamodb.conditions.Key</span></tt></a> should be used when the
+condition is related to the key of the item.
+The <a class="reference internal" href="../reference/customizations/dynamodb.html#boto3.dynamodb.conditions.Attr" title="boto3.dynamodb.conditions.Attr"><tt class="xref py py-class docutils literal"><span class="pre">boto3.dynamodb.conditions.Attr</span></tt></a> should be used when the
+condition is related to an attribute of the item:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.dynamodb.conditions</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Attr</span>
+</pre></div>
+</div>
+<p>This queries for all of the users whose <tt class="docutils literal"><span class="pre">username</span></tt> key equals <tt class="docutils literal"><span class="pre">johndoe</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+    <span class="n">KeyConditionExpression</span><span class="o">=</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;johndoe&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Items&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;John&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;25&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;90001&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">}}]</span>
+</pre></div>
+</div>
+<p>Similarly you can scan the table based on attributes of the items. For
+example, this scans for all the users whose <tt class="docutils literal"><span class="pre">age</span></tt> is less than <tt class="docutils literal"><span class="pre">27</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">FilterExpression</span><span class="o">=</span><span class="n">Attr</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="mi">27</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Items&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;John&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;25&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;90001&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">}},</span>
+ <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;bobsmith&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Smith&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;18&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Louisville&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;KY&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;40213&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;3 Madison Lane&#39;</span><span class="p">}}]</span>
+</pre></div>
+</div>
+<p>You are also able to chain conditions together using the logical operators:
+<tt class="docutils literal"><span class="pre">&amp;</span></tt> (and), <tt class="docutils literal"><span class="pre">|</span></tt> (or), and <tt class="docutils literal"><span class="pre">~</span></tt> (not). For example, this scans for all
+users whose <tt class="docutils literal"><span class="pre">first_name</span></tt> starts with <tt class="docutils literal"><span class="pre">J</span></tt> and whose <tt class="docutils literal"><span class="pre">account_type</span></tt> is
+<tt class="docutils literal"><span class="pre">super_user</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">FilterExpression</span><span class="o">=</span><span class="n">Attr</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">begins_with</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Attr</span><span class="p">(</span><span class="s1">&#39;account_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;super_user&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Items&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;janedoering&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doering&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;super_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;40&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Seattle&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;WA&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;98109&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2 Washington Avenue&#39;</span><span class="p">}}]</span>
+</pre></div>
+</div>
+<p>You can even scan based on conditions of a nested attribute. For example this
+scans for all users whose <tt class="docutils literal"><span class="pre">state</span></tt> in their <tt class="docutils literal"><span class="pre">address</span></tt> is <tt class="docutils literal"><span class="pre">CA</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span>
+    <span class="n">FilterExpression</span><span class="o">=</span><span class="n">Attr</span><span class="p">(</span><span class="s1">&#39;address.state&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;CA&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Items&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;johndoe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;John&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;standard_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;25&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;90001&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">}},</span>
+ <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;alicedoe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;account_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;super_user&#39;</span><span class="p">,</span>
+  <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;27&#39;</span><span class="p">),</span>
+  <span class="sa">u</span><span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Los Angeles&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span>
+               <span class="sa">u</span><span class="s1">&#39;zipcode&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;90001&#39;</span><span class="p">),</span>
+               <span class="sa">u</span><span class="s1">&#39;road&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1 Jefferson Street&#39;</span><span class="p">}}]</span>
+</pre></div>
+</div>
+<p>For more information on the various conditions you can use for queries and
+scans, refer to <a class="reference internal" href="../reference/customizations/dynamodb.html#ref-dynamodb-conditions"><em>DynamoDB conditions</em></a>.</p>
+</div>
+<div class="section" id="deleting-a-table">
+<h2>Deleting a table<a class="headerlink" href="#deleting-a-table" title="Permalink to this headline">¶</a></h2>
+<p>Finally, if you want to delete your table call
+<a class="reference internal" href="../reference/services/dynamodb.html#DynamoDB.Table.delete" title="DynamoDB.Table.delete"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Table.delete()</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="cw-example-subscription-filters.html" title="previous chapter (use the left arrow)">Using subscription filters in Amazon CloudWatch Logs</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="ec2-examples.html" title="next chapter (use the right arrow)">Amazon EC2 examples</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ec2-examples.html" title="Amazon EC2 examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cw-example-subscription-filters.html" title="Using subscription filters in Amazon CloudWatch Logs"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

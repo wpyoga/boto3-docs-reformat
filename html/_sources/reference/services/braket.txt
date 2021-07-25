@@ -1,0 +1,1710 @@
+
+
+******
+Braket
+******
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Braket.Client
+
+  A low-level client representing Braket
+  
+
+  The Amazon Braket API Reference provides information about the operations and structures supported in Amazon Braket.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('braket')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Braket.Client.can_paginate`
+
+  
+  *   :py:meth:`~Braket.Client.cancel_quantum_task`
+
+  
+  *   :py:meth:`~Braket.Client.create_quantum_task`
+
+  
+  *   :py:meth:`~Braket.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Braket.Client.get_device`
+
+  
+  *   :py:meth:`~Braket.Client.get_paginator`
+
+  
+  *   :py:meth:`~Braket.Client.get_quantum_task`
+
+  
+  *   :py:meth:`~Braket.Client.get_waiter`
+
+  
+  *   :py:meth:`~Braket.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~Braket.Client.search_devices`
+
+  
+  *   :py:meth:`~Braket.Client.search_quantum_tasks`
+
+  
+  *   :py:meth:`~Braket.Client.tag_resource`
+
+  
+  *   :py:meth:`~Braket.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_quantum_task(**kwargs)
+
+    
+
+    Cancels the specified task.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CancelQuantumTask>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_quantum_task(
+          clientToken='string',
+          quantumTaskArn='string'
+      )
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      The client token associated with the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type quantumTaskArn: string
+    :param quantumTaskArn: **[REQUIRED]** 
+
+      The ARN of the task to cancel.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'cancellationStatus': 'CANCELLING'|'CANCELLED',
+            'quantumTaskArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **cancellationStatus** *(string) --* 
+
+          The status of the cancellation request.
+
+          
+        
+
+        - **quantumTaskArn** *(string) --* 
+
+          The ARN of the task.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: create_quantum_task(**kwargs)
+
+    
+
+    Creates a quantum task.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/CreateQuantumTask>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_quantum_task(
+          action='string',
+          clientToken='string',
+          deviceArn='string',
+          deviceParameters='string',
+          outputS3Bucket='string',
+          outputS3KeyPrefix='string',
+          shots=123,
+          tags={
+              'string': 'string'
+          }
+      )
+    :type action: string
+    :param action: **[REQUIRED]** 
+
+      The action associated with the task.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      The client token associated with the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type deviceArn: string
+    :param deviceArn: **[REQUIRED]** 
+
+      The ARN of the device to run the task on.
+
+      
+
+    
+    :type deviceParameters: string
+    :param deviceParameters: 
+
+      The parameters for the device to run the task on.
+
+      
+
+    
+    :type outputS3Bucket: string
+    :param outputS3Bucket: **[REQUIRED]** 
+
+      The S3 bucket to store task result files in.
+
+      
+
+    
+    :type outputS3KeyPrefix: string
+    :param outputS3KeyPrefix: **[REQUIRED]** 
+
+      The key prefix for the location in the S3 bucket to store task results in.
+
+      
+
+    
+    :type shots: integer
+    :param shots: **[REQUIRED]** 
+
+      The number of shots to use for the task.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      Tags to be added to the quantum task you're creating.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'quantumTaskArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **quantumTaskArn** *(string) --* 
+
+          The ARN of the task created by the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.DeviceOfflineException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_device(**kwargs)
+
+    
+
+    Retrieves the devices available in Amazon Braket.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_device(
+          deviceArn='string'
+      )
+    :type deviceArn: string
+    :param deviceArn: **[REQUIRED]** 
+
+      The ARN of the device to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'deviceArn': 'string',
+            'deviceCapabilities': 'string',
+            'deviceName': 'string',
+            'deviceStatus': 'ONLINE'|'OFFLINE'|'RETIRED',
+            'deviceType': 'QPU'|'SIMULATOR',
+            'providerName': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **deviceArn** *(string) --* 
+
+          The ARN of the device.
+
+          
+        
+
+        - **deviceCapabilities** *(string) --* 
+
+          Details about the capabilities of the device.
+
+          
+        
+
+        - **deviceName** *(string) --* 
+
+          The name of the device.
+
+          
+        
+
+        - **deviceStatus** *(string) --* 
+
+          The status of the device.
+
+          
+        
+
+        - **deviceType** *(string) --* 
+
+          The type of the device.
+
+          
+        
+
+        - **providerName** *(string) --* 
+
+          The name of the partner company for the device.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.DeviceOfflineException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.DeviceRetiredException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_quantum_task(**kwargs)
+
+    
+
+    Retrieves the specified quantum task.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/GetQuantumTask>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_quantum_task(
+          quantumTaskArn='string'
+      )
+    :type quantumTaskArn: string
+    :param quantumTaskArn: **[REQUIRED]** 
+
+      the ARN of the task to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'createdAt': datetime(2015, 1, 1),
+            'deviceArn': 'string',
+            'deviceParameters': 'string',
+            'endedAt': datetime(2015, 1, 1),
+            'failureReason': 'string',
+            'outputS3Bucket': 'string',
+            'outputS3Directory': 'string',
+            'quantumTaskArn': 'string',
+            'shots': 123,
+            'status': 'CREATED'|'QUEUED'|'RUNNING'|'COMPLETED'|'FAILED'|'CANCELLING'|'CANCELLED',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **createdAt** *(datetime) --* 
+
+          The time at which the task was created.
+
+          
+        
+
+        - **deviceArn** *(string) --* 
+
+          The ARN of the device the task was run on.
+
+          
+        
+
+        - **deviceParameters** *(string) --* 
+
+          The parameters for the device on which the task ran.
+
+          
+        
+
+        - **endedAt** *(datetime) --* 
+
+          The time at which the task ended.
+
+          
+        
+
+        - **failureReason** *(string) --* 
+
+          The reason that a task failed.
+
+          
+        
+
+        - **outputS3Bucket** *(string) --* 
+
+          The S3 bucket where task results are stored.
+
+          
+        
+
+        - **outputS3Directory** *(string) --* 
+
+          The folder in the S3 bucket where task results are stored.
+
+          
+        
+
+        - **quantumTaskArn** *(string) --* 
+
+          The ARN of the task.
+
+          
+        
+
+        - **shots** *(integer) --* 
+
+          The number of shots used in the task.
+
+          
+        
+
+        - **status** *(string) --* 
+
+          The status of the task.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          The tags that belong to this task.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Shows the tags associated with this resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      Specify the ``resourceArn`` for the resource whose tags to display.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          Displays the key, value pairs of tags associated with this resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: search_devices(**kwargs)
+
+    
+
+    Searches for devices using the specified filters.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.search_devices(
+          filters=[
+              {
+                  'name': 'string',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type filters: list
+    :param filters: **[REQUIRED]** 
+
+      The filter values to use to search for a device.
+
+      
+
+    
+      - *(dict) --* 
+
+        The filter to use for searching devices.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name to use to filter results.
+
+          
+
+        
+        - **values** *(list) --* **[REQUIRED]** 
+
+          The values to use to filter results.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return in the response.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'devices': [
+                {
+                    'deviceArn': 'string',
+                    'deviceName': 'string',
+                    'deviceStatus': 'ONLINE'|'OFFLINE'|'RETIRED',
+                    'deviceType': 'QPU'|'SIMULATOR',
+                    'providerName': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **devices** *(list) --* 
+
+          An array of ``DeviceSummary`` objects for devices that match the specified filter values.
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes information about the device.
+
+            
+            
+
+            - **deviceArn** *(string) --* 
+
+              The ARN of the device.
+
+              
+            
+
+            - **deviceName** *(string) --* 
+
+              The name of the device.
+
+              
+            
+
+            - **deviceStatus** *(string) --* 
+
+              The status of the device.
+
+              
+            
+
+            - **deviceType** *(string) --* 
+
+              The type of the device.
+
+              
+            
+
+            - **providerName** *(string) --* 
+
+              The provider of the device.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: search_quantum_tasks(**kwargs)
+
+    
+
+    Searches for tasks that match the specified filter values.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchQuantumTasks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.search_quantum_tasks(
+          filters=[
+              {
+                  'name': 'string',
+                  'operator': 'LT'|'LTE'|'EQUAL'|'GT'|'GTE'|'BETWEEN',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type filters: list
+    :param filters: **[REQUIRED]** 
+
+      Array of ``SearchQuantumTasksFilter`` objects.
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter to use to search for tasks.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name of the device used for the task.
+
+          
+
+        
+        - **operator** *(string) --* **[REQUIRED]** 
+
+          An operator to use in the filter.
+
+          
+
+        
+        - **values** *(list) --* **[REQUIRED]** 
+
+          The values to use for the filter.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      Maximum number of results to return in the response.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'quantumTasks': [
+                {
+                    'createdAt': datetime(2015, 1, 1),
+                    'deviceArn': 'string',
+                    'endedAt': datetime(2015, 1, 1),
+                    'outputS3Bucket': 'string',
+                    'outputS3Directory': 'string',
+                    'quantumTaskArn': 'string',
+                    'shots': 123,
+                    'status': 'CREATED'|'QUEUED'|'RUNNING'|'COMPLETED'|'FAILED'|'CANCELLING'|'CANCELLED',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.
+
+          
+        
+
+        - **quantumTasks** *(list) --* 
+
+          An array of ``QuantumTaskSummary`` objects for tasks that match the specified filters.
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes information about a quantum task.
+
+            
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time at which the task was created.
+
+              
+            
+
+            - **deviceArn** *(string) --* 
+
+              The ARN of the device the task ran on.
+
+              
+            
+
+            - **endedAt** *(datetime) --* 
+
+              The time at which the task finished.
+
+              
+            
+
+            - **outputS3Bucket** *(string) --* 
+
+              The S3 bucket where the task result file is stored..
+
+              
+            
+
+            - **outputS3Directory** *(string) --* 
+
+              The folder in the S3 bucket where the task result file is stored.
+
+              
+            
+
+            - **quantumTaskArn** *(string) --* 
+
+              The ARN of the task.
+
+              
+            
+
+            - **shots** *(integer) --* 
+
+              The shots used for the task.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the task.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Displays the key, value pairs of tags associated with this quantum task.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Add a tag to the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      Specify the ``resourceArn`` of the resource to which a tag will be added.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      Specify the tags to add to the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Remove tags from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      Specify the ``resourceArn`` for the resource from which to remove the tags.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      Specify the keys for the tags to remove from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Braket.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`Braket.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`Braket.Paginator.SearchDevices`
+
+
+* :py:class:`Braket.Paginator.SearchQuantumTasks`
+
+
+
+.. py:class:: Braket.Paginator.SearchDevices
+
+  ::
+
+    
+    paginator = client.get_paginator('search_devices')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Braket.Client.search_devices`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          filters=[
+              {
+                  'name': 'string',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type filters: list
+    :param filters: **[REQUIRED]** 
+
+      The filter values to use to search for a device.
+
+      
+
+    
+      - *(dict) --* 
+
+        The filter to use for searching devices.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name to use to filter results.
+
+          
+
+        
+        - **values** *(list) --* **[REQUIRED]** 
+
+          The values to use to filter results.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'devices': [
+                {
+                    'deviceArn': 'string',
+                    'deviceName': 'string',
+                    'deviceStatus': 'ONLINE'|'OFFLINE'|'RETIRED',
+                    'deviceType': 'QPU'|'SIMULATOR',
+                    'providerName': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **devices** *(list) --* 
+
+          An array of ``DeviceSummary`` objects for devices that match the specified filter values.
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes information about the device.
+
+            
+            
+
+            - **deviceArn** *(string) --* 
+
+              The ARN of the device.
+
+              
+            
+
+            - **deviceName** *(string) --* 
+
+              The name of the device.
+
+              
+            
+
+            - **deviceStatus** *(string) --* 
+
+              The status of the device.
+
+              
+            
+
+            - **deviceType** *(string) --* 
+
+              The type of the device.
+
+              
+            
+
+            - **providerName** *(string) --* 
+
+              The provider of the device.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: Braket.Paginator.SearchQuantumTasks
+
+  ::
+
+    
+    paginator = client.get_paginator('search_quantum_tasks')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Braket.Client.search_quantum_tasks`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/braket-2019-09-01/SearchQuantumTasks>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          filters=[
+              {
+                  'name': 'string',
+                  'operator': 'LT'|'LTE'|'EQUAL'|'GT'|'GTE'|'BETWEEN',
+                  'values': [
+                      'string',
+                  ]
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type filters: list
+    :param filters: **[REQUIRED]** 
+
+      Array of ``SearchQuantumTasksFilter`` objects.
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter to use to search for tasks.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name of the device used for the task.
+
+          
+
+        
+        - **operator** *(string) --* **[REQUIRED]** 
+
+          An operator to use in the filter.
+
+          
+
+        
+        - **values** *(list) --* **[REQUIRED]** 
+
+          The values to use for the filter.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'quantumTasks': [
+                {
+                    'createdAt': datetime(2015, 1, 1),
+                    'deviceArn': 'string',
+                    'endedAt': datetime(2015, 1, 1),
+                    'outputS3Bucket': 'string',
+                    'outputS3Directory': 'string',
+                    'quantumTaskArn': 'string',
+                    'shots': 123,
+                    'status': 'CREATED'|'QUEUED'|'RUNNING'|'COMPLETED'|'FAILED'|'CANCELLING'|'CANCELLED',
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **quantumTasks** *(list) --* 
+
+          An array of ``QuantumTaskSummary`` objects for tasks that match the specified filters.
+
+          
+          
+
+          - *(dict) --* 
+
+            Includes information about a quantum task.
+
+            
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time at which the task was created.
+
+              
+            
+
+            - **deviceArn** *(string) --* 
+
+              The ARN of the device the task ran on.
+
+              
+            
+
+            - **endedAt** *(datetime) --* 
+
+              The time at which the task finished.
+
+              
+            
+
+            - **outputS3Bucket** *(string) --* 
+
+              The S3 bucket where the task result file is stored..
+
+              
+            
+
+            - **outputS3Directory** *(string) --* 
+
+              The folder in the S3 bucket where the task result file is stored.
+
+              
+            
+
+            - **quantumTaskArn** *(string) --* 
+
+              The ARN of the task.
+
+              
+            
+
+            - **shots** *(integer) --* 
+
+              The shots used for the task.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the task.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              Displays the key, value pairs of tags associated with this quantum task.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

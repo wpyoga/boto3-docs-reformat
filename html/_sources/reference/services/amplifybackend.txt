@@ -1,0 +1,6029 @@
+
+
+**************
+AmplifyBackend
+**************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: AmplifyBackend.Client
+
+  A low-level client representing AmplifyBackend
+  
+
+  AWS Amplify Admin API
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('amplifybackend')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~AmplifyBackend.Client.can_paginate`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.clone_backend`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.create_backend`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.create_backend_api`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.create_backend_auth`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.create_backend_config`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.create_token`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.delete_backend`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.delete_backend_api`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.delete_backend_auth`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.delete_token`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.generate_backend_api_models`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_backend`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_backend_api`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_backend_api_models`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_backend_auth`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_backend_job`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_paginator`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_token`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.get_waiter`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.import_backend_auth`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.list_backend_jobs`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.remove_all_backends`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.remove_backend_config`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.update_backend_api`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.update_backend_auth`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.update_backend_config`
+
+  
+  *   :py:meth:`~AmplifyBackend.Client.update_backend_job`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: clone_backend(**kwargs)
+
+    
+
+    This operation clones an existing backend.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CloneBackend>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.clone_backend(
+          AppId='string',
+          BackendEnvironmentName='string',
+          TargetEnvironmentName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type TargetEnvironmentName: string
+    :param TargetEnvironmentName: **[REQUIRED]** 
+
+      The name of the destination backend environment to be created.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_backend(**kwargs)
+
+    
+
+    This operation creates a backend for an Amplify app. Backends are automatically created at the time of app creation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackend>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_backend(
+          AppId='string',
+          AppName='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={}
+          ,
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type AppName: string
+    :param AppName: **[REQUIRED]** 
+
+      The name of the app.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: 
+
+      The resource configuration for the create backend request.
+
+      
+
+    
+    
+    :type ResourceName: string
+    :param ResourceName: 
+
+      The name of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_backend_api(**kwargs)
+
+    
+
+    Creates a new backend API resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAPI>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_backend_api(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AdditionalAuthTypes': [
+                  {
+                      'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                      'Settings': {
+                          'CognitoUserPoolId': 'string',
+                          'Description': 'string',
+                          'ExpirationTime': 123.0,
+                          'OpenIDAuthTTL': 'string',
+                          'OpenIDClientId': 'string',
+                          'OpenIDIatTTL': 'string',
+                          'OpenIDIssueURL': 'string',
+                          'OpenIDProviderName': 'string'
+                      }
+                  },
+              ],
+              'ApiName': 'string',
+              'ConflictResolution': {
+                  'ResolutionStrategy': 'OPTIMISTIC_CONCURRENCY'|'LAMBDA'|'AUTOMERGE'|'NONE'
+              },
+              'DefaultAuthType': {
+                  'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                  'Settings': {
+                      'CognitoUserPoolId': 'string',
+                      'Description': 'string',
+                      'ExpirationTime': 123.0,
+                      'OpenIDAuthTTL': 'string',
+                      'OpenIDClientId': 'string',
+                      'OpenIDIatTTL': 'string',
+                      'OpenIDIssueURL': 'string',
+                      'OpenIDProviderName': 'string'
+                  }
+              },
+              'Service': 'string',
+              'TransformSchema': 'string'
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: **[REQUIRED]** 
+
+      The resource configuration for this request.
+
+      
+
+    
+      - **AdditionalAuthTypes** *(list) --* 
+
+        Additional authentication methods used to interact with your data models.
+
+        
+
+      
+        - *(dict) --* 
+
+          Describes the auth types for your configured data models.
+
+          
+
+        
+          - **Mode** *(string) --* 
+
+            Describes the authentication mode.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            Describes settings for the authentication mode.
+
+            
+
+          
+            - **CognitoUserPoolId** *(string) --* 
+
+              The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **Description** *(string) --* 
+
+              The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **ExpirationTime** *(float) --* 
+
+              The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **OpenIDAuthTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDClientId** *(string) --* 
+
+              The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDIatTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDIssueURL** *(string) --* 
+
+              The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDProviderName** *(string) --* 
+
+              The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+              
+
+            
+          
+        
+    
+      - **ApiName** *(string) --* 
+
+        The API name used to interact with the data model, configured as a part of your Amplify project.
+
+        
+
+      
+      - **ConflictResolution** *(dict) --* 
+
+        The conflict resolution strategy for your data stored in the data models.
+
+        
+
+      
+        - **ResolutionStrategy** *(string) --* 
+
+          The strategy for conflict resolution.
+
+          
+
+        
+      
+      - **DefaultAuthType** *(dict) --* 
+
+        The default authentication type for interacting with the configured data models in your Amplify project.
+
+        
+
+      
+        - **Mode** *(string) --* 
+
+          Describes the authentication mode.
+
+          
+
+        
+        - **Settings** *(dict) --* 
+
+          Describes settings for the authentication mode.
+
+          
+
+        
+          - **CognitoUserPoolId** *(string) --* 
+
+            The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **Description** *(string) --* 
+
+            The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **ExpirationTime** *(float) --* 
+
+            The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **OpenIDAuthTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDClientId** *(string) --* 
+
+            The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDIatTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDIssueURL** *(string) --* 
+
+            The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDProviderName** *(string) --* 
+
+            The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+            
+
+          
+        
+      
+      - **Service** *(string) --* 
+
+        The service used to provision and interact with the data model.
+
+        
+
+      
+      - **TransformSchema** *(string) --* 
+
+        The definition of the data model in the annotated transform of the GraphQL schema.
+
+        
+
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_backend_auth(**kwargs)
+
+    
+
+    Creates a new backend authentication resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendAuth>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_backend_auth(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AuthResources': 'USER_POOL_ONLY'|'IDENTITY_POOL_AND_USER_POOL',
+              'IdentityPoolConfigs': {
+                  'IdentityPoolName': 'string',
+                  'UnauthenticatedLogin': True|False
+              },
+              'Service': 'COGNITO',
+              'UserPoolConfigs': {
+                  'ForgotPassword': {
+                      'DeliveryMethod': 'EMAIL'|'SMS',
+                      'EmailSettings': {
+                          'EmailMessage': 'string',
+                          'EmailSubject': 'string'
+                      },
+                      'SmsSettings': {
+                          'SmsMessage': 'string'
+                      }
+                  },
+                  'Mfa': {
+                      'MFAMode': 'ON'|'OFF'|'OPTIONAL',
+                      'Settings': {
+                          'MfaTypes': [
+                              'SMS'|'TOTP',
+                          ],
+                          'SmsMessage': 'string'
+                      }
+                  },
+                  'OAuth': {
+                      'DomainPrefix': 'string',
+                      'OAuthGrantType': 'CODE'|'IMPLICIT',
+                      'OAuthScopes': [
+                          'PHONE'|'EMAIL'|'OPENID'|'PROFILE'|'AWS_COGNITO_SIGNIN_USER_ADMIN',
+                      ],
+                      'RedirectSignInURIs': [
+                          'string',
+                      ],
+                      'RedirectSignOutURIs': [
+                          'string',
+                      ],
+                      'SocialProviderSettings': {
+                          'Facebook': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'Google': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'LoginWithAmazon': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'SignInWithApple': {
+                              'ClientId': 'string',
+                              'KeyId': 'string',
+                              'PrivateKey': 'string',
+                              'TeamId': 'string'
+                          }
+                      }
+                  },
+                  'PasswordPolicy': {
+                      'AdditionalConstraints': [
+                          'REQUIRE_DIGIT'|'REQUIRE_LOWERCASE'|'REQUIRE_SYMBOL'|'REQUIRE_UPPERCASE',
+                      ],
+                      'MinimumLength': 123.0
+                  },
+                  'RequiredSignUpAttributes': [
+                      'ADDRESS'|'BIRTHDATE'|'EMAIL'|'FAMILY_NAME'|'GENDER'|'GIVEN_NAME'|'LOCALE'|'MIDDLE_NAME'|'NAME'|'NICKNAME'|'PHONE_NUMBER'|'PICTURE'|'PREFERRED_USERNAME'|'PROFILE'|'UPDATED_AT'|'WEBSITE'|'ZONE_INFO',
+                  ],
+                  'SignInMethod': 'EMAIL'|'EMAIL_AND_PHONE_NUMBER'|'PHONE_NUMBER'|'USERNAME',
+                  'UserPoolName': 'string'
+              }
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: **[REQUIRED]** 
+
+      The resource configuration for this request object.
+
+      
+
+    
+      - **AuthResources** *(string) --* **[REQUIRED]** 
+
+        Defines whether you want to configure only authentication or both authentication and authorization settings.
+
+        
+
+      
+      - **IdentityPoolConfigs** *(dict) --* 
+
+        Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
+
+        
+
+      
+        - **IdentityPoolName** *(string) --* **[REQUIRED]** 
+
+          Name of the Amazon Cognito identity pool used for authorization.
+
+          
+
+        
+        - **UnauthenticatedLogin** *(boolean) --* **[REQUIRED]** 
+
+          Set to true or false based on whether you want to enable guest authorization to your Amplify app.
+
+          
+
+        
+      
+      - **Service** *(string) --* **[REQUIRED]** 
+
+        Defines the service name to use when configuring an authentication resource in your Amplify project.
+
+        
+
+      
+      - **UserPoolConfigs** *(dict) --* **[REQUIRED]** 
+
+        Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
+
+        
+
+      
+        - **ForgotPassword** *(dict) --* 
+
+          Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **DeliveryMethod** *(string) --* **[REQUIRED]** 
+
+            Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.
+
+            
+
+          
+          - **EmailSettings** *(dict) --* 
+
+            The configuration for the email sent when an app user forgets their password.
+
+            
+
+          
+            - **EmailMessage** *(string) --* 
+
+              The body of the email.
+
+              
+
+            
+            - **EmailSubject** *(string) --* 
+
+              The subject of the email.
+
+              
+
+            
+          
+          - **SmsSettings** *(dict) --* 
+
+            The configuration for the SMS message sent when an app user forgets their password.
+
+            
+
+          
+            - **SmsMessage** *(string) --* 
+
+              The body of the SMS message.
+
+              
+
+            
+          
+        
+        - **Mfa** *(dict) --* 
+
+          Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
+
+          
+
+        
+          - **MFAMode** *(string) --* **[REQUIRED]** 
+
+            Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            Describes the configuration settings and methods for your Amplify app users to use MFA.
+
+            
+
+          
+            - **MfaTypes** *(list) --* 
+
+              The supported MFA types.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+            - **SmsMessage** *(string) --* 
+
+              The body of the SMS message.
+
+              
+
+            
+          
+        
+        - **OAuth** *(dict) --* 
+
+          Describes the OAuth policy and rules for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **DomainPrefix** *(string) --* 
+
+            The domain prefix for your Amplify app.
+
+            
+
+          
+          - **OAuthGrantType** *(string) --* **[REQUIRED]** 
+
+            The OAuth grant type that you use to allow app users to authenticate from your Amplify app.
+
+            
+
+          
+          - **OAuthScopes** *(list) --* **[REQUIRED]** 
+
+            List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **RedirectSignInURIs** *(list) --* **[REQUIRED]** 
+
+            The redirected URI for signing in to your Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **RedirectSignOutURIs** *(list) --* **[REQUIRED]** 
+
+            Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **SocialProviderSettings** *(dict) --* 
+
+            The settings for using social providers to access your Amplify app.
+
+            
+
+          
+            - **Facebook** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **Google** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **LoginWithAmazon** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **SignInWithApple** *(dict) --* 
+
+              Describes Apple social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id (also called Services ID) that comes from Apple.
+
+                
+
+              
+              - **KeyId** *(string) --* 
+
+                Describes the key_id that comes from Apple.
+
+                
+
+              
+              - **PrivateKey** *(string) --* 
+
+                Describes the private_key that comes from Apple.
+
+                
+
+              
+              - **TeamId** *(string) --* 
+
+                Describes the team_id that comes from Apple.
+
+                
+
+              
+            
+          
+        
+        - **PasswordPolicy** *(dict) --* 
+
+          Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **AdditionalConstraints** *(list) --* 
+
+            Additional constraints for the password used to access the backend of your Amplify project.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **MinimumLength** *(float) --* **[REQUIRED]** 
+
+            The minimum length of the password used to access the backend of your Amplify project.
+
+            
+
+          
+        
+        - **RequiredSignUpAttributes** *(list) --* **[REQUIRED]** 
+
+          The required attributes to sign up new users in the user pool.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **SignInMethod** *(string) --* **[REQUIRED]** 
+
+          Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+        - **UserPoolName** *(string) --* **[REQUIRED]** 
+
+          The Amazon Cognito user pool name.
+
+          
+
+        
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_backend_config(**kwargs)
+
+    
+
+    Creates a config object for a backend.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateBackendConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_backend_config(
+          AppId='string',
+          BackendManagerAppId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendManagerAppId: string
+    :param BackendManagerAppId: 
+
+      The app ID for the backend manager.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'JobId': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_token(**kwargs)
+
+    
+
+    Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/CreateToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_token(
+          AppId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'ChallengeCode': 'string',
+            'SessionId': 'string',
+            'Ttl': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **ChallengeCode** *(string) --* 
+
+          One-time challenge code for authenticating into the Amplify Admin UI.
+
+          
+        
+
+        - **SessionId** *(string) --* 
+
+          A unique ID provided when creating a new challenge token.
+
+          
+        
+
+        - **Ttl** *(string) --* 
+
+          The expiry time for the one-time generated token code.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_backend(**kwargs)
+
+    
+
+    Removes an existing environment from your Amplify project.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackend>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_backend(
+          AppId='string',
+          BackendEnvironmentName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_backend_api(**kwargs)
+
+    
+
+    Deletes an existing backend API resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackendAPI>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_backend_api(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AdditionalAuthTypes': [
+                  {
+                      'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                      'Settings': {
+                          'CognitoUserPoolId': 'string',
+                          'Description': 'string',
+                          'ExpirationTime': 123.0,
+                          'OpenIDAuthTTL': 'string',
+                          'OpenIDClientId': 'string',
+                          'OpenIDIatTTL': 'string',
+                          'OpenIDIssueURL': 'string',
+                          'OpenIDProviderName': 'string'
+                      }
+                  },
+              ],
+              'ApiName': 'string',
+              'ConflictResolution': {
+                  'ResolutionStrategy': 'OPTIMISTIC_CONCURRENCY'|'LAMBDA'|'AUTOMERGE'|'NONE'
+              },
+              'DefaultAuthType': {
+                  'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                  'Settings': {
+                      'CognitoUserPoolId': 'string',
+                      'Description': 'string',
+                      'ExpirationTime': 123.0,
+                      'OpenIDAuthTTL': 'string',
+                      'OpenIDClientId': 'string',
+                      'OpenIDIatTTL': 'string',
+                      'OpenIDIssueURL': 'string',
+                      'OpenIDProviderName': 'string'
+                  }
+              },
+              'Service': 'string',
+              'TransformSchema': 'string'
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: 
+
+      Defines the resource configuration for the data model in your Amplify project.
+
+      
+
+    
+      - **AdditionalAuthTypes** *(list) --* 
+
+        Additional authentication methods used to interact with your data models.
+
+        
+
+      
+        - *(dict) --* 
+
+          Describes the auth types for your configured data models.
+
+          
+
+        
+          - **Mode** *(string) --* 
+
+            Describes the authentication mode.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            Describes settings for the authentication mode.
+
+            
+
+          
+            - **CognitoUserPoolId** *(string) --* 
+
+              The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **Description** *(string) --* 
+
+              The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **ExpirationTime** *(float) --* 
+
+              The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **OpenIDAuthTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDClientId** *(string) --* 
+
+              The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDIatTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDIssueURL** *(string) --* 
+
+              The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDProviderName** *(string) --* 
+
+              The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+              
+
+            
+          
+        
+    
+      - **ApiName** *(string) --* 
+
+        The API name used to interact with the data model, configured as a part of your Amplify project.
+
+        
+
+      
+      - **ConflictResolution** *(dict) --* 
+
+        The conflict resolution strategy for your data stored in the data models.
+
+        
+
+      
+        - **ResolutionStrategy** *(string) --* 
+
+          The strategy for conflict resolution.
+
+          
+
+        
+      
+      - **DefaultAuthType** *(dict) --* 
+
+        The default authentication type for interacting with the configured data models in your Amplify project.
+
+        
+
+      
+        - **Mode** *(string) --* 
+
+          Describes the authentication mode.
+
+          
+
+        
+        - **Settings** *(dict) --* 
+
+          Describes settings for the authentication mode.
+
+          
+
+        
+          - **CognitoUserPoolId** *(string) --* 
+
+            The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **Description** *(string) --* 
+
+            The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **ExpirationTime** *(float) --* 
+
+            The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **OpenIDAuthTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDClientId** *(string) --* 
+
+            The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDIatTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDIssueURL** *(string) --* 
+
+            The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDProviderName** *(string) --* 
+
+            The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+            
+
+          
+        
+      
+      - **Service** *(string) --* 
+
+        The service used to provision and interact with the data model.
+
+        
+
+      
+      - **TransformSchema** *(string) --* 
+
+        The definition of the data model in the annotated transform of the GraphQL schema.
+
+        
+
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_backend_auth(**kwargs)
+
+    
+
+    Deletes an existing backend authentication resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteBackendAuth>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_backend_auth(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_token(**kwargs)
+
+    
+
+    Deletes the challenge token based on the given appId and sessionId.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/DeleteToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_token(
+          AppId='string',
+          SessionId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type SessionId: string
+    :param SessionId: **[REQUIRED]** 
+
+      The session ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'IsSuccess': True|False
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **IsSuccess** *(boolean) --* 
+
+          Indicates whether the request succeeded or failed.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: generate_backend_api_models(**kwargs)
+
+    
+
+    Generates a model schema for an existing backend API resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GenerateBackendAPIModels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.generate_backend_api_models(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_backend(**kwargs)
+
+    
+
+    Provides project-level details for your Amplify UI project.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackend>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_backend(
+          AppId='string',
+          BackendEnvironmentName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: 
+
+      The name of the backend environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AmplifyMetaConfig': 'string',
+            'AppId': 'string',
+            'AppName': 'string',
+            'BackendEnvironmentList': [
+                'string',
+            ],
+            'BackendEnvironmentName': 'string',
+            'Error': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AmplifyMetaConfig** *(string) --* 
+
+          A stringified version of the current configs for your Amplify project.
+
+          
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **AppName** *(string) --* 
+
+          The name of the app.
+
+          
+        
+
+        - **BackendEnvironmentList** *(list) --* 
+
+          A list of backend environments in an array.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request failed, this is the returned error.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_backend_api(**kwargs)
+
+    
+
+    Gets the details for a backend API.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAPI>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_backend_api(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AdditionalAuthTypes': [
+                  {
+                      'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                      'Settings': {
+                          'CognitoUserPoolId': 'string',
+                          'Description': 'string',
+                          'ExpirationTime': 123.0,
+                          'OpenIDAuthTTL': 'string',
+                          'OpenIDClientId': 'string',
+                          'OpenIDIatTTL': 'string',
+                          'OpenIDIssueURL': 'string',
+                          'OpenIDProviderName': 'string'
+                      }
+                  },
+              ],
+              'ApiName': 'string',
+              'ConflictResolution': {
+                  'ResolutionStrategy': 'OPTIMISTIC_CONCURRENCY'|'LAMBDA'|'AUTOMERGE'|'NONE'
+              },
+              'DefaultAuthType': {
+                  'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                  'Settings': {
+                      'CognitoUserPoolId': 'string',
+                      'Description': 'string',
+                      'ExpirationTime': 123.0,
+                      'OpenIDAuthTTL': 'string',
+                      'OpenIDClientId': 'string',
+                      'OpenIDIatTTL': 'string',
+                      'OpenIDIssueURL': 'string',
+                      'OpenIDProviderName': 'string'
+                  }
+              },
+              'Service': 'string',
+              'TransformSchema': 'string'
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: 
+
+      Defines the resource configuration for the data model in your Amplify project.
+
+      
+
+    
+      - **AdditionalAuthTypes** *(list) --* 
+
+        Additional authentication methods used to interact with your data models.
+
+        
+
+      
+        - *(dict) --* 
+
+          Describes the auth types for your configured data models.
+
+          
+
+        
+          - **Mode** *(string) --* 
+
+            Describes the authentication mode.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            Describes settings for the authentication mode.
+
+            
+
+          
+            - **CognitoUserPoolId** *(string) --* 
+
+              The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **Description** *(string) --* 
+
+              The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **ExpirationTime** *(float) --* 
+
+              The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **OpenIDAuthTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDClientId** *(string) --* 
+
+              The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDIatTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDIssueURL** *(string) --* 
+
+              The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDProviderName** *(string) --* 
+
+              The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+              
+
+            
+          
+        
+    
+      - **ApiName** *(string) --* 
+
+        The API name used to interact with the data model, configured as a part of your Amplify project.
+
+        
+
+      
+      - **ConflictResolution** *(dict) --* 
+
+        The conflict resolution strategy for your data stored in the data models.
+
+        
+
+      
+        - **ResolutionStrategy** *(string) --* 
+
+          The strategy for conflict resolution.
+
+          
+
+        
+      
+      - **DefaultAuthType** *(dict) --* 
+
+        The default authentication type for interacting with the configured data models in your Amplify project.
+
+        
+
+      
+        - **Mode** *(string) --* 
+
+          Describes the authentication mode.
+
+          
+
+        
+        - **Settings** *(dict) --* 
+
+          Describes settings for the authentication mode.
+
+          
+
+        
+          - **CognitoUserPoolId** *(string) --* 
+
+            The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **Description** *(string) --* 
+
+            The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **ExpirationTime** *(float) --* 
+
+            The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **OpenIDAuthTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDClientId** *(string) --* 
+
+            The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDIatTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDIssueURL** *(string) --* 
+
+            The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDProviderName** *(string) --* 
+
+            The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+            
+
+          
+        
+      
+      - **Service** *(string) --* 
+
+        The service used to provision and interact with the data model.
+
+        
+
+      
+      - **TransformSchema** *(string) --* 
+
+        The definition of the data model in the annotated transform of the GraphQL schema.
+
+        
+
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'ResourceConfig': {
+                'AdditionalAuthTypes': [
+                    {
+                        'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                        'Settings': {
+                            'CognitoUserPoolId': 'string',
+                            'Description': 'string',
+                            'ExpirationTime': 123.0,
+                            'OpenIDAuthTTL': 'string',
+                            'OpenIDClientId': 'string',
+                            'OpenIDIatTTL': 'string',
+                            'OpenIDIssueURL': 'string',
+                            'OpenIDProviderName': 'string'
+                        }
+                    },
+                ],
+                'ApiName': 'string',
+                'ConflictResolution': {
+                    'ResolutionStrategy': 'OPTIMISTIC_CONCURRENCY'|'LAMBDA'|'AUTOMERGE'|'NONE'
+                },
+                'DefaultAuthType': {
+                    'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                    'Settings': {
+                        'CognitoUserPoolId': 'string',
+                        'Description': 'string',
+                        'ExpirationTime': 123.0,
+                        'OpenIDAuthTTL': 'string',
+                        'OpenIDClientId': 'string',
+                        'OpenIDIatTTL': 'string',
+                        'OpenIDIssueURL': 'string',
+                        'OpenIDProviderName': 'string'
+                    }
+                },
+                'Service': 'string',
+                'TransformSchema': 'string'
+            },
+            'ResourceName': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **ResourceConfig** *(dict) --* 
+
+          The resource configuration for this response object.
+
+          
+          
+
+          - **AdditionalAuthTypes** *(list) --* 
+
+            Additional authentication methods used to interact with your data models.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes the auth types for your configured data models.
+
+              
+              
+
+              - **Mode** *(string) --* 
+
+                Describes the authentication mode.
+
+                
+              
+
+              - **Settings** *(dict) --* 
+
+                Describes settings for the authentication mode.
+
+                
+                
+
+                - **CognitoUserPoolId** *(string) --* 
+
+                  The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+                  
+                
+
+                - **Description** *(string) --* 
+
+                  The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+                  
+                
+
+                - **ExpirationTime** *(float) --* 
+
+                  The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+                  
+                
+
+                - **OpenIDAuthTTL** *(string) --* 
+
+                  The expiry time for the OpenID authentication mechanism.
+
+                  
+                
+
+                - **OpenIDClientId** *(string) --* 
+
+                  The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+                  
+                
+
+                - **OpenIDIatTTL** *(string) --* 
+
+                  The expiry time for the OpenID authentication mechanism.
+
+                  
+                
+
+                - **OpenIDIssueURL** *(string) --* 
+
+                  The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+                  
+                
+
+                - **OpenIDProviderName** *(string) --* 
+
+                  The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+                  
+            
+          
+        
+          
+
+          - **ApiName** *(string) --* 
+
+            The API name used to interact with the data model, configured as a part of your Amplify project.
+
+            
+          
+
+          - **ConflictResolution** *(dict) --* 
+
+            The conflict resolution strategy for your data stored in the data models.
+
+            
+            
+
+            - **ResolutionStrategy** *(string) --* 
+
+              The strategy for conflict resolution.
+
+              
+        
+          
+
+          - **DefaultAuthType** *(dict) --* 
+
+            The default authentication type for interacting with the configured data models in your Amplify project.
+
+            
+            
+
+            - **Mode** *(string) --* 
+
+              Describes the authentication mode.
+
+              
+            
+
+            - **Settings** *(dict) --* 
+
+              Describes settings for the authentication mode.
+
+              
+              
+
+              - **CognitoUserPoolId** *(string) --* 
+
+                The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+                
+              
+
+              - **Description** *(string) --* 
+
+                The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+                
+              
+
+              - **ExpirationTime** *(float) --* 
+
+                The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+                
+              
+
+              - **OpenIDAuthTTL** *(string) --* 
+
+                The expiry time for the OpenID authentication mechanism.
+
+                
+              
+
+              - **OpenIDClientId** *(string) --* 
+
+                The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+                
+              
+
+              - **OpenIDIatTTL** *(string) --* 
+
+                The expiry time for the OpenID authentication mechanism.
+
+                
+              
+
+              - **OpenIDIssueURL** *(string) --* 
+
+                The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+                
+              
+
+              - **OpenIDProviderName** *(string) --* 
+
+                The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+                
+          
+        
+          
+
+          - **Service** *(string) --* 
+
+            The service used to provision and interact with the data model.
+
+            
+          
+
+          - **TransformSchema** *(string) --* 
+
+            The definition of the data model in the annotated transform of the GraphQL schema.
+
+            
+      
+        
+
+        - **ResourceName** *(string) --* 
+
+          The name of this resource.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_backend_api_models(**kwargs)
+
+    
+
+    Generates a model schema for existing backend API resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAPIModels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_backend_api_models(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Models': 'string',
+            'Status': 'LATEST'|'STALE'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Models** *(string) --* 
+
+          Stringified JSON of the datastore model.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_backend_auth(**kwargs)
+
+    
+
+    Gets a backend auth details.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendAuth>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_backend_auth(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'ResourceConfig': {
+                'AuthResources': 'USER_POOL_ONLY'|'IDENTITY_POOL_AND_USER_POOL',
+                'IdentityPoolConfigs': {
+                    'IdentityPoolName': 'string',
+                    'UnauthenticatedLogin': True|False
+                },
+                'Service': 'COGNITO',
+                'UserPoolConfigs': {
+                    'ForgotPassword': {
+                        'DeliveryMethod': 'EMAIL'|'SMS',
+                        'EmailSettings': {
+                            'EmailMessage': 'string',
+                            'EmailSubject': 'string'
+                        },
+                        'SmsSettings': {
+                            'SmsMessage': 'string'
+                        }
+                    },
+                    'Mfa': {
+                        'MFAMode': 'ON'|'OFF'|'OPTIONAL',
+                        'Settings': {
+                            'MfaTypes': [
+                                'SMS'|'TOTP',
+                            ],
+                            'SmsMessage': 'string'
+                        }
+                    },
+                    'OAuth': {
+                        'DomainPrefix': 'string',
+                        'OAuthGrantType': 'CODE'|'IMPLICIT',
+                        'OAuthScopes': [
+                            'PHONE'|'EMAIL'|'OPENID'|'PROFILE'|'AWS_COGNITO_SIGNIN_USER_ADMIN',
+                        ],
+                        'RedirectSignInURIs': [
+                            'string',
+                        ],
+                        'RedirectSignOutURIs': [
+                            'string',
+                        ],
+                        'SocialProviderSettings': {
+                            'Facebook': {
+                                'ClientId': 'string',
+                                'ClientSecret': 'string'
+                            },
+                            'Google': {
+                                'ClientId': 'string',
+                                'ClientSecret': 'string'
+                            },
+                            'LoginWithAmazon': {
+                                'ClientId': 'string',
+                                'ClientSecret': 'string'
+                            },
+                            'SignInWithApple': {
+                                'ClientId': 'string',
+                                'KeyId': 'string',
+                                'PrivateKey': 'string',
+                                'TeamId': 'string'
+                            }
+                        }
+                    },
+                    'PasswordPolicy': {
+                        'AdditionalConstraints': [
+                            'REQUIRE_DIGIT'|'REQUIRE_LOWERCASE'|'REQUIRE_SYMBOL'|'REQUIRE_UPPERCASE',
+                        ],
+                        'MinimumLength': 123.0
+                    },
+                    'RequiredSignUpAttributes': [
+                        'ADDRESS'|'BIRTHDATE'|'EMAIL'|'FAMILY_NAME'|'GENDER'|'GIVEN_NAME'|'LOCALE'|'MIDDLE_NAME'|'NAME'|'NICKNAME'|'PHONE_NUMBER'|'PICTURE'|'PREFERRED_USERNAME'|'PROFILE'|'UPDATED_AT'|'WEBSITE'|'ZONE_INFO',
+                    ],
+                    'SignInMethod': 'EMAIL'|'EMAIL_AND_PHONE_NUMBER'|'PHONE_NUMBER'|'USERNAME',
+                    'UserPoolName': 'string'
+                }
+            },
+            'ResourceName': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **ResourceConfig** *(dict) --* 
+
+          The resource configuration for authorization requests to the backend of your Amplify project.
+
+          
+          
+
+          - **AuthResources** *(string) --* 
+
+            Defines whether you want to configure only authentication or both authentication and authorization settings.
+
+            
+          
+
+          - **IdentityPoolConfigs** *(dict) --* 
+
+            Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
+
+            
+            
+
+            - **IdentityPoolName** *(string) --* 
+
+              Name of the Amazon Cognito identity pool used for authorization.
+
+              
+            
+
+            - **UnauthenticatedLogin** *(boolean) --* 
+
+              Set to true or false based on whether you want to enable guest authorization to your Amplify app.
+
+              
+        
+          
+
+          - **Service** *(string) --* 
+
+            Defines the service name to use when configuring an authentication resource in your Amplify project.
+
+            
+          
+
+          - **UserPoolConfigs** *(dict) --* 
+
+            Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
+
+            
+            
+
+            - **ForgotPassword** *(dict) --* 
+
+              Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+              
+              
+
+              - **DeliveryMethod** *(string) --* 
+
+                Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.
+
+                
+              
+
+              - **EmailSettings** *(dict) --* 
+
+                The configuration for the email sent when an app user forgets their password.
+
+                
+                
+
+                - **EmailMessage** *(string) --* 
+
+                  The body of the email.
+
+                  
+                
+
+                - **EmailSubject** *(string) --* 
+
+                  The subject of the email.
+
+                  
+            
+              
+
+              - **SmsSettings** *(dict) --* 
+
+                The configuration for the SMS message sent when an app user forgets their password.
+
+                
+                
+
+                - **SmsMessage** *(string) --* 
+
+                  The body of the SMS message.
+
+                  
+            
+          
+            
+
+            - **Mfa** *(dict) --* 
+
+              Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
+
+              
+              
+
+              - **MFAMode** *(string) --* 
+
+                Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.
+
+                
+              
+
+              - **Settings** *(dict) --* 
+
+                Describes the configuration settings and methods for your Amplify app users to use MFA.
+
+                
+                
+
+                - **MfaTypes** *(list) --* 
+
+                  The supported MFA types.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **SmsMessage** *(string) --* 
+
+                  The body of the SMS message.
+
+                  
+            
+          
+            
+
+            - **OAuth** *(dict) --* 
+
+              Describes the OAuth policy and rules for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+              
+              
+
+              - **DomainPrefix** *(string) --* 
+
+                The domain prefix for your Amplify app.
+
+                
+              
+
+              - **OAuthGrantType** *(string) --* 
+
+                The OAuth grant type that you use to allow app users to authenticate from your Amplify app.
+
+                
+              
+
+              - **OAuthScopes** *(list) --* 
+
+                List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **RedirectSignInURIs** *(list) --* 
+
+                The redirected URI for signing in to your Amplify app.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **RedirectSignOutURIs** *(list) --* 
+
+                Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **SocialProviderSettings** *(dict) --* 
+
+                The settings for using social providers to access your Amplify app.
+
+                
+                
+
+                - **Facebook** *(dict) --* 
+
+                  Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+                  
+                  
+
+                  - **ClientId** *(string) --* 
+
+                    Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                    
+                  
+
+                  - **ClientSecret** *(string) --* 
+
+                    Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                    
+              
+                
+
+                - **Google** *(dict) --* 
+
+                  Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+                  
+                  
+
+                  - **ClientId** *(string) --* 
+
+                    Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                    
+                  
+
+                  - **ClientSecret** *(string) --* 
+
+                    Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                    
+              
+                
+
+                - **LoginWithAmazon** *(dict) --* 
+
+                  Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+                  
+                  
+
+                  - **ClientId** *(string) --* 
+
+                    Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                    
+                  
+
+                  - **ClientSecret** *(string) --* 
+
+                    Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                    
+              
+                
+
+                - **SignInWithApple** *(dict) --* 
+
+                  Describes Apple social federation configurations for allowing your app users to sign in using OAuth.
+
+                  
+                  
+
+                  - **ClientId** *(string) --* 
+
+                    Describes the client_id (also called Services ID) that comes from Apple.
+
+                    
+                  
+
+                  - **KeyId** *(string) --* 
+
+                    Describes the key_id that comes from Apple.
+
+                    
+                  
+
+                  - **PrivateKey** *(string) --* 
+
+                    Describes the private_key that comes from Apple.
+
+                    
+                  
+
+                  - **TeamId** *(string) --* 
+
+                    Describes the team_id that comes from Apple.
+
+                    
+              
+            
+          
+            
+
+            - **PasswordPolicy** *(dict) --* 
+
+              Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+              
+              
+
+              - **AdditionalConstraints** *(list) --* 
+
+                Additional constraints for the password used to access the backend of your Amplify project.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **MinimumLength** *(float) --* 
+
+                The minimum length of the password used to access the backend of your Amplify project.
+
+                
+          
+            
+
+            - **RequiredSignUpAttributes** *(list) --* 
+
+              The required attributes to sign up new users in the user pool.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **SignInMethod** *(string) --* 
+
+              Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.
+
+              
+            
+
+            - **UserPoolName** *(string) --* 
+
+              The Amazon Cognito user pool name.
+
+              
+        
+      
+        
+
+        - **ResourceName** *(string) --* 
+
+          The name of this resource.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_backend_job(**kwargs)
+
+    
+
+    Returns information about a specific job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetBackendJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_backend_job(
+          AppId='string',
+          BackendEnvironmentName='string',
+          JobId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The ID for the job.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'CreateTime': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string',
+            'UpdateTime': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **CreateTime** *(string) --* 
+
+          The time when the job was created.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+        
+
+        - **UpdateTime** *(string) --* 
+
+          The time when the job was last updated.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_token(**kwargs)
+
+    
+
+    Gets the challenge token based on the given appId and sessionId.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/GetToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_token(
+          AppId='string',
+          SessionId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type SessionId: string
+    :param SessionId: **[REQUIRED]** 
+
+      The session ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'ChallengeCode': 'string',
+            'SessionId': 'string',
+            'Ttl': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **ChallengeCode** *(string) --* 
+
+          The one-time challenge code for authenticating into the Amplify Admin UI.
+
+          
+        
+
+        - **SessionId** *(string) --* 
+
+          A unique ID provided when creating a new challenge token.
+
+          
+        
+
+        - **Ttl** *(string) --* 
+
+          The expiry time for the one-time generated token code.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: import_backend_auth(**kwargs)
+
+    
+
+    Imports an existing backend authentication resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ImportBackendAuth>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.import_backend_auth(
+          AppId='string',
+          BackendEnvironmentName='string',
+          IdentityPoolId='string',
+          NativeClientId='string',
+          UserPoolId='string',
+          WebClientId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type IdentityPoolId: string
+    :param IdentityPoolId: 
+
+      The ID of the Amazon Cognito identity pool.
+
+      
+
+    
+    :type NativeClientId: string
+    :param NativeClientId: **[REQUIRED]** 
+
+      The ID of the Amazon Cognito native client.
+
+      
+
+    
+    :type UserPoolId: string
+    :param UserPoolId: **[REQUIRED]** 
+
+      The ID of the Amazon Cognito user pool.
+
+      
+
+    
+    :type WebClientId: string
+    :param WebClientId: **[REQUIRED]** 
+
+      The ID of the Amazon Cognito web client.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_backend_jobs(**kwargs)
+
+    
+
+    Lists the jobs for the backend of an Amplify app.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListBackendJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_backend_jobs(
+          AppId='string',
+          BackendEnvironmentName='string',
+          JobId='string',
+          MaxResults=123,
+          NextToken='string',
+          Operation='string',
+          Status='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: 
+
+      The ID for the job.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results that you want in the response.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next set of results.
+
+      
+
+    
+    :type Operation: string
+    :param Operation: 
+
+      Filters the list of response objects to include only those with the specified operation name.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      Filters the list of response objects to include only those with the specified status.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Jobs': [
+                {
+                    'AppId': 'string',
+                    'BackendEnvironmentName': 'string',
+                    'CreateTime': 'string',
+                    'Error': 'string',
+                    'JobId': 'string',
+                    'Operation': 'string',
+                    'Status': 'string',
+                    'UpdateTime': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Jobs** *(list) --* 
+
+          An array of jobs and their properties.
+
+          
+          
+
+          - *(dict) --* 
+
+            The response object for this operation.
+
+            
+            
+
+            - **AppId** *(string) --* 
+
+              The app ID.
+
+              
+            
+
+            - **BackendEnvironmentName** *(string) --* 
+
+              The name of the backend environment.
+
+              
+            
+
+            - **CreateTime** *(string) --* 
+
+              The time when the job was created.
+
+              
+            
+
+            - **Error** *(string) --* 
+
+              If the request fails, this error is returned.
+
+              
+            
+
+            - **JobId** *(string) --* 
+
+              The ID for the job.
+
+              
+            
+
+            - **Operation** *(string) --* 
+
+              The name of the operation.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The current status of the request.
+
+              
+            
+
+            - **UpdateTime** *(string) --* 
+
+              The time when the job was last updated.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: remove_all_backends(**kwargs)
+
+    
+
+    Removes all backend environments from your Amplify project.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/RemoveAllBackends>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.remove_all_backends(
+          AppId='string',
+          CleanAmplifyApp=True|False
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type CleanAmplifyApp: boolean
+    :param CleanAmplifyApp: 
+
+      Cleans up the Amplify Console app if this value is set to true.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: remove_backend_config(**kwargs)
+
+    
+
+    Removes the AWS resources required to access the Amplify Admin UI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/RemoveBackendConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.remove_backend_config(
+          AppId='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Error': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: update_backend_api(**kwargs)
+
+    
+
+    Updates an existing backend API resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAPI>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_backend_api(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AdditionalAuthTypes': [
+                  {
+                      'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                      'Settings': {
+                          'CognitoUserPoolId': 'string',
+                          'Description': 'string',
+                          'ExpirationTime': 123.0,
+                          'OpenIDAuthTTL': 'string',
+                          'OpenIDClientId': 'string',
+                          'OpenIDIatTTL': 'string',
+                          'OpenIDIssueURL': 'string',
+                          'OpenIDProviderName': 'string'
+                      }
+                  },
+              ],
+              'ApiName': 'string',
+              'ConflictResolution': {
+                  'ResolutionStrategy': 'OPTIMISTIC_CONCURRENCY'|'LAMBDA'|'AUTOMERGE'|'NONE'
+              },
+              'DefaultAuthType': {
+                  'Mode': 'API_KEY'|'AWS_IAM'|'AMAZON_COGNITO_USER_POOLS'|'OPENID_CONNECT',
+                  'Settings': {
+                      'CognitoUserPoolId': 'string',
+                      'Description': 'string',
+                      'ExpirationTime': 123.0,
+                      'OpenIDAuthTTL': 'string',
+                      'OpenIDClientId': 'string',
+                      'OpenIDIatTTL': 'string',
+                      'OpenIDIssueURL': 'string',
+                      'OpenIDProviderName': 'string'
+                  }
+              },
+              'Service': 'string',
+              'TransformSchema': 'string'
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: 
+
+      Defines the resource configuration for the data model in your Amplify project.
+
+      
+
+    
+      - **AdditionalAuthTypes** *(list) --* 
+
+        Additional authentication methods used to interact with your data models.
+
+        
+
+      
+        - *(dict) --* 
+
+          Describes the auth types for your configured data models.
+
+          
+
+        
+          - **Mode** *(string) --* 
+
+            Describes the authentication mode.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            Describes settings for the authentication mode.
+
+            
+
+          
+            - **CognitoUserPoolId** *(string) --* 
+
+              The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **Description** *(string) --* 
+
+              The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **ExpirationTime** *(float) --* 
+
+              The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+              
+
+            
+            - **OpenIDAuthTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDClientId** *(string) --* 
+
+              The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDIatTTL** *(string) --* 
+
+              The expiry time for the OpenID authentication mechanism.
+
+              
+
+            
+            - **OpenIDIssueURL** *(string) --* 
+
+              The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+              
+
+            
+            - **OpenIDProviderName** *(string) --* 
+
+              The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+              
+
+            
+          
+        
+    
+      - **ApiName** *(string) --* 
+
+        The API name used to interact with the data model, configured as a part of your Amplify project.
+
+        
+
+      
+      - **ConflictResolution** *(dict) --* 
+
+        The conflict resolution strategy for your data stored in the data models.
+
+        
+
+      
+        - **ResolutionStrategy** *(string) --* 
+
+          The strategy for conflict resolution.
+
+          
+
+        
+      
+      - **DefaultAuthType** *(dict) --* 
+
+        The default authentication type for interacting with the configured data models in your Amplify project.
+
+        
+
+      
+        - **Mode** *(string) --* 
+
+          Describes the authentication mode.
+
+          
+
+        
+        - **Settings** *(dict) --* 
+
+          Describes settings for the authentication mode.
+
+          
+
+        
+          - **CognitoUserPoolId** *(string) --* 
+
+            The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **Description** *(string) --* 
+
+            The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **ExpirationTime** *(float) --* 
+
+            The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.
+
+            
+
+          
+          - **OpenIDAuthTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDClientId** *(string) --* 
+
+            The clientID for openID, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDIatTTL** *(string) --* 
+
+            The expiry time for the OpenID authentication mechanism.
+
+            
+
+          
+          - **OpenIDIssueURL** *(string) --* 
+
+            The openID issuer URL, if openID was used as an authentication setting to access your data models.
+
+            
+
+          
+          - **OpenIDProviderName** *(string) --* 
+
+            The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.
+
+            
+
+          
+        
+      
+      - **Service** *(string) --* 
+
+        The service used to provision and interact with the data model.
+
+        
+
+      
+      - **TransformSchema** *(string) --* 
+
+        The definition of the data model in the annotated transform of the GraphQL schema.
+
+        
+
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: update_backend_auth(**kwargs)
+
+    
+
+    Updates an existing backend authentication resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendAuth>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_backend_auth(
+          AppId='string',
+          BackendEnvironmentName='string',
+          ResourceConfig={
+              'AuthResources': 'USER_POOL_ONLY'|'IDENTITY_POOL_AND_USER_POOL',
+              'IdentityPoolConfigs': {
+                  'UnauthenticatedLogin': True|False
+              },
+              'Service': 'COGNITO',
+              'UserPoolConfigs': {
+                  'ForgotPassword': {
+                      'DeliveryMethod': 'EMAIL'|'SMS',
+                      'EmailSettings': {
+                          'EmailMessage': 'string',
+                          'EmailSubject': 'string'
+                      },
+                      'SmsSettings': {
+                          'SmsMessage': 'string'
+                      }
+                  },
+                  'Mfa': {
+                      'MFAMode': 'ON'|'OFF'|'OPTIONAL',
+                      'Settings': {
+                          'MfaTypes': [
+                              'SMS'|'TOTP',
+                          ],
+                          'SmsMessage': 'string'
+                      }
+                  },
+                  'OAuth': {
+                      'DomainPrefix': 'string',
+                      'OAuthGrantType': 'CODE'|'IMPLICIT',
+                      'OAuthScopes': [
+                          'PHONE'|'EMAIL'|'OPENID'|'PROFILE'|'AWS_COGNITO_SIGNIN_USER_ADMIN',
+                      ],
+                      'RedirectSignInURIs': [
+                          'string',
+                      ],
+                      'RedirectSignOutURIs': [
+                          'string',
+                      ],
+                      'SocialProviderSettings': {
+                          'Facebook': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'Google': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'LoginWithAmazon': {
+                              'ClientId': 'string',
+                              'ClientSecret': 'string'
+                          },
+                          'SignInWithApple': {
+                              'ClientId': 'string',
+                              'KeyId': 'string',
+                              'PrivateKey': 'string',
+                              'TeamId': 'string'
+                          }
+                      }
+                  },
+                  'PasswordPolicy': {
+                      'AdditionalConstraints': [
+                          'REQUIRE_DIGIT'|'REQUIRE_LOWERCASE'|'REQUIRE_SYMBOL'|'REQUIRE_UPPERCASE',
+                      ],
+                      'MinimumLength': 123.0
+                  }
+              }
+          },
+          ResourceName='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type ResourceConfig: dict
+    :param ResourceConfig: **[REQUIRED]** 
+
+      The resource configuration for this request object.
+
+      
+
+    
+      - **AuthResources** *(string) --* **[REQUIRED]** 
+
+        Defines the service name to use when configuring an authentication resource in your Amplify project.
+
+        
+
+      
+      - **IdentityPoolConfigs** *(dict) --* 
+
+        Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
+
+        
+
+      
+        - **UnauthenticatedLogin** *(boolean) --* 
+
+          A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.
+
+          
+
+        
+      
+      - **Service** *(string) --* **[REQUIRED]** 
+
+        Defines the service name to use when configuring an authentication resource in your Amplify project.
+
+        
+
+      
+      - **UserPoolConfigs** *(dict) --* **[REQUIRED]** 
+
+        Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
+
+        
+
+      
+        - **ForgotPassword** *(dict) --* 
+
+          Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **DeliveryMethod** *(string) --* 
+
+            Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
+
+            
+
+          
+          - **EmailSettings** *(dict) --* 
+
+            The configuration for the email sent when an app user forgets their password.
+
+            
+
+          
+            - **EmailMessage** *(string) --* 
+
+              The body of the email.
+
+              
+
+            
+            - **EmailSubject** *(string) --* 
+
+              The subject of the email.
+
+              
+
+            
+          
+          - **SmsSettings** *(dict) --* 
+
+            The configuration for the SMS message sent when an Amplify app user forgets their password.
+
+            
+
+          
+            - **SmsMessage** *(string) --* 
+
+              The body of the SMS message.
+
+              
+
+            
+          
+        
+        - **Mfa** *(dict) --* 
+
+          Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
+
+          
+
+        
+          - **MFAMode** *(string) --* 
+
+            The MFA mode for the backend of your Amplify project.
+
+            
+
+          
+          - **Settings** *(dict) --* 
+
+            The settings of your MFA configuration for the backend of your Amplify project.
+
+            
+
+          
+            - **MfaTypes** *(list) --* 
+
+              The supported MFA types.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+            - **SmsMessage** *(string) --* 
+
+              The body of the SMS message.
+
+              
+
+            
+          
+        
+        - **OAuth** *(dict) --* 
+
+          Describes the OAuth policy and rules for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **DomainPrefix** *(string) --* 
+
+            The Amazon Cognito domain prefix used to create a hosted UI for authentication.
+
+            
+
+          
+          - **OAuthGrantType** *(string) --* 
+
+            The OAuth grant type to allow app users to authenticate from your Amplify app.
+
+            
+
+          
+          - **OAuthScopes** *(list) --* 
+
+            The list of OAuth-related flows that can allow users to authenticate from your Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **RedirectSignInURIs** *(list) --* 
+
+            Redirect URLs that OAuth uses when a user signs in to an Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **RedirectSignOutURIs** *(list) --* 
+
+            Redirect URLs that OAuth uses when a user signs out of an Amplify app.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **SocialProviderSettings** *(dict) --* 
+
+            Describes third-party social federation configurations for allowing your users to sign in with OAuth.
+
+            
+
+          
+            - **Facebook** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **Google** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **LoginWithAmazon** *(dict) --* 
+
+              Describes third-party social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id, which can be obtained from the third-party social federation provider.
+
+                
+
+              
+              - **ClientSecret** *(string) --* 
+
+                Describes the client_secret, which can be obtained from third-party social federation providers.
+
+                
+
+              
+            
+            - **SignInWithApple** *(dict) --* 
+
+              Describes Apple social federation configurations for allowing your app users to sign in using OAuth.
+
+              
+
+            
+              - **ClientId** *(string) --* 
+
+                Describes the client_id (also called Services ID) that comes from Apple.
+
+                
+
+              
+              - **KeyId** *(string) --* 
+
+                Describes the key_id that comes from Apple.
+
+                
+
+              
+              - **PrivateKey** *(string) --* 
+
+                Describes the private_key that comes from Apple.
+
+                
+
+              
+              - **TeamId** *(string) --* 
+
+                Describes the team_id that comes from Apple.
+
+                
+
+              
+            
+          
+        
+        - **PasswordPolicy** *(dict) --* 
+
+          Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
+
+          
+
+        
+          - **AdditionalConstraints** *(list) --* 
+
+            Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **MinimumLength** *(float) --* 
+
+            Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.
+
+            
+
+          
+        
+      
+    
+    :type ResourceName: string
+    :param ResourceName: **[REQUIRED]** 
+
+      The name of this resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: update_backend_config(**kwargs)
+
+    
+
+    Updates the AWS resources required to access the Amplify Admin UI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendConfig>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_backend_config(
+          AppId='string',
+          LoginAuthConfig={
+              'AwsCognitoIdentityPoolId': 'string',
+              'AwsCognitoRegion': 'string',
+              'AwsUserPoolsId': 'string',
+              'AwsUserPoolsWebClientId': 'string'
+          }
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type LoginAuthConfig: dict
+    :param LoginAuthConfig: 
+
+      Describes the Amazon Cognito configuration for Admin UI access.
+
+      
+
+    
+      - **AwsCognitoIdentityPoolId** *(string) --* 
+
+        The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.
+
+        
+
+      
+      - **AwsCognitoRegion** *(string) --* 
+
+        The AWS Region for the Amplify Admin UI login.
+
+        
+
+      
+      - **AwsUserPoolsId** *(string) --* 
+
+        The Amazon Cognito user pool ID used for Amplify Admin UI login authentication.
+
+        
+
+      
+      - **AwsUserPoolsWebClientId** *(string) --* 
+
+        The web client ID for the Amazon Cognito user pools.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendManagerAppId': 'string',
+            'Error': 'string',
+            'LoginAuthConfig': {
+                'AwsCognitoIdentityPoolId': 'string',
+                'AwsCognitoRegion': 'string',
+                'AwsUserPoolsId': 'string',
+                'AwsUserPoolsWebClientId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendManagerAppId** *(string) --* 
+
+          The app ID for the backend manager.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **LoginAuthConfig** *(dict) --* 
+
+          Describes the Amazon Cognito configurations for the Admin UI auth resource to log in with.
+
+          
+          
+
+          - **AwsCognitoIdentityPoolId** *(string) --* 
+
+            The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.
+
+            
+          
+
+          - **AwsCognitoRegion** *(string) --* 
+
+            The AWS Region for the Amplify Admin UI login.
+
+            
+          
+
+          - **AwsUserPoolsId** *(string) --* 
+
+            The Amazon Cognito user pool ID used for Amplify Admin UI login authentication.
+
+            
+          
+
+          - **AwsUserPoolsWebClientId** *(string) --* 
+
+            The web client ID for the Amazon Cognito user pools.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: update_backend_job(**kwargs)
+
+    
+
+    Updates a specific job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/UpdateBackendJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_backend_job(
+          AppId='string',
+          BackendEnvironmentName='string',
+          JobId='string',
+          Operation='string',
+          Status='string'
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The ID for the job.
+
+      
+
+    
+    :type Operation: string
+    :param Operation: 
+
+      Filters the list of response objects to include only those with the specified operation name.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      Filters the list of response objects to include only those with the specified status.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AppId': 'string',
+            'BackendEnvironmentName': 'string',
+            'CreateTime': 'string',
+            'Error': 'string',
+            'JobId': 'string',
+            'Operation': 'string',
+            'Status': 'string',
+            'UpdateTime': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **AppId** *(string) --* 
+
+          The app ID.
+
+          
+        
+
+        - **BackendEnvironmentName** *(string) --* 
+
+          The name of the backend environment.
+
+          
+        
+
+        - **CreateTime** *(string) --* 
+
+          The time when the job was created.
+
+          
+        
+
+        - **Error** *(string) --* 
+
+          If the request fails, this error is returned.
+
+          
+        
+
+        - **JobId** *(string) --* 
+
+          The ID for the job.
+
+          
+        
+
+        - **Operation** *(string) --* 
+
+          The name of the operation.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The current status of the request.
+
+          
+        
+
+        - **UpdateTime** *(string) --* 
+
+          The time when the job was last updated.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.GatewayTimeoutException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`AmplifyBackend.Client.exceptions.BadRequestException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`AmplifyBackend.Paginator.ListBackendJobs`
+
+
+
+.. py:class:: AmplifyBackend.Paginator.ListBackendJobs
+
+  ::
+
+    
+    paginator = client.get_paginator('list_backend_jobs')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`AmplifyBackend.Client.list_backend_jobs`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/amplifybackend-2020-08-11/ListBackendJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          AppId='string',
+          BackendEnvironmentName='string',
+          JobId='string',
+          Operation='string',
+          Status='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type AppId: string
+    :param AppId: **[REQUIRED]** 
+
+      The app ID.
+
+      
+
+    
+    :type BackendEnvironmentName: string
+    :param BackendEnvironmentName: **[REQUIRED]** 
+
+      The name of the backend environment.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: 
+
+      The ID for the job.
+
+      
+
+    
+    :type Operation: string
+    :param Operation: 
+
+      Filters the list of response objects to include only those with the specified operation name.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      Filters the list of response objects to include only those with the specified status.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Jobs': [
+                {
+                    'AppId': 'string',
+                    'BackendEnvironmentName': 'string',
+                    'CreateTime': 'string',
+                    'Error': 'string',
+                    'JobId': 'string',
+                    'Operation': 'string',
+                    'Status': 'string',
+                    'UpdateTime': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        200 response
+
+        
+        
+
+        - **Jobs** *(list) --* 
+
+          An array of jobs and their properties.
+
+          
+          
+
+          - *(dict) --* 
+
+            The response object for this operation.
+
+            
+            
+
+            - **AppId** *(string) --* 
+
+              The app ID.
+
+              
+            
+
+            - **BackendEnvironmentName** *(string) --* 
+
+              The name of the backend environment.
+
+              
+            
+
+            - **CreateTime** *(string) --* 
+
+              The time when the job was created.
+
+              
+            
+
+            - **Error** *(string) --* 
+
+              If the request fails, this error is returned.
+
+              
+            
+
+            - **JobId** *(string) --* 
+
+              The ID for the job.
+
+              
+            
+
+            - **Operation** *(string) --* 
+
+              The name of the operation.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The current status of the request.
+
+              
+            
+
+            - **UpdateTime** *(string) --* 
+
+              The time when the job was last updated.
+
+              
+        
+      
+    

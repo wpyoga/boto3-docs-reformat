@@ -1,0 +1,5443 @@
+
+
+********
+SSOAdmin
+********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SSOAdmin.Client
+
+  A low-level client representing AWS Single Sign-On Admin (SSO Admin)
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('sso-admin')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SSOAdmin.Client.attach_managed_policy_to_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.can_paginate`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.create_account_assignment`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.create_instance_access_control_attribute_configuration`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.create_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.delete_account_assignment`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.delete_inline_policy_from_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.delete_instance_access_control_attribute_configuration`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.delete_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.describe_account_assignment_creation_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.describe_account_assignment_deletion_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.describe_instance_access_control_attribute_configuration`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.describe_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.describe_permission_set_provisioning_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.detach_managed_policy_from_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.get_inline_policy_for_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.get_paginator`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.get_waiter`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_account_assignment_creation_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_account_assignment_deletion_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_account_assignments`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_accounts_for_provisioned_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_instances`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_managed_policies_in_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_permission_set_provisioning_status`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_permission_sets`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_permission_sets_provisioned_to_account`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.provision_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.put_inline_policy_to_permission_set`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.tag_resource`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.untag_resource`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.update_instance_access_control_attribute_configuration`
+
+  
+  *   :py:meth:`~SSOAdmin.Client.update_permission_set`
+
+  
+
+  .. py:method:: attach_managed_policy_to_permission_set(**kwargs)
+
+    
+
+    Attaches an IAM managed policy ARN to a permission set.
+
+     
+
+    .. note::
+
+       
+
+      If the permission set is already referenced by one or more account assignments, you will need to call ``  ProvisionPermissionSet `` after this action to apply the corresponding IAM policy updates to all assigned accounts.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/AttachManagedPolicyToPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.attach_managed_policy_to_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          ManagedPolicyArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet that the managed policy should be attached to.
+
+      
+
+    
+    :type ManagedPolicyArn: string
+    :param ManagedPolicyArn: **[REQUIRED]** 
+
+      The IAM managed policy ARN to be attached to a permission set.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_account_assignment(**kwargs)
+
+    
+
+    Assigns access to a principal for a specified AWS account using a specified permission set.
+
+     
+
+    .. note::
+
+       
+
+      The term *principal* here refers to a user or group that is defined in AWS SSO.
+
+       
+
+     
+
+    .. note::
+
+       
+
+      As part of a successful ``CreateAccountAssignment`` call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call ``  ProvisionPermissionSet `` to make these updates.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateAccountAssignment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_account_assignment(
+          InstanceArn='string',
+          TargetId='string',
+          TargetType='AWS_ACCOUNT',
+          PermissionSetArn='string',
+          PrincipalType='USER'|'GROUP',
+          PrincipalId='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type TargetId: string
+    :param TargetId: **[REQUIRED]** 
+
+      TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+      
+
+    
+    :type TargetType: string
+    :param TargetType: **[REQUIRED]** 
+
+      The entity type for which the assignment will be created.
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set that the admin wants to grant the principal access to.
+
+      
+
+    
+    :type PrincipalType: string
+    :param PrincipalType: **[REQUIRED]** 
+
+      The entity type for which the assignment will be created.
+
+      
+
+    
+    :type PrincipalId: string
+    :param PrincipalId: **[REQUIRED]** 
+
+      An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentCreationStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'FailureReason': 'string',
+                'TargetId': 'string',
+                'TargetType': 'AWS_ACCOUNT',
+                'PermissionSetArn': 'string',
+                'PrincipalType': 'USER'|'GROUP',
+                'PrincipalId': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentCreationStatus** *(dict) --* 
+
+          The status object for the account assignment creation operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **TargetId** *(string) --* 
+
+            TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+            
+          
+
+          - **TargetType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **PrincipalType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PrincipalId** *(string) --* 
+
+            An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: create_instance_access_control_attribute_configuration(**kwargs)
+
+    
+
+    Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see `Attribute-Based Access Control </singlesignon/latest/userguide/abac.html>`__ in the *AWS SSO User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreateInstanceAccessControlAttributeConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_instance_access_control_attribute_configuration(
+          InstanceArn='string',
+          InstanceAccessControlAttributeConfiguration={
+              'AccessControlAttributes': [
+                  {
+                      'Key': 'string',
+                      'Value': {
+                          'Source': [
+                              'string',
+                          ]
+                      }
+                  },
+              ]
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed.
+
+      
+
+    
+    :type InstanceAccessControlAttributeConfiguration: dict
+    :param InstanceAccessControlAttributeConfiguration: **[REQUIRED]** 
+
+      Specifies the AWS SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store.
+
+      
+
+    
+      - **AccessControlAttributes** *(list) --* **[REQUIRED]** 
+
+        Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+
+        
+
+      
+        - *(dict) --* 
+
+          These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.
+
+          
+
+        
+          - **Key** *(string) --* **[REQUIRED]** 
+
+            The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+
+            
+
+          
+          - **Value** *(dict) --* **[REQUIRED]** 
+
+            The value used for mapping a specified attribute to an identity source.
+
+            
+
+          
+            - **Source** *(list) --* **[REQUIRED]** 
+
+              The identity source to use when mapping a specified attribute to AWS SSO.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+    
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: create_permission_set(**kwargs)
+
+    
+
+    Creates a permission set within a specified SSO instance.
+
+     
+
+    .. note::
+
+       
+
+      To grant users and groups access to AWS account resources, use ``  CreateAccountAssignment `` .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/CreatePermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_permission_set(
+          Name='string',
+          Description='string',
+          InstanceArn='string',
+          SessionDuration='string',
+          RelayState='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the  PermissionSet .
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the  PermissionSet .
+
+      
+
+    
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type SessionDuration: string
+    :param SessionDuration: 
+
+      The length of time that the application user sessions are valid in the ISO-8601 standard.
+
+      
+
+    
+    :type RelayState: string
+    :param RelayState: 
+
+      Used to redirect users within the application during the federation authentication process.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The tags to attach to the new  PermissionSet .
+
+      
+
+    
+      - *(dict) --* 
+
+        A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that AWS SSO creates in AWS accounts.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The key for the tag.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSet': {
+                'Name': 'string',
+                'PermissionSetArn': 'string',
+                'Description': 'string',
+                'CreatedDate': datetime(2015, 1, 1),
+                'SessionDuration': 'string',
+                'RelayState': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSet** *(dict) --* 
+
+          Defines the level of access on an AWS account.
+
+          
+          
+
+          - **Name** *(string) --* 
+
+            The name of the permission set.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the  PermissionSet .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+          
+
+          - **SessionDuration** *(string) --* 
+
+            The length of time that the application user sessions are valid for in the ISO-8601 standard.
+
+            
+          
+
+          - **RelayState** *(string) --* 
+
+            Used to redirect users within the application during the federation authentication process.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: delete_account_assignment(**kwargs)
+
+    
+
+    Deletes a principal's access from a specified AWS account using a specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteAccountAssignment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_account_assignment(
+          InstanceArn='string',
+          TargetId='string',
+          TargetType='AWS_ACCOUNT',
+          PermissionSetArn='string',
+          PrincipalType='USER'|'GROUP',
+          PrincipalId='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type TargetId: string
+    :param TargetId: **[REQUIRED]** 
+
+      TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+      
+
+    
+    :type TargetType: string
+    :param TargetType: **[REQUIRED]** 
+
+      The entity type for which the assignment will be deleted.
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set that will be used to remove access.
+
+      
+
+    
+    :type PrincipalType: string
+    :param PrincipalType: **[REQUIRED]** 
+
+      The entity type for which the assignment will be deleted.
+
+      
+
+    
+    :type PrincipalId: string
+    :param PrincipalId: **[REQUIRED]** 
+
+      An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentDeletionStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'FailureReason': 'string',
+                'TargetId': 'string',
+                'TargetType': 'AWS_ACCOUNT',
+                'PermissionSetArn': 'string',
+                'PrincipalType': 'USER'|'GROUP',
+                'PrincipalId': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentDeletionStatus** *(dict) --* 
+
+          The status object for the account assignment deletion operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **TargetId** *(string) --* 
+
+            TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+            
+          
+
+          - **TargetType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **PrincipalType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PrincipalId** *(string) --* 
+
+            An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: delete_inline_policy_from_permission_set(**kwargs)
+
+    
+
+    Deletes the inline policy from a specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInlinePolicyFromPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_inline_policy_from_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set that will be used to remove access.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: delete_instance_access_control_attribute_configuration(**kwargs)
+
+    
+
+    Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see `Attribute-Based Access Control </singlesignon/latest/userguide/abac.html>`__ in the *AWS SSO User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeleteInstanceAccessControlAttributeConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_instance_access_control_attribute_configuration(
+          InstanceArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: delete_permission_set(**kwargs)
+
+    
+
+    Deletes the specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DeletePermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set that should be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: describe_account_assignment_creation_status(**kwargs)
+
+    
+
+    Describes the status of the assignment creation request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentCreationStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_account_assignment_creation_status(
+          InstanceArn='string',
+          AccountAssignmentCreationRequestId='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountAssignmentCreationRequestId: string
+    :param AccountAssignmentCreationRequestId: **[REQUIRED]** 
+
+      The identifier that is used to track the request operation progress.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentCreationStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'FailureReason': 'string',
+                'TargetId': 'string',
+                'TargetType': 'AWS_ACCOUNT',
+                'PermissionSetArn': 'string',
+                'PrincipalType': 'USER'|'GROUP',
+                'PrincipalId': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentCreationStatus** *(dict) --* 
+
+          The status object for the account assignment creation operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **TargetId** *(string) --* 
+
+            TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+            
+          
+
+          - **TargetType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **PrincipalType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PrincipalId** *(string) --* 
+
+            An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: describe_account_assignment_deletion_status(**kwargs)
+
+    
+
+    Describes the status of the assignment deletion request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeAccountAssignmentDeletionStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_account_assignment_deletion_status(
+          InstanceArn='string',
+          AccountAssignmentDeletionRequestId='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountAssignmentDeletionRequestId: string
+    :param AccountAssignmentDeletionRequestId: **[REQUIRED]** 
+
+      The identifier that is used to track the request operation progress.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentDeletionStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'FailureReason': 'string',
+                'TargetId': 'string',
+                'TargetType': 'AWS_ACCOUNT',
+                'PermissionSetArn': 'string',
+                'PrincipalType': 'USER'|'GROUP',
+                'PrincipalId': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentDeletionStatus** *(dict) --* 
+
+          The status object for the account assignment deletion operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **TargetId** *(string) --* 
+
+            TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+            
+          
+
+          - **TargetType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **PrincipalType** *(string) --* 
+
+            The entity type for which the assignment will be created.
+
+            
+          
+
+          - **PrincipalId** *(string) --* 
+
+            An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: describe_instance_access_control_attribute_configuration(**kwargs)
+
+    
+
+    Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see `Attribute-Based Access Control </singlesignon/latest/userguide/abac.html>`__ in the *AWS SSO User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribeInstanceAccessControlAttributeConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_instance_access_control_attribute_configuration(
+          InstanceArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Status': 'ENABLED'|'CREATION_IN_PROGRESS'|'CREATION_FAILED',
+            'StatusReason': 'string',
+            'InstanceAccessControlAttributeConfiguration': {
+                'AccessControlAttributes': [
+                    {
+                        'Key': 'string',
+                        'Value': {
+                            'Source': [
+                                'string',
+                            ]
+                        }
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Status** *(string) --* 
+
+          The status of the attribute configuration process.
+
+          
+        
+
+        - **StatusReason** *(string) --* 
+
+          Provides more details about the current status of the specified attribute.
+
+          
+        
+
+        - **InstanceAccessControlAttributeConfiguration** *(dict) --* 
+
+          Gets the list of AWS SSO identity store attributes added to your ABAC configuration.
+
+          
+          
+
+          - **AccessControlAttributes** *(list) --* 
+
+            Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+
+            
+            
+
+            - *(dict) --* 
+
+              These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.
+
+              
+              
+
+              - **Key** *(string) --* 
+
+                The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+
+                
+              
+
+              - **Value** *(dict) --* 
+
+                The value used for mapping a specified attribute to an identity source.
+
+                
+                
+
+                - **Source** *(list) --* 
+
+                  The identity source to use when mapping a specified attribute to AWS SSO.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: describe_permission_set(**kwargs)
+
+    
+
+    Gets the details of the permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSet': {
+                'Name': 'string',
+                'PermissionSetArn': 'string',
+                'Description': 'string',
+                'CreatedDate': datetime(2015, 1, 1),
+                'SessionDuration': 'string',
+                'RelayState': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSet** *(dict) --* 
+
+          Describes the level of access on an AWS account.
+
+          
+          
+
+          - **Name** *(string) --* 
+
+            The name of the permission set.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the  PermissionSet .
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+          
+
+          - **SessionDuration** *(string) --* 
+
+            The length of time that the application user sessions are valid for in the ISO-8601 standard.
+
+            
+          
+
+          - **RelayState** *(string) --* 
+
+            Used to redirect users within the application during the federation authentication process.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: describe_permission_set_provisioning_status(**kwargs)
+
+    
+
+    Describes the status for the given permission set provisioning request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DescribePermissionSetProvisioningStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_permission_set_provisioning_status(
+          InstanceArn='string',
+          ProvisionPermissionSetRequestId='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type ProvisionPermissionSetRequestId: string
+    :param ProvisionPermissionSetRequestId: **[REQUIRED]** 
+
+      The identifier that is provided by the  ProvisionPermissionSet call to retrieve the current status of the provisioning workflow.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSetProvisioningStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'AccountId': 'string',
+                'PermissionSetArn': 'string',
+                'FailureReason': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSetProvisioningStatus** *(dict) --* 
+
+          The status object for the permission set provisioning operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **AccountId** *(string) --* 
+
+            The identifier of the AWS account from which to list the assignments.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set that is being provisioned. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: detach_managed_policy_from_permission_set(**kwargs)
+
+    
+
+    Detaches the attached IAM managed policy ARN from the specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/DetachManagedPolicyFromPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.detach_managed_policy_from_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          ManagedPolicyArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet from which the policy should be detached.
+
+      
+
+    
+    :type ManagedPolicyArn: string
+    :param ManagedPolicyArn: **[REQUIRED]** 
+
+      The IAM managed policy ARN to be attached to a permission set.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_inline_policy_for_permission_set(**kwargs)
+
+    
+
+    Obtains the inline policy assigned to the permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/GetInlinePolicyForPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_inline_policy_for_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'InlinePolicy': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **InlinePolicy** *(string) --* 
+
+          The IAM inline policy that is attached to the permission set.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_account_assignment_creation_status(**kwargs)
+
+    
+
+    Lists the status of the AWS account assignment creation requests for a specified SSO instance.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentCreationStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_account_assignment_creation_status(
+          InstanceArn='string',
+          MaxResults=123,
+          NextToken='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentsCreationStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentsCreationStatus** *(list) --* 
+
+          The status object for the account assignment creation operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the  AccountAssignment creation request.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_account_assignment_deletion_status(**kwargs)
+
+    
+
+    Lists the status of the AWS account assignment deletion requests for a specified SSO instance.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentDeletionStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_account_assignment_deletion_status(
+          InstanceArn='string',
+          MaxResults=123,
+          NextToken='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentsDeletionStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentsDeletionStatus** *(list) --* 
+
+          The status object for the account assignment deletion operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the  AccountAssignment creation request.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_account_assignments(**kwargs)
+
+    
+
+    Lists the assignee of the specified AWS account with the specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_account_assignments(
+          InstanceArn='string',
+          AccountId='string',
+          PermissionSetArn='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountId: string
+    :param AccountId: **[REQUIRED]** 
+
+      The identifier of the AWS account from which to list the assignments.
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set from which to list assignments.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignments': [
+                {
+                    'AccountId': 'string',
+                    'PermissionSetArn': 'string',
+                    'PrincipalType': 'USER'|'GROUP',
+                    'PrincipalId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignments** *(list) --* 
+
+          The list of assignments that match the input AWS account and permission set.
+
+          
+          
+
+          - *(dict) --* 
+
+            The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.
+
+             
+
+            .. note::
+
+               
+
+              The term *principal* here refers to a user or group that is defined in AWS SSO.
+
+               
+
+            
+            
+
+            - **AccountId** *(string) --* 
+
+              The identifier of the AWS account.
+
+              
+            
+
+            - **PermissionSetArn** *(string) --* 
+
+              The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+            
+
+            - **PrincipalType** *(string) --* 
+
+              The entity type for which the assignment will be created.
+
+              
+            
+
+            - **PrincipalId** *(string) --* 
+
+              An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_accounts_for_provisioned_permission_set(**kwargs)
+
+    
+
+    Lists all the AWS accounts where the specified permission set is provisioned.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountsForProvisionedPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_accounts_for_provisioned_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          ProvisioningStatus='LATEST_PERMISSION_SET_PROVISIONED'|'LATEST_PERMISSION_SET_NOT_PROVISIONED',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet from which the associated AWS accounts will be listed.
+
+      
+
+    
+    :type ProvisioningStatus: string
+    :param ProvisioningStatus: 
+
+      The permission set provisioning status for an AWS account.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the  PermissionSet .
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountIds': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountIds** *(list) --* 
+
+          The list of AWS ``AccountIds`` .
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_instances(**kwargs)
+
+    
+
+    Lists the SSO instances that the caller has access to.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListInstances>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_instances(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the instance.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Instances': [
+                {
+                    'InstanceArn': 'string',
+                    'IdentityStoreId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Instances** *(list) --* 
+
+          Lists the SSO instances that the caller has access to.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the SSO instance.
+
+            
+            
+
+            - **InstanceArn** *(string) --* 
+
+              The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+            
+
+            - **IdentityStoreId** *(string) --* 
+
+              The identifier of the identity store that is connected to the SSO instance.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_managed_policies_in_permission_set(**kwargs)
+
+    
+
+    Lists the IAM managed policy that is attached to a specified permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListManagedPoliciesInPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_managed_policies_in_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet whose managed policies will be listed.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the  PermissionSet .
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AttachedManagedPolicies': [
+                {
+                    'Name': 'string',
+                    'Arn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AttachedManagedPolicies** *(list) --* 
+
+          The array of the  AttachedManagedPolicy data type object.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that stores the details of the IAM managed policy.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the IAM managed policy.
+
+              
+            
+
+            - **Arn** *(string) --* 
+
+              The ARN of the IAM managed policy. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_permission_set_provisioning_status(**kwargs)
+
+    
+
+    Lists the status of the permission set provisioning requests for a specified SSO instance.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_permission_set_provisioning_status(
+          InstanceArn='string',
+          MaxResults=123,
+          NextToken='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSetsProvisioningStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSetsProvisioningStatus** *(list) --* 
+
+          The status object for the permission set provisioning operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the permission set provisioning status.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_permission_sets(**kwargs)
+
+    
+
+    Lists the  PermissionSet s in an SSO instance.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_permission_sets(
+          InstanceArn='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSets': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSets** *(list) --* 
+
+          Defines the level of access on an AWS account.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_permission_sets_provisioned_to_account(**kwargs)
+
+    
+
+    Lists all the permission sets that are provisioned to a specified AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsProvisionedToAccount>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_permission_sets_provisioned_to_account(
+          InstanceArn='string',
+          AccountId='string',
+          ProvisioningStatus='LATEST_PERMISSION_SET_PROVISIONED'|'LATEST_PERMISSION_SET_NOT_PROVISIONED',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountId: string
+    :param AccountId: **[REQUIRED]** 
+
+      The identifier of the AWS account from which to list the assignments.
+
+      
+
+    
+    :type ProvisioningStatus: string
+    :param ProvisioningStatus: 
+
+      The status object for the permission set provisioning operation.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to display for the assignment.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'PermissionSets': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+        
+
+        - **PermissionSets** *(list) --* 
+
+          Defines the level of access that an AWS account has.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags that are attached to a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          InstanceArn='string',
+          ResourceArn='string',
+          NextToken='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource with the tags to be listed.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A set of key-value pairs that are used to manage the resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that AWS SSO creates in AWS accounts.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key for the tag.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: provision_permission_set(**kwargs)
+
+    
+
+    The process by which a specified permission set is provisioned to the specified target.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ProvisionPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.provision_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          TargetId='string',
+          TargetType='AWS_ACCOUNT'|'ALL_PROVISIONED_ACCOUNTS'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set.
+
+      
+
+    
+    :type TargetId: string
+    :param TargetId: 
+
+      TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
+
+      
+
+    
+    :type TargetType: string
+    :param TargetType: **[REQUIRED]** 
+
+      The entity type for which the assignment will be created.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSetProvisioningStatus': {
+                'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                'RequestId': 'string',
+                'AccountId': 'string',
+                'PermissionSetArn': 'string',
+                'FailureReason': 'string',
+                'CreatedDate': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSetProvisioningStatus** *(dict) --* 
+
+          The status object for the permission set provisioning operation.
+
+          
+          
+
+          - **Status** *(string) --* 
+
+            The status of the permission set provisioning process.
+
+            
+          
+
+          - **RequestId** *(string) --* 
+
+            The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+            
+          
+
+          - **AccountId** *(string) --* 
+
+            The identifier of the AWS account from which to list the assignments.
+
+            
+          
+
+          - **PermissionSetArn** *(string) --* 
+
+            The ARN of the permission set that is being provisioned. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+            
+          
+
+          - **FailureReason** *(string) --* 
+
+            The message that contains an error or exception in case of an operation failure.
+
+            
+          
+
+          - **CreatedDate** *(datetime) --* 
+
+            The date that the permission set was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: put_inline_policy_to_permission_set(**kwargs)
+
+    
+
+    Attaches an IAM inline policy to a permission set.
+
+     
+
+    .. note::
+
+       
+
+      If the permission set is already referenced by one or more account assignments, you will need to call ``  ProvisionPermissionSet `` after this action to apply the corresponding IAM policy updates to all assigned accounts.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/PutInlinePolicyToPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_inline_policy_to_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          InlinePolicy='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set.
+
+      
+
+    
+    :type InlinePolicy: string
+    :param InlinePolicy: **[REQUIRED]** 
+
+      The IAM inline policy to attach to a  PermissionSet .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Associates a set of tags with a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          InstanceArn='string',
+          ResourceArn='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource with the tags to be listed.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      A set of key-value pairs that are used to manage the resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that AWS SSO creates in AWS accounts.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          The key for the tag.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Disassociates a set of tags from a specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          InstanceArn='string',
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource with the tags to be listed.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The keys of tags that are attached to the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: update_instance_access_control_attribute_configuration(**kwargs)
+
+    
+
+    Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see `Attribute-Based Access Control </singlesignon/latest/userguide/abac.html>`__ in the *AWS SSO User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdateInstanceAccessControlAttributeConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_instance_access_control_attribute_configuration(
+          InstanceArn='string',
+          InstanceAccessControlAttributeConfiguration={
+              'AccessControlAttributes': [
+                  {
+                      'Key': 'string',
+                      'Value': {
+                          'Source': [
+                              'string',
+                          ]
+                      }
+                  },
+              ]
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed.
+
+      
+
+    
+    :type InstanceAccessControlAttributeConfiguration: dict
+    :param InstanceAccessControlAttributeConfiguration: **[REQUIRED]** 
+
+      Updates the attributes for your ABAC configuration.
+
+      
+
+    
+      - **AccessControlAttributes** *(list) --* **[REQUIRED]** 
+
+        Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+
+        
+
+      
+        - *(dict) --* 
+
+          These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.
+
+          
+
+        
+          - **Key** *(string) --* **[REQUIRED]** 
+
+            The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+
+            
+
+          
+          - **Value** *(dict) --* **[REQUIRED]** 
+
+            The value used for mapping a specified attribute to an identity source.
+
+            
+
+          
+            - **Source** *(list) --* **[REQUIRED]** 
+
+              The identity source to use when mapping a specified attribute to AWS SSO.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+    
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: update_permission_set(**kwargs)
+
+    
+
+    Updates an existing permission set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/UpdatePermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_permission_set(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          Description='string',
+          SessionDuration='string',
+          RelayState='string'
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the  PermissionSet .
+
+      
+
+    
+    :type SessionDuration: string
+    :param SessionDuration: 
+
+      The length of time that the application user sessions are valid for in the ISO-8601 standard.
+
+      
+
+    
+    :type RelayState: string
+    :param RelayState: 
+
+      Used to redirect users within the application during the federation authentication process.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSOAdmin.Client.exceptions.ConflictException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`SSOAdmin.Paginator.ListAccountAssignmentCreationStatus`
+
+
+* :py:class:`SSOAdmin.Paginator.ListAccountAssignmentDeletionStatus`
+
+
+* :py:class:`SSOAdmin.Paginator.ListAccountAssignments`
+
+
+* :py:class:`SSOAdmin.Paginator.ListAccountsForProvisionedPermissionSet`
+
+
+* :py:class:`SSOAdmin.Paginator.ListInstances`
+
+
+* :py:class:`SSOAdmin.Paginator.ListManagedPoliciesInPermissionSet`
+
+
+* :py:class:`SSOAdmin.Paginator.ListPermissionSetProvisioningStatus`
+
+
+* :py:class:`SSOAdmin.Paginator.ListPermissionSets`
+
+
+* :py:class:`SSOAdmin.Paginator.ListPermissionSetsProvisionedToAccount`
+
+
+* :py:class:`SSOAdmin.Paginator.ListTagsForResource`
+
+
+
+.. py:class:: SSOAdmin.Paginator.ListAccountAssignmentCreationStatus
+
+  ::
+
+    
+    paginator = client.get_paginator('list_account_assignment_creation_status')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_account_assignment_creation_status`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentCreationStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentsCreationStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentsCreationStatus** *(list) --* 
+
+          The status object for the account assignment creation operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the  AccountAssignment creation request.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListAccountAssignmentDeletionStatus
+
+  ::
+
+    
+    paginator = client.get_paginator('list_account_assignment_deletion_status')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_account_assignment_deletion_status`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignmentDeletionStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignmentsDeletionStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignmentsDeletionStatus** *(list) --* 
+
+          The status object for the account assignment deletion operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the  AccountAssignment creation request.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListAccountAssignments
+
+  ::
+
+    
+    paginator = client.get_paginator('list_account_assignments')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_account_assignments`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountAssignments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          AccountId='string',
+          PermissionSetArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountId: string
+    :param AccountId: **[REQUIRED]** 
+
+      The identifier of the AWS account from which to list the assignments.
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the permission set from which to list assignments.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountAssignments': [
+                {
+                    'AccountId': 'string',
+                    'PermissionSetArn': 'string',
+                    'PrincipalType': 'USER'|'GROUP',
+                    'PrincipalId': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountAssignments** *(list) --* 
+
+          The list of assignments that match the input AWS account and permission set.
+
+          
+          
+
+          - *(dict) --* 
+
+            The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.
+
+             
+
+            .. note::
+
+               
+
+              The term *principal* here refers to a user or group that is defined in AWS SSO.
+
+               
+
+            
+            
+
+            - **AccountId** *(string) --* 
+
+              The identifier of the AWS account.
+
+              
+            
+
+            - **PermissionSetArn** *(string) --* 
+
+              The ARN of the permission set. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+            
+
+            - **PrincipalType** *(string) --* 
+
+              The entity type for which the assignment will be created.
+
+              
+            
+
+            - **PrincipalId** *(string) --* 
+
+              An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the `AWS SSO Identity Store API Reference </singlesignon/latest/IdentityStoreAPIReference/welcome.html>`__ .
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListAccountsForProvisionedPermissionSet
+
+  ::
+
+    
+    paginator = client.get_paginator('list_accounts_for_provisioned_permission_set')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_accounts_for_provisioned_permission_set`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListAccountsForProvisionedPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          ProvisioningStatus='LATEST_PERMISSION_SET_PROVISIONED'|'LATEST_PERMISSION_SET_NOT_PROVISIONED',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet from which the associated AWS accounts will be listed.
+
+      
+
+    
+    :type ProvisioningStatus: string
+    :param ProvisioningStatus: 
+
+      The permission set provisioning status for an AWS account.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AccountIds': [
+                'string',
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AccountIds** *(list) --* 
+
+          The list of AWS ``AccountIds`` .
+
+          
+          
+
+          - *(string) --* 
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListInstances
+
+  ::
+
+    
+    paginator = client.get_paginator('list_instances')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_instances`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListInstances>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Instances': [
+                {
+                    'InstanceArn': 'string',
+                    'IdentityStoreId': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Instances** *(list) --* 
+
+          Lists the SSO instances that the caller has access to.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the SSO instance.
+
+            
+            
+
+            - **InstanceArn** *(string) --* 
+
+              The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+            
+
+            - **IdentityStoreId** *(string) --* 
+
+              The identifier of the identity store that is connected to the SSO instance.
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListManagedPoliciesInPermissionSet
+
+  ::
+
+    
+    paginator = client.get_paginator('list_managed_policies_in_permission_set')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_managed_policies_in_permission_set`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListManagedPoliciesInPermissionSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          PermissionSetArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PermissionSetArn: string
+    :param PermissionSetArn: **[REQUIRED]** 
+
+      The ARN of the  PermissionSet whose managed policies will be listed.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'AttachedManagedPolicies': [
+                {
+                    'Name': 'string',
+                    'Arn': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **AttachedManagedPolicies** *(list) --* 
+
+          The array of the  AttachedManagedPolicy data type object.
+
+          
+          
+
+          - *(dict) --* 
+
+            A structure that stores the details of the IAM managed policy.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the IAM managed policy.
+
+              
+            
+
+            - **Arn** *(string) --* 
+
+              The ARN of the IAM managed policy. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListPermissionSetProvisioningStatus
+
+  ::
+
+    
+    paginator = client.get_paginator('list_permission_set_provisioning_status')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_permission_set_provisioning_status`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetProvisioningStatus>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          Filter={
+              'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED'
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type Filter: dict
+    :param Filter: 
+
+      Filters results based on the passed attribute value.
+
+      
+
+    
+      - **Status** *(string) --* 
+
+        Filters the list operations result based on the status attribute.
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSetsProvisioningStatus': [
+                {
+                    'Status': 'IN_PROGRESS'|'FAILED'|'SUCCEEDED',
+                    'RequestId': 'string',
+                    'CreatedDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSetsProvisioningStatus** *(list) --* 
+
+          The status object for the permission set provisioning operation.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the permission set provisioning status.
+
+            
+            
+
+            - **Status** *(string) --* 
+
+              The status of the permission set provisioning process.
+
+              
+            
+
+            - **RequestId** *(string) --* 
+
+              The identifier for tracking the request operation that is generated by the universally unique identifier (UUID) workflow.
+
+              
+            
+
+            - **CreatedDate** *(datetime) --* 
+
+              The date that the permission set was created.
+
+              
+        
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListPermissionSets
+
+  ::
+
+    
+    paginator = client.get_paginator('list_permission_sets')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_permission_sets`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSets': [
+                'string',
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSets** *(list) --* 
+
+          Defines the level of access on an AWS account.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListPermissionSetsProvisionedToAccount
+
+  ::
+
+    
+    paginator = client.get_paginator('list_permission_sets_provisioned_to_account')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_permission_sets_provisioned_to_account`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListPermissionSetsProvisionedToAccount>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          AccountId='string',
+          ProvisioningStatus='LATEST_PERMISSION_SET_PROVISIONED'|'LATEST_PERMISSION_SET_NOT_PROVISIONED',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type AccountId: string
+    :param AccountId: **[REQUIRED]** 
+
+      The identifier of the AWS account from which to list the assignments.
+
+      
+
+    
+    :type ProvisioningStatus: string
+    :param ProvisioningStatus: 
+
+      The status object for the permission set provisioning operation.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PermissionSets': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **PermissionSets** *(list) --* 
+
+          Defines the level of access that an AWS account has.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+
+.. py:class:: SSOAdmin.Paginator.ListTagsForResource
+
+  ::
+
+    
+    paginator = client.get_paginator('list_tags_for_resource')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSOAdmin.Client.list_tags_for_resource`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          InstanceArn='string',
+          ResourceArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type InstanceArn: string
+    :param InstanceArn: **[REQUIRED]** 
+
+      The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see `Amazon Resource Names (ARNs) and AWS Service Namespaces </general/latest/gr/aws-arns-and-namespaces.html>`__ in the *AWS General Reference* .
+
+      
+
+    
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource with the tags to be listed.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A set of key-value pairs that are used to manage the resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that AWS SSO creates in AWS accounts.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key for the tag.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag.
+
+              
+        
+      
+    

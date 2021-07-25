@@ -1,0 +1,1041 @@
+
+
+***********************
+ApplicationCostProfiler
+***********************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ApplicationCostProfiler.Client
+
+  A low-level client representing AWS Application Cost Profiler
+  
+
+  This reference provides descriptions of the AWS Application Cost Profiler API.
+
+   
+
+  The AWS Application Cost Profiler API provides programmatic access to view, create, update, and delete application cost report definitions, as well as to import your usage data into the Application Cost Profiler service.
+
+   
+
+  For more information about using this service, see the `AWS Application Cost Profiler User Guide <https://docs.aws.amazon.com/application-cost-profiler/latest/userguide/introduction.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('applicationcostprofiler')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.can_paginate`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.delete_report_definition`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.get_paginator`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.get_report_definition`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.get_waiter`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.import_application_usage`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.list_report_definitions`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.put_report_definition`
+
+  
+  *   :py:meth:`~ApplicationCostProfiler.Client.update_report_definition`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: delete_report_definition(**kwargs)
+
+    
+
+    Deletes the specified report definition in AWS Application Cost Profiler. This stops the report from being generated.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/DeleteReportDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_report_definition(
+          reportId='string'
+      )
+    :type reportId: string
+    :param reportId: **[REQUIRED]** 
+
+      Required. ID of the report to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportId** *(string) --* 
+
+          ID of the report that was deleted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_report_definition(**kwargs)
+
+    
+
+    Retrieves the definition of a report already configured in AWS Application Cost Profiler.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/GetReportDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_report_definition(
+          reportId='string'
+      )
+    :type reportId: string
+    :param reportId: **[REQUIRED]** 
+
+      ID of the report to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportId': 'string',
+            'reportDescription': 'string',
+            'reportFrequency': 'MONTHLY'|'DAILY'|'ALL',
+            'format': 'CSV'|'PARQUET',
+            'destinationS3Location': {
+                'bucket': 'string',
+                'prefix': 'string'
+            },
+            'createdAt': datetime(2015, 1, 1),
+            'lastUpdated': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportId** *(string) --* 
+
+          ID of the report retrieved.
+
+          
+        
+
+        - **reportDescription** *(string) --* 
+
+          Description of the report.
+
+          
+        
+
+        - **reportFrequency** *(string) --* 
+
+          Cadence used to generate the report.
+
+          
+        
+
+        - **format** *(string) --* 
+
+          Format of the generated report.
+
+          
+        
+
+        - **destinationS3Location** *(dict) --* 
+
+          Amazon Simple Storage Service (Amazon S3) location where the report is uploaded.
+
+          
+          
+
+          - **bucket** *(string) --* 
+
+            Name of the S3 bucket.
+
+            
+          
+
+          - **prefix** *(string) --* 
+
+            Prefix for the location to write to.
+
+            
+      
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Timestamp (milliseconds) when this report definition was created.
+
+          
+        
+
+        - **lastUpdated** *(datetime) --* 
+
+          Timestamp (milliseconds) when this report definition was last updated.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: import_application_usage(**kwargs)
+
+    
+
+    Ingests application usage data from Amazon Simple Storage Service (Amazon S3).
+
+     
+
+    The data must already exist in the S3 location. As part of the action, AWS Application Cost Profiler copies the object from your S3 bucket to an S3 bucket owned by Amazon for processing asynchronously.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/ImportApplicationUsage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.import_application_usage(
+          sourceS3Location={
+              'bucket': 'string',
+              'key': 'string',
+              'region': 'ap-east-1'|'me-south-1'|'eu-south-1'|'af-south-1'
+          }
+      )
+    :type sourceS3Location: dict
+    :param sourceS3Location: **[REQUIRED]** 
+
+      Amazon S3 location to import application usage data from.
+
+      
+
+    
+      - **bucket** *(string) --* **[REQUIRED]** 
+
+        Name of the bucket.
+
+        
+
+      
+      - **key** *(string) --* **[REQUIRED]** 
+
+        Key of the object.
+
+        
+
+      
+      - **region** *(string) --* 
+
+        Region of the bucket. Only required for Regions that are disabled by default. For more infomration about Regions that are disabled by default, see `Enabling a Region <https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable>`__ in the *AWS General Reference guide* .
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'importId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **importId** *(string) --* 
+
+          ID of the import request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: list_report_definitions(**kwargs)
+
+    
+
+    Retrieves a list of all reports and their configurations for your AWS account.
+
+     
+
+    The maximum number of reports is one.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/ListReportDefinitions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_report_definitions(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The token value from a previous call to access the next page of results.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportDefinitions': [
+                {
+                    'reportId': 'string',
+                    'reportDescription': 'string',
+                    'reportFrequency': 'MONTHLY'|'DAILY'|'ALL',
+                    'format': 'CSV'|'PARQUET',
+                    'destinationS3Location': {
+                        'bucket': 'string',
+                        'prefix': 'string'
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'lastUpdatedAt': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportDefinitions** *(list) --* 
+
+          The retrieved reports.
+
+          
+          
+
+          - *(dict) --* 
+
+            The configuration of a report in AWS Application Cost Profiler.
+
+            
+            
+
+            - **reportId** *(string) --* 
+
+              The ID of the report.
+
+              
+            
+
+            - **reportDescription** *(string) --* 
+
+              Description of the report
+
+              
+            
+
+            - **reportFrequency** *(string) --* 
+
+              The cadence at which the report is generated.
+
+              
+            
+
+            - **format** *(string) --* 
+
+              The format used for the generated reports.
+
+              
+            
+
+            - **destinationS3Location** *(dict) --* 
+
+              The location in Amazon Simple Storage Service (Amazon S3) the reports should be saved to.
+
+              
+              
+
+              - **bucket** *(string) --* 
+
+                Name of the S3 bucket.
+
+                
+              
+
+              - **prefix** *(string) --* 
+
+                Prefix for the location to write to.
+
+                
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              Timestamp (milliseconds) when this report definition was created.
+
+              
+            
+
+            - **lastUpdatedAt** *(datetime) --* 
+
+              Timestamp (milliseconds) when this report definition was last updated.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The value of the next token, if it exists. Null if there are no more results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+
+  .. py:method:: put_report_definition(**kwargs)
+
+    
+
+    Creates the report definition for a report in Application Cost Profiler.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/PutReportDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_report_definition(
+          reportId='string',
+          reportDescription='string',
+          reportFrequency='MONTHLY'|'DAILY'|'ALL',
+          format='CSV'|'PARQUET',
+          destinationS3Location={
+              'bucket': 'string',
+              'prefix': 'string'
+          }
+      )
+    :type reportId: string
+    :param reportId: **[REQUIRED]** 
+
+      Required. ID of the report. You can choose any valid string matching the pattern for the ID.
+
+      
+
+    
+    :type reportDescription: string
+    :param reportDescription: **[REQUIRED]** 
+
+      Required. Description of the report.
+
+      
+
+    
+    :type reportFrequency: string
+    :param reportFrequency: **[REQUIRED]** 
+
+      Required. The cadence to generate the report.
+
+      
+
+    
+    :type format: string
+    :param format: **[REQUIRED]** 
+
+      Required. The format to use for the generated report.
+
+      
+
+    
+    :type destinationS3Location: dict
+    :param destinationS3Location: **[REQUIRED]** 
+
+      Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
+
+      
+
+    
+      - **bucket** *(string) --* **[REQUIRED]** 
+
+        Name of the S3 bucket.
+
+        
+
+      
+      - **prefix** *(string) --* **[REQUIRED]** 
+
+        Prefix for the location to write to.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportId** *(string) --* 
+
+          ID of the report.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: update_report_definition(**kwargs)
+
+    
+
+    Updates existing report in AWS Application Cost Profiler.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/UpdateReportDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_report_definition(
+          reportId='string',
+          reportDescription='string',
+          reportFrequency='MONTHLY'|'DAILY'|'ALL',
+          format='CSV'|'PARQUET',
+          destinationS3Location={
+              'bucket': 'string',
+              'prefix': 'string'
+          }
+      )
+    :type reportId: string
+    :param reportId: **[REQUIRED]** 
+
+      Required. ID of the report to update.
+
+      
+
+    
+    :type reportDescription: string
+    :param reportDescription: **[REQUIRED]** 
+
+      Required. Description of the report.
+
+      
+
+    
+    :type reportFrequency: string
+    :param reportFrequency: **[REQUIRED]** 
+
+      Required. The cadence to generate the report.
+
+      
+
+    
+    :type format: string
+    :param format: **[REQUIRED]** 
+
+      Required. The format to use for the generated report.
+
+      
+
+    
+    :type destinationS3Location: dict
+    :param destinationS3Location: **[REQUIRED]** 
+
+      Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the report.
+
+      
+
+    
+      - **bucket** *(string) --* **[REQUIRED]** 
+
+        Name of the S3 bucket.
+
+        
+
+      
+      - **prefix** *(string) --* **[REQUIRED]** 
+
+        Prefix for the location to write to.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportId** *(string) --* 
+
+          ID of the report.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`ApplicationCostProfiler.Client.exceptions.AccessDeniedException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`ApplicationCostProfiler.Paginator.ListReportDefinitions`
+
+
+
+.. py:class:: ApplicationCostProfiler.Paginator.ListReportDefinitions
+
+  ::
+
+    
+    paginator = client.get_paginator('list_report_definitions')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ApplicationCostProfiler.Client.list_report_definitions`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/AWSApplicationCostProfiler-2020-09-10/ListReportDefinitions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'reportDefinitions': [
+                {
+                    'reportId': 'string',
+                    'reportDescription': 'string',
+                    'reportFrequency': 'MONTHLY'|'DAILY'|'ALL',
+                    'format': 'CSV'|'PARQUET',
+                    'destinationS3Location': {
+                        'bucket': 'string',
+                        'prefix': 'string'
+                    },
+                    'createdAt': datetime(2015, 1, 1),
+                    'lastUpdatedAt': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **reportDefinitions** *(list) --* 
+
+          The retrieved reports.
+
+          
+          
+
+          - *(dict) --* 
+
+            The configuration of a report in AWS Application Cost Profiler.
+
+            
+            
+
+            - **reportId** *(string) --* 
+
+              The ID of the report.
+
+              
+            
+
+            - **reportDescription** *(string) --* 
+
+              Description of the report
+
+              
+            
+
+            - **reportFrequency** *(string) --* 
+
+              The cadence at which the report is generated.
+
+              
+            
+
+            - **format** *(string) --* 
+
+              The format used for the generated reports.
+
+              
+            
+
+            - **destinationS3Location** *(dict) --* 
+
+              The location in Amazon Simple Storage Service (Amazon S3) the reports should be saved to.
+
+              
+              
+
+              - **bucket** *(string) --* 
+
+                Name of the S3 bucket.
+
+                
+              
+
+              - **prefix** *(string) --* 
+
+                Prefix for the location to write to.
+
+                
+          
+            
+
+            - **createdAt** *(datetime) --* 
+
+              Timestamp (milliseconds) when this report definition was created.
+
+              
+            
+
+            - **lastUpdatedAt** *(datetime) --* 
+
+              Timestamp (milliseconds) when this report definition was last updated.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

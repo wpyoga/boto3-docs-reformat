@@ -1,0 +1,6818 @@
+
+
+***************
+WellArchitected
+***************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: WellArchitected.Client
+
+  A low-level client representing AWS Well-Architected Tool
+   
+
+  This is the *AWS Well-Architected Tool API Reference* . The AWS Well-Architected Tool API provides programmatic access to the `AWS Well-Architected Tool <http://aws.amazon.com/well-architected-tool>`__ in the `AWS Management Console <https://console.aws.amazon.com/wellarchitected>`__ . For information about the AWS Well-Architected Tool, see the `AWS Well-Architected Tool User Guide <https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('wellarchitected')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~WellArchitected.Client.associate_lenses`
+
+  
+  *   :py:meth:`~WellArchitected.Client.can_paginate`
+
+  
+  *   :py:meth:`~WellArchitected.Client.create_milestone`
+
+  
+  *   :py:meth:`~WellArchitected.Client.create_workload`
+
+  
+  *   :py:meth:`~WellArchitected.Client.create_workload_share`
+
+  
+  *   :py:meth:`~WellArchitected.Client.delete_workload`
+
+  
+  *   :py:meth:`~WellArchitected.Client.delete_workload_share`
+
+  
+  *   :py:meth:`~WellArchitected.Client.disassociate_lenses`
+
+  
+  *   :py:meth:`~WellArchitected.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_answer`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_lens_review`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_lens_review_report`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_lens_version_difference`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_milestone`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_paginator`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_waiter`
+
+  
+  *   :py:meth:`~WellArchitected.Client.get_workload`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_answers`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_lens_review_improvements`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_lens_reviews`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_lenses`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_milestones`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_notifications`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_share_invitations`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_workload_shares`
+
+  
+  *   :py:meth:`~WellArchitected.Client.list_workloads`
+
+  
+  *   :py:meth:`~WellArchitected.Client.tag_resource`
+
+  
+  *   :py:meth:`~WellArchitected.Client.untag_resource`
+
+  
+  *   :py:meth:`~WellArchitected.Client.update_answer`
+
+  
+  *   :py:meth:`~WellArchitected.Client.update_lens_review`
+
+  
+  *   :py:meth:`~WellArchitected.Client.update_share_invitation`
+
+  
+  *   :py:meth:`~WellArchitected.Client.update_workload`
+
+  
+  *   :py:meth:`~WellArchitected.Client.update_workload_share`
+
+  
+  *   :py:meth:`~WellArchitected.Client.upgrade_lens_review`
+
+  
+
+  .. py:method:: associate_lenses(**kwargs)
+
+    
+
+    Associate a lens to a workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/AssociateLenses>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_lenses(
+          WorkloadId='string',
+          LensAliases=[
+              'string',
+          ]
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAliases: list
+    :param LensAliases: **[REQUIRED]** 
+
+      List of lens aliases to associate or disassociate with a workload.
+
+       
+
+      Identify a lens using its  LensSummary$LensAlias .
+
+      
+
+    
+      - *(string) --* 
+
+        The alias of the lens, for example, ``serverless`` .
+
+         
+
+        Each lens is identified by its  LensSummary$LensAlias .
+
+        
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_milestone(**kwargs)
+
+    
+
+    Create a milestone for an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateMilestone>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_milestone(
+          WorkloadId='string',
+          MilestoneName='string',
+          ClientRequestToken='string'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type MilestoneName: string
+    :param MilestoneName: **[REQUIRED]** 
+
+      The name of the milestone in a workload.
+
+       
+
+      Milestone names must be unique within a workload.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: **[REQUIRED]** 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a create milestone call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: create_workload(**kwargs)
+
+    
+
+    Create a new workload.
+
+     
+
+    The owner of a workload can share the workload with other AWS accounts and IAM users in the same AWS Region. Only the owner of a workload can delete it.
+
+     
+
+    For more information, see `Defining a Workload <https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html>`__ in the *AWS Well-Architected Tool User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_workload(
+          WorkloadName='string',
+          Description='string',
+          Environment='PRODUCTION'|'PREPRODUCTION',
+          AccountIds=[
+              'string',
+          ],
+          AwsRegions=[
+              'string',
+          ],
+          NonAwsRegions=[
+              'string',
+          ],
+          PillarPriorities=[
+              'string',
+          ],
+          ArchitecturalDesign='string',
+          ReviewOwner='string',
+          IndustryType='string',
+          Industry='string',
+          Lenses=[
+              'string',
+          ],
+          Notes='string',
+          ClientRequestToken='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type WorkloadName: string
+    :param WorkloadName: **[REQUIRED]** 
+
+      The name of the workload.
+
+       
+
+      The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+      
+
+    
+    :type Description: string
+    :param Description: **[REQUIRED]** 
+
+      The description for the workload.
+
+      
+
+    
+    :type Environment: string
+    :param Environment: **[REQUIRED]** 
+
+      The environment for the workload.
+
+      
+
+    
+    :type AccountIds: list
+    :param AccountIds: 
+
+      The list of AWS account IDs associated with the workload.
+
+      
+
+    
+      - *(string) --* 
+
+        An AWS account ID.
+
+        
+
+      
+  
+    :type AwsRegions: list
+    :param AwsRegions: 
+
+      The list of AWS Regions associated with the workload, for example, ``us-east-2`` , or ``ca-central-1`` .
+
+      
+
+    
+      - *(string) --* 
+
+        An AWS Region, for example, ``us-west-2`` or ``ap-northeast-1`` .
+
+        
+
+      
+  
+    :type NonAwsRegions: list
+    :param NonAwsRegions: 
+
+      The list of non-AWS Regions associated with the workload.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PillarPriorities: list
+    :param PillarPriorities: 
+
+      The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its  PillarReviewSummary$PillarId .
+
+      
+
+    
+      - *(string) --* 
+
+        The ID used to identify a pillar, for example, ``security`` .
+
+         
+
+        A pillar is identified by its  PillarReviewSummary$PillarId .
+
+        
+
+      
+  
+    :type ArchitecturalDesign: string
+    :param ArchitecturalDesign: 
+
+      The URL of the architectural design for the workload.
+
+      
+
+    
+    :type ReviewOwner: string
+    :param ReviewOwner: **[REQUIRED]** 
+
+      The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.
+
+      
+
+    
+    :type IndustryType: string
+    :param IndustryType: 
+
+      The industry type for the workload.
+
+       
+
+      If specified, must be one of the following:
+
+       
+
+       
+      * ``Agriculture``   
+       
+      * ``Automobile``   
+       
+      * ``Defense``   
+       
+      * ``Design and Engineering``   
+       
+      * ``Digital Advertising``   
+       
+      * ``Education``   
+       
+      * ``Environmental Protection``   
+       
+      * ``Financial Services``   
+       
+      * ``Gaming``   
+       
+      * ``General Public Services``   
+       
+      * ``Healthcare``   
+       
+      * ``Hospitality``   
+       
+      * ``InfoTech``   
+       
+      * ``Justice and Public Safety``   
+       
+      * ``Life Sciences``   
+       
+      * ``Manufacturing``   
+       
+      * ``Media & Entertainment``   
+       
+      * ``Mining & Resources``   
+       
+      * ``Oil & Gas``   
+       
+      * ``Power & Utilities``   
+       
+      * ``Professional Services``   
+       
+      * ``Real Estate & Construction``   
+       
+      * ``Retail & Wholesale``   
+       
+      * ``Social Protection``   
+       
+      * ``Telecommunications``   
+       
+      * ``Travel, Transportation & Logistics``   
+       
+      * ``Other``   
+       
+
+      
+
+    
+    :type Industry: string
+    :param Industry: 
+
+      The industry for the workload.
+
+      
+
+    
+    :type Lenses: list
+    :param Lenses: **[REQUIRED]** 
+
+      The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+      - *(string) --* 
+
+        The alias of the lens, for example, ``serverless`` .
+
+         
+
+        Each lens is identified by its  LensSummary$LensAlias .
+
+        
+
+      
+  
+    :type Notes: string
+    :param Notes: 
+
+      The notes associated with the workload.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: **[REQUIRED]** 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      This field is autopopulated if not provided.
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      The tags to be associated with the workload.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'WorkloadArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a create workload call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **WorkloadArn** *(string) --* 
+
+          The ARN for the workload.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: create_workload_share(**kwargs)
+
+    
+
+    Create a workload share.
+
+     
+
+    The owner of a workload can share it with other AWS accounts and IAM users in the same AWS Region. Shared access to a workload is not removed until the workload invitation is deleted.
+
+     
+
+    For more information, see `Sharing a Workload <https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html>`__ in the *AWS Well-Architected Tool User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/CreateWorkloadShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_workload_share(
+          WorkloadId='string',
+          SharedWith='string',
+          PermissionType='READONLY'|'CONTRIBUTOR',
+          ClientRequestToken='string'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type SharedWith: string
+    :param SharedWith: **[REQUIRED]** 
+
+      The AWS account ID or IAM role with which the workload is shared.
+
+      
+
+    
+    :type PermissionType: string
+    :param PermissionType: **[REQUIRED]** 
+
+      Permission granted on a workload share.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: **[REQUIRED]** 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'ShareId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Input for Create Workload Share
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **ShareId** *(string) --* 
+
+          The ID associated with the workload share.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: delete_workload(**kwargs)
+
+    
+
+    Delete an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteWorkload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_workload(
+          WorkloadId='string',
+          ClientRequestToken='string'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: **[REQUIRED]** 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: delete_workload_share(**kwargs)
+
+    
+
+    Delete a workload share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DeleteWorkloadShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_workload_share(
+          ShareId='string',
+          WorkloadId='string',
+          ClientRequestToken='string'
+      )
+    :type ShareId: string
+    :param ShareId: **[REQUIRED]** 
+
+      The ID associated with the workload share.
+
+      
+
+    
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: **[REQUIRED]** 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: disassociate_lenses(**kwargs)
+
+    
+
+    Disassociate a lens from a workload.
+
+     
+
+    .. note::
+
+       
+
+      The AWS Well-Architected Framework lens (``wellarchitected`` ) cannot be removed from a workload.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/DisassociateLenses>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_lenses(
+          WorkloadId='string',
+          LensAliases=[
+              'string',
+          ]
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAliases: list
+    :param LensAliases: **[REQUIRED]** 
+
+      List of lens aliases to associate or disassociate with a workload.
+
+       
+
+      Identify a lens using its  LensSummary$LensAlias .
+
+      
+
+    
+      - *(string) --* 
+
+        The alias of the lens, for example, ``serverless`` .
+
+         
+
+        Each lens is identified by its  LensSummary$LensAlias .
+
+        
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_answer(**kwargs)
+
+    
+
+    Get the answer to a specific question in a workload review.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAnswer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_answer(
+          WorkloadId='string',
+          LensAlias='string',
+          QuestionId='string',
+          MilestoneNumber=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type QuestionId: string
+    :param QuestionId: **[REQUIRED]** 
+
+      The ID of the question.
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensAlias': 'string',
+            'Answer': {
+                'QuestionId': 'string',
+                'PillarId': 'string',
+                'QuestionTitle': 'string',
+                'QuestionDescription': 'string',
+                'ImprovementPlanUrl': 'string',
+                'HelpfulResourceUrl': 'string',
+                'Choices': [
+                    {
+                        'ChoiceId': 'string',
+                        'Title': 'string',
+                        'Description': 'string'
+                    },
+                ],
+                'SelectedChoices': [
+                    'string',
+                ],
+                'ChoiceAnswers': [
+                    {
+                        'ChoiceId': 'string',
+                        'Status': 'SELECTED'|'NOT_APPLICABLE'|'UNSELECTED',
+                        'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE',
+                        'Notes': 'string'
+                    },
+                ],
+                'IsApplicable': True|False,
+                'Risk': 'UNANSWERED'|'HIGH'|'MEDIUM'|'NONE'|'NOT_APPLICABLE',
+                'Notes': 'string',
+                'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a get answer call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensAlias** *(string) --* 
+
+          The alias of the lens, for example, ``serverless`` .
+
+           
+
+          Each lens is identified by its  LensSummary$LensAlias .
+
+          
+        
+
+        - **Answer** *(dict) --* 
+
+          An answer of the question.
+
+          
+          
+
+          - **QuestionId** *(string) --* 
+
+            The ID of the question.
+
+            
+          
+
+          - **PillarId** *(string) --* 
+
+            The ID used to identify a pillar, for example, ``security`` .
+
+             
+
+            A pillar is identified by its  PillarReviewSummary$PillarId .
+
+            
+          
+
+          - **QuestionTitle** *(string) --* 
+
+            The title of the question.
+
+            
+          
+
+          - **QuestionDescription** *(string) --* 
+
+            The description of the question.
+
+            
+          
+
+          - **ImprovementPlanUrl** *(string) --* 
+
+            The improvement plan URL for a question.
+
+             
+
+            This value is only available if the question has been answered.
+
+            
+          
+
+          - **HelpfulResourceUrl** *(string) --* 
+
+            The helpful resource URL for a question.
+
+            
+          
+
+          - **Choices** *(list) --* 
+
+            List of choices available for a question.
+
+            
+            
+
+            - *(dict) --* 
+
+              A choice available to answer question.
+
+              
+              
+
+              - **ChoiceId** *(string) --* 
+
+                The ID of a choice.
+
+                
+              
+
+              - **Title** *(string) --* 
+
+                The title of a choice.
+
+                
+              
+
+              - **Description** *(string) --* 
+
+                The description of a choice.
+
+                
+          
+        
+          
+
+          - **SelectedChoices** *(list) --* 
+
+            List of selected choice IDs in a question answer.
+
+             
+
+            The values entered replace the previously selected choices.
+
+            
+            
+
+            - *(string) --* 
+
+              The ID of a choice.
+
+              
+        
+          
+
+          - **ChoiceAnswers** *(list) --* 
+
+            A list of selected choices to a question in your workload.
+
+            
+            
+
+            - *(dict) --* 
+
+              A choice that has been answered on a question in your workload.
+
+              
+              
+
+              - **ChoiceId** *(string) --* 
+
+                The ID of a choice.
+
+                
+              
+
+              - **Status** *(string) --* 
+
+                The status of a choice.
+
+                
+              
+
+              - **Reason** *(string) --* 
+
+                The reason why a choice is non-applicable to a question in your workload.
+
+                
+              
+
+              - **Notes** *(string) --* 
+
+                The notes associated with a choice.
+
+                
+          
+        
+          
+
+          - **IsApplicable** *(boolean) --* 
+
+            Defines whether this question is applicable to a lens review.
+
+            
+          
+
+          - **Risk** *(string) --* 
+
+            The risk for a given workload, lens review, pillar, or question.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **Reason** *(string) --* 
+
+            The reason why the question is not applicable to your workload.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_lens_review(**kwargs)
+
+    
+
+    Get lens review.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLensReview>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_lens_review(
+          WorkloadId='string',
+          LensAlias='string',
+          MilestoneNumber=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensReview': {
+                'LensAlias': 'string',
+                'LensVersion': 'string',
+                'LensName': 'string',
+                'LensStatus': 'CURRENT'|'NOT_CURRENT'|'DEPRECATED',
+                'PillarReviewSummaries': [
+                    {
+                        'PillarId': 'string',
+                        'PillarName': 'string',
+                        'Notes': 'string',
+                        'RiskCounts': {
+                            'string': 123
+                        }
+                    },
+                ],
+                'UpdatedAt': datetime(2015, 1, 1),
+                'Notes': 'string',
+                'RiskCounts': {
+                    'string': 123
+                },
+                'NextToken': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a get lens review call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensReview** *(dict) --* 
+
+          A lens review of a question.
+
+          
+          
+
+          - **LensAlias** *(string) --* 
+
+            The alias of the lens, for example, ``serverless`` .
+
+             
+
+            Each lens is identified by its  LensSummary$LensAlias .
+
+            
+          
+
+          - **LensVersion** *(string) --* 
+
+            The version of the lens.
+
+            
+          
+
+          - **LensName** *(string) --* 
+
+            The full name of the lens.
+
+            
+          
+
+          - **LensStatus** *(string) --* 
+
+            The status of the lens.
+
+            
+          
+
+          - **PillarReviewSummaries** *(list) --* 
+
+            List of pillar review summaries of lens review in a workload.
+
+            
+            
+
+            - *(dict) --* 
+
+              A pillar review summary of a lens review.
+
+              
+              
+
+              - **PillarId** *(string) --* 
+
+                The ID used to identify a pillar, for example, ``security`` .
+
+                 
+
+                A pillar is identified by its  PillarReviewSummary$PillarId .
+
+                
+              
+
+              - **PillarName** *(string) --* 
+
+                The name of the pillar.
+
+                
+              
+
+              - **Notes** *(string) --* 
+
+                The notes associated with the workload.
+
+                
+              
+
+              - **RiskCounts** *(dict) --* 
+
+                A map from risk names to the count of how questions have that rating.
+
+                
+                
+
+                - *(string) --* 
+
+                  The risk for a given workload, lens review, pillar, or question.
+
+                  
+                  
+
+                  - *(integer) --* 
+
+                    A non-negative integer that denotes how many.
+
+                    
+            
+          
+          
+        
+          
+
+          - **UpdatedAt** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **RiskCounts** *(dict) --* 
+
+            A map from risk names to the count of how questions have that rating.
+
+            
+            
+
+            - *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+              
+
+              - *(integer) --* 
+
+                A non-negative integer that denotes how many.
+
+                
+        
+      
+          
+
+          - **NextToken** *(string) --* 
+
+            The token to use to retrieve the next set of results.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_lens_review_report(**kwargs)
+
+    
+
+    Get lens review report.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLensReviewReport>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_lens_review_report(
+          WorkloadId='string',
+          LensAlias='string',
+          MilestoneNumber=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensReviewReport': {
+                'LensAlias': 'string',
+                'Base64String': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a get lens review report call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensReviewReport** *(dict) --* 
+
+          A report of a lens review.
+
+          
+          
+
+          - **LensAlias** *(string) --* 
+
+            The alias of the lens, for example, ``serverless`` .
+
+             
+
+            Each lens is identified by its  LensSummary$LensAlias .
+
+            
+          
+
+          - **Base64String** *(string) --* 
+
+            The Base64-encoded string representation of a lens review report.
+
+             
+
+            This data can be used to create a PDF file.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_lens_version_difference(**kwargs)
+
+    
+
+    Get lens version differences.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetLensVersionDifference>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_lens_version_difference(
+          LensAlias='string',
+          BaseLensVersion='string'
+      )
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type BaseLensVersion: string
+    :param BaseLensVersion: **[REQUIRED]** 
+
+      The base version of the lens.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LensAlias': 'string',
+            'BaseLensVersion': 'string',
+            'LatestLensVersion': 'string',
+            'VersionDifferences': {
+                'PillarDifferences': [
+                    {
+                        'PillarId': 'string',
+                        'DifferenceStatus': 'UPDATED'|'NEW'|'DELETED',
+                        'QuestionDifferences': [
+                            {
+                                'QuestionId': 'string',
+                                'QuestionTitle': 'string',
+                                'DifferenceStatus': 'UPDATED'|'NEW'|'DELETED'
+                            },
+                        ]
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **LensAlias** *(string) --* 
+
+          The alias of the lens, for example, ``serverless`` .
+
+           
+
+          Each lens is identified by its  LensSummary$LensAlias .
+
+          
+        
+
+        - **BaseLensVersion** *(string) --* 
+
+          The base version of the lens.
+
+          
+        
+
+        - **LatestLensVersion** *(string) --* 
+
+          The latest version of the lens.
+
+          
+        
+
+        - **VersionDifferences** *(dict) --* 
+
+          The differences between the base and latest versions of the lens.
+
+          
+          
+
+          - **PillarDifferences** *(list) --* 
+
+            The differences between the base and latest versions of the lens.
+
+            
+            
+
+            - *(dict) --* 
+
+              A pillar difference return object.
+
+              
+              
+
+              - **PillarId** *(string) --* 
+
+                The ID used to identify a pillar, for example, ``security`` .
+
+                 
+
+                A pillar is identified by its  PillarReviewSummary$PillarId .
+
+                
+              
+
+              - **DifferenceStatus** *(string) --* 
+
+                Indicates the type of change to the pillar.
+
+                
+              
+
+              - **QuestionDifferences** *(list) --* 
+
+                List of question differences.
+
+                
+                
+
+                - *(dict) --* 
+
+                  A question difference return object.
+
+                  
+                  
+
+                  - **QuestionId** *(string) --* 
+
+                    The ID of the question.
+
+                    
+                  
+
+                  - **QuestionTitle** *(string) --* 
+
+                    The title of the question.
+
+                    
+                  
+
+                  - **DifferenceStatus** *(string) --* 
+
+                    Indicates the type of change to the question.
+
+                    
+              
+            
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_milestone(**kwargs)
+
+    
+
+    Get a milestone for an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_milestone(
+          WorkloadId='string',
+          MilestoneNumber=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: **[REQUIRED]** 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'Milestone': {
+                'MilestoneNumber': 123,
+                'MilestoneName': 'string',
+                'RecordedAt': datetime(2015, 1, 1),
+                'Workload': {
+                    'WorkloadId': 'string',
+                    'WorkloadArn': 'string',
+                    'WorkloadName': 'string',
+                    'Description': 'string',
+                    'Environment': 'PRODUCTION'|'PREPRODUCTION',
+                    'UpdatedAt': datetime(2015, 1, 1),
+                    'AccountIds': [
+                        'string',
+                    ],
+                    'AwsRegions': [
+                        'string',
+                    ],
+                    'NonAwsRegions': [
+                        'string',
+                    ],
+                    'ArchitecturalDesign': 'string',
+                    'ReviewOwner': 'string',
+                    'ReviewRestrictionDate': datetime(2015, 1, 1),
+                    'IsReviewOwnerUpdateAcknowledged': True|False,
+                    'IndustryType': 'string',
+                    'Industry': 'string',
+                    'Notes': 'string',
+                    'ImprovementStatus': 'NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED',
+                    'RiskCounts': {
+                        'string': 123
+                    },
+                    'PillarPriorities': [
+                        'string',
+                    ],
+                    'Lenses': [
+                        'string',
+                    ],
+                    'Owner': 'string',
+                    'ShareInvitationId': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a get milestone call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **Milestone** *(dict) --* 
+
+          A milestone return object.
+
+          
+          
+
+          - **MilestoneNumber** *(integer) --* 
+
+            The milestone number.
+
+             
+
+            A workload can have a maximum of 100 milestones.
+
+            
+          
+
+          - **MilestoneName** *(string) --* 
+
+            The name of the milestone in a workload.
+
+             
+
+            Milestone names must be unique within a workload.
+
+            
+          
+
+          - **RecordedAt** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **Workload** *(dict) --* 
+
+            A workload return object.
+
+            
+            
+
+            - **WorkloadId** *(string) --* 
+
+              The ID assigned to the workload. This ID is unique within an AWS Region.
+
+              
+            
+
+            - **WorkloadArn** *(string) --* 
+
+              The ARN for the workload.
+
+              
+            
+
+            - **WorkloadName** *(string) --* 
+
+              The name of the workload.
+
+               
+
+              The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description for the workload.
+
+              
+            
+
+            - **Environment** *(string) --* 
+
+              The environment for the workload.
+
+              
+            
+
+            - **UpdatedAt** *(datetime) --* 
+
+              The date and time recorded.
+
+              
+            
+
+            - **AccountIds** *(list) --* 
+
+              The list of AWS account IDs associated with the workload.
+
+              
+              
+
+              - *(string) --* 
+
+                An AWS account ID.
+
+                
+          
+            
+
+            - **AwsRegions** *(list) --* 
+
+              The list of AWS Regions associated with the workload, for example, ``us-east-2`` , or ``ca-central-1`` .
+
+              
+              
+
+              - *(string) --* 
+
+                An AWS Region, for example, ``us-west-2`` or ``ap-northeast-1`` .
+
+                
+          
+            
+
+            - **NonAwsRegions** *(list) --* 
+
+              The list of non-AWS Regions associated with the workload.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **ArchitecturalDesign** *(string) --* 
+
+              The URL of the architectural design for the workload.
+
+              
+            
+
+            - **ReviewOwner** *(string) --* 
+
+              The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.
+
+              
+            
+
+            - **ReviewRestrictionDate** *(datetime) --* 
+
+              The date and time recorded.
+
+              
+            
+
+            - **IsReviewOwnerUpdateAcknowledged** *(boolean) --* 
+
+              Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+
+               
+
+              If a **Review owner** is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.
+
+              
+            
+
+            - **IndustryType** *(string) --* 
+
+              The industry type for the workload.
+
+               
+
+              If specified, must be one of the following:
+
+               
+
+               
+              * ``Agriculture``   
+               
+              * ``Automobile``   
+               
+              * ``Defense``   
+               
+              * ``Design and Engineering``   
+               
+              * ``Digital Advertising``   
+               
+              * ``Education``   
+               
+              * ``Environmental Protection``   
+               
+              * ``Financial Services``   
+               
+              * ``Gaming``   
+               
+              * ``General Public Services``   
+               
+              * ``Healthcare``   
+               
+              * ``Hospitality``   
+               
+              * ``InfoTech``   
+               
+              * ``Justice and Public Safety``   
+               
+              * ``Life Sciences``   
+               
+              * ``Manufacturing``   
+               
+              * ``Media & Entertainment``   
+               
+              * ``Mining & Resources``   
+               
+              * ``Oil & Gas``   
+               
+              * ``Power & Utilities``   
+               
+              * ``Professional Services``   
+               
+              * ``Real Estate & Construction``   
+               
+              * ``Retail & Wholesale``   
+               
+              * ``Social Protection``   
+               
+              * ``Telecommunications``   
+               
+              * ``Travel, Transportation & Logistics``   
+               
+              * ``Other``   
+               
+
+              
+            
+
+            - **Industry** *(string) --* 
+
+              The industry for the workload.
+
+              
+            
+
+            - **Notes** *(string) --* 
+
+              The notes associated with the workload.
+
+              
+            
+
+            - **ImprovementStatus** *(string) --* 
+
+              The improvement status for a workload.
+
+              
+            
+
+            - **RiskCounts** *(dict) --* 
+
+              A map from risk names to the count of how questions have that rating.
+
+              
+              
+
+              - *(string) --* 
+
+                The risk for a given workload, lens review, pillar, or question.
+
+                
+                
+
+                - *(integer) --* 
+
+                  A non-negative integer that denotes how many.
+
+                  
+          
+        
+            
+
+            - **PillarPriorities** *(list) --* 
+
+              The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its  PillarReviewSummary$PillarId .
+
+              
+              
+
+              - *(string) --* 
+
+                The ID used to identify a pillar, for example, ``security`` .
+
+                 
+
+                A pillar is identified by its  PillarReviewSummary$PillarId .
+
+                
+          
+            
+
+            - **Lenses** *(list) --* 
+
+              The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+              
+              
+
+              - *(string) --* 
+
+                The alias of the lens, for example, ``serverless`` .
+
+                 
+
+                Each lens is identified by its  LensSummary$LensAlias .
+
+                
+          
+            
+
+            - **Owner** *(string) --* 
+
+              An AWS account ID.
+
+              
+            
+
+            - **ShareInvitationId** *(string) --* 
+
+              The ID assigned to the share invitation.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              The tags associated with the workload.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: get_workload(**kwargs)
+
+    
+
+    Get an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_workload(
+          WorkloadId='string'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Workload': {
+                'WorkloadId': 'string',
+                'WorkloadArn': 'string',
+                'WorkloadName': 'string',
+                'Description': 'string',
+                'Environment': 'PRODUCTION'|'PREPRODUCTION',
+                'UpdatedAt': datetime(2015, 1, 1),
+                'AccountIds': [
+                    'string',
+                ],
+                'AwsRegions': [
+                    'string',
+                ],
+                'NonAwsRegions': [
+                    'string',
+                ],
+                'ArchitecturalDesign': 'string',
+                'ReviewOwner': 'string',
+                'ReviewRestrictionDate': datetime(2015, 1, 1),
+                'IsReviewOwnerUpdateAcknowledged': True|False,
+                'IndustryType': 'string',
+                'Industry': 'string',
+                'Notes': 'string',
+                'ImprovementStatus': 'NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED',
+                'RiskCounts': {
+                    'string': 123
+                },
+                'PillarPriorities': [
+                    'string',
+                ],
+                'Lenses': [
+                    'string',
+                ],
+                'Owner': 'string',
+                'ShareInvitationId': 'string',
+                'Tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a get workload call.
+
+        
+        
+
+        - **Workload** *(dict) --* 
+
+          A workload return object.
+
+          
+          
+
+          - **WorkloadId** *(string) --* 
+
+            The ID assigned to the workload. This ID is unique within an AWS Region.
+
+            
+          
+
+          - **WorkloadArn** *(string) --* 
+
+            The ARN for the workload.
+
+            
+          
+
+          - **WorkloadName** *(string) --* 
+
+            The name of the workload.
+
+             
+
+            The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description for the workload.
+
+            
+          
+
+          - **Environment** *(string) --* 
+
+            The environment for the workload.
+
+            
+          
+
+          - **UpdatedAt** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **AccountIds** *(list) --* 
+
+            The list of AWS account IDs associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+
+              An AWS account ID.
+
+              
+        
+          
+
+          - **AwsRegions** *(list) --* 
+
+            The list of AWS Regions associated with the workload, for example, ``us-east-2`` , or ``ca-central-1`` .
+
+            
+            
+
+            - *(string) --* 
+
+              An AWS Region, for example, ``us-west-2`` or ``ap-northeast-1`` .
+
+              
+        
+          
+
+          - **NonAwsRegions** *(list) --* 
+
+            The list of non-AWS Regions associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **ArchitecturalDesign** *(string) --* 
+
+            The URL of the architectural design for the workload.
+
+            
+          
+
+          - **ReviewOwner** *(string) --* 
+
+            The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.
+
+            
+          
+
+          - **ReviewRestrictionDate** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **IsReviewOwnerUpdateAcknowledged** *(boolean) --* 
+
+            Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+
+             
+
+            If a **Review owner** is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.
+
+            
+          
+
+          - **IndustryType** *(string) --* 
+
+            The industry type for the workload.
+
+             
+
+            If specified, must be one of the following:
+
+             
+
+             
+            * ``Agriculture``   
+             
+            * ``Automobile``   
+             
+            * ``Defense``   
+             
+            * ``Design and Engineering``   
+             
+            * ``Digital Advertising``   
+             
+            * ``Education``   
+             
+            * ``Environmental Protection``   
+             
+            * ``Financial Services``   
+             
+            * ``Gaming``   
+             
+            * ``General Public Services``   
+             
+            * ``Healthcare``   
+             
+            * ``Hospitality``   
+             
+            * ``InfoTech``   
+             
+            * ``Justice and Public Safety``   
+             
+            * ``Life Sciences``   
+             
+            * ``Manufacturing``   
+             
+            * ``Media & Entertainment``   
+             
+            * ``Mining & Resources``   
+             
+            * ``Oil & Gas``   
+             
+            * ``Power & Utilities``   
+             
+            * ``Professional Services``   
+             
+            * ``Real Estate & Construction``   
+             
+            * ``Retail & Wholesale``   
+             
+            * ``Social Protection``   
+             
+            * ``Telecommunications``   
+             
+            * ``Travel, Transportation & Logistics``   
+             
+            * ``Other``   
+             
+
+            
+          
+
+          - **Industry** *(string) --* 
+
+            The industry for the workload.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **ImprovementStatus** *(string) --* 
+
+            The improvement status for a workload.
+
+            
+          
+
+          - **RiskCounts** *(dict) --* 
+
+            A map from risk names to the count of how questions have that rating.
+
+            
+            
+
+            - *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+              
+
+              - *(integer) --* 
+
+                A non-negative integer that denotes how many.
+
+                
+        
+      
+          
+
+          - **PillarPriorities** *(list) --* 
+
+            The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its  PillarReviewSummary$PillarId .
+
+            
+            
+
+            - *(string) --* 
+
+              The ID used to identify a pillar, for example, ``security`` .
+
+               
+
+              A pillar is identified by its  PillarReviewSummary$PillarId .
+
+              
+        
+          
+
+          - **Lenses** *(list) --* 
+
+            The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+            
+            
+
+            - *(string) --* 
+
+              The alias of the lens, for example, ``serverless`` .
+
+               
+
+              Each lens is identified by its  LensSummary$LensAlias .
+
+              
+        
+          
+
+          - **Owner** *(string) --* 
+
+            An AWS account ID.
+
+            
+          
+
+          - **ShareInvitationId** *(string) --* 
+
+            The ID assigned to the share invitation.
+
+            
+          
+
+          - **Tags** *(dict) --* 
+
+            The tags associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_answers(**kwargs)
+
+    
+
+    List of answers.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_answers(
+          WorkloadId='string',
+          LensAlias='string',
+          PillarId='string',
+          MilestoneNumber=123,
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type PillarId: string
+    :param PillarId: 
+
+      The ID used to identify a pillar, for example, ``security`` .
+
+       
+
+      A pillar is identified by its  PillarReviewSummary$PillarId .
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensAlias': 'string',
+            'AnswerSummaries': [
+                {
+                    'QuestionId': 'string',
+                    'PillarId': 'string',
+                    'QuestionTitle': 'string',
+                    'Choices': [
+                        {
+                            'ChoiceId': 'string',
+                            'Title': 'string',
+                            'Description': 'string'
+                        },
+                    ],
+                    'SelectedChoices': [
+                        'string',
+                    ],
+                    'ChoiceAnswerSummaries': [
+                        {
+                            'ChoiceId': 'string',
+                            'Status': 'SELECTED'|'NOT_APPLICABLE'|'UNSELECTED',
+                            'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE'
+                        },
+                    ],
+                    'IsApplicable': True|False,
+                    'Risk': 'UNANSWERED'|'HIGH'|'MEDIUM'|'NONE'|'NOT_APPLICABLE',
+                    'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list answers call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensAlias** *(string) --* 
+
+          The alias of the lens, for example, ``serverless`` .
+
+           
+
+          Each lens is identified by its  LensSummary$LensAlias .
+
+          
+        
+
+        - **AnswerSummaries** *(list) --* 
+
+          List of answer summaries of lens review in a workload.
+
+          
+          
+
+          - *(dict) --* 
+
+            An answer summary of a lens review in a workload.
+
+            
+            
+
+            - **QuestionId** *(string) --* 
+
+              The ID of the question.
+
+              
+            
+
+            - **PillarId** *(string) --* 
+
+              The ID used to identify a pillar, for example, ``security`` .
+
+               
+
+              A pillar is identified by its  PillarReviewSummary$PillarId .
+
+              
+            
+
+            - **QuestionTitle** *(string) --* 
+
+              The title of the question.
+
+              
+            
+
+            - **Choices** *(list) --* 
+
+              List of choices available for a question.
+
+              
+              
+
+              - *(dict) --* 
+
+                A choice available to answer question.
+
+                
+                
+
+                - **ChoiceId** *(string) --* 
+
+                  The ID of a choice.
+
+                  
+                
+
+                - **Title** *(string) --* 
+
+                  The title of a choice.
+
+                  
+                
+
+                - **Description** *(string) --* 
+
+                  The description of a choice.
+
+                  
+            
+          
+            
+
+            - **SelectedChoices** *(list) --* 
+
+              List of selected choice IDs in a question answer.
+
+               
+
+              The values entered replace the previously selected choices.
+
+              
+              
+
+              - *(string) --* 
+
+                The ID of a choice.
+
+                
+          
+            
+
+            - **ChoiceAnswerSummaries** *(list) --* 
+
+              A list of selected choices to a question in your workload.
+
+              
+              
+
+              - *(dict) --* 
+
+                A choice summary that has been answered on a question in your workload.
+
+                
+                
+
+                - **ChoiceId** *(string) --* 
+
+                  The ID of a choice.
+
+                  
+                
+
+                - **Status** *(string) --* 
+
+                  The status of a choice.
+
+                  
+                
+
+                - **Reason** *(string) --* 
+
+                  The reason why a choice is non-applicable to a question in your workload.
+
+                  
+            
+          
+            
+
+            - **IsApplicable** *(boolean) --* 
+
+              Defines whether this question is applicable to a lens review.
+
+              
+            
+
+            - **Risk** *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+            
+
+            - **Reason** *(string) --* 
+
+              The reason why a choice is non-applicable to a question in your workload.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_lens_review_improvements(**kwargs)
+
+    
+
+    List lens review improvements.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviewImprovements>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_lens_review_improvements(
+          WorkloadId='string',
+          LensAlias='string',
+          PillarId='string',
+          MilestoneNumber=123,
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type PillarId: string
+    :param PillarId: 
+
+      The ID used to identify a pillar, for example, ``security`` .
+
+       
+
+      A pillar is identified by its  PillarReviewSummary$PillarId .
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensAlias': 'string',
+            'ImprovementSummaries': [
+                {
+                    'QuestionId': 'string',
+                    'PillarId': 'string',
+                    'QuestionTitle': 'string',
+                    'Risk': 'UNANSWERED'|'HIGH'|'MEDIUM'|'NONE'|'NOT_APPLICABLE',
+                    'ImprovementPlanUrl': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list lens review improvements call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensAlias** *(string) --* 
+
+          The alias of the lens, for example, ``serverless`` .
+
+           
+
+          Each lens is identified by its  LensSummary$LensAlias .
+
+          
+        
+
+        - **ImprovementSummaries** *(list) --* 
+
+          List of improvement summaries of lens review in a workload.
+
+          
+          
+
+          - *(dict) --* 
+
+            An improvement summary of a lens review in a workload.
+
+            
+            
+
+            - **QuestionId** *(string) --* 
+
+              The ID of the question.
+
+              
+            
+
+            - **PillarId** *(string) --* 
+
+              The ID used to identify a pillar, for example, ``security`` .
+
+               
+
+              A pillar is identified by its  PillarReviewSummary$PillarId .
+
+              
+            
+
+            - **QuestionTitle** *(string) --* 
+
+              The title of the question.
+
+              
+            
+
+            - **Risk** *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+            
+
+            - **ImprovementPlanUrl** *(string) --* 
+
+              The improvement plan URL for a question.
+
+               
+
+              This value is only available if the question has been answered.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_lens_reviews(**kwargs)
+
+    
+
+    List lens reviews.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviews>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_lens_reviews(
+          WorkloadId='string',
+          MilestoneNumber=123,
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type MilestoneNumber: integer
+    :param MilestoneNumber: 
+
+      The milestone number.
+
+       
+
+      A workload can have a maximum of 100 milestones.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneNumber': 123,
+            'LensReviewSummaries': [
+                {
+                    'LensAlias': 'string',
+                    'LensVersion': 'string',
+                    'LensName': 'string',
+                    'LensStatus': 'CURRENT'|'NOT_CURRENT'|'DEPRECATED',
+                    'UpdatedAt': datetime(2015, 1, 1),
+                    'RiskCounts': {
+                        'string': 123
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list lens reviews call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneNumber** *(integer) --* 
+
+          The milestone number.
+
+           
+
+          A workload can have a maximum of 100 milestones.
+
+          
+        
+
+        - **LensReviewSummaries** *(list) --* 
+
+          List of lens summaries of lens reviews of a workload.
+
+          
+          
+
+          - *(dict) --* 
+
+            A lens review summary of a workload.
+
+            
+            
+
+            - **LensAlias** *(string) --* 
+
+              The alias of the lens, for example, ``serverless`` .
+
+               
+
+              Each lens is identified by its  LensSummary$LensAlias .
+
+              
+            
+
+            - **LensVersion** *(string) --* 
+
+              The version of the lens.
+
+              
+            
+
+            - **LensName** *(string) --* 
+
+              The full name of the lens.
+
+              
+            
+
+            - **LensStatus** *(string) --* 
+
+              The status of the lens.
+
+              
+            
+
+            - **UpdatedAt** *(datetime) --* 
+
+              The date and time recorded.
+
+              
+            
+
+            - **RiskCounts** *(dict) --* 
+
+              A map from risk names to the count of how questions have that rating.
+
+              
+              
+
+              - *(string) --* 
+
+                The risk for a given workload, lens review, pillar, or question.
+
+                
+                
+
+                - *(integer) --* 
+
+                  A non-negative integer that denotes how many.
+
+                  
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_lenses(**kwargs)
+
+    
+
+    List the available lenses.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLenses>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_lenses(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'LensSummaries': [
+                {
+                    'LensAlias': 'string',
+                    'LensVersion': 'string',
+                    'LensName': 'string',
+                    'Description': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list lenses call.
+
+        
+        
+
+        - **LensSummaries** *(list) --* 
+
+          List of lens summaries of available lenses.
+
+          
+          
+
+          - *(dict) --* 
+
+            A lens summary of a lens.
+
+            
+            
+
+            - **LensAlias** *(string) --* 
+
+              The alias of the lens, for example, ``serverless`` .
+
+               
+
+              Each lens is identified by its  LensSummary$LensAlias .
+
+              
+            
+
+            - **LensVersion** *(string) --* 
+
+              The version of the lens.
+
+              
+            
+
+            - **LensName** *(string) --* 
+
+              The full name of the lens.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the lens.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_milestones(**kwargs)
+
+    
+
+    List all milestones for an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListMilestones>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_milestones(
+          WorkloadId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'MilestoneSummaries': [
+                {
+                    'MilestoneNumber': 123,
+                    'MilestoneName': 'string',
+                    'RecordedAt': datetime(2015, 1, 1),
+                    'WorkloadSummary': {
+                        'WorkloadId': 'string',
+                        'WorkloadArn': 'string',
+                        'WorkloadName': 'string',
+                        'Owner': 'string',
+                        'UpdatedAt': datetime(2015, 1, 1),
+                        'Lenses': [
+                            'string',
+                        ],
+                        'RiskCounts': {
+                            'string': 123
+                        },
+                        'ImprovementStatus': 'NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list milestones call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **MilestoneSummaries** *(list) --* 
+
+          A list of milestone summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            A milestone summary return object.
+
+            
+            
+
+            - **MilestoneNumber** *(integer) --* 
+
+              The milestone number.
+
+               
+
+              A workload can have a maximum of 100 milestones.
+
+              
+            
+
+            - **MilestoneName** *(string) --* 
+
+              The name of the milestone in a workload.
+
+               
+
+              Milestone names must be unique within a workload.
+
+              
+            
+
+            - **RecordedAt** *(datetime) --* 
+
+              The date and time recorded.
+
+              
+            
+
+            - **WorkloadSummary** *(dict) --* 
+
+              A workload summary return object.
+
+              
+              
+
+              - **WorkloadId** *(string) --* 
+
+                The ID assigned to the workload. This ID is unique within an AWS Region.
+
+                
+              
+
+              - **WorkloadArn** *(string) --* 
+
+                The ARN for the workload.
+
+                
+              
+
+              - **WorkloadName** *(string) --* 
+
+                The name of the workload.
+
+                 
+
+                The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+                
+              
+
+              - **Owner** *(string) --* 
+
+                An AWS account ID.
+
+                
+              
+
+              - **UpdatedAt** *(datetime) --* 
+
+                The date and time recorded.
+
+                
+              
+
+              - **Lenses** *(list) --* 
+
+                The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+                
+                
+
+                - *(string) --* 
+
+                  The alias of the lens, for example, ``serverless`` .
+
+                   
+
+                  Each lens is identified by its  LensSummary$LensAlias .
+
+                  
+            
+              
+
+              - **RiskCounts** *(dict) --* 
+
+                A map from risk names to the count of how questions have that rating.
+
+                
+                
+
+                - *(string) --* 
+
+                  The risk for a given workload, lens review, pillar, or question.
+
+                  
+                  
+
+                  - *(integer) --* 
+
+                    A non-negative integer that denotes how many.
+
+                    
+            
+          
+              
+
+              - **ImprovementStatus** *(string) --* 
+
+                The improvement status for a workload.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_notifications(**kwargs)
+
+    
+
+    List lens notifications.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListNotifications>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_notifications(
+          WorkloadId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NotificationSummaries': [
+                {
+                    'Type': 'LENS_VERSION_UPGRADED'|'LENS_VERSION_DEPRECATED',
+                    'LensUpgradeSummary': {
+                        'WorkloadId': 'string',
+                        'WorkloadName': 'string',
+                        'LensAlias': 'string',
+                        'CurrentLensVersion': 'string',
+                        'LatestLensVersion': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NotificationSummaries** *(list) --* 
+
+          List of lens notification summaries in a workload.
+
+          
+          
+
+          - *(dict) --* 
+
+            A notification summary return object.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of notification.
+
+              
+            
+
+            - **LensUpgradeSummary** *(dict) --* 
+
+              Summary of lens upgrade.
+
+              
+              
+
+              - **WorkloadId** *(string) --* 
+
+                The ID assigned to the workload. This ID is unique within an AWS Region.
+
+                
+              
+
+              - **WorkloadName** *(string) --* 
+
+                The name of the workload.
+
+                 
+
+                The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+                
+              
+
+              - **LensAlias** *(string) --* 
+
+                The alias of the lens, for example, ``serverless`` .
+
+                 
+
+                Each lens is identified by its  LensSummary$LensAlias .
+
+                
+              
+
+              - **CurrentLensVersion** *(string) --* 
+
+                The current version of the lens.
+
+                
+              
+
+              - **LatestLensVersion** *(string) --* 
+
+                The latest version of the lens.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_share_invitations(**kwargs)
+
+    
+
+    List the workload invitations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListShareInvitations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_share_invitations(
+          WorkloadNamePrefix='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadNamePrefix: string
+    :param WorkloadNamePrefix: 
+
+      An optional string added to the beginning of each workload name returned in the results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ShareInvitationSummaries': [
+                {
+                    'ShareInvitationId': 'string',
+                    'SharedBy': 'string',
+                    'SharedWith': 'string',
+                    'PermissionType': 'READONLY'|'CONTRIBUTOR',
+                    'WorkloadName': 'string',
+                    'WorkloadId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Input for List Share Invitations
+
+        
+        
+
+        - **ShareInvitationSummaries** *(list) --* 
+
+          List of share invitation summaries in a workload.
+
+          
+          
+
+          - *(dict) --* 
+
+            A share invitation summary return object.
+
+            
+            
+
+            - **ShareInvitationId** *(string) --* 
+
+              The ID assigned to the share invitation.
+
+              
+            
+
+            - **SharedBy** *(string) --* 
+
+              An AWS account ID.
+
+              
+            
+
+            - **SharedWith** *(string) --* 
+
+              The AWS account ID or IAM role with which the workload is shared.
+
+              
+            
+
+            - **PermissionType** *(string) --* 
+
+              Permission granted on a workload share.
+
+              
+            
+
+            - **WorkloadName** *(string) --* 
+
+              The name of the workload.
+
+               
+
+              The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+              
+            
+
+            - **WorkloadId** *(string) --* 
+
+              The ID assigned to the workload. This ID is unique within an AWS Region.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    List the tags for a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          WorkloadArn='string'
+      )
+    :type WorkloadArn: string
+    :param WorkloadArn: **[REQUIRED]** 
+
+      The ARN for the workload.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(dict) --* 
+
+          The tags for the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_workload_shares(**kwargs)
+
+    
+
+    List the workload shares associated with the workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloadShares>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_workload_shares(
+          WorkloadId='string',
+          SharedWithPrefix='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type SharedWithPrefix: string
+    :param SharedWithPrefix: 
+
+      The AWS account ID or IAM role with which the workload is shared.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'WorkloadShareSummaries': [
+                {
+                    'ShareId': 'string',
+                    'SharedWith': 'string',
+                    'PermissionType': 'READONLY'|'CONTRIBUTOR',
+                    'Status': 'ACCEPTED'|'REJECTED'|'PENDING'|'REVOKED'|'EXPIRED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Input for List Workload Share
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **WorkloadShareSummaries** *(list) --* 
+
+          A list of workload share summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            A workload share summary return object.
+
+            
+            
+
+            - **ShareId** *(string) --* 
+
+              The ID associated with the workload share.
+
+              
+            
+
+            - **SharedWith** *(string) --* 
+
+              The AWS account ID or IAM role with which the workload is shared.
+
+              
+            
+
+            - **PermissionType** *(string) --* 
+
+              Permission granted on a workload share.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of a workload share.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_workloads(**kwargs)
+
+    
+
+    List workloads. Paginated.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListWorkloads>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_workloads(
+          WorkloadNamePrefix='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type WorkloadNamePrefix: string
+    :param WorkloadNamePrefix: 
+
+      An optional string added to the beginning of each workload name returned in the results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next set of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return for this request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadSummaries': [
+                {
+                    'WorkloadId': 'string',
+                    'WorkloadArn': 'string',
+                    'WorkloadName': 'string',
+                    'Owner': 'string',
+                    'UpdatedAt': datetime(2015, 1, 1),
+                    'Lenses': [
+                        'string',
+                    ],
+                    'RiskCounts': {
+                        'string': 123
+                    },
+                    'ImprovementStatus': 'NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a list workloads call.
+
+        
+        
+
+        - **WorkloadSummaries** *(list) --* 
+
+          A list of workload summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            A workload summary return object.
+
+            
+            
+
+            - **WorkloadId** *(string) --* 
+
+              The ID assigned to the workload. This ID is unique within an AWS Region.
+
+              
+            
+
+            - **WorkloadArn** *(string) --* 
+
+              The ARN for the workload.
+
+              
+            
+
+            - **WorkloadName** *(string) --* 
+
+              The name of the workload.
+
+               
+
+              The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+              
+            
+
+            - **Owner** *(string) --* 
+
+              An AWS account ID.
+
+              
+            
+
+            - **UpdatedAt** *(datetime) --* 
+
+              The date and time recorded.
+
+              
+            
+
+            - **Lenses** *(list) --* 
+
+              The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+              
+              
+
+              - *(string) --* 
+
+                The alias of the lens, for example, ``serverless`` .
+
+                 
+
+                Each lens is identified by its  LensSummary$LensAlias .
+
+                
+          
+            
+
+            - **RiskCounts** *(dict) --* 
+
+              A map from risk names to the count of how questions have that rating.
+
+              
+              
+
+              - *(string) --* 
+
+                The risk for a given workload, lens review, pillar, or question.
+
+                
+                
+
+                - *(integer) --* 
+
+                  A non-negative integer that denotes how many.
+
+                  
+          
+        
+            
+
+            - **ImprovementStatus** *(string) --* 
+
+              The improvement status for a workload.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds one or more tags to the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          WorkloadArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type WorkloadArn: string
+    :param WorkloadArn: **[REQUIRED]** 
+
+      The ARN for the workload.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      The tags for the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Deletes specified tags from a resource.
+
+     
+
+    To specify multiple tags, use separate **tagKeys** parameters, for example:
+
+     
+
+     ``DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2``  
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          WorkloadArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type WorkloadArn: string
+    :param WorkloadArn: **[REQUIRED]** 
+
+      The ARN for the workload.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      A list of tag keys. Existing tags of the resource whose keys are members of this list are removed from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_answer(**kwargs)
+
+    
+
+    Update the answer to a specific question in a workload review.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAnswer>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_answer(
+          WorkloadId='string',
+          LensAlias='string',
+          QuestionId='string',
+          SelectedChoices=[
+              'string',
+          ],
+          ChoiceUpdates={
+              'string': {
+                  'Status': 'SELECTED'|'NOT_APPLICABLE'|'UNSELECTED',
+                  'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE',
+                  'Notes': 'string'
+              }
+          },
+          Notes='string',
+          IsApplicable=True|False,
+          Reason='OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type QuestionId: string
+    :param QuestionId: **[REQUIRED]** 
+
+      The ID of the question.
+
+      
+
+    
+    :type SelectedChoices: list
+    :param SelectedChoices: 
+
+      List of selected choice IDs in a question answer.
+
+       
+
+      The values entered replace the previously selected choices.
+
+      
+
+    
+      - *(string) --* 
+
+        The ID of a choice.
+
+        
+
+      
+  
+    :type ChoiceUpdates: dict
+    :param ChoiceUpdates: 
+
+      A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
+
+      
+
+    
+      - *(string) --* 
+
+        The ID of a choice.
+
+        
+
+      
+        - *(dict) --* 
+
+          A list of choices to be updated.
+
+          
+
+        
+          - **Status** *(string) --* **[REQUIRED]** 
+
+            The status of a choice.
+
+            
+
+          
+          - **Reason** *(string) --* 
+
+            The reason why a choice is non-applicable to a question in your workload.
+
+            
+
+          
+          - **Notes** *(string) --* 
+
+            The notes associated with a choice.
+
+            
+
+          
+        
+  
+
+    :type Notes: string
+    :param Notes: 
+
+      The notes associated with the workload.
+
+      
+
+    
+    :type IsApplicable: boolean
+    :param IsApplicable: 
+
+      Defines whether this question is applicable to a lens review.
+
+      
+
+    
+    :type Reason: string
+    :param Reason: 
+
+      The reason why a question is not applicable to your workload.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'LensAlias': 'string',
+            'Answer': {
+                'QuestionId': 'string',
+                'PillarId': 'string',
+                'QuestionTitle': 'string',
+                'QuestionDescription': 'string',
+                'ImprovementPlanUrl': 'string',
+                'HelpfulResourceUrl': 'string',
+                'Choices': [
+                    {
+                        'ChoiceId': 'string',
+                        'Title': 'string',
+                        'Description': 'string'
+                    },
+                ],
+                'SelectedChoices': [
+                    'string',
+                ],
+                'ChoiceAnswers': [
+                    {
+                        'ChoiceId': 'string',
+                        'Status': 'SELECTED'|'NOT_APPLICABLE'|'UNSELECTED',
+                        'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE',
+                        'Notes': 'string'
+                    },
+                ],
+                'IsApplicable': True|False,
+                'Risk': 'UNANSWERED'|'HIGH'|'MEDIUM'|'NONE'|'NOT_APPLICABLE',
+                'Notes': 'string',
+                'Reason': 'OUT_OF_SCOPE'|'BUSINESS_PRIORITIES'|'ARCHITECTURE_CONSTRAINTS'|'OTHER'|'NONE'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a update answer call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **LensAlias** *(string) --* 
+
+          The alias of the lens, for example, ``serverless`` .
+
+           
+
+          Each lens is identified by its  LensSummary$LensAlias .
+
+          
+        
+
+        - **Answer** *(dict) --* 
+
+          An answer of the question.
+
+          
+          
+
+          - **QuestionId** *(string) --* 
+
+            The ID of the question.
+
+            
+          
+
+          - **PillarId** *(string) --* 
+
+            The ID used to identify a pillar, for example, ``security`` .
+
+             
+
+            A pillar is identified by its  PillarReviewSummary$PillarId .
+
+            
+          
+
+          - **QuestionTitle** *(string) --* 
+
+            The title of the question.
+
+            
+          
+
+          - **QuestionDescription** *(string) --* 
+
+            The description of the question.
+
+            
+          
+
+          - **ImprovementPlanUrl** *(string) --* 
+
+            The improvement plan URL for a question.
+
+             
+
+            This value is only available if the question has been answered.
+
+            
+          
+
+          - **HelpfulResourceUrl** *(string) --* 
+
+            The helpful resource URL for a question.
+
+            
+          
+
+          - **Choices** *(list) --* 
+
+            List of choices available for a question.
+
+            
+            
+
+            - *(dict) --* 
+
+              A choice available to answer question.
+
+              
+              
+
+              - **ChoiceId** *(string) --* 
+
+                The ID of a choice.
+
+                
+              
+
+              - **Title** *(string) --* 
+
+                The title of a choice.
+
+                
+              
+
+              - **Description** *(string) --* 
+
+                The description of a choice.
+
+                
+          
+        
+          
+
+          - **SelectedChoices** *(list) --* 
+
+            List of selected choice IDs in a question answer.
+
+             
+
+            The values entered replace the previously selected choices.
+
+            
+            
+
+            - *(string) --* 
+
+              The ID of a choice.
+
+              
+        
+          
+
+          - **ChoiceAnswers** *(list) --* 
+
+            A list of selected choices to a question in your workload.
+
+            
+            
+
+            - *(dict) --* 
+
+              A choice that has been answered on a question in your workload.
+
+              
+              
+
+              - **ChoiceId** *(string) --* 
+
+                The ID of a choice.
+
+                
+              
+
+              - **Status** *(string) --* 
+
+                The status of a choice.
+
+                
+              
+
+              - **Reason** *(string) --* 
+
+                The reason why a choice is non-applicable to a question in your workload.
+
+                
+              
+
+              - **Notes** *(string) --* 
+
+                The notes associated with a choice.
+
+                
+          
+        
+          
+
+          - **IsApplicable** *(boolean) --* 
+
+            Defines whether this question is applicable to a lens review.
+
+            
+          
+
+          - **Risk** *(string) --* 
+
+            The risk for a given workload, lens review, pillar, or question.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **Reason** *(string) --* 
+
+            The reason why the question is not applicable to your workload.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: update_lens_review(**kwargs)
+
+    
+
+    Update lens review.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateLensReview>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_lens_review(
+          WorkloadId='string',
+          LensAlias='string',
+          LensNotes='string',
+          PillarNotes={
+              'string': 'string'
+          }
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type LensNotes: string
+    :param LensNotes: 
+
+      The notes associated with the workload.
+
+      
+
+    
+    :type PillarNotes: dict
+    :param PillarNotes: 
+
+      List of pillar notes of a lens review in a workload.
+
+      
+
+    
+      - *(string) --* 
+
+        The ID used to identify a pillar, for example, ``security`` .
+
+         
+
+        A pillar is identified by its  PillarReviewSummary$PillarId .
+
+        
+
+      
+        - *(string) --* 
+
+          The notes associated with the workload.
+
+          
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'LensReview': {
+                'LensAlias': 'string',
+                'LensVersion': 'string',
+                'LensName': 'string',
+                'LensStatus': 'CURRENT'|'NOT_CURRENT'|'DEPRECATED',
+                'PillarReviewSummaries': [
+                    {
+                        'PillarId': 'string',
+                        'PillarName': 'string',
+                        'Notes': 'string',
+                        'RiskCounts': {
+                            'string': 123
+                        }
+                    },
+                ],
+                'UpdatedAt': datetime(2015, 1, 1),
+                'Notes': 'string',
+                'RiskCounts': {
+                    'string': 123
+                },
+                'NextToken': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of a update lens review call.
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **LensReview** *(dict) --* 
+
+          A lens review of a question.
+
+          
+          
+
+          - **LensAlias** *(string) --* 
+
+            The alias of the lens, for example, ``serverless`` .
+
+             
+
+            Each lens is identified by its  LensSummary$LensAlias .
+
+            
+          
+
+          - **LensVersion** *(string) --* 
+
+            The version of the lens.
+
+            
+          
+
+          - **LensName** *(string) --* 
+
+            The full name of the lens.
+
+            
+          
+
+          - **LensStatus** *(string) --* 
+
+            The status of the lens.
+
+            
+          
+
+          - **PillarReviewSummaries** *(list) --* 
+
+            List of pillar review summaries of lens review in a workload.
+
+            
+            
+
+            - *(dict) --* 
+
+              A pillar review summary of a lens review.
+
+              
+              
+
+              - **PillarId** *(string) --* 
+
+                The ID used to identify a pillar, for example, ``security`` .
+
+                 
+
+                A pillar is identified by its  PillarReviewSummary$PillarId .
+
+                
+              
+
+              - **PillarName** *(string) --* 
+
+                The name of the pillar.
+
+                
+              
+
+              - **Notes** *(string) --* 
+
+                The notes associated with the workload.
+
+                
+              
+
+              - **RiskCounts** *(dict) --* 
+
+                A map from risk names to the count of how questions have that rating.
+
+                
+                
+
+                - *(string) --* 
+
+                  The risk for a given workload, lens review, pillar, or question.
+
+                  
+                  
+
+                  - *(integer) --* 
+
+                    A non-negative integer that denotes how many.
+
+                    
+            
+          
+          
+        
+          
+
+          - **UpdatedAt** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **RiskCounts** *(dict) --* 
+
+            A map from risk names to the count of how questions have that rating.
+
+            
+            
+
+            - *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+              
+
+              - *(integer) --* 
+
+                A non-negative integer that denotes how many.
+
+                
+        
+      
+          
+
+          - **NextToken** *(string) --* 
+
+            The token to use to retrieve the next set of results.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: update_share_invitation(**kwargs)
+
+    
+
+    Update a workload invitation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateShareInvitation>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_share_invitation(
+          ShareInvitationId='string',
+          ShareInvitationAction='ACCEPT'|'REJECT'
+      )
+    :type ShareInvitationId: string
+    :param ShareInvitationId: **[REQUIRED]** 
+
+      The ID assigned to the share invitation.
+
+      
+
+    
+    :type ShareInvitationAction: string
+    :param ShareInvitationAction: **[REQUIRED]** 
+
+      Share invitation action taken by contributor.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ShareInvitation': {
+                'ShareInvitationId': 'string',
+                'WorkloadId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ShareInvitation** *(dict) --* 
+
+          The updated workload share invitation.
+
+          
+          
+
+          - **ShareInvitationId** *(string) --* 
+
+            The ID assigned to the share invitation.
+
+            
+          
+
+          - **WorkloadId** *(string) --* 
+
+            The ID assigned to the workload. This ID is unique within an AWS Region.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: update_workload(**kwargs)
+
+    
+
+    Update an existing workload.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_workload(
+          WorkloadId='string',
+          WorkloadName='string',
+          Description='string',
+          Environment='PRODUCTION'|'PREPRODUCTION',
+          AccountIds=[
+              'string',
+          ],
+          AwsRegions=[
+              'string',
+          ],
+          NonAwsRegions=[
+              'string',
+          ],
+          PillarPriorities=[
+              'string',
+          ],
+          ArchitecturalDesign='string',
+          ReviewOwner='string',
+          IsReviewOwnerUpdateAcknowledged=True|False,
+          IndustryType='string',
+          Industry='string',
+          Notes='string',
+          ImprovementStatus='NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type WorkloadName: string
+    :param WorkloadName: 
+
+      The name of the workload.
+
+       
+
+      The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description for the workload.
+
+      
+
+    
+    :type Environment: string
+    :param Environment: 
+
+      The environment for the workload.
+
+      
+
+    
+    :type AccountIds: list
+    :param AccountIds: 
+
+      The list of AWS account IDs associated with the workload.
+
+      
+
+    
+      - *(string) --* 
+
+        An AWS account ID.
+
+        
+
+      
+  
+    :type AwsRegions: list
+    :param AwsRegions: 
+
+      The list of AWS Regions associated with the workload, for example, ``us-east-2`` , or ``ca-central-1`` .
+
+      
+
+    
+      - *(string) --* 
+
+        An AWS Region, for example, ``us-west-2`` or ``ap-northeast-1`` .
+
+        
+
+      
+  
+    :type NonAwsRegions: list
+    :param NonAwsRegions: 
+
+      The list of non-AWS Regions associated with the workload.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PillarPriorities: list
+    :param PillarPriorities: 
+
+      The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its  PillarReviewSummary$PillarId .
+
+      
+
+    
+      - *(string) --* 
+
+        The ID used to identify a pillar, for example, ``security`` .
+
+         
+
+        A pillar is identified by its  PillarReviewSummary$PillarId .
+
+        
+
+      
+  
+    :type ArchitecturalDesign: string
+    :param ArchitecturalDesign: 
+
+      The URL of the architectural design for the workload.
+
+      
+
+    
+    :type ReviewOwner: string
+    :param ReviewOwner: 
+
+      The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.
+
+      
+
+    
+    :type IsReviewOwnerUpdateAcknowledged: boolean
+    :param IsReviewOwnerUpdateAcknowledged: 
+
+      Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+
+       
+
+      If a **Review owner** is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.
+
+      
+
+    
+    :type IndustryType: string
+    :param IndustryType: 
+
+      The industry type for the workload.
+
+       
+
+      If specified, must be one of the following:
+
+       
+
+       
+      * ``Agriculture``   
+       
+      * ``Automobile``   
+       
+      * ``Defense``   
+       
+      * ``Design and Engineering``   
+       
+      * ``Digital Advertising``   
+       
+      * ``Education``   
+       
+      * ``Environmental Protection``   
+       
+      * ``Financial Services``   
+       
+      * ``Gaming``   
+       
+      * ``General Public Services``   
+       
+      * ``Healthcare``   
+       
+      * ``Hospitality``   
+       
+      * ``InfoTech``   
+       
+      * ``Justice and Public Safety``   
+       
+      * ``Life Sciences``   
+       
+      * ``Manufacturing``   
+       
+      * ``Media & Entertainment``   
+       
+      * ``Mining & Resources``   
+       
+      * ``Oil & Gas``   
+       
+      * ``Power & Utilities``   
+       
+      * ``Professional Services``   
+       
+      * ``Real Estate & Construction``   
+       
+      * ``Retail & Wholesale``   
+       
+      * ``Social Protection``   
+       
+      * ``Telecommunications``   
+       
+      * ``Travel, Transportation & Logistics``   
+       
+      * ``Other``   
+       
+
+      
+
+    
+    :type Industry: string
+    :param Industry: 
+
+      The industry for the workload.
+
+      
+
+    
+    :type Notes: string
+    :param Notes: 
+
+      The notes associated with the workload.
+
+      
+
+    
+    :type ImprovementStatus: string
+    :param ImprovementStatus: 
+
+      The improvement status for a workload.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Workload': {
+                'WorkloadId': 'string',
+                'WorkloadArn': 'string',
+                'WorkloadName': 'string',
+                'Description': 'string',
+                'Environment': 'PRODUCTION'|'PREPRODUCTION',
+                'UpdatedAt': datetime(2015, 1, 1),
+                'AccountIds': [
+                    'string',
+                ],
+                'AwsRegions': [
+                    'string',
+                ],
+                'NonAwsRegions': [
+                    'string',
+                ],
+                'ArchitecturalDesign': 'string',
+                'ReviewOwner': 'string',
+                'ReviewRestrictionDate': datetime(2015, 1, 1),
+                'IsReviewOwnerUpdateAcknowledged': True|False,
+                'IndustryType': 'string',
+                'Industry': 'string',
+                'Notes': 'string',
+                'ImprovementStatus': 'NOT_APPLICABLE'|'NOT_STARTED'|'IN_PROGRESS'|'COMPLETE'|'RISK_ACKNOWLEDGED',
+                'RiskCounts': {
+                    'string': 123
+                },
+                'PillarPriorities': [
+                    'string',
+                ],
+                'Lenses': [
+                    'string',
+                ],
+                'Owner': 'string',
+                'ShareInvitationId': 'string',
+                'Tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Output of an update workload call.
+
+        
+        
+
+        - **Workload** *(dict) --* 
+
+          A workload return object.
+
+          
+          
+
+          - **WorkloadId** *(string) --* 
+
+            The ID assigned to the workload. This ID is unique within an AWS Region.
+
+            
+          
+
+          - **WorkloadArn** *(string) --* 
+
+            The ARN for the workload.
+
+            
+          
+
+          - **WorkloadName** *(string) --* 
+
+            The name of the workload.
+
+             
+
+            The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description for the workload.
+
+            
+          
+
+          - **Environment** *(string) --* 
+
+            The environment for the workload.
+
+            
+          
+
+          - **UpdatedAt** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **AccountIds** *(list) --* 
+
+            The list of AWS account IDs associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+
+              An AWS account ID.
+
+              
+        
+          
+
+          - **AwsRegions** *(list) --* 
+
+            The list of AWS Regions associated with the workload, for example, ``us-east-2`` , or ``ca-central-1`` .
+
+            
+            
+
+            - *(string) --* 
+
+              An AWS Region, for example, ``us-west-2`` or ``ap-northeast-1`` .
+
+              
+        
+          
+
+          - **NonAwsRegions** *(list) --* 
+
+            The list of non-AWS Regions associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **ArchitecturalDesign** *(string) --* 
+
+            The URL of the architectural design for the workload.
+
+            
+          
+
+          - **ReviewOwner** *(string) --* 
+
+            The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.
+
+            
+          
+
+          - **ReviewRestrictionDate** *(datetime) --* 
+
+            The date and time recorded.
+
+            
+          
+
+          - **IsReviewOwnerUpdateAcknowledged** *(boolean) --* 
+
+            Flag indicating whether the workload owner has acknowledged that the *Review owner* field is required.
+
+             
+
+            If a **Review owner** is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.
+
+            
+          
+
+          - **IndustryType** *(string) --* 
+
+            The industry type for the workload.
+
+             
+
+            If specified, must be one of the following:
+
+             
+
+             
+            * ``Agriculture``   
+             
+            * ``Automobile``   
+             
+            * ``Defense``   
+             
+            * ``Design and Engineering``   
+             
+            * ``Digital Advertising``   
+             
+            * ``Education``   
+             
+            * ``Environmental Protection``   
+             
+            * ``Financial Services``   
+             
+            * ``Gaming``   
+             
+            * ``General Public Services``   
+             
+            * ``Healthcare``   
+             
+            * ``Hospitality``   
+             
+            * ``InfoTech``   
+             
+            * ``Justice and Public Safety``   
+             
+            * ``Life Sciences``   
+             
+            * ``Manufacturing``   
+             
+            * ``Media & Entertainment``   
+             
+            * ``Mining & Resources``   
+             
+            * ``Oil & Gas``   
+             
+            * ``Power & Utilities``   
+             
+            * ``Professional Services``   
+             
+            * ``Real Estate & Construction``   
+             
+            * ``Retail & Wholesale``   
+             
+            * ``Social Protection``   
+             
+            * ``Telecommunications``   
+             
+            * ``Travel, Transportation & Logistics``   
+             
+            * ``Other``   
+             
+
+            
+          
+
+          - **Industry** *(string) --* 
+
+            The industry for the workload.
+
+            
+          
+
+          - **Notes** *(string) --* 
+
+            The notes associated with the workload.
+
+            
+          
+
+          - **ImprovementStatus** *(string) --* 
+
+            The improvement status for a workload.
+
+            
+          
+
+          - **RiskCounts** *(dict) --* 
+
+            A map from risk names to the count of how questions have that rating.
+
+            
+            
+
+            - *(string) --* 
+
+              The risk for a given workload, lens review, pillar, or question.
+
+              
+              
+
+              - *(integer) --* 
+
+                A non-negative integer that denotes how many.
+
+                
+        
+      
+          
+
+          - **PillarPriorities** *(list) --* 
+
+            The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its  PillarReviewSummary$PillarId .
+
+            
+            
+
+            - *(string) --* 
+
+              The ID used to identify a pillar, for example, ``security`` .
+
+               
+
+              A pillar is identified by its  PillarReviewSummary$PillarId .
+
+              
+        
+          
+
+          - **Lenses** *(list) --* 
+
+            The list of lenses associated with the workload. Each lens is identified by its  LensSummary$LensAlias .
+
+            
+            
+
+            - *(string) --* 
+
+              The alias of the lens, for example, ``serverless`` .
+
+               
+
+              Each lens is identified by its  LensSummary$LensAlias .
+
+              
+        
+          
+
+          - **Owner** *(string) --* 
+
+            An AWS account ID.
+
+            
+          
+
+          - **ShareInvitationId** *(string) --* 
+
+            The ID assigned to the share invitation.
+
+            
+          
+
+          - **Tags** *(dict) --* 
+
+            The tags associated with the workload.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: update_workload_share(**kwargs)
+
+    
+
+    Update a workload share.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkloadShare>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_workload_share(
+          ShareId='string',
+          WorkloadId='string',
+          PermissionType='READONLY'|'CONTRIBUTOR'
+      )
+    :type ShareId: string
+    :param ShareId: **[REQUIRED]** 
+
+      The ID associated with the workload share.
+
+      
+
+    
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type PermissionType: string
+    :param PermissionType: **[REQUIRED]** 
+
+      Permission granted on a workload share.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WorkloadId': 'string',
+            'WorkloadShare': {
+                'ShareId': 'string',
+                'SharedBy': 'string',
+                'SharedWith': 'string',
+                'PermissionType': 'READONLY'|'CONTRIBUTOR',
+                'Status': 'ACCEPTED'|'REJECTED'|'PENDING'|'REVOKED'|'EXPIRED',
+                'WorkloadName': 'string',
+                'WorkloadId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+
+        Input for Update Workload Share
+
+        
+        
+
+        - **WorkloadId** *(string) --* 
+
+          The ID assigned to the workload. This ID is unique within an AWS Region.
+
+          
+        
+
+        - **WorkloadShare** *(dict) --* 
+
+          A workload share return object.
+
+          
+          
+
+          - **ShareId** *(string) --* 
+
+            The ID associated with the workload share.
+
+            
+          
+
+          - **SharedBy** *(string) --* 
+
+            An AWS account ID.
+
+            
+          
+
+          - **SharedWith** *(string) --* 
+
+            The AWS account ID or IAM role with which the workload is shared.
+
+            
+          
+
+          - **PermissionType** *(string) --* 
+
+            Permission granted on a workload share.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of a workload share.
+
+            
+          
+
+          - **WorkloadName** *(string) --* 
+
+            The name of the workload.
+
+             
+
+            The name must be unique within an account within a Region. Spaces and capitalization are ignored when checking for uniqueness.
+
+            
+          
+
+          - **WorkloadId** *(string) --* 
+
+            The ID assigned to the workload. This ID is unique within an AWS Region.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: upgrade_lens_review(**kwargs)
+
+    
+
+    Upgrade lens review.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpgradeLensReview>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.upgrade_lens_review(
+          WorkloadId='string',
+          LensAlias='string',
+          MilestoneName='string',
+          ClientRequestToken='string'
+      )
+    :type WorkloadId: string
+    :param WorkloadId: **[REQUIRED]** 
+
+      The ID assigned to the workload. This ID is unique within an AWS Region.
+
+      
+
+    
+    :type LensAlias: string
+    :param LensAlias: **[REQUIRED]** 
+
+      The alias of the lens, for example, ``serverless`` .
+
+       
+
+      Each lens is identified by its  LensSummary$LensAlias .
+
+      
+
+    
+    :type MilestoneName: string
+    :param MilestoneName: **[REQUIRED]** 
+
+      The name of the milestone in a workload.
+
+       
+
+      Milestone names must be unique within a workload.
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: 
+
+      A unique case-sensitive string used to ensure that this request is idempotent (executes only once).
+
+       
+
+      You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. 
+
+       
+
+      .. warning::
+
+         
+
+        This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.
+
+         
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`WellArchitected.Client.exceptions.ThrottlingException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,974 @@
+
+
+***************
+TimestreamQuery
+***************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: TimestreamQuery.Client
+
+  A low-level client representing Amazon Timestream Query
+  
+
+   
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('timestream-query')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~TimestreamQuery.Client.can_paginate`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.cancel_query`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.describe_endpoints`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.get_paginator`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.get_waiter`
+
+  
+  *   :py:meth:`~TimestreamQuery.Client.query`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_query(**kwargs)
+
+    
+
+    Cancels a query that has been issued. Cancellation is guaranteed only if the query has not completed execution before the cancellation request was issued. Because cancellation is an idempotent operation, subsequent cancellation requests will return a ``CancellationMessage`` , indicating that the query has already been canceled. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/CancelQuery>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_query(
+          QueryId='string'
+      )
+    :type QueryId: string
+    :param QueryId: **[REQUIRED]** 
+
+      The id of the query that needs to be cancelled. ``QueryID`` is returned as part of QueryResult. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CancellationMessage': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CancellationMessage** *(string) --* 
+
+          A ``CancellationMessage`` is returned when a ``CancelQuery`` request for the query specified by ``QueryId`` has already been issued. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.InvalidEndpointException`
+
+    
+
+  .. py:method:: describe_endpoints()
+
+    
+
+    DescribeEndpoints returns a list of available endpoints to make Timestream API calls against. This API is available through both Write and Query.
+
+     
+
+    Because Timestream’s SDKs are designed to transparently work with the service’s architecture, including the management and mapping of the service endpoints, *it is not recommended that you use this API unless* :
+
+     
+
+     
+    * Your application uses a programming language that does not yet have SDK support 
+     
+    * You require better control over the client-side implementation 
+     
+
+     
+
+    For detailed information on how to use DescribeEndpoints, see `The Endpoint Discovery Pattern and REST APIs <https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeEndpoints>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_endpoints()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Endpoints': [
+                {
+                    'Address': 'string',
+                    'CachePeriodInMinutes': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Endpoints** *(list) --* 
+
+          An ``Endpoints`` object is returned when a ``DescribeEndpoints`` request is made.
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.
+
+            
+            
+
+            - **Address** *(string) --* 
+
+              An endpoint address.
+
+              
+            
+
+            - **CachePeriodInMinutes** *(integer) --* 
+
+              The TTL for the endpoint, in minutes.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: query(**kwargs)
+
+    
+
+    Query is a synchronous operation that enables you to execute a query. Query will timeout after 60 seconds. You must update the default timeout in the SDK to support a timeout of 60 seconds. The result set will be truncated to 1MB. Service quotas apply. For more information, see Quotas in the Timestream Developer Guide. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/Query>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.query(
+          QueryString='string',
+          ClientToken='string',
+          NextToken='string',
+          MaxRows=123
+      )
+    :type QueryString: string
+    :param QueryString: **[REQUIRED]** 
+
+      The query to be executed by Timestream. 
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      Unique, case-sensitive string of up to 64 ASCII characters that you specify when you make a Query request. Providing a ``ClientToken`` makes the call to ``Query`` idempotent, meaning that multiple identical calls have the same effect as one single call. 
+
+       
+
+      Your query request will fail in the following cases:
+
+       
+
+       
+      * If you submit a request with the same client token outside the 5-minute idepotency window.  
+       
+      * If you submit a request with the same client token but a change in other parameters within the 5-minute idempotency window.  
+       
+
+       
+
+      After 4 hours, any request with the same client token is treated as a new request. 
+
+      This field is autopopulated if not provided.
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A pagination token passed to get a set of results. 
+
+      
+
+    
+    :type MaxRows: integer
+    :param MaxRows: 
+
+      The total number of rows to return in the output. If the total number of rows available is more than the value specified, a NextToken is provided in the command's output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'QueryId': 'string',
+            'NextToken': 'string',
+            'Rows': [
+                {
+                    'Data': [
+                        {
+                            'ScalarValue': 'string',
+                            'TimeSeriesValue': [
+                                {
+                                    'Time': 'string',
+                                    'Value': {'... recursive ...'}
+                                },
+                            ],
+                            'ArrayValue': {'... recursive ...'},
+                            'RowValue': {'... recursive ...'},
+                            'NullValue': True|False
+                        },
+                    ]
+                },
+            ],
+            'ColumnInfo': [
+                {
+                    'Name': 'string',
+                    'Type': {
+                        'ScalarType': 'VARCHAR'|'BOOLEAN'|'BIGINT'|'DOUBLE'|'TIMESTAMP'|'DATE'|'TIME'|'INTERVAL_DAY_TO_SECOND'|'INTERVAL_YEAR_TO_MONTH'|'UNKNOWN'|'INTEGER',
+                        'ArrayColumnInfo': {'... recursive ...'},
+                        'TimeSeriesMeasureValueColumnInfo': {'... recursive ...'},
+                        'RowColumnInfo': {'... recursive ...'}
+                    }
+                },
+            ],
+            'QueryStatus': {
+                'ProgressPercentage': 123.0,
+                'CumulativeBytesScanned': 123,
+                'CumulativeBytesMetered': 123
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **QueryId** *(string) --* 
+
+          A unique ID for the given query. 
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          A pagination token that can be used again on a ``Query`` call to get the next set of results. 
+
+          
+        
+
+        - **Rows** *(list) --* 
+
+          The result set rows returned by the query. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents a single row in the query results.
+
+            
+            
+
+            - **Data** *(list) --* 
+
+              List of data points in a single row of the result set.
+
+              
+              
+
+              - *(dict) --* 
+
+                Datum represents a single data point in a query result. 
+
+                
+                
+
+                - **ScalarValue** *(string) --* 
+
+                  Indicates if the data point is a scalar value such as integer, string, double, or boolean. 
+
+                  
+                
+
+                - **TimeSeriesValue** *(list) --* 
+
+                  Indicates if the data point is of timeseries data type. 
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    The timeseries datatype represents the values of a measure over time. A time series is an array of rows of timestamps and measure values, with rows sorted in ascending order of time. A TimeSeriesDataPoint is a single data point in the timeseries. It represents a tuple of (time, measure value) in a timeseries. 
+
+                    
+                    
+
+                    - **Time** *(string) --* 
+
+                      The timestamp when the measure value was collected.
+
+                      
+                    
+
+                    - **Value** *(dict) --* 
+
+                      The measure value for the data point.
+
+                      
+                
+              
+                
+
+                - **ArrayValue** *(list) --* 
+
+                  Indicates if the data point is an array. 
+
+                  
+                
+
+                - **RowValue** *(dict) --* 
+
+                  Indicates if the data point is a row. 
+
+                  
+                
+
+                - **NullValue** *(boolean) --* 
+
+                  Indicates if the data point is null. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **ColumnInfo** *(list) --* 
+
+          The column data types of the returned result set. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains the meta data for query results such as the column names, data types, and other attributes. 
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the result set column. The name of the result set is available for columns of all data types except for arrays. 
+
+              
+            
+
+            - **Type** *(dict) --* 
+
+              The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, booleans, and others. Complex data types are types such as arrays, rows, and others. 
+
+              
+              
+
+              - **ScalarType** *(string) --* 
+
+                Indicates if the column is of type string, integer, boolean, double, timestamp, date, time. 
+
+                
+              
+
+              - **ArrayColumnInfo** *(dict) --* 
+
+                Indicates if the column is an array.
+
+                
+              
+
+              - **TimeSeriesMeasureValueColumnInfo** *(dict) --* 
+
+                Indicates if the column is a timeseries data type.
+
+                
+              
+
+              - **RowColumnInfo** *(list) --* 
+
+                Indicates if the column is a row.
+
+                
+          
+        
+      
+        
+
+        - **QueryStatus** *(dict) --* 
+
+          Information about the status of the query, including progress and bytes scannned.
+
+          
+          
+
+          - **ProgressPercentage** *(float) --* 
+
+            The progress of the query, expressed as a percentage.
+
+            
+          
+
+          - **CumulativeBytesScanned** *(integer) --* 
+
+            The amount of data scanned by the query in bytes. This is a cumulative sum and represents the total amount of bytes scanned since the query was started. 
+
+            
+          
+
+          - **CumulativeBytesMetered** *(integer) --* 
+
+            The amount of data scanned by the query in bytes that you will be charged for. This is a cumulative sum and represents the total amount of data that you will be charged for since the query was started. The charge is applied only once and is either applied when the query completes execution or when the query is cancelled. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.QueryExecutionException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`TimestreamQuery.Client.exceptions.InvalidEndpointException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`TimestreamQuery.Paginator.Query`
+
+
+
+.. py:class:: TimestreamQuery.Paginator.Query
+
+  ::
+
+    
+    paginator = client.get_paginator('query')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`TimestreamQuery.Client.query`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/Query>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          QueryString='string',
+          ClientToken='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type QueryString: string
+    :param QueryString: **[REQUIRED]** 
+
+      The query to be executed by Timestream. 
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      Unique, case-sensitive string of up to 64 ASCII characters that you specify when you make a Query request. Providing a ``ClientToken`` makes the call to ``Query`` idempotent, meaning that multiple identical calls have the same effect as one single call. 
+
+       
+
+      Your query request will fail in the following cases:
+
+       
+
+       
+      * If you submit a request with the same client token outside the 5-minute idepotency window.  
+       
+      * If you submit a request with the same client token but a change in other parameters within the 5-minute idempotency window.  
+       
+
+       
+
+      After 4 hours, any request with the same client token is treated as a new request. 
+
+      This field is autopopulated if not provided.
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'QueryId': 'string',
+            'Rows': [
+                {
+                    'Data': [
+                        {
+                            'ScalarValue': 'string',
+                            'TimeSeriesValue': [
+                                {
+                                    'Time': 'string',
+                                    'Value': {'... recursive ...'}
+                                },
+                            ],
+                            'ArrayValue': {'... recursive ...'},
+                            'RowValue': {'... recursive ...'},
+                            'NullValue': True|False
+                        },
+                    ]
+                },
+            ],
+            'ColumnInfo': [
+                {
+                    'Name': 'string',
+                    'Type': {
+                        'ScalarType': 'VARCHAR'|'BOOLEAN'|'BIGINT'|'DOUBLE'|'TIMESTAMP'|'DATE'|'TIME'|'INTERVAL_DAY_TO_SECOND'|'INTERVAL_YEAR_TO_MONTH'|'UNKNOWN'|'INTEGER',
+                        'ArrayColumnInfo': {'... recursive ...'},
+                        'TimeSeriesMeasureValueColumnInfo': {'... recursive ...'},
+                        'RowColumnInfo': {'... recursive ...'}
+                    }
+                },
+            ],
+            'QueryStatus': {
+                'ProgressPercentage': 123.0,
+                'CumulativeBytesScanned': 123,
+                'CumulativeBytesMetered': 123
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **QueryId** *(string) --* 
+
+          A unique ID for the given query. 
+
+          
+        
+
+        - **Rows** *(list) --* 
+
+          The result set rows returned by the query. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Represents a single row in the query results.
+
+            
+            
+
+            - **Data** *(list) --* 
+
+              List of data points in a single row of the result set.
+
+              
+              
+
+              - *(dict) --* 
+
+                Datum represents a single data point in a query result. 
+
+                
+                
+
+                - **ScalarValue** *(string) --* 
+
+                  Indicates if the data point is a scalar value such as integer, string, double, or boolean. 
+
+                  
+                
+
+                - **TimeSeriesValue** *(list) --* 
+
+                  Indicates if the data point is of timeseries data type. 
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    The timeseries datatype represents the values of a measure over time. A time series is an array of rows of timestamps and measure values, with rows sorted in ascending order of time. A TimeSeriesDataPoint is a single data point in the timeseries. It represents a tuple of (time, measure value) in a timeseries. 
+
+                    
+                    
+
+                    - **Time** *(string) --* 
+
+                      The timestamp when the measure value was collected.
+
+                      
+                    
+
+                    - **Value** *(dict) --* 
+
+                      The measure value for the data point.
+
+                      
+                
+              
+                
+
+                - **ArrayValue** *(list) --* 
+
+                  Indicates if the data point is an array. 
+
+                  
+                
+
+                - **RowValue** *(dict) --* 
+
+                  Indicates if the data point is a row. 
+
+                  
+                
+
+                - **NullValue** *(boolean) --* 
+
+                  Indicates if the data point is null. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **ColumnInfo** *(list) --* 
+
+          The column data types of the returned result set. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains the meta data for query results such as the column names, data types, and other attributes. 
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the result set column. The name of the result set is available for columns of all data types except for arrays. 
+
+              
+            
+
+            - **Type** *(dict) --* 
+
+              The data type of the result set column. The data type can be a scalar or complex. Scalar data types are integers, strings, doubles, booleans, and others. Complex data types are types such as arrays, rows, and others. 
+
+              
+              
+
+              - **ScalarType** *(string) --* 
+
+                Indicates if the column is of type string, integer, boolean, double, timestamp, date, time. 
+
+                
+              
+
+              - **ArrayColumnInfo** *(dict) --* 
+
+                Indicates if the column is an array.
+
+                
+              
+
+              - **TimeSeriesMeasureValueColumnInfo** *(dict) --* 
+
+                Indicates if the column is a timeseries data type.
+
+                
+              
+
+              - **RowColumnInfo** *(list) --* 
+
+                Indicates if the column is a row.
+
+                
+          
+        
+      
+        
+
+        - **QueryStatus** *(dict) --* 
+
+          Information about the status of the query, including progress and bytes scannned.
+
+          
+          
+
+          - **ProgressPercentage** *(float) --* 
+
+            The progress of the query, expressed as a percentage.
+
+            
+          
+
+          - **CumulativeBytesScanned** *(integer) --* 
+
+            The amount of data scanned by the query in bytes. This is a cumulative sum and represents the total amount of bytes scanned since the query was started. 
+
+            
+          
+
+          - **CumulativeBytesMetered** *(integer) --* 
+
+            The amount of data scanned by the query in bytes that you will be charged for. This is a cumulative sum and represents the total amount of data that you will be charged for since the query was started. The charge is applied only once and is either applied when the query completes execution or when the query is cancelled. 
+
+            
+      
+    

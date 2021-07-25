@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Security &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="next" title="Available services" href="../reference/services/index.html" />
+    <link rel="prev" title="Upgrading notes" href="upgrading.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../reference/services/index.html" title="Available services"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-protection">Data protection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#identity-and-access-management-intro">Identity and access management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compliance-validation">Compliance validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resilience">Resilience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infrastructure-security">Infrastructure security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enforcing-tls-1-2">Enforcing TLS 1.2</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+              <li>Security</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="security">
+<span id="guide-security"></span><h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
+<p>Cloud security at Amazon Web Services (AWS) is the highest priority. As an AWS
+customer, you benefit from a data center and network architecture that is built to meet the
+requirements of the most security-sensitive organizations. Security is a shared responsibility
+between AWS and you. The <a class="reference external" href="https://aws.amazon.com/compliance/shared-responsibility-model/">Shared Responsibility Model</a>
+describes this as Security of the Cloud and Security in the Cloud.</p>
+<p><strong>Security of the Cloud</strong> – AWS is responsible for
+protecting the infrastructure that runs all of the services offered in the AWS Cloud and
+providing you with services that you can use securely. Our security responsibility is the
+highest priority at AWS, and the effectiveness of our security is regularly tested and
+verified by third-party auditors as part of the <a class="reference external" href="https://aws.amazon.com/compliance/programs/">AWS Compliance Programs</a>.</p>
+<p><strong>Security in the Cloud</strong> – Your responsibility is
+determined by the AWS service you are using, and other factors including the sensitivity of
+your data, your organization’s requirements, and applicable laws and regulations.</p>
+<p>Boto3 follows the <a class="reference external" href="https://aws.amazon.com/compliance/shared-responsibility-model">shared responsibility model</a>
+through the specific AWS services it supports. For AWS service security information, see the
+<a class="reference external" href="https://aws.amazon.com/security/?id=docs_gateway#aws-security">AWS service security documentation page</a>
+and <a class="reference external" href="https://aws.amazon.com/compliance/services-in-scope/">AWS services that are in scope of AWS compliance efforts by compliance program</a>.</p>
+<div class="section" id="data-protection">
+<span id="data-protection-intro"></span><h2>Data protection<a class="headerlink" href="#data-protection" title="Permalink to this headline">¶</a></h2>
+<p>The AWS <a class="reference external" href="https://aws.amazon.com/compliance/shared-responsibility-model">shared responsibility model</a>
+applies to data protection in AWS SDK for Python (Boto3). As described in this model,
+AWS is responsible for protecting the global infrastructure that runs all of the AWS
+Cloud. You are responsible for maintaining control over your content that is hosted on
+this infrastructure. This content includes the security configuration and management
+tasks for the AWS services that you use. For more information about data privacy, see
+the <a class="reference external" href="https://aws.amazon.com/compliance/data-privacy-faq">Data Privacy FAQ</a>.</p>
+<p>For data protection purposes, we recommend that you protect AWS account credentials and set up individual user accounts with
+AWS Identity and Access Management (IAM), so that each user is given only the permissions necessary to fulfill their job duties. We also recommend that
+you secure your data in the following ways:</p>
+<ul class="simple">
+<li>Use multi-factor authentication (MFA) with each account.</li>
+<li>Use SSL/TLS to communicate with AWS resources. To use minimum TLS version of 1.2, see <a class="reference internal" href="#enforcing-tls-1-2">Enforcing TLS 1.2</a></li>
+<li>Set up API and user activity logging with AWS CloudTrail.</li>
+<li>Use AWS encryption solutions, along with all default security controls within AWS services.</li>
+<li>Use advanced managed security services such as Amazon Macie, which assists in discovering and securing personal data that
+is stored in Amazon S3.</li>
+</ul>
+<p>We strongly recommend that you never put sensitive identifying information, such as your customers' account numbers, into
+free-form fields such as a <strong>Name</strong> field. This includes when you work with Boto3 or other AWS services
+using the console, API, AWS CLI, or AWS SDKs. Any data that you enter into Boto3 or other services might get picked up
+for inclusion in diagnostic logs. When you provide a URL to an external server, don't include credentials information in the URL
+to validate your request to that server.</p>
+</div>
+<div class="section" id="identity-and-access-management-intro">
+<span id="identity-and-access-management"></span><h2>Identity and access management<a class="headerlink" href="#identity-and-access-management-intro" title="Permalink to this headline">¶</a></h2>
+<p>AWS Identity and Access Management (IAM) is an AWS service that helps an administrator securely control access to AWS resources.
+IAM administrators control who can be <em>authenticated</em> (signed in) and <em>authorized</em> (have permissions) to use AWS resources. IAM is an AWS service that you can use with no additional charge.</p>
+<p>To use Boto3 to access AWS, you need an AWS account and AWS credentials. To increase the security of your
+AWS account, we recommend that you use an <em>IAM user</em> to provide access credentials instead of using your AWS
+account credentials.</p>
+<p>For details about working with IAM, see <a class="reference external" href="https://aws.amazon.com/iam/">IAM</a>.</p>
+<p>For an overview of IAM users and why they are important for the security of your account,
+see <a class="reference external" href="https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html">AWS Security Credentials</a>
+in the <a class="reference external" href="https://docs.aws.amazon.com/general/latest/gr/">Amazon Web Services General Reference</a>.</p>
+</div>
+<div class="section" id="compliance-validation">
+<span id="compliance-validation-intro"></span><h2>Compliance validation<a class="headerlink" href="#compliance-validation" title="Permalink to this headline">¶</a></h2>
+<p>The security and compliance of AWS services is assessed by third-party auditors as part
+of multiple AWS compliance programs. These include SOC, PCI, FedRAMP, HIPAA, and others.
+AWS provides a frequently updated list of AWS services in scope of specific compliance programs at
+<a class="reference external" href="https://aws.amazon.com/compliance/services-in-scope/">AWS Services in Scope by Compliance Program</a>.</p>
+<p>Third-party audit reports are available for you to download using AWS Artifact. For more information, see
+<a class="reference external" href="https://docs.aws.amazon.com/artifact/latest/ug/downloading-documents.html">Downloading Reports in AWS Artifact</a>.</p>
+<p>For more information about AWS compliance programs, see <a class="reference external" href="https://aws.amazon.com/compliance/programs/">AWS Compliance Programs</a>.</p>
+<p>Your compliance responsibility when using Boto3 to access an AWS service is determined by the sensitivity of your data, your organization’s compliance objectives,
+and applicable laws and regulations. If your use of an AWS service is subject to compliance with standards such as HIPAA, PCI, or FedRAMP, AWS provides resources to help:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://aws.amazon.com/quickstart/?quickstart-all.sort-by=item.additionalFields.updateDate&amp;quickstart-all.sort-order=desc&amp;awsf.quickstart-homepage-filter=categories%23security-identity-compliance">Security and Compliance Quick Start Guides</a> –
+Deployment guides that discuss architectural considerations and provide steps for deploying security-focused and compliance-focused baseline environments on AWS.</li>
+<li><a class="reference external" href="https://d0.awsstatic.com/whitepapers/compliance/AWS_HIPAA_Compliance_Whitepaper.pdf">Architecting for HIPAA Security and Compliance Whitepaper</a> –
+A whitepaper that describes how companies can use AWS to create HIPAA-compliant applications.</li>
+<li><a class="reference external" href="https://aws.amazon.com/compliance/resources/">AWS Compliance Resources</a> – A collection of workbooks and guides that might apply to your industry and location.</li>
+<li><a class="reference external" href="https://aws.amazon.com/config/">AWS Config</a> – A service that assesses how well your resource configurations comply with
+internal practices, industry guidelines, and regulations.</li>
+<li><a class="reference external" href="https://aws.amazon.com/security-hub">AWS Security Hub</a> – A comprehensive view of your security state within AWS that helps
+you check your compliance with security industry standards and best practices.</li>
+</ul>
+</div>
+<div class="section" id="resilience">
+<span id="resilience-intro"></span><h2>Resilience<a class="headerlink" href="#resilience" title="Permalink to this headline">¶</a></h2>
+<p>The AWS global infrastructure is built around AWS Regions and Availability Zones.</p>
+<p>AWS Regions provide multiple physically separated and isolated Availability Zones, which are connected with low-latency, high-throughput, and highly redundant networking.</p>
+<p>With Availability Zones, you can design and operate applications and databases that automatically fail over between Availability Zones without interruption.
+Availability Zones are more highly available, fault tolerant, and scalable than traditional single or multiple data center infrastructures.</p>
+<p>For more information about AWS Regions and Availability Zones, see <a class="reference external" href="https://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.</p>
+</div>
+<div class="section" id="infrastructure-security">
+<span id="infrastructure-security-intro"></span><h2>Infrastructure security<a class="headerlink" href="#infrastructure-security" title="Permalink to this headline">¶</a></h2>
+<p>For information about AWS security processes, see the <a class="reference external" href="https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf">AWS: Overview of Security Processes</a> whitepaper.</p>
+</div>
+<div class="section" id="enforcing-tls-1-2">
+<span id="enforcing-tls-12-intro"></span><h2>Enforcing TLS 1.2<a class="headerlink" href="#enforcing-tls-1-2" title="Permalink to this headline">¶</a></h2>
+<p>To ensure the AWS SDK for Python uses no TLS version earlier than TLS 1.2, you might need to recompile OpenSSL to enforce this minimum and then recompile Python to use the recompiled OpenSSL.</p>
+<div class="section" id="determining-supported-protocols">
+<h3>Determining supported protocols<a class="headerlink" href="#determining-supported-protocols" title="Permalink to this headline">¶</a></h3>
+<p>First, create a self-signed certificate to use for the test server and the SDK using OpenSSL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>openssl req -subj &#39;/CN=localhost&#39; -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -days 365
+</pre></div>
+</div>
+<p>Then spin up a test server using OpenSSL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>openssl s_server -key key.pem -cert cert.pem -www
+</pre></div>
+</div>
+<p>In a new terminal window, create a virtual environment and install the SDK:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python3 -m venv test-env
+source test-env/bin/activate
+pip install botocore
+</pre></div>
+</div>
+<p>Create a new Python script called <tt class="docutils literal"><span class="pre">check.py</span></tt> that will use the SDK’s underlying HTTP library:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib3</span>
+<span class="n">URL</span> <span class="o">=</span> <span class="s1">&#39;https://localhost:4433/&#39;</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="n">urllib3</span><span class="o">.</span><span class="n">PoolManager</span><span class="p">(</span>
+    <span class="n">ca_certs</span><span class="o">=</span><span class="s1">&#39;cert.pem&#39;</span><span class="p">,</span>
+    <span class="n">cert_reqs</span><span class="o">=</span><span class="s1">&#39;CERT_REQUIRED&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">URL</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Run the script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python check.py
+</pre></div>
+</div>
+<p>This will give details about the connection made. Search for <tt class="docutils literal"><span class="pre">Protocol</span> <span class="pre">:</span></tt> in the output. If the output is <tt class="docutils literal"><span class="pre">TLSv1.2</span></tt> or later, the SDK will default to TLS v1.2 and later. If it's earlier, you need to recompile OpenSSL and then recompile Python.</p>
+<p>However, even if your installation of Python defaults to TLS v1.2 or later, it's still possible for Python to renegotiate to a version earlier than TLS v1.2 if the server doesn't support TLS v1.2+. To check that Python will not automatically renegotiate to these earlier versions, restart the test server with the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>openssl s_server -key key.pem -cert cert.pem -no_tls1_3 -no_tls1_2 -www
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using an older version of OpenSSL, you might not have the <tt class="docutils literal"><span class="pre">-no_tls_3</span></tt> flag available.
+In this case, just remove the flag because the version of OpenSSL you are using doesn't support TLS v1.3.</p>
+</div>
+<p>Rerun the Python script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python check.py
+</pre></div>
+</div>
+<p>If your installation of Python correctly does not renegotiate for versions earlier than TLS 1.2, you should receive an SSL error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=&#39;localhost&#39;, port=4433): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, &#39;[SSL: UNSUPPORTED_PROTOCOL] unsupported protocol (_ssl.c:1108)&#39;)))
+</pre></div>
+</div>
+<p>If you are able to make a connection, you need to recompile OpenSSL and Python to disable negotiation of protocols earlier than TLS v1.2.</p>
+</div>
+<div class="section" id="compile-openssl-and-python">
+<h3>Compile OpenSSL and Python<a class="headerlink" href="#compile-openssl-and-python" title="Permalink to this headline">¶</a></h3>
+<p>To ensure the SDK or CLI doesn't not negotiate for anything earlier than TLS 1.2, you need to recompile OpenSSL and Python. First copy the following content to create a script and run it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>#!/usr/bin/env bash
+set -e
+
+OPENSSL_VERSION=&quot;1.1.1d&quot;
+OPENSSL_PREFIX=&quot;/opt/openssl-with-min-tls1_2&quot;
+PYTHON_VERSION=&quot;3.8.1&quot;
+PYTHON_PREFIX=&quot;/opt/python-with-min-tls1_2&quot;
+
+
+curl -O &quot;https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz&quot;
+tar -xzf &quot;openssl-$OPENSSL_VERSION.tar.gz&quot;
+cd openssl-$OPENSSL_VERSION
+./config --prefix=$OPENSSL_PREFIX no-ssl3 no-tls1 no-tls1_1 no-shared
+make &gt; /dev/null
+sudo make install_sw &gt; /dev/null
+
+
+cd /tmp
+curl -O &quot;https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tgz&quot;
+tar -xzf &quot;Python-$PYTHON_VERSION.tgz&quot;
+cd Python-$PYTHON_VERSION
+./configure --prefix=$PYTHON_PREFIX --with-openssl=$OPENSSL_PREFIX --disable-shared &gt; /dev/null
+make &gt; /dev/null
+sudo make install &gt; /dev/null
+</pre></div>
+</div>
+<p>This will compile a version of Python that has a statically linked OpenSSL that will not automatically negotiate anything earlier than TLS 1.2. This will also install OpenSSL in the directory: <tt class="docutils literal"><span class="pre">/opt/openssl-with-min-tls1_2</span></tt> and install Python in the directory: <tt class="docutils literal"><span class="pre">/opt/python-with-min-tls1_2</span></tt>.</p>
+<p>After you run this script, you should be able to use this newly installed version of Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>/opt/python-with-min-tls1_2/bin/python3 --version
+</pre></div>
+</div>
+<p>This should print out:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Python 3.8.1
+</pre></div>
+</div>
+<p>To confirm this new version of Python does not negotiate a version earlier than TLS 1.2, rerun the steps from <a class="reference internal" href="#determining-supported-protocols">Determining Supported Protocols</a> using the newly installed Python version (that is, <tt class="docutils literal"><span class="pre">/opt/python-with-min-tls1_2/bin/python3</span></tt>).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="upgrading.html" title="previous chapter (use the left arrow)">Upgrading notes</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="../reference/services/index.html" title="next chapter (use the right arrow)">Available services</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../reference/services/index.html" title="Available services"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading notes"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

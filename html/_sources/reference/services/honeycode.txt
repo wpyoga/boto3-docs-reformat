@@ -1,0 +1,3716 @@
+
+
+*********
+Honeycode
+*********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Honeycode.Client
+
+  A low-level client representing Amazon Honeycode
+  
+
+  Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals, resources, and even your team. 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('honeycode')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Honeycode.Client.batch_create_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.batch_delete_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.batch_update_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.batch_upsert_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.can_paginate`
+
+  
+  *   :py:meth:`~Honeycode.Client.describe_table_data_import_job`
+
+  
+  *   :py:meth:`~Honeycode.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Honeycode.Client.get_paginator`
+
+  
+  *   :py:meth:`~Honeycode.Client.get_screen_data`
+
+  
+  *   :py:meth:`~Honeycode.Client.get_waiter`
+
+  
+  *   :py:meth:`~Honeycode.Client.invoke_screen_automation`
+
+  
+  *   :py:meth:`~Honeycode.Client.list_table_columns`
+
+  
+  *   :py:meth:`~Honeycode.Client.list_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.list_tables`
+
+  
+  *   :py:meth:`~Honeycode.Client.query_table_rows`
+
+  
+  *   :py:meth:`~Honeycode.Client.start_table_data_import_job`
+
+  
+
+  .. py:method:: batch_create_table_rows(**kwargs)
+
+    
+
+    The BatchCreateTableRows API allows you to create one or more rows at the end of a table in a workbook. The API allows you to specify the values to set in some or all of the columns in the new rows. 
+
+     
+
+    If a column is not explicitly set in a specific row, then the column level formula specified in the table will be applied to the new row. If there is no column level formula but the last row of the table has a formula, then that formula will be copied down to the new row. If there is no column level formula and no formula in the last row of the table, then that column will be left blank for the new rows. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchCreateTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_create_table_rows(
+          workbookId='string',
+          tableId='string',
+          rowsToCreate=[
+              {
+                  'batchItemId': 'string',
+                  'cellsToCreate': {
+                      'string': {
+                          'fact': 'string'
+                      }
+                  }
+              },
+          ],
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook where the new rows are being added.
+
+       
+
+      If a workbook with the specified ID could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table where the new rows are being added.
+
+       
+
+      If a table with the specified ID could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowsToCreate: list
+    :param rowsToCreate: **[REQUIRED]** 
+
+      The list of rows to create at the end of the table. Each item in this list needs to have a batch item id to uniquely identify the element in the request and the cells to create for that row. You need to specify at least one item in this list. 
+
+       
+
+      Note that if one of the column ids in any of the rows in the request does not exist in the table, then the request fails and no updates are made to the table. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Data needed to create a single row in a table as part of the BatchCreateTableRows request. 
+
+        
+
+      
+        - **batchItemId** *(string) --* **[REQUIRED]** 
+
+          An external identifier that represents the single row that is being created as part of the BatchCreateTableRows request. This can be any string that you can use to identify the row in the request. The BatchCreateTableRows API puts the batch item id in the results to allow you to link data in the request to data in the results. 
+
+          
+
+        
+        - **cellsToCreate** *(dict) --* **[REQUIRED]** 
+
+          A map representing the cells to create in the new row. The key is the column id of the cell and the value is the CellInput object that represents the data to set in that cell. 
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              CellInput object contains the data needed to create or update cells in a table. 
+
+              
+
+            
+              - **fact** *(string) --* 
+
+                Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need to start with the equals (=) sign. 
+
+                
+
+              
+            
+      
+    
+      
+  
+    :type clientRequestToken: string
+    :param clientRequestToken: 
+
+      The request token for performing the batch create operation. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will not perform the operation again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workbookCursor': 123,
+            'createdRows': {
+                'string': 'string'
+            },
+            'failedBatchItems': [
+                {
+                    'id': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          The updated workbook cursor after adding the new rows at the end of the table.
+
+          
+        
+
+        - **createdRows** *(dict) --* 
+
+          The map of batch item id to the row id that was created for that item.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **failedBatchItems** *(list) --* 
+
+          The list of batch items in the request that could not be added to the table. Each element in this list contains one item from the request that could not be added to the table along with the reason why that item could not be added. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A single item in a batch that failed to perform the intended action because of an error preventing it from succeeding. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The id of the batch item that failed. This is the batch item id for the BatchCreateTableRows and BatchUpsertTableRows operations and the row id for the BatchUpdateTableRows and BatchDeleteTableRows operations. 
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message that indicates why the batch item failed. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: batch_delete_table_rows(**kwargs)
+
+    
+
+    The BatchDeleteTableRows API allows you to delete one or more rows from a table in a workbook. You need to specify the ids of the rows that you want to delete from the table. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchDeleteTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_delete_table_rows(
+          workbookId='string',
+          tableId='string',
+          rowIds=[
+              'string',
+          ],
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook where the rows are being deleted.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table where the rows are being deleted.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowIds: list
+    :param rowIds: **[REQUIRED]** 
+
+      The list of row ids to delete from the table. You need to specify at least one row id in this list. 
+
+       
+
+      Note that if one of the row ids provided in the request does not exist in the table, then the request fails and no rows are deleted from the table. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type clientRequestToken: string
+    :param clientRequestToken: 
+
+      The request token for performing the delete action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will not perform the action again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workbookCursor': 123,
+            'failedBatchItems': [
+                {
+                    'id': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          The updated workbook cursor after deleting the rows from the table.
+
+          
+        
+
+        - **failedBatchItems** *(list) --* 
+
+          The list of row ids in the request that could not be deleted from the table. Each element in this list contains one row id from the request that could not be deleted along with the reason why that item could not be deleted. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A single item in a batch that failed to perform the intended action because of an error preventing it from succeeding. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The id of the batch item that failed. This is the batch item id for the BatchCreateTableRows and BatchUpsertTableRows operations and the row id for the BatchUpdateTableRows and BatchDeleteTableRows operations. 
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message that indicates why the batch item failed. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: batch_update_table_rows(**kwargs)
+
+    
+
+    The BatchUpdateTableRows API allows you to update one or more rows in a table in a workbook. 
+
+     
+
+    You can specify the values to set in some or all of the columns in the table for the specified rows. If a column is not explicitly specified in a particular row, then that column will not be updated for that row. To clear out the data in a specific cell, you need to set the value as an empty string (""). 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchUpdateTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_update_table_rows(
+          workbookId='string',
+          tableId='string',
+          rowsToUpdate=[
+              {
+                  'rowId': 'string',
+                  'cellsToUpdate': {
+                      'string': {
+                          'fact': 'string'
+                      }
+                  }
+              },
+          ],
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook where the rows are being updated.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table where the rows are being updated.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowsToUpdate: list
+    :param rowsToUpdate: **[REQUIRED]** 
+
+      The list of rows to update in the table. Each item in this list needs to contain the row id to update along with the map of column id to cell values for each column in that row that needs to be updated. You need to specify at least one row in this list, and for each row, you need to specify at least one column to update. 
+
+       
+
+      Note that if one of the row or column ids in the request does not exist in the table, then the request fails and no updates are made to the table. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Data needed to create a single row in a table as part of the BatchCreateTableRows request. 
+
+        
+
+      
+        - **rowId** *(string) --* **[REQUIRED]** 
+
+          The id of the row that needs to be updated. 
+
+          
+
+        
+        - **cellsToUpdate** *(dict) --* **[REQUIRED]** 
+
+          A map representing the cells to update in the given row. The key is the column id of the cell and the value is the CellInput object that represents the data to set in that cell. 
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              CellInput object contains the data needed to create or update cells in a table. 
+
+              
+
+            
+              - **fact** *(string) --* 
+
+                Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need to start with the equals (=) sign. 
+
+                
+
+              
+            
+      
+    
+      
+  
+    :type clientRequestToken: string
+    :param clientRequestToken: 
+
+      The request token for performing the update action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will not perform the action again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workbookCursor': 123,
+            'failedBatchItems': [
+                {
+                    'id': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          The updated workbook cursor after adding the new rows at the end of the table.
+
+          
+        
+
+        - **failedBatchItems** *(list) --* 
+
+          The list of batch items in the request that could not be updated in the table. Each element in this list contains one item from the request that could not be updated in the table along with the reason why that item could not be updated. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A single item in a batch that failed to perform the intended action because of an error preventing it from succeeding. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The id of the batch item that failed. This is the batch item id for the BatchCreateTableRows and BatchUpsertTableRows operations and the row id for the BatchUpdateTableRows and BatchDeleteTableRows operations. 
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message that indicates why the batch item failed. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: batch_upsert_table_rows(**kwargs)
+
+    
+
+    The BatchUpsertTableRows API allows you to upsert one or more rows in a table. The upsert operation takes a filter expression as input and evaluates it to find matching rows on the destination table. If matching rows are found, it will update the cells in the matching rows to new values specified in the request. If no matching rows are found, a new row is added at the end of the table and the cells in that row are set to the new values specified in the request. 
+
+     
+
+    You can specify the values to set in some or all of the columns in the table for the matching or newly appended rows. If a column is not explicitly specified for a particular row, then that column will not be updated for that row. To clear out the data in a specific cell, you need to set the value as an empty string (""). 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/BatchUpsertTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_upsert_table_rows(
+          workbookId='string',
+          tableId='string',
+          rowsToUpsert=[
+              {
+                  'batchItemId': 'string',
+                  'filter': {
+                      'formula': 'string',
+                      'contextRowId': 'string'
+                  },
+                  'cellsToUpdate': {
+                      'string': {
+                          'fact': 'string'
+                      }
+                  }
+              },
+          ],
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook where the rows are being upserted.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table where the rows are being upserted.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowsToUpsert: list
+    :param rowsToUpsert: **[REQUIRED]** 
+
+      The list of rows to upsert in the table. Each item in this list needs to have a batch item id to uniquely identify the element in the request, a filter expression to find the rows to update for that element and the cell values to set for each column in the upserted rows. You need to specify at least one item in this list. 
+
+       
+
+      Note that if one of the filter formulas in the request fails to evaluate because of an error or one of the column ids in any of the rows does not exist in the table, then the request fails and no updates are made to the table. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Data needed to upsert rows in a table as part of a single item in the BatchUpsertTableRows request. 
+
+        
+
+      
+        - **batchItemId** *(string) --* **[REQUIRED]** 
+
+          An external identifier that represents a single item in the request that is being upserted as part of the BatchUpsertTableRows request. This can be any string that you can use to identify the item in the request. The BatchUpsertTableRows API puts the batch item id in the results to allow you to link data in the request to data in the results. 
+
+          
+
+        
+        - **filter** *(dict) --* **[REQUIRED]** 
+
+          The filter formula to use to find existing matching rows to update. The formula needs to return zero or more rows. If the formula returns 0 rows, then a new row will be appended in the target table. If the formula returns one or more rows, then the returned rows will be updated. 
+
+           
+
+          Note that the filter formula needs to return rows from the target table for the upsert operation to succeed. If the filter formula has a syntax error or it doesn't evaluate to zero or more rows in the target table for any one item in the input list, then the entire BatchUpsertTableRows request fails and no updates are made to the table. 
+
+          
+
+        
+          - **formula** *(string) --* **[REQUIRED]** 
+
+            A formula representing a filter function that returns zero or more matching rows from a table. Valid formulas in this field return a list of rows from a table. The most common ways of writing a formula to return a list of rows are to use the FindRow() or Filter() functions. Any other formula that returns zero or more rows is also acceptable. For example, you can use a formula that points to a cell that contains a filter function. 
+
+            
+
+          
+          - **contextRowId** *(string) --* 
+
+            The optional contextRowId attribute can be used to specify the row id of the context row if the filter formula contains unqualified references to table columns and needs a context row to evaluate them successfully. 
+
+            
+
+          
+        
+        - **cellsToUpdate** *(dict) --* **[REQUIRED]** 
+
+          A map representing the cells to update for the matching rows or an appended row. The key is the column id of the cell and the value is the CellInput object that represents the data to set in that cell. 
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              CellInput object contains the data needed to create or update cells in a table. 
+
+              
+
+            
+              - **fact** *(string) --* 
+
+                Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need to start with the equals (=) sign. 
+
+                
+
+              
+            
+      
+    
+      
+  
+    :type clientRequestToken: string
+    :param clientRequestToken: 
+
+      The request token for performing the update action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will not perform the action again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'rows': {
+                'string': {
+                    'rowIds': [
+                        'string',
+                    ],
+                    'upsertAction': 'UPDATED'|'APPENDED'
+                }
+            },
+            'workbookCursor': 123,
+            'failedBatchItems': [
+                {
+                    'id': 'string',
+                    'errorMessage': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **rows** *(dict) --* 
+
+          A map with the batch item id as the key and the result of the upsert operation as the value. The result of the upsert operation specifies whether existing rows were updated or a new row was appended, along with the list of row ids that were affected. 
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(dict) --* 
+
+              An object that represents the result of a single upsert row request. 
+
+              
+              
+
+              - **rowIds** *(list) --* 
+
+                The list of row ids that were changed as part of an upsert row operation. If the upsert resulted in an update, this list could potentially contain multiple rows that matched the filter and hence got updated. If the upsert resulted in an append, this list would only have the single row that was appended. 
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **upsertAction** *(string) --* 
+
+                The result of the upsert action. 
+
+                
+          
+      
+    
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          The updated workbook cursor after updating or appending rows in the table.
+
+          
+        
+
+        - **failedBatchItems** *(list) --* 
+
+          The list of batch items in the request that could not be updated or appended in the table. Each element in this list contains one item from the request that could not be updated in the table along with the reason why that item could not be updated or appended. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A single item in a batch that failed to perform the intended action because of an error preventing it from succeeding. 
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The id of the batch item that failed. This is the batch item id for the BatchCreateTableRows and BatchUpsertTableRows operations and the row id for the BatchUpdateTableRows and BatchDeleteTableRows operations. 
+
+              
+            
+
+            - **errorMessage** *(string) --* 
+
+              The error message that indicates why the batch item failed. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: describe_table_data_import_job(**kwargs)
+
+    
+
+    The DescribeTableDataImportJob API allows you to retrieve the status and details of a table data import job. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/DescribeTableDataImportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_table_data_import_job(
+          workbookId='string',
+          tableId='string',
+          jobId='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook into which data was imported.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table into which data was imported.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type jobId: string
+    :param jobId: **[REQUIRED]** 
+
+      The ID of the job that was returned by the StartTableDataImportJob request.
+
+       
+
+      If a job with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'FAILED',
+            'message': 'string',
+            'jobMetadata': {
+                'submitter': {
+                    'email': 'string',
+                    'userArn': 'string'
+                },
+                'submitTime': datetime(2015, 1, 1),
+                'importOptions': {
+                    'destinationOptions': {
+                        'columnMap': {
+                            'string': {
+                                'columnIndex': 123
+                            }
+                        }
+                    },
+                    'delimitedTextOptions': {
+                        'delimiter': 'string',
+                        'hasHeaderRow': True|False,
+                        'ignoreEmptyRows': True|False,
+                        'dataCharacterEncoding': 'UTF-8'|'US-ASCII'|'ISO-8859-1'|'UTF-16BE'|'UTF-16LE'|'UTF-16'
+                    }
+                },
+                'dataSource': {
+                    'dataSourceConfig': {
+                        'dataSourceUrl': 'string'
+                    }
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobStatus** *(string) --* 
+
+          The current status of the import job. 
+
+          
+        
+
+        - **message** *(string) --* 
+
+          A message providing more details about the current status of the import job. 
+
+          
+        
+
+        - **jobMetadata** *(dict) --* 
+
+          The metadata about the job that was submitted for import. 
+
+          
+          
+
+          - **submitter** *(dict) --* 
+
+            Details about the submitter of the import request.
+
+            
+            
+
+            - **email** *(string) --* 
+
+              The email id of the submitter of the import job, if available.
+
+              
+            
+
+            - **userArn** *(string) --* 
+
+              The AWS user ARN of the submitter of the import job, if available.
+
+              
+        
+          
+
+          - **submitTime** *(datetime) --* 
+
+            The timestamp when the job was submitted for import.
+
+            
+          
+
+          - **importOptions** *(dict) --* 
+
+            The options that was specified at the time of submitting the import request.
+
+            
+            
+
+            - **destinationOptions** *(dict) --* 
+
+              Options relating to the destination of the import request.
+
+              
+              
+
+              - **columnMap** *(dict) --* 
+
+                A map of the column id to the import properties for each column.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(dict) --* 
+
+                    An object that contains the properties for importing data to a specific column in a table.
+
+                    
+                    
+
+                    - **columnIndex** *(integer) --* 
+
+                      The index of the column in the input file.
+
+                      
+                
+            
+          
+          
+            
+
+            - **delimitedTextOptions** *(dict) --* 
+
+              Options relating to parsing delimited text. Required if dataFormat is DELIMITED_TEXT.
+
+              
+              
+
+              - **delimiter** *(string) --* 
+
+                The delimiter to use for separating columns in a single row of the input.
+
+                
+              
+
+              - **hasHeaderRow** *(boolean) --* 
+
+                Indicates whether the input file has a header row at the top containing the column names.
+
+                
+              
+
+              - **ignoreEmptyRows** *(boolean) --* 
+
+                A parameter to indicate whether empty rows should be ignored or be included in the import.
+
+                
+              
+
+              - **dataCharacterEncoding** *(string) --* 
+
+                The encoding of the data in the input file.
+
+                
+          
+        
+          
+
+          - **dataSource** *(dict) --* 
+
+            The source of the data that was submitted for import.
+
+            
+            
+
+            - **dataSourceConfig** *(dict) --* 
+
+              The configuration parameters for the data source of the import
+
+              
+              
+
+              - **dataSourceUrl** *(string) --* 
+
+                The URL from which source data will be downloaded for the import request. 
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_screen_data(**kwargs)
+
+    
+
+    The GetScreenData API allows retrieval of data from a screen in a Honeycode app. The API allows setting local variables in the screen to filter, sort or otherwise affect what will be displayed on the screen. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/GetScreenData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_screen_data(
+          workbookId='string',
+          appId='string',
+          screenId='string',
+          variables={
+              'string': {
+                  'rawValue': 'string'
+              }
+          },
+          maxResults=123,
+          nextToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the screen.
+
+      
+
+    
+    :type appId: string
+    :param appId: **[REQUIRED]** 
+
+      The ID of the app that contains the screem.
+
+      
+
+    
+    :type screenId: string
+    :param screenId: **[REQUIRED]** 
+
+      The ID of the screen.
+
+      
+
+    
+    :type variables: dict
+    :param variables: 
+
+      Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          The input variables to the app to be used by the InvokeScreenAutomation action request.
+
+          
+
+        
+          - **rawValue** *(string) --* **[REQUIRED]** 
+
+            Raw value of the variable.
+
+            
+
+          
+        
+  
+
+    :type maxResults: integer
+    :param maxResults: 
+
+      The number of results to be returned on a single page. Specify a number between 1 and 100. The maximum value is 100. 
+
+       
+
+      This parameter is optional. If you don't specify this parameter, the default page size is 100. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      This parameter is optional. If a nextToken is not specified, the API returns the first page of data. 
+
+       
+
+      Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'results': {
+                'string': {
+                    'headers': [
+                        {
+                            'name': 'string',
+                            'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK'
+                        },
+                    ],
+                    'rows': [
+                        {
+                            'rowId': 'string',
+                            'dataItems': [
+                                {
+                                    'overrideFormat': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK',
+                                    'rawValue': 'string',
+                                    'formattedValue': 'string'
+                                },
+                            ]
+                        },
+                    ]
+                }
+            },
+            'workbookCursor': 123,
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **results** *(dict) --* 
+
+          A map of all the rows on the screen keyed by block name.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(dict) --* 
+
+              ResultSet contains the results of the request for a single block or list defined on the screen. 
+
+              
+              
+
+              - **headers** *(list) --* 
+
+                List of headers for all the data cells in the block. The header identifies the name and default format of the data cell. Data cells appear in the same order in all rows as defined in the header. The names and formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank value is used. 
+
+                 
+
+                For example, a task list that displays the task name, due date and assigned person might have headers [ { "name": "Task Name"}, {"name": "Due Date", "format": "DATE"}, {"name": "Assigned", "format": "CONTACT"} ]. Every row in the result will have the task name as the first item, due date as the second item and assigned person as the third item. If a particular task does not have a due date, that row will still have a blank value in the second element and the assigned person will still be in the third element. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  Metadata for column in the table.
+
+                  
+                  
+
+                  - **name** *(string) --* 
+
+                    The name of the column.
+
+                    
+                  
+
+                  - **format** *(string) --* 
+
+                    The format of the column.
+
+                    
+              
+            
+              
+
+              - **rows** *(list) --* 
+
+                List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data cells will be present in the same order as they are defined in the header. 
+
+                
+                
+
+                - *(dict) --* 
+
+                  A single row in the ResultSet.
+
+                  
+                  
+
+                  - **rowId** *(string) --* 
+
+                    The ID for a particular row.
+
+                    
+                  
+
+                  - **dataItems** *(list) --* 
+
+                    List of all the data cells in a row.
+
+                    
+                    
+
+                    - *(dict) --* 
+
+                      The data in a particular data cell defined on the screen.
+
+                      
+                      
+
+                      - **overrideFormat** *(string) --* 
+
+                        The overrideFormat is optional and is specified only if a particular row of data has a different format for the data than the default format defined on the screen or the table. 
+
+                        
+                      
+
+                      - **rawValue** *(string) --* 
+
+                        The raw value of the data. e.g. jsmith@example.com
+
+                        
+                      
+
+                      - **formattedValue** *(string) --* 
+
+                        The formatted value of the data. e.g. John Smith.
+
+                        
+                  
+                
+              
+            
+          
+      
+    
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this workbook is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+        
+
+        - **nextToken** *(string) --* 
+
+          Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the query has been loaded. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: invoke_screen_automation(**kwargs)
+
+    
+
+    The InvokeScreenAutomation API allows invoking an action defined in a screen in a Honeycode app. The API allows setting local variables, which can then be used in the automation being invoked. This allows automating the Honeycode app interactions to write, update or delete data in the workbook. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/InvokeScreenAutomation>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.invoke_screen_automation(
+          workbookId='string',
+          appId='string',
+          screenId='string',
+          screenAutomationId='string',
+          variables={
+              'string': {
+                  'rawValue': 'string'
+              }
+          },
+          rowId='string',
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the screen automation.
+
+      
+
+    
+    :type appId: string
+    :param appId: **[REQUIRED]** 
+
+      The ID of the app that contains the screen automation.
+
+      
+
+    
+    :type screenId: string
+    :param screenId: **[REQUIRED]** 
+
+      The ID of the screen that contains the screen automation.
+
+      
+
+    
+    :type screenAutomationId: string
+    :param screenAutomationId: **[REQUIRED]** 
+
+      The ID of the automation action to be performed.
+
+      
+
+    
+    :type variables: dict
+    :param variables: 
+
+      Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. Any variables defined in a screen are required to be passed in the call. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          The input variables to the app to be used by the InvokeScreenAutomation action request.
+
+          
+
+        
+          - **rawValue** *(string) --* **[REQUIRED]** 
+
+            Raw value of the variable.
+
+            
+
+          
+        
+  
+
+    :type rowId: string
+    :param rowId: 
+
+      The row ID for the automation if the automation is defined inside a block with source or list. 
+
+      
+
+    
+    :type clientRequestToken: string
+    :param clientRequestToken: 
+
+      The request token for performing the automation action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will return the response of the previous call rather than performing the action again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'workbookCursor': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          The updated workbook cursor after performing the automation action.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.AutomationExecutionException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.AutomationExecutionTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+
+  .. py:method:: list_table_columns(**kwargs)
+
+    
+
+    The ListTableColumns API allows you to retrieve a list of all the columns in a table in a workbook. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableColumns>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_table_columns(
+          workbookId='string',
+          tableId='string',
+          nextToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the table whose columns are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose columns are being retrieved.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      This parameter is optional. If a nextToken is not specified, the API returns the first page of data. 
+
+       
+
+      Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tableColumns': [
+                {
+                    'tableColumnId': 'string',
+                    'tableColumnName': 'string',
+                    'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK'
+                },
+            ],
+            'nextToken': 'string',
+            'workbookCursor': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tableColumns** *(list) --* 
+
+          The list of columns in the table. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single column in a table
+
+            
+            
+
+            - **tableColumnId** *(string) --* 
+
+              The id of the column in the table.
+
+              
+            
+
+            - **tableColumnName** *(string) --* 
+
+              The name of the column in the table.
+
+              
+            
+
+            - **format** *(string) --* 
+
+              The column level format that is applied in the table. An empty value in this field means that the column format is the default value 'AUTO'. 
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the request has been loaded. 
+
+          
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_table_rows(**kwargs)
+
+    
+
+    The ListTableRows API allows you to retrieve a list of all the rows in a table in a workbook. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_table_rows(
+          workbookId='string',
+          tableId='string',
+          rowIds=[
+              'string',
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the table whose rows are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose rows are being retrieved.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowIds: list
+    :param rowIds: 
+
+      This parameter is optional. If one or more row ids are specified in this list, then only the specified row ids are returned in the result. If no row ids are specified here, then all the rows in the table are returned. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of rows to return in each page of the results.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      This parameter is optional. If a nextToken is not specified, the API returns the first page of data. 
+
+       
+
+      Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'columnIds': [
+                'string',
+            ],
+            'rows': [
+                {
+                    'rowId': 'string',
+                    'cells': [
+                        {
+                            'formula': 'string',
+                            'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK',
+                            'rawValue': 'string',
+                            'formattedValue': 'string'
+                        },
+                    ]
+                },
+            ],
+            'rowIdsNotFound': [
+                'string',
+            ],
+            'nextToken': 'string',
+            'workbookCursor': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **columnIds** *(list) --* 
+
+          The list of columns in the table whose row data is returned in the result. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **rows** *(list) --* 
+
+          The list of rows in the table. Note that this result is paginated, so this list contains a maximum of 100 rows. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single row in a table
+
+            
+            
+
+            - **rowId** *(string) --* 
+
+              The id of the row in the table.
+
+              
+            
+
+            - **cells** *(list) --* 
+
+              A list of cells in the table row. The cells appear in the same order as the columns of the table. 
+
+              
+              
+
+              - *(dict) --* 
+
+                An object that represents a single cell in a table.
+
+                
+                
+
+                - **formula** *(string) --* 
+
+                  The formula contained in the cell. This field is empty if a cell does not have a formula. 
+
+                  
+                
+
+                - **format** *(string) --* 
+
+                  The format of the cell. If this field is empty, then the format is either not specified in the workbook or the format is set to AUTO.
+
+                  
+                
+
+                - **rawValue** *(string) --* 
+
+                  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. 
+
+                   
+
+                  Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. 
+
+                   
+
+                  Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. 
+
+                   
+
+                  Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. 
+
+                   
+
+                  Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. 
+
+                   
+
+                  Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. 
+
+                   
+
+                  Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
+
+                  
+                
+
+                - **formattedValue** *(string) --* 
+
+                  The formatted value of the cell. This is the value that you see displayed in the cell in the UI. 
+
+                   
+
+                  Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **rowIdsNotFound** *(list) --* 
+
+          The list of row ids included in the request that were not found in the table. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the request has been loaded. 
+
+          
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tables(**kwargs)
+
+    
+
+    The ListTables API allows you to retrieve a list of all the tables in a workbook. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTables>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tables(
+          workbookId='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook whose tables are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of tables to return in each page of the results.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      This parameter is optional. If a nextToken is not specified, the API returns the first page of data. 
+
+       
+
+      Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tables': [
+                {
+                    'tableId': 'string',
+                    'tableName': 'string'
+                },
+            ],
+            'nextToken': 'string',
+            'workbookCursor': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tables** *(list) --* 
+
+          The list of tables in the workbook. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing the properties of a table in a workbook.
+
+            
+            
+
+            - **tableId** *(string) --* 
+
+              The id of the table.
+
+              
+            
+
+            - **tableName** *(string) --* 
+
+              The name of the table.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the request has been loaded. 
+
+          
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: query_table_rows(**kwargs)
+
+    
+
+    The QueryTableRows API allows you to use a filter formula to query for specific rows in a table. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/QueryTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.query_table_rows(
+          workbookId='string',
+          tableId='string',
+          filterFormula={
+              'formula': 'string',
+              'contextRowId': 'string'
+          },
+          maxResults=123,
+          nextToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook whose table rows are being queried.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose rows are being queried.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type filterFormula: dict
+    :param filterFormula: **[REQUIRED]** 
+
+      An object that represents a filter formula along with the id of the context row under which the filter function needs to evaluate.
+
+      
+
+    
+      - **formula** *(string) --* **[REQUIRED]** 
+
+        A formula representing a filter function that returns zero or more matching rows from a table. Valid formulas in this field return a list of rows from a table. The most common ways of writing a formula to return a list of rows are to use the FindRow() or Filter() functions. Any other formula that returns zero or more rows is also acceptable. For example, you can use a formula that points to a cell that contains a filter function. 
+
+        
+
+      
+      - **contextRowId** *(string) --* 
+
+        The optional contextRowId attribute can be used to specify the row id of the context row if the filter formula contains unqualified references to table columns and needs a context row to evaluate them successfully. 
+
+        
+
+      
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of rows to return in each page of the results.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      This parameter is optional. If a nextToken is not specified, the API returns the first page of data. 
+
+       
+
+      Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'columnIds': [
+                'string',
+            ],
+            'rows': [
+                {
+                    'rowId': 'string',
+                    'cells': [
+                        {
+                            'formula': 'string',
+                            'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK',
+                            'rawValue': 'string',
+                            'formattedValue': 'string'
+                        },
+                    ]
+                },
+            ],
+            'nextToken': 'string',
+            'workbookCursor': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **columnIds** *(list) --* 
+
+          The list of columns in the table whose row data is returned in the result. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **rows** *(list) --* 
+
+          The list of rows in the table that match the query filter. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single row in a table
+
+            
+            
+
+            - **rowId** *(string) --* 
+
+              The id of the row in the table.
+
+              
+            
+
+            - **cells** *(list) --* 
+
+              A list of cells in the table row. The cells appear in the same order as the columns of the table. 
+
+              
+              
+
+              - *(dict) --* 
+
+                An object that represents a single cell in a table.
+
+                
+                
+
+                - **formula** *(string) --* 
+
+                  The formula contained in the cell. This field is empty if a cell does not have a formula. 
+
+                  
+                
+
+                - **format** *(string) --* 
+
+                  The format of the cell. If this field is empty, then the format is either not specified in the workbook or the format is set to AUTO.
+
+                  
+                
+
+                - **rawValue** *(string) --* 
+
+                  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. 
+
+                   
+
+                  Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. 
+
+                   
+
+                  Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. 
+
+                   
+
+                  Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. 
+
+                   
+
+                  Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. 
+
+                   
+
+                  Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. 
+
+                   
+
+                  Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
+
+                  
+                
+
+                - **formattedValue** *(string) --* 
+
+                  The formatted value of the cell. This is the value that you see displayed in the cell in the UI. 
+
+                   
+
+                  Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the request has been loaded. 
+
+          
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.RequestTimeoutException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: start_table_data_import_job(**kwargs)
+
+    
+
+    The StartTableDataImportJob API allows you to start an import job on a table. This API will only return the id of the job that was started. To find out the status of the import request, you need to call the DescribeTableDataImportJob API. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/StartTableDataImportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_table_data_import_job(
+          workbookId='string',
+          dataSource={
+              'dataSourceConfig': {
+                  'dataSourceUrl': 'string'
+              }
+          },
+          dataFormat='DELIMITED_TEXT',
+          destinationTableId='string',
+          importOptions={
+              'destinationOptions': {
+                  'columnMap': {
+                      'string': {
+                          'columnIndex': 123
+                      }
+                  }
+              },
+              'delimitedTextOptions': {
+                  'delimiter': 'string',
+                  'hasHeaderRow': True|False,
+                  'ignoreEmptyRows': True|False,
+                  'dataCharacterEncoding': 'UTF-8'|'US-ASCII'|'ISO-8859-1'|'UTF-16BE'|'UTF-16LE'|'UTF-16'
+              }
+          },
+          clientRequestToken='string'
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook where the rows are being imported.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type dataSource: dict
+    :param dataSource: **[REQUIRED]** 
+
+      The source of the data that is being imported. The size of source must be no larger than 100 MB. Source must have no more than 100,000 cells and no more than 1,000 rows. 
+
+      
+
+    
+      - **dataSourceConfig** *(dict) --* **[REQUIRED]** 
+
+        The configuration parameters for the data source of the import
+
+        
+
+      
+        - **dataSourceUrl** *(string) --* 
+
+          The URL from which source data will be downloaded for the import request. 
+
+          
+
+        
+      
+    
+    :type dataFormat: string
+    :param dataFormat: **[REQUIRED]** 
+
+      The format of the data that is being imported. Currently the only option supported is "DELIMITED_TEXT". 
+
+      
+
+    
+    :type destinationTableId: string
+    :param destinationTableId: **[REQUIRED]** 
+
+      The ID of the table where the rows are being imported.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type importOptions: dict
+    :param importOptions: **[REQUIRED]** 
+
+      The options for customizing this import request. 
+
+      
+
+    
+      - **destinationOptions** *(dict) --* 
+
+        Options relating to the destination of the import request.
+
+        
+
+      
+        - **columnMap** *(dict) --* 
+
+          A map of the column id to the import properties for each column.
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              An object that contains the properties for importing data to a specific column in a table.
+
+              
+
+            
+              - **columnIndex** *(integer) --* 
+
+                The index of the column in the input file.
+
+                
+
+              
+            
+      
+    
+      
+      - **delimitedTextOptions** *(dict) --* 
+
+        Options relating to parsing delimited text. Required if dataFormat is DELIMITED_TEXT.
+
+        
+
+      
+        - **delimiter** *(string) --* **[REQUIRED]** 
+
+          The delimiter to use for separating columns in a single row of the input.
+
+          
+
+        
+        - **hasHeaderRow** *(boolean) --* 
+
+          Indicates whether the input file has a header row at the top containing the column names.
+
+          
+
+        
+        - **ignoreEmptyRows** *(boolean) --* 
+
+          A parameter to indicate whether empty rows should be ignored or be included in the import.
+
+          
+
+        
+        - **dataCharacterEncoding** *(string) --* 
+
+          The encoding of the data in the input file.
+
+          
+
+        
+      
+    
+    :type clientRequestToken: string
+    :param clientRequestToken: **[REQUIRED]** 
+
+      The request token for performing the update action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will not perform the action again. 
+
+       
+
+      Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'jobId': 'string',
+            'jobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED'|'FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **jobId** *(string) --* 
+
+          The id that is assigned to this import job. Future requests to find out the status of this import job need to send this id in the appropriate parameter in the request. 
+
+          
+        
+
+        - **jobStatus** *(string) --* 
+
+          The status of the import job immediately after submitting the request. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Honeycode.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`Honeycode.Client.exceptions.ValidationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`Honeycode.Paginator.ListTableColumns`
+
+
+* :py:class:`Honeycode.Paginator.ListTableRows`
+
+
+* :py:class:`Honeycode.Paginator.ListTables`
+
+
+* :py:class:`Honeycode.Paginator.QueryTableRows`
+
+
+
+.. py:class:: Honeycode.Paginator.ListTableColumns
+
+  ::
+
+    
+    paginator = client.get_paginator('list_table_columns')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Honeycode.Client.list_table_columns`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableColumns>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          workbookId='string',
+          tableId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the table whose columns are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose columns are being retrieved.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tableColumns': [
+                {
+                    'tableColumnId': 'string',
+                    'tableColumnName': 'string',
+                    'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK'
+                },
+            ],
+            'workbookCursor': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tableColumns** *(list) --* 
+
+          The list of columns in the table. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single column in a table
+
+            
+            
+
+            - **tableColumnId** *(string) --* 
+
+              The id of the column in the table.
+
+              
+            
+
+            - **tableColumnName** *(string) --* 
+
+              The name of the column in the table.
+
+              
+            
+
+            - **format** *(string) --* 
+
+              The column level format that is applied in the table. An empty value in this field means that the column format is the default value 'AUTO'. 
+
+              
+        
+      
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: Honeycode.Paginator.ListTableRows
+
+  ::
+
+    
+    paginator = client.get_paginator('list_table_rows')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Honeycode.Client.list_table_rows`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          workbookId='string',
+          tableId='string',
+          rowIds=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook that contains the table whose rows are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose rows are being retrieved.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type rowIds: list
+    :param rowIds: 
+
+      This parameter is optional. If one or more row ids are specified in this list, then only the specified row ids are returned in the result. If no row ids are specified here, then all the rows in the table are returned. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'columnIds': [
+                'string',
+            ],
+            'rows': [
+                {
+                    'rowId': 'string',
+                    'cells': [
+                        {
+                            'formula': 'string',
+                            'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK',
+                            'rawValue': 'string',
+                            'formattedValue': 'string'
+                        },
+                    ]
+                },
+            ],
+            'rowIdsNotFound': [
+                'string',
+            ],
+            'workbookCursor': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **columnIds** *(list) --* 
+
+          The list of columns in the table whose row data is returned in the result. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **rows** *(list) --* 
+
+          The list of rows in the table. Note that this result is paginated, so this list contains a maximum of 100 rows. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single row in a table
+
+            
+            
+
+            - **rowId** *(string) --* 
+
+              The id of the row in the table.
+
+              
+            
+
+            - **cells** *(list) --* 
+
+              A list of cells in the table row. The cells appear in the same order as the columns of the table. 
+
+              
+              
+
+              - *(dict) --* 
+
+                An object that represents a single cell in a table.
+
+                
+                
+
+                - **formula** *(string) --* 
+
+                  The formula contained in the cell. This field is empty if a cell does not have a formula. 
+
+                  
+                
+
+                - **format** *(string) --* 
+
+                  The format of the cell. If this field is empty, then the format is either not specified in the workbook or the format is set to AUTO.
+
+                  
+                
+
+                - **rawValue** *(string) --* 
+
+                  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. 
+
+                   
+
+                  Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. 
+
+                   
+
+                  Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. 
+
+                   
+
+                  Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. 
+
+                   
+
+                  Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. 
+
+                   
+
+                  Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. 
+
+                   
+
+                  Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
+
+                  
+                
+
+                - **formattedValue** *(string) --* 
+
+                  The formatted value of the cell. This is the value that you see displayed in the cell in the UI. 
+
+                   
+
+                  Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **rowIdsNotFound** *(list) --* 
+
+          The list of row ids included in the request that were not found in the table. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: Honeycode.Paginator.ListTables
+
+  ::
+
+    
+    paginator = client.get_paginator('list_tables')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Honeycode.Client.list_tables`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTables>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          workbookId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook whose tables are being retrieved.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tables': [
+                {
+                    'tableId': 'string',
+                    'tableName': 'string'
+                },
+            ],
+            'workbookCursor': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tables** *(list) --* 
+
+          The list of tables in the workbook. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing the properties of a table in a workbook.
+
+            
+            
+
+            - **tableId** *(string) --* 
+
+              The id of the table.
+
+              
+            
+
+            - **tableName** *(string) --* 
+
+              The name of the table.
+
+              
+        
+      
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: Honeycode.Paginator.QueryTableRows
+
+  ::
+
+    
+    paginator = client.get_paginator('query_table_rows')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`Honeycode.Client.query_table_rows`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/QueryTableRows>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          workbookId='string',
+          tableId='string',
+          filterFormula={
+              'formula': 'string',
+              'contextRowId': 'string'
+          },
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type workbookId: string
+    :param workbookId: **[REQUIRED]** 
+
+      The ID of the workbook whose table rows are being queried.
+
+       
+
+      If a workbook with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type tableId: string
+    :param tableId: **[REQUIRED]** 
+
+      The ID of the table whose rows are being queried.
+
+       
+
+      If a table with the specified id could not be found, this API throws ResourceNotFoundException. 
+
+      
+
+    
+    :type filterFormula: dict
+    :param filterFormula: **[REQUIRED]** 
+
+      An object that represents a filter formula along with the id of the context row under which the filter function needs to evaluate.
+
+      
+
+    
+      - **formula** *(string) --* **[REQUIRED]** 
+
+        A formula representing a filter function that returns zero or more matching rows from a table. Valid formulas in this field return a list of rows from a table. The most common ways of writing a formula to return a list of rows are to use the FindRow() or Filter() functions. Any other formula that returns zero or more rows is also acceptable. For example, you can use a formula that points to a cell that contains a filter function. 
+
+        
+
+      
+      - **contextRowId** *(string) --* 
+
+        The optional contextRowId attribute can be used to specify the row id of the context row if the filter formula contains unqualified references to table columns and needs a context row to evaluate them successfully. 
+
+        
+
+      
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'columnIds': [
+                'string',
+            ],
+            'rows': [
+                {
+                    'rowId': 'string',
+                    'cells': [
+                        {
+                            'formula': 'string',
+                            'format': 'AUTO'|'NUMBER'|'CURRENCY'|'DATE'|'TIME'|'DATE_TIME'|'PERCENTAGE'|'TEXT'|'ACCOUNTING'|'CONTACT'|'ROWLINK',
+                            'rawValue': 'string',
+                            'formattedValue': 'string'
+                        },
+                    ]
+                },
+            ],
+            'workbookCursor': 123,
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **columnIds** *(list) --* 
+
+          The list of columns in the table whose row data is returned in the result. 
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **rows** *(list) --* 
+
+          The list of rows in the table that match the query filter. 
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that contains attributes about a single row in a table
+
+            
+            
+
+            - **rowId** *(string) --* 
+
+              The id of the row in the table.
+
+              
+            
+
+            - **cells** *(list) --* 
+
+              A list of cells in the table row. The cells appear in the same order as the columns of the table. 
+
+              
+              
+
+              - *(dict) --* 
+
+                An object that represents a single cell in a table.
+
+                
+                
+
+                - **formula** *(string) --* 
+
+                  The formula contained in the cell. This field is empty if a cell does not have a formula. 
+
+                  
+                
+
+                - **format** *(string) --* 
+
+                  The format of the cell. If this field is empty, then the format is either not specified in the workbook or the format is set to AUTO.
+
+                  
+                
+
+                - **rawValue** *(string) --* 
+
+                  The raw value of the data contained in the cell. The raw value depends on the format of the data in the cell. However the attribute in the API return value is always a string containing the raw value. 
+
+                   
+
+                  Cells with format DATE, DATE_TIME or TIME have the raw value as a floating point number where the whole number represents the number of days since 1/1/1900 and the fractional part represents the fraction of the day since midnight. For example, a cell with date 11/3/2020 has the raw value "44138". A cell with the time 9:00 AM has the raw value "0.375" and a cell with date/time value of 11/3/2020 9:00 AM has the raw value "44138.375". Notice that even though the raw value is a number in all three cases, it is still represented as a string. 
+
+                   
+
+                  Cells with format NUMBER, CURRENCY, PERCENTAGE and ACCOUNTING have the raw value of the data as the number representing the data being displayed. For example, the number 1.325 with two decimal places in the format will have it's raw value as "1.325" and formatted value as "1.33". A currency value for $10 will have the raw value as "10" and formatted value as "$10.00". A value representing 20% with two decimal places in the format will have its raw value as "0.2" and the formatted value as "20.00%". An accounting value of -$25 will have "-25" as the raw value and "$ (25.00)" as the formatted value. 
+
+                   
+
+                  Cells with format TEXT will have the raw text as the raw value. For example, a cell with text "John Smith" will have "John Smith" as both the raw value and the formatted value. 
+
+                   
+
+                  Cells with format CONTACT will have the name of the contact as a formatted value and the email address of the contact as the raw value. For example, a contact for John Smith will have "John Smith" as the formatted value and "john.smith@example.com" as the raw value. 
+
+                   
+
+                  Cells with format ROWLINK (aka picklist) will have the first column of the linked row as the formatted value and the row id of the linked row as the raw value. For example, a cell containing a picklist to a table that displays task status might have "Completed" as the formatted value and "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw value. 
+
+                   
+
+                  Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no auto-detected format, the raw and formatted values will be the same as the data in the cell. 
+
+                  
+                
+
+                - **formattedValue** *(string) --* 
+
+                  The formatted value of the cell. This is the value that you see displayed in the cell in the UI. 
+
+                   
+
+                  Note that the formatted value of a cell is always represented as a string irrespective of the data that is stored in the cell. For example, if a cell contains a date, the formatted value of the cell is the string representation of the formatted date being shown in the cell in the UI. See details in the rawValue field below for how cells of different formats will have different raw and formatted values. 
+
+                  
+            
+          
+        
+      
+        
+
+        - **workbookCursor** *(integer) --* 
+
+          Indicates the cursor of the workbook at which the data returned by this request is read. Workbook cursor keeps increasing with every update and the increments are not sequential. 
+
+          
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

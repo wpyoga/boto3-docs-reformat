@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Retries &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Extensibility guide" href="events.html" />
+    <link rel="prev" title="Error handling" href="error-handling.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="Extensibility guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#sdk-features">SDK features</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clients.html">Low-level clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginators.html">Paginators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Retries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Extensibility guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#migrations">Migrations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="index.html">Developer guide</a></li>
+              
+              <li>Retries</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="retries">
+<span id="guide-retries"></span><h1>Retries<a class="headerlink" href="#retries" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Your AWS client might see calls to AWS services fail due to unexpected issues on the client side. Or calls might fail due to rate limiting from the AWS service you're attempting to call. In either case, these kinds of failures often don’t require special handling and the call should be made again, often after a brief waiting period. Boto3 provides many features to assist in retrying client calls to AWS services when these kinds of errors or exceptions are experienced.</p>
+<p>This guide provides you with details on the following:</p>
+<ul class="simple">
+<li>How to find the available retry modes and the differences between each mode</li>
+<li>How to configure your client to use each retry mode and other retry configurations</li>
+<li>How to validate if your client performs a retry attempt</li>
+</ul>
+</div>
+<div class="section" id="available-retry-modes">
+<h2>Available retry modes<a class="headerlink" href="#available-retry-modes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="legacy-retry-mode">
+<h3>Legacy retry mode<a class="headerlink" href="#legacy-retry-mode" title="Permalink to this headline">¶</a></h3>
+<p>Legacy mode is the default mode used by any Boto3 client you create. As its name implies, <tt class="docutils literal"><span class="pre">legacy</span> <span class="pre">mode</span></tt> uses an older (v1) retry handler that has limited functionality.</p>
+<p><strong>Legacy mode’s functionality includes:</strong></p>
+<ul>
+<li><p class="first">A default value of 5 for maximum retry attempts. This value can be overwritten through the <tt class="docutils literal"><span class="pre">max_attempts</span></tt> configuration parameter.</p>
+</li>
+<li><p class="first">Retry attempts for a limited number of errors/exceptions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># General socket/connection errors</span>
+<span class="ne">ConnectionError</span>
+<span class="n">ConnectionClosedError</span>
+<span class="n">ReadTimeoutError</span>
+<span class="n">EndpointConnectionError</span>
+
+<span class="c1"># Service-side throttling/limit errors and exceptions</span>
+<span class="n">Throttling</span>
+<span class="n">ThrottlingException</span>
+<span class="n">ThrottledException</span>
+<span class="n">RequestThrottledException</span>
+<span class="n">ProvisionedThroughputExceededException</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Retry attempts on several HTTP status codes, including 429, 500, 502, 503, 504, and 509.</p>
+</li>
+<li><p class="first">Any retry attempt will include an exponential backoff by a base factor of 2.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information about additional service-specific retry policies, see the following <a class="reference external" href="https://github.com/boto/botocore/blob/develop/botocore/data/_retry.json">botocore references in GitHub</a>.</p>
+</div>
+</div>
+<div class="section" id="standard-retry-mode">
+<h3>Standard retry mode<a class="headerlink" href="#standard-retry-mode" title="Permalink to this headline">¶</a></h3>
+<p>Standard mode is a retry mode that was introduced with the updated retry handler (v2). This mode is a standardization of retry logic and behavior that is consistent with other AWS SDKs. In addition to this standardization, this mode also extends the functionality of retries over that found in legacy mode.</p>
+<p><strong>Standard mode’s functionality includes:</strong></p>
+<ul>
+<li><p class="first">A default value of 3 for maximum retry attempts. This value can be overwritten through the <tt class="docutils literal"><span class="pre">max_attempts</span></tt> configuration parameter.</p>
+</li>
+<li><p class="first">Retry attempts for an expanded list of errors/exceptions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Transient errors/exceptions</span>
+<span class="n">RequestTimeout</span>
+<span class="n">RequestTimeoutException</span>
+<span class="n">PriorRequestNotComplete</span>
+<span class="ne">ConnectionError</span>
+<span class="n">HTTPClientError</span>
+
+<span class="c1"># Service-side throttling/limit errors and exceptions</span>
+<span class="n">Throttling</span>
+<span class="n">ThrottlingException</span>
+<span class="n">ThrottledException</span>
+<span class="n">RequestThrottledException</span>
+<span class="n">TooManyRequestsException</span>
+<span class="n">ProvisionedThroughputExceededException</span>
+<span class="n">TransactionInProgressException</span>
+<span class="n">RequestLimitExceeded</span>
+<span class="n">BandwidthLimitExceeded</span>
+<span class="n">LimitExceededException</span>
+<span class="n">RequestThrottled</span>
+<span class="n">SlowDown</span>
+<span class="n">EC2ThrottledException</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Retry attempts on nondescriptive, transient error codes. Specifically, these HTTP status codes: 500, 502, 503, 504.</p>
+</li>
+<li><p class="first">Any retry attempt will include an exponential backoff by a base factor of 2 for a maximum backoff time of 20 seconds.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="adaptive-retry-mode">
+<h3>Adaptive retry mode<a class="headerlink" href="#adaptive-retry-mode" title="Permalink to this headline">¶</a></h3>
+<p>Adaptive retry mode is an experimental retry mode that includes all the features of standard mode. In addition to the standard mode features, adaptive mode also introduces client-side rate limiting through the use of a token bucket and rate-limit variables that are dynamically updated with each retry attempt. This mode offers flexibility in client-side retries that adapts to the error/exception state response from an AWS service.</p>
+<p>With each new retry attempt, adaptive mode modifies the rate-limit variables based on the error, exception, or HTTP status code presented in the response from the AWS service. These rate-limit variables are then used to calculate a new call rate for the client. Each exception/error or non-success HTTP response (provided in the list above) from an AWS service updates the rate-limit variables as retries occur until success is reached, the token bucket is exhausted, or the configured maximum attempts value is reached.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Adaptive mode is an experimental mode and is subject to change, both in features and behavior.</p>
+</div>
+</div>
+</div>
+<div class="section" id="configuring-a-retry-mode">
+<h2>Configuring a retry mode<a class="headerlink" href="#configuring-a-retry-mode" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 includes a variety of both retry configurations as well as configuration methods to consider when creating your client object.</p>
+<div class="section" id="available-configuration-options">
+<h3>Available configuration options<a class="headerlink" href="#available-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>In Boto3, users can customize two retry configurations:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">retry_mode</span></tt> - This tells Boto3 which retry mode to use. As described previously, there are three retry modes available: legacy (default), standard, and adaptive.</li>
+<li><tt class="docutils literal"><span class="pre">max_attempts</span></tt> - This provides Boto3’s retry handler with a value of maximum retry attempts, where the initial call counts toward the <tt class="docutils literal"><span class="pre">max_attempts</span></tt> value that you provide.</li>
+</ul>
+</div>
+<div class="section" id="defining-a-retry-configuration-in-your-aws-configuration-file">
+<h3>Defining a retry configuration in your AWS configuration file<a class="headerlink" href="#defining-a-retry-configuration-in-your-aws-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>This first way to define your retry configuration is to update your global AWS configuration file. The default location for your AWS config file is <tt class="docutils literal"><span class="pre">~/.aws/config</span></tt>. Here’s an example of an AWS config file with the retry configuration options used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">myConfigProfile</span><span class="p">]</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">us</span><span class="o">-</span><span class="n">east</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">max_attempts</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">retry_mode</span> <span class="o">=</span> <span class="n">standard</span>
+</pre></div>
+</div>
+<p>Any Boto3 script or code that uses your AWS config file inherits these configurations when using your profile, unless otherwise explicitly overwritten by a <tt class="docutils literal"><span class="pre">Config</span></tt> object when instantiating your client object at runtime. If no configuration options are set, the default retry mode value is <tt class="docutils literal"><span class="pre">legacy</span></tt>, and the default <tt class="docutils literal"><span class="pre">max_attempts</span></tt> value is 5.</p>
+</div>
+<div class="section" id="defining-a-retry-configuration-in-a-config-object-for-your-boto3-client">
+<h3>Defining a retry configuration in a Config object for your Boto3 client<a class="headerlink" href="#defining-a-retry-configuration-in-a-config-object-for-your-boto3-client" title="Permalink to this headline">¶</a></h3>
+<p>The second way to define your retry configuration is to use botocore to enable more flexibility for you to specify your retry configuration using a <tt class="docutils literal"><span class="pre">Config</span></tt> object that you can pass to your client at runtime. This method is useful if you don't want to configure retry behavior globally with your AWS config file</p>
+<p>Additionally, if your AWS configuration file is configured with retry behavior, but you want to override those global settings, you can use the <tt class="docutils literal"><span class="pre">Config</span></tt> object to override an individual client object at runtime.</p>
+<p>As shown in the following example, the <tt class="docutils literal"><span class="pre">Config</span></tt> object takes a <tt class="docutils literal"><span class="pre">retries</span></tt> dictionary where you can supply your two configuration options, <tt class="docutils literal"><span class="pre">max_attempts</span></tt> and <tt class="docutils literal"><span class="pre">mode</span></tt>, and the values for each.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span>
+   <span class="n">retries</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;max_attempts&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;standard&#39;</span>
+   <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The AWS configuration file uses <tt class="docutils literal"><span class="pre">retry_mode</span></tt> and the <tt class="docutils literal"><span class="pre">Config</span></tt> object uses <tt class="docutils literal"><span class="pre">mode</span></tt>. Although named differently, they both refer to the same retry configuration whose options are legacy (default), standard, and adaptive.</p>
+</div>
+<p>The following is an example of instantiating a <tt class="docutils literal"><span class="pre">Config</span></tt> object and passing it into an Amazon EC2 client to use at runtime.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.config</span> <span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span>
+   <span class="n">retries</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;max_attempts&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;standard&#39;</span>
+   <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">ec2</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;ec2&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As mentioned previously, if no configuration options are set, the default mode is <tt class="docutils literal"><span class="pre">legacy</span></tt> and the default <tt class="docutils literal"><span class="pre">max_attempts</span></tt> is 5.</p>
+</div>
+</div>
+</div>
+<div class="section" id="validating-retry-attempts">
+<h2>Validating retry attempts<a class="headerlink" href="#validating-retry-attempts" title="Permalink to this headline">¶</a></h2>
+<p>To ensure that your retry configuration is correct and working properly, there are a number of ways you can validate that your client's retries are occurring.</p>
+<div class="section" id="checking-retry-attempts-in-your-client-logs">
+<h3>Checking retry attempts in your client logs<a class="headerlink" href="#checking-retry-attempts-in-your-client-logs" title="Permalink to this headline">¶</a></h3>
+<p>If you enable Boto3’s logging, you can validate and check your client’s retry attempts in your client’s logs. Notice, however, that you need to enable <tt class="docutils literal"><span class="pre">DEBUG</span></tt> mode in your logger to see any retry attempts. The client log entries for retry attempts will appear differently, depending on which retry mode you’ve configured.</p>
+<p><strong>If legacy mode is enabled:</strong></p>
+<p>Retry messages are generated by <tt class="docutils literal"><span class="pre">botocore.retryhandler</span></tt>. You’ll see one of three messages:</p>
+<ul class="simple">
+<li><em>No retry needed</em></li>
+<li><em>Retry needed, action of: &lt;action_value&gt;</em></li>
+<li><em>Reached the maximum number of retry attempts: &lt;attempt_num&gt;</em></li>
+</ul>
+<p><strong>If standard or adaptive mode is enabled:</strong></p>
+<p>Retry messages are generated by <tt class="docutils literal"><span class="pre">botocore.retries.standard</span></tt>. You’ll see one of three messages:</p>
+<ul class="simple">
+<li><em>Not retrying request</em></li>
+<li><em>Retry needed, retrying request after delay of: &lt;delay_value&gt;</em></li>
+<li><em>Retry needed but retry quota reached, not retrying request</em></li>
+</ul>
+</div>
+<div class="section" id="checking-retry-attempts-in-an-aws-service-response">
+<h3>Checking retry attempts in an AWS service response<a class="headerlink" href="#checking-retry-attempts-in-an-aws-service-response" title="Permalink to this headline">¶</a></h3>
+<p>You can check the number of retry attempts your client has made by parsing the response botocore provides when making a call to an AWS service API. Responses are handled by an underlying botocore module, and formatted into a dictionary that's part of the JSON response object. You can access the number of retry attempts your client has taken by calling the <tt class="docutils literal"><span class="pre">RetryAttempts</span></tt> key in the <tt class="docutils literal"><span class="pre">ResponseMetaData</span></tt> dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;ResponseMetadata&#39;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="s1">&#39;RequestId&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890ABCDEF&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;HostId&#39;</span><span class="p">:</span> <span class="s1">&#39;host ID data will appear here as a hash&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;HTTPStatusCode&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+   <span class="s1">&#39;HTTPHeaders&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;header metadata key/values will appear here&#39;</span><span class="p">},</span>
+   <span class="s1">&#39;RetryAttempts&#39;</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="error-handling.html" title="previous chapter (use the left arrow)">Error handling</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="events.html" title="next chapter (use the right arrow)">Extensibility guide</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="Extensibility guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

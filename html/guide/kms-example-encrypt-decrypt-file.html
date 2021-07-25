@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Encrypt and decrypt a file &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="AWS Key Management Service (AWS KMS) examples" href="kms-examples.html" />
+    <link rel="next" title="Amazon S3 examples" href="s3-examples.html" />
+    <link rel="prev" title="AWS Key Management Service (AWS KMS) examples" href="kms-examples.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-examples.html" title="Amazon S3 examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="kms-examples.html" title="AWS Key Management Service (AWS KMS) examples"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="kms-examples.html" accesskey="U">AWS Key Management Service (AWS KMS) examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+              
+              <li>Encrypt and decrypt a file</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="encrypt-and-decrypt-a-file">
+<span id="aws-boto3-kms-examples-encrypt-decrypt-file"></span><h1>Encrypt and decrypt a file<a class="headerlink" href="#encrypt-and-decrypt-a-file" title="Permalink to this headline">¶</a></h1>
+<p>The example program uses AWS KMS keys to encrypt and decrypt a file.</p>
+<p>A master key, also called a Customer Master Key or CMK, is created and used to generate a data key.
+The data key is then used to encrypt a disk file. The encrypted data key is stored within
+the encrypted file. To decrypt the file, the data key is decrypted and then used to decrypt
+the rest of the file. This manner of using master and data keys is called envelope encryption.</p>
+<p>To encrypt and decrypt data, the example uses the well-known Python <tt class="docutils literal"><span class="pre">cryptography</span></tt> package.
+This package is not part of the Python standard library and must be installed separately, for
+example, with the <tt class="docutils literal"><span class="pre">pip</span></tt> command.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install cryptography
+</pre></div>
+</div>
+<p>Each section describes a single function from the example's <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code/kms/encrypt_decrypt_file.py">entire
+source file</a>.</p>
+<div class="section" id="retrieve-an-existing-master-key">
+<h2>Retrieve an existing master key<a class="headerlink" href="#retrieve-an-existing-master-key" title="Permalink to this headline">¶</a></h2>
+<p>Master keys are created, managed, and stored within AWS KMS. A KMS master key is also referred to
+as a customer master key or CMK. An AWS storage cost is incurred for each CMK, therefore, one CMK is
+often used to manage multiple data keys.</p>
+<p>The example <tt class="docutils literal"><span class="pre">retrieve_cmk</span></tt> function searches for an existing CMK. A key description is specified
+when a CMK is created, and this description is used to identify and retrieve the desired key. If
+many CMKs exist, they are processed in batches until either the desired key is found or all keys are
+examined.</p>
+<p>If the example function finds the desired CMK, it returns both the CMK's ID and its ARN (Amazon
+Resource Name). Either of these identifiers can be used to reference the CMK in subsequent calls
+to AWS KMS methods.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">retrieve_cmk</span><span class="p">(</span><span class="n">desc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieve an existing KMS CMK based on its description</span>
+
+<span class="sd">    :param desc: Description of CMK specified when the CMK was created</span>
+<span class="sd">    :return Tuple(KeyId, KeyArn) where:</span>
+<span class="sd">        KeyId: CMK ID</span>
+<span class="sd">        KeyArn: Amazon Resource Name of CMK</span>
+<span class="sd">    :return Tuple(None, None) if a CMK with the specified description was</span>
+<span class="sd">    not found</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Retrieve a list of existing CMKs</span>
+    <span class="c1"># If more than 100 keys exist, retrieve and process them in batches</span>
+    <span class="n">kms_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kms&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">list_keys</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">done</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">cmk</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Keys&#39;</span><span class="p">]:</span>
+            <span class="c1"># Get info about the key, including its description</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">key_info</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">describe_key</span><span class="p">(</span><span class="n">KeyId</span><span class="o">=</span><span class="n">cmk</span><span class="p">[</span><span class="s1">&#39;KeyArn&#39;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+            <span class="c1"># Is this the key we&#39;re looking for?</span>
+            <span class="k">if</span> <span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;KeyMetadata&#39;</span><span class="p">][</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">desc</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">cmk</span><span class="p">[</span><span class="s1">&#39;KeyId&#39;</span><span class="p">],</span> <span class="n">cmk</span><span class="p">[</span><span class="s1">&#39;KeyArn&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Are there more keys to retrieve?</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Truncated&#39;</span><span class="p">]:</span>
+            <span class="c1"># No, the CMK was not found</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;A CMK with the specified description was not found&#39;</span><span class="p">)</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Yes, retrieve another batch</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">list_keys</span><span class="p">(</span><span class="n">Marker</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;NextMarker&#39;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># All existing CMKs were checked and the desired key was not found</span>
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-customer-master-key">
+<h2>Create a customer master key<a class="headerlink" href="#create-a-customer-master-key" title="Permalink to this headline">¶</a></h2>
+<p>If the example does not find an existing CMK, it creates a new one and returns its ID and ARN.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_cmk</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Customer Master Key&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a KMS Customer Master Key</span>
+
+<span class="sd">    The created CMK is a Customer-managed key stored in AWS KMS.</span>
+
+<span class="sd">    :param desc: key description</span>
+<span class="sd">    :return Tuple(KeyId, KeyArn) where:</span>
+<span class="sd">        KeyId: AWS globally-unique string ID</span>
+<span class="sd">        KeyArn: Amazon Resource Name of the CMK</span>
+<span class="sd">    :return Tuple(None, None) if error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Create CMK</span>
+    <span class="n">kms_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kms&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">create_key</span><span class="p">(</span><span class="n">Description</span><span class="o">=</span><span class="n">desc</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># Return the key ID and ARN</span>
+    <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;KeyMetadata&#39;</span><span class="p">][</span><span class="s1">&#39;KeyId&#39;</span><span class="p">],</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;KeyMetadata&#39;</span><span class="p">][</span><span class="s1">&#39;Arn&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-data-key">
+<h2>Create a data key<a class="headerlink" href="#create-a-data-key" title="Permalink to this headline">¶</a></h2>
+<p>To encrypt a file, the example <tt class="docutils literal"><span class="pre">create_data_key</span></tt> function creates a data key. The data key is
+customer managed and does not incur an AWS storage cost. The example creates a data key for
+each file it encrypts, but it's possible to use a single data key to encrypt multiple files.</p>
+<p>The example function returns the data key in both its plaintext and encrypted forms. The
+plaintext form is used to encrypt the data. The encrypted form will be stored with the encrypted
+file. The data key is associated with a CMK which is capable of decrypting the encrypted data key
+when necessary.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_data_key</span><span class="p">(</span><span class="n">cmk_id</span><span class="p">,</span> <span class="n">key_spec</span><span class="o">=</span><span class="s1">&#39;AES_256&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a data key to use when encrypting and decrypting data</span>
+
+<span class="sd">    :param cmk_id: KMS CMK ID or ARN under which to generate and encrypt the</span>
+<span class="sd">    data key.</span>
+<span class="sd">    :param key_spec: Length of the data encryption key. Supported values:</span>
+<span class="sd">        &#39;AES_128&#39;: Generate a 128-bit symmetric key</span>
+<span class="sd">        &#39;AES_256&#39;: Generate a 256-bit symmetric key</span>
+<span class="sd">    :return Tuple(EncryptedDataKey, PlaintextDataKey) where:</span>
+<span class="sd">        EncryptedDataKey: Encrypted CiphertextBlob data key as binary string</span>
+<span class="sd">        PlaintextDataKey: Plaintext base64-encoded data key as binary string</span>
+<span class="sd">    :return Tuple(None, None) if error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Create data key</span>
+    <span class="n">kms_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kms&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">generate_data_key</span><span class="p">(</span><span class="n">KeyId</span><span class="o">=</span><span class="n">cmk_id</span><span class="p">,</span> <span class="n">KeySpec</span><span class="o">=</span><span class="n">key_spec</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># Return the encrypted and plaintext data key</span>
+    <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;CiphertextBlob&#39;</span><span class="p">],</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Plaintext&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="encrypt-a-file">
+<h2>Encrypt a file<a class="headerlink" href="#encrypt-a-file" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">encrypt_file</span></tt> function creates a data key and uses it to encrypt the contents of a disk file.</p>
+<p>The encryption operation is performed by a <tt class="docutils literal"><span class="pre">Fernet</span></tt> object created by the Python <tt class="docutils literal"><span class="pre">cryptography</span></tt>
+package.</p>
+<p>The encrypted form of the data key is saved within the encrypted file and will be used in the future
+to decrypt the file. The encrypted file can be decrypted by any program with the credentials to
+decrypt the encrypted data key.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">encrypt_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">cmk_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Encrypt a file using an AWS KMS CMK</span>
+
+<span class="sd">    A data key is generated and associated with the CMK.</span>
+<span class="sd">    The encrypted data key is saved with the encrypted file. This enables the</span>
+<span class="sd">    file to be decrypted at any time in the future and by any program that</span>
+<span class="sd">    has the credentials to decrypt the data key.</span>
+<span class="sd">    The encrypted file is saved to &lt;filename&gt;.encrypted</span>
+<span class="sd">    Limitation: The contents of filename must fit in memory.</span>
+
+<span class="sd">    :param filename: File to encrypt</span>
+<span class="sd">    :param cmk_id: AWS KMS CMK ID or ARN</span>
+<span class="sd">    :return: True if file was encrypted. Otherwise, False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Read the entire file into memory</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Generate a data key associated with the CMK</span>
+    <span class="c1"># The data key is used to encrypt the file. Each file can use its own</span>
+    <span class="c1"># data key or data keys can be shared among files.</span>
+    <span class="c1"># Specify either the CMK ID or ARN</span>
+    <span class="n">data_key_encrypted</span><span class="p">,</span> <span class="n">data_key_plaintext</span> <span class="o">=</span> <span class="n">create_data_key</span><span class="p">(</span><span class="n">cmk_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data_key_encrypted</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Created new AWS KMS data key&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Encrypt the file</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">data_key_plaintext</span><span class="p">)</span>
+    <span class="n">file_contents_encrypted</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">file_contents</span><span class="p">)</span>
+
+    <span class="c1"># Write the encrypted data key and encrypted file contents together</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;.encrypted&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_encrypted</span><span class="p">:</span>
+            <span class="n">file_encrypted</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_key_encrypted</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">NUM_BYTES_FOR_LEN</span><span class="p">,</span>
+                                                                  <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">))</span>
+            <span class="n">file_encrypted</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data_key_encrypted</span><span class="p">)</span>
+            <span class="n">file_encrypted</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_contents_encrypted</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># For the highest security, the data_key_plaintext value should be wiped</span>
+    <span class="c1"># from memory. Unfortunately, this is not possible in Python. However,</span>
+    <span class="c1"># storing the value in a local variable makes it available for garbage</span>
+    <span class="c1"># collection.</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decrypt-a-data-key">
+<h2>Decrypt a data key<a class="headerlink" href="#decrypt-a-data-key" title="Permalink to this headline">¶</a></h2>
+<p>To decrypt an encrypted file, the encrypted data key used to perform the encryption must first
+be decrypted. This operation is performed by the example <tt class="docutils literal"><span class="pre">decrypt_data_key</span></tt> function which returns
+the plaintext form of the key.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decrypt_data_key</span><span class="p">(</span><span class="n">data_key_encrypted</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decrypt an encrypted data key</span>
+
+<span class="sd">    :param data_key_encrypted: Encrypted ciphertext data key.</span>
+<span class="sd">    :return Plaintext base64-encoded binary data key as binary string</span>
+<span class="sd">    :return None if error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Decrypt the data key</span>
+    <span class="n">kms_client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kms&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">kms_client</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">CiphertextBlob</span><span class="o">=</span><span class="n">data_key_encrypted</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ClientError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Return plaintext base64-encoded binary data key</span>
+    <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">((</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Plaintext&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="decrypt-a-file">
+<h2>Decrypt a file<a class="headerlink" href="#decrypt-a-file" title="Permalink to this headline">¶</a></h2>
+<p>The example <tt class="docutils literal"><span class="pre">decrypt_file</span></tt> function first extracts the encrypted data key from the encrypted file. It
+then decrypts the key to get its plaintext form and uses that to decrypt the file contents.</p>
+<p>The decryption operation is performed by a <tt class="docutils literal"><span class="pre">Fernet</span></tt> object created by the Python <tt class="docutils literal"><span class="pre">cryptography</span></tt>
+package.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decrypt_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Decrypt a file encrypted by encrypt_file()</span>
+
+<span class="sd">    The encrypted file is read from &lt;filename&gt;.encrypted</span>
+<span class="sd">    The decrypted file is written to &lt;filename&gt;.decrypted</span>
+
+<span class="sd">    :param filename: File to decrypt</span>
+<span class="sd">    :return: True if file was decrypted. Otherwise, False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Read the encrypted file into memory</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;.encrypted&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># The first NUM_BYTES_FOR_LEN bytes contain the integer length of the</span>
+    <span class="c1"># encrypted data key.</span>
+    <span class="c1"># Add NUM_BYTES_FOR_LEN to get index of end of encrypted data key/start</span>
+    <span class="c1"># of encrypted data.</span>
+    <span class="n">data_key_encrypted_len</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">file_contents</span><span class="p">[:</span><span class="n">NUM_BYTES_FOR_LEN</span><span class="p">],</span>
+                                            <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">)</span> \
+                             <span class="o">+</span> <span class="n">NUM_BYTES_FOR_LEN</span>
+    <span class="n">data_key_encrypted</span> <span class="o">=</span> <span class="n">file_contents</span><span class="p">[</span><span class="n">NUM_BYTES_FOR_LEN</span><span class="p">:</span><span class="n">data_key_encrypted_len</span><span class="p">]</span>
+
+    <span class="c1"># Decrypt the data key before using it</span>
+    <span class="n">data_key_plaintext</span> <span class="o">=</span> <span class="n">decrypt_data_key</span><span class="p">(</span><span class="n">data_key_encrypted</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data_key_plaintext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># Decrypt the rest of the file</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">data_key_plaintext</span><span class="p">)</span>
+    <span class="n">file_contents_decrypted</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">file_contents</span><span class="p">[</span><span class="n">data_key_encrypted_len</span><span class="p">:])</span>
+
+    <span class="c1"># Write the decrypted file contents</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s1">&#39;.decrypted&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_decrypted</span><span class="p">:</span>
+            <span class="n">file_decrypted</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_contents_decrypted</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="c1"># The same security issue described at the end of encrypt_file() exists</span>
+    <span class="c1"># here, too, i.e., the wish to wipe the data_key_plaintext value from</span>
+    <span class="c1"># memory.</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="kms-examples.html" title="previous chapter (use the left arrow)">AWS Key Management Service (AWS KMS) examples</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="s3-examples.html" title="next chapter (use the right arrow)">Amazon S3 examples</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="s3-examples.html" title="Amazon S3 examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="kms-examples.html" title="AWS Key Management Service (AWS KMS) examples"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="kms-examples.html" >AWS Key Management Service (AWS KMS) examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

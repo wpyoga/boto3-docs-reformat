@@ -1,0 +1,4050 @@
+
+
+***************
+MediaPackageVod
+***************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: MediaPackageVod.Client
+
+  A low-level client representing AWS Elemental MediaPackage VOD
+  AWS Elemental MediaPackage VOD::
+
+    
+    import boto3
+    
+    client = boto3.client('mediapackage-vod')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~MediaPackageVod.Client.can_paginate`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.configure_logs`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.create_asset`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.create_packaging_configuration`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.create_packaging_group`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.delete_asset`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.delete_packaging_configuration`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.delete_packaging_group`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.describe_asset`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.describe_packaging_configuration`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.describe_packaging_group`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.get_paginator`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.get_waiter`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.list_assets`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.list_packaging_configurations`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.list_packaging_groups`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.tag_resource`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.untag_resource`
+
+  
+  *   :py:meth:`~MediaPackageVod.Client.update_packaging_group`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: configure_logs(**kwargs)
+
+    Changes the packaging group's properities to configure log subscription
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ConfigureLogs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.configure_logs(
+          EgressAccessLogs={
+              'LogGroupName': 'string'
+          },
+          Id='string'
+      )
+    :type EgressAccessLogs: dict
+    :param EgressAccessLogs: Configure egress access logging.
+
+    
+      - **LogGroupName** *(string) --* Customize the log group name.
+
+      
+    
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of a MediaPackage VOD PackagingGroup resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Authorization': {
+                'CdnIdentifierSecret': 'string',
+                'SecretsRoleArn': 'string'
+            },
+            'DomainName': 'string',
+            'EgressAccessLogs': {
+                'LogGroupName': 'string'
+            },
+            'Id': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The updated MediaPackage VOD PackagingGroup resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingGroup.
+        
+
+        - **Authorization** *(dict) --* CDN Authorization credentials
+          
+
+          - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+          
+
+          - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+      
+        
+
+        - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+        
+
+        - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+          
+
+          - **LogGroupName** *(string) --* Customize the log group name.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: create_asset(**kwargs)
+
+    Creates a new MediaPackage VOD Asset resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreateAsset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_asset(
+          Id='string',
+          PackagingGroupId='string',
+          ResourceId='string',
+          SourceArn='string',
+          SourceRoleArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The unique identifier for the Asset.
+
+    
+    :type PackagingGroupId: string
+    :param PackagingGroupId: **[REQUIRED]** The ID of the PackagingGroup for the Asset.
+
+    
+    :type ResourceId: string
+    :param ResourceId: The resource ID to include in SPEKE key requests.
+
+    
+    :type SourceArn: string
+    :param SourceArn: **[REQUIRED]** ARN of the source object in S3.
+
+    
+    :type SourceRoleArn: string
+    :param SourceRoleArn: **[REQUIRED]** The IAM role ARN used to access the source S3 bucket.
+
+    
+    :type Tags: dict
+    :param Tags: A collection of tags associated with a resource
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'CreatedAt': 'string',
+            'EgressEndpoints': [
+                {
+                    'PackagingConfigurationId': 'string',
+                    'Url': 'string'
+                },
+            ],
+            'Id': 'string',
+            'PackagingGroupId': 'string',
+            'ResourceId': 'string',
+            'SourceArn': 'string',
+            'SourceRoleArn': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The new MediaPackage VOD Asset resource.
+        
+
+        - **Arn** *(string) --* The ARN of the Asset.
+        
+
+        - **CreatedAt** *(string) --* The time the Asset was initially submitted for Ingest.
+        
+
+        - **EgressEndpoints** *(list) --* The list of egress endpoints available for the Asset.
+          
+
+          - *(dict) --* The endpoint URL used to access an Asset using one PackagingConfiguration.
+            
+
+            - **PackagingConfigurationId** *(string) --* The ID of the PackagingConfiguration being applied to the Asset.
+            
+
+            - **Url** *(string) --* The URL of the parent manifest for the repackaged Asset.
+        
+      
+        
+
+        - **Id** *(string) --* The unique identifier for the Asset.
+        
+
+        - **PackagingGroupId** *(string) --* The ID of the PackagingGroup for the Asset.
+        
+
+        - **ResourceId** *(string) --* The resource ID to include in SPEKE key requests.
+        
+
+        - **SourceArn** *(string) --* ARN of the source object in S3.
+        
+
+        - **SourceRoleArn** *(string) --* The IAM role_arn used to access the source S3 bucket.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: create_packaging_configuration(**kwargs)
+
+    Creates a new MediaPackage VOD PackagingConfiguration resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_packaging_configuration(
+          CmafPackage={
+              'Encryption': {
+                  'ConstantInitializationVector': 'string',
+                  'SpekeKeyProvider': {
+                      'RoleArn': 'string',
+                      'SystemIds': [
+                          'string',
+                      ],
+                      'Url': 'string'
+                  }
+              },
+              'HlsManifests': [
+                  {
+                      'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                      'IncludeIframeOnlyStream': True|False,
+                      'ManifestName': 'string',
+                      'ProgramDateTimeIntervalSeconds': 123,
+                      'RepeatExtXKey': True|False,
+                      'StreamSelection': {
+                          'MaxVideoBitsPerSecond': 123,
+                          'MinVideoBitsPerSecond': 123,
+                          'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                      }
+                  },
+              ],
+              'IncludeEncoderConfigurationInSegments': True|False,
+              'SegmentDurationSeconds': 123
+          },
+          DashPackage={
+              'DashManifests': [
+                  {
+                      'ManifestLayout': 'FULL'|'COMPACT',
+                      'ManifestName': 'string',
+                      'MinBufferTimeSeconds': 123,
+                      'Profile': 'NONE'|'HBBTV_1_5',
+                      'StreamSelection': {
+                          'MaxVideoBitsPerSecond': 123,
+                          'MinVideoBitsPerSecond': 123,
+                          'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                      }
+                  },
+              ],
+              'Encryption': {
+                  'SpekeKeyProvider': {
+                      'RoleArn': 'string',
+                      'SystemIds': [
+                          'string',
+                      ],
+                      'Url': 'string'
+                  }
+              },
+              'IncludeEncoderConfigurationInSegments': True|False,
+              'PeriodTriggers': [
+                  'ADS',
+              ],
+              'SegmentDurationSeconds': 123,
+              'SegmentTemplateFormat': 'NUMBER_WITH_TIMELINE'|'TIME_WITH_TIMELINE'|'NUMBER_WITH_DURATION'
+          },
+          HlsPackage={
+              'Encryption': {
+                  'ConstantInitializationVector': 'string',
+                  'EncryptionMethod': 'AES_128'|'SAMPLE_AES',
+                  'SpekeKeyProvider': {
+                      'RoleArn': 'string',
+                      'SystemIds': [
+                          'string',
+                      ],
+                      'Url': 'string'
+                  }
+              },
+              'HlsManifests': [
+                  {
+                      'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                      'IncludeIframeOnlyStream': True|False,
+                      'ManifestName': 'string',
+                      'ProgramDateTimeIntervalSeconds': 123,
+                      'RepeatExtXKey': True|False,
+                      'StreamSelection': {
+                          'MaxVideoBitsPerSecond': 123,
+                          'MinVideoBitsPerSecond': 123,
+                          'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                      }
+                  },
+              ],
+              'SegmentDurationSeconds': 123,
+              'UseAudioRenditionGroup': True|False
+          },
+          Id='string',
+          MssPackage={
+              'Encryption': {
+                  'SpekeKeyProvider': {
+                      'RoleArn': 'string',
+                      'SystemIds': [
+                          'string',
+                      ],
+                      'Url': 'string'
+                  }
+              },
+              'MssManifests': [
+                  {
+                      'ManifestName': 'string',
+                      'StreamSelection': {
+                          'MaxVideoBitsPerSecond': 123,
+                          'MinVideoBitsPerSecond': 123,
+                          'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                      }
+                  },
+              ],
+              'SegmentDurationSeconds': 123
+          },
+          PackagingGroupId='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type CmafPackage: dict
+    :param CmafPackage: A CMAF packaging configuration.
+
+    
+      - **Encryption** *(dict) --* A CMAF encryption configuration.
+
+      
+        - **ConstantInitializationVector** *(string) --* An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+
+        
+        - **SpekeKeyProvider** *(dict) --* **[REQUIRED]** A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+
+        
+          - **RoleArn** *(string) --* **[REQUIRED]** An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+
+          
+          - **SystemIds** *(list) --* **[REQUIRED]** The system IDs to include in key requests.
+
+          
+            - *(string) --* 
+
+            
+        
+          - **Url** *(string) --* **[REQUIRED]** The URL of the external key provider service.
+
+          
+        
+      
+      - **HlsManifests** *(list) --* **[REQUIRED]** A list of HLS manifest configurations.
+
+      
+        - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+
+        
+          - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+
+          
+          - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+
+          
+          - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+
+          
+          - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+
+          
+          - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+
+          
+          - **StreamSelection** *(dict) --* A StreamSelection configuration.
+
+          
+            - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+
+            
+            - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+
+            
+            - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+
+            
+          
+        
+    
+      - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+
+      
+      - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+
+      
+    
+    :type DashPackage: dict
+    :param DashPackage: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+
+    
+      - **DashManifests** *(list) --* **[REQUIRED]** A list of DASH manifest configurations.
+
+      
+        - *(dict) --* A DASH manifest configuration.
+
+        
+          - **ManifestLayout** *(string) --* Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+
+          
+          - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+
+          
+          - **MinBufferTimeSeconds** *(integer) --* Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+
+          
+          - **Profile** *(string) --* The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+
+          
+          - **StreamSelection** *(dict) --* A StreamSelection configuration.
+
+          
+            - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+
+            
+            - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+
+            
+            - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+
+            
+          
+        
+    
+      - **Encryption** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+
+      
+        - **SpekeKeyProvider** *(dict) --* **[REQUIRED]** A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+
+        
+          - **RoleArn** *(string) --* **[REQUIRED]** An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+
+          
+          - **SystemIds** *(list) --* **[REQUIRED]** The system IDs to include in key requests.
+
+          
+            - *(string) --* 
+
+            
+        
+          - **Url** *(string) --* **[REQUIRED]** The URL of the external key provider service.
+
+          
+        
+      
+      - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+
+      
+      - **PeriodTriggers** *(list) --* A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains "ADS", new periods will be created where the Asset contains SCTE-35 ad markers. 
+
+      
+        - *(string) --* 
+
+        
+    
+      - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration. 
+
+      
+      - **SegmentTemplateFormat** *(string) --* Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+
+      
+    
+    :type HlsPackage: dict
+    :param HlsPackage: An HTTP Live Streaming (HLS) packaging configuration.
+
+    
+      - **Encryption** *(dict) --* An HTTP Live Streaming (HLS) encryption configuration.
+
+      
+        - **ConstantInitializationVector** *(string) --* A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated. 
+
+        
+        - **EncryptionMethod** *(string) --* The encryption method to use.
+
+        
+        - **SpekeKeyProvider** *(dict) --* **[REQUIRED]** A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+
+        
+          - **RoleArn** *(string) --* **[REQUIRED]** An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+
+          
+          - **SystemIds** *(list) --* **[REQUIRED]** The system IDs to include in key requests.
+
+          
+            - *(string) --* 
+
+            
+        
+          - **Url** *(string) --* **[REQUIRED]** The URL of the external key provider service.
+
+          
+        
+      
+      - **HlsManifests** *(list) --* **[REQUIRED]** A list of HLS manifest configurations.
+
+      
+        - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+
+        
+          - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+
+          
+          - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+
+          
+          - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+
+          
+          - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+
+          
+          - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+
+          
+          - **StreamSelection** *(dict) --* A StreamSelection configuration.
+
+          
+            - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+
+            
+            - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+
+            
+            - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+
+            
+          
+        
+    
+      - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+
+      
+      - **UseAudioRenditionGroup** *(boolean) --* When enabled, audio streams will be placed in rendition groups in the output.
+
+      
+    
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of the PackagingConfiguration.
+
+    
+    :type MssPackage: dict
+    :param MssPackage: A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+
+    
+      - **Encryption** *(dict) --* A Microsoft Smooth Streaming (MSS) encryption configuration.
+
+      
+        - **SpekeKeyProvider** *(dict) --* **[REQUIRED]** A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+
+        
+          - **RoleArn** *(string) --* **[REQUIRED]** An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+
+          
+          - **SystemIds** *(list) --* **[REQUIRED]** The system IDs to include in key requests.
+
+          
+            - *(string) --* 
+
+            
+        
+          - **Url** *(string) --* **[REQUIRED]** The URL of the external key provider service.
+
+          
+        
+      
+      - **MssManifests** *(list) --* **[REQUIRED]** A list of MSS manifest configurations.
+
+      
+        - *(dict) --* A Microsoft Smooth Streaming (MSS) manifest configuration.
+
+        
+          - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+
+          
+          - **StreamSelection** *(dict) --* A StreamSelection configuration.
+
+          
+            - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+
+            
+            - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+
+            
+            - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+
+            
+          
+        
+    
+      - **SegmentDurationSeconds** *(integer) --* The duration (in seconds) of each segment.
+
+      
+    
+    :type PackagingGroupId: string
+    :param PackagingGroupId: **[REQUIRED]** The ID of a PackagingGroup.
+
+    
+    :type Tags: dict
+    :param Tags: A collection of tags associated with a resource
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'CmafPackage': {
+                'Encryption': {
+                    'ConstantInitializationVector': 'string',
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'HlsManifests': [
+                    {
+                        'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                        'IncludeIframeOnlyStream': True|False,
+                        'ManifestName': 'string',
+                        'ProgramDateTimeIntervalSeconds': 123,
+                        'RepeatExtXKey': True|False,
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'IncludeEncoderConfigurationInSegments': True|False,
+                'SegmentDurationSeconds': 123
+            },
+            'DashPackage': {
+                'DashManifests': [
+                    {
+                        'ManifestLayout': 'FULL'|'COMPACT',
+                        'ManifestName': 'string',
+                        'MinBufferTimeSeconds': 123,
+                        'Profile': 'NONE'|'HBBTV_1_5',
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'Encryption': {
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'IncludeEncoderConfigurationInSegments': True|False,
+                'PeriodTriggers': [
+                    'ADS',
+                ],
+                'SegmentDurationSeconds': 123,
+                'SegmentTemplateFormat': 'NUMBER_WITH_TIMELINE'|'TIME_WITH_TIMELINE'|'NUMBER_WITH_DURATION'
+            },
+            'HlsPackage': {
+                'Encryption': {
+                    'ConstantInitializationVector': 'string',
+                    'EncryptionMethod': 'AES_128'|'SAMPLE_AES',
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'HlsManifests': [
+                    {
+                        'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                        'IncludeIframeOnlyStream': True|False,
+                        'ManifestName': 'string',
+                        'ProgramDateTimeIntervalSeconds': 123,
+                        'RepeatExtXKey': True|False,
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'SegmentDurationSeconds': 123,
+                'UseAudioRenditionGroup': True|False
+            },
+            'Id': 'string',
+            'MssPackage': {
+                'Encryption': {
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'MssManifests': [
+                    {
+                        'ManifestName': 'string',
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'SegmentDurationSeconds': 123
+            },
+            'PackagingGroupId': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The new MediaPackage VOD PackagingConfiguration resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingConfiguration.
+        
+
+        - **CmafPackage** *(dict) --* A CMAF packaging configuration.
+          
+
+          - **Encryption** *(dict) --* A CMAF encryption configuration.
+            
+
+            - **ConstantInitializationVector** *(string) --* An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+            
+
+            - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+              
+
+              - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+              
+
+              - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+              
+
+              - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+      
+        
+
+        - **DashPackage** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+          
+
+          - **DashManifests** *(list) --* A list of DASH manifest configurations.
+            
+
+            - *(dict) --* A DASH manifest configuration.
+              
+
+              - **ManifestLayout** *(string) --* Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **MinBufferTimeSeconds** *(integer) --* Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+              
+
+              - **Profile** *(string) --* The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **Encryption** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+          
+
+          - **PeriodTriggers** *(list) --* A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains "ADS", new periods will be created where the Asset contains SCTE-35 ad markers. 
+            
+
+            - *(string) --* 
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration. 
+          
+
+          - **SegmentTemplateFormat** *(string) --* Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+      
+        
+
+        - **HlsPackage** *(dict) --* An HTTP Live Streaming (HLS) packaging configuration.
+          
+
+          - **Encryption** *(dict) --* An HTTP Live Streaming (HLS) encryption configuration.
+            
+
+            - **ConstantInitializationVector** *(string) --* A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated. 
+            
+
+            - **EncryptionMethod** *(string) --* The encryption method to use.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+            
+
+            - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+              
+
+              - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+              
+
+              - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+              
+
+              - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+          
+
+          - **UseAudioRenditionGroup** *(boolean) --* When enabled, audio streams will be placed in rendition groups in the output.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingConfiguration.
+        
+
+        - **MssPackage** *(dict) --* A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+          
+
+          - **Encryption** *(dict) --* A Microsoft Smooth Streaming (MSS) encryption configuration.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **MssManifests** *(list) --* A list of MSS manifest configurations.
+            
+
+            - *(dict) --* A Microsoft Smooth Streaming (MSS) manifest configuration.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* The duration (in seconds) of each segment.
+      
+        
+
+        - **PackagingGroupId** *(string) --* The ID of a PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: create_packaging_group(**kwargs)
+
+    Creates a new MediaPackage VOD PackagingGroup resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_packaging_group(
+          Authorization={
+              'CdnIdentifierSecret': 'string',
+              'SecretsRoleArn': 'string'
+          },
+          EgressAccessLogs={
+              'LogGroupName': 'string'
+          },
+          Id='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Authorization: dict
+    :param Authorization: CDN Authorization credentials
+
+    
+      - **CdnIdentifierSecret** *(string) --* **[REQUIRED]** The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+
+      
+      - **SecretsRoleArn** *(string) --* **[REQUIRED]** The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+
+      
+    
+    :type EgressAccessLogs: dict
+    :param EgressAccessLogs: Configure egress access logging.
+
+    
+      - **LogGroupName** *(string) --* Customize the log group name.
+
+      
+    
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of the PackagingGroup.
+
+    
+    :type Tags: dict
+    :param Tags: A collection of tags associated with a resource
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Authorization': {
+                'CdnIdentifierSecret': 'string',
+                'SecretsRoleArn': 'string'
+            },
+            'DomainName': 'string',
+            'EgressAccessLogs': {
+                'LogGroupName': 'string'
+            },
+            'Id': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The new MediaPackage VOD PackagingGroup resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingGroup.
+        
+
+        - **Authorization** *(dict) --* CDN Authorization credentials
+          
+
+          - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+          
+
+          - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+      
+        
+
+        - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+        
+
+        - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+          
+
+          - **LogGroupName** *(string) --* Customize the log group name.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: delete_asset(**kwargs)
+
+    Deletes an existing MediaPackage VOD Asset resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DeleteAsset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_asset(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of the MediaPackage VOD Asset resource to delete.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The MediaPackage VOD Asset resource has been deleted.
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: delete_packaging_configuration(**kwargs)
+
+    Deletes a MediaPackage VOD PackagingConfiguration resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DeletePackagingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_packaging_configuration(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of the MediaPackage VOD PackagingConfiguration resource to delete.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The MediaPackage VOD PackagingConfiguration resource has been deleted.
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: delete_packaging_group(**kwargs)
+
+    Deletes a MediaPackage VOD PackagingGroup resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DeletePackagingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_packaging_group(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of the MediaPackage VOD PackagingGroup resource to delete.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The MediaPackage VOD PackagingGroup resource has been deleted.
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: describe_asset(**kwargs)
+
+    Returns a description of a MediaPackage VOD Asset resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribeAsset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_asset(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of an MediaPackage VOD Asset resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'CreatedAt': 'string',
+            'EgressEndpoints': [
+                {
+                    'PackagingConfigurationId': 'string',
+                    'Url': 'string'
+                },
+            ],
+            'Id': 'string',
+            'PackagingGroupId': 'string',
+            'ResourceId': 'string',
+            'SourceArn': 'string',
+            'SourceRoleArn': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A MediaPackage VOD Asset resource.
+        
+
+        - **Arn** *(string) --* The ARN of the Asset.
+        
+
+        - **CreatedAt** *(string) --* The time the Asset was initially submitted for Ingest.
+        
+
+        - **EgressEndpoints** *(list) --* The list of egress endpoints available for the Asset.
+          
+
+          - *(dict) --* The endpoint URL used to access an Asset using one PackagingConfiguration.
+            
+
+            - **PackagingConfigurationId** *(string) --* The ID of the PackagingConfiguration being applied to the Asset.
+            
+
+            - **Url** *(string) --* The URL of the parent manifest for the repackaged Asset.
+        
+      
+        
+
+        - **Id** *(string) --* The unique identifier for the Asset.
+        
+
+        - **PackagingGroupId** *(string) --* The ID of the PackagingGroup for the Asset.
+        
+
+        - **ResourceId** *(string) --* The resource ID to include in SPEKE key requests.
+        
+
+        - **SourceArn** *(string) --* ARN of the source object in S3.
+        
+
+        - **SourceRoleArn** *(string) --* The IAM role_arn used to access the source S3 bucket.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: describe_packaging_configuration(**kwargs)
+
+    Returns a description of a MediaPackage VOD PackagingConfiguration resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_packaging_configuration(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of a MediaPackage VOD PackagingConfiguration resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'CmafPackage': {
+                'Encryption': {
+                    'ConstantInitializationVector': 'string',
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'HlsManifests': [
+                    {
+                        'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                        'IncludeIframeOnlyStream': True|False,
+                        'ManifestName': 'string',
+                        'ProgramDateTimeIntervalSeconds': 123,
+                        'RepeatExtXKey': True|False,
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'IncludeEncoderConfigurationInSegments': True|False,
+                'SegmentDurationSeconds': 123
+            },
+            'DashPackage': {
+                'DashManifests': [
+                    {
+                        'ManifestLayout': 'FULL'|'COMPACT',
+                        'ManifestName': 'string',
+                        'MinBufferTimeSeconds': 123,
+                        'Profile': 'NONE'|'HBBTV_1_5',
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'Encryption': {
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'IncludeEncoderConfigurationInSegments': True|False,
+                'PeriodTriggers': [
+                    'ADS',
+                ],
+                'SegmentDurationSeconds': 123,
+                'SegmentTemplateFormat': 'NUMBER_WITH_TIMELINE'|'TIME_WITH_TIMELINE'|'NUMBER_WITH_DURATION'
+            },
+            'HlsPackage': {
+                'Encryption': {
+                    'ConstantInitializationVector': 'string',
+                    'EncryptionMethod': 'AES_128'|'SAMPLE_AES',
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'HlsManifests': [
+                    {
+                        'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                        'IncludeIframeOnlyStream': True|False,
+                        'ManifestName': 'string',
+                        'ProgramDateTimeIntervalSeconds': 123,
+                        'RepeatExtXKey': True|False,
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'SegmentDurationSeconds': 123,
+                'UseAudioRenditionGroup': True|False
+            },
+            'Id': 'string',
+            'MssPackage': {
+                'Encryption': {
+                    'SpekeKeyProvider': {
+                        'RoleArn': 'string',
+                        'SystemIds': [
+                            'string',
+                        ],
+                        'Url': 'string'
+                    }
+                },
+                'MssManifests': [
+                    {
+                        'ManifestName': 'string',
+                        'StreamSelection': {
+                            'MaxVideoBitsPerSecond': 123,
+                            'MinVideoBitsPerSecond': 123,
+                            'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                        }
+                    },
+                ],
+                'SegmentDurationSeconds': 123
+            },
+            'PackagingGroupId': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A MediaPackage VOD PackagingConfiguration resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingConfiguration.
+        
+
+        - **CmafPackage** *(dict) --* A CMAF packaging configuration.
+          
+
+          - **Encryption** *(dict) --* A CMAF encryption configuration.
+            
+
+            - **ConstantInitializationVector** *(string) --* An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+            
+
+            - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+              
+
+              - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+              
+
+              - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+              
+
+              - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+      
+        
+
+        - **DashPackage** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+          
+
+          - **DashManifests** *(list) --* A list of DASH manifest configurations.
+            
+
+            - *(dict) --* A DASH manifest configuration.
+              
+
+              - **ManifestLayout** *(string) --* Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **MinBufferTimeSeconds** *(integer) --* Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+              
+
+              - **Profile** *(string) --* The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **Encryption** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+          
+
+          - **PeriodTriggers** *(list) --* A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains "ADS", new periods will be created where the Asset contains SCTE-35 ad markers. 
+            
+
+            - *(string) --* 
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration. 
+          
+
+          - **SegmentTemplateFormat** *(string) --* Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+      
+        
+
+        - **HlsPackage** *(dict) --* An HTTP Live Streaming (HLS) packaging configuration.
+          
+
+          - **Encryption** *(dict) --* An HTTP Live Streaming (HLS) encryption configuration.
+            
+
+            - **ConstantInitializationVector** *(string) --* A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated. 
+            
+
+            - **EncryptionMethod** *(string) --* The encryption method to use.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+            
+
+            - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+              
+
+              - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+              
+
+              - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+              
+
+              - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+          
+
+          - **UseAudioRenditionGroup** *(boolean) --* When enabled, audio streams will be placed in rendition groups in the output.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingConfiguration.
+        
+
+        - **MssPackage** *(dict) --* A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+          
+
+          - **Encryption** *(dict) --* A Microsoft Smooth Streaming (MSS) encryption configuration.
+            
+
+            - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+              
+
+              - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+              
+
+              - **SystemIds** *(list) --* The system IDs to include in key requests.
+                
+
+                - *(string) --* 
+            
+              
+
+              - **Url** *(string) --* The URL of the external key provider service.
+          
+        
+          
+
+          - **MssManifests** *(list) --* A list of MSS manifest configurations.
+            
+
+            - *(dict) --* A Microsoft Smooth Streaming (MSS) manifest configuration.
+              
+
+              - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+              
+
+              - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                
+
+                - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                
+
+                - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                
+
+                - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+            
+          
+        
+          
+
+          - **SegmentDurationSeconds** *(integer) --* The duration (in seconds) of each segment.
+      
+        
+
+        - **PackagingGroupId** *(string) --* The ID of a PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: describe_packaging_group(**kwargs)
+
+    Returns a description of a MediaPackage VOD PackagingGroup resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_packaging_group(
+          Id='string'
+      )
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of a MediaPackage VOD PackagingGroup resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Authorization': {
+                'CdnIdentifierSecret': 'string',
+                'SecretsRoleArn': 'string'
+            },
+            'DomainName': 'string',
+            'EgressAccessLogs': {
+                'LogGroupName': 'string'
+            },
+            'Id': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A MediaPackage VOD PackagingGroup resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingGroup.
+        
+
+        - **Authorization** *(dict) --* CDN Authorization credentials
+          
+
+          - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+          
+
+          - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+      
+        
+
+        - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+        
+
+        - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+          
+
+          - **LogGroupName** *(string) --* Customize the log group name.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_assets(**kwargs)
+
+    Returns a collection of MediaPackage VOD Asset resources.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListAssets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_assets(
+          MaxResults=123,
+          NextToken='string',
+          PackagingGroupId='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: Upper bound on number of records to return.
+
+    
+    :type NextToken: string
+    :param NextToken: A token used to resume pagination from the end of a previous request.
+
+    
+    :type PackagingGroupId: string
+    :param PackagingGroupId: Returns Assets associated with the specified PackagingGroup.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Assets': [
+                {
+                    'Arn': 'string',
+                    'CreatedAt': 'string',
+                    'Id': 'string',
+                    'PackagingGroupId': 'string',
+                    'ResourceId': 'string',
+                    'SourceArn': 'string',
+                    'SourceRoleArn': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD Asset resources.
+        
+
+        - **Assets** *(list) --* A list of MediaPackage VOD Asset resources.
+          
+
+          - *(dict) --* A MediaPackage VOD Asset resource.
+            
+
+            - **Arn** *(string) --* The ARN of the Asset.
+            
+
+            - **CreatedAt** *(string) --* The time the Asset was initially submitted for Ingest.
+            
+
+            - **Id** *(string) --* The unique identifier for the Asset.
+            
+
+            - **PackagingGroupId** *(string) --* The ID of the PackagingGroup for the Asset.
+            
+
+            - **ResourceId** *(string) --* The resource ID to include in SPEKE key requests.
+            
+
+            - **SourceArn** *(string) --* ARN of the source object in S3.
+            
+
+            - **SourceRoleArn** *(string) --* The IAM role ARN used to access the source S3 bucket.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **NextToken** *(string) --* A token that can be used to resume pagination from the end of the collection.
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_packaging_configurations(**kwargs)
+
+    Returns a collection of MediaPackage VOD PackagingConfiguration resources.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_packaging_configurations(
+          MaxResults=123,
+          NextToken='string',
+          PackagingGroupId='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: Upper bound on number of records to return.
+
+    
+    :type NextToken: string
+    :param NextToken: A token used to resume pagination from the end of a previous request.
+
+    
+    :type PackagingGroupId: string
+    :param PackagingGroupId: Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'PackagingConfigurations': [
+                {
+                    'Arn': 'string',
+                    'CmafPackage': {
+                        'Encryption': {
+                            'ConstantInitializationVector': 'string',
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'HlsManifests': [
+                            {
+                                'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                                'IncludeIframeOnlyStream': True|False,
+                                'ManifestName': 'string',
+                                'ProgramDateTimeIntervalSeconds': 123,
+                                'RepeatExtXKey': True|False,
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'IncludeEncoderConfigurationInSegments': True|False,
+                        'SegmentDurationSeconds': 123
+                    },
+                    'DashPackage': {
+                        'DashManifests': [
+                            {
+                                'ManifestLayout': 'FULL'|'COMPACT',
+                                'ManifestName': 'string',
+                                'MinBufferTimeSeconds': 123,
+                                'Profile': 'NONE'|'HBBTV_1_5',
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'Encryption': {
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'IncludeEncoderConfigurationInSegments': True|False,
+                        'PeriodTriggers': [
+                            'ADS',
+                        ],
+                        'SegmentDurationSeconds': 123,
+                        'SegmentTemplateFormat': 'NUMBER_WITH_TIMELINE'|'TIME_WITH_TIMELINE'|'NUMBER_WITH_DURATION'
+                    },
+                    'HlsPackage': {
+                        'Encryption': {
+                            'ConstantInitializationVector': 'string',
+                            'EncryptionMethod': 'AES_128'|'SAMPLE_AES',
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'HlsManifests': [
+                            {
+                                'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                                'IncludeIframeOnlyStream': True|False,
+                                'ManifestName': 'string',
+                                'ProgramDateTimeIntervalSeconds': 123,
+                                'RepeatExtXKey': True|False,
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'SegmentDurationSeconds': 123,
+                        'UseAudioRenditionGroup': True|False
+                    },
+                    'Id': 'string',
+                    'MssPackage': {
+                        'Encryption': {
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'MssManifests': [
+                            {
+                                'ManifestName': 'string',
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'SegmentDurationSeconds': 123
+                    },
+                    'PackagingGroupId': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD PackagingConfiguration resources.
+        
+
+        - **NextToken** *(string) --* A token that can be used to resume pagination from the end of the collection.
+        
+
+        - **PackagingConfigurations** *(list) --* A list of MediaPackage VOD PackagingConfiguration resources.
+          
+
+          - *(dict) --* A MediaPackage VOD PackagingConfiguration resource.
+            
+
+            - **Arn** *(string) --* The ARN of the PackagingConfiguration.
+            
+
+            - **CmafPackage** *(dict) --* A CMAF packaging configuration.
+              
+
+              - **Encryption** *(dict) --* A CMAF encryption configuration.
+                
+
+                - **ConstantInitializationVector** *(string) --* An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+                
+
+                - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+                  
+
+                  - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+                  
+
+                  - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+                  
+
+                  - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+          
+            
+
+            - **DashPackage** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+              
+
+              - **DashManifests** *(list) --* A list of DASH manifest configurations.
+                
+
+                - *(dict) --* A DASH manifest configuration.
+                  
+
+                  - **ManifestLayout** *(string) --* Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **MinBufferTimeSeconds** *(integer) --* Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+                  
+
+                  - **Profile** *(string) --* The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **Encryption** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+              
+
+              - **PeriodTriggers** *(list) --* A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains "ADS", new periods will be created where the Asset contains SCTE-35 ad markers. 
+                
+
+                - *(string) --* 
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration. 
+              
+
+              - **SegmentTemplateFormat** *(string) --* Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+          
+            
+
+            - **HlsPackage** *(dict) --* An HTTP Live Streaming (HLS) packaging configuration.
+              
+
+              - **Encryption** *(dict) --* An HTTP Live Streaming (HLS) encryption configuration.
+                
+
+                - **ConstantInitializationVector** *(string) --* A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated. 
+                
+
+                - **EncryptionMethod** *(string) --* The encryption method to use.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+                
+
+                - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+                  
+
+                  - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+                  
+
+                  - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+                  
+
+                  - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+              
+
+              - **UseAudioRenditionGroup** *(boolean) --* When enabled, audio streams will be placed in rendition groups in the output.
+          
+            
+
+            - **Id** *(string) --* The ID of the PackagingConfiguration.
+            
+
+            - **MssPackage** *(dict) --* A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+              
+
+              - **Encryption** *(dict) --* A Microsoft Smooth Streaming (MSS) encryption configuration.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **MssManifests** *(list) --* A list of MSS manifest configurations.
+                
+
+                - *(dict) --* A Microsoft Smooth Streaming (MSS) manifest configuration.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* The duration (in seconds) of each segment.
+          
+            
+
+            - **PackagingGroupId** *(string) --* The ID of a PackagingGroup.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_packaging_groups(**kwargs)
+
+    Returns a collection of MediaPackage VOD PackagingGroup resources.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_packaging_groups(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: Upper bound on number of records to return.
+
+    
+    :type NextToken: string
+    :param NextToken: A token used to resume pagination from the end of a previous request.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'PackagingGroups': [
+                {
+                    'Arn': 'string',
+                    'Authorization': {
+                        'CdnIdentifierSecret': 'string',
+                        'SecretsRoleArn': 'string'
+                    },
+                    'DomainName': 'string',
+                    'EgressAccessLogs': {
+                        'LogGroupName': 'string'
+                    },
+                    'Id': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD PackagingGroup resources.
+        
+
+        - **NextToken** *(string) --* A token that can be used to resume pagination from the end of the collection.
+        
+
+        - **PackagingGroups** *(list) --* A list of MediaPackage VOD PackagingGroup resources.
+          
+
+          - *(dict) --* A MediaPackage VOD PackagingGroup resource.
+            
+
+            - **Arn** *(string) --* The ARN of the PackagingGroup.
+            
+
+            - **Authorization** *(dict) --* CDN Authorization credentials
+              
+
+              - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+              
+
+              - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+          
+            
+
+            - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+            
+
+            - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+              
+
+              - **LogGroupName** *(string) --* Customize the log group name.
+          
+            
+
+            - **Id** *(string) --* The ID of the PackagingGroup.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    Returns a list of the tags assigned to the specified resource.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 200 response
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    Adds tags to the specified resource. You can specify one or more tags to add.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** A collection of tags associated with a resource
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :returns: None
+
+  .. py:method:: untag_resource(**kwargs)
+
+    Removes tags from the specified resource. You can specify one or more tags to remove.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** A comma-separated list of the tag keys to remove from the resource.
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+
+  .. py:method:: update_packaging_group(**kwargs)
+
+    Updates a specific packaging group. You can't change the id attribute or any other system-generated attributes.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/UpdatePackagingGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_packaging_group(
+          Authorization={
+              'CdnIdentifierSecret': 'string',
+              'SecretsRoleArn': 'string'
+          },
+          Id='string'
+      )
+    :type Authorization: dict
+    :param Authorization: CDN Authorization credentials
+
+    
+      - **CdnIdentifierSecret** *(string) --* **[REQUIRED]** The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+
+      
+      - **SecretsRoleArn** *(string) --* **[REQUIRED]** The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+
+      
+    
+    :type Id: string
+    :param Id: **[REQUIRED]** The ID of a MediaPackage VOD PackagingGroup resource.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string',
+            'Authorization': {
+                'CdnIdentifierSecret': 'string',
+                'SecretsRoleArn': 'string'
+            },
+            'DomainName': 'string',
+            'EgressAccessLogs': {
+                'LogGroupName': 'string'
+            },
+            'Id': 'string',
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* The updated MediaPackage VOD PackagingGroup resource.
+        
+
+        - **Arn** *(string) --* The ARN of the PackagingGroup.
+        
+
+        - **Authorization** *(dict) --* CDN Authorization credentials
+          
+
+          - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+          
+
+          - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+      
+        
+
+        - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+        
+
+        - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+          
+
+          - **LogGroupName** *(string) --* Customize the log group name.
+      
+        
+
+        - **Id** *(string) --* The ID of the PackagingGroup.
+        
+
+        - **Tags** *(dict) --* A collection of tags associated with a resource
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.UnprocessableEntityException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.InternalServerErrorException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ForbiddenException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.ServiceUnavailableException`
+
+    
+    *     :py:class:`MediaPackageVod.Client.exceptions.TooManyRequestsException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`MediaPackageVod.Paginator.ListAssets`
+
+
+* :py:class:`MediaPackageVod.Paginator.ListPackagingConfigurations`
+
+
+* :py:class:`MediaPackageVod.Paginator.ListPackagingGroups`
+
+
+
+.. py:class:: MediaPackageVod.Paginator.ListAssets
+
+  ::
+
+    
+    paginator = client.get_paginator('list_assets')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`MediaPackageVod.Client.list_assets`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListAssets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PackagingGroupId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PackagingGroupId: string
+    :param PackagingGroupId: Returns Assets associated with the specified PackagingGroup.
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Assets': [
+                {
+                    'Arn': 'string',
+                    'CreatedAt': 'string',
+                    'Id': 'string',
+                    'PackagingGroupId': 'string',
+                    'ResourceId': 'string',
+                    'SourceArn': 'string',
+                    'SourceRoleArn': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD Asset resources.
+        
+
+        - **Assets** *(list) --* A list of MediaPackage VOD Asset resources.
+          
+
+          - *(dict) --* A MediaPackage VOD Asset resource.
+            
+
+            - **Arn** *(string) --* The ARN of the Asset.
+            
+
+            - **CreatedAt** *(string) --* The time the Asset was initially submitted for Ingest.
+            
+
+            - **Id** *(string) --* The unique identifier for the Asset.
+            
+
+            - **PackagingGroupId** *(string) --* The ID of the PackagingGroup for the Asset.
+            
+
+            - **ResourceId** *(string) --* The resource ID to include in SPEKE key requests.
+            
+
+            - **SourceArn** *(string) --* ARN of the source object in S3.
+            
+
+            - **SourceRoleArn** *(string) --* The IAM role ARN used to access the source S3 bucket.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+
+.. py:class:: MediaPackageVod.Paginator.ListPackagingConfigurations
+
+  ::
+
+    
+    paginator = client.get_paginator('list_packaging_configurations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`MediaPackageVod.Client.list_packaging_configurations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingConfigurations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PackagingGroupId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PackagingGroupId: string
+    :param PackagingGroupId: Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PackagingConfigurations': [
+                {
+                    'Arn': 'string',
+                    'CmafPackage': {
+                        'Encryption': {
+                            'ConstantInitializationVector': 'string',
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'HlsManifests': [
+                            {
+                                'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                                'IncludeIframeOnlyStream': True|False,
+                                'ManifestName': 'string',
+                                'ProgramDateTimeIntervalSeconds': 123,
+                                'RepeatExtXKey': True|False,
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'IncludeEncoderConfigurationInSegments': True|False,
+                        'SegmentDurationSeconds': 123
+                    },
+                    'DashPackage': {
+                        'DashManifests': [
+                            {
+                                'ManifestLayout': 'FULL'|'COMPACT',
+                                'ManifestName': 'string',
+                                'MinBufferTimeSeconds': 123,
+                                'Profile': 'NONE'|'HBBTV_1_5',
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'Encryption': {
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'IncludeEncoderConfigurationInSegments': True|False,
+                        'PeriodTriggers': [
+                            'ADS',
+                        ],
+                        'SegmentDurationSeconds': 123,
+                        'SegmentTemplateFormat': 'NUMBER_WITH_TIMELINE'|'TIME_WITH_TIMELINE'|'NUMBER_WITH_DURATION'
+                    },
+                    'HlsPackage': {
+                        'Encryption': {
+                            'ConstantInitializationVector': 'string',
+                            'EncryptionMethod': 'AES_128'|'SAMPLE_AES',
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'HlsManifests': [
+                            {
+                                'AdMarkers': 'NONE'|'SCTE35_ENHANCED'|'PASSTHROUGH',
+                                'IncludeIframeOnlyStream': True|False,
+                                'ManifestName': 'string',
+                                'ProgramDateTimeIntervalSeconds': 123,
+                                'RepeatExtXKey': True|False,
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'SegmentDurationSeconds': 123,
+                        'UseAudioRenditionGroup': True|False
+                    },
+                    'Id': 'string',
+                    'MssPackage': {
+                        'Encryption': {
+                            'SpekeKeyProvider': {
+                                'RoleArn': 'string',
+                                'SystemIds': [
+                                    'string',
+                                ],
+                                'Url': 'string'
+                            }
+                        },
+                        'MssManifests': [
+                            {
+                                'ManifestName': 'string',
+                                'StreamSelection': {
+                                    'MaxVideoBitsPerSecond': 123,
+                                    'MinVideoBitsPerSecond': 123,
+                                    'StreamOrder': 'ORIGINAL'|'VIDEO_BITRATE_ASCENDING'|'VIDEO_BITRATE_DESCENDING'
+                                }
+                            },
+                        ],
+                        'SegmentDurationSeconds': 123
+                    },
+                    'PackagingGroupId': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD PackagingConfiguration resources.
+        
+
+        - **PackagingConfigurations** *(list) --* A list of MediaPackage VOD PackagingConfiguration resources.
+          
+
+          - *(dict) --* A MediaPackage VOD PackagingConfiguration resource.
+            
+
+            - **Arn** *(string) --* The ARN of the PackagingConfiguration.
+            
+
+            - **CmafPackage** *(dict) --* A CMAF packaging configuration.
+              
+
+              - **Encryption** *(dict) --* A CMAF encryption configuration.
+                
+
+                - **ConstantInitializationVector** *(string) --* An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+                
+
+                - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+                  
+
+                  - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+                  
+
+                  - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+                  
+
+                  - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+          
+            
+
+            - **DashPackage** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+              
+
+              - **DashManifests** *(list) --* A list of DASH manifest configurations.
+                
+
+                - *(dict) --* A DASH manifest configuration.
+                  
+
+                  - **ManifestLayout** *(string) --* Determines the position of some tags in the Media Presentation Description (MPD). When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation. When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **MinBufferTimeSeconds** *(integer) --* Minimum duration (in seconds) that a player will buffer media before starting the presentation.
+                  
+
+                  - **Profile** *(string) --* The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **Encryption** *(dict) --* A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **IncludeEncoderConfigurationInSegments** *(boolean) --* When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback. 
+              
+
+              - **PeriodTriggers** *(list) --* A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains "ADS", new periods will be created where the Asset contains SCTE-35 ad markers. 
+                
+
+                - *(string) --* 
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration. 
+              
+
+              - **SegmentTemplateFormat** *(string) --* Determines the type of SegmentTemplate included in the Media Presentation Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs. When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+          
+            
+
+            - **HlsPackage** *(dict) --* An HTTP Live Streaming (HLS) packaging configuration.
+              
+
+              - **Encryption** *(dict) --* An HTTP Live Streaming (HLS) encryption configuration.
+                
+
+                - **ConstantInitializationVector** *(string) --* A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated. 
+                
+
+                - **EncryptionMethod** *(string) --* The encryption method to use.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **HlsManifests** *(list) --* A list of HLS manifest configurations.
+                
+
+                - *(dict) --* An HTTP Live Streaming (HLS) manifest configuration.
+                  
+
+                  - **AdMarkers** *(string) --* This setting controls how ad markers are included in the packaged OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the output. "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35 messages in the input source. 
+                  
+
+                  - **IncludeIframeOnlyStream** *(boolean) --* When enabled, an I-Frame only stream will be included in the output.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **ProgramDateTimeIntervalSeconds** *(integer) --* The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output. 
+                  
+
+                  - **RepeatExtXKey** *(boolean) --* When enabled, the EXT-X-KEY tag will be repeated in output manifests.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration. 
+              
+
+              - **UseAudioRenditionGroup** *(boolean) --* When enabled, audio streams will be placed in rendition groups in the output.
+          
+            
+
+            - **Id** *(string) --* The ID of the PackagingConfiguration.
+            
+
+            - **MssPackage** *(dict) --* A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
+              
+
+              - **Encryption** *(dict) --* A Microsoft Smooth Streaming (MSS) encryption configuration.
+                
+
+                - **SpekeKeyProvider** *(dict) --* A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
+                  
+
+                  - **RoleArn** *(string) --* An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service. 
+                  
+
+                  - **SystemIds** *(list) --* The system IDs to include in key requests.
+                    
+
+                    - *(string) --* 
+                
+                  
+
+                  - **Url** *(string) --* The URL of the external key provider service.
+              
+            
+              
+
+              - **MssManifests** *(list) --* A list of MSS manifest configurations.
+                
+
+                - *(dict) --* A Microsoft Smooth Streaming (MSS) manifest configuration.
+                  
+
+                  - **ManifestName** *(string) --* An optional string to include in the name of the manifest.
+                  
+
+                  - **StreamSelection** *(dict) --* A StreamSelection configuration.
+                    
+
+                    - **MaxVideoBitsPerSecond** *(integer) --* The maximum video bitrate (bps) to include in output.
+                    
+
+                    - **MinVideoBitsPerSecond** *(integer) --* The minimum video bitrate (bps) to include in output.
+                    
+
+                    - **StreamOrder** *(string) --* A directive that determines the order of streams in the output.
+                
+              
+            
+              
+
+              - **SegmentDurationSeconds** *(integer) --* The duration (in seconds) of each segment.
+          
+            
+
+            - **PackagingGroupId** *(string) --* The ID of a PackagingGroup.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    
+
+.. py:class:: MediaPackageVod.Paginator.ListPackagingGroups
+
+  ::
+
+    
+    paginator = client.get_paginator('list_packaging_groups')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`MediaPackageVod.Client.list_packaging_groups`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'PackagingGroups': [
+                {
+                    'Arn': 'string',
+                    'Authorization': {
+                        'CdnIdentifierSecret': 'string',
+                        'SecretsRoleArn': 'string'
+                    },
+                    'DomainName': 'string',
+                    'EgressAccessLogs': {
+                        'LogGroupName': 'string'
+                    },
+                    'Id': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* A collection of MediaPackage VOD PackagingGroup resources.
+        
+
+        - **PackagingGroups** *(list) --* A list of MediaPackage VOD PackagingGroup resources.
+          
+
+          - *(dict) --* A MediaPackage VOD PackagingGroup resource.
+            
+
+            - **Arn** *(string) --* The ARN of the PackagingGroup.
+            
+
+            - **Authorization** *(dict) --* CDN Authorization credentials
+              
+
+              - **CdnIdentifierSecret** *(string) --* The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+              
+
+              - **SecretsRoleArn** *(string) --* The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+          
+            
+
+            - **DomainName** *(string) --* The fully qualified domain name for Assets in the PackagingGroup.
+            
+
+            - **EgressAccessLogs** *(dict) --* Configure egress access logging.
+              
+
+              - **LogGroupName** *(string) --* Customize the log group name.
+          
+            
+
+            - **Id** *(string) --* The ID of the PackagingGroup.
+            
+
+            - **Tags** *(dict) --* A collection of tags associated with a resource
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+    

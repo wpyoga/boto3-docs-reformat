@@ -1,0 +1,4835 @@
+
+
+*********
+AppConfig
+*********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: AppConfig.Client
+
+  A low-level client representing Amazon AppConfig
+   
+
+  Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.
+
+   
+
+  To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+   
+
+  During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. 
+
+   
+
+  AppConfig supports multiple use cases. Here are some examples.
+
+   
+
+   
+  * **Application tuning** : Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic. 
+   
+  * **Feature toggle** : Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement.  
+   
+  * **Allow list** : Use AppConfig to allow premium subscribers to access paid content.  
+   
+  * **Operational issues** : Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system. 
+   
+
+   
+
+  This reference is intended to be used with the `AWS AppConfig User Guide <http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('appconfig')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~AppConfig.Client.can_paginate`
+
+  
+  *   :py:meth:`~AppConfig.Client.create_application`
+
+  
+  *   :py:meth:`~AppConfig.Client.create_configuration_profile`
+
+  
+  *   :py:meth:`~AppConfig.Client.create_deployment_strategy`
+
+  
+  *   :py:meth:`~AppConfig.Client.create_environment`
+
+  
+  *   :py:meth:`~AppConfig.Client.create_hosted_configuration_version`
+
+  
+  *   :py:meth:`~AppConfig.Client.delete_application`
+
+  
+  *   :py:meth:`~AppConfig.Client.delete_configuration_profile`
+
+  
+  *   :py:meth:`~AppConfig.Client.delete_deployment_strategy`
+
+  
+  *   :py:meth:`~AppConfig.Client.delete_environment`
+
+  
+  *   :py:meth:`~AppConfig.Client.delete_hosted_configuration_version`
+
+  
+  *   :py:meth:`~AppConfig.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_application`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_configuration`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_configuration_profile`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_deployment`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_deployment_strategy`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_environment`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_hosted_configuration_version`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_paginator`
+
+  
+  *   :py:meth:`~AppConfig.Client.get_waiter`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_applications`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_configuration_profiles`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_deployment_strategies`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_deployments`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_environments`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_hosted_configuration_versions`
+
+  
+  *   :py:meth:`~AppConfig.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~AppConfig.Client.start_deployment`
+
+  
+  *   :py:meth:`~AppConfig.Client.stop_deployment`
+
+  
+  *   :py:meth:`~AppConfig.Client.tag_resource`
+
+  
+  *   :py:meth:`~AppConfig.Client.untag_resource`
+
+  
+  *   :py:meth:`~AppConfig.Client.update_application`
+
+  
+  *   :py:meth:`~AppConfig.Client.update_configuration_profile`
+
+  
+  *   :py:meth:`~AppConfig.Client.update_deployment_strategy`
+
+  
+  *   :py:meth:`~AppConfig.Client.update_environment`
+
+  
+  *   :py:meth:`~AppConfig.Client.validate_configuration`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_application(**kwargs)
+
+    
+
+    An application in AppConfig is a logical unit of code that provides capabilities for your customers. For example, an application can be a microservice that runs on Amazon EC2 instances, a mobile application installed by your users, a serverless application using Amazon API Gateway and AWS Lambda, or any system you run on behalf of others.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_application(
+          Name='string',
+          Description='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      A name for the application.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the application.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Metadata to assign to the application. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The application name.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the application.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_configuration_profile(**kwargs)
+
+    
+
+    Information that enables AppConfig to access the configuration source. Valid configuration sources include Systems Manager (SSM) documents, SSM Parameter Store parameters, and Amazon S3 objects. A configuration profile includes the following information.
+
+     
+
+     
+    * The Uri location of the configuration data. 
+     
+    * The AWS Identity and Access Management (IAM) role that provides access to the configuration data. 
+     
+    * A validator for the configuration data. Available validators include either a JSON Schema or an AWS Lambda function. 
+     
+
+     
+
+    For more information, see `Create a Configuration and a Configuration Profile <http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-creating-configuration-and-profile.html>`__ in the *AWS AppConfig User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateConfigurationProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_configuration_profile(
+          ApplicationId='string',
+          Name='string',
+          Description='string',
+          LocationUri='string',
+          RetrievalRoleArn='string',
+          Validators=[
+              {
+                  'Type': 'JSON_SCHEMA'|'LAMBDA',
+                  'Content': 'string'
+              },
+          ],
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      A name for the configuration profile.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the configuration profile.
+
+      
+
+    
+    :type LocationUri: string
+    :param LocationUri: **[REQUIRED]** 
+
+      A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format ``ssm-document://<Document_name>`` or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format ``ssm-parameter://<Parameter_name>`` or the ARN. For an Amazon S3 object, specify the URI in the following format: ``s3://<bucket>/<objectKey>`` . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json
+
+      
+
+    
+    :type RetrievalRoleArn: string
+    :param RetrievalRoleArn: 
+
+      The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+
+      
+
+    
+    :type Validators: list
+    :param Validators: 
+
+      A list of methods for validating the configuration.
+
+      
+
+    
+      - *(dict) --* 
+
+        A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+        
+
+      
+        - **Type** *(string) --* **[REQUIRED]** 
+
+          AppConfig supports validators of type ``JSON_SCHEMA`` and ``LAMBDA``  
+
+          
+
+        
+        - **Content** *(string) --* **[REQUIRED]** 
+
+          Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+
+          
+
+        
+      
+  
+    :type Tags: dict
+    :param Tags: 
+
+      Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'LocationUri': 'string',
+            'RetrievalRoleArn': 'string',
+            'Validators': [
+                {
+                    'Type': 'JSON_SCHEMA'|'LAMBDA',
+                    'Content': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The configuration profile ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the configuration profile.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The configuration profile description.
+
+          
+        
+
+        - **LocationUri** *(string) --* 
+
+          The URI location of the configuration.
+
+          
+        
+
+        - **RetrievalRoleArn** *(string) --* 
+
+          The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+
+          
+        
+
+        - **Validators** *(list) --* 
+
+          A list of methods for validating the configuration.
+
+          
+          
+
+          - *(dict) --* 
+
+            A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              AppConfig supports validators of type ``JSON_SCHEMA`` and ``LAMBDA``  
+
+              
+            
+
+            - **Content** *(string) --* 
+
+              Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_deployment_strategy(**kwargs)
+
+    
+
+    A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateDeploymentStrategy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_deployment_strategy(
+          Name='string',
+          Description='string',
+          DeploymentDurationInMinutes=123,
+          FinalBakeTimeInMinutes=123,
+          GrowthFactor=...,
+          GrowthType='LINEAR'|'EXPONENTIAL',
+          ReplicateTo='NONE'|'SSM_DOCUMENT',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      A name for the deployment strategy.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the deployment strategy.
+
+      
+
+    
+    :type DeploymentDurationInMinutes: integer
+    :param DeploymentDurationInMinutes: **[REQUIRED]** 
+
+      Total amount of time for a deployment to last.
+
+      
+
+    
+    :type FinalBakeTimeInMinutes: integer
+    :param FinalBakeTimeInMinutes: 
+
+      The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+      
+
+    
+    :type GrowthFactor: float
+    :param GrowthFactor: **[REQUIRED]** 
+
+      The percentage of targets to receive a deployed configuration during each interval.
+
+      
+
+    
+    :type GrowthType: string
+    :param GrowthType: 
+
+      The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:
+
+       
+
+       **Linear** : For this type, AppConfig processes the deployment by dividing the total number of targets by the value specified for ``Step percentage`` . For example, a linear deployment that uses a ``Step percentage`` of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.
+
+       
+
+       **Exponential** : For this type, AppConfig processes the deployment exponentially using the following formula: ``G*(2^N)`` . In this formula, ``G`` is the growth factor specified by the user and ``N`` is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:
+
+       
+
+       ``2*(2^0)``  
+
+       
+
+       ``2*(2^1)``  
+
+       
+
+       ``2*(2^2)``  
+
+       
+
+      Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
+
+      
+
+    
+    :type ReplicateTo: string
+    :param ReplicateTo: **[REQUIRED]** 
+
+      Save the deployment strategy to a Systems Manager (SSM) document.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Metadata to assign to the deployment strategy. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'ReplicateTo': 'NONE'|'SSM_DOCUMENT'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The deployment strategy ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the deployment strategy.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment strategy.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets that received a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **ReplicateTo** *(string) --* 
+
+          Save the deployment strategy to a Systems Manager (SSM) document.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_environment(**kwargs)
+
+    
+
+    For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a ``Beta`` or ``Production`` environment. You can also define environments for application subcomponents such as the ``Web`` , ``Mobile`` and ``Back-end`` components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_environment(
+          ApplicationId='string',
+          Name='string',
+          Description='string',
+          Monitors=[
+              {
+                  'AlarmArn': 'string',
+                  'AlarmRoleArn': 'string'
+              },
+          ],
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      A name for the environment.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the environment.
+
+      
+
+    
+    :type Monitors: list
+    :param Monitors: 
+
+      Amazon CloudWatch alarms to monitor during the deployment process.
+
+      
+
+    
+      - *(dict) --* 
+
+        Amazon CloudWatch alarms to monitor during the deployment process.
+
+        
+
+      
+        - **AlarmArn** *(string) --* 
+
+          ARN of the Amazon CloudWatch alarm.
+
+          
+
+        
+        - **AlarmRoleArn** *(string) --* 
+
+          ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+          
+
+        
+      
+  
+    :type Tags: dict
+    :param Tags: 
+
+      Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'State': 'READY_FOR_DEPLOYMENT'|'DEPLOYING'|'ROLLING_BACK'|'ROLLED_BACK',
+            'Monitors': [
+                {
+                    'AlarmArn': 'string',
+                    'AlarmRoleArn': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The environment ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the environment.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the environment.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the environment. An environment can be in one of the following states: ``READY_FOR_DEPLOYMENT`` , ``DEPLOYING`` , ``ROLLING_BACK`` , or ``ROLLED_BACK``  
+
+          
+        
+
+        - **Monitors** *(list) --* 
+
+          Amazon CloudWatch alarms monitored during the deployment.
+
+          
+          
+
+          - *(dict) --* 
+
+            Amazon CloudWatch alarms to monitor during the deployment process.
+
+            
+            
+
+            - **AlarmArn** *(string) --* 
+
+              ARN of the Amazon CloudWatch alarm.
+
+              
+            
+
+            - **AlarmRoleArn** *(string) --* 
+
+              ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: create_hosted_configuration_version(**kwargs)
+
+    
+
+    Create a new configuration in the AppConfig configuration store.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateHostedConfigurationVersion>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_hosted_configuration_version(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          Description='string',
+          Content=b'bytes'|file,
+          ContentType='string',
+          LatestVersionNumber=123
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the configuration.
+
+      
+
+    
+    :type Content: bytes or seekable file-like object
+    :param Content: **[REQUIRED]** 
+
+      The content of the configuration or the configuration data.
+
+      
+
+    
+    :type ContentType: string
+    :param ContentType: **[REQUIRED]** 
+
+      A standard MIME type describing the format of the configuration content. For more information, see `Content-Type <https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17>`__ .
+
+      
+
+    
+    :type LatestVersionNumber: integer
+    :param LatestVersionNumber: 
+
+      An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version of the latest hosted configuration version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'ConfigurationProfileId': 'string',
+            'VersionNumber': 123,
+            'Description': 'string',
+            'Content': StreamingBody(),
+            'ContentType': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **ConfigurationProfileId** *(string) --* 
+
+          The configuration profile ID.
+
+          
+        
+
+        - **VersionNumber** *(integer) --* 
+
+          The configuration version.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          A description of the configuration.
+
+          
+        
+
+        - **Content** (:class:`.StreamingBody`) -- 
+
+          The content of the configuration or the configuration data.
+
+          
+        
+
+        - **ContentType** *(string) --* 
+
+          A standard MIME type describing the format of the configuration content. For more information, see `Content-Type <https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17>`__ .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.PayloadTooLargeException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_application(**kwargs)
+
+    
+
+    Delete an application. Deleting an application does not delete a configuration from a host.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_application(
+          ApplicationId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The ID of the application to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_configuration_profile(**kwargs)
+
+    
+
+    Delete a configuration profile. Deleting a configuration profile does not delete a configuration from a host.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteConfigurationProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_configuration_profile(
+          ApplicationId='string',
+          ConfigurationProfileId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID that includes the configuration profile you want to delete.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The ID of the configuration profile you want to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_deployment_strategy(**kwargs)
+
+    
+
+    Delete a deployment strategy. Deleting a deployment strategy does not delete a configuration from a host.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteDeploymentStrategy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_deployment_strategy(
+          DeploymentStrategyId='string'
+      )
+    :type DeploymentStrategyId: string
+    :param DeploymentStrategyId: **[REQUIRED]** 
+
+      The ID of the deployment strategy you want to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_environment(**kwargs)
+
+    
+
+    Delete an environment. Deleting an environment does not delete a configuration from a host.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_environment(
+          ApplicationId='string',
+          EnvironmentId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID that includes the environment you want to delete.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The ID of the environment you want to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: delete_hosted_configuration_version(**kwargs)
+
+    
+
+    Delete a version of a configuration from the AppConfig configuration store.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/DeleteHostedConfigurationVersion>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_hosted_configuration_version(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          VersionNumber=123
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type VersionNumber: integer
+    :param VersionNumber: **[REQUIRED]** 
+
+      The versions number to delete.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_application(**kwargs)
+
+    
+
+    Retrieve information about an application.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_application(
+          ApplicationId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The ID of the application you want to get.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The application name.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the application.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_configuration(**kwargs)
+
+    
+
+    Receive information about a configuration.
+
+     
+
+    .. warning::
+
+       
+
+      AWS AppConfig uses the value of the ``ClientConfigurationVersion`` parameter to identify the configuration version on your clients. If you don’t send ``ClientConfigurationVersion`` with each call to ``GetConfiguration`` , your clients receive the current configuration. You are charged each time your clients receive a configuration.
+
+       
+
+      To avoid excess charges, we recommend that you include the ``ClientConfigurationVersion`` value with every call to ``GetConfiguration`` . This value must be saved on your client. Subsequent calls to ``GetConfiguration`` must pass this value by using the ``ClientConfigurationVersion`` parameter. 
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_configuration(
+          Application='string',
+          Environment='string',
+          Configuration='string',
+          ClientId='string',
+          ClientConfigurationVersion='string'
+      )
+    :type Application: string
+    :param Application: **[REQUIRED]** 
+
+      The application to get. Specify either the application name or the application ID.
+
+      
+
+    
+    :type Environment: string
+    :param Environment: **[REQUIRED]** 
+
+      The environment to get. Specify either the environment name or the environment ID.
+
+      
+
+    
+    :type Configuration: string
+    :param Configuration: **[REQUIRED]** 
+
+      The configuration to get. Specify either the configuration name or the configuration ID.
+
+      
+
+    
+    :type ClientId: string
+    :param ClientId: **[REQUIRED]** 
+
+      A unique ID to identify the client for the configuration. This ID enables AppConfig to deploy the configuration in intervals, as defined in the deployment strategy.
+
+      
+
+    
+    :type ClientConfigurationVersion: string
+    :param ClientConfigurationVersion: 
+
+      The configuration version returned in the most recent ``GetConfiguration`` response.
+
+       
+
+      .. warning::
+
+         
+
+        AWS AppConfig uses the value of the ``ClientConfigurationVersion`` parameter to identify the configuration version on your clients. If you don’t send ``ClientConfigurationVersion`` with each call to ``GetConfiguration`` , your clients receive the current configuration. You are charged each time your clients receive a configuration.
+
+         
+
+        To avoid excess charges, we recommend that you include the ``ClientConfigurationVersion`` value with every call to ``GetConfiguration`` . This value must be saved on your client. Subsequent calls to ``GetConfiguration`` must pass this value by using the ``ClientConfigurationVersion`` parameter. 
+
+         
+
+       
+
+      For more information about working with configurations, see `Retrieving the Configuration <https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html>`__ in the *AWS AppConfig User Guide* .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Content': StreamingBody(),
+            'ConfigurationVersion': 'string',
+            'ContentType': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Content** (:class:`.StreamingBody`) -- 
+
+          The content of the configuration or the configuration data.
+
+          
+        
+
+        - **ConfigurationVersion** *(string) --* 
+
+          The configuration version.
+
+          
+        
+
+        - **ContentType** *(string) --* 
+
+          A standard MIME type describing the format of the configuration content. For more information, see `Content-Type <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17>`__ .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_configuration_profile(**kwargs)
+
+    
+
+    Retrieve information about a configuration profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetConfigurationProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_configuration_profile(
+          ApplicationId='string',
+          ConfigurationProfileId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The ID of the application that includes the configuration profile you want to get.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The ID of the configuration profile you want to get.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'LocationUri': 'string',
+            'RetrievalRoleArn': 'string',
+            'Validators': [
+                {
+                    'Type': 'JSON_SCHEMA'|'LAMBDA',
+                    'Content': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The configuration profile ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the configuration profile.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The configuration profile description.
+
+          
+        
+
+        - **LocationUri** *(string) --* 
+
+          The URI location of the configuration.
+
+          
+        
+
+        - **RetrievalRoleArn** *(string) --* 
+
+          The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+
+          
+        
+
+        - **Validators** *(list) --* 
+
+          A list of methods for validating the configuration.
+
+          
+          
+
+          - *(dict) --* 
+
+            A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              AppConfig supports validators of type ``JSON_SCHEMA`` and ``LAMBDA``  
+
+              
+            
+
+            - **Content** *(string) --* 
+
+              Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_deployment(**kwargs)
+
+    
+
+    Retrieve information about a configuration deployment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_deployment(
+          ApplicationId='string',
+          EnvironmentId='string',
+          DeploymentNumber=123
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The ID of the application that includes the deployment you want to get. 
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The ID of the environment that includes the deployment you want to get. 
+
+      
+
+    
+    :type DeploymentNumber: integer
+    :param DeploymentNumber: **[REQUIRED]** 
+
+      The sequence number of the deployment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'EnvironmentId': 'string',
+            'DeploymentStrategyId': 'string',
+            'ConfigurationProfileId': 'string',
+            'DeploymentNumber': 123,
+            'ConfigurationName': 'string',
+            'ConfigurationLocationUri': 'string',
+            'ConfigurationVersion': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'State': 'BAKING'|'VALIDATING'|'DEPLOYING'|'COMPLETE'|'ROLLING_BACK'|'ROLLED_BACK',
+            'EventLog': [
+                {
+                    'EventType': 'PERCENTAGE_UPDATED'|'ROLLBACK_STARTED'|'ROLLBACK_COMPLETED'|'BAKE_TIME_STARTED'|'DEPLOYMENT_STARTED'|'DEPLOYMENT_COMPLETED',
+                    'TriggeredBy': 'USER'|'APPCONFIG'|'CLOUDWATCH_ALARM'|'INTERNAL_ERROR',
+                    'Description': 'string',
+                    'OccurredAt': datetime(2015, 1, 1)
+                },
+            ],
+            'PercentageComplete': ...,
+            'StartedAt': datetime(2015, 1, 1),
+            'CompletedAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The ID of the application that was deployed.
+
+          
+        
+
+        - **EnvironmentId** *(string) --* 
+
+          The ID of the environment that was deployed.
+
+          
+        
+
+        - **DeploymentStrategyId** *(string) --* 
+
+          The ID of the deployment strategy that was deployed.
+
+          
+        
+
+        - **ConfigurationProfileId** *(string) --* 
+
+          The ID of the configuration profile that was deployed.
+
+          
+        
+
+        - **DeploymentNumber** *(integer) --* 
+
+          The sequence number of the deployment.
+
+          
+        
+
+        - **ConfigurationName** *(string) --* 
+
+          The name of the configuration.
+
+          
+        
+
+        - **ConfigurationLocationUri** *(string) --* 
+
+          Information about the source location of the configuration.
+
+          
+        
+
+        - **ConfigurationVersion** *(string) --* 
+
+          The configuration version that was deployed.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets to receive a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the deployment.
+
+          
+        
+
+        - **EventLog** *(list) --* 
+
+          A list containing all events related to a deployment. The most recent events are displayed first.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes a deployment event.
+
+            
+            
+
+            - **EventType** *(string) --* 
+
+              The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.
+
+              
+            
+
+            - **TriggeredBy** *(string) --* 
+
+              The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+
+              
+            
+
+            - **OccurredAt** *(datetime) --* 
+
+              The date and time the event occurred.
+
+              
+        
+      
+        
+
+        - **PercentageComplete** *(float) --* 
+
+          The percentage of targets for which the deployment is available.
+
+          
+        
+
+        - **StartedAt** *(datetime) --* 
+
+          The time the deployment started.
+
+          
+        
+
+        - **CompletedAt** *(datetime) --* 
+
+          The time the deployment completed. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_deployment_strategy(**kwargs)
+
+    
+
+    Retrieve information about a deployment strategy. A deployment strategy defines important criteria for rolling out your configuration to the designated targets. A deployment strategy includes: the overall duration required, a percentage of targets to receive the deployment during each interval, an algorithm that defines how percentage grows, and bake time.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetDeploymentStrategy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_deployment_strategy(
+          DeploymentStrategyId='string'
+      )
+    :type DeploymentStrategyId: string
+    :param DeploymentStrategyId: **[REQUIRED]** 
+
+      The ID of the deployment strategy to get.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'ReplicateTo': 'NONE'|'SSM_DOCUMENT'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The deployment strategy ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the deployment strategy.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment strategy.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets that received a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **ReplicateTo** *(string) --* 
+
+          Save the deployment strategy to a Systems Manager (SSM) document.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_environment(**kwargs)
+
+    
+
+    Retrieve information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a ``Production`` environment or in an ``EU_Region`` environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_environment(
+          ApplicationId='string',
+          EnvironmentId='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The ID of the application that includes the environment you want to get.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The ID of the environment you wnat to get.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'State': 'READY_FOR_DEPLOYMENT'|'DEPLOYING'|'ROLLING_BACK'|'ROLLED_BACK',
+            'Monitors': [
+                {
+                    'AlarmArn': 'string',
+                    'AlarmRoleArn': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The environment ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the environment.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the environment.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the environment. An environment can be in one of the following states: ``READY_FOR_DEPLOYMENT`` , ``DEPLOYING`` , ``ROLLING_BACK`` , or ``ROLLED_BACK``  
+
+          
+        
+
+        - **Monitors** *(list) --* 
+
+          Amazon CloudWatch alarms monitored during the deployment.
+
+          
+          
+
+          - *(dict) --* 
+
+            Amazon CloudWatch alarms to monitor during the deployment process.
+
+            
+            
+
+            - **AlarmArn** *(string) --* 
+
+              ARN of the Amazon CloudWatch alarm.
+
+              
+            
+
+            - **AlarmRoleArn** *(string) --* 
+
+              ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: get_hosted_configuration_version(**kwargs)
+
+    
+
+    Get information about a specific configuration version.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/GetHostedConfigurationVersion>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_hosted_configuration_version(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          VersionNumber=123
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type VersionNumber: integer
+    :param VersionNumber: **[REQUIRED]** 
+
+      The version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'ConfigurationProfileId': 'string',
+            'VersionNumber': 123,
+            'Description': 'string',
+            'Content': StreamingBody(),
+            'ContentType': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **ConfigurationProfileId** *(string) --* 
+
+          The configuration profile ID.
+
+          
+        
+
+        - **VersionNumber** *(integer) --* 
+
+          The configuration version.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          A description of the configuration.
+
+          
+        
+
+        - **Content** (:class:`.StreamingBody`) -- 
+
+          The content of the configuration or the configuration data.
+
+          
+        
+
+        - **ContentType** *(string) --* 
+
+          A standard MIME type describing the format of the configuration content. For more information, see `Content-Type <https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17>`__ .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_applications(**kwargs)
+
+    
+
+    List all applications in your AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListApplications>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_applications(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'Id': 'string',
+                    'Name': 'string',
+                    'Description': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **Id** *(string) --* 
+
+              The application ID.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The application name.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the application.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_configuration_profiles(**kwargs)
+
+    
+
+    Lists the configuration profiles for an application.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListConfigurationProfiles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_configuration_profiles(
+          ApplicationId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'ApplicationId': 'string',
+                    'Id': 'string',
+                    'Name': 'string',
+                    'LocationUri': 'string',
+                    'ValidatorTypes': [
+                        'JSON_SCHEMA'|'LAMBDA',
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of a configuration profile.
+
+            
+            
+
+            - **ApplicationId** *(string) --* 
+
+              The application ID.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The ID of the configuration profile.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the configuration profile.
+
+              
+            
+
+            - **LocationUri** *(string) --* 
+
+              The URI location of the configuration.
+
+              
+            
+
+            - **ValidatorTypes** *(list) --* 
+
+              The types of validators in the configuration profile.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_deployment_strategies(**kwargs)
+
+    
+
+    List deployment strategies.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListDeploymentStrategies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_deployment_strategies(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'Id': 'string',
+                    'Name': 'string',
+                    'Description': 'string',
+                    'DeploymentDurationInMinutes': 123,
+                    'GrowthType': 'LINEAR'|'EXPONENTIAL',
+                    'GrowthFactor': ...,
+                    'FinalBakeTimeInMinutes': 123,
+                    'ReplicateTo': 'NONE'|'SSM_DOCUMENT'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **Id** *(string) --* 
+
+              The deployment strategy ID.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the deployment strategy.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the deployment strategy.
+
+              
+            
+
+            - **DeploymentDurationInMinutes** *(integer) --* 
+
+              Total amount of time the deployment lasted.
+
+              
+            
+
+            - **GrowthType** *(string) --* 
+
+              The algorithm used to define how percentage grew over time.
+
+              
+            
+
+            - **GrowthFactor** *(float) --* 
+
+              The percentage of targets that received a deployed configuration during each interval.
+
+              
+            
+
+            - **FinalBakeTimeInMinutes** *(integer) --* 
+
+              The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+              
+            
+
+            - **ReplicateTo** *(string) --* 
+
+              Save the deployment strategy to a Systems Manager (SSM) document.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_deployments(**kwargs)
+
+    
+
+    Lists the deployments for an environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListDeployments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_deployments(
+          ApplicationId='string',
+          EnvironmentId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The environment ID.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'DeploymentNumber': 123,
+                    'ConfigurationName': 'string',
+                    'ConfigurationVersion': 'string',
+                    'DeploymentDurationInMinutes': 123,
+                    'GrowthType': 'LINEAR'|'EXPONENTIAL',
+                    'GrowthFactor': ...,
+                    'FinalBakeTimeInMinutes': 123,
+                    'State': 'BAKING'|'VALIDATING'|'DEPLOYING'|'COMPLETE'|'ROLLING_BACK'|'ROLLED_BACK',
+                    'PercentageComplete': ...,
+                    'StartedAt': datetime(2015, 1, 1),
+                    'CompletedAt': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the deployment.
+
+            
+            
+
+            - **DeploymentNumber** *(integer) --* 
+
+              The sequence number of the deployment.
+
+              
+            
+
+            - **ConfigurationName** *(string) --* 
+
+              The name of the configuration.
+
+              
+            
+
+            - **ConfigurationVersion** *(string) --* 
+
+              The version of the configuration.
+
+              
+            
+
+            - **DeploymentDurationInMinutes** *(integer) --* 
+
+              Total amount of time the deployment lasted.
+
+              
+            
+
+            - **GrowthType** *(string) --* 
+
+              The algorithm used to define how percentage grows over time.
+
+              
+            
+
+            - **GrowthFactor** *(float) --* 
+
+              The percentage of targets to receive a deployed configuration during each interval.
+
+              
+            
+
+            - **FinalBakeTimeInMinutes** *(integer) --* 
+
+              The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the deployment.
+
+              
+            
+
+            - **PercentageComplete** *(float) --* 
+
+              The percentage of targets for which the deployment is available.
+
+              
+            
+
+            - **StartedAt** *(datetime) --* 
+
+              Time the deployment started.
+
+              
+            
+
+            - **CompletedAt** *(datetime) --* 
+
+              Time the deployment completed.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_environments(**kwargs)
+
+    
+
+    List the environments for an application.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListEnvironments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_environments(
+          ApplicationId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'ApplicationId': 'string',
+                    'Id': 'string',
+                    'Name': 'string',
+                    'Description': 'string',
+                    'State': 'READY_FOR_DEPLOYMENT'|'DEPLOYING'|'ROLLING_BACK'|'ROLLED_BACK',
+                    'Monitors': [
+                        {
+                            'AlarmArn': 'string',
+                            'AlarmRoleArn': 'string'
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+            
+
+            - **ApplicationId** *(string) --* 
+
+              The application ID.
+
+              
+            
+
+            - **Id** *(string) --* 
+
+              The environment ID.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the environment.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the environment.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the environment. An environment can be in one of the following states: ``READY_FOR_DEPLOYMENT`` , ``DEPLOYING`` , ``ROLLING_BACK`` , or ``ROLLED_BACK``  
+
+              
+            
+
+            - **Monitors** *(list) --* 
+
+              Amazon CloudWatch alarms monitored during the deployment.
+
+              
+              
+
+              - *(dict) --* 
+
+                Amazon CloudWatch alarms to monitor during the deployment process.
+
+                
+                
+
+                - **AlarmArn** *(string) --* 
+
+                  ARN of the Amazon CloudWatch alarm.
+
+                  
+                
+
+                - **AlarmRoleArn** *(string) --* 
+
+                  ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: list_hosted_configuration_versions(**kwargs)
+
+    
+
+    View a list of configurations stored in the AppConfig configuration store by version.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListHostedConfigurationVersions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_hosted_configuration_versions(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to start the list. Use this token to get the next set of results. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Items': [
+                {
+                    'ApplicationId': 'string',
+                    'ConfigurationProfileId': 'string',
+                    'VersionNumber': 123,
+                    'Description': 'string',
+                    'ContentType': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Items** *(list) --* 
+
+          The elements from this collection.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the configuration.
+
+            
+            
+
+            - **ApplicationId** *(string) --* 
+
+              The application ID.
+
+              
+            
+
+            - **ConfigurationProfileId** *(string) --* 
+
+              The configuration profile ID.
+
+              
+            
+
+            - **VersionNumber** *(integer) --* 
+
+              The configuration version.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              A description of the configuration.
+
+              
+            
+
+            - **ContentType** *(string) --* 
+
+              A standard MIME type describing the format of the configuration content. For more information, see `Content-Type <https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17>`__ .
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token for the next set of items to return. Use this token to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Retrieves the list of key-value tags assigned to the resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(dict) --* 
+
+          Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_deployment(**kwargs)
+
+    
+
+    Starts a deployment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StartDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_deployment(
+          ApplicationId='string',
+          EnvironmentId='string',
+          DeploymentStrategyId='string',
+          ConfigurationProfileId='string',
+          ConfigurationVersion='string',
+          Description='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The environment ID.
+
+      
+
+    
+    :type DeploymentStrategyId: string
+    :param DeploymentStrategyId: **[REQUIRED]** 
+
+      The deployment strategy ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type ConfigurationVersion: string
+    :param ConfigurationVersion: **[REQUIRED]** 
+
+      The configuration version to deploy.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the deployment.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      Metadata to assign to the deployment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'EnvironmentId': 'string',
+            'DeploymentStrategyId': 'string',
+            'ConfigurationProfileId': 'string',
+            'DeploymentNumber': 123,
+            'ConfigurationName': 'string',
+            'ConfigurationLocationUri': 'string',
+            'ConfigurationVersion': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'State': 'BAKING'|'VALIDATING'|'DEPLOYING'|'COMPLETE'|'ROLLING_BACK'|'ROLLED_BACK',
+            'EventLog': [
+                {
+                    'EventType': 'PERCENTAGE_UPDATED'|'ROLLBACK_STARTED'|'ROLLBACK_COMPLETED'|'BAKE_TIME_STARTED'|'DEPLOYMENT_STARTED'|'DEPLOYMENT_COMPLETED',
+                    'TriggeredBy': 'USER'|'APPCONFIG'|'CLOUDWATCH_ALARM'|'INTERNAL_ERROR',
+                    'Description': 'string',
+                    'OccurredAt': datetime(2015, 1, 1)
+                },
+            ],
+            'PercentageComplete': ...,
+            'StartedAt': datetime(2015, 1, 1),
+            'CompletedAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The ID of the application that was deployed.
+
+          
+        
+
+        - **EnvironmentId** *(string) --* 
+
+          The ID of the environment that was deployed.
+
+          
+        
+
+        - **DeploymentStrategyId** *(string) --* 
+
+          The ID of the deployment strategy that was deployed.
+
+          
+        
+
+        - **ConfigurationProfileId** *(string) --* 
+
+          The ID of the configuration profile that was deployed.
+
+          
+        
+
+        - **DeploymentNumber** *(integer) --* 
+
+          The sequence number of the deployment.
+
+          
+        
+
+        - **ConfigurationName** *(string) --* 
+
+          The name of the configuration.
+
+          
+        
+
+        - **ConfigurationLocationUri** *(string) --* 
+
+          Information about the source location of the configuration.
+
+          
+        
+
+        - **ConfigurationVersion** *(string) --* 
+
+          The configuration version that was deployed.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets to receive a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the deployment.
+
+          
+        
+
+        - **EventLog** *(list) --* 
+
+          A list containing all events related to a deployment. The most recent events are displayed first.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes a deployment event.
+
+            
+            
+
+            - **EventType** *(string) --* 
+
+              The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.
+
+              
+            
+
+            - **TriggeredBy** *(string) --* 
+
+              The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+
+              
+            
+
+            - **OccurredAt** *(datetime) --* 
+
+              The date and time the event occurred.
+
+              
+        
+      
+        
+
+        - **PercentageComplete** *(float) --* 
+
+          The percentage of targets for which the deployment is available.
+
+          
+        
+
+        - **StartedAt** *(datetime) --* 
+
+          The time the deployment started.
+
+          
+        
+
+        - **CompletedAt** *(datetime) --* 
+
+          The time the deployment completed. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: stop_deployment(**kwargs)
+
+    
+
+    Stops a deployment. This API action works only on deployments that have a status of ``DEPLOYING`` . This action moves the deployment to a status of ``ROLLED_BACK`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/StopDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_deployment(
+          ApplicationId='string',
+          EnvironmentId='string',
+          DeploymentNumber=123
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The environment ID.
+
+      
+
+    
+    :type DeploymentNumber: integer
+    :param DeploymentNumber: **[REQUIRED]** 
+
+      The sequence number of the deployment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'EnvironmentId': 'string',
+            'DeploymentStrategyId': 'string',
+            'ConfigurationProfileId': 'string',
+            'DeploymentNumber': 123,
+            'ConfigurationName': 'string',
+            'ConfigurationLocationUri': 'string',
+            'ConfigurationVersion': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'State': 'BAKING'|'VALIDATING'|'DEPLOYING'|'COMPLETE'|'ROLLING_BACK'|'ROLLED_BACK',
+            'EventLog': [
+                {
+                    'EventType': 'PERCENTAGE_UPDATED'|'ROLLBACK_STARTED'|'ROLLBACK_COMPLETED'|'BAKE_TIME_STARTED'|'DEPLOYMENT_STARTED'|'DEPLOYMENT_COMPLETED',
+                    'TriggeredBy': 'USER'|'APPCONFIG'|'CLOUDWATCH_ALARM'|'INTERNAL_ERROR',
+                    'Description': 'string',
+                    'OccurredAt': datetime(2015, 1, 1)
+                },
+            ],
+            'PercentageComplete': ...,
+            'StartedAt': datetime(2015, 1, 1),
+            'CompletedAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The ID of the application that was deployed.
+
+          
+        
+
+        - **EnvironmentId** *(string) --* 
+
+          The ID of the environment that was deployed.
+
+          
+        
+
+        - **DeploymentStrategyId** *(string) --* 
+
+          The ID of the deployment strategy that was deployed.
+
+          
+        
+
+        - **ConfigurationProfileId** *(string) --* 
+
+          The ID of the configuration profile that was deployed.
+
+          
+        
+
+        - **DeploymentNumber** *(integer) --* 
+
+          The sequence number of the deployment.
+
+          
+        
+
+        - **ConfigurationName** *(string) --* 
+
+          The name of the configuration.
+
+          
+        
+
+        - **ConfigurationLocationUri** *(string) --* 
+
+          Information about the source location of the configuration.
+
+          
+        
+
+        - **ConfigurationVersion** *(string) --* 
+
+          The configuration version that was deployed.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets to receive a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the deployment.
+
+          
+        
+
+        - **EventLog** *(list) --* 
+
+          A list containing all events related to a deployment. The most recent events are displayed first.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes a deployment event.
+
+            
+            
+
+            - **EventType** *(string) --* 
+
+              The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.
+
+              
+            
+
+            - **TriggeredBy** *(string) --* 
+
+              The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+
+              
+            
+
+            - **OccurredAt** *(datetime) --* 
+
+              The date and time the event occurred.
+
+              
+        
+      
+        
+
+        - **PercentageComplete** *(float) --* 
+
+          The percentage of targets for which the deployment is available.
+
+          
+        
+
+        - **StartedAt** *(datetime) --* 
+
+          The time the deployment started.
+
+          
+        
+
+        - **CompletedAt** *(datetime) --* 
+
+          The time the deployment completed. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Metadata to assign to an AppConfig resource. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define. You can specify a maximum of 50 tags for a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource for which to retrieve tags.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:`` . The tag value can be up to 256 characters.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Deletes a tag key and value from an AppConfig resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The ARN of the resource for which to remove tags.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The tag keys to delete.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_application(**kwargs)
+
+    
+
+    Updates an application.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_application(
+          ApplicationId='string',
+          Name='string',
+          Description='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type Name: string
+    :param Name: 
+
+      The name of the application.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the application.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The application name.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the application.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_configuration_profile(**kwargs)
+
+    
+
+    Updates a configuration profile.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateConfigurationProfile>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_configuration_profile(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          Name='string',
+          Description='string',
+          RetrievalRoleArn='string',
+          Validators=[
+              {
+                  'Type': 'JSON_SCHEMA'|'LAMBDA',
+                  'Content': 'string'
+              },
+          ]
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The ID of the configuration profile.
+
+      
+
+    
+    :type Name: string
+    :param Name: 
+
+      The name of the configuration profile.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the configuration profile.
+
+      
+
+    
+    :type RetrievalRoleArn: string
+    :param RetrievalRoleArn: 
+
+      The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+
+      
+
+    
+    :type Validators: list
+    :param Validators: 
+
+      A list of methods for validating the configuration.
+
+      
+
+    
+      - *(dict) --* 
+
+        A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+        
+
+      
+        - **Type** *(string) --* **[REQUIRED]** 
+
+          AppConfig supports validators of type ``JSON_SCHEMA`` and ``LAMBDA``  
+
+          
+
+        
+        - **Content** *(string) --* **[REQUIRED]** 
+
+          Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'LocationUri': 'string',
+            'RetrievalRoleArn': 'string',
+            'Validators': [
+                {
+                    'Type': 'JSON_SCHEMA'|'LAMBDA',
+                    'Content': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The configuration profile ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the configuration profile.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The configuration profile description.
+
+          
+        
+
+        - **LocationUri** *(string) --* 
+
+          The URI location of the configuration.
+
+          
+        
+
+        - **RetrievalRoleArn** *(string) --* 
+
+          The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+
+          
+        
+
+        - **Validators** *(list) --* 
+
+          A list of methods for validating the configuration.
+
+          
+          
+
+          - *(dict) --* 
+
+            A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              AppConfig supports validators of type ``JSON_SCHEMA`` and ``LAMBDA``  
+
+              
+            
+
+            - **Content** *(string) --* 
+
+              Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_deployment_strategy(**kwargs)
+
+    
+
+    Updates a deployment strategy.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateDeploymentStrategy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_deployment_strategy(
+          DeploymentStrategyId='string',
+          Description='string',
+          DeploymentDurationInMinutes=123,
+          FinalBakeTimeInMinutes=123,
+          GrowthFactor=...,
+          GrowthType='LINEAR'|'EXPONENTIAL'
+      )
+    :type DeploymentStrategyId: string
+    :param DeploymentStrategyId: **[REQUIRED]** 
+
+      The deployment strategy ID.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the deployment strategy.
+
+      
+
+    
+    :type DeploymentDurationInMinutes: integer
+    :param DeploymentDurationInMinutes: 
+
+      Total amount of time for a deployment to last.
+
+      
+
+    
+    :type FinalBakeTimeInMinutes: integer
+    :param FinalBakeTimeInMinutes: 
+
+      The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+      
+
+    
+    :type GrowthFactor: float
+    :param GrowthFactor: 
+
+      The percentage of targets to receive a deployed configuration during each interval.
+
+      
+
+    
+    :type GrowthType: string
+    :param GrowthType: 
+
+      The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:
+
+       
+
+       **Linear** : For this type, AppConfig processes the deployment by increments of the growth factor evenly distributed over the deployment time. For example, a linear deployment that uses a growth factor of 20 initially makes the configuration available to 20 percent of the targets. After 1/5th of the deployment time has passed, the system updates the percentage to 40 percent. This continues until 100% of the targets are set to receive the deployed configuration.
+
+       
+
+       **Exponential** : For this type, AppConfig processes the deployment exponentially using the following formula: ``G*(2^N)`` . In this formula, ``G`` is the growth factor specified by the user and ``N`` is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:
+
+       
+
+       ``2*(2^0)``  
+
+       
+
+       ``2*(2^1)``  
+
+       
+
+       ``2*(2^2)``  
+
+       
+
+      Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'DeploymentDurationInMinutes': 123,
+            'GrowthType': 'LINEAR'|'EXPONENTIAL',
+            'GrowthFactor': ...,
+            'FinalBakeTimeInMinutes': 123,
+            'ReplicateTo': 'NONE'|'SSM_DOCUMENT'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The deployment strategy ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the deployment strategy.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the deployment strategy.
+
+          
+        
+
+        - **DeploymentDurationInMinutes** *(integer) --* 
+
+          Total amount of time the deployment lasted.
+
+          
+        
+
+        - **GrowthType** *(string) --* 
+
+          The algorithm used to define how percentage grew over time.
+
+          
+        
+
+        - **GrowthFactor** *(float) --* 
+
+          The percentage of targets that received a deployed configuration during each interval.
+
+          
+        
+
+        - **FinalBakeTimeInMinutes** *(integer) --* 
+
+          The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+
+          
+        
+
+        - **ReplicateTo** *(string) --* 
+
+          Save the deployment strategy to a Systems Manager (SSM) document.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_environment(**kwargs)
+
+    
+
+    Updates an environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/UpdateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_environment(
+          ApplicationId='string',
+          EnvironmentId='string',
+          Name='string',
+          Description='string',
+          Monitors=[
+              {
+                  'AlarmArn': 'string',
+                  'AlarmRoleArn': 'string'
+              },
+          ]
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type EnvironmentId: string
+    :param EnvironmentId: **[REQUIRED]** 
+
+      The environment ID.
+
+      
+
+    
+    :type Name: string
+    :param Name: 
+
+      The name of the environment.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description of the environment.
+
+      
+
+    
+    :type Monitors: list
+    :param Monitors: 
+
+      Amazon CloudWatch alarms to monitor during the deployment process.
+
+      
+
+    
+      - *(dict) --* 
+
+        Amazon CloudWatch alarms to monitor during the deployment process.
+
+        
+
+      
+        - **AlarmArn** *(string) --* 
+
+          ARN of the Amazon CloudWatch alarm.
+
+          
+
+        
+        - **AlarmRoleArn** *(string) --* 
+
+          ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ApplicationId': 'string',
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'State': 'READY_FOR_DEPLOYMENT'|'DEPLOYING'|'ROLLING_BACK'|'ROLLED_BACK',
+            'Monitors': [
+                {
+                    'AlarmArn': 'string',
+                    'AlarmRoleArn': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ApplicationId** *(string) --* 
+
+          The application ID.
+
+          
+        
+
+        - **Id** *(string) --* 
+
+          The environment ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the environment.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The description of the environment.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the environment. An environment can be in one of the following states: ``READY_FOR_DEPLOYMENT`` , ``DEPLOYING`` , ``ROLLING_BACK`` , or ``ROLLED_BACK``  
+
+          
+        
+
+        - **Monitors** *(list) --* 
+
+          Amazon CloudWatch alarms monitored during the deployment.
+
+          
+          
+
+          - *(dict) --* 
+
+            Amazon CloudWatch alarms to monitor during the deployment process.
+
+            
+            
+
+            - **AlarmArn** *(string) --* 
+
+              ARN of the Amazon CloudWatch alarm.
+
+              
+            
+
+            - **AlarmRoleArn** *(string) --* 
+
+              ARN of an IAM role for AppConfig to monitor ``AlarmArn`` .
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: validate_configuration(**kwargs)
+
+    
+
+    Uses the validators in a configuration profile to validate a configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ValidateConfiguration>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.validate_configuration(
+          ApplicationId='string',
+          ConfigurationProfileId='string',
+          ConfigurationVersion='string'
+      )
+    :type ApplicationId: string
+    :param ApplicationId: **[REQUIRED]** 
+
+      The application ID.
+
+      
+
+    
+    :type ConfigurationProfileId: string
+    :param ConfigurationProfileId: **[REQUIRED]** 
+
+      The configuration profile ID.
+
+      
+
+    
+    :type ConfigurationVersion: string
+    :param ConfigurationVersion: **[REQUIRED]** 
+
+      The version of the configuration to validate.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`AppConfig.Client.exceptions.BadRequestException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AppConfig.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

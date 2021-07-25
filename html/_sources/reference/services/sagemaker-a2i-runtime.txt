@@ -1,0 +1,887 @@
+
+
+******************
+AugmentedAIRuntime
+******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: AugmentedAIRuntime.Client
+
+  A low-level client representing Amazon Augmented AI Runtime
+  
+
+  Amazon Augmented AI (Amazon A2I) adds the benefit of human judgment to any machine learning application. When an AI application can't evaluate data with a high degree of confidence, human reviewers can take over. This human review is called a human review workflow. To create and start a human review workflow, you need three resources: a *worker task template* , a *flow definition* , and a *human loop* .
+
+   
+
+  For information about these resources and prerequisites for using Amazon A2I, see `Get Started with Amazon Augmented AI <https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html>`__ in the Amazon SageMaker Developer Guide.
+
+   
+
+  This API reference includes information about API actions and data types that you can use to interact with Amazon A2I programmatically. Use this guide to:
+
+   
+
+   
+  * Start a human loop with the ``StartHumanLoop`` operation when using Amazon A2I with a *custom task type* . To learn more about the difference between custom and built-in task types, see `Use Task Types <https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-task-types-general.html>`__ . To learn how to start a human loop using this API, see `Create and Start a Human Loop for a Custom Task Type <https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop>`__ in the Amazon SageMaker Developer Guide. 
+   
+  * Manage your human loops. You can list all human loops that you have created, describe individual human loops, and stop and delete human loops. To learn more, see `Monitor and Manage Your Human Loop <https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-monitor-humanloop-results.html>`__ in the Amazon SageMaker Developer Guide. 
+   
+
+   
+
+  Amazon A2I integrates APIs from various AWS services to create and start human review workflows for those services. To learn how Amazon A2I uses these APIs, see `Use APIs in Amazon A2I <https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-api-references.html>`__ in the Amazon SageMaker Developer Guide.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('sagemaker-a2i-runtime')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.can_paginate`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.delete_human_loop`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.describe_human_loop`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.get_paginator`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.get_waiter`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.list_human_loops`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.start_human_loop`
+
+  
+  *   :py:meth:`~AugmentedAIRuntime.Client.stop_human_loop`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: delete_human_loop(**kwargs)
+
+    
+
+    Deletes the specified human loop for a flow definition.
+
+     
+
+    If the human loop was deleted, this operation will return a ``ResourceNotFoundException`` . 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DeleteHumanLoop>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_human_loop(
+          HumanLoopName='string'
+      )
+    :type HumanLoopName: string
+    :param HumanLoopName: **[REQUIRED]** 
+
+      The name of the human loop that you want to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_human_loop(**kwargs)
+
+    
+
+    Returns information about the specified human loop. If the human loop was deleted, this operation will return a ``ResourceNotFoundException`` error. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DescribeHumanLoop>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_human_loop(
+          HumanLoopName='string'
+      )
+    :type HumanLoopName: string
+    :param HumanLoopName: **[REQUIRED]** 
+
+      The name of the human loop that you want information about.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CreationTime': datetime(2015, 1, 1),
+            'FailureReason': 'string',
+            'FailureCode': 'string',
+            'HumanLoopStatus': 'InProgress'|'Failed'|'Completed'|'Stopped'|'Stopping',
+            'HumanLoopName': 'string',
+            'HumanLoopArn': 'string',
+            'FlowDefinitionArn': 'string',
+            'HumanLoopOutput': {
+                'OutputS3Uri': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CreationTime** *(datetime) --* 
+
+          The creation time when Amazon Augmented AI created the human loop.
+
+          
+        
+
+        - **FailureReason** *(string) --* 
+
+          The reason why a human loop failed. The failure reason is returned when the status of the human loop is ``Failed`` .
+
+          
+        
+
+        - **FailureCode** *(string) --* 
+
+          A failure code that identifies the type of failure.
+
+           
+
+          Possible values: ``ValidationError`` , ``Expired`` , ``InternalError``  
+
+          
+        
+
+        - **HumanLoopStatus** *(string) --* 
+
+          The status of the human loop. 
+
+          
+        
+
+        - **HumanLoopName** *(string) --* 
+
+          The name of the human loop. The name must be lowercase, unique within the Region in your account, and can have up to 63 characters. Valid characters: a-z, 0-9, and - (hyphen).
+
+          
+        
+
+        - **HumanLoopArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the human loop.
+
+          
+        
+
+        - **FlowDefinitionArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the flow definition.
+
+          
+        
+
+        - **HumanLoopOutput** *(dict) --* 
+
+          An object that contains information about the output of the human loop.
+
+          
+          
+
+          - **OutputS3Uri** *(string) --* 
+
+            The location of the Amazon S3 object where Amazon Augmented AI stores your human loop output.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_human_loops(**kwargs)
+
+    
+
+    Returns information about human loops, given the specified parameters. If a human loop was deleted, it will not be included.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/ListHumanLoops>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_human_loops(
+          CreationTimeAfter=datetime(2015, 1, 1),
+          CreationTimeBefore=datetime(2015, 1, 1),
+          FlowDefinitionArn='string',
+          SortOrder='Ascending'|'Descending',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type CreationTimeAfter: datetime
+    :param CreationTimeAfter: 
+
+      (Optional) The timestamp of the date when you want the human loops to begin in ISO 8601 format. For example, ``2020-02-24`` .
+
+      
+
+    
+    :type CreationTimeBefore: datetime
+    :param CreationTimeBefore: 
+
+      (Optional) The timestamp of the date before which you want the human loops to begin in ISO 8601 format. For example, ``2020-02-24`` .
+
+      
+
+    
+    :type FlowDefinitionArn: string
+    :param FlowDefinitionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of a flow definition.
+
+      
+
+    
+    :type SortOrder: string
+    :param SortOrder: 
+
+      Optional. The order for displaying results. Valid values: ``Ascending`` and ``Descending`` .
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A token to display the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The total number of items to return. If the total number of available items is more than the value specified in ``MaxResults`` , then a ``NextToken`` is returned in the output. You can use this token to display the next page of results. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'HumanLoopSummaries': [
+                {
+                    'HumanLoopName': 'string',
+                    'HumanLoopStatus': 'InProgress'|'Failed'|'Completed'|'Stopped'|'Stopping',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'FailureReason': 'string',
+                    'FlowDefinitionArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **HumanLoopSummaries** *(list) --* 
+
+          An array of objects that contain information about the human loops.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about the human loop.
+
+            
+            
+
+            - **HumanLoopName** *(string) --* 
+
+              The name of the human loop.
+
+              
+            
+
+            - **HumanLoopStatus** *(string) --* 
+
+              The status of the human loop. 
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              When Amazon Augmented AI created the human loop.
+
+              
+            
+
+            - **FailureReason** *(string) --* 
+
+              The reason why the human loop failed. A failure reason is returned when the status of the human loop is ``Failed`` .
+
+              
+            
+
+            - **FlowDefinitionArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the flow definition used to configure the human loop.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to display the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_human_loop(**kwargs)
+
+    
+
+    Starts a human loop, provided that at least one activation condition is met.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/StartHumanLoop>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_human_loop(
+          HumanLoopName='string',
+          FlowDefinitionArn='string',
+          HumanLoopInput={
+              'InputContent': 'string'
+          },
+          DataAttributes={
+              'ContentClassifiers': [
+                  'FreeOfPersonallyIdentifiableInformation'|'FreeOfAdultContent',
+              ]
+          }
+      )
+    :type HumanLoopName: string
+    :param HumanLoopName: **[REQUIRED]** 
+
+      The name of the human loop.
+
+      
+
+    
+    :type FlowDefinitionArn: string
+    :param FlowDefinitionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the flow definition associated with this human loop.
+
+      
+
+    
+    :type HumanLoopInput: dict
+    :param HumanLoopInput: **[REQUIRED]** 
+
+      An object that contains information about the human loop.
+
+      
+
+    
+      - **InputContent** *(string) --* **[REQUIRED]** 
+
+        Serialized input from the human loop. The input must be a string representation of a file in JSON format.
+
+        
+
+      
+    
+    :type DataAttributes: dict
+    :param DataAttributes: 
+
+      Attributes of the specified data. Use ``DataAttributes`` to specify if your data is free of personally identifiable information and/or free of adult content.
+
+      
+
+    
+      - **ContentClassifiers** *(list) --* **[REQUIRED]** 
+
+        Declares that your content is free of personally identifiable information or adult content.
+
+         
+
+        Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view your task based on this information.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'HumanLoopArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **HumanLoopArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the human loop.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: stop_human_loop(**kwargs)
+
+    
+
+    Stops the specified human loop.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/StopHumanLoop>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_human_loop(
+          HumanLoopName='string'
+      )
+    :type HumanLoopName: string
+    :param HumanLoopName: **[REQUIRED]** 
+
+      The name of the human loop that you want to stop.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`AugmentedAIRuntime.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`AugmentedAIRuntime.Paginator.ListHumanLoops`
+
+
+
+.. py:class:: AugmentedAIRuntime.Paginator.ListHumanLoops
+
+  ::
+
+    
+    paginator = client.get_paginator('list_human_loops')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`AugmentedAIRuntime.Client.list_human_loops`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/ListHumanLoops>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          CreationTimeAfter=datetime(2015, 1, 1),
+          CreationTimeBefore=datetime(2015, 1, 1),
+          FlowDefinitionArn='string',
+          SortOrder='Ascending'|'Descending',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type CreationTimeAfter: datetime
+    :param CreationTimeAfter: 
+
+      (Optional) The timestamp of the date when you want the human loops to begin in ISO 8601 format. For example, ``2020-02-24`` .
+
+      
+
+    
+    :type CreationTimeBefore: datetime
+    :param CreationTimeBefore: 
+
+      (Optional) The timestamp of the date before which you want the human loops to begin in ISO 8601 format. For example, ``2020-02-24`` .
+
+      
+
+    
+    :type FlowDefinitionArn: string
+    :param FlowDefinitionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of a flow definition.
+
+      
+
+    
+    :type SortOrder: string
+    :param SortOrder: 
+
+      Optional. The order for displaying results. Valid values: ``Ascending`` and ``Descending`` .
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'HumanLoopSummaries': [
+                {
+                    'HumanLoopName': 'string',
+                    'HumanLoopStatus': 'InProgress'|'Failed'|'Completed'|'Stopped'|'Stopping',
+                    'CreationTime': datetime(2015, 1, 1),
+                    'FailureReason': 'string',
+                    'FlowDefinitionArn': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **HumanLoopSummaries** *(list) --* 
+
+          An array of objects that contain information about the human loops.
+
+          
+          
+
+          - *(dict) --* 
+
+            Summary information about the human loop.
+
+            
+            
+
+            - **HumanLoopName** *(string) --* 
+
+              The name of the human loop.
+
+              
+            
+
+            - **HumanLoopStatus** *(string) --* 
+
+              The status of the human loop. 
+
+              
+            
+
+            - **CreationTime** *(datetime) --* 
+
+              When Amazon Augmented AI created the human loop.
+
+              
+            
+
+            - **FailureReason** *(string) --* 
+
+              The reason why the human loop failed. A failure reason is returned when the status of the human loop is ``Failed`` .
+
+              
+            
+
+            - **FlowDefinitionArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the flow definition used to configure the human loop.
+
+              
+        
+      
+    

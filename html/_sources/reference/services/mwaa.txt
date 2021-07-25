@@ -1,0 +1,2285 @@
+
+
+****
+MWAA
+****
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: MWAA.Client
+
+  A low-level client representing AmazonMWAA
+  
+
+   
+
+  This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see `What Is Amazon MWAA? <https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html>`__ .
+
+  
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('mwaa')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~MWAA.Client.can_paginate`
+
+  
+  *   :py:meth:`~MWAA.Client.create_cli_token`
+
+  
+  *   :py:meth:`~MWAA.Client.create_environment`
+
+  
+  *   :py:meth:`~MWAA.Client.create_web_login_token`
+
+  
+  *   :py:meth:`~MWAA.Client.delete_environment`
+
+  
+  *   :py:meth:`~MWAA.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~MWAA.Client.get_environment`
+
+  
+  *   :py:meth:`~MWAA.Client.get_paginator`
+
+  
+  *   :py:meth:`~MWAA.Client.get_waiter`
+
+  
+  *   :py:meth:`~MWAA.Client.list_environments`
+
+  
+  *   :py:meth:`~MWAA.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~MWAA.Client.publish_metrics`
+
+  
+  *   :py:meth:`~MWAA.Client.tag_resource`
+
+  
+  *   :py:meth:`~MWAA.Client.untag_resource`
+
+  
+  *   :py:meth:`~MWAA.Client.update_environment`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_cli_token(**kwargs)
+
+    
+
+    Create a CLI token to use Airflow CLI.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateCliToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_cli_token(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      Create a CLI token request for a MWAA environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'CliToken': 'string',
+            'WebServerHostname': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **CliToken** *(string) --* 
+
+          Create an Airflow CLI login token response for the provided JWT token.
+
+          
+        
+
+        - **WebServerHostname** *(string) --* 
+
+          Create an Airflow CLI login token response for the provided webserver hostname.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: create_environment(**kwargs)
+
+    
+
+    Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_environment(
+          AirflowConfigurationOptions={
+              'string': 'string'
+          },
+          AirflowVersion='string',
+          DagS3Path='string',
+          EnvironmentClass='string',
+          ExecutionRoleArn='string',
+          KmsKey='string',
+          LoggingConfiguration={
+              'DagProcessingLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'SchedulerLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'TaskLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'WebserverLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'WorkerLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              }
+          },
+          MaxWorkers=123,
+          MinWorkers=123,
+          Name='string',
+          NetworkConfiguration={
+              'SecurityGroupIds': [
+                  'string',
+              ],
+              'SubnetIds': [
+                  'string',
+              ]
+          },
+          PluginsS3ObjectVersion='string',
+          PluginsS3Path='string',
+          RequirementsS3ObjectVersion='string',
+          RequirementsS3Path='string',
+          Schedulers=123,
+          SourceBucketArn='string',
+          Tags={
+              'string': 'string'
+          },
+          WebserverAccessMode='PRIVATE_ONLY'|'PUBLIC_ONLY',
+          WeeklyMaintenanceWindowStart='string'
+      )
+    :type AirflowConfigurationOptions: dict
+    :param AirflowConfigurationOptions: 
+
+      A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see `Apache Airflow configuration options <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html>`__ .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type AirflowVersion: string
+    :param AirflowVersion: 
+
+      The Apache Airflow version for your environment. For example, ``v1.10.12`` . If no value is specified, defaults to the latest version. Valid values: ``v1.10.12`` .
+
+      
+
+    
+    :type DagS3Path: string
+    :param DagS3Path: **[REQUIRED]** 
+
+      The relative path to the DAGs folder on your Amazon S3 bucket. For example, ``dags`` . To learn more, see `Adding or updating DAGs <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html>`__ .
+
+      
+
+    
+    :type EnvironmentClass: string
+    :param EnvironmentClass: 
+
+      The environment class type. Valid values: ``mw1.small`` , ``mw1.medium`` , ``mw1.large`` . To learn more, see `Amazon MWAA environment class <https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html>`__ .
+
+      
+
+    
+    :type ExecutionRoleArn: string
+    :param ExecutionRoleArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an AWS Identity and Access Management (IAM) role that grants MWAA permission to access AWS services and resources used by your environment. For example, ``arn:aws:iam::123456789:role/my-execution-role`` . To learn more, see `Amazon MWAA Execution role <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html>`__ .
+
+      
+
+    
+    :type KmsKey: string
+    :param KmsKey: 
+
+      The AWS Key Management Service (KMS) key to encrypt the data in your environment. You can use an AWS owned CMK, or a Customer managed CMK (advanced). To learn more, see `Get started with Amazon Managed Workflows for Apache Airflow <https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html>`__ .
+
+      
+
+    
+    :type LoggingConfiguration: dict
+    :param LoggingConfiguration: 
+
+      Defines the Apache Airflow logs to send to CloudWatch Logs: ``DagProcessingLogs`` , ``SchedulerLogs`` , ``TaskLogs`` , ``WebserverLogs`` , ``WorkerLogs`` .
+
+      
+
+    
+      - **DagProcessingLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **SchedulerLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **TaskLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **WebserverLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **WorkerLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+    
+    :type MaxWorkers: integer
+    :param MaxWorkers: 
+
+      The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the ``MaxWorkers`` field. For example, ``20`` . When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in ``MinWorkers`` .
+
+      
+
+    
+    :type MinWorkers: integer
+    :param MinWorkers: 
+
+      The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the ``MaxWorkers`` field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the ``MinWorkers`` field. For example, ``2`` .
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the Amazon MWAA environment. For example, ``MyMWAAEnvironment`` .
+
+      
+
+    
+    :type NetworkConfiguration: dict
+    :param NetworkConfiguration: **[REQUIRED]** 
+
+      The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see `About networking on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html>`__ .
+
+      
+
+    
+      - **SecurityGroupIds** *(list) --* 
+
+        A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see `Security in your VPC on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html>`__ .
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **SubnetIds** *(list) --* 
+
+        A list of 2 subnet IDs. **Required** to create an environment. Must be private subnets in two different availability zones. A subnet must be attached to the same VPC as the security group.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+    
+    :type PluginsS3ObjectVersion: string
+    :param PluginsS3ObjectVersion: 
+
+      The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see `How S3 Versioning works <https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html>`__ .
+
+      
+
+    
+    :type PluginsS3Path: string
+    :param PluginsS3Path: 
+
+      The relative path to the ``plugins.zip`` file on your Amazon S3 bucket. For example, ``plugins.zip`` . If specified, then the plugins.zip version is required. To learn more, see `Installing custom plugins <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html>`__ .
+
+      
+
+    
+    :type RequirementsS3ObjectVersion: string
+    :param RequirementsS3ObjectVersion: 
+
+      The version of the requirements.txt file on your Amazon S3 bucket. A version must be specified each time a requirements.txt file is updated. To learn more, see `How S3 Versioning works <https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html>`__ .
+
+      
+
+    
+    :type RequirementsS3Path: string
+    :param RequirementsS3Path: 
+
+      The relative path to the ``requirements.txt`` file on your Amazon S3 bucket. For example, ``requirements.txt`` . If specified, then a file version is required. To learn more, see `Installing Python dependencies <https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html>`__ .
+
+      
+
+    
+    :type Schedulers: integer
+    :param Schedulers: 
+
+      The number of Apache Airflow schedulers to run in your environment.
+
+      
+
+    
+    :type SourceBucketArn: string
+    :param SourceBucketArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, ``arn:aws:s3:::my-airflow-bucket-unique-name`` . To learn more, see `Create an Amazon S3 bucket for Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html>`__ .
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      The key-value tag pairs you want to associate to your environment. For example, ``"Environment": "Staging"`` . To learn more, see `Tagging AWS resources <https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html>`__ .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type WebserverAccessMode: string
+    :param WebserverAccessMode: 
+
+      The Apache Airflow *Web server* access mode. To learn more, see `Apache Airflow access modes <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html>`__ .
+
+      
+
+    
+    :type WeeklyMaintenanceWindowStart: string
+    :param WeeklyMaintenanceWindowStart: 
+
+      The day and time of the week to start weekly maintenance updates of your environment in the following format: ``DAY:HH:MM`` . For example: ``TUE:03:30`` . You can specify a start time in 30 minute increments only. Supported input includes the following:
+
+       
+
+       
+      * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30) 
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) returned in the response for the environment.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_web_login_token(**kwargs)
+
+    
+
+    Create a JWT token to be used to login to Airflow Web UI with claims based Authentication.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateWebLoginToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_web_login_token(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      Create an Airflow Web UI login token request for a MWAA environment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'WebServerHostname': 'string',
+            'WebToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **WebServerHostname** *(string) --* 
+
+          Create an Airflow Web UI login token response for the provided webserver hostname.
+
+          
+        
+
+        - **WebToken** *(string) --* 
+
+          Create an Airflow Web UI login token response for the provided JWT token.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_environment(**kwargs)
+
+    
+
+    Deletes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/DeleteEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_environment(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the Amazon MWAA environment. For example, ``MyMWAAEnvironment`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_environment(**kwargs)
+
+    
+
+    Retrieves the details of an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/GetEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_environment(
+          Name='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the Amazon MWAA environment. For example, ``MyMWAAEnvironment`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Environment': {
+                'AirflowConfigurationOptions': {
+                    'string': 'string'
+                },
+                'AirflowVersion': 'string',
+                'Arn': 'string',
+                'CreatedAt': datetime(2015, 1, 1),
+                'DagS3Path': 'string',
+                'EnvironmentClass': 'string',
+                'ExecutionRoleArn': 'string',
+                'KmsKey': 'string',
+                'LastUpdate': {
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'Error': {
+                        'ErrorCode': 'string',
+                        'ErrorMessage': 'string'
+                    },
+                    'Status': 'SUCCESS'|'PENDING'|'FAILED'
+                },
+                'LoggingConfiguration': {
+                    'DagProcessingLogs': {
+                        'CloudWatchLogGroupArn': 'string',
+                        'Enabled': True|False,
+                        'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+                    },
+                    'SchedulerLogs': {
+                        'CloudWatchLogGroupArn': 'string',
+                        'Enabled': True|False,
+                        'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+                    },
+                    'TaskLogs': {
+                        'CloudWatchLogGroupArn': 'string',
+                        'Enabled': True|False,
+                        'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+                    },
+                    'WebserverLogs': {
+                        'CloudWatchLogGroupArn': 'string',
+                        'Enabled': True|False,
+                        'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+                    },
+                    'WorkerLogs': {
+                        'CloudWatchLogGroupArn': 'string',
+                        'Enabled': True|False,
+                        'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+                    }
+                },
+                'MaxWorkers': 123,
+                'MinWorkers': 123,
+                'Name': 'string',
+                'NetworkConfiguration': {
+                    'SecurityGroupIds': [
+                        'string',
+                    ],
+                    'SubnetIds': [
+                        'string',
+                    ]
+                },
+                'PluginsS3ObjectVersion': 'string',
+                'PluginsS3Path': 'string',
+                'RequirementsS3ObjectVersion': 'string',
+                'RequirementsS3Path': 'string',
+                'Schedulers': 123,
+                'ServiceRoleArn': 'string',
+                'SourceBucketArn': 'string',
+                'Status': 'CREATING'|'CREATE_FAILED'|'AVAILABLE'|'UPDATING'|'DELETING'|'DELETED'|'UNAVAILABLE'|'UPDATE_FAILED',
+                'Tags': {
+                    'string': 'string'
+                },
+                'WebserverAccessMode': 'PRIVATE_ONLY'|'PUBLIC_ONLY',
+                'WebserverUrl': 'string',
+                'WeeklyMaintenanceWindowStart': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Environment** *(dict) --* 
+
+          An object containing all available details about the environment.
+
+          
+          
+
+          - **AirflowConfigurationOptions** *(dict) --* 
+
+            A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. To learn more, see `Apache Airflow configuration options <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html>`__ .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **AirflowVersion** *(string) --* 
+
+            The Apache Airflow version on your environment. For example, ``v1.10.12`` .
+
+            
+          
+
+          - **Arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the Amazon MWAA environment.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The day and time the environment was created.
+
+            
+          
+
+          - **DagS3Path** *(string) --* 
+
+            The relative path to the DAGs folder on your Amazon S3 bucket. For example, ``dags`` . To learn more, see `Adding or updating DAGs <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html>`__ .
+
+            
+          
+
+          - **EnvironmentClass** *(string) --* 
+
+            The environment class type. Valid values: ``mw1.small`` , ``mw1.medium`` , ``mw1.large`` . To learn more, see `Amazon MWAA environment class <https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html>`__ .
+
+            
+          
+
+          - **ExecutionRoleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access AWS resources in your environment. For example, ``arn:aws:iam::123456789:role/my-execution-role`` . To learn more, see `Amazon MWAA Execution role <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html>`__ .
+
+            
+          
+
+          - **KmsKey** *(string) --* 
+
+            The Key Management Service (KMS) encryption key used to encrypt the data in your environment.
+
+            
+          
+
+          - **LastUpdate** *(dict) --* 
+
+            The status of the last update on the environment, and any errors that were encountered.
+
+            
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The day and time of the last update on the environment.
+
+              
+            
+
+            - **Error** *(dict) --* 
+
+              The error that was encountered during the last update of the environment.
+
+              
+              
+
+              - **ErrorCode** *(string) --* 
+
+                The error code that corresponds to the error with the last update.
+
+                
+              
+
+              - **ErrorMessage** *(string) --* 
+
+                The error message that corresponds to the error code.
+
+                
+          
+            
+
+            - **Status** *(string) --* 
+
+              The status of the last update on the environment. Valid values: ``SUCCESS`` , ``PENDING`` , ``FAILED`` .
+
+              
+        
+          
+
+          - **LoggingConfiguration** *(dict) --* 
+
+            The Apache Airflow logs being sent to CloudWatch Logs: ``DagProcessingLogs`` , ``SchedulerLogs`` , ``TaskLogs`` , ``WebserverLogs`` , ``WorkerLogs`` .
+
+            
+            
+
+            - **DagProcessingLogs** *(dict) --* 
+
+              Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+              
+              
+
+              - **CloudWatchLogGroupArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) is published. For example, ``arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`` .
+
+                
+              
+
+              - **Enabled** *(boolean) --* 
+
+                Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+                
+              
+
+              - **LogLevel** *(string) --* 
+
+                Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+                
+          
+            
+
+            - **SchedulerLogs** *(dict) --* 
+
+              Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+              
+              
+
+              - **CloudWatchLogGroupArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) is published. For example, ``arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`` .
+
+                
+              
+
+              - **Enabled** *(boolean) --* 
+
+                Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+                
+              
+
+              - **LogLevel** *(string) --* 
+
+                Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+                
+          
+            
+
+            - **TaskLogs** *(dict) --* 
+
+              Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+              
+              
+
+              - **CloudWatchLogGroupArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) is published. For example, ``arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`` .
+
+                
+              
+
+              - **Enabled** *(boolean) --* 
+
+                Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+                
+              
+
+              - **LogLevel** *(string) --* 
+
+                Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+                
+          
+            
+
+            - **WebserverLogs** *(dict) --* 
+
+              Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+              
+              
+
+              - **CloudWatchLogGroupArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) is published. For example, ``arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`` .
+
+                
+              
+
+              - **Enabled** *(boolean) --* 
+
+                Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+                
+              
+
+              - **LogLevel** *(string) --* 
+
+                Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+                
+          
+            
+
+            - **WorkerLogs** *(dict) --* 
+
+              Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+              
+              
+
+              - **CloudWatchLogGroupArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) for the CloudWatch Logs group where the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) is published. For example, ``arn:aws:logs:us-east-1:123456789012:log-group:airflow-MyMWAAEnvironment-MwaaEnvironment-DAGProcessing:*`` .
+
+                
+              
+
+              - **Enabled** *(boolean) --* 
+
+                Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+                
+              
+
+              - **LogLevel** *(string) --* 
+
+                Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+                
+          
+        
+          
+
+          - **MaxWorkers** *(integer) --* 
+
+            The maximum number of workers that run in your environment. For example, ``20`` .
+
+            
+          
+
+          - **MinWorkers** *(integer) --* 
+
+            The minimum number of workers that run in your environment. For example, ``2`` .
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the Amazon MWAA environment. For example, ``MyMWAAEnvironment`` .
+
+            
+          
+
+          - **NetworkConfiguration** *(dict) --* 
+
+            The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see `About networking on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html>`__ .
+
+            
+            
+
+            - **SecurityGroupIds** *(list) --* 
+
+              A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see `Security in your VPC on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html>`__ .
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **SubnetIds** *(list) --* 
+
+              A list of 2 subnet IDs. **Required** to create an environment. Must be private subnets in two different availability zones. A subnet must be attached to the same VPC as the security group.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+          
+
+          - **PluginsS3ObjectVersion** *(string) --* 
+
+            The version of the plugins.zip file on your Amazon S3 bucket. To learn more, see `Installing custom plugins <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html>`__ .
+
+            
+          
+
+          - **PluginsS3Path** *(string) --* 
+
+            The relative path to the ``plugins.zip`` file on your Amazon S3 bucket. For example, ``plugins.zip`` . To learn more, see `Installing custom plugins <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html>`__ .
+
+            
+          
+
+          - **RequirementsS3ObjectVersion** *(string) --* 
+
+            The version of the requirements.txt file on your Amazon S3 bucket. To learn more, see `Installing Python dependencies <https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html>`__ .
+
+            
+          
+
+          - **RequirementsS3Path** *(string) --* 
+
+            The relative path to the ``requirements.txt`` file on your Amazon S3 bucket. For example, ``requirements.txt`` . To learn more, see `Installing Python dependencies <https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html>`__ .
+
+            
+          
+
+          - **Schedulers** *(integer) --* 
+
+            The number of Apache Airflow schedulers that run in your Amazon MWAA environment.
+
+            
+          
+
+          - **ServiceRoleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) for the service-linked role of the environment. To learn more, see `Amazon MWAA Service-linked role <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html>`__ .
+
+            
+          
+
+          - **SourceBucketArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, ``arn:aws:s3:::my-airflow-bucket-unique-name`` . To learn more, see `Create an Amazon S3 bucket for Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html>`__ .
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of the Amazon MWAA environment. Valid values:
+
+             
+
+             
+            * ``CREATING`` - Indicates the request to create the environment is in progress. 
+             
+            * ``CREATE_FAILED`` - Indicates the request to create the environment failed, and the environment could not be created. 
+             
+            * ``AVAILABLE`` - Indicates the request was successful and the environment is ready to use. 
+             
+            * ``UPDATING`` - Indicates the request to update the environment is in progress. 
+             
+            * ``DELETING`` - Indicates the request to delete the environment is in progress. 
+             
+            * ``DELETED`` - Indicates the request to delete the environment is complete, and the environment has been deleted. 
+             
+            * ``UNAVAILABLE`` - Indicates the request failed, but the environment was unable to rollback and is not in a stable state. 
+             
+            * ``UPDATE_FAILED`` - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use. 
+             
+
+             
+
+            We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. To learn more, see `Amazon MWAA troubleshooting <https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html>`__ .
+
+            
+          
+
+          - **Tags** *(dict) --* 
+
+            The key-value tag pairs associated to your environment. For example, ``"Environment": "Staging"`` . To learn more, see `Tagging AWS resources <https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html>`__ .
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **WebserverAccessMode** *(string) --* 
+
+            The Apache Airflow *Web server* access mode. To learn more, see `Apache Airflow access modes <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html>`__ .
+
+            
+          
+
+          - **WebserverUrl** *(string) --* 
+
+            The Apache Airflow *Web server* host name for the Amazon MWAA environment. To learn more, see `Accessing the Apache Airflow UI <https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html>`__ .
+
+            
+          
+
+          - **WeeklyMaintenanceWindowStart** *(string) --* 
+
+            The day and time of the week that weekly maintenance updates are scheduled. For example: ``TUE:03:30`` .
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_environments(**kwargs)
+
+    
+
+    Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListEnvironments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_environments(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to retrieve per page. For example, ``5`` environments per page.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      Retrieves the next page of the results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Environments': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Environments** *(list) --* 
+
+          Returns the list of Amazon MWAA environments.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          Retrieves the next page of the results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the key-value tag pairs associated to the Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, ``"Environment": "Staging"`` . 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, ``arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(dict) --* 
+
+          The key-value tag pairs associated to your environment. To learn more, see `Tagging AWS resources <https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html>`__ .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: publish_metrics(**kwargs)
+
+    
+
+    An operation for publishing metrics from the customers to the Ops plane.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/PublishMetrics>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.publish_metrics(
+          EnvironmentName='string',
+          MetricData=[
+              {
+                  'Dimensions': [
+                      {
+                          'Name': 'string',
+                          'Value': 'string'
+                      },
+                  ],
+                  'MetricName': 'string',
+                  'StatisticValues': {
+                      'Maximum': 123.0,
+                      'Minimum': 123.0,
+                      'SampleCount': 123,
+                      'Sum': 123.0
+                  },
+                  'Timestamp': datetime(2015, 1, 1),
+                  'Unit': 'Seconds'|'Microseconds'|'Milliseconds'|'Bytes'|'Kilobytes'|'Megabytes'|'Gigabytes'|'Terabytes'|'Bits'|'Kilobits'|'Megabits'|'Gigabits'|'Terabits'|'Percent'|'Count'|'Bytes/Second'|'Kilobytes/Second'|'Megabytes/Second'|'Gigabytes/Second'|'Terabytes/Second'|'Bits/Second'|'Kilobits/Second'|'Megabits/Second'|'Gigabits/Second'|'Terabits/Second'|'Count/Second'|'None',
+                  'Value': 123.0
+              },
+          ]
+      )
+    :type EnvironmentName: string
+    :param EnvironmentName: **[REQUIRED]** 
+
+      Publishes environment metric data to Amazon CloudWatch.
+
+      
+
+    
+    :type MetricData: list
+    :param MetricData: **[REQUIRED]** 
+
+      Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metrica.
+
+      
+
+    
+      - *(dict) --* 
+
+        Internal only API.
+
+        
+
+      
+        - **Dimensions** *(list) --* 
+
+          Internal only API.
+
+          
+
+        
+          - *(dict) --* 
+
+            Internal only API.
+
+            
+
+          
+            - **Name** *(string) --* **[REQUIRED]** 
+
+              Internal only API.
+
+              
+
+            
+            - **Value** *(string) --* **[REQUIRED]** 
+
+              Internal only API.
+
+              
+
+            
+          
+      
+        - **MetricName** *(string) --* **[REQUIRED]** 
+
+          Internal only API.
+
+          
+
+        
+        - **StatisticValues** *(dict) --* 
+
+          Internal only API.
+
+          
+
+        
+          - **Maximum** *(float) --* 
+
+            Internal only API.
+
+            
+
+          
+          - **Minimum** *(float) --* 
+
+            Internal only API.
+
+            
+
+          
+          - **SampleCount** *(integer) --* 
+
+            Internal only API.
+
+            
+
+          
+          - **Sum** *(float) --* 
+
+            Internal only API.
+
+            
+
+          
+        
+        - **Timestamp** *(datetime) --* **[REQUIRED]** 
+
+          Internal only API.
+
+          
+
+        
+        - **Unit** *(string) --* 
+
+          Unit
+
+          
+
+        
+        - **Value** *(float) --* 
+
+          Internal only API.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Associates key-value tag pairs to your Amazon Managed Workflows for Apache Airflow (MWAA) environment. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, ``arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`` .
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      The key-value tag pairs you want to associate to your environment. For example, ``"Environment": "Staging"`` . To learn more, see `Tagging AWS resources <https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html>`__ .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes key-value tag pairs associated to your Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, ``"Environment": "Staging"`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, ``arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`` .
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The key-value tag pair you want to remove. For example, ``"Environment": "Staging"`` . 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_environment(**kwargs)
+
+    
+
+    Updates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_environment(
+          AirflowConfigurationOptions={
+              'string': 'string'
+          },
+          AirflowVersion='string',
+          DagS3Path='string',
+          EnvironmentClass='string',
+          ExecutionRoleArn='string',
+          LoggingConfiguration={
+              'DagProcessingLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'SchedulerLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'TaskLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'WebserverLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              },
+              'WorkerLogs': {
+                  'Enabled': True|False,
+                  'LogLevel': 'CRITICAL'|'ERROR'|'WARNING'|'INFO'|'DEBUG'
+              }
+          },
+          MaxWorkers=123,
+          MinWorkers=123,
+          Name='string',
+          NetworkConfiguration={
+              'SecurityGroupIds': [
+                  'string',
+              ]
+          },
+          PluginsS3ObjectVersion='string',
+          PluginsS3Path='string',
+          RequirementsS3ObjectVersion='string',
+          RequirementsS3Path='string',
+          Schedulers=123,
+          SourceBucketArn='string',
+          WebserverAccessMode='PRIVATE_ONLY'|'PUBLIC_ONLY',
+          WeeklyMaintenanceWindowStart='string'
+      )
+    :type AirflowConfigurationOptions: dict
+    :param AirflowConfigurationOptions: 
+
+      A list of key-value pairs containing the Apache Airflow configuration options you want to attach to your environment. To learn more, see `Apache Airflow configuration options <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html>`__ .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type AirflowVersion: string
+    :param AirflowVersion: 
+
+      The Apache Airflow version for your environment. For example, ``v1.10.12`` . If no value is specified, defaults to the latest version. Valid values: ``v1.10.12`` .
+
+      
+
+    
+    :type DagS3Path: string
+    :param DagS3Path: 
+
+      The relative path to the DAGs folder on your Amazon S3 bucket. For example, ``dags`` . To learn more, see `Adding or updating DAGs <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html>`__ .
+
+      
+
+    
+    :type EnvironmentClass: string
+    :param EnvironmentClass: 
+
+      The environment class type. Valid values: ``mw1.small`` , ``mw1.medium`` , ``mw1.large`` . To learn more, see `Amazon MWAA environment class <https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html>`__ .
+
+      
+
+    
+    :type ExecutionRoleArn: string
+    :param ExecutionRoleArn: 
+
+      The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to access AWS resources in your environment. For example, ``arn:aws:iam::123456789:role/my-execution-role`` . To learn more, see `Amazon MWAA Execution role <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html>`__ .
+
+      
+
+    
+    :type LoggingConfiguration: dict
+    :param LoggingConfiguration: 
+
+      Defines the Apache Airflow logs to send to CloudWatch Logs: ``DagProcessingLogs`` , ``SchedulerLogs`` , ``TaskLogs`` , ``WebserverLogs`` , ``WorkerLogs`` .
+
+      
+
+    
+      - **DagProcessingLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **SchedulerLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **TaskLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **WebserverLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+      - **WorkerLogs** *(dict) --* 
+
+        Defines the type of logs to send for the Apache Airflow log type (e.g. ``DagProcessingLogs`` ). Valid values: ``CloudWatchLogGroupArn`` , ``Enabled`` , ``LogLevel`` .
+
+        
+
+      
+        - **Enabled** *(boolean) --* **[REQUIRED]** 
+
+          Indicates whether to enable the Apache Airflow log type (e.g. ``DagProcessingLogs`` ) in CloudWatch Logs.
+
+          
+
+        
+        - **LogLevel** *(string) --* **[REQUIRED]** 
+
+          Defines the Apache Airflow logs to send for the log type (e.g. ``DagProcessingLogs`` ) to CloudWatch Logs. Valid values: ``CRITICAL`` , ``ERROR`` , ``WARNING`` , ``INFO`` .
+
+          
+
+        
+      
+    
+    :type MaxWorkers: integer
+    :param MaxWorkers: 
+
+      The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the ``MaxWorkers`` field. For example, ``20`` . When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the one worker that is included with your environment, or the number you specify in ``MinWorkers`` .
+
+      
+
+    
+    :type MinWorkers: integer
+    :param MinWorkers: 
+
+      The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers up to the number you specify in the ``MaxWorkers`` field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra workers leaving the worker count you specify in the ``MinWorkers`` field. For example, ``2`` .
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of your Amazon MWAA environment. For example, ``MyMWAAEnvironment`` .
+
+      
+
+    
+    :type NetworkConfiguration: dict
+    :param NetworkConfiguration: 
+
+      The VPC networking components used to secure and enable network traffic between the AWS resources for your environment. To learn more, see `About networking on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html>`__ .
+
+      
+
+    
+      - **SecurityGroupIds** *(list) --* **[REQUIRED]** 
+
+        A list of 1 or more security group IDs. Accepts up to 5 security group IDs. A security group must be attached to the same VPC as the subnets. To learn more, see `Security in your VPC on Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html>`__ .
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+    
+    :type PluginsS3ObjectVersion: string
+    :param PluginsS3ObjectVersion: 
+
+      The version of the plugins.zip file on your Amazon S3 bucket. A version must be specified each time a plugins.zip file is updated. To learn more, see `How S3 Versioning works <https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html>`__ .
+
+      
+
+    
+    :type PluginsS3Path: string
+    :param PluginsS3Path: 
+
+      The relative path to the ``plugins.zip`` file on your Amazon S3 bucket. For example, ``plugins.zip`` . If specified, then the plugins.zip version is required. To learn more, see `Installing custom plugins <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html>`__ .
+
+      
+
+    
+    :type RequirementsS3ObjectVersion: string
+    :param RequirementsS3ObjectVersion: 
+
+      The version of the requirements.txt file on your Amazon S3 bucket. A version must be specified each time a requirements.txt file is updated. To learn more, see `How S3 Versioning works <https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html>`__ .
+
+      
+
+    
+    :type RequirementsS3Path: string
+    :param RequirementsS3Path: 
+
+      The relative path to the ``requirements.txt`` file on your Amazon S3 bucket. For example, ``requirements.txt`` . If specified, then a file version is required. To learn more, see `Installing Python dependencies <https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html>`__ .
+
+      
+
+    
+    :type Schedulers: integer
+    :param Schedulers: 
+
+      The number of Apache Airflow schedulers to run in your Amazon MWAA environment.
+
+      
+
+    
+    :type SourceBucketArn: string
+    :param SourceBucketArn: 
+
+      The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and supporting files are stored. For example, ``arn:aws:s3:::my-airflow-bucket-unique-name`` . To learn more, see `Create an Amazon S3 bucket for Amazon MWAA <https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html>`__ .
+
+      
+
+    
+    :type WebserverAccessMode: string
+    :param WebserverAccessMode: 
+
+      The Apache Airflow *Web server* access mode. To learn more, see `Apache Airflow access modes <https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html>`__ .
+
+      
+
+    
+    :type WeeklyMaintenanceWindowStart: string
+    :param WeeklyMaintenanceWindowStart: 
+
+      The day and time of the week to start weekly maintenance updates of your environment in the following format: ``DAY:HH:MM`` . For example: ``TUE:03:30`` . You can specify a start time in 30 minute increments only. Supported input includes the following:
+
+       
+
+       
+      * MON|TUE|WED|THU|FRI|SAT|SUN:([01]\\d|2[0-3]):(00|30) 
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Arn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, ``arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment`` .
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MWAA.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MWAA.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`MWAA.Paginator.ListEnvironments`
+
+
+
+.. py:class:: MWAA.Paginator.ListEnvironments
+
+  ::
+
+    
+    paginator = client.get_paginator('list_environments')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`MWAA.Client.list_environments`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ListEnvironments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Environments': [
+                'string',
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Environments** *(list) --* 
+
+          Returns the list of Amazon MWAA environments.
+
+          
+          
+
+          - *(string) --* 
+      
+    

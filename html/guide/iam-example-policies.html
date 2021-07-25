@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Working with IAM policies &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="AWS Identity and Access Management examples" href="iam-examples.html" />
+    <link rel="next" title="Managing IAM access keys" href="iam-example-managing-access-keys.html" />
+    <link rel="prev" title="Managing IAM users" href="iam-example-managing-users.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="iam-example-managing-access-keys.html" title="Managing IAM access keys"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="iam-example-managing-users.html" title="Managing IAM users"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="iam-examples.html" accesskey="U">AWS Identity and Access Management examples</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Code examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cw-examples.html">Amazon CloudWatch examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamodb.html">Amazon DynamoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ec2-examples.html">Amazon EC2 examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kms-examples.html">AWS Key Management Service (AWS KMS) examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s3-examples.html">Amazon S3 examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secrets-manager.html">AWS Secrets Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ses-examples.html">Amazon SES examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqs-examples.html">Amazon SQS examples</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Developer guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="examples.html">Code examples</a></li>
+              
+                <li><a href="iam-examples.html">AWS Identity and Access Management examples</a></li>
+              
+              <li>Working with IAM policies</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="working-with-iam-policies">
+<span id="aws-boto3-iam-examples-policies"></span><h1>Working with IAM policies<a class="headerlink" href="#working-with-iam-policies" title="Permalink to this headline">¶</a></h1>
+<p>This Python example shows you how to create and get IAM policies and attach and detach IAM policies from roles.</p>
+<div class="section" id="the-scenario">
+<h2>The scenario<a class="headerlink" href="#the-scenario" title="Permalink to this headline">¶</a></h2>
+<p>You grant permissions to a user by creating a policy, which is a document that lists the actions
+that a user can perform and the resources those actions can affect. Any actions or resources that are
+not explicitly allowed are denied by default. Policies can be created and attached to users, groups
+of users, roles assumed by users, and resources.</p>
+<p>In this example, Python code used to manage policies in IAM. The code uses the
+Amazon Web Services (AWS) SDK for Python to create and delete policies as well as attaching and
+detaching role policies using these methods of the IAM client class:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.create_policy">create_policy</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_policy">get_policy</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.attach_role_policy">attach_role_policy</a>.</li>
+<li><a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.detach_role_policy">detach_role_policy</a>.</li>
+</ul>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+<p>For more information about IAM policies, see <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html">Overview of Access Management: Permissions and Policies</a>
+in the IAM User Guide.</p>
+</div>
+<div class="section" id="prerequisite-tasks">
+<h2>Prerequisite tasks<a class="headerlink" href="#prerequisite-tasks" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run this example, you must first configure your AWS credentials, as described in <a class="reference internal" href="quickstart.html"><em>Quickstart</em></a>.</p>
+</div>
+<div class="section" id="create-an-iam-policy">
+<h2>Create an IAM policy<a class="headerlink" href="#create-an-iam-policy" title="Permalink to this headline">¶</a></h2>
+<p>Create a new managed policy for your AWS account.</p>
+<p>This operation creates a policy version with a version identifier of <tt class="code docutils literal"><span class="pre">v1</span></tt> and sets <tt class="code docutils literal"><span class="pre">v1</span></tt>
+as the policy's default version. For more information about policy versions, see
+<a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-versioning.html">Versioning for Managed Policies</a>
+in the <em>IAM User Guide</em>.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Create a new managed policy using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.create_policy">create_policy</a>.</li>
+</ul>
+<p>All the example code for the Amazon Web Services (AWS) SDK for Python is available <a class="reference external" href="https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/python/example_code">here on GitHub</a>.</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create IAM client</span>
+<span class="n">iam</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;iam&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a policy</span>
+<span class="n">my_managed_policy</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;logs:CreateLogGroup&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;RESOURCE_ARN&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;dynamodb:DeleteItem&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;dynamodb:GetItem&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;dynamodb:PutItem&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;dynamodb:Scan&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;dynamodb:UpdateItem&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;RESOURCE_ARN&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">create_policy</span><span class="p">(</span>
+  <span class="n">PolicyName</span><span class="o">=</span><span class="s1">&#39;myDynamoDBPolicy&#39;</span><span class="p">,</span>
+  <span class="n">PolicyDocument</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">my_managed_policy</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="get-an-iam-policy">
+<h2>Get an IAM policy<a class="headerlink" href="#get-an-iam-policy" title="Permalink to this headline">¶</a></h2>
+<p>Get information about the specified managed policy, including the policy's default version and
+the total number of IAM users, groups, and roles to which the policy is attached. To get the
+list of the specific users, groups, and roles that the policy is attached to, use the
+<tt class="code docutils literal"><span class="pre">list_entities_for_policy</span></tt> API. This API returns metadata about the policy. To get the actual policy
+document for a specific version of the policy, use <tt class="code docutils literal"><span class="pre">get_policy_version</span></tt> API.</p>
+<p>This API gets information about managed policies. To get information about an inline policy
+that is embedded with an IAM user, group, or role, use the <tt class="code docutils literal"><span class="pre">get_user_policy</span></tt>, <tt class="code docutils literal"><span class="pre">get_group_policy</span></tt>,
+or <tt class="code docutils literal"><span class="pre">get_role_policy</span></tt> API.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Get information about a managed policy using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.get_policy">get_policy</a>.</li>
+</ul>
+<div class="section" id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+
+<span class="c1"># Create IAM client</span>
+<span class="n">iam</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;iam&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get a policy</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">iam</span><span class="o">.</span><span class="n">get_policy</span><span class="p">(</span>
+    <span class="n">PolicyArn</span><span class="o">=</span><span class="s1">&#39;arn:aws:iam::aws:policy/AWSLambdaExecute&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;Policy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="attach-a-managed-role-policy">
+<h2>Attach a managed role policy<a class="headerlink" href="#attach-a-managed-role-policy" title="Permalink to this headline">¶</a></h2>
+<p>When you attach a managed policy to a role, the managed policy becomes part of the role's permission
+(access) policy. You cannot use a managed policy as the role's trust policy. The role's trust policy
+is created at the same time as the role, using <tt class="code docutils literal"><span class="pre">create_role</span></tt>. You can update a role's trust policy using
+<tt class="code docutils literal"><span class="pre">update_assume_role_policy</span></tt>.</p>
+<p>Use this API to attach a managed policy to a role. To embed an inline policy in a role, use <tt class="code docutils literal"><span class="pre">put_role_policy</span></tt>.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Attach a managed policy to an IAM role. using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.attach_role_policy">attach_role_policy</a>.</li>
+</ul>
+<div class="section" id="id6">
+<h3>Example<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create IAM client</span>
+<span class="n">iam</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;iam&#39;</span><span class="p">)</span>
+
+<span class="c1"># Attach a role policy</span>
+<span class="n">iam</span><span class="o">.</span><span class="n">attach_role_policy</span><span class="p">(</span>
+    <span class="n">PolicyArn</span><span class="o">=</span><span class="s1">&#39;arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess&#39;</span><span class="p">,</span>
+    <span class="n">RoleName</span><span class="o">=</span><span class="s1">&#39;AmazonDynamoDBFullAccess&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="detach-a-managed-role-policy">
+<h2>Detach a managed role policy<a class="headerlink" href="#detach-a-managed-role-policy" title="Permalink to this headline">¶</a></h2>
+<p>Detach the specified managed policy from the specified role.</p>
+<p>A role can also have inline policies embedded with it. To delete an inline policy, use the
+<tt class="code docutils literal"><span class="pre">delete_role_policy</span></tt> API. For information about policies, see
+<a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed Policies and Inline Policies</a>
+in the <em>IAM User Guide</em>.</p>
+<p>The example below shows how to:</p>
+<ul class="simple">
+<li>Detach a managed role policy using
+<a class="reference external" href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/iam.html#IAM.Client.detach_role_policy">detach_role_policy</a>.</li>
+</ul>
+<div class="section" id="id8">
+<h3>Example<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="c1"># Create IAM client</span>
+<span class="n">iam</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;iam&#39;</span><span class="p">)</span>
+
+<span class="c1"># Detach a role policy</span>
+<span class="n">iam</span><span class="o">.</span><span class="n">detach_role_policy</span><span class="p">(</span>
+    <span class="n">PolicyArn</span><span class="o">=</span><span class="s1">&#39;arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess&#39;</span><span class="p">,</span>
+    <span class="n">RoleName</span><span class="o">=</span><span class="s1">&#39;AmazonDynamoDBFullAccess&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="iam-example-managing-users.html" title="previous chapter (use the left arrow)">Managing IAM users</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="iam-example-managing-access-keys.html" title="next chapter (use the right arrow)">Managing IAM access keys</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="iam-example-managing-access-keys.html" title="Managing IAM access keys"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="iam-example-managing-users.html" title="Managing IAM users"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="examples.html" >Code examples</a> &raquo;</li>
+          <li><a href="iam-examples.html" >AWS Identity and Access Management examples</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

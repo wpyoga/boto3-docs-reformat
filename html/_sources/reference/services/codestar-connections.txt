@@ -1,0 +1,1693 @@
+
+
+*******************
+CodeStarconnections
+*******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: CodeStarconnections.Client
+
+  A low-level client representing AWS CodeStar connections
+   
+
+  This AWS CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Connections API. You can use the connections API to work with connections and installations.
+
+   
+
+   *Connections* are configurations that you use to connect AWS resources to external code repositories. Each connection is a resource that can be given to services such as CodePipeline to connect to a third-party repository such as Bitbucket. For example, you can add the connection in CodePipeline so that it triggers your pipeline when a code change is made to your third-party code repository. Each connection is named and associated with a unique ARN that is used to reference the connection.
+
+   
+
+  When you create a connection, the console initiates a third-party connection handshake. *Installations* are the apps that are used to conduct this handshake. For example, the installation for the Bitbucket provider type is the Bitbucket app. When you create a connection, you can choose an existing installation or create one.
+
+   
+
+  When you want to create a connection to an installed provider type such as GitHub Enterprise Server, you create a *host* for your connections.
+
+   
+
+  You can work with connections by calling:
+
+   
+
+   
+  *  CreateConnection , which creates a uniquely named connection that can be referenced by services such as CodePipeline. 
+   
+  *  DeleteConnection , which deletes the specified connection. 
+   
+  *  GetConnection , which returns information about the connection, including the connection status. 
+   
+  *  ListConnections , which lists the connections associated with your account. 
+   
+
+   
+
+  You can work with hosts by calling:
+
+   
+
+   
+  *  CreateHost , which creates a host that represents the infrastructure where your provider is installed. 
+   
+  *  DeleteHost , which deletes the specified host. 
+   
+  *  GetHost , which returns information about the host, including the setup status. 
+   
+  *  ListHosts , which lists the hosts associated with your account. 
+   
+
+   
+
+  You can work with tags in AWS CodeStar Connections by calling the following:
+
+   
+
+   
+  *  ListTagsForResource , which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeStar Connections. 
+   
+  *  TagResource , which adds or updates tags for a resource in AWS CodeStar Connections. 
+   
+  *  UntagResource , which removes tags for a resource in AWS CodeStar Connections. 
+   
+
+   
+
+  For information about how to use AWS CodeStar Connections, see the `Developer Tools User Guide <https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('codestar-connections')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~CodeStarconnections.Client.can_paginate`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.create_connection`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.create_host`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.delete_connection`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.delete_host`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.get_connection`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.get_host`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.get_paginator`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.get_waiter`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.list_connections`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.list_hosts`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.tag_resource`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.untag_resource`
+
+  
+  *   :py:meth:`~CodeStarconnections.Client.update_host`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_connection(**kwargs)
+
+    
+
+    Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_connection(
+          ProviderType='Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+          ConnectionName='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ],
+          HostArn='string'
+      )
+    :type ProviderType: string
+    :param ProviderType: 
+
+      The name of the external provider where your third-party code repository is configured.
+
+      
+
+    
+    :type ConnectionName: string
+    :param ConnectionName: **[REQUIRED]** 
+
+      The name of the connection to be created. The name must be unique in the calling AWS account.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      The key-value pair to use when tagging the resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair that is used to manage the resource.
+
+         
+
+        This tag is available for use by AWS services that support tags.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag's key.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The tag's value.
+
+          
+
+        
+      
+  
+    :type HostArn: string
+    :param HostArn: 
+
+      The Amazon Resource Name (ARN) of the host associated with the connection to be created.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ConnectionArn': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ConnectionArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.
+
+           
+
+          .. note::
+
+             
+
+            The ARN is never reused if the connection is deleted.
+
+             
+
+          
+        
+
+        - **Tags** *(list) --* 
+
+          Specifies the tags applied to the resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair that is used to manage the resource.
+
+             
+
+            This tag is available for use by AWS services that support tags.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag's key.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The tag's value.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceUnavailableException`
+
+    
+
+  .. py:method:: create_host(**kwargs)
+
+    
+
+    Creates a resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.
+
+     
+
+    .. note::
+
+       
+
+      A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateHost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_host(
+          Name='string',
+          ProviderType='Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+          ProviderEndpoint='string',
+          VpcConfiguration={
+              'VpcId': 'string',
+              'SubnetIds': [
+                  'string',
+              ],
+              'SecurityGroupIds': [
+                  'string',
+              ],
+              'TlsCertificate': 'string'
+          },
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the host to be created. The name must be unique in the calling AWS account.
+
+      
+
+    
+    :type ProviderType: string
+    :param ProviderType: **[REQUIRED]** 
+
+      The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+
+      
+
+    
+    :type ProviderEndpoint: string
+    :param ProviderEndpoint: **[REQUIRED]** 
+
+      The endpoint of the infrastructure to be represented by the host after it is created.
+
+      
+
+    
+    :type VpcConfiguration: dict
+    :param VpcConfiguration: 
+
+      The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+
+      
+
+    
+      - **VpcId** *(string) --* **[REQUIRED]** 
+
+        The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+      - **SubnetIds** *(list) --* **[REQUIRED]** 
+
+        The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **SecurityGroupIds** *(list) --* **[REQUIRED]** 
+
+        The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **TlsCertificate** *(string) --* 
+
+        The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+
+        
+
+      
+    
+    :type Tags: list
+    :param Tags: 
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair that is used to manage the resource.
+
+         
+
+        This tag is available for use by AWS services that support tags.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag's key.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The tag's value.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'HostArn': 'string',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **HostArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the host to be created.
+
+          
+        
+
+        - **Tags** *(list) --* 
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair that is used to manage the resource.
+
+             
+
+            This tag is available for use by AWS services that support tags.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag's key.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The tag's value.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: delete_connection(**kwargs)
+
+    
+
+    The connection to be deleted.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/DeleteConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_connection(
+          ConnectionArn='string'
+      )
+    :type ConnectionArn: string
+    :param ConnectionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the connection to be deleted.
+
+       
+
+      .. note::
+
+         
+
+        The ARN is never reused if the connection is deleted.
+
+         
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: delete_host(**kwargs)
+
+    
+
+    The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.
+
+     
+
+    .. note::
+
+       
+
+      A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/DeleteHost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_host(
+          HostArn='string'
+      )
+    :type HostArn: string
+    :param HostArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the host to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceUnavailableException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_connection(**kwargs)
+
+    
+
+    Returns the connection ARN and details such as status, owner, and provider type.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetConnection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_connection(
+          ConnectionArn='string'
+      )
+    :type ConnectionArn: string
+    :param ConnectionArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of a connection.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connection': {
+                'ConnectionName': 'string',
+                'ConnectionArn': 'string',
+                'ProviderType': 'Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+                'OwnerAccountId': 'string',
+                'ConnectionStatus': 'PENDING'|'AVAILABLE'|'ERROR',
+                'HostArn': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connection** *(dict) --* 
+
+          The connection details, such as status, owner, and provider type.
+
+          
+          
+
+          - **ConnectionName** *(string) --* 
+
+            The name of the connection. Connection names must be unique in an AWS user account.
+
+            
+          
+
+          - **ConnectionArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.
+
+             
+
+            .. note::
+
+               
+
+              The ARN is never reused if the connection is deleted.
+
+               
+
+            
+          
+
+          - **ProviderType** *(string) --* 
+
+            The name of the external provider where your third-party code repository is configured.
+
+            
+          
+
+          - **OwnerAccountId** *(string) --* 
+
+            The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
+
+            
+          
+
+          - **ConnectionStatus** *(string) --* 
+
+            The current status of the connection. 
+
+            
+          
+
+          - **HostArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the host associated with the connection.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceUnavailableException`
+
+    
+
+  .. py:method:: get_host(**kwargs)
+
+    
+
+    Returns the host ARN and details such as status, provider type, endpoint, and, if applicable, the VPC configuration.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetHost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_host(
+          HostArn='string'
+      )
+    :type HostArn: string
+    :param HostArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the requested host.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Name': 'string',
+            'Status': 'string',
+            'ProviderType': 'Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+            'ProviderEndpoint': 'string',
+            'VpcConfiguration': {
+                'VpcId': 'string',
+                'SubnetIds': [
+                    'string',
+                ],
+                'SecurityGroupIds': [
+                    'string',
+                ],
+                'TlsCertificate': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Name** *(string) --* 
+
+          The name of the requested host.
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the requested host.
+
+          
+        
+
+        - **ProviderType** *(string) --* 
+
+          The provider type of the requested host, such as GitHub Enterprise Server.
+
+          
+        
+
+        - **ProviderEndpoint** *(string) --* 
+
+          The endpoint of the infrastructure represented by the requested host.
+
+          
+        
+
+        - **VpcConfiguration** *(dict) --* 
+
+          The VPC configuration of the requested host.
+
+          
+          
+
+          - **VpcId** *(string) --* 
+
+            The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+            
+          
+
+          - **SubnetIds** *(list) --* 
+
+            The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **SecurityGroupIds** *(list) --* 
+
+            The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **TlsCertificate** *(string) --* 
+
+            The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceUnavailableException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_connections(**kwargs)
+
+    
+
+    Lists the connections associated with your account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListConnections>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_connections(
+          ProviderTypeFilter='Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+          HostArnFilter='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type ProviderTypeFilter: string
+    :param ProviderTypeFilter: 
+
+      Filters the list of connections to those associated with a specified provider, such as Bitbucket.
+
+      
+
+    
+    :type HostArnFilter: string
+    :param HostArnFilter: 
+
+      Filters the list of connections to those associated with a specified host.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that was returned from the previous ``ListConnections`` call, which can be used to return the next set of connections in the list.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Connections': [
+                {
+                    'ConnectionName': 'string',
+                    'ConnectionArn': 'string',
+                    'ProviderType': 'Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+                    'OwnerAccountId': 'string',
+                    'ConnectionStatus': 'PENDING'|'AVAILABLE'|'ERROR',
+                    'HostArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Connections** *(list) --* 
+
+          A list of connections and the details for each connection, such as status, owner, and provider type.
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource that is used to connect third-party source providers with services like AWS CodePipeline.
+
+             
+
+            Note: A connection created through CloudFormation, the CLI, or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by updating the connection in the console.
+
+            
+            
+
+            - **ConnectionName** *(string) --* 
+
+              The name of the connection. Connection names must be unique in an AWS user account.
+
+              
+            
+
+            - **ConnectionArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.
+
+               
+
+              .. note::
+
+                 
+
+                The ARN is never reused if the connection is deleted.
+
+                 
+
+              
+            
+
+            - **ProviderType** *(string) --* 
+
+              The name of the external provider where your third-party code repository is configured.
+
+              
+            
+
+            - **OwnerAccountId** *(string) --* 
+
+              The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
+
+              
+            
+
+            - **ConnectionStatus** *(string) --* 
+
+              The current status of the connection. 
+
+              
+            
+
+            - **HostArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the host associated with the connection.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token that can be used in the next ``ListConnections`` call. To view all items in the list, continue to call this operation with each subsequent token until no more ``nextToken`` values are returned.
+
+          
+    
+
+  .. py:method:: list_hosts(**kwargs)
+
+    
+
+    Lists the hosts associated with your account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListHosts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_hosts(
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token that was returned from the previous ``ListHosts`` call, which can be used to return the next set of hosts in the list.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Hosts': [
+                {
+                    'Name': 'string',
+                    'HostArn': 'string',
+                    'ProviderType': 'Bitbucket'|'GitHub'|'GitHubEnterpriseServer',
+                    'ProviderEndpoint': 'string',
+                    'VpcConfiguration': {
+                        'VpcId': 'string',
+                        'SubnetIds': [
+                            'string',
+                        ],
+                        'SecurityGroupIds': [
+                            'string',
+                        ],
+                        'TlsCertificate': 'string'
+                    },
+                    'Status': 'string',
+                    'StatusMessage': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Hosts** *(list) --* 
+
+          A list of hosts and the details for each host, such as status, endpoint, and provider type.
+
+          
+          
+
+          - *(dict) --* 
+
+            A resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.
+
+             
+
+            .. note::
+
+               
+
+              A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console.
+
+               
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name of the host.
+
+              
+            
+
+            - **HostArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the host.
+
+              
+            
+
+            - **ProviderType** *(string) --* 
+
+              The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+
+              
+            
+
+            - **ProviderEndpoint** *(string) --* 
+
+              The endpoint of the infrastructure where your provider type is installed.
+
+              
+            
+
+            - **VpcConfiguration** *(dict) --* 
+
+              The VPC configuration provisioned for the host.
+
+              
+              
+
+              - **VpcId** *(string) --* 
+
+                The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+                
+              
+
+              - **SubnetIds** *(list) --* 
+
+                The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **SecurityGroupIds** *(list) --* 
+
+                The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **TlsCertificate** *(string) --* 
+
+                The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+
+                
+          
+            
+
+            - **Status** *(string) --* 
+
+              The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
+
+              
+            
+
+            - **StatusMessage** *(string) --* 
+
+              The status description for the host.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token that can be used in the next ``ListHosts`` call. To view all items in the list, continue to call this operation with each subsequent token until no more ``nextToken`` values are returned.
+
+          
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Gets the set of key-value pairs (metadata) that are used to manage the resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A list of tag key and value pairs associated with the specified resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a key-value pair that is used to manage the resource.
+
+             
+
+            This tag is available for use by AWS services that support tags.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The tag's key.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The tag's value.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The tags you want to modify or add to the resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a key-value pair that is used to manage the resource.
+
+         
+
+        This tag is available for use by AWS services that support tags.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The tag's key.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The tag's value.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from an AWS resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource to remove tags from.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The list of keys for the tags to be removed from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_host(**kwargs)
+
+    
+
+    Updates a specified host with the provided configurations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateHost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_host(
+          HostArn='string',
+          ProviderEndpoint='string',
+          VpcConfiguration={
+              'VpcId': 'string',
+              'SubnetIds': [
+                  'string',
+              ],
+              'SecurityGroupIds': [
+                  'string',
+              ],
+              'TlsCertificate': 'string'
+          }
+      )
+    :type HostArn: string
+    :param HostArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the host to be updated.
+
+      
+
+    
+    :type ProviderEndpoint: string
+    :param ProviderEndpoint: 
+
+      The URL or endpoint of the host to be updated.
+
+      
+
+    
+    :type VpcConfiguration: dict
+    :param VpcConfiguration: 
+
+      The VPC configuration of the host to be updated. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+
+      
+
+    
+      - **VpcId** *(string) --* **[REQUIRED]** 
+
+        The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+      - **SubnetIds** *(list) --* **[REQUIRED]** 
+
+        The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **SecurityGroupIds** *(list) --* **[REQUIRED]** 
+
+        The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **TlsCertificate** *(string) --* 
+
+        The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.ResourceUnavailableException`
+
+    
+    *     :py:class:`CodeStarconnections.Client.exceptions.UnsupportedOperationException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

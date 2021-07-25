@@ -1,0 +1,1208 @@
+
+
+***********
+IoTFleetHub
+***********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: IoTFleetHub.Client
+
+  A low-level client representing AWS IoT Fleet Hub
+  
+
+  With Fleet Hub for AWS IoT Device Management you can build stand-alone web applications for monitoring the health of your device fleets.
+
+   
+
+  .. note::
+
+     
+
+    Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+     
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('iotfleethub')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~IoTFleetHub.Client.can_paginate`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.create_application`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.delete_application`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.describe_application`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.get_paginator`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.get_waiter`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.list_applications`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.tag_resource`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.untag_resource`
+
+  
+  *   :py:meth:`~IoTFleetHub.Client.update_application`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_application(**kwargs)
+
+    
+
+    Creates a Fleet Hub for AWS IoT Device Management web application.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/CreateApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_application(
+          applicationName='string',
+          applicationDescription='string',
+          clientToken='string',
+          roleArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type applicationName: string
+    :param applicationName: **[REQUIRED]** 
+
+      The name of the web application.
+
+      
+
+    
+    :type applicationDescription: string
+    :param applicationDescription: 
+
+      An optional description of the web application.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+
+      This field is autopopulated if not provided.
+
+    
+    :type roleArn: string
+    :param roleArn: **[REQUIRED]** 
+
+      The ARN of the role that the web application assumes when it interacts with AWS IoT Core.
+
+       
+
+      .. note::
+
+         
+
+        The name of the role must be in the form ``AWSIotFleetHub_*random_string* `` .
+
+         
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      A set of key/value pairs that you can use to manage the web application resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'applicationId': 'string',
+            'applicationArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **applicationId** *(string) --* 
+
+          The unique Id of the web application.
+
+          
+        
+
+        - **applicationArn** *(string) --* 
+
+          The ARN of the web application.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: delete_application(**kwargs)
+
+    
+
+    Deletes a Fleet Hub for AWS IoT Device Management web application.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/DeleteApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_application(
+          applicationId='string',
+          clientToken='string'
+      )
+    :type applicationId: string
+    :param applicationId: **[REQUIRED]** 
+
+      The unique Id of the web application.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_application(**kwargs)
+
+    
+
+    Gets information about a Fleet Hub for AWS IoT Device Management web application.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/DescribeApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_application(
+          applicationId='string'
+      )
+    :type applicationId: string
+    :param applicationId: **[REQUIRED]** 
+
+      The unique Id of the web application.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'applicationId': 'string',
+            'applicationArn': 'string',
+            'applicationName': 'string',
+            'applicationDescription': 'string',
+            'applicationUrl': 'string',
+            'applicationState': 'CREATING'|'DELETING'|'ACTIVE'|'CREATE_FAILED'|'DELETE_FAILED',
+            'applicationCreationDate': 123,
+            'applicationLastUpdateDate': 123,
+            'roleArn': 'string',
+            'ssoClientId': 'string',
+            'errorMessage': 'string',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **applicationId** *(string) --* 
+
+          The unique Id of the web application.
+
+          
+        
+
+        - **applicationArn** *(string) --* 
+
+          The ARN of the web application.
+
+          
+        
+
+        - **applicationName** *(string) --* 
+
+          The name of the web application.
+
+          
+        
+
+        - **applicationDescription** *(string) --* 
+
+          An optional description of the web application.
+
+          
+        
+
+        - **applicationUrl** *(string) --* 
+
+          The URL of the web application.
+
+          
+        
+
+        - **applicationState** *(string) --* 
+
+          The current state of the web application.
+
+          
+        
+
+        - **applicationCreationDate** *(integer) --* 
+
+          The date (in Unix epoch time) when the application was created.
+
+          
+        
+
+        - **applicationLastUpdateDate** *(integer) --* 
+
+          The date (in Unix epoch time) when the application was last updated.
+
+          
+        
+
+        - **roleArn** *(string) --* 
+
+          The ARN of the role that the web application assumes when it interacts with AWS IoT Core.
+
+          
+        
+
+        - **ssoClientId** *(string) --* 
+
+          The Id of the single sign-on client that you use to authenticate and authorize users on the web application.
+
+          
+        
+
+        - **errorMessage** *(string) --* 
+
+          A message indicating why the ``DescribeApplication`` API failed.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          A set of key/value pairs that you can use to manage the web application resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_applications(**kwargs)
+
+    
+
+    Gets a list of Fleet Hub for AWS IoT Device Management web applications for the current account.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/ListApplications>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_applications(
+          nextToken='string'
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      A token used to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'applicationSummaries': [
+                {
+                    'applicationId': 'string',
+                    'applicationName': 'string',
+                    'applicationDescription': 'string',
+                    'applicationUrl': 'string',
+                    'applicationCreationDate': 123,
+                    'applicationLastUpdateDate': 123,
+                    'applicationState': 'CREATING'|'DELETING'|'ACTIVE'|'CREATE_FAILED'|'DELETE_FAILED'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **applicationSummaries** *(list) --* 
+
+          An array of objects that provide summaries of information about the web applications in the list.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of information about a AWS IoT Device Management web application.
+
+             
+
+            .. note::
+
+               
+
+              Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+               
+
+            
+            
+
+            - **applicationId** *(string) --* 
+
+              The unique Id of the web application.
+
+              
+            
+
+            - **applicationName** *(string) --* 
+
+              The name of the web application.
+
+              
+            
+
+            - **applicationDescription** *(string) --* 
+
+              An optional description of the web application.
+
+              
+            
+
+            - **applicationUrl** *(string) --* 
+
+              The URL of the web application.
+
+              
+            
+
+            - **applicationCreationDate** *(integer) --* 
+
+              The date (in Unix epoch time) when the web application was created.
+
+              
+            
+
+            - **applicationLastUpdateDate** *(integer) --* 
+
+              The date (in Unix epoch time) when the web application was last updated.
+
+              
+            
+
+            - **applicationState** *(string) --* 
+
+              The current state of the web application.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token used to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags for the specified resource.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The list of tags assigned to the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The new or modified tags for the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes the specified tags (metadata) from the resource.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      A list of the keys of the tags to be removed from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_application(**kwargs)
+
+    
+
+    Updates information about a Fleet Hub for a AWS IoT Device Management web application.
+
+     
+
+    .. note::
+
+       
+
+      Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/UpdateApplication>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_application(
+          applicationId='string',
+          applicationName='string',
+          applicationDescription='string',
+          clientToken='string'
+      )
+    :type applicationId: string
+    :param applicationId: **[REQUIRED]** 
+
+      The unique Id of the web application.
+
+      
+
+    
+    :type applicationName: string
+    :param applicationName: 
+
+      The name of the web application.
+
+      
+
+    
+    :type applicationDescription: string
+    :param applicationDescription: 
+
+      An optional description of the web application.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.InternalFailureException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`IoTFleetHub.Client.exceptions.ThrottlingException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`IoTFleetHub.Paginator.ListApplications`
+
+
+
+.. py:class:: IoTFleetHub.Paginator.ListApplications
+
+  ::
+
+    
+    paginator = client.get_paginator('list_applications')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`IoTFleetHub.Client.list_applications`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotfleethub-2020-11-03/ListApplications>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'applicationSummaries': [
+                {
+                    'applicationId': 'string',
+                    'applicationName': 'string',
+                    'applicationDescription': 'string',
+                    'applicationUrl': 'string',
+                    'applicationCreationDate': 123,
+                    'applicationLastUpdateDate': 123,
+                    'applicationState': 'CREATING'|'DELETING'|'ACTIVE'|'CREATE_FAILED'|'DELETE_FAILED'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **applicationSummaries** *(list) --* 
+
+          An array of objects that provide summaries of information about the web applications in the list.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of information about a AWS IoT Device Management web application.
+
+             
+
+            .. note::
+
+               
+
+              Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.
+
+               
+
+            
+            
+
+            - **applicationId** *(string) --* 
+
+              The unique Id of the web application.
+
+              
+            
+
+            - **applicationName** *(string) --* 
+
+              The name of the web application.
+
+              
+            
+
+            - **applicationDescription** *(string) --* 
+
+              An optional description of the web application.
+
+              
+            
+
+            - **applicationUrl** *(string) --* 
+
+              The URL of the web application.
+
+              
+            
+
+            - **applicationCreationDate** *(integer) --* 
+
+              The date (in Unix epoch time) when the web application was created.
+
+              
+            
+
+            - **applicationLastUpdateDate** *(integer) --* 
+
+              The date (in Unix epoch time) when the web application was last updated.
+
+              
+            
+
+            - **applicationState** *(string) --* 
+
+              The current state of the web application.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

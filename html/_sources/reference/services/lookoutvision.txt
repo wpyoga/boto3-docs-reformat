@@ -1,0 +1,3400 @@
+
+
+****************
+LookoutforVision
+****************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: LookoutforVision.Client
+
+  A low-level client representing Amazon Lookout for Vision
+  
+
+  This is the Amazon Lookout for Vision API Reference. It provides descriptions of actions, data types, common parameters, and common errors.
+
+   
+
+  Amazon Lookout for Vision enables you to find visual defects in industrial products, accurately and at scale. It uses computer vision to identify missing components in an industrial product, damage to vehicles or structures, irregularities in production lines, and even minuscule defects in silicon wafers — or any other physical item where quality is important such as a missing capacitor on printed circuit boards.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('lookoutvision')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~LookoutforVision.Client.can_paginate`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.create_dataset`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.create_model`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.create_project`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.delete_dataset`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.delete_model`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.delete_project`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.describe_dataset`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.describe_model`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.describe_project`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.detect_anomalies`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.get_paginator`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.get_waiter`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.list_dataset_entries`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.list_models`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.list_projects`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.start_model`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.stop_model`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.tag_resource`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.untag_resource`
+
+  
+  *   :py:meth:`~LookoutforVision.Client.update_dataset_entries`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_dataset(**kwargs)
+
+    
+
+    Creates a new dataset in an Amazon Lookout for Vision project. ``CreateDataset`` can create a training or a test dataset from a valid dataset source (``DatasetSource`` ).
+
+     
+
+    If you want a single dataset project, specify ``train`` for the value of ``DatasetType`` .
+
+     
+
+    To have a project with separate training and test datasets, call ``CreateDataset`` twice. On the first call, specify ``train`` for the value of ``DatasetType`` . On the second call, specify ``test`` for the value of ``DatasetType`` . 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:CreateDataset`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateDataset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_dataset(
+          ProjectName='string',
+          DatasetType='string',
+          DatasetSource={
+              'GroundTruthManifest': {
+                  'S3Object': {
+                      'Bucket': 'string',
+                      'Key': 'string',
+                      'VersionId': 'string'
+                  }
+              }
+          },
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project in which you want to create a dataset.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset. Specify ``train`` for a training dataset. Specify ``test`` for a test dataset.
+
+      
+
+    
+    :type DatasetSource: dict
+    :param DatasetSource: 
+
+      The location of the manifest file that Amazon Lookout for Vision uses to create the dataset.
+
+       
+
+      If you don't specify ``DatasetSource`` , an empty dataset is created and the operation synchronously returns. Later, you can add JSON Lines by calling  UpdateDatasetEntries . 
+
+       
+
+      If you specify a value for ``DataSource`` , the manifest at the S3 location is validated and used to create the dataset. The call to ``CreateDataset`` is asynchronous and might take a while to complete. To find out the current status, Check the value of ``Status`` returned in a call to  DescribeDataset .
+
+      
+
+    
+      - **GroundTruthManifest** *(dict) --* 
+
+        Location information for the manifest file.
+
+        
+
+      
+        - **S3Object** *(dict) --* 
+
+          The S3 bucket location for the manifest file.
+
+          
+
+        
+          - **Bucket** *(string) --* **[REQUIRED]** 
+
+            The Amazon S3 bucket that contains the manifest.
+
+            
+
+          
+          - **Key** *(string) --* **[REQUIRED]** 
+
+            The name and location of the manifest file withiin the bucket.
+
+            
+
+          
+          - **VersionId** *(string) --* 
+
+            The version ID of the bucket.
+
+            
+
+          
+        
+      
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``CreateDataset`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``CreateDataset`` . In this case, safely retry your call to ``CreateDataset`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``CreateDataset`` . An idempotency token is active for 8 hours. 
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatasetMetadata': {
+                'DatasetType': 'string',
+                'CreationTimestamp': datetime(2015, 1, 1),
+                'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'|'UPDATE_IN_PROGRESS'|'UPDATE_COMPLETE'|'UPDATE_FAILED_ROLLBACK_IN_PROGRESS'|'UPDATE_FAILED_ROLLBACK_COMPLETE'|'DELETE_IN_PROGRESS'|'DELETE_COMPLETE'|'DELETE_FAILED',
+                'StatusMessage': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatasetMetadata** *(dict) --* 
+
+          Information about the dataset.
+
+          
+          
+
+          - **DatasetType** *(string) --* 
+
+            The type of the dataset.
+
+            
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The Unix timestamp for the date and time that the dataset was created. 
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status for the dataset.
+
+            
+          
+
+          - **StatusMessage** *(string) --* 
+
+            The status message for the dataset.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: create_model(**kwargs)
+
+    
+
+    Creates a new version of a model within an an Amazon Lookout for Vision project. ``CreateModel`` is an asynchronous operation in which Amazon Lookout for Vision trains, tests, and evaluates a new version of a model. 
+
+     
+
+    To get the current status, check the ``Status`` field returned in the response from  DescribeModel .
+
+     
+
+    If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset to create a training and a test dataset. If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test the model. 
+
+     
+
+    After training completes, the evaluation metrics are stored at the location specified in ``OutputConfig`` . 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:CreateModel`` operation. If you want to tag your model, you also require permission to the ``lookoutvision:TagResource`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateModel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_model(
+          ProjectName='string',
+          Description='string',
+          ClientToken='string',
+          OutputConfig={
+              'S3Location': {
+                  'Bucket': 'string',
+                  'Prefix': 'string'
+              }
+          },
+          KmsKeyId='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project in which you want to create a model version.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      A description for the version of the model.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``CreateModel`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``CreateModel`` . In this case, safely retry your call to ``CreateModel`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``CreateModel`` . An idempotency token is active for 8 hours.
+
+      This field is autopopulated if not provided.
+
+    
+    :type OutputConfig: dict
+    :param OutputConfig: **[REQUIRED]** 
+
+      The location where Amazon Lookout for Vision saves the training results.
+
+      
+
+    
+      - **S3Location** *(dict) --* **[REQUIRED]** 
+
+        The S3 location for the output.
+
+        
+
+      
+        - **Bucket** *(string) --* **[REQUIRED]** 
+
+          The S3 bucket that contains the training output.
+
+          
+
+        
+        - **Prefix** *(string) --* 
+
+          The path of the folder, within the S3 bucket, that contains the training output.
+
+          
+
+        
+      
+    
+    :type KmsKeyId: string
+    :param KmsKeyId: 
+
+      The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      A set of tags (key-value pairs) that you want to attach to the model.
+
+      
+
+    
+      - *(dict) --* 
+
+        A key and value pair that is attached to the specified Amazon Lookout for Vision model.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag that is attached to the specified model.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag that is attached to the specified model.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ModelMetadata': {
+                'CreationTimestamp': datetime(2015, 1, 1),
+                'ModelVersion': 'string',
+                'ModelArn': 'string',
+                'Description': 'string',
+                'Status': 'TRAINING'|'TRAINED'|'TRAINING_FAILED'|'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'|'DELETING',
+                'StatusMessage': 'string',
+                'Performance': {
+                    'F1Score': ...,
+                    'Recall': ...,
+                    'Precision': ...
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ModelMetadata** *(dict) --* 
+
+          The response from a call to ``CreateModel`` .
+
+          
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The unix timestamp for the date and time that the model was created. 
+
+            
+          
+
+          - **ModelVersion** *(string) --* 
+
+            The version of the model.
+
+            
+          
+
+          - **ModelArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the model.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description for the model.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of the model.
+
+            
+          
+
+          - **StatusMessage** *(string) --* 
+
+            The status message for the model.
+
+            
+          
+
+          - **Performance** *(dict) --* 
+
+            Performance metrics for the model. Not available until training has successfully completed.
+
+            
+            
+
+            - **F1Score** *(float) --* 
+
+              The overall F1 score metric for the trained model.
+
+              
+            
+
+            - **Recall** *(float) --* 
+
+              The overall recall metric value for the trained model. 
+
+              
+            
+
+            - **Precision** *(float) --* 
+
+              The overall precision metric value for the trained model.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: create_project(**kwargs)
+
+    
+
+    Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling  CreateDataset .
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:CreateProject`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/CreateProject>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_project(
+          ProjectName='string',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name for the project.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``CreateProject`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``CreateProject`` . In this case, safely retry your call to ``CreateProject`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``CreateProject`` . An idempotency token is active for 8 hours.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ProjectMetadata': {
+                'ProjectArn': 'string',
+                'ProjectName': 'string',
+                'CreationTimestamp': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ProjectMetadata** *(dict) --* 
+
+          Information about the project.
+
+          
+          
+
+          - **ProjectArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the project.
+
+            
+          
+
+          - **ProjectName** *(string) --* 
+
+            The name of the project.
+
+            
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The unix timestamp for the date and time that the project was created. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: delete_dataset(**kwargs)
+
+    
+
+    Deletes an existing Amazon Lookout for Vision ``dataset`` . 
+
+     
+
+    If your the project has a single dataset, you must create a new dataset before you can create a model.
+
+     
+
+    If you project has a training dataset and a test dataset consider the following. 
+
+     
+
+     
+    * If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset. 
+     
+    * If you delete the training dataset, you must create a training dataset before you can create a model. 
+     
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DeleteDataset`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteDataset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_dataset(
+          ProjectName='string',
+          DatasetType='string',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the dataset that you want to delete.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset to delete. Specify ``train`` to delete the training dataset. Specify ``test`` to delete the test dataset. To delete the dataset in a single dataset project, specify ``train`` .
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``DeleteDataset`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``DeleteDataset`` . In this case, safely retry your call to ``DeleteDataset`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``DeleteDataset`` . An idempotency token is active for 8 hours.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: delete_model(**kwargs)
+
+    
+
+    Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model, use the  StopModel operation.
+
+     
+
+    It might take a few seconds to delete a model. To determine if a model has been deleted, call  ListProjects and check if the version of the model (``ModelVersion`` ) is in the ``Models`` array. 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DeleteModel`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteModel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_model(
+          ProjectName='string',
+          ModelVersion='string',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model that you want to delete.
+
+      
+
+    
+    :type ModelVersion: string
+    :param ModelVersion: **[REQUIRED]** 
+
+      The version of the model that you want to delete.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``DeleteModel`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``DeleteModel`` . In this case, safely retry your call to ``DeleteModel`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``DeleteModel`` . An idempotency token is active for 8 hours.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ModelArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ModelArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the model that was deleted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: delete_project(**kwargs)
+
+    
+
+    Deletes an Amazon Lookout for Vision project.
+
+     
+
+    To delete a project, you must first delete each version of the model associated with the project. To delete a model use the  DeleteModel operation.
+
+     
+
+    You also have to delete the dataset(s) associated with the model. For more information, see  DeleteDataset . The images referenced by the training and test datasets aren't deleted. 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DeleteProject`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DeleteProject>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_project(
+          ProjectName='string',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project to delete.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``DeleteProject`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``DeleteProject`` . In this case, safely retry your call to ``DeleteProject`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``DeleteProject`` . An idempotency token is active for 8 hours.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ProjectArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ProjectArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the project that was deleted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_dataset(**kwargs)
+
+    
+
+    Describe an Amazon Lookout for Vision dataset.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DescribeDataset`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeDataset>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_dataset(
+          ProjectName='string',
+          DatasetType='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the dataset that you want to describe.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset to describe. Specify ``train`` to describe the training dataset. Specify ``test`` to describe the test dataset. If you have a single dataset project, specify ``train``  
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatasetDescription': {
+                'ProjectName': 'string',
+                'DatasetType': 'string',
+                'CreationTimestamp': datetime(2015, 1, 1),
+                'LastUpdatedTimestamp': datetime(2015, 1, 1),
+                'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'|'UPDATE_IN_PROGRESS'|'UPDATE_COMPLETE'|'UPDATE_FAILED_ROLLBACK_IN_PROGRESS'|'UPDATE_FAILED_ROLLBACK_COMPLETE'|'DELETE_IN_PROGRESS'|'DELETE_COMPLETE'|'DELETE_FAILED',
+                'StatusMessage': 'string',
+                'ImageStats': {
+                    'Total': 123,
+                    'Labeled': 123,
+                    'Normal': 123,
+                    'Anomaly': 123
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatasetDescription** *(dict) --* 
+
+          The description of the requested dataset. 
+
+          
+          
+
+          - **ProjectName** *(string) --* 
+
+            The name of the project that contains the dataset.
+
+            
+          
+
+          - **DatasetType** *(string) --* 
+
+            The type of the dataset. The value ``train`` represents a training dataset or single dataset project. The value ``test`` represents a test dataset.
+
+            
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The Unix timestamp for the time and date that the dataset was created.
+
+            
+          
+
+          - **LastUpdatedTimestamp** *(datetime) --* 
+
+            The Unix timestamp for the date and time that the dataset was last updated.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of the dataset.
+
+            
+          
+
+          - **StatusMessage** *(string) --* 
+
+            The status message for the dataset. 
+
+            
+          
+
+          - **ImageStats** *(dict) --* 
+
+            
+
+            
+            
+
+            - **Total** *(integer) --* 
+
+              The total number of images in the dataset.
+
+              
+            
+
+            - **Labeled** *(integer) --* 
+
+              The total number of labeled images.
+
+              
+            
+
+            - **Normal** *(integer) --* 
+
+              The total number of images labeled as normal.
+
+              
+            
+
+            - **Anomaly** *(integer) --* 
+
+              the total number of images labeled as an anomaly.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_model(**kwargs)
+
+    
+
+    Describes a version of an Amazon Lookout for Vision model.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DescribeModel`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeModel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_model(
+          ProjectName='string',
+          ModelVersion='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The project that contains the version of a model that you want to describe.
+
+      
+
+    
+    :type ModelVersion: string
+    :param ModelVersion: **[REQUIRED]** 
+
+      The version of the model that you want to describe.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ModelDescription': {
+                'ModelVersion': 'string',
+                'ModelArn': 'string',
+                'CreationTimestamp': datetime(2015, 1, 1),
+                'Description': 'string',
+                'Status': 'TRAINING'|'TRAINED'|'TRAINING_FAILED'|'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'|'DELETING',
+                'StatusMessage': 'string',
+                'Performance': {
+                    'F1Score': ...,
+                    'Recall': ...,
+                    'Precision': ...
+                },
+                'OutputConfig': {
+                    'S3Location': {
+                        'Bucket': 'string',
+                        'Prefix': 'string'
+                    }
+                },
+                'EvaluationManifest': {
+                    'Bucket': 'string',
+                    'Key': 'string'
+                },
+                'EvaluationResult': {
+                    'Bucket': 'string',
+                    'Key': 'string'
+                },
+                'EvaluationEndTimestamp': datetime(2015, 1, 1),
+                'KmsKeyId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ModelDescription** *(dict) --* 
+
+          Contains the description of the model.
+
+          
+          
+
+          - **ModelVersion** *(string) --* 
+
+            The version of the model
+
+            
+          
+
+          - **ModelArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the model.
+
+            
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The unix timestamp for the date and time that the model was created. 
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description for the model.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The status of the model.
+
+            
+          
+
+          - **StatusMessage** *(string) --* 
+
+            The status message for the model.
+
+            
+          
+
+          - **Performance** *(dict) --* 
+
+            Performance metrics for the model. Created during training.
+
+            
+            
+
+            - **F1Score** *(float) --* 
+
+              The overall F1 score metric for the trained model.
+
+              
+            
+
+            - **Recall** *(float) --* 
+
+              The overall recall metric value for the trained model. 
+
+              
+            
+
+            - **Precision** *(float) --* 
+
+              The overall precision metric value for the trained model.
+
+              
+        
+          
+
+          - **OutputConfig** *(dict) --* 
+
+            The S3 location where Amazon Lookout for Vision saves model training files.
+
+            
+            
+
+            - **S3Location** *(dict) --* 
+
+              The S3 location for the output.
+
+              
+              
+
+              - **Bucket** *(string) --* 
+
+                The S3 bucket that contains the training output.
+
+                
+              
+
+              - **Prefix** *(string) --* 
+
+                The path of the folder, within the S3 bucket, that contains the training output.
+
+                
+          
+        
+          
+
+          - **EvaluationManifest** *(dict) --* 
+
+            The S3 location where Amazon Lookout for Vision saves the manifest file that was used to test the trained model and generate the performance scores.
+
+            
+            
+
+            - **Bucket** *(string) --* 
+
+              The bucket that contains the training output.
+
+              
+            
+
+            - **Key** *(string) --* 
+
+              The location of the training output in the bucket.
+
+              
+        
+          
+
+          - **EvaluationResult** *(dict) --* 
+
+            The S3 location where Amazon Lookout for Vision saves the performance metrics.
+
+            
+            
+
+            - **Bucket** *(string) --* 
+
+              The bucket that contains the training output.
+
+              
+            
+
+            - **Key** *(string) --* 
+
+              The location of the training output in the bucket.
+
+              
+        
+          
+
+          - **EvaluationEndTimestamp** *(datetime) --* 
+
+            The unix timestamp for the date and time that the evaluation ended. 
+
+            
+          
+
+          - **KmsKeyId** *(string) --* 
+
+            The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model during training.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_project(**kwargs)
+
+    
+
+    Describes an Amazon Lookout for Vision project.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DescribeProject`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DescribeProject>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_project(
+          ProjectName='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that you want to describe.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ProjectDescription': {
+                'ProjectArn': 'string',
+                'ProjectName': 'string',
+                'CreationTimestamp': datetime(2015, 1, 1),
+                'Datasets': [
+                    {
+                        'DatasetType': 'string',
+                        'CreationTimestamp': datetime(2015, 1, 1),
+                        'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'|'UPDATE_IN_PROGRESS'|'UPDATE_COMPLETE'|'UPDATE_FAILED_ROLLBACK_IN_PROGRESS'|'UPDATE_FAILED_ROLLBACK_COMPLETE'|'DELETE_IN_PROGRESS'|'DELETE_COMPLETE'|'DELETE_FAILED',
+                        'StatusMessage': 'string'
+                    },
+                ]
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ProjectDescription** *(dict) --* 
+
+          The description of the project.
+
+          
+          
+
+          - **ProjectArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the project.
+
+            
+          
+
+          - **ProjectName** *(string) --* 
+
+            The name of the project.
+
+            
+          
+
+          - **CreationTimestamp** *(datetime) --* 
+
+            The unix timestamp for the date and time that the project was created. 
+
+            
+          
+
+          - **Datasets** *(list) --* 
+
+            A list of datasets in the project.
+
+            
+            
+
+            - *(dict) --* 
+
+              Sumary information for an Amazon Lookout for Vision dataset.
+
+              
+              
+
+              - **DatasetType** *(string) --* 
+
+                The type of the dataset.
+
+                
+              
+
+              - **CreationTimestamp** *(datetime) --* 
+
+                The Unix timestamp for the date and time that the dataset was created. 
+
+                
+              
+
+              - **Status** *(string) --* 
+
+                The status for the dataset.
+
+                
+              
+
+              - **StatusMessage** *(string) --* 
+
+                The status message for the dataset.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: detect_anomalies(**kwargs)
+
+    
+
+    Detects anomalies in an image that you supply. 
+
+     
+
+    The response from ``DetectAnomalies`` includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.
+
+     
+
+    .. note::
+
+       
+
+      Before calling ``DetectAnomalies`` , you must first start your model with the  StartModel operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the  StopModel operation to stop your model. 
+
+       
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:DetectAnomalies`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/DetectAnomalies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.detect_anomalies(
+          ProjectName='string',
+          ModelVersion='string',
+          Body=b'bytes'|file,
+          ContentType='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model version that you want to use.
+
+      
+
+    
+    :type ModelVersion: string
+    :param ModelVersion: **[REQUIRED]** 
+
+      The version of the model that you want to use.
+
+      
+
+    
+    :type Body: bytes or seekable file-like object
+    :param Body: **[REQUIRED]** 
+
+      The unencrypted image bytes that you want to analyze. 
+
+      
+
+    
+    :type ContentType: string
+    :param ContentType: **[REQUIRED]** 
+
+      The type of the image passed in ``Body`` . Valid values are ``image/png`` (PNG format images) and ``image/jpeg`` (JPG format images). 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DetectAnomalyResult': {
+                'Source': {
+                    'Type': 'string'
+                },
+                'IsAnomalous': True|False,
+                'Confidence': ...
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DetectAnomalyResult** *(dict) --* 
+
+          The results of the ``DetectAnomalies`` operation.
+
+          
+          
+
+          - **Source** *(dict) --* 
+
+            The source of the image that was analyzed. ``direct`` means that the images was supplied from the local computer. No other values are supported.
+
+            
+            
+
+            - **Type** *(string) --* 
+
+              The type of the image.
+
+              
+        
+          
+
+          - **IsAnomalous** *(boolean) --* 
+
+            True if the image contains an anomaly, otherwise false.
+
+            
+          
+
+          - **Confidence** *(float) --* 
+
+            The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_dataset_entries(**kwargs)
+
+    
+
+    Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly information for a single image, including the image location and the assigned label.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:ListDatasetEntries`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListDatasetEntries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_dataset_entries(
+          ProjectName='string',
+          DatasetType='string',
+          Labeled=True|False,
+          AnomalyClass='string',
+          BeforeCreationDate=datetime(2015, 1, 1),
+          AfterCreationDate=datetime(2015, 1, 1),
+          NextToken='string',
+          MaxResults=123,
+          SourceRefContains='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the dataset that you want to list.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset that you want to list. Specify ``train`` to list the training dataset. Specify ``test`` to list the test dataset. If you have a single dataset project, specify ``train`` .
+
+      
+
+    
+    :type Labeled: boolean
+    :param Labeled: 
+
+      Specify ``true`` to include labeled entries, otherwise specify ``false`` . If you don't specify a value, Lookout for Vision returns all entries.
+
+      
+
+    
+    :type AnomalyClass: string
+    :param AnomalyClass: 
+
+      Specify ``normal`` to include only normal images. Specify ``anomaly`` to only include anomalous entries. If you don't specify a value, Amazon Lookout for Vision returns normal and anomalous images.
+
+      
+
+    
+    :type BeforeCreationDate: datetime
+    :param BeforeCreationDate: 
+
+      Only includes entries before the specified date in the response. For example, ``2020-06-23T00:00:00`` .
+
+      
+
+    
+    :type AfterCreationDate: datetime
+    :param AfterCreationDate: 
+
+      Only includes entries after the specified date in the response. For example, ``2020-06-23T00:00:00`` .
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      If the previous response was incomplete (because there is more data to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of dataset entries.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100.
+
+      
+
+    
+    :type SourceRefContains: string
+    :param SourceRefContains: 
+
+      Perform a "contains" search on the values of the ``source-ref`` key within the dataset. For example a value of "IMG_17" returns all JSON Lines where the ``source-ref`` key value matches **IMG_17** .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatasetEntries': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatasetEntries** *(list) --* 
+
+          A list of the entries (JSON Lines) within the dataset.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set ofdataset entries.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_models(**kwargs)
+
+    
+
+    Lists the versions of a model in an Amazon Lookout for Vision project.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:ListModels`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListModels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_models(
+          ProjectName='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model versions that you want to list.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      If the previous response was incomplete (because there is more data to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of models.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Models': [
+                {
+                    'CreationTimestamp': datetime(2015, 1, 1),
+                    'ModelVersion': 'string',
+                    'ModelArn': 'string',
+                    'Description': 'string',
+                    'Status': 'TRAINING'|'TRAINED'|'TRAINING_FAILED'|'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'|'DELETING',
+                    'StatusMessage': 'string',
+                    'Performance': {
+                        'F1Score': ...,
+                        'Recall': ...,
+                        'Precision': ...
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Models** *(list) --* 
+
+          A list of model versions in the specified project. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an Amazon Lookout for Vision model.
+
+            
+            
+
+            - **CreationTimestamp** *(datetime) --* 
+
+              The unix timestamp for the date and time that the model was created. 
+
+              
+            
+
+            - **ModelVersion** *(string) --* 
+
+              The version of the model.
+
+              
+            
+
+            - **ModelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the model.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description for the model.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the model.
+
+              
+            
+
+            - **StatusMessage** *(string) --* 
+
+              The status message for the model.
+
+              
+            
+
+            - **Performance** *(dict) --* 
+
+              Performance metrics for the model. Not available until training has successfully completed.
+
+              
+              
+
+              - **F1Score** *(float) --* 
+
+                The overall F1 score metric for the trained model.
+
+                
+              
+
+              - **Recall** *(float) --* 
+
+                The overall recall metric value for the trained model. 
+
+                
+              
+
+              - **Precision** *(float) --* 
+
+                The overall precision metric value for the trained model.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of models. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_projects(**kwargs)
+
+    
+
+    Lists the Amazon Lookout for Vision projects in your AWS account.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:ListProjects`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListProjects>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_projects(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      If the previous response was incomplete (because there is more data to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to retrieve the next set of projects.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Projects': [
+                {
+                    'ProjectArn': 'string',
+                    'ProjectName': 'string',
+                    'CreationTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Projects** *(list) --* 
+
+          A list of projects in your AWS account.
+
+          
+          
+
+          - *(dict) --* 
+
+            Metadata about an Amazon Lookout for Vision project.
+
+            
+            
+
+            - **ProjectArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the project.
+
+              
+            
+
+            - **ProjectName** *(string) --* 
+
+              The name of the project.
+
+              
+            
+
+            - **CreationTimestamp** *(datetime) --* 
+
+              The unix timestamp for the date and time that the project was created. 
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If the response is truncated, Amazon Lookout for Vision returns this token that you can use in the subsequent request to retrieve the next set of projects.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of tags attached to the specified Amazon Lookout for Vision model.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:ListTagsForResource`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the model for which you want to list tags. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A map of tag keys and values attached to the specified model.
+
+          
+          
+
+          - *(dict) --* 
+
+            A key and value pair that is attached to the specified Amazon Lookout for Vision model.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key of the tag that is attached to the specified model.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag that is attached to the specified model.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: start_model(**kwargs)
+
+    
+
+    Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use  DescribeModel .
+
+     
+
+    A model is ready to use when its status is ``HOSTED`` .
+
+     
+
+    Once the model is running, you can detect custom labels in new images by calling  DetectAnomalies .
+
+     
+
+    .. note::
+
+       
+
+      You are charged for the amount of time that the model is running. To stop a running model, call  StopModel .
+
+       
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:StartModel`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StartModel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_model(
+          ProjectName='string',
+          ModelVersion='string',
+          MinInferenceUnits=123,
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model that you want to start.
+
+      
+
+    
+    :type ModelVersion: string
+    :param ModelVersion: **[REQUIRED]** 
+
+      The version of the model that you want to start.
+
+      
+
+    
+    :type MinInferenceUnits: integer
+    :param MinInferenceUnits: **[REQUIRED]** 
+
+      The minimum number of inference units to use. A single inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS). Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use. 
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``StartModel`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``StartModel`` . In this case, safely retry your call to ``StartModel`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``StartModel`` . An idempotency token is active for 8 hours. 
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Status': 'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Status** *(string) --* 
+
+          The current running status of the model.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: stop_model(**kwargs)
+
+    
+
+    Stops the hosting of a running model. The operation might take a while to complete. To check the current status, call  DescribeModel . 
+
+     
+
+    After the model hosting stops, the ``Status`` of the model is ``TRAINED`` .
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:StopModel`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/StopModel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_model(
+          ProjectName='string',
+          ModelVersion='string',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model that you want to stop.
+
+      
+
+    
+    :type ModelVersion: string
+    :param ModelVersion: **[REQUIRED]** 
+
+      The version of the model that you want to stop.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``StopModel`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``StopModel`` . In this case, safely retry your call to ``StopModel`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``StopModel`` . An idempotency token is active for 8 hours. 
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Status': 'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Status** *(string) --* 
+
+          The status of the model.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds one or more key-value tags to an Amazon Lookout for Vision model. For more information, see *Tagging a model* in the *Amazon Lookout for Vision Developer Guide* . 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:TagResource`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the model to assign the tags.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The key-value tags to assign to the model.
+
+      
+
+    
+      - *(dict) --* 
+
+        A key and value pair that is attached to the specified Amazon Lookout for Vision model.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag that is attached to the specified model.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag that is attached to the specified model.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes one or more tags from an Amazon Lookout for Vision model. For more information, see *Tagging a model* in the *Amazon Lookout for Vision Developer Guide* . 
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:UntagResource`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the model from which you want to remove tags. 
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      A list of the keys of the tags that you want to remove.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: update_dataset_entries(**kwargs)
+
+    
+
+    Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line.
+
+     
+
+    Updating a dataset might take a while to complete. To check the current status, call  DescribeDataset and check the ``Status`` field in the response.
+
+     
+
+    This operation requires permissions to perform the ``lookoutvision:UpdateDatasetEntries`` operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/UpdateDatasetEntries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_dataset_entries(
+          ProjectName='string',
+          DatasetType='string',
+          Changes=b'bytes',
+          ClientToken='string'
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the dataset that you want to update.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset that you want to update. Specify ``train`` to update the training dataset. Specify ``test`` to update the test dataset. If you have a single dataset project, specify ``train`` .
+
+      
+
+    
+    :type Changes: bytes
+    :param Changes: **[REQUIRED]** 
+
+      The entries to add to the dataset.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      ClientToken is an idempotency token that ensures a call to ``UpdateDatasetEntries`` completes only once. You choose the value to pass. For example, An issue, such as an network outage, might prevent you from getting a response from ``UpdateDatasetEntries`` . In this case, safely retry your call to ``UpdateDatasetEntries`` by using the same ``ClientToken`` parameter value. An error occurs if the other input parameters are not the same as in the first request. Using a different value for ``ClientToken`` is considered a new call to ``UpdateDatasetEntries`` . An idempotency token is active for 8 hours. 
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Status': 'CREATE_IN_PROGRESS'|'CREATE_COMPLETE'|'CREATE_FAILED'|'UPDATE_IN_PROGRESS'|'UPDATE_COMPLETE'|'UPDATE_FAILED_ROLLBACK_IN_PROGRESS'|'UPDATE_FAILED_ROLLBACK_COMPLETE'|'DELETE_IN_PROGRESS'|'DELETE_COMPLETE'|'DELETE_FAILED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Status** *(string) --* 
+
+          The status of the dataset update.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LookoutforVision.Client.exceptions.ThrottlingException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`LookoutforVision.Paginator.ListDatasetEntries`
+
+
+* :py:class:`LookoutforVision.Paginator.ListModels`
+
+
+* :py:class:`LookoutforVision.Paginator.ListProjects`
+
+
+
+.. py:class:: LookoutforVision.Paginator.ListDatasetEntries
+
+  ::
+
+    
+    paginator = client.get_paginator('list_dataset_entries')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`LookoutforVision.Client.list_dataset_entries`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListDatasetEntries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ProjectName='string',
+          DatasetType='string',
+          Labeled=True|False,
+          AnomalyClass='string',
+          BeforeCreationDate=datetime(2015, 1, 1),
+          AfterCreationDate=datetime(2015, 1, 1),
+          SourceRefContains='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the dataset that you want to list.
+
+      
+
+    
+    :type DatasetType: string
+    :param DatasetType: **[REQUIRED]** 
+
+      The type of the dataset that you want to list. Specify ``train`` to list the training dataset. Specify ``test`` to list the test dataset. If you have a single dataset project, specify ``train`` .
+
+      
+
+    
+    :type Labeled: boolean
+    :param Labeled: 
+
+      Specify ``true`` to include labeled entries, otherwise specify ``false`` . If you don't specify a value, Lookout for Vision returns all entries.
+
+      
+
+    
+    :type AnomalyClass: string
+    :param AnomalyClass: 
+
+      Specify ``normal`` to include only normal images. Specify ``anomaly`` to only include anomalous entries. If you don't specify a value, Amazon Lookout for Vision returns normal and anomalous images.
+
+      
+
+    
+    :type BeforeCreationDate: datetime
+    :param BeforeCreationDate: 
+
+      Only includes entries before the specified date in the response. For example, ``2020-06-23T00:00:00`` .
+
+      
+
+    
+    :type AfterCreationDate: datetime
+    :param AfterCreationDate: 
+
+      Only includes entries after the specified date in the response. For example, ``2020-06-23T00:00:00`` .
+
+      
+
+    
+    :type SourceRefContains: string
+    :param SourceRefContains: 
+
+      Perform a "contains" search on the values of the ``source-ref`` key within the dataset. For example a value of "IMG_17" returns all JSON Lines where the ``source-ref`` key value matches **IMG_17** .
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatasetEntries': [
+                'string',
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatasetEntries** *(list) --* 
+
+          A list of the entries (JSON Lines) within the dataset.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+
+.. py:class:: LookoutforVision.Paginator.ListModels
+
+  ::
+
+    
+    paginator = client.get_paginator('list_models')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`LookoutforVision.Client.list_models`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListModels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ProjectName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ProjectName: string
+    :param ProjectName: **[REQUIRED]** 
+
+      The name of the project that contains the model versions that you want to list.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Models': [
+                {
+                    'CreationTimestamp': datetime(2015, 1, 1),
+                    'ModelVersion': 'string',
+                    'ModelArn': 'string',
+                    'Description': 'string',
+                    'Status': 'TRAINING'|'TRAINED'|'TRAINING_FAILED'|'STARTING_HOSTING'|'HOSTED'|'HOSTING_FAILED'|'STOPPING_HOSTING'|'SYSTEM_UPDATING'|'DELETING',
+                    'StatusMessage': 'string',
+                    'Performance': {
+                        'F1Score': ...,
+                        'Recall': ...,
+                        'Precision': ...
+                    }
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Models** *(list) --* 
+
+          A list of model versions in the specified project. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes an Amazon Lookout for Vision model.
+
+            
+            
+
+            - **CreationTimestamp** *(datetime) --* 
+
+              The unix timestamp for the date and time that the model was created. 
+
+              
+            
+
+            - **ModelVersion** *(string) --* 
+
+              The version of the model.
+
+              
+            
+
+            - **ModelArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the model.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description for the model.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The status of the model.
+
+              
+            
+
+            - **StatusMessage** *(string) --* 
+
+              The status message for the model.
+
+              
+            
+
+            - **Performance** *(dict) --* 
+
+              Performance metrics for the model. Not available until training has successfully completed.
+
+              
+              
+
+              - **F1Score** *(float) --* 
+
+                The overall F1 score metric for the trained model.
+
+                
+              
+
+              - **Recall** *(float) --* 
+
+                The overall recall metric value for the trained model. 
+
+                
+              
+
+              - **Precision** *(float) --* 
+
+                The overall precision metric value for the trained model.
+
+                
+          
+        
+      
+    
+
+.. py:class:: LookoutforVision.Paginator.ListProjects
+
+  ::
+
+    
+    paginator = client.get_paginator('list_projects')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`LookoutforVision.Client.list_projects`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/lookoutvision-2020-11-20/ListProjects>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Projects': [
+                {
+                    'ProjectArn': 'string',
+                    'ProjectName': 'string',
+                    'CreationTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Projects** *(list) --* 
+
+          A list of projects in your AWS account.
+
+          
+          
+
+          - *(dict) --* 
+
+            Metadata about an Amazon Lookout for Vision project.
+
+            
+            
+
+            - **ProjectArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the project.
+
+              
+            
+
+            - **ProjectName** *(string) --* 
+
+              The name of the project.
+
+              
+            
+
+            - **CreationTimestamp** *(datetime) --* 
+
+              The unix timestamp for the date and time that the project was created. 
+
+              
+        
+      
+    

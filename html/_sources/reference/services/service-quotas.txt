@@ -1,0 +1,4737 @@
+
+
+*************
+ServiceQuotas
+*************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ServiceQuotas.Client
+
+  A low-level client representing Service Quotas
+  
+
+  With Service Quotas, you can view and manage your quotas easily as your AWS workloads grow. Quotas, also referred to as limits, are the maximum number of resources that you can create in your AWS account. For more information, see the `Service Quotas User Guide <https://docs.aws.amazon.com/servicequotas/latest/userguide/>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('service-quotas')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ServiceQuotas.Client.associate_service_quota_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.can_paginate`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.delete_service_quota_increase_request_from_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.disassociate_service_quota_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_association_for_service_quota_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_aws_default_service_quota`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_paginator`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_requested_service_quota_change`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_service_quota`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_service_quota_increase_request_from_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.get_waiter`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_aws_default_service_quotas`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_requested_service_quota_change_history`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_requested_service_quota_change_history_by_quota`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_service_quota_increase_requests_in_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_service_quotas`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_services`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.put_service_quota_increase_request_into_template`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.request_service_quota_increase`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.tag_resource`
+
+  
+  *   :py:meth:`~ServiceQuotas.Client.untag_resource`
+
+  
+
+  .. py:method:: associate_service_quota_template()
+
+    
+
+    Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/AssociateServiceQuotaTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_service_quota_template()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.OrganizationNotInAllFeaturesModeException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: delete_service_quota_increase_request_from_template(**kwargs)
+
+    
+
+    Deletes the quota increase request for the specified quota from your quota request template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DeleteServiceQuotaIncreaseRequestFromTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_service_quota_increase_request_from_template(
+          ServiceCode='string',
+          QuotaCode='string',
+          AwsRegion='string'
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type AwsRegion: string
+    :param AwsRegion: **[REQUIRED]** 
+
+      The AWS Region.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: disassociate_service_quota_template()
+
+    
+
+    Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/DisassociateServiceQuotaTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_service_quota_template()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceQuotaTemplateNotInUseException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_association_for_service_quota_template()
+
+    
+
+    Retrieves the status of the association for the quota request template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAssociationForServiceQuotaTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_association_for_service_quota_template()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ServiceQuotaTemplateAssociationStatus': 'ASSOCIATED'|'DISASSOCIATED'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ServiceQuotaTemplateAssociationStatus** *(string) --* 
+
+          The association status. If the status is ``ASSOCIATED`` , the quota increase requests in the template are automatically applied to new accounts in your organization.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceQuotaTemplateNotInUseException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: get_aws_default_service_quota(**kwargs)
+
+    
+
+    Retrieves the default value for the specified quota. The default value does not reflect any quota increases.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetAWSDefaultServiceQuota>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_aws_default_service_quota(
+          ServiceCode='string',
+          QuotaCode='string'
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Quota': {
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaArn': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'Value': 123.0,
+                'Unit': 'string',
+                'Adjustable': True|False,
+                'GlobalQuota': True|False,
+                'UsageMetric': {
+                    'MetricNamespace': 'string',
+                    'MetricName': 'string',
+                    'MetricDimensions': {
+                        'string': 'string'
+                    },
+                    'MetricStatisticRecommendation': 'string'
+                },
+                'Period': {
+                    'PeriodValue': 123,
+                    'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                },
+                'ErrorReason': {
+                    'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                    'ErrorMessage': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Quota** *(dict) --* 
+
+          Information about the quota.
+
+          
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the quota.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **Value** *(float) --* 
+
+            The quota value.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+          
+
+          - **Adjustable** *(boolean) --* 
+
+            Indicates whether the quota value can be increased.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+          
+
+          - **UsageMetric** *(dict) --* 
+
+            Information about the measurement.
+
+            
+            
+
+            - **MetricNamespace** *(string) --* 
+
+              The namespace of the metric.
+
+              
+            
+
+            - **MetricName** *(string) --* 
+
+              The name of the metric.
+
+              
+            
+
+            - **MetricDimensions** *(dict) --* 
+
+              The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **MetricStatisticRecommendation** *(string) --* 
+
+              The metric statistic that we recommend you use when determining quota usage.
+
+              
+        
+          
+
+          - **Period** *(dict) --* 
+
+            The period of time.
+
+            
+            
+
+            - **PeriodValue** *(integer) --* 
+
+              The value.
+
+              
+            
+
+            - **PeriodUnit** *(string) --* 
+
+              The time unit.
+
+              
+        
+          
+
+          - **ErrorReason** *(dict) --* 
+
+            The error code and error reason.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Service Quotas returns the following error values:
+
+               
+
+               
+              * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+               
+              * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+               
+              * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+               
+              * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+               
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_requested_service_quota_change(**kwargs)
+
+    
+
+    Retrieves information about the specified quota increase request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetRequestedServiceQuotaChange>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_requested_service_quota_change(
+          RequestId='string'
+      )
+    :type RequestId: string
+    :param RequestId: **[REQUIRED]** 
+
+      The ID of the quota increase request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'RequestedQuota': {
+                'Id': 'string',
+                'CaseId': 'string',
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'DesiredValue': 123.0,
+                'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                'Created': datetime(2015, 1, 1),
+                'LastUpdated': datetime(2015, 1, 1),
+                'Requester': 'string',
+                'QuotaArn': 'string',
+                'GlobalQuota': True|False,
+                'Unit': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **RequestedQuota** *(dict) --* 
+
+          Information about the quota increase request.
+
+          
+          
+
+          - **Id** *(string) --* 
+
+            The unique identifier.
+
+            
+          
+
+          - **CaseId** *(string) --* 
+
+            The case ID.
+
+            
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **DesiredValue** *(float) --* 
+
+            The new, increased value for the quota.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The state of the quota increase request.
+
+            
+          
+
+          - **Created** *(datetime) --* 
+
+            The date and time when the quota increase request was received and the case ID was created.
+
+            
+          
+
+          - **LastUpdated** *(datetime) --* 
+
+            The date and time of the most recent change.
+
+            
+          
+
+          - **Requester** *(string) --* 
+
+            The IAM identity of the requester.
+
+            
+          
+
+          - **QuotaArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the quota.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: get_service_quota(**kwargs)
+
+    
+
+    Retrieves the applied quota value for the specified quota. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuota>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_service_quota(
+          ServiceCode='string',
+          QuotaCode='string'
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Quota': {
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaArn': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'Value': 123.0,
+                'Unit': 'string',
+                'Adjustable': True|False,
+                'GlobalQuota': True|False,
+                'UsageMetric': {
+                    'MetricNamespace': 'string',
+                    'MetricName': 'string',
+                    'MetricDimensions': {
+                        'string': 'string'
+                    },
+                    'MetricStatisticRecommendation': 'string'
+                },
+                'Period': {
+                    'PeriodValue': 123,
+                    'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                },
+                'ErrorReason': {
+                    'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                    'ErrorMessage': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Quota** *(dict) --* 
+
+          Information about the quota.
+
+          
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the quota.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **Value** *(float) --* 
+
+            The quota value.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+          
+
+          - **Adjustable** *(boolean) --* 
+
+            Indicates whether the quota value can be increased.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+          
+
+          - **UsageMetric** *(dict) --* 
+
+            Information about the measurement.
+
+            
+            
+
+            - **MetricNamespace** *(string) --* 
+
+              The namespace of the metric.
+
+              
+            
+
+            - **MetricName** *(string) --* 
+
+              The name of the metric.
+
+              
+            
+
+            - **MetricDimensions** *(dict) --* 
+
+              The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **MetricStatisticRecommendation** *(string) --* 
+
+              The metric statistic that we recommend you use when determining quota usage.
+
+              
+        
+          
+
+          - **Period** *(dict) --* 
+
+            The period of time.
+
+            
+            
+
+            - **PeriodValue** *(integer) --* 
+
+              The value.
+
+              
+            
+
+            - **PeriodUnit** *(string) --* 
+
+              The time unit.
+
+              
+        
+          
+
+          - **ErrorReason** *(dict) --* 
+
+            The error code and error reason.
+
+            
+            
+
+            - **ErrorCode** *(string) --* 
+
+              Service Quotas returns the following error values:
+
+               
+
+               
+              * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+               
+              * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+               
+              * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+               
+              * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+               
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: get_service_quota_increase_request_from_template(**kwargs)
+
+    
+
+    Retrieves information about the specified quota increase request in your quota request template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/GetServiceQuotaIncreaseRequestFromTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_service_quota_increase_request_from_template(
+          ServiceCode='string',
+          QuotaCode='string',
+          AwsRegion='string'
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type AwsRegion: string
+    :param AwsRegion: **[REQUIRED]** 
+
+      The AWS Region.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ServiceQuotaIncreaseRequestInTemplate': {
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'DesiredValue': 123.0,
+                'AwsRegion': 'string',
+                'Unit': 'string',
+                'GlobalQuota': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ServiceQuotaIncreaseRequestInTemplate** *(dict) --* 
+
+          Information about the quota increase request.
+
+          
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **DesiredValue** *(float) --* 
+
+            The new, increased value of the quota.
+
+            
+          
+
+          - **AwsRegion** *(string) --* 
+
+            The AWS Region.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_aws_default_service_quotas(**kwargs)
+
+    
+
+    Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_aws_default_service_quotas(
+          ServiceCode='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Quotas': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaArn': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'Value': 123.0,
+                    'Unit': 'string',
+                    'Adjustable': True|False,
+                    'GlobalQuota': True|False,
+                    'UsageMetric': {
+                        'MetricNamespace': 'string',
+                        'MetricName': 'string',
+                        'MetricDimensions': {
+                            'string': 'string'
+                        },
+                        'MetricStatisticRecommendation': 'string'
+                    },
+                    'Period': {
+                        'PeriodValue': 123,
+                        'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                    },
+                    'ErrorReason': {
+                        'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                        'ErrorMessage': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+        
+
+        - **Quotas** *(list) --* 
+
+          Information about the quotas.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **Value** *(float) --* 
+
+              The quota value.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **Adjustable** *(boolean) --* 
+
+              Indicates whether the quota value can be increased.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **UsageMetric** *(dict) --* 
+
+              Information about the measurement.
+
+              
+              
+
+              - **MetricNamespace** *(string) --* 
+
+                The namespace of the metric.
+
+                
+              
+
+              - **MetricName** *(string) --* 
+
+                The name of the metric.
+
+                
+              
+
+              - **MetricDimensions** *(dict) --* 
+
+                The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+              
+
+              - **MetricStatisticRecommendation** *(string) --* 
+
+                The metric statistic that we recommend you use when determining quota usage.
+
+                
+          
+            
+
+            - **Period** *(dict) --* 
+
+              The period of time.
+
+              
+              
+
+              - **PeriodValue** *(integer) --* 
+
+                The value.
+
+                
+              
+
+              - **PeriodUnit** *(string) --* 
+
+                The time unit.
+
+                
+          
+            
+
+            - **ErrorReason** *(dict) --* 
+
+              The error code and error reason.
+
+              
+              
+
+              - **ErrorCode** *(string) --* 
+
+                Service Quotas returns the following error values:
+
+                 
+
+                 
+                * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+                 
+                * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+                 
+                * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+                 
+                * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+                 
+
+                
+              
+
+              - **ErrorMessage** *(string) --* 
+
+                The error message.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidPaginationTokenException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_requested_service_quota_change_history(**kwargs)
+
+    
+
+    Retrieves the quota increase requests for the specified service.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistory>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_requested_service_quota_change_history(
+          ServiceCode='string',
+          Status='PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ServiceCode: string
+    :param ServiceCode: 
+
+      The service identifier.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      The status of the quota increase request.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'RequestedQuotas': [
+                {
+                    'Id': 'string',
+                    'CaseId': 'string',
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                    'Created': datetime(2015, 1, 1),
+                    'LastUpdated': datetime(2015, 1, 1),
+                    'Requester': 'string',
+                    'QuotaArn': 'string',
+                    'GlobalQuota': True|False,
+                    'Unit': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+        
+
+        - **RequestedQuotas** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The unique identifier.
+
+              
+            
+
+            - **CaseId** *(string) --* 
+
+              The case ID.
+
+              
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value for the quota.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The state of the quota increase request.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The date and time when the quota increase request was received and the case ID was created.
+
+              
+            
+
+            - **LastUpdated** *(datetime) --* 
+
+              The date and time of the most recent change.
+
+              
+            
+
+            - **Requester** *(string) --* 
+
+              The IAM identity of the requester.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidPaginationTokenException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_requested_service_quota_change_history_by_quota(**kwargs)
+
+    
+
+    Retrieves the quota increase requests for the specified quota.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuota>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_requested_service_quota_change_history_by_quota(
+          ServiceCode='string',
+          QuotaCode='string',
+          Status='PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      The status value of the quota increase request.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'RequestedQuotas': [
+                {
+                    'Id': 'string',
+                    'CaseId': 'string',
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                    'Created': datetime(2015, 1, 1),
+                    'LastUpdated': datetime(2015, 1, 1),
+                    'Requester': 'string',
+                    'QuotaArn': 'string',
+                    'GlobalQuota': True|False,
+                    'Unit': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+        
+
+        - **RequestedQuotas** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The unique identifier.
+
+              
+            
+
+            - **CaseId** *(string) --* 
+
+              The case ID.
+
+              
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value for the quota.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The state of the quota increase request.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The date and time when the quota increase request was received and the case ID was created.
+
+              
+            
+
+            - **LastUpdated** *(datetime) --* 
+
+              The date and time of the most recent change.
+
+              
+            
+
+            - **Requester** *(string) --* 
+
+              The IAM identity of the requester.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidPaginationTokenException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_service_quota_increase_requests_in_template(**kwargs)
+
+    
+
+    Lists the quota increase requests in the specified quota request template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_service_quota_increase_requests_in_template(
+          ServiceCode='string',
+          AwsRegion='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ServiceCode: string
+    :param ServiceCode: 
+
+      The service identifier.
+
+      
+
+    
+    :type AwsRegion: string
+    :param AwsRegion: 
+
+      The AWS Region.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ServiceQuotaIncreaseRequestInTemplateList': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'AwsRegion': 'string',
+                    'Unit': 'string',
+                    'GlobalQuota': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ServiceQuotaIncreaseRequestInTemplateList** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value of the quota.
+
+              
+            
+
+            - **AwsRegion** *(string) --* 
+
+              The AWS Region.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: list_service_quotas(**kwargs)
+
+    
+
+    Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_service_quotas(
+          ServiceCode='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Quotas': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaArn': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'Value': 123.0,
+                    'Unit': 'string',
+                    'Adjustable': True|False,
+                    'GlobalQuota': True|False,
+                    'UsageMetric': {
+                        'MetricNamespace': 'string',
+                        'MetricName': 'string',
+                        'MetricDimensions': {
+                            'string': 'string'
+                        },
+                        'MetricStatisticRecommendation': 'string'
+                    },
+                    'Period': {
+                        'PeriodValue': 123,
+                        'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                    },
+                    'ErrorReason': {
+                        'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                        'ErrorMessage': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+        
+
+        - **Quotas** *(list) --* 
+
+          Information about the quotas.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **Value** *(float) --* 
+
+              The quota value.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **Adjustable** *(boolean) --* 
+
+              Indicates whether the quota value can be increased.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **UsageMetric** *(dict) --* 
+
+              Information about the measurement.
+
+              
+              
+
+              - **MetricNamespace** *(string) --* 
+
+                The namespace of the metric.
+
+                
+              
+
+              - **MetricName** *(string) --* 
+
+                The name of the metric.
+
+                
+              
+
+              - **MetricDimensions** *(dict) --* 
+
+                The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+              
+
+              - **MetricStatisticRecommendation** *(string) --* 
+
+                The metric statistic that we recommend you use when determining quota usage.
+
+                
+          
+            
+
+            - **Period** *(dict) --* 
+
+              The period of time.
+
+              
+              
+
+              - **PeriodValue** *(integer) --* 
+
+                The value.
+
+                
+              
+
+              - **PeriodUnit** *(string) --* 
+
+                The time unit.
+
+                
+          
+            
+
+            - **ErrorReason** *(dict) --* 
+
+              The error code and error reason.
+
+              
+              
+
+              - **ErrorCode** *(string) --* 
+
+                Service Quotas returns the following error values:
+
+                 
+
+                 
+                * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+                 
+                * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+                 
+                * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+                 
+                * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+                 
+
+                
+              
+
+              - **ErrorMessage** *(string) --* 
+
+                The error message.
+
+                
+          
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidPaginationTokenException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_services(**kwargs)
+
+    
+
+    Lists the names and codes for the services integrated with Service Quotas.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_services(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'NextToken': 'string',
+            'Services': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+
+          
+        
+
+        - **Services** *(list) --* 
+
+          Information about the services.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a service.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidPaginationTokenException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of the tags assigned to the specified applied quota.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceARN='string'
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the `list-service-quotas <https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html>`__ AWS CLI command or the `ListServiceQuotas <https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html>`__ AWS API operation.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A complex data type that contains zero or more tag elements.
+
+          
+          
+
+          - *(dict) --* 
+
+            A complex data type that contains a tag key and tag value.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              A string that contains a tag key. The string length should be between 1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              A string that contains an optional tag value. The string length should be between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+
+  .. py:method:: put_service_quota_increase_request_into_template(**kwargs)
+
+    
+
+    Adds a quota increase request to your quota request template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/PutServiceQuotaIncreaseRequestIntoTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_service_quota_increase_request_into_template(
+          QuotaCode='string',
+          ServiceCode='string',
+          AwsRegion='string',
+          DesiredValue=123.0
+      )
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type AwsRegion: string
+    :param AwsRegion: **[REQUIRED]** 
+
+      The AWS Region.
+
+      
+
+    
+    :type DesiredValue: float
+    :param DesiredValue: **[REQUIRED]** 
+
+      The new, increased value for the quota.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ServiceQuotaIncreaseRequestInTemplate': {
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'DesiredValue': 123.0,
+                'AwsRegion': 'string',
+                'Unit': 'string',
+                'GlobalQuota': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ServiceQuotaIncreaseRequestInTemplate** *(dict) --* 
+
+          Information about the quota increase request.
+
+          
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **DesiredValue** *(float) --* 
+
+            The new, increased value of the quota.
+
+            
+          
+
+          - **AwsRegion** *(string) --* 
+
+            The AWS Region.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.QuotaExceededException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AWSServiceAccessNotEnabledException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TemplatesNotAvailableInRegionException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoAvailableOrganizationException`
+
+    
+
+  .. py:method:: request_service_quota_increase(**kwargs)
+
+    
+
+    Submits a quota increase request for the specified quota.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/RequestServiceQuotaIncrease>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.request_service_quota_increase(
+          ServiceCode='string',
+          QuotaCode='string',
+          DesiredValue=123.0
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type DesiredValue: float
+    :param DesiredValue: **[REQUIRED]** 
+
+      The new, increased value for the quota.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'RequestedQuota': {
+                'Id': 'string',
+                'CaseId': 'string',
+                'ServiceCode': 'string',
+                'ServiceName': 'string',
+                'QuotaCode': 'string',
+                'QuotaName': 'string',
+                'DesiredValue': 123.0,
+                'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                'Created': datetime(2015, 1, 1),
+                'LastUpdated': datetime(2015, 1, 1),
+                'Requester': 'string',
+                'QuotaArn': 'string',
+                'GlobalQuota': True|False,
+                'Unit': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **RequestedQuota** *(dict) --* 
+
+          Information about the quota increase request.
+
+          
+          
+
+          - **Id** *(string) --* 
+
+            The unique identifier.
+
+            
+          
+
+          - **CaseId** *(string) --* 
+
+            The case ID.
+
+            
+          
+
+          - **ServiceCode** *(string) --* 
+
+            The service identifier.
+
+            
+          
+
+          - **ServiceName** *(string) --* 
+
+            The service name.
+
+            
+          
+
+          - **QuotaCode** *(string) --* 
+
+            The quota identifier.
+
+            
+          
+
+          - **QuotaName** *(string) --* 
+
+            The quota name.
+
+            
+          
+
+          - **DesiredValue** *(float) --* 
+
+            The new, increased value for the quota.
+
+            
+          
+
+          - **Status** *(string) --* 
+
+            The state of the quota increase request.
+
+            
+          
+
+          - **Created** *(datetime) --* 
+
+            The date and time when the quota increase request was received and the case ID was created.
+
+            
+          
+
+          - **LastUpdated** *(datetime) --* 
+
+            The date and time of the most recent change.
+
+            
+          
+
+          - **Requester** *(string) --* 
+
+            The IAM identity of the requester.
+
+            
+          
+
+          - **QuotaArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the quota.
+
+            
+          
+
+          - **GlobalQuota** *(boolean) --* 
+
+            Indicates whether the quota is global.
+
+            
+          
+
+          - **Unit** *(string) --* 
+
+            The unit of measurement.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.DependencyAccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.QuotaExceededException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ResourceAlreadyExistsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.InvalidResourceStateException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds tags to the specified applied quota. You can include one or more tags to add to the quota.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceARN='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the `list-service-quotas <https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html>`__ AWS CLI command or the `ListServiceQuotas <https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html>`__ AWS API operation.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The tags that you want to add to the resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        A complex data type that contains a tag key and tag value.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          A string that contains a tag key. The string length should be between 1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          A string that contains an optional tag value. The string length should be between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . : / = + @.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyTagsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TagPolicyViolationException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from the specified applied quota. You can specify one or more tags to remove.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceARN='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the `list-service-quotas <https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html>`__ AWS CLI command or the `ListServiceQuotas <https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html>`__ AWS API operation.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The keys of the tags that you want to remove from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.NoSuchResourceException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.IllegalArgumentException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ServiceQuotas.Client.exceptions.ServiceException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`ServiceQuotas.Paginator.ListAWSDefaultServiceQuotas`
+
+
+* :py:class:`ServiceQuotas.Paginator.ListRequestedServiceQuotaChangeHistory`
+
+
+* :py:class:`ServiceQuotas.Paginator.ListRequestedServiceQuotaChangeHistoryByQuota`
+
+
+* :py:class:`ServiceQuotas.Paginator.ListServiceQuotaIncreaseRequestsInTemplate`
+
+
+* :py:class:`ServiceQuotas.Paginator.ListServiceQuotas`
+
+
+* :py:class:`ServiceQuotas.Paginator.ListServices`
+
+
+
+.. py:class:: ServiceQuotas.Paginator.ListAWSDefaultServiceQuotas
+
+  ::
+
+    
+    paginator = client.get_paginator('list_aws_default_service_quotas')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_aws_default_service_quotas`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListAWSDefaultServiceQuotas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ServiceCode='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Quotas': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaArn': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'Value': 123.0,
+                    'Unit': 'string',
+                    'Adjustable': True|False,
+                    'GlobalQuota': True|False,
+                    'UsageMetric': {
+                        'MetricNamespace': 'string',
+                        'MetricName': 'string',
+                        'MetricDimensions': {
+                            'string': 'string'
+                        },
+                        'MetricStatisticRecommendation': 'string'
+                    },
+                    'Period': {
+                        'PeriodValue': 123,
+                        'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                    },
+                    'ErrorReason': {
+                        'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                        'ErrorMessage': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Quotas** *(list) --* 
+
+          Information about the quotas.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **Value** *(float) --* 
+
+              The quota value.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **Adjustable** *(boolean) --* 
+
+              Indicates whether the quota value can be increased.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **UsageMetric** *(dict) --* 
+
+              Information about the measurement.
+
+              
+              
+
+              - **MetricNamespace** *(string) --* 
+
+                The namespace of the metric.
+
+                
+              
+
+              - **MetricName** *(string) --* 
+
+                The name of the metric.
+
+                
+              
+
+              - **MetricDimensions** *(dict) --* 
+
+                The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+              
+
+              - **MetricStatisticRecommendation** *(string) --* 
+
+                The metric statistic that we recommend you use when determining quota usage.
+
+                
+          
+            
+
+            - **Period** *(dict) --* 
+
+              The period of time.
+
+              
+              
+
+              - **PeriodValue** *(integer) --* 
+
+                The value.
+
+                
+              
+
+              - **PeriodUnit** *(string) --* 
+
+                The time unit.
+
+                
+          
+            
+
+            - **ErrorReason** *(dict) --* 
+
+              The error code and error reason.
+
+              
+              
+
+              - **ErrorCode** *(string) --* 
+
+                Service Quotas returns the following error values:
+
+                 
+
+                 
+                * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+                 
+                * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+                 
+                * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+                 
+                * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+                 
+
+                
+              
+
+              - **ErrorMessage** *(string) --* 
+
+                The error message.
+
+                
+          
+        
+      
+    
+
+.. py:class:: ServiceQuotas.Paginator.ListRequestedServiceQuotaChangeHistory
+
+  ::
+
+    
+    paginator = client.get_paginator('list_requested_service_quota_change_history')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_requested_service_quota_change_history`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistory>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ServiceCode='string',
+          Status='PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ServiceCode: string
+    :param ServiceCode: 
+
+      The service identifier.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      The status of the quota increase request.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'RequestedQuotas': [
+                {
+                    'Id': 'string',
+                    'CaseId': 'string',
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                    'Created': datetime(2015, 1, 1),
+                    'LastUpdated': datetime(2015, 1, 1),
+                    'Requester': 'string',
+                    'QuotaArn': 'string',
+                    'GlobalQuota': True|False,
+                    'Unit': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **RequestedQuotas** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The unique identifier.
+
+              
+            
+
+            - **CaseId** *(string) --* 
+
+              The case ID.
+
+              
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value for the quota.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The state of the quota increase request.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The date and time when the quota increase request was received and the case ID was created.
+
+              
+            
+
+            - **LastUpdated** *(datetime) --* 
+
+              The date and time of the most recent change.
+
+              
+            
+
+            - **Requester** *(string) --* 
+
+              The IAM identity of the requester.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+        
+      
+    
+
+.. py:class:: ServiceQuotas.Paginator.ListRequestedServiceQuotaChangeHistoryByQuota
+
+  ::
+
+    
+    paginator = client.get_paginator('list_requested_service_quota_change_history_by_quota')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_requested_service_quota_change_history_by_quota`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListRequestedServiceQuotaChangeHistoryByQuota>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ServiceCode='string',
+          QuotaCode='string',
+          Status='PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type QuotaCode: string
+    :param QuotaCode: **[REQUIRED]** 
+
+      The quota identifier.
+
+      
+
+    
+    :type Status: string
+    :param Status: 
+
+      The status value of the quota increase request.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'RequestedQuotas': [
+                {
+                    'Id': 'string',
+                    'CaseId': 'string',
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'Status': 'PENDING'|'CASE_OPENED'|'APPROVED'|'DENIED'|'CASE_CLOSED',
+                    'Created': datetime(2015, 1, 1),
+                    'LastUpdated': datetime(2015, 1, 1),
+                    'Requester': 'string',
+                    'QuotaArn': 'string',
+                    'GlobalQuota': True|False,
+                    'Unit': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **RequestedQuotas** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The unique identifier.
+
+              
+            
+
+            - **CaseId** *(string) --* 
+
+              The case ID.
+
+              
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value for the quota.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The state of the quota increase request.
+
+              
+            
+
+            - **Created** *(datetime) --* 
+
+              The date and time when the quota increase request was received and the case ID was created.
+
+              
+            
+
+            - **LastUpdated** *(datetime) --* 
+
+              The date and time of the most recent change.
+
+              
+            
+
+            - **Requester** *(string) --* 
+
+              The IAM identity of the requester.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+        
+      
+    
+
+.. py:class:: ServiceQuotas.Paginator.ListServiceQuotaIncreaseRequestsInTemplate
+
+  ::
+
+    
+    paginator = client.get_paginator('list_service_quota_increase_requests_in_template')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_service_quota_increase_requests_in_template`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotaIncreaseRequestsInTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ServiceCode='string',
+          AwsRegion='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ServiceCode: string
+    :param ServiceCode: 
+
+      The service identifier.
+
+      
+
+    
+    :type AwsRegion: string
+    :param AwsRegion: 
+
+      The AWS Region.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ServiceQuotaIncreaseRequestInTemplateList': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'DesiredValue': 123.0,
+                    'AwsRegion': 'string',
+                    'Unit': 'string',
+                    'GlobalQuota': True|False
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ServiceQuotaIncreaseRequestInTemplateList** *(list) --* 
+
+          Information about the quota increase requests.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota increase request.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **DesiredValue** *(float) --* 
+
+              The new, increased value of the quota.
+
+              
+            
+
+            - **AwsRegion** *(string) --* 
+
+              The AWS Region.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+        
+      
+    
+
+.. py:class:: ServiceQuotas.Paginator.ListServiceQuotas
+
+  ::
+
+    
+    paginator = client.get_paginator('list_service_quotas')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_service_quotas`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServiceQuotas>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          ServiceCode='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type ServiceCode: string
+    :param ServiceCode: **[REQUIRED]** 
+
+      The service identifier.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Quotas': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string',
+                    'QuotaArn': 'string',
+                    'QuotaCode': 'string',
+                    'QuotaName': 'string',
+                    'Value': 123.0,
+                    'Unit': 'string',
+                    'Adjustable': True|False,
+                    'GlobalQuota': True|False,
+                    'UsageMetric': {
+                        'MetricNamespace': 'string',
+                        'MetricName': 'string',
+                        'MetricDimensions': {
+                            'string': 'string'
+                        },
+                        'MetricStatisticRecommendation': 'string'
+                    },
+                    'Period': {
+                        'PeriodValue': 123,
+                        'PeriodUnit': 'MICROSECOND'|'MILLISECOND'|'SECOND'|'MINUTE'|'HOUR'|'DAY'|'WEEK'
+                    },
+                    'ErrorReason': {
+                        'ErrorCode': 'DEPENDENCY_ACCESS_DENIED_ERROR'|'DEPENDENCY_THROTTLING_ERROR'|'DEPENDENCY_SERVICE_ERROR'|'SERVICE_QUOTA_NOT_AVAILABLE_ERROR',
+                        'ErrorMessage': 'string'
+                    }
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Quotas** *(list) --* 
+
+          Information about the quotas.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a quota.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+            
+
+            - **QuotaArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the quota.
+
+              
+            
+
+            - **QuotaCode** *(string) --* 
+
+              The quota identifier.
+
+              
+            
+
+            - **QuotaName** *(string) --* 
+
+              The quota name.
+
+              
+            
+
+            - **Value** *(float) --* 
+
+              The quota value.
+
+              
+            
+
+            - **Unit** *(string) --* 
+
+              The unit of measurement.
+
+              
+            
+
+            - **Adjustable** *(boolean) --* 
+
+              Indicates whether the quota value can be increased.
+
+              
+            
+
+            - **GlobalQuota** *(boolean) --* 
+
+              Indicates whether the quota is global.
+
+              
+            
+
+            - **UsageMetric** *(dict) --* 
+
+              Information about the measurement.
+
+              
+              
+
+              - **MetricNamespace** *(string) --* 
+
+                The namespace of the metric.
+
+                
+              
+
+              - **MetricName** *(string) --* 
+
+                The name of the metric.
+
+                
+              
+
+              - **MetricDimensions** *(dict) --* 
+
+                The metric dimension. This is a name/value pair that is part of the identity of a metric.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+              
+
+              - **MetricStatisticRecommendation** *(string) --* 
+
+                The metric statistic that we recommend you use when determining quota usage.
+
+                
+          
+            
+
+            - **Period** *(dict) --* 
+
+              The period of time.
+
+              
+              
+
+              - **PeriodValue** *(integer) --* 
+
+                The value.
+
+                
+              
+
+              - **PeriodUnit** *(string) --* 
+
+                The time unit.
+
+                
+          
+            
+
+            - **ErrorReason** *(dict) --* 
+
+              The error code and error reason.
+
+              
+              
+
+              - **ErrorCode** *(string) --* 
+
+                Service Quotas returns the following error values:
+
+                 
+
+                 
+                * ``DEPENDENCY_ACCESS_DENIED_ERROR`` - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota. 
+                 
+                * ``DEPENDENCY_THROTTLING_ERROR`` - The service is throttling Service Quotas. 
+                 
+                * ``DEPENDENCY_SERVICE_ERROR`` - The service is not available. 
+                 
+                * ``SERVICE_QUOTA_NOT_AVAILABLE_ERROR`` - There was an error in Service Quotas. 
+                 
+
+                
+              
+
+              - **ErrorMessage** *(string) --* 
+
+                The error message.
+
+                
+          
+        
+      
+    
+
+.. py:class:: ServiceQuotas.Paginator.ListServices
+
+  ::
+
+    
+    paginator = client.get_paginator('list_services')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ServiceQuotas.Client.list_services`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/service-quotas-2019-06-24/ListServices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Services': [
+                {
+                    'ServiceCode': 'string',
+                    'ServiceName': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Services** *(list) --* 
+
+          Information about the services.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a service.
+
+            
+            
+
+            - **ServiceCode** *(string) --* 
+
+              The service identifier.
+
+              
+            
+
+            - **ServiceName** *(string) --* 
+
+              The service name.
+
+              
+        
+      
+    

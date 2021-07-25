@@ -1,0 +1,1949 @@
+
+
+****************
+IoTDeviceAdvisor
+****************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: IoTDeviceAdvisor.Client
+
+  A low-level client representing AWS IoT Core Device Advisor (oTDeviceAdvisor)
+  
+
+  AWS IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT devices during device software development. Device Advisor provides pre-built tests that you can use to validate IoT devices for reliable and secure connectivity with AWS IoT Core before deploying devices to production. By using Device Advisor, you can confirm that your devices can connect to AWS IoT Core, follow security best practices and, if applicable, receive software updates from IoT Device Management. You can also download signed qualification reports to submit to the AWS Partner Network to get your device qualified for the AWS Partner Device Catalog without the need to send your device in and wait for it to be tested.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('iotdeviceadvisor')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.can_paginate`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.create_suite_definition`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.delete_suite_definition`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.get_paginator`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.get_suite_definition`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.get_suite_run`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.get_suite_run_report`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.get_waiter`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.list_suite_definitions`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.list_suite_runs`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.start_suite_run`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.stop_suite_run`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.tag_resource`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.untag_resource`
+
+  
+  *   :py:meth:`~IoTDeviceAdvisor.Client.update_suite_definition`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_suite_definition(**kwargs)
+
+    
+
+    Creates a Device Advisor test suite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/CreateSuiteDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_suite_definition(
+          suiteDefinitionConfiguration={
+              'suiteDefinitionName': 'string',
+              'devices': [
+                  {
+                      'thingArn': 'string',
+                      'certificateArn': 'string'
+                  },
+              ],
+              'intendedForQualification': True|False,
+              'rootGroup': 'string',
+              'devicePermissionRoleArn': 'string'
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type suiteDefinitionConfiguration: dict
+    :param suiteDefinitionConfiguration: 
+
+      Creates a Device Advisor test suite with suite definition configuration.
+
+      
+
+    
+      - **suiteDefinitionName** *(string) --* 
+
+        Gets Suite Definition Configuration name.
+
+        
+
+      
+      - **devices** *(list) --* 
+
+        Gets the devices configured.
+
+        
+
+      
+        - *(dict) --* 
+
+          Lists all the devices under test
+
+          
+
+        
+          - **thingArn** *(string) --* 
+
+            Lists devices thing arn
+
+            
+
+          
+          - **certificateArn** *(string) --* 
+
+            Lists devices certificate arn
+
+            
+
+          
+        
+    
+      - **intendedForQualification** *(boolean) --* 
+
+        Gets the tests intended for qualification in a suite.
+
+        
+
+      
+      - **rootGroup** *(string) --* 
+
+        Gets test suite root group.
+
+        
+
+      
+      - **devicePermissionRoleArn** *(string) --* 
+
+        Gets device permission arn.
+
+        
+
+      
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags to be attached to the suite definition.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteDefinitionId': 'string',
+            'suiteDefinitionArn': 'string',
+            'suiteDefinitionName': 'string',
+            'createdAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteDefinitionId** *(string) --* 
+
+          Creates a Device Advisor test suite with suite UUID.
+
+          
+        
+
+        - **suiteDefinitionArn** *(string) --* 
+
+          Creates a Device Advisor test suite with Amazon Resource name.
+
+          
+        
+
+        - **suiteDefinitionName** *(string) --* 
+
+          Creates a Device Advisor test suite with suite definition name.
+
+          
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Creates a Device Advisor test suite with TimeStamp of when it was created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_suite_definition(**kwargs)
+
+    
+
+    Deletes a Device Advisor test suite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/DeleteSuiteDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_suite_definition(
+          suiteDefinitionId='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_suite_definition(**kwargs)
+
+    
+
+    Gets information about a Device Advisor test suite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/GetSuiteDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_suite_definition(
+          suiteDefinitionId='string',
+          suiteDefinitionVersion='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite to get.
+
+      
+
+    
+    :type suiteDefinitionVersion: string
+    :param suiteDefinitionVersion: 
+
+      Suite definition version of the test suite to get.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteDefinitionId': 'string',
+            'suiteDefinitionArn': 'string',
+            'suiteDefinitionVersion': 'string',
+            'latestVersion': 'string',
+            'suiteDefinitionConfiguration': {
+                'suiteDefinitionName': 'string',
+                'devices': [
+                    {
+                        'thingArn': 'string',
+                        'certificateArn': 'string'
+                    },
+                ],
+                'intendedForQualification': True|False,
+                'rootGroup': 'string',
+                'devicePermissionRoleArn': 'string'
+            },
+            'createdAt': datetime(2015, 1, 1),
+            'lastModifiedAt': datetime(2015, 1, 1),
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteDefinitionId** *(string) --* 
+
+          Suite definition Id of the suite definition.
+
+          
+        
+
+        - **suiteDefinitionArn** *(string) --* 
+
+          The ARN of the suite definition.
+
+          
+        
+
+        - **suiteDefinitionVersion** *(string) --* 
+
+          Suite definition version of the suite definition.
+
+          
+        
+
+        - **latestVersion** *(string) --* 
+
+          Latest suite definition version of the suite definition.
+
+          
+        
+
+        - **suiteDefinitionConfiguration** *(dict) --* 
+
+          Suite configuration of the suite definition.
+
+          
+          
+
+          - **suiteDefinitionName** *(string) --* 
+
+            Gets Suite Definition Configuration name.
+
+            
+          
+
+          - **devices** *(list) --* 
+
+            Gets the devices configured.
+
+            
+            
+
+            - *(dict) --* 
+
+              Lists all the devices under test
+
+              
+              
+
+              - **thingArn** *(string) --* 
+
+                Lists devices thing arn
+
+                
+              
+
+              - **certificateArn** *(string) --* 
+
+                Lists devices certificate arn
+
+                
+          
+        
+          
+
+          - **intendedForQualification** *(boolean) --* 
+
+            Gets the tests intended for qualification in a suite.
+
+            
+          
+
+          - **rootGroup** *(string) --* 
+
+            Gets test suite root group.
+
+            
+          
+
+          - **devicePermissionRoleArn** *(string) --* 
+
+            Gets device permission arn.
+
+            
+      
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Date (in Unix epoch time) when the suite definition was created.
+
+          
+        
+
+        - **lastModifiedAt** *(datetime) --* 
+
+          Date (in Unix epoch time) when the suite definition was last modified.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          Tags attached to the suite definition.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_suite_run(**kwargs)
+
+    
+
+    Gets information about a Device Advisor test suite run.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/GetSuiteRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_suite_run(
+          suiteDefinitionId='string',
+          suiteRunId='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id for the test suite run.
+
+      
+
+    
+    :type suiteRunId: string
+    :param suiteRunId: **[REQUIRED]** 
+
+      Suite run Id for the test suite run.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteDefinitionId': 'string',
+            'suiteDefinitionVersion': 'string',
+            'suiteRunId': 'string',
+            'suiteRunArn': 'string',
+            'suiteRunConfiguration': {
+                'primaryDevice': {
+                    'thingArn': 'string',
+                    'certificateArn': 'string'
+                },
+                'selectedTestList': [
+                    'string',
+                ]
+            },
+            'testResult': {
+                'groups': [
+                    {
+                        'groupId': 'string',
+                        'groupName': 'string',
+                        'tests': [
+                            {
+                                'testCaseRunId': 'string',
+                                'testCaseDefinitionId': 'string',
+                                'testCaseDefinitionName': 'string',
+                                'status': 'PASS'|'FAIL'|'CANCELED'|'PENDING'|'RUNNING'|'STOPPING'|'STOPPED'|'PASS_WITH_WARNINGS'|'ERROR',
+                                'startTime': datetime(2015, 1, 1),
+                                'endTime': datetime(2015, 1, 1),
+                                'logUrl': 'string',
+                                'warnings': 'string',
+                                'failure': 'string'
+                            },
+                        ]
+                    },
+                ]
+            },
+            'startTime': datetime(2015, 1, 1),
+            'endTime': datetime(2015, 1, 1),
+            'status': 'PASS'|'FAIL'|'CANCELED'|'PENDING'|'RUNNING'|'STOPPING'|'STOPPED'|'PASS_WITH_WARNINGS'|'ERROR',
+            'errorReason': 'string',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteDefinitionId** *(string) --* 
+
+          Suite definition Id for the test suite run.
+
+          
+        
+
+        - **suiteDefinitionVersion** *(string) --* 
+
+          Suite definition version for the test suite run.
+
+          
+        
+
+        - **suiteRunId** *(string) --* 
+
+          Suite run Id for the test suite run.
+
+          
+        
+
+        - **suiteRunArn** *(string) --* 
+
+          The ARN of the suite run.
+
+          
+        
+
+        - **suiteRunConfiguration** *(dict) --* 
+
+          Suite run configuration for the test suite run.
+
+          
+          
+
+          - **primaryDevice** *(dict) --* 
+
+            Gets the primary device for suite run.
+
+            
+            
+
+            - **thingArn** *(string) --* 
+
+              Lists devices thing arn
+
+              
+            
+
+            - **certificateArn** *(string) --* 
+
+              Lists devices certificate arn
+
+              
+        
+          
+
+          - **selectedTestList** *(list) --* 
+
+            Gets test case list.
+
+            
+            
+
+            - *(string) --* 
+        
+      
+        
+
+        - **testResult** *(dict) --* 
+
+          Test results for the test suite run.
+
+          
+          
+
+          - **groups** *(list) --* 
+
+            Show each group of test results.
+
+            
+            
+
+            - *(dict) --* 
+
+              Show Group Result.
+
+              
+              
+
+              - **groupId** *(string) --* 
+
+                Group result Id.
+
+                
+              
+
+              - **groupName** *(string) --* 
+
+                Group Result Name.
+
+                
+              
+
+              - **tests** *(list) --* 
+
+                Tests under Group Result.
+
+                
+                
+
+                - *(dict) --* 
+
+                  Provides test case run.
+
+                  
+                  
+
+                  - **testCaseRunId** *(string) --* 
+
+                    Provides test case run Id.
+
+                    
+                  
+
+                  - **testCaseDefinitionId** *(string) --* 
+
+                    Provides test case run definition Id.
+
+                    
+                  
+
+                  - **testCaseDefinitionName** *(string) --* 
+
+                    Provides test case run definition Name.
+
+                    
+                  
+
+                  - **status** *(string) --* 
+
+                    Provides test case run status.
+
+                    
+                  
+
+                  - **startTime** *(datetime) --* 
+
+                    Provides test case run start time.
+
+                    
+                  
+
+                  - **endTime** *(datetime) --* 
+
+                    Provides test case run end time.
+
+                    
+                  
+
+                  - **logUrl** *(string) --* 
+
+                    Provides test case run log Url.
+
+                    
+                  
+
+                  - **warnings** *(string) --* 
+
+                    Provides test case run warnings.
+
+                    
+                  
+
+                  - **failure** *(string) --* 
+
+                    Provides test case run failure result.
+
+                    
+              
+            
+          
+        
+      
+        
+
+        - **startTime** *(datetime) --* 
+
+          Date (in Unix epoch time) when the test suite run was started.
+
+          
+        
+
+        - **endTime** *(datetime) --* 
+
+          Date (in Unix epoch time) when the test suite run ended.
+
+          
+        
+
+        - **status** *(string) --* 
+
+          Status for the test suite run.
+
+          
+        
+
+        - **errorReason** *(string) --* 
+
+          Error reason for any test suite run failure.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          The tags attached to the suite run.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_suite_run_report(**kwargs)
+
+    
+
+    Gets a report download link for a successful Device Advisor qualifying test suite run.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/GetSuiteRunReport>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_suite_run_report(
+          suiteDefinitionId='string',
+          suiteRunId='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite.
+
+      
+
+    
+    :type suiteRunId: string
+    :param suiteRunId: **[REQUIRED]** 
+
+      Suite run Id of the test suite run.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'qualificationReportDownloadUrl': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **qualificationReportDownloadUrl** *(string) --* 
+
+          Download URL of the qualification report.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_suite_definitions(**kwargs)
+
+    
+
+    Lists the Device Advisor test suites you have created.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/ListSuiteDefinitions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_suite_definitions(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return at once.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token used to get the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteDefinitionInformationList': [
+                {
+                    'suiteDefinitionId': 'string',
+                    'suiteDefinitionName': 'string',
+                    'defaultDevices': [
+                        {
+                            'thingArn': 'string',
+                            'certificateArn': 'string'
+                        },
+                    ],
+                    'intendedForQualification': True|False,
+                    'createdAt': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteDefinitionInformationList** *(list) --* 
+
+          An array of objects that provide summaries of information about the suite definitions in the list.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the suite definition.
+
+            
+            
+
+            - **suiteDefinitionId** *(string) --* 
+
+              Suite definition Id of the test suite.
+
+              
+            
+
+            - **suiteDefinitionName** *(string) --* 
+
+              Suite name of the test suite.
+
+              
+            
+
+            - **defaultDevices** *(list) --* 
+
+              Specifies the devices under test for the test suite.
+
+              
+              
+
+              - *(dict) --* 
+
+                Lists all the devices under test
+
+                
+                
+
+                - **thingArn** *(string) --* 
+
+                  Lists devices thing arn
+
+                  
+                
+
+                - **certificateArn** *(string) --* 
+
+                  Lists devices certificate arn
+
+                  
+            
+          
+            
+
+            - **intendedForQualification** *(boolean) --* 
+
+              Specifies if the test suite is intended for qualification.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              Date (in Unix epoch time) when the test suite was created.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token used to get the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_suite_runs(**kwargs)
+
+    
+
+    Lists the runs of the specified Device Advisor test suite. You can list all runs of the test suite, or the runs of a specific version of the test suite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/ListSuiteRuns>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_suite_runs(
+          suiteDefinitionId='string',
+          suiteDefinitionVersion='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: 
+
+      Lists the test suite runs of the specified test suite based on suite definition Id.
+
+      
+
+    
+    :type suiteDefinitionVersion: string
+    :param suiteDefinitionVersion: 
+
+      Must be passed along with suiteDefinitionId. Lists the test suite runs of the specified test suite based on suite definition version.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return at once.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token to retrieve the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteRunsList': [
+                {
+                    'suiteDefinitionId': 'string',
+                    'suiteDefinitionVersion': 'string',
+                    'suiteDefinitionName': 'string',
+                    'suiteRunId': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'startedAt': datetime(2015, 1, 1),
+                    'endAt': datetime(2015, 1, 1),
+                    'status': 'PASS'|'FAIL'|'CANCELED'|'PENDING'|'RUNNING'|'STOPPING'|'STOPPED'|'PASS_WITH_WARNINGS'|'ERROR',
+                    'passed': 123,
+                    'failed': 123
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteRunsList** *(list) --* 
+
+          An array of objects that provide summaries of information about the suite runs in the list.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the suite run.
+
+            
+            
+
+            - **suiteDefinitionId** *(string) --* 
+
+              Suite definition Id of the suite run.
+
+              
+            
+
+            - **suiteDefinitionVersion** *(string) --* 
+
+              Suite definition version of the suite run.
+
+              
+            
+
+            - **suiteDefinitionName** *(string) --* 
+
+              Suite definition name of the suite run.
+
+              
+            
+
+            - **suiteRunId** *(string) --* 
+
+              Suite run Id of the suite run.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              Date (in Unix epoch time) when the suite run was created.
+
+              
+            
+
+            - **startedAt** *(datetime) --* 
+
+              Date (in Unix epoch time) when the suite run was started.
+
+              
+            
+
+            - **endAt** *(datetime) --* 
+
+              Date (in Unix epoch time) when the suite run ended.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              Status of the suite run.
+
+              
+            
+
+            - **passed** *(integer) --* 
+
+              Number of test cases that passed in the suite run.
+
+              
+            
+
+            - **failed** *(integer) --* 
+
+              Number of test cases that failed in the suite run.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token to retrieve the next set of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags attached to an IoT Device Advisor resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the IoT Device Advisor resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The tags attached to the IoT Device Advisor resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: start_suite_run(**kwargs)
+
+    
+
+    Starts a Device Advisor test suite run.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/StartSuiteRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_suite_run(
+          suiteDefinitionId='string',
+          suiteDefinitionVersion='string',
+          suiteRunConfiguration={
+              'primaryDevice': {
+                  'thingArn': 'string',
+                  'certificateArn': 'string'
+              },
+              'selectedTestList': [
+                  'string',
+              ]
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite.
+
+      
+
+    
+    :type suiteDefinitionVersion: string
+    :param suiteDefinitionVersion: 
+
+      Suite definition version of the test suite.
+
+      
+
+    
+    :type suiteRunConfiguration: dict
+    :param suiteRunConfiguration: 
+
+      Suite run configuration.
+
+      
+
+    
+      - **primaryDevice** *(dict) --* 
+
+        Gets the primary device for suite run.
+
+        
+
+      
+        - **thingArn** *(string) --* 
+
+          Lists devices thing arn
+
+          
+
+        
+        - **certificateArn** *(string) --* 
+
+          Lists devices certificate arn
+
+          
+
+        
+      
+      - **selectedTestList** *(list) --* 
+
+        Gets test case list.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags to be attached to the suite run.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteRunId': 'string',
+            'suiteRunArn': 'string',
+            'createdAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteRunId** *(string) --* 
+
+          Suite Run Id of the started suite run.
+
+          
+        
+
+        - **suiteRunArn** *(string) --* 
+
+          Amazon resource name of the started suite run.
+
+          
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Date (in Unix epoch time) when the suite run was created.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: stop_suite_run(**kwargs)
+
+    
+
+    Stops a Device Advisor test suite run that is currently running.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/StopSuiteRun>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_suite_run(
+          suiteDefinitionId='string',
+          suiteRunId='string'
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite run to be stopped.
+
+      
+
+    
+    :type suiteRunId: string
+    :param suiteRunId: **[REQUIRED]** 
+
+      Suite run Id of the test suite run to be stopped.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds to and modifies existing tags of an IoT Device Advisor resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The resource ARN of an IoT Device Advisor resource.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The tags to be attached to the IoT Device Advisor resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from an IoT Device Advisor resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The resource ARN of an IoT Device Advisor resource.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      List of tag keys to remove from the IoT Device Advisor resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_suite_definition(**kwargs)
+
+    
+
+    Updates a Device Advisor test suite.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotdeviceadvisor-2020-09-18/UpdateSuiteDefinition>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_suite_definition(
+          suiteDefinitionId='string',
+          suiteDefinitionConfiguration={
+              'suiteDefinitionName': 'string',
+              'devices': [
+                  {
+                      'thingArn': 'string',
+                      'certificateArn': 'string'
+                  },
+              ],
+              'intendedForQualification': True|False,
+              'rootGroup': 'string',
+              'devicePermissionRoleArn': 'string'
+          }
+      )
+    :type suiteDefinitionId: string
+    :param suiteDefinitionId: **[REQUIRED]** 
+
+      Suite definition Id of the test suite to be updated.
+
+      
+
+    
+    :type suiteDefinitionConfiguration: dict
+    :param suiteDefinitionConfiguration: 
+
+      Updates a Device Advisor test suite with suite definition configuration.
+
+      
+
+    
+      - **suiteDefinitionName** *(string) --* 
+
+        Gets Suite Definition Configuration name.
+
+        
+
+      
+      - **devices** *(list) --* 
+
+        Gets the devices configured.
+
+        
+
+      
+        - *(dict) --* 
+
+          Lists all the devices under test
+
+          
+
+        
+          - **thingArn** *(string) --* 
+
+            Lists devices thing arn
+
+            
+
+          
+          - **certificateArn** *(string) --* 
+
+            Lists devices certificate arn
+
+            
+
+          
+        
+    
+      - **intendedForQualification** *(boolean) --* 
+
+        Gets the tests intended for qualification in a suite.
+
+        
+
+      
+      - **rootGroup** *(string) --* 
+
+        Gets test suite root group.
+
+        
+
+      
+      - **devicePermissionRoleArn** *(string) --* 
+
+        Gets device permission arn.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'suiteDefinitionId': 'string',
+            'suiteDefinitionArn': 'string',
+            'suiteDefinitionName': 'string',
+            'suiteDefinitionVersion': 'string',
+            'createdAt': datetime(2015, 1, 1),
+            'lastUpdatedAt': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **suiteDefinitionId** *(string) --* 
+
+          Suite definition Id of the updated test suite.
+
+          
+        
+
+        - **suiteDefinitionArn** *(string) --* 
+
+          Amazon Resource name of the updated test suite.
+
+          
+        
+
+        - **suiteDefinitionName** *(string) --* 
+
+          Suite definition name of the updated test suite.
+
+          
+        
+
+        - **suiteDefinitionVersion** *(string) --* 
+
+          Suite definition version of the updated test suite.
+
+          
+        
+
+        - **createdAt** *(datetime) --* 
+
+          Timestamp of when the test suite was created.
+
+          
+        
+
+        - **lastUpdatedAt** *(datetime) --* 
+
+          Timestamp of when the test suite was updated.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IoTDeviceAdvisor.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,855 @@
+
+
+***
+SSO
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SSO.Client
+
+  A low-level client representing AWS Single Sign-On (SSO)
+  
+
+  AWS Single Sign-On Portal is a web service that makes it easy for you to assign user access to AWS SSO resources such as the user portal. Users can get AWS account applications and roles assigned to them and get federated into the application.
+
+   
+
+  For general information about AWS SSO, see `What is AWS Single Sign-On? <https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html>`__ in the *AWS SSO User Guide* .
+
+   
+
+  This API reference guide describes the AWS SSO Portal operations that you can call programatically and includes detailed information on data types and errors.
+
+   
+
+  .. note::
+
+     
+
+    AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms, such as Java, Ruby, .Net, iOS, or Android. The SDKs provide a convenient way to create programmatic access to AWS SSO and other AWS services. For more information about the AWS SDKs, including how to download and install them, see `Tools for Amazon Web Services <http://aws.amazon.com/tools/>`__ .
+
+     
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('sso')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SSO.Client.can_paginate`
+
+  
+  *   :py:meth:`~SSO.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SSO.Client.get_paginator`
+
+  
+  *   :py:meth:`~SSO.Client.get_role_credentials`
+
+  
+  *   :py:meth:`~SSO.Client.get_waiter`
+
+  
+  *   :py:meth:`~SSO.Client.list_account_roles`
+
+  
+  *   :py:meth:`~SSO.Client.list_accounts`
+
+  
+  *   :py:meth:`~SSO.Client.logout`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_role_credentials(**kwargs)
+
+    
+
+    Returns the STS short-term credentials for a given role name that is assigned to the user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/GetRoleCredentials>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_role_credentials(
+          roleName='string',
+          accountId='string',
+          accessToken='string'
+      )
+    :type roleName: string
+    :param roleName: **[REQUIRED]** 
+
+      The friendly name of the role that is assigned to the user.
+
+      
+
+    
+    :type accountId: string
+    :param accountId: **[REQUIRED]** 
+
+      The identifier for the AWS account that is assigned to the user.
+
+      
+
+    
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'roleCredentials': {
+                'accessKeyId': 'string',
+                'secretAccessKey': 'string',
+                'sessionToken': 'string',
+                'expiration': 123
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **roleCredentials** *(dict) --* 
+
+          The credentials for the role that is assigned to the user.
+
+          
+          
+
+          - **accessKeyId** *(string) --* 
+
+            The identifier used for the temporary security credentials. For more information, see `Using Temporary Security Credentials to Request Access to AWS Resources <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html>`__ in the *AWS IAM User Guide* .
+
+            
+          
+
+          - **secretAccessKey** *(string) --* 
+
+            The key that is used to sign the request. For more information, see `Using Temporary Security Credentials to Request Access to AWS Resources <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html>`__ in the *AWS IAM User Guide* .
+
+            
+          
+
+          - **sessionToken** *(string) --* 
+
+            The token used for temporary credentials. For more information, see `Using Temporary Security Credentials to Request Access to AWS Resources <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html>`__ in the *AWS IAM User Guide* .
+
+            
+          
+
+          - **expiration** *(integer) --* 
+
+            The date on which temporary security credentials expire.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSO.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_account_roles(**kwargs)
+
+    
+
+    Lists all roles that are assigned to the user for a given AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/ListAccountRoles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_account_roles(
+          nextToken='string',
+          maxResults=123,
+          accessToken='string',
+          accountId='string'
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The page token from the previous response output when you request subsequent pages.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The number of items that clients can request per page.
+
+      
+
+    
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    :type accountId: string
+    :param accountId: **[REQUIRED]** 
+
+      The identifier for the AWS account that is assigned to the user.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'roleList': [
+                {
+                    'roleName': 'string',
+                    'accountId': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The page token client that is used to retrieve the list of accounts.
+
+          
+        
+
+        - **roleList** *(list) --* 
+
+          A paginated response with the list of roles and the next token if more results are available.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the role that is assigned to the user.
+
+            
+            
+
+            - **roleName** *(string) --* 
+
+              The friendly name of the role that is assigned to the user.
+
+              
+            
+
+            - **accountId** *(string) --* 
+
+              The identifier of the AWS account assigned to the user.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSO.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_accounts(**kwargs)
+
+    
+
+    Lists all AWS accounts assigned to the user. These AWS accounts are assigned by the administrator of the account. For more information, see `Assign User Access <https://docs.aws.amazon.com/singlesignon/latest/userguide/useraccess.html#assignusers>`__ in the *AWS SSO User Guide* . This operation returns a paginated response.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/ListAccounts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_accounts(
+          nextToken='string',
+          maxResults=123,
+          accessToken='string'
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      (Optional) When requesting subsequent pages, this is the page token from the previous response output.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      This is the number of items clients can request per page.
+
+      
+
+    
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'accountList': [
+                {
+                    'accountId': 'string',
+                    'accountName': 'string',
+                    'emailAddress': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The page token client that is used to retrieve the list of accounts.
+
+          
+        
+
+        - **accountList** *(list) --* 
+
+          A paginated response with the list of account information and the next token if more results are available.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about your AWS account.
+
+            
+            
+
+            - **accountId** *(string) --* 
+
+              The identifier of the AWS account that is assigned to the user.
+
+              
+            
+
+            - **accountName** *(string) --* 
+
+              The display name of the AWS account that is assigned to the user.
+
+              
+            
+
+            - **emailAddress** *(string) --* 
+
+              The email address of the AWS account that is assigned to the user.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSO.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.TooManyRequestsException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: logout(**kwargs)
+
+    
+
+    Removes the client- and server-side session that is associated with the user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/Logout>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.logout(
+          accessToken='string'
+      )
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`SSO.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.UnauthorizedException`
+
+    
+    *     :py:class:`SSO.Client.exceptions.TooManyRequestsException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`SSO.Paginator.ListAccountRoles`
+
+
+* :py:class:`SSO.Paginator.ListAccounts`
+
+
+
+.. py:class:: SSO.Paginator.ListAccountRoles
+
+  ::
+
+    
+    paginator = client.get_paginator('list_account_roles')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSO.Client.list_account_roles`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/ListAccountRoles>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          accessToken='string',
+          accountId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    :type accountId: string
+    :param accountId: **[REQUIRED]** 
+
+      The identifier for the AWS account that is assigned to the user.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'roleList': [
+                {
+                    'roleName': 'string',
+                    'accountId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **roleList** *(list) --* 
+
+          A paginated response with the list of roles and the next token if more results are available.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about the role that is assigned to the user.
+
+            
+            
+
+            - **roleName** *(string) --* 
+
+              The friendly name of the role that is assigned to the user.
+
+              
+            
+
+            - **accountId** *(string) --* 
+
+              The identifier of the AWS account assigned to the user.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSO.Paginator.ListAccounts
+
+  ::
+
+    
+    paginator = client.get_paginator('list_accounts')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSO.Client.list_accounts`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/sso-2019-06-10/ListAccounts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          accessToken='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type accessToken: string
+    :param accessToken: **[REQUIRED]** 
+
+      The token issued by the ``CreateToken`` API call. For more information, see `CreateToken <https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html>`__ in the *AWS SSO OIDC API Reference Guide* .
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'accountList': [
+                {
+                    'accountId': 'string',
+                    'accountName': 'string',
+                    'emailAddress': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **accountList** *(list) --* 
+
+          A paginated response with the list of account information and the next token if more results are available.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides information about your AWS account.
+
+            
+            
+
+            - **accountId** *(string) --* 
+
+              The identifier of the AWS account that is assigned to the user.
+
+              
+            
+
+            - **accountName** *(string) --* 
+
+              The display name of the AWS account that is assigned to the user.
+
+              
+            
+
+            - **emailAddress** *(string) --* 
+
+              The email address of the AWS account that is assigned to the user.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

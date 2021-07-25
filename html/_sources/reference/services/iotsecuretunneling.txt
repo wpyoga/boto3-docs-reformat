@@ -1,0 +1,987 @@
+
+
+******************
+IoTSecureTunneling
+******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: IoTSecureTunneling.Client
+
+  A low-level client representing AWS IoT Secure Tunneling
+   
+
+  AWS IoT Secure Tunnling enables you to create remote connections to devices deployed in the field.
+
+   
+
+  For more information about how AWS IoT Secure Tunneling works, see `AWS IoT Secure Tunneling <https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('iotsecuretunneling')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.can_paginate`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.close_tunnel`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.describe_tunnel`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.get_paginator`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.get_waiter`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.list_tunnels`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.open_tunnel`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.tag_resource`
+
+  
+  *   :py:meth:`~IoTSecureTunneling.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: close_tunnel(**kwargs)
+
+    
+
+    Closes a tunnel identified by the unique tunnel id. When a ``CloseTunnel`` request is received, we close the WebSocket connections between the client and proxy server so no data can be transmitted.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/CloseTunnel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.close_tunnel(
+          tunnelId='string',
+          delete=True|False
+      )
+    :type tunnelId: string
+    :param tunnelId: **[REQUIRED]** 
+
+      The ID of the tunnel to close.
+
+      
+
+    
+    :type delete: boolean
+    :param delete: 
+
+      When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: describe_tunnel(**kwargs)
+
+    
+
+    Gets information about a tunnel identified by the unique tunnel id.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/DescribeTunnel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_tunnel(
+          tunnelId='string'
+      )
+    :type tunnelId: string
+    :param tunnelId: **[REQUIRED]** 
+
+      The tunnel to describe.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tunnel': {
+                'tunnelId': 'string',
+                'tunnelArn': 'string',
+                'status': 'OPEN'|'CLOSED',
+                'sourceConnectionState': {
+                    'status': 'CONNECTED'|'DISCONNECTED',
+                    'lastUpdatedAt': datetime(2015, 1, 1)
+                },
+                'destinationConnectionState': {
+                    'status': 'CONNECTED'|'DISCONNECTED',
+                    'lastUpdatedAt': datetime(2015, 1, 1)
+                },
+                'description': 'string',
+                'destinationConfig': {
+                    'thingName': 'string',
+                    'services': [
+                        'string',
+                    ]
+                },
+                'timeoutConfig': {
+                    'maxLifetimeTimeoutMinutes': 123
+                },
+                'tags': [
+                    {
+                        'key': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'createdAt': datetime(2015, 1, 1),
+                'lastUpdatedAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tunnel** *(dict) --* 
+
+          The tunnel being described.
+
+          
+          
+
+          - **tunnelId** *(string) --* 
+
+            A unique alpha-numeric ID that identifies a tunnel.
+
+            
+          
+
+          - **tunnelArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is ``arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>``  
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The status of a tunnel. Valid values are: Open and Closed.
+
+            
+          
+
+          - **sourceConnectionState** *(dict) --* 
+
+            The connection state of the source application.
+
+            
+            
+
+            - **status** *(string) --* 
+
+              The connection status of the tunnel. Valid values are ``CONNECTED`` and ``DISCONNECTED`` .
+
+              
+            
+
+            - **lastUpdatedAt** *(datetime) --* 
+
+              The last time the connection status was updated.
+
+              
+        
+          
+
+          - **destinationConnectionState** *(dict) --* 
+
+            The connection state of the destination application.
+
+            
+            
+
+            - **status** *(string) --* 
+
+              The connection status of the tunnel. Valid values are ``CONNECTED`` and ``DISCONNECTED`` .
+
+              
+            
+
+            - **lastUpdatedAt** *(datetime) --* 
+
+              The last time the connection status was updated.
+
+              
+        
+          
+
+          - **description** *(string) --* 
+
+            A description of the tunnel.
+
+            
+          
+
+          - **destinationConfig** *(dict) --* 
+
+            The destination configuration that specifies the thing name of the destination device and a service name that the local proxy uses to connect to the destination application.
+
+            
+            
+
+            - **thingName** *(string) --* 
+
+              The name of the IoT thing to which you want to connect.
+
+              
+            
+
+            - **services** *(list) --* 
+
+              A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+          
+
+          - **timeoutConfig** *(dict) --* 
+
+            Timeout configuration for the tunnel.
+
+            
+            
+
+            - **maxLifetimeTimeoutMinutes** *(integer) --* 
+
+              The maximum amount of time (in minutes) a tunnel can remain open. If not specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are from 1 minute to 12 hours (720 minutes) 
+
+              
+        
+          
+
+          - **tags** *(list) --* 
+
+            A list of tag metadata associated with the secure tunnel.
+
+            
+            
+
+            - *(dict) --* 
+
+              An arbitary key/value pair used to add searchable metadata to secure tunnel resources.
+
+              
+              
+
+              - **key** *(string) --* 
+
+                The key of the tag.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The value of the tag.
+
+                
+          
+        
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The time when the tunnel was created.
+
+            
+          
+
+          - **lastUpdatedAt** *(datetime) --* 
+
+            The last time the tunnel was updated.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags for the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': [
+                {
+                    'key': 'string',
+                    'value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(list) --* 
+
+          The tags for the specified resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            An arbitary key/value pair used to add searchable metadata to secure tunnel resources.
+
+            
+            
+
+            - **key** *(string) --* 
+
+              The key of the tag.
+
+              
+            
+
+            - **value** *(string) --* 
+
+              The value of the tag.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_tunnels(**kwargs)
+
+    
+
+    List all tunnels for an AWS account. Tunnels are listed by creation time in descending order, newer tunnels will be listed before older tunnels.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/ListTunnels>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tunnels(
+          thingName='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type thingName: string
+    :param thingName: 
+
+      The name of the IoT thing associated with the destination device.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return at once.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      A token to retrieve the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tunnelSummaries': [
+                {
+                    'tunnelId': 'string',
+                    'tunnelArn': 'string',
+                    'status': 'OPEN'|'CLOSED',
+                    'description': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'lastUpdatedAt': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tunnelSummaries** *(list) --* 
+
+          A short description of the tunnels in an AWS account.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about the tunnel.
+
+            
+            
+
+            - **tunnelId** *(string) --* 
+
+              The unique alpha-numeric identifier for the tunnel.
+
+              
+            
+
+            - **tunnelArn** *(string) --* 
+
+              The Amazon Resource Name of the tunnel. The tunnel ARN format is ``arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>``  
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of a tunnel. Valid values are: Open and Closed.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              A description of the tunnel.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time the tunnel was created.
+
+              
+            
+
+            - **lastUpdatedAt** *(datetime) --* 
+
+              The time the tunnel was last updated.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          A token to used to retrieve the next set of results.
+
+          
+    
+
+  .. py:method:: open_tunnel(**kwargs)
+
+    
+
+    Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/OpenTunnel>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.open_tunnel(
+          description='string',
+          tags=[
+              {
+                  'key': 'string',
+                  'value': 'string'
+              },
+          ],
+          destinationConfig={
+              'thingName': 'string',
+              'services': [
+                  'string',
+              ]
+          },
+          timeoutConfig={
+              'maxLifetimeTimeoutMinutes': 123
+          }
+      )
+    :type description: string
+    :param description: 
+
+      A short text description of the tunnel. 
+
+      
+
+    
+    :type tags: list
+    :param tags: 
+
+      A collection of tag metadata.
+
+      
+
+    
+      - *(dict) --* 
+
+        An arbitary key/value pair used to add searchable metadata to secure tunnel resources.
+
+        
+
+      
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag.
+
+          
+
+        
+        - **value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    :type destinationConfig: dict
+    :param destinationConfig: 
+
+      The destination configuration for the OpenTunnel request.
+
+      
+
+    
+      - **thingName** *(string) --* 
+
+        The name of the IoT thing to which you want to connect.
+
+        
+
+      
+      - **services** *(list) --* **[REQUIRED]** 
+
+        A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+    
+    :type timeoutConfig: dict
+    :param timeoutConfig: 
+
+      Timeout configuration for a tunnel.
+
+      
+
+    
+      - **maxLifetimeTimeoutMinutes** *(integer) --* 
+
+        The maximum amount of time (in minutes) a tunnel can remain open. If not specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are from 1 minute to 12 hours (720 minutes) 
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tunnelId': 'string',
+            'tunnelArn': 'string',
+            'sourceAccessToken': 'string',
+            'destinationAccessToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tunnelId** *(string) --* 
+
+          A unique alpha-numeric tunnel ID.
+
+          
+        
+
+        - **tunnelArn** *(string) --* 
+
+          The Amazon Resource Name for the tunnel. The tunnel ARN format is ``arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>``  
+
+          
+        
+
+        - **sourceAccessToken** *(string) --* 
+
+          The access token the source local proxy uses to connect to AWS IoT Secure Tunneling.
+
+          
+        
+
+        - **destinationAccessToken** *(string) --* 
+
+          The access token the destination local proxy uses to connect to AWS IoT Secure Tunneling.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    A resource tag.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags=[
+              {
+                  'key': 'string',
+                  'value': 'string'
+              },
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The ARN of the resource.
+
+      
+
+    
+    :type tags: list
+    :param tags: **[REQUIRED]** 
+
+      The tags for the resource.
+
+      
+
+    
+      - *(dict) --* 
+
+        An arbitary key/value pair used to add searchable metadata to secure tunnel resources.
+
+        
+
+      
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag.
+
+          
+
+        
+        - **value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes a tag from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/iotsecuretunneling-2018-10-05/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The keys of the tags to remove.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`IoTSecureTunneling.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

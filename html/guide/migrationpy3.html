@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Migrating to Python 3 &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Upgrading notes" href="upgrading.html" />
+    <link rel="prev" title="Amazon EC2" href="migrationec2.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="migrationec2.html" title="Amazon EC2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#sdk-features">SDK features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tools">Tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#migrations">Migrations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="new.html">What's new</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration.html">Migrating from Boto 2.x</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Migrating to Python 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="index.html">Developer guide</a></li>
+              
+              <li>Migrating to Python 3</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="migrating-to-python-3">
+<span id="guide-migration-py3"></span><h1>Migrating to Python 3<a class="headerlink" href="#migrating-to-python-3" title="Permalink to this headline">¶</a></h1>
+<p>Python 2.7 was deprecated by the <a class="reference external" href="https://www.python.org/psf-landing/">Python Software Foundation</a>
+on January 1, 2020 following a multi-year process of phasing it out. Because of this, AWS has
+deprecated support for Python 2.7, which means that releases of Boto3 issued after the deprecation
+date will no longer work on Python 2.7.</p>
+<p>This affects both modules that comprise the AWS SDK for Python: Botocore (the underlying low-level
+module) and Boto3 (which implements the API functionality and higher-level features).</p>
+<div class="section" id="timeline">
+<h2>Timeline<a class="headerlink" href="#timeline" title="Permalink to this headline">¶</a></h2>
+<p>Going forward, all projects using Boto3 need to transition to Python 3.6 or later. Boto3 and
+Botocore ended support for Python 3.4 and 3.5 on Feb 21, 2021, and support for Python 2.7
+ended July 15, 2021.</p>
+</div>
+<div class="section" id="updating-your-project-to-use-python-3">
+<h2>Updating your project to use Python 3<a class="headerlink" href="#updating-your-project-to-use-python-3" title="Permalink to this headline">¶</a></h2>
+<p>Before you begin to update your project and environment, make sure you’ve installed or updated to
+Python 3.6 or later as described in <a class="reference internal" href="quickstart.html#quickstart-install-python"><em>upgrade to Python 3</em></a>. You can
+get Python from the <a class="reference external" href="https://www.python.org/downloads">PSF web site</a> or using your local package
+manager.</p>
+<p>After you have installed Python 3, you can upgrade the SDK. To do so, you need to update the Boto3
+Python package. You can do this globally or within your virtual environment if you use one for your
+project.</p>
+<div class="section" id="to-update-the-aws-sdk-for-python">
+<h3>To update the AWS SDK for Python<a class="headerlink" href="#to-update-the-aws-sdk-for-python" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Uninstall the currently installed copies of Boto3 and Botocore:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ python -m pip uninstall boto3 botocore
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install the new version of Boto3. This will also install Botocore, which it requires:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ python3 -m pip install boto3
+</pre></div>
+</div>
+</li>
+<li><p class="first">(Optional) Verify that the SDK is using the correct version of Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ python3 -c &quot;import boto3, sys; print(f&#39;{sys.version} \nboto3: {boto3.__version__}&#39;)&quot;
+3.8.6 (default, Jan  7 2021, 17:11:21)
+[GCC 7.3.1 20180712 (Red Hat 7.3.1-11)]
+boto3: 1.16.15
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="if-you-re-unable-to-upgrade-to-python-3">
+<h2>If you're unable to upgrade to Python 3<a class="headerlink" href="#if-you-re-unable-to-upgrade-to-python-3" title="Permalink to this headline">¶</a></h2>
+<p>It may be that you're unable to upgrade to Python 3, for example if you have a large project that's
+heavily dependent on syntax or features that no longer work as desired in Python 3. It's also
+possible that you need to postpone the Python transition while you finish updates to your code.</p>
+<p>Under these circumstances, you should plan on pinning your project's install of Boto3 to the last
+release that supports the Python version you use, then not updating Boto3 further. You can then keep
+using an existing installation of Boto3 on Python 2, even after its deprecation date, with the
+understanding that deprecated versions of Boto3 will not receive further feature or security
+updates.</p>
+<div class="section" id="pip-based-installations">
+<h3>pip-based installations<a class="headerlink" href="#pip-based-installations" title="Permalink to this headline">¶</a></h3>
+<p>If you installed Boto3 using <strong class="command">pip</strong> 10.0 or later, you'll automatically stop receiving Boto3
+updates after the last Python 2 compatible version of the SDK is installed. If you're using an older
+version of <strong class="command">pip</strong>, you need to pin your Boto3 install to no later than version 1.17.</p>
+</div>
+<div class="section" id="other-installation-methods">
+<h3>Other installation methods<a class="headerlink" href="#other-installation-methods" title="Permalink to this headline">¶</a></h3>
+<p>If you installed Boto3 and Botocore from source or by any other method, be sure to download and
+install a version released prior to the Python 2.7 deprecation date.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="migrationec2.html" title="previous chapter (use the left arrow)">Amazon EC2</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="upgrading.html" title="next chapter (use the right arrow)">Upgrading notes</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="upgrading.html" title="Upgrading notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="migrationec2.html" title="Amazon EC2"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

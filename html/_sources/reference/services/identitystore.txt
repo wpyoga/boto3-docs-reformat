@@ -1,0 +1,622 @@
+
+
+*************
+IdentityStore
+*************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: IdentityStore.Client
+
+  A low-level client representing AWS SSO Identity Store (IdentityStore)
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('identitystore')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~IdentityStore.Client.can_paginate`
+
+  
+  *   :py:meth:`~IdentityStore.Client.describe_group`
+
+  
+  *   :py:meth:`~IdentityStore.Client.describe_user`
+
+  
+  *   :py:meth:`~IdentityStore.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~IdentityStore.Client.get_paginator`
+
+  
+  *   :py:meth:`~IdentityStore.Client.get_waiter`
+
+  
+  *   :py:meth:`~IdentityStore.Client.list_groups`
+
+  
+  *   :py:meth:`~IdentityStore.Client.list_users`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: describe_group(**kwargs)
+
+    
+
+    Retrieves the group metadata and attributes from ``GroupId`` in an identity store.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_group(
+          IdentityStoreId='string',
+          GroupId='string'
+      )
+    :type IdentityStoreId: string
+    :param IdentityStoreId: **[REQUIRED]** 
+
+      The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier for a group in the identity store.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupId': 'string',
+            'DisplayName': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupId** *(string) --* 
+
+          The identifier for a group in the identity store.
+
+          
+        
+
+        - **DisplayName** *(string) --* 
+
+          Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “<>;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_user(**kwargs)
+
+    
+
+    Retrieves the user metadata and attributes from ``UserId`` in an identity store.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/DescribeUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_user(
+          IdentityStoreId='string',
+          UserId='string'
+      )
+    :type IdentityStoreId: string
+    :param IdentityStoreId: **[REQUIRED]** 
+
+      The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifier for a user in the identity store.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'UserName': 'string',
+            'UserId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **UserName** *(string) --* 
+
+          Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “<>;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+
+          
+        
+
+        - **UserId** *(string) --* 
+
+          The identifier for a user in the identity store.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_groups(**kwargs)
+
+    
+
+    Lists the attribute name and value of the group that you specified in the search. We only support ``DisplayName`` as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including ``GroupId`` and group ``DisplayName`` in the response.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_groups(
+          IdentityStoreId='string',
+          MaxResults=123,
+          NextToken='string',
+          Filters=[
+              {
+                  'AttributePath': 'string',
+                  'AttributeValue': 'string'
+              },
+          ]
+      )
+    :type IdentityStoreId: string
+    :param IdentityStoreId: **[REQUIRED]** 
+
+      The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to be returned per request, which is used in the ``ListUsers`` and ``ListGroups`` request to specify how many results to return in one page. The length limit is 50 characters.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token used for the ``ListUsers`` and ``ListGroups`` APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+
+      
+
+    
+    :type Filters: list
+    :param Filters: 
+
+      A list of ``Filter`` objects, which is used in the ``ListUsers`` and ``ListGroups`` request. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A query filter used by ``ListUsers`` and ``ListGroup`` . This filter object provides the attribute name and attribute value to search users or groups.
+
+        
+
+      
+        - **AttributePath** *(string) --* **[REQUIRED]** 
+
+          The attribute path used to specify which attribute name to search. Length limit is 255 characters. For example, ``UserName`` is a valid attribute path for the ``ListUsers`` API, and ``DisplayName`` is a valid attribute path for the ``ListGroups`` API.
+
+          
+
+        
+        - **AttributeValue** *(string) --* **[REQUIRED]** 
+
+          Represents the data for an attribute. Each attribute value is described as a name-value pair. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Groups': [
+                {
+                    'GroupId': 'string',
+                    'DisplayName': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Groups** *(list) --* 
+
+          A list of ``Group`` objects in the identity store.
+
+          
+          
+
+          - *(dict) --* 
+
+            A group object, which contains a specified group’s metadata and attributes.
+
+            
+            
+
+            - **GroupId** *(string) --* 
+
+              The identifier for a group in the identity store.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “<>;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token used for the ``ListUsers`` and ``ListGroups`` APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_users(**kwargs)
+
+    
+
+    Lists the attribute name and value of the user that you specified in the search. We only support ``UserName`` as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including ``UserId`` and ``UserName`` in the response.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/identitystore-2020-06-15/ListUsers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_users(
+          IdentityStoreId='string',
+          MaxResults=123,
+          NextToken='string',
+          Filters=[
+              {
+                  'AttributePath': 'string',
+                  'AttributeValue': 'string'
+              },
+          ]
+      )
+    :type IdentityStoreId: string
+    :param IdentityStoreId: **[REQUIRED]** 
+
+      The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to be returned per request, which is used in the ``ListUsers`` and ``ListGroups`` request to specify how many results to return in one page. The length limit is 50 characters.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token used for the ``ListUsers`` and ``ListGroups`` APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+
+      
+
+    
+    :type Filters: list
+    :param Filters: 
+
+      A list of ``Filter`` objects, which is used in the ``ListUsers`` and ``ListGroups`` request. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A query filter used by ``ListUsers`` and ``ListGroup`` . This filter object provides the attribute name and attribute value to search users or groups.
+
+        
+
+      
+        - **AttributePath** *(string) --* **[REQUIRED]** 
+
+          The attribute path used to specify which attribute name to search. Length limit is 255 characters. For example, ``UserName`` is a valid attribute path for the ``ListUsers`` API, and ``DisplayName`` is a valid attribute path for the ``ListGroups`` API.
+
+          
+
+        
+        - **AttributeValue** *(string) --* **[REQUIRED]** 
+
+          Represents the data for an attribute. Each attribute value is described as a name-value pair. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Users': [
+                {
+                    'UserName': 'string',
+                    'UserId': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Users** *(list) --* 
+
+          A list of ``User`` objects in the identity store.
+
+          
+          
+
+          - *(dict) --* 
+
+            A user object, which contains a specified user’s metadata and attributes.
+
+            
+            
+
+            - **UserName** *(string) --* 
+
+              Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “<>;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+
+              
+            
+
+            - **UserId** *(string) --* 
+
+              The identifier for a user in the identity store.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token used for the ``ListUsers`` and ``ListGroups`` APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`IdentityStore.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

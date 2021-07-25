@@ -1,0 +1,1306 @@
+
+
+******************
+MarketplaceCatalog
+******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: MarketplaceCatalog.Client
+
+  A low-level client representing AWS Marketplace Catalog Service
+  
+
+  Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace. 
+
+   
+
+  You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('marketplace-catalog')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.can_paginate`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.cancel_change_set`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.describe_change_set`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.describe_entity`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.get_paginator`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.get_waiter`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.list_change_sets`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.list_entities`
+
+  
+  *   :py:meth:`~MarketplaceCatalog.Client.start_change_set`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_change_set(**kwargs)
+
+    
+
+    Used to cancel an open change request. Must be sent before the status of the request changes to ``APPLYING`` , the final stage of completing your change request. You can describe a change during the 60-day request history retention period for API calls.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/CancelChangeSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_change_set(
+          Catalog='string',
+          ChangeSetId='string'
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      Required. The catalog related to the request. Fixed value: ``AWSMarketplace`` .
+
+      
+
+    
+    :type ChangeSetId: string
+    :param ChangeSetId: **[REQUIRED]** 
+
+      Required. The unique identifier of the ``StartChangeSet`` request that you want to cancel.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ChangeSetId': 'string',
+            'ChangeSetArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ChangeSetId** *(string) --* 
+
+          The unique identifier for the change set referenced in this request.
+
+          
+        
+
+        - **ChangeSetArn** *(string) --* 
+
+          The ARN associated with the change set referenced in this request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceInUseException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_change_set(**kwargs)
+
+    
+
+    Provides information about a given change set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeChangeSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_change_set(
+          Catalog='string',
+          ChangeSetId='string'
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      Required. The catalog related to the request. Fixed value: ``AWSMarketplace``  
+
+      
+
+    
+    :type ChangeSetId: string
+    :param ChangeSetId: **[REQUIRED]** 
+
+      Required. The unique identifier for the ``StartChangeSet`` request that you want to describe the details for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ChangeSetId': 'string',
+            'ChangeSetArn': 'string',
+            'ChangeSetName': 'string',
+            'StartTime': 'string',
+            'EndTime': 'string',
+            'Status': 'PREPARING'|'APPLYING'|'SUCCEEDED'|'CANCELLED'|'FAILED',
+            'FailureCode': 'CLIENT_ERROR'|'SERVER_FAULT',
+            'FailureDescription': 'string',
+            'ChangeSet': [
+                {
+                    'ChangeType': 'string',
+                    'Entity': {
+                        'Type': 'string',
+                        'Identifier': 'string'
+                    },
+                    'Details': 'string',
+                    'ErrorDetailList': [
+                        {
+                            'ErrorCode': 'string',
+                            'ErrorMessage': 'string'
+                        },
+                    ],
+                    'ChangeName': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ChangeSetId** *(string) --* 
+
+          Required. The unique identifier for the change set referenced in this request.
+
+          
+        
+
+        - **ChangeSetArn** *(string) --* 
+
+          The ARN associated with the unique identifier for the change set referenced in this request.
+
+          
+        
+
+        - **ChangeSetName** *(string) --* 
+
+          The optional name provided in the ``StartChangeSet`` request. If you do not provide a name, one is set by default.
+
+          
+        
+
+        - **StartTime** *(string) --* 
+
+          The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request started. 
+
+          
+        
+
+        - **EndTime** *(string) --* 
+
+          The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request transitioned to a terminal state. The change cannot transition to a different state. Null if the request is not in a terminal state. 
+
+          
+        
+
+        - **Status** *(string) --* 
+
+          The status of the change request.
+
+          
+        
+
+        - **FailureCode** *(string) --* 
+
+          Returned if the change set is in ``FAILED`` status. Can be either ``CLIENT_ERROR`` , which means that there are issues with the request (see the ``ErrorDetailList`` ), or ``SERVER_FAULT`` , which means that there is a problem in the system, and you should retry your request.
+
+          
+        
+
+        - **FailureDescription** *(string) --* 
+
+          Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.
+
+          
+        
+
+        - **ChangeSet** *(list) --* 
+
+          An array of ``ChangeSummary`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.
+
+            
+            
+
+            - **ChangeType** *(string) --* 
+
+              The type of the change.
+
+              
+            
+
+            - **Entity** *(dict) --* 
+
+              The entity to be changed.
+
+              
+              
+
+              - **Type** *(string) --* 
+
+                The type of entity.
+
+                
+              
+
+              - **Identifier** *(string) --* 
+
+                The identifier for the entity.
+
+                
+          
+            
+
+            - **Details** *(string) --* 
+
+              This object contains details specific to the change type of the requested change.
+
+              
+            
+
+            - **ErrorDetailList** *(list) --* 
+
+              An array of ``ErrorDetail`` objects associated with the change.
+
+              
+              
+
+              - *(dict) --* 
+
+                Details about the error.
+
+                
+                
+
+                - **ErrorCode** *(string) --* 
+
+                  The error code that identifies the type of error.
+
+                  
+                
+
+                - **ErrorMessage** *(string) --* 
+
+                  The message for the error.
+
+                  
+            
+          
+            
+
+            - **ChangeName** *(string) --* 
+
+              Optional name for the change.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: describe_entity(**kwargs)
+
+    
+
+    Returns the metadata and content of the entity.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/DescribeEntity>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_entity(
+          Catalog='string',
+          EntityId='string'
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      Required. The catalog related to the request. Fixed value: ``AWSMarketplace``  
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      Required. The unique ID of the entity to describe.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'EntityType': 'string',
+            'EntityIdentifier': 'string',
+            'EntityArn': 'string',
+            'LastModifiedDate': 'string',
+            'Details': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **EntityType** *(string) --* 
+
+          The named type of the entity, in the format of ``EntityType@Version`` .
+
+          
+        
+
+        - **EntityIdentifier** *(string) --* 
+
+          The identifier of the entity, in the format of ``EntityId@RevisionId`` .
+
+          
+        
+
+        - **EntityArn** *(string) --* 
+
+          The ARN associated to the unique identifier for the change set referenced in this request.
+
+          
+        
+
+        - **LastModifiedDate** *(string) --* 
+
+          The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).
+
+          
+        
+
+        - **Details** *(string) --* 
+
+          This stringified JSON object includes the details of the entity.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotSupportedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_change_sets(**kwargs)
+
+    
+
+    Returns the list of change sets owned by the account being used to make the call. You can filter this list by providing any combination of ``entityId`` , ``ChangeSetName`` , and status. If you provide more than one filter, the API operation applies a logical AND between the filters.
+
+     
+
+    You can describe a change during the 60-day request history retention period for API calls.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListChangeSets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_change_sets(
+          Catalog='string',
+          FilterList=[
+              {
+                  'Name': 'string',
+                  'ValueList': [
+                      'string',
+                  ]
+              },
+          ],
+          Sort={
+              'SortBy': 'string',
+              'SortOrder': 'ASCENDING'|'DESCENDING'
+          },
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      The catalog related to the request. Fixed value: ``AWSMarketplace``  
+
+      
+
+    
+    :type FilterList: list
+    :param FilterList: 
+
+      An array of filter objects.
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter object, used to optionally filter results from calls to the ``ListEntities`` and ``ListChangeSets`` actions.
+
+        
+
+      
+        - **Name** *(string) --* 
+
+          For ``ListEntities`` , the supported value for this is an ``EntityId`` .
+
+           
+
+          For ``ListChangeSets`` , the supported values are as follows:
+
+          
+
+        
+        - **ValueList** *(list) --* 
+
+           ``ListEntities`` - This is a list of unique ``EntityId`` s.
+
+           
+
+           ``ListChangeSets`` - The supported filter names and associated ``ValueList`` s is as follows:
+
+           
+
+           
+          * ``ChangeSetName`` - The supported ``ValueList`` is a list of non-unique ``ChangeSetName`` s. These are defined when you call the ``StartChangeSet`` action. 
+           
+          * ``Status`` - The supported ``ValueList`` is a list of statuses for all change set requests. 
+           
+          * ``EntityId`` - The supported ``ValueList`` is a list of unique ``EntityId`` s. 
+           
+          * ``BeforeStartTime`` - The supported ``ValueList`` is a list of all change sets that started before the filter value. 
+           
+          * ``AfterStartTime`` - The supported ``ValueList`` is a list of all change sets that started after the filter value. 
+           
+          * ``BeforeEndTime`` - The supported ``ValueList`` is a list of all change sets that ended before the filter value. 
+           
+          * ``AfterEndTime`` - The supported ``ValueList`` is a list of all change sets that ended after the filter value. 
+           
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type Sort: dict
+    :param Sort: 
+
+      An object that contains two attributes, ``SortBy`` and ``SortOrder`` .
+
+      
+
+    
+      - **SortBy** *(string) --* 
+
+        For ``ListEntities`` , supported attributes include ``LastModifiedDate`` (default), ``Visibility`` , ``EntityId`` , and ``Name`` .
+
+         
+
+        For ``ListChangeSets`` , supported attributes include ``StartTime`` and ``EndTime`` .
+
+        
+
+      
+      - **SortOrder** *(string) --* 
+
+        The sorting order. Can be ``ASCENDING`` or ``DESCENDING`` . The default value is ``DESCENDING`` .
+
+        
+
+      
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results. By default, this value is 20.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token value retrieved from a previous call to access the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ChangeSetSummaryList': [
+                {
+                    'ChangeSetId': 'string',
+                    'ChangeSetArn': 'string',
+                    'ChangeSetName': 'string',
+                    'StartTime': 'string',
+                    'EndTime': 'string',
+                    'Status': 'PREPARING'|'APPLYING'|'SUCCEEDED'|'CANCELLED'|'FAILED',
+                    'EntityIdList': [
+                        'string',
+                    ],
+                    'FailureCode': 'CLIENT_ERROR'|'SERVER_FAULT'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ChangeSetSummaryList** *(list) --* 
+
+          Array of ``ChangeSetSummaryListItem`` objects.
+
+          
+          
+
+          - *(dict) --* 
+
+            A summary of a change set returned in a list of change sets when the ``ListChangeSets`` action is called.
+
+            
+            
+
+            - **ChangeSetId** *(string) --* 
+
+              The unique identifier for a change set.
+
+              
+            
+
+            - **ChangeSetArn** *(string) --* 
+
+              The ARN associated with the unique identifier for the change set referenced in this request.
+
+              
+            
+
+            - **ChangeSetName** *(string) --* 
+
+              The non-unique name for the change set.
+
+              
+            
+
+            - **StartTime** *(string) --* 
+
+              The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was started.
+
+              
+            
+
+            - **EndTime** *(string) --* 
+
+              The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was finished.
+
+              
+            
+
+            - **Status** *(string) --* 
+
+              The current status of the change set.
+
+              
+            
+
+            - **EntityIdList** *(list) --* 
+
+              This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **FailureCode** *(string) --* 
+
+              Returned if the change set is in ``FAILED`` status. Can be either ``CLIENT_ERROR`` , which means that there are issues with the request (see the ``ErrorDetailList`` of ``DescribeChangeSet`` ), or ``SERVER_FAULT`` , which means that there is a problem in the system, and you should retry your request.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The value of the next token, if it exists. Null if there are no more results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_entities(**kwargs)
+
+    
+
+    Provides the list of entities of a given type.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_entities(
+          Catalog='string',
+          EntityType='string',
+          FilterList=[
+              {
+                  'Name': 'string',
+                  'ValueList': [
+                      'string',
+                  ]
+              },
+          ],
+          Sort={
+              'SortBy': 'string',
+              'SortOrder': 'ASCENDING'|'DESCENDING'
+          },
+          NextToken='string',
+          MaxResults=123
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      The catalog related to the request. Fixed value: ``AWSMarketplace``  
+
+      
+
+    
+    :type EntityType: string
+    :param EntityType: **[REQUIRED]** 
+
+      The type of entities to retrieve.
+
+      
+
+    
+    :type FilterList: list
+    :param FilterList: 
+
+      An array of filter objects. Each filter object contains two attributes, ``filterName`` and ``filterValues`` .
+
+      
+
+    
+      - *(dict) --* 
+
+        A filter object, used to optionally filter results from calls to the ``ListEntities`` and ``ListChangeSets`` actions.
+
+        
+
+      
+        - **Name** *(string) --* 
+
+          For ``ListEntities`` , the supported value for this is an ``EntityId`` .
+
+           
+
+          For ``ListChangeSets`` , the supported values are as follows:
+
+          
+
+        
+        - **ValueList** *(list) --* 
+
+           ``ListEntities`` - This is a list of unique ``EntityId`` s.
+
+           
+
+           ``ListChangeSets`` - The supported filter names and associated ``ValueList`` s is as follows:
+
+           
+
+           
+          * ``ChangeSetName`` - The supported ``ValueList`` is a list of non-unique ``ChangeSetName`` s. These are defined when you call the ``StartChangeSet`` action. 
+           
+          * ``Status`` - The supported ``ValueList`` is a list of statuses for all change set requests. 
+           
+          * ``EntityId`` - The supported ``ValueList`` is a list of unique ``EntityId`` s. 
+           
+          * ``BeforeStartTime`` - The supported ``ValueList`` is a list of all change sets that started before the filter value. 
+           
+          * ``AfterStartTime`` - The supported ``ValueList`` is a list of all change sets that started after the filter value. 
+           
+          * ``BeforeEndTime`` - The supported ``ValueList`` is a list of all change sets that ended before the filter value. 
+           
+          * ``AfterEndTime`` - The supported ``ValueList`` is a list of all change sets that ended after the filter value. 
+           
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+      
+  
+    :type Sort: dict
+    :param Sort: 
+
+      An object that contains two attributes, ``SortBy`` and ``SortOrder`` .
+
+      
+
+    
+      - **SortBy** *(string) --* 
+
+        For ``ListEntities`` , supported attributes include ``LastModifiedDate`` (default), ``Visibility`` , ``EntityId`` , and ``Name`` .
+
+         
+
+        For ``ListChangeSets`` , supported attributes include ``StartTime`` and ``EndTime`` .
+
+        
+
+      
+      - **SortOrder** *(string) --* 
+
+        The sorting order. Can be ``ASCENDING`` or ``DESCENDING`` . The default value is ``DESCENDING`` .
+
+        
+
+      
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The value of the next token, if it exists. Null if there are no more results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      Specifies the upper limit of the elements on a single page. If a value isn't provided, the default value is 20.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'EntitySummaryList': [
+                {
+                    'Name': 'string',
+                    'EntityType': 'string',
+                    'EntityId': 'string',
+                    'EntityArn': 'string',
+                    'LastModifiedDate': 'string',
+                    'Visibility': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **EntitySummaryList** *(list) --* 
+
+          Array of ``EntitySummary`` object.
+
+          
+          
+
+          - *(dict) --* 
+
+            This object is a container for common summary information about the entity. The summary doesn't contain the whole entity structure, but it does contain information common across all entities.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The name for the entity. This value is not unique. It is defined by the seller.
+
+              
+            
+
+            - **EntityType** *(string) --* 
+
+              The type of the entity.
+
+              
+            
+
+            - **EntityId** *(string) --* 
+
+              The unique identifier for the entity.
+
+              
+            
+
+            - **EntityArn** *(string) --* 
+
+              The ARN associated with the unique identifier for the entity.
+
+              
+            
+
+            - **LastModifiedDate** *(string) --* 
+
+              The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).
+
+              
+            
+
+            - **Visibility** *(string) --* 
+
+              The visibility status of the entity to buyers. This value can be ``Public`` (everyone can view the entity), ``Limited`` (the entity is visible to limited accounts only), or ``Restricted`` (the entity was published and then unpublished and only existing buyers can view it). 
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The value of the next token if it exists. Null if there is no more result.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: start_change_set(**kwargs)
+
+    
+
+    This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ``ResourceInUseException`` .
+
+     
+
+    For example, you cannot start the ChangeSet described in the `example <https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples>`__ later in this topic, because it contains two changes to execute the same change type (``AddRevisions`` ) against the same entity (``entity-id@1)`` .
+
+     
+
+    For more information about working with change sets, see `Working with change sets <https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/StartChangeSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_change_set(
+          Catalog='string',
+          ChangeSet=[
+              {
+                  'ChangeType': 'string',
+                  'Entity': {
+                      'Type': 'string',
+                      'Identifier': 'string'
+                  },
+                  'Details': 'string',
+                  'ChangeName': 'string'
+              },
+          ],
+          ChangeSetName='string',
+          ClientRequestToken='string'
+      )
+    :type Catalog: string
+    :param Catalog: **[REQUIRED]** 
+
+      The catalog related to the request. Fixed value: ``AWSMarketplace``  
+
+      
+
+    
+    :type ChangeSet: list
+    :param ChangeSet: **[REQUIRED]** 
+
+      Array of ``change`` object.
+
+      
+
+    
+      - *(dict) --* 
+
+        An object that contains the ``ChangeType`` , ``Details`` , and ``Entity`` .
+
+        
+
+      
+        - **ChangeType** *(string) --* **[REQUIRED]** 
+
+          Change types are single string values that describe your intention for the change. Each change type is unique for each ``EntityType`` provided in the change's scope.
+
+          
+
+        
+        - **Entity** *(dict) --* **[REQUIRED]** 
+
+          The entity to be changed.
+
+          
+
+        
+          - **Type** *(string) --* **[REQUIRED]** 
+
+            The type of entity.
+
+            
+
+          
+          - **Identifier** *(string) --* 
+
+            The identifier for the entity.
+
+            
+
+          
+        
+        - **Details** *(string) --* **[REQUIRED]** 
+
+          This object contains details specific to the change type of the requested change.
+
+          
+
+        
+        - **ChangeName** *(string) --* 
+
+          Optional name for the change.
+
+          
+
+        
+      
+  
+    :type ChangeSetName: string
+    :param ChangeSetName: 
+
+      Optional case sensitive string of up to 100 ASCII characters. The change set name can be used to filter the list of change sets. 
+
+      
+
+    
+    :type ClientRequestToken: string
+    :param ClientRequestToken: 
+
+      A unique token to identify the request to ensure idempotency.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ChangeSetId': 'string',
+            'ChangeSetArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ChangeSetId** *(string) --* 
+
+          Unique identifier generated for the request.
+
+          
+        
+
+        - **ChangeSetArn** *(string) --* 
+
+          The ARN associated to the unique identifier generated for the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ResourceInUseException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`MarketplaceCatalog.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

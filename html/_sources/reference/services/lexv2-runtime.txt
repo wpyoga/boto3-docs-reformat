@@ -1,0 +1,2988 @@
+
+
+************
+LexRuntimeV2
+************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: LexRuntimeV2.Client
+
+  A low-level client representing Amazon Lex Runtime V2
+  
+
+  
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('lexv2-runtime')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~LexRuntimeV2.Client.can_paginate`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.delete_session`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.get_paginator`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.get_session`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.get_waiter`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.put_session`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.recognize_text`
+
+  
+  *   :py:meth:`~LexRuntimeV2.Client.recognize_utterance`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: delete_session(**kwargs)
+
+    
+
+    Removes session information for a specified bot, alias, and user ID. 
+
+     
+
+    You can use this operation to restart a conversation with a bot. When you remove a session, the entire history of the session is removed so that you can start again.
+
+     
+
+    You don't need to delete a session. Sessions have a time limit and will expire. Set the session time limit when you create the bot. The default is 5 minutes, but you can specify anything between 1 minute and 24 hours.
+
+     
+
+    If you specify a bot or alias ID that doesn't exist, you receive a ``BadRequestException.``  
+
+     
+
+    If the locale doesn't exist in the bot, or if the locale hasn't been enables for the alias, you receive a ``BadRequestException`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/DeleteSession>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_session(
+          botId='string',
+          botAliasId='string',
+          localeId='string',
+          sessionId='string'
+      )
+    :type botId: string
+    :param botId: **[REQUIRED]** 
+
+      The identifier of the bot that contains the session data.
+
+      
+
+    
+    :type botAliasId: string
+    :param botAliasId: **[REQUIRED]** 
+
+      The alias identifier in use for the bot that contains the session data.
+
+      
+
+    
+    :type localeId: string
+    :param localeId: **[REQUIRED]** 
+
+      The locale where the session is in use.
+
+      
+
+    
+    :type sessionId: string
+    :param sessionId: **[REQUIRED]** 
+
+      The identifier of the session to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'botId': 'string',
+            'botAliasId': 'string',
+            'localeId': 'string',
+            'sessionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **botId** *(string) --* 
+
+          The identifier of the bot that contained the session data.
+
+          
+        
+
+        - **botAliasId** *(string) --* 
+
+          The alias identifier in use for the bot that contained the session data.
+
+          
+        
+
+        - **localeId** *(string) --* 
+
+          The locale where the session was used.
+
+          
+        
+
+        - **sessionId** *(string) --* 
+
+          The identifier of the deleted session.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_session(**kwargs)
+
+    
+
+    Returns session information for a specified bot, alias, and user.
+
+     
+
+    For example, you can use this operation to retrieve session information for a user that has left a long-running session in use.
+
+     
+
+    If the bot, alias, or session identifier doesn't exist, Amazon Lex V2 returns a ``BadRequestException`` . If the locale doesn't exist or is not enabled for the alias, you receive a ``BadRequestException`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/GetSession>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_session(
+          botId='string',
+          botAliasId='string',
+          localeId='string',
+          sessionId='string'
+      )
+    :type botId: string
+    :param botId: **[REQUIRED]** 
+
+      The identifier of the bot that contains the session data.
+
+      
+
+    
+    :type botAliasId: string
+    :param botAliasId: **[REQUIRED]** 
+
+      The alias identifier in use for the bot that contains the session data.
+
+      
+
+    
+    :type localeId: string
+    :param localeId: **[REQUIRED]** 
+
+      The locale where the session is in use.
+
+      
+
+    
+    :type sessionId: string
+    :param sessionId: **[REQUIRED]** 
+
+      The identifier of the session to return.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'sessionId': 'string',
+            'messages': [
+                {
+                    'content': 'string',
+                    'contentType': 'CustomPayload'|'ImageResponseCard'|'PlainText'|'SSML',
+                    'imageResponseCard': {
+                        'title': 'string',
+                        'subtitle': 'string',
+                        'imageUrl': 'string',
+                        'buttons': [
+                            {
+                                'text': 'string',
+                                'value': 'string'
+                            },
+                        ]
+                    }
+                },
+            ],
+            'interpretations': [
+                {
+                    'nluConfidence': {
+                        'score': 123.0
+                    },
+                    'sentimentResponse': {
+                        'sentiment': 'MIXED'|'NEGATIVE'|'NEUTRAL'|'POSITIVE',
+                        'sentimentScore': {
+                            'positive': 123.0,
+                            'negative': 123.0,
+                            'neutral': 123.0,
+                            'mixed': 123.0
+                        }
+                    },
+                    'intent': {
+                        'name': 'string',
+                        'slots': {
+                            'string': {
+                                'value': {
+                                    'originalValue': 'string',
+                                    'interpretedValue': 'string',
+                                    'resolvedValues': [
+                                        'string',
+                                    ]
+                                },
+                                'shape': 'Scalar'|'List',
+                                'values': [
+                                    {'... recursive ...'},
+                                ]
+                            }
+                        },
+                        'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                        'confirmationState': 'Confirmed'|'Denied'|'None'
+                    }
+                },
+            ],
+            'sessionState': {
+                'dialogAction': {
+                    'type': 'Close'|'ConfirmIntent'|'Delegate'|'ElicitIntent'|'ElicitSlot',
+                    'slotToElicit': 'string'
+                },
+                'intent': {
+                    'name': 'string',
+                    'slots': {
+                        'string': {
+                            'value': {
+                                'originalValue': 'string',
+                                'interpretedValue': 'string',
+                                'resolvedValues': [
+                                    'string',
+                                ]
+                            },
+                            'shape': 'Scalar'|'List',
+                            'values': [
+                                {'... recursive ...'},
+                            ]
+                        }
+                    },
+                    'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                    'confirmationState': 'Confirmed'|'Denied'|'None'
+                },
+                'activeContexts': [
+                    {
+                        'name': 'string',
+                        'timeToLive': {
+                            'timeToLiveInSeconds': 123,
+                            'turnsToLive': 123
+                        },
+                        'contextAttributes': {
+                            'string': 'string'
+                        }
+                    },
+                ],
+                'sessionAttributes': {
+                    'string': 'string'
+                },
+                'originatingRequestId': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **sessionId** *(string) --* 
+
+          The identifier of the returned session.
+
+          
+        
+
+        - **messages** *(list) --* 
+
+          A list of messages that were last sent to the user. The messages are ordered based on the order that your returned the messages from your Lambda function or the order that messages are defined in the bot. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Container for text that is returned to the customer..
+
+            
+            
+
+            - **content** *(string) --* 
+
+              The text of the message.
+
+              
+            
+
+            - **contentType** *(string) --* 
+
+              Indicates the type of response.
+
+              
+            
+
+            - **imageResponseCard** *(dict) --* 
+
+              A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. 
+
+               
+
+              When you use a response card, the response from the user is constrained to the text associated with a button on the card.
+
+              
+              
+
+              - **title** *(string) --* 
+
+                The title to display on the response card. The format of the title is determined by the platform displaying the response card.
+
+                
+              
+
+              - **subtitle** *(string) --* 
+
+                The subtitle to display on the response card. The format of the subtitle is determined by the platform displaying the response card.
+
+                
+              
+
+              - **imageUrl** *(string) --* 
+
+                The URL of an image to display on the response card. The image URL must be publicly available so that the platform displaying the response card has access to the image.
+
+                
+              
+
+              - **buttons** *(list) --* 
+
+                A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
+
+                
+                
+
+                - *(dict) --* 
+
+                  A button that appears on a response card show to the user.
+
+                  
+                  
+
+                  - **text** *(string) --* 
+
+                    The text that is displayed on the button.
+
+                    
+                  
+
+                  - **value** *(string) --* 
+
+                    The value returned to Amazon Lex V2 when a user chooses the button.
+
+                    
+              
+            
+          
+        
+      
+        
+
+        - **interpretations** *(list) --* 
+
+          A list of intents that Amazon Lex V2 determined might satisfy the user's utterance. 
+
+           
+
+          Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+
+          
+          
+
+          - *(dict) --* 
+
+            An intent that Amazon Lex V2 determined might satisfy the user's utterance. The intents are ordered by the confidence score. 
+
+            
+            
+
+            - **nluConfidence** *(dict) --* 
+
+              Determines the threshold where Amazon Lex V2 will insert the ``AMAZON.FallbackIntent`` , ``AMAZON.KendraSearchIntent`` , or both when returning alternative intents in a response. ``AMAZON.FallbackIntent`` and ``AMAZON.KendraSearchIntent`` are only inserted if they are configured for the bot.
+
+              
+              
+
+              - **score** *(float) --* 
+
+                A score that indicates how confident Amazon Lex V2 is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+
+                
+          
+            
+
+            - **sentimentResponse** *(dict) --* 
+
+              The sentiment expressed in an utterance. 
+
+               
+
+              When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
+
+              
+              
+
+              - **sentiment** *(string) --* 
+
+                The overall sentiment expressed in the user's response. This is the sentiment most likely expressed by the user based on the analysis by Amazon Comprehend.
+
+                
+              
+
+              - **sentimentScore** *(dict) --* 
+
+                The individual sentiment responses for the utterance.
+
+                
+                
+
+                - **positive** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``POSITIVE`` sentiment.
+
+                  
+                
+
+                - **negative** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``NEGATIVE`` sentiment.
+
+                  
+                
+
+                - **neutral** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``NEUTRAL`` sentiment.
+
+                  
+                
+
+                - **mixed** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``MIXED`` sentiment.
+
+                  
+            
+          
+            
+
+            - **intent** *(dict) --* 
+
+              A list of intents that might satisfy the user's utterance. The intents are ordered by the confidence score.
+
+              
+              
+
+              - **name** *(string) --* 
+
+                The name of the intent.
+
+                
+              
+
+              - **slots** *(dict) --* 
+
+                A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(dict) --* 
+
+                    A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                    
+                    
+
+                    - **value** *(dict) --* 
+
+                      The current value of the slot.
+
+                      
+                      
+
+                      - **originalValue** *(string) --* 
+
+                        The text of the utterance from the user that was entered for the slot.
+
+                        
+                      
+
+                      - **interpretedValue** *(string) --* 
+
+                        The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                        
+                      
+
+                      - **resolvedValues** *(list) --* 
+
+                        A list of additional values that have been recognized for the slot.
+
+                        
+                        
+
+                        - *(string) --* 
+                    
+                  
+                    
+
+                    - **shape** *(string) --* 
+
+                      When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                      
+                      
+
+                      - *(dict) --* 
+
+                        A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                        
+                  
+                
+            
+          
+              
+
+              - **state** *(string) --* 
+
+                Contains fulfillment information for the intent. 
+
+                
+              
+
+              - **confirmationState** *(string) --* 
+
+                Contains information about whether fulfillment of the intent has been confirmed.
+
+                
+          
+        
+      
+        
+
+        - **sessionState** *(dict) --* 
+
+          Represents the current state of the dialog between the user and the bot.
+
+           
+
+          You can use this to determine the progress of the conversation and what the next action might be.
+
+          
+          
+
+          - **dialogAction** *(dict) --* 
+
+            The next step that Amazon Lex V2 should take in the conversation with a user.
+
+            
+            
+
+            - **type** *(string) --* 
+
+              The next action that the bot should take in its interaction with the user. The possible values are:
+
+               
+
+               
+              * ``Close`` - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response. 
+               
+              * ``ConfirmIntent`` - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?" 
+               
+              * ``Delegate`` - The next action is determined by Amazon Lex V2. 
+               
+              * ``ElicitSlot`` - The next action is to elicit a slot value from the user. 
+               
+
+              
+            
+
+            - **slotToElicit** *(string) --* 
+
+              The name of the slot that should be elicited from the user.
+
+              
+        
+          
+
+          - **intent** *(dict) --* 
+
+            The active intent that Amazon Lex V2 is processing.
+
+            
+            
+
+            - **name** *(string) --* 
+
+              The name of the intent.
+
+              
+            
+
+            - **slots** *(dict) --* 
+
+              A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(dict) --* 
+
+                  A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                  
+                  
+
+                  - **value** *(dict) --* 
+
+                    The current value of the slot.
+
+                    
+                    
+
+                    - **originalValue** *(string) --* 
+
+                      The text of the utterance from the user that was entered for the slot.
+
+                      
+                    
+
+                    - **interpretedValue** *(string) --* 
+
+                      The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                      
+                    
+
+                    - **resolvedValues** *(list) --* 
+
+                      A list of additional values that have been recognized for the slot.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+                  
+
+                  - **shape** *(string) --* 
+
+                    When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                    
+                  
+
+                  - **values** *(list) --* 
+
+                    A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                    
+                    
+
+                    - *(dict) --* 
+
+                      A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                      
+                
+              
+          
+        
+            
+
+            - **state** *(string) --* 
+
+              Contains fulfillment information for the intent. 
+
+              
+            
+
+            - **confirmationState** *(string) --* 
+
+              Contains information about whether fulfillment of the intent has been confirmed.
+
+              
+        
+          
+
+          - **activeContexts** *(list) --* 
+
+            One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.
+
+            
+            
+
+            - *(dict) --* 
+
+              Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.
+
+               
+
+              Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is ``order-fulfilled`` , only intents that have ``order-fulfilled`` configured as a trigger are considered for follow up.
+
+              
+              
+
+              - **name** *(string) --* 
+
+                The name of the context.
+
+                
+              
+
+              - **timeToLive** *(dict) --* 
+
+                Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.
+
+                
+                
+
+                - **timeToLiveInSeconds** *(integer) --* 
+
+                  The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
+
+                  
+                
+
+                - **turnsToLive** *(integer) --* 
+
+                  The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
+
+                  
+            
+              
+
+              - **contextAttributes** *(dict) --* 
+
+                A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.
+
+                 
+
+                If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+          
+        
+          
+
+          - **sessionAttributes** *(dict) --* 
+
+            Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **originatingRequestId** *(string) --* 
+
+            
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: put_session(**kwargs)
+
+    
+
+    Creates a new session or modifies an existing session with an Amazon Lex V2 bot. Use this operation to enable your application to set the state of the bot.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/PutSession>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_session(
+          botId='string',
+          botAliasId='string',
+          localeId='string',
+          sessionId='string',
+          messages=[
+              {
+                  'content': 'string',
+                  'contentType': 'CustomPayload'|'ImageResponseCard'|'PlainText'|'SSML',
+                  'imageResponseCard': {
+                      'title': 'string',
+                      'subtitle': 'string',
+                      'imageUrl': 'string',
+                      'buttons': [
+                          {
+                              'text': 'string',
+                              'value': 'string'
+                          },
+                      ]
+                  }
+              },
+          ],
+          sessionState={
+              'dialogAction': {
+                  'type': 'Close'|'ConfirmIntent'|'Delegate'|'ElicitIntent'|'ElicitSlot',
+                  'slotToElicit': 'string'
+              },
+              'intent': {
+                  'name': 'string',
+                  'slots': {
+                      'string': {
+                          'value': {
+                              'originalValue': 'string',
+                              'interpretedValue': 'string',
+                              'resolvedValues': [
+                                  'string',
+                              ]
+                          },
+                          'shape': 'Scalar'|'List',
+                          'values': [
+                              {'... recursive ...'},
+                          ]
+                      }
+                  },
+                  'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                  'confirmationState': 'Confirmed'|'Denied'|'None'
+              },
+              'activeContexts': [
+                  {
+                      'name': 'string',
+                      'timeToLive': {
+                          'timeToLiveInSeconds': 123,
+                          'turnsToLive': 123
+                      },
+                      'contextAttributes': {
+                          'string': 'string'
+                      }
+                  },
+              ],
+              'sessionAttributes': {
+                  'string': 'string'
+              },
+              'originatingRequestId': 'string'
+          },
+          requestAttributes={
+              'string': 'string'
+          },
+          responseContentType='string'
+      )
+    :type botId: string
+    :param botId: **[REQUIRED]** 
+
+      The identifier of the bot that receives the session data.
+
+      
+
+    
+    :type botAliasId: string
+    :param botAliasId: **[REQUIRED]** 
+
+      The alias identifier of the bot that receives the session data.
+
+      
+
+    
+    :type localeId: string
+    :param localeId: **[REQUIRED]** 
+
+      The locale where the session is in use.
+
+      
+
+    
+    :type sessionId: string
+    :param sessionId: **[REQUIRED]** 
+
+      The identifier of the session that receives the session data.
+
+      
+
+    
+    :type messages: list
+    :param messages: 
+
+      A list of messages to send to the user. Messages are sent in the order that they are defined in the list.
+
+      
+
+    
+      - *(dict) --* 
+
+        Container for text that is returned to the customer..
+
+        
+
+      
+        - **content** *(string) --* 
+
+          The text of the message.
+
+          
+
+        
+        - **contentType** *(string) --* **[REQUIRED]** 
+
+          Indicates the type of response.
+
+          
+
+        
+        - **imageResponseCard** *(dict) --* 
+
+          A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. 
+
+           
+
+          When you use a response card, the response from the user is constrained to the text associated with a button on the card.
+
+          
+
+        
+          - **title** *(string) --* **[REQUIRED]** 
+
+            The title to display on the response card. The format of the title is determined by the platform displaying the response card.
+
+            
+
+          
+          - **subtitle** *(string) --* 
+
+            The subtitle to display on the response card. The format of the subtitle is determined by the platform displaying the response card.
+
+            
+
+          
+          - **imageUrl** *(string) --* 
+
+            The URL of an image to display on the response card. The image URL must be publicly available so that the platform displaying the response card has access to the image.
+
+            
+
+          
+          - **buttons** *(list) --* 
+
+            A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
+
+            
+
+          
+            - *(dict) --* 
+
+              A button that appears on a response card show to the user.
+
+              
+
+            
+              - **text** *(string) --* **[REQUIRED]** 
+
+                The text that is displayed on the button.
+
+                
+
+              
+              - **value** *(string) --* **[REQUIRED]** 
+
+                The value returned to Amazon Lex V2 when a user chooses the button.
+
+                
+
+              
+            
+        
+        
+      
+  
+    :type sessionState: dict
+    :param sessionState: **[REQUIRED]** 
+
+      Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user.
+
+      
+
+    
+      - **dialogAction** *(dict) --* 
+
+        The next step that Amazon Lex V2 should take in the conversation with a user.
+
+        
+
+      
+        - **type** *(string) --* **[REQUIRED]** 
+
+          The next action that the bot should take in its interaction with the user. The possible values are:
+
+           
+
+           
+          * ``Close`` - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response. 
+           
+          * ``ConfirmIntent`` - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?" 
+           
+          * ``Delegate`` - The next action is determined by Amazon Lex V2. 
+           
+          * ``ElicitSlot`` - The next action is to elicit a slot value from the user. 
+           
+
+          
+
+        
+        - **slotToElicit** *(string) --* 
+
+          The name of the slot that should be elicited from the user.
+
+          
+
+        
+      
+      - **intent** *(dict) --* 
+
+        The active intent that Amazon Lex V2 is processing.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name of the intent.
+
+          
+
+        
+        - **slots** *(dict) --* 
+
+          A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              A value that Amazon Lex V2 uses to fulfill an intent. 
+
+              
+
+            
+              - **value** *(dict) --* 
+
+                The current value of the slot.
+
+                
+
+              
+                - **originalValue** *(string) --* 
+
+                  The text of the utterance from the user that was entered for the slot.
+
+                  
+
+                
+                - **interpretedValue** *(string) --* **[REQUIRED]** 
+
+                  The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                  
+
+                
+                - **resolvedValues** *(list) --* 
+
+                  A list of additional values that have been recognized for the slot.
+
+                  
+
+                
+                  - *(string) --* 
+
+                  
+              
+              
+              - **shape** *(string) --* 
+
+                When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                
+
+              
+              - **values** *(list) --* 
+
+                A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                
+
+              
+                - *(dict) --* 
+
+                  A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                  
+
+                
+            
+            
+      
+    
+        - **state** *(string) --* 
+
+          Contains fulfillment information for the intent. 
+
+          
+
+        
+        - **confirmationState** *(string) --* 
+
+          Contains information about whether fulfillment of the intent has been confirmed.
+
+          
+
+        
+      
+      - **activeContexts** *(list) --* 
+
+        One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.
+
+        
+
+      
+        - *(dict) --* 
+
+          Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.
+
+           
+
+          Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is ``order-fulfilled`` , only intents that have ``order-fulfilled`` configured as a trigger are considered for follow up.
+
+          
+
+        
+          - **name** *(string) --* **[REQUIRED]** 
+
+            The name of the context.
+
+            
+
+          
+          - **timeToLive** *(dict) --* **[REQUIRED]** 
+
+            Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.
+
+            
+
+          
+            - **timeToLiveInSeconds** *(integer) --* **[REQUIRED]** 
+
+              The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
+
+              
+
+            
+            - **turnsToLive** *(integer) --* **[REQUIRED]** 
+
+              The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
+
+              
+
+            
+          
+          - **contextAttributes** *(dict) --* **[REQUIRED]** 
+
+            A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.
+
+             
+
+            If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+        
+    
+      - **sessionAttributes** *(dict) --* 
+
+        Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(string) --* 
+
+          
+    
+  
+      - **originatingRequestId** *(string) --* 
+
+        
+
+        
+
+      
+    
+    :type requestAttributes: dict
+    :param requestAttributes: 
+
+      Request-specific information passed between Amazon Lex V2 and the client application.
+
+       
+
+      The namespace ``x-amz-lex:`` is reserved for special attributes. Don't create any request attributes with the prefix ``x-amz-lex:`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    :type responseContentType: string
+    :param responseContentType: 
+
+      The message that Amazon Lex V2 returns in the response can be either text or speech depending on the value of this parameter. 
+
+       
+
+       
+      * If the value is ``text/plain; charset=utf-8`` , Amazon Lex V2 returns text in the response. 
+       
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'contentType': 'string',
+            'messages': 'string',
+            'sessionState': 'string',
+            'requestAttributes': 'string',
+            'sessionId': 'string',
+            'audioStream': StreamingBody()
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **contentType** *(string) --* 
+
+          The type of response. Same as the type specified in the ``responseContentType`` field in the request.
+
+          
+        
+
+        - **messages** *(string) --* 
+
+          A list of messages that were last sent to the user. The messages are ordered based on how you return the messages from you Lambda function or the order that the messages are defined in the bot.
+
+          
+        
+
+        - **sessionState** *(string) --* 
+
+          Represents the current state of the dialog between the user and the bot.
+
+           
+
+          Use this to determine the progress of the conversation and what the next action may be.
+
+          
+        
+
+        - **requestAttributes** *(string) --* 
+
+          Request-specific information passed between the client application and Amazon Lex V2. These are the same as the ``requestAttribute`` parameter in the call to the ``PutSession`` operation.
+
+          
+        
+
+        - **sessionId** *(string) --* 
+
+          The identifier of the session that received the data.
+
+          
+        
+
+        - **audioStream** (:class:`.StreamingBody`) -- 
+
+          If the requested content type was audio, the audio version of the message to convey to the user.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.DependencyFailedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.BadGatewayException`
+
+    
+
+  .. py:method:: recognize_text(**kwargs)
+
+    
+
+    Sends user input to Amazon Lex V2. Client applications use this API to send requests to Amazon Lex V2 at runtime. Amazon Lex V2 then interprets the user input using the machine learning model that it build for the bot.
+
+     
+
+    In response, Amazon Lex V2 returns the next message to convey to the user and an optional response card to display.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeText>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.recognize_text(
+          botId='string',
+          botAliasId='string',
+          localeId='string',
+          sessionId='string',
+          text='string',
+          sessionState={
+              'dialogAction': {
+                  'type': 'Close'|'ConfirmIntent'|'Delegate'|'ElicitIntent'|'ElicitSlot',
+                  'slotToElicit': 'string'
+              },
+              'intent': {
+                  'name': 'string',
+                  'slots': {
+                      'string': {
+                          'value': {
+                              'originalValue': 'string',
+                              'interpretedValue': 'string',
+                              'resolvedValues': [
+                                  'string',
+                              ]
+                          },
+                          'shape': 'Scalar'|'List',
+                          'values': [
+                              {'... recursive ...'},
+                          ]
+                      }
+                  },
+                  'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                  'confirmationState': 'Confirmed'|'Denied'|'None'
+              },
+              'activeContexts': [
+                  {
+                      'name': 'string',
+                      'timeToLive': {
+                          'timeToLiveInSeconds': 123,
+                          'turnsToLive': 123
+                      },
+                      'contextAttributes': {
+                          'string': 'string'
+                      }
+                  },
+              ],
+              'sessionAttributes': {
+                  'string': 'string'
+              },
+              'originatingRequestId': 'string'
+          },
+          requestAttributes={
+              'string': 'string'
+          }
+      )
+    :type botId: string
+    :param botId: **[REQUIRED]** 
+
+      The identifier of the bot that processes the request.
+
+      
+
+    
+    :type botAliasId: string
+    :param botAliasId: **[REQUIRED]** 
+
+      The alias identifier in use for the bot that processes the request.
+
+      
+
+    
+    :type localeId: string
+    :param localeId: **[REQUIRED]** 
+
+      The locale where the session is in use.
+
+      
+
+    
+    :type sessionId: string
+    :param sessionId: **[REQUIRED]** 
+
+      The identifier of the user session that is having the conversation.
+
+      
+
+    
+    :type text: string
+    :param text: **[REQUIRED]** 
+
+      The text that the user entered. Amazon Lex V2 interprets this text.
+
+      
+
+    
+    :type sessionState: dict
+    :param sessionState: 
+
+      The current state of the dialog between the user and the bot.
+
+      
+
+    
+      - **dialogAction** *(dict) --* 
+
+        The next step that Amazon Lex V2 should take in the conversation with a user.
+
+        
+
+      
+        - **type** *(string) --* **[REQUIRED]** 
+
+          The next action that the bot should take in its interaction with the user. The possible values are:
+
+           
+
+           
+          * ``Close`` - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response. 
+           
+          * ``ConfirmIntent`` - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?" 
+           
+          * ``Delegate`` - The next action is determined by Amazon Lex V2. 
+           
+          * ``ElicitSlot`` - The next action is to elicit a slot value from the user. 
+           
+
+          
+
+        
+        - **slotToElicit** *(string) --* 
+
+          The name of the slot that should be elicited from the user.
+
+          
+
+        
+      
+      - **intent** *(dict) --* 
+
+        The active intent that Amazon Lex V2 is processing.
+
+        
+
+      
+        - **name** *(string) --* **[REQUIRED]** 
+
+          The name of the intent.
+
+          
+
+        
+        - **slots** *(dict) --* 
+
+          A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(dict) --* 
+
+              A value that Amazon Lex V2 uses to fulfill an intent. 
+
+              
+
+            
+              - **value** *(dict) --* 
+
+                The current value of the slot.
+
+                
+
+              
+                - **originalValue** *(string) --* 
+
+                  The text of the utterance from the user that was entered for the slot.
+
+                  
+
+                
+                - **interpretedValue** *(string) --* **[REQUIRED]** 
+
+                  The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                  
+
+                
+                - **resolvedValues** *(list) --* 
+
+                  A list of additional values that have been recognized for the slot.
+
+                  
+
+                
+                  - *(string) --* 
+
+                  
+              
+              
+              - **shape** *(string) --* 
+
+                When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                
+
+              
+              - **values** *(list) --* 
+
+                A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                
+
+              
+                - *(dict) --* 
+
+                  A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                  
+
+                
+            
+            
+      
+    
+        - **state** *(string) --* 
+
+          Contains fulfillment information for the intent. 
+
+          
+
+        
+        - **confirmationState** *(string) --* 
+
+          Contains information about whether fulfillment of the intent has been confirmed.
+
+          
+
+        
+      
+      - **activeContexts** *(list) --* 
+
+        One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.
+
+        
+
+      
+        - *(dict) --* 
+
+          Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.
+
+           
+
+          Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is ``order-fulfilled`` , only intents that have ``order-fulfilled`` configured as a trigger are considered for follow up.
+
+          
+
+        
+          - **name** *(string) --* **[REQUIRED]** 
+
+            The name of the context.
+
+            
+
+          
+          - **timeToLive** *(dict) --* **[REQUIRED]** 
+
+            Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.
+
+            
+
+          
+            - **timeToLiveInSeconds** *(integer) --* **[REQUIRED]** 
+
+              The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
+
+              
+
+            
+            - **turnsToLive** *(integer) --* **[REQUIRED]** 
+
+              The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
+
+              
+
+            
+          
+          - **contextAttributes** *(dict) --* **[REQUIRED]** 
+
+            A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.
+
+             
+
+            If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+        
+    
+      - **sessionAttributes** *(dict) --* 
+
+        Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(string) --* 
+
+          
+    
+  
+      - **originatingRequestId** *(string) --* 
+
+        
+
+        
+
+      
+    
+    :type requestAttributes: dict
+    :param requestAttributes: 
+
+      Request-specific information passed between the client application and Amazon Lex V2 
+
+       
+
+      The namespace ``x-amz-lex:`` is reserved for special attributes. Don't create any request attributes with the prefix ``x-amz-lex:`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'messages': [
+                {
+                    'content': 'string',
+                    'contentType': 'CustomPayload'|'ImageResponseCard'|'PlainText'|'SSML',
+                    'imageResponseCard': {
+                        'title': 'string',
+                        'subtitle': 'string',
+                        'imageUrl': 'string',
+                        'buttons': [
+                            {
+                                'text': 'string',
+                                'value': 'string'
+                            },
+                        ]
+                    }
+                },
+            ],
+            'sessionState': {
+                'dialogAction': {
+                    'type': 'Close'|'ConfirmIntent'|'Delegate'|'ElicitIntent'|'ElicitSlot',
+                    'slotToElicit': 'string'
+                },
+                'intent': {
+                    'name': 'string',
+                    'slots': {
+                        'string': {
+                            'value': {
+                                'originalValue': 'string',
+                                'interpretedValue': 'string',
+                                'resolvedValues': [
+                                    'string',
+                                ]
+                            },
+                            'shape': 'Scalar'|'List',
+                            'values': [
+                                {'... recursive ...'},
+                            ]
+                        }
+                    },
+                    'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                    'confirmationState': 'Confirmed'|'Denied'|'None'
+                },
+                'activeContexts': [
+                    {
+                        'name': 'string',
+                        'timeToLive': {
+                            'timeToLiveInSeconds': 123,
+                            'turnsToLive': 123
+                        },
+                        'contextAttributes': {
+                            'string': 'string'
+                        }
+                    },
+                ],
+                'sessionAttributes': {
+                    'string': 'string'
+                },
+                'originatingRequestId': 'string'
+            },
+            'interpretations': [
+                {
+                    'nluConfidence': {
+                        'score': 123.0
+                    },
+                    'sentimentResponse': {
+                        'sentiment': 'MIXED'|'NEGATIVE'|'NEUTRAL'|'POSITIVE',
+                        'sentimentScore': {
+                            'positive': 123.0,
+                            'negative': 123.0,
+                            'neutral': 123.0,
+                            'mixed': 123.0
+                        }
+                    },
+                    'intent': {
+                        'name': 'string',
+                        'slots': {
+                            'string': {
+                                'value': {
+                                    'originalValue': 'string',
+                                    'interpretedValue': 'string',
+                                    'resolvedValues': [
+                                        'string',
+                                    ]
+                                },
+                                'shape': 'Scalar'|'List',
+                                'values': [
+                                    {'... recursive ...'},
+                                ]
+                            }
+                        },
+                        'state': 'Failed'|'Fulfilled'|'InProgress'|'ReadyForFulfillment'|'Waiting',
+                        'confirmationState': 'Confirmed'|'Denied'|'None'
+                    }
+                },
+            ],
+            'requestAttributes': {
+                'string': 'string'
+            },
+            'sessionId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **messages** *(list) --* 
+
+          A list of messages last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot.
+
+          
+          
+
+          - *(dict) --* 
+
+            Container for text that is returned to the customer..
+
+            
+            
+
+            - **content** *(string) --* 
+
+              The text of the message.
+
+              
+            
+
+            - **contentType** *(string) --* 
+
+              Indicates the type of response.
+
+              
+            
+
+            - **imageResponseCard** *(dict) --* 
+
+              A card that is shown to the user by a messaging platform. You define the contents of the card, the card is displayed by the platform. 
+
+               
+
+              When you use a response card, the response from the user is constrained to the text associated with a button on the card.
+
+              
+              
+
+              - **title** *(string) --* 
+
+                The title to display on the response card. The format of the title is determined by the platform displaying the response card.
+
+                
+              
+
+              - **subtitle** *(string) --* 
+
+                The subtitle to display on the response card. The format of the subtitle is determined by the platform displaying the response card.
+
+                
+              
+
+              - **imageUrl** *(string) --* 
+
+                The URL of an image to display on the response card. The image URL must be publicly available so that the platform displaying the response card has access to the image.
+
+                
+              
+
+              - **buttons** *(list) --* 
+
+                A list of buttons that should be displayed on the response card. The arrangement of the buttons is determined by the platform that displays the button.
+
+                
+                
+
+                - *(dict) --* 
+
+                  A button that appears on a response card show to the user.
+
+                  
+                  
+
+                  - **text** *(string) --* 
+
+                    The text that is displayed on the button.
+
+                    
+                  
+
+                  - **value** *(string) --* 
+
+                    The value returned to Amazon Lex V2 when a user chooses the button.
+
+                    
+              
+            
+          
+        
+      
+        
+
+        - **sessionState** *(dict) --* 
+
+          Represents the current state of the dialog between the user and the bot. 
+
+           
+
+          Use this to determine the progress of the conversation and what the next action may be.
+
+          
+          
+
+          - **dialogAction** *(dict) --* 
+
+            The next step that Amazon Lex V2 should take in the conversation with a user.
+
+            
+            
+
+            - **type** *(string) --* 
+
+              The next action that the bot should take in its interaction with the user. The possible values are:
+
+               
+
+               
+              * ``Close`` - Indicates that there will not be a response from the user. For example, the statement "Your order has been placed" does not require a response. 
+               
+              * ``ConfirmIntent`` - The next action is asking the user if the intent is complete and ready to be fulfilled. This is a yes/no question such as "Place the order?" 
+               
+              * ``Delegate`` - The next action is determined by Amazon Lex V2. 
+               
+              * ``ElicitSlot`` - The next action is to elicit a slot value from the user. 
+               
+
+              
+            
+
+            - **slotToElicit** *(string) --* 
+
+              The name of the slot that should be elicited from the user.
+
+              
+        
+          
+
+          - **intent** *(dict) --* 
+
+            The active intent that Amazon Lex V2 is processing.
+
+            
+            
+
+            - **name** *(string) --* 
+
+              The name of the intent.
+
+              
+            
+
+            - **slots** *(dict) --* 
+
+              A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(dict) --* 
+
+                  A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                  
+                  
+
+                  - **value** *(dict) --* 
+
+                    The current value of the slot.
+
+                    
+                    
+
+                    - **originalValue** *(string) --* 
+
+                      The text of the utterance from the user that was entered for the slot.
+
+                      
+                    
+
+                    - **interpretedValue** *(string) --* 
+
+                      The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                      
+                    
+
+                    - **resolvedValues** *(list) --* 
+
+                      A list of additional values that have been recognized for the slot.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+                  
+
+                  - **shape** *(string) --* 
+
+                    When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                    
+                  
+
+                  - **values** *(list) --* 
+
+                    A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                    
+                    
+
+                    - *(dict) --* 
+
+                      A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                      
+                
+              
+          
+        
+            
+
+            - **state** *(string) --* 
+
+              Contains fulfillment information for the intent. 
+
+              
+            
+
+            - **confirmationState** *(string) --* 
+
+              Contains information about whether fulfillment of the intent has been confirmed.
+
+              
+        
+          
+
+          - **activeContexts** *(list) --* 
+
+            One or more contexts that indicate to Amazon Lex V2 the context of a request. When a context is active, Amazon Lex V2 considers intents with the matching context as a trigger as the next intent in a session.
+
+            
+            
+
+            - *(dict) --* 
+
+              Contains information about the contexts that a user is using in a session. You can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you can set a context using the , , or operations.
+
+               
+
+              Use a context to indicate to Amazon Lex V2 intents that should be used as follow-up intents. For example, if the active context is ``order-fulfilled`` , only intents that have ``order-fulfilled`` configured as a trigger are considered for follow up.
+
+              
+              
+
+              - **name** *(string) --* 
+
+                The name of the context.
+
+                
+              
+
+              - **timeToLive** *(dict) --* 
+
+                Indicates the number of turns or seconds that the context is active. Once the time to live expires, the context is no longer returned in a response.
+
+                
+                
+
+                - **timeToLiveInSeconds** *(integer) --* 
+
+                  The number of seconds that the context is active. You can specify between 5 and 86400 seconds (24 hours).
+
+                  
+                
+
+                - **turnsToLive** *(integer) --* 
+
+                  The number of turns that the context is active. You can specify up to 20 turns. Each request and response from the bot is a turn.
+
+                  
+            
+              
+
+              - **contextAttributes** *(dict) --* 
+
+                A lis tof contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request.
+
+                 
+
+                If you don't specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared. 
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(string) --* 
+            
+          
+          
+        
+          
+
+          - **sessionAttributes** *(dict) --* 
+
+            Map of key/value pairs representing session-specific context information. It contains application information passed between Amazon Lex V2 and a client application.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **originatingRequestId** *(string) --* 
+
+            
+
+            
+      
+        
+
+        - **interpretations** *(list) --* 
+
+          A list of intents that Amazon Lex V2 determined might satisfy the user's utterance. 
+
+           
+
+          Each interpretation includes the intent, a score that indicates now confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+
+          
+          
+
+          - *(dict) --* 
+
+            An intent that Amazon Lex V2 determined might satisfy the user's utterance. The intents are ordered by the confidence score. 
+
+            
+            
+
+            - **nluConfidence** *(dict) --* 
+
+              Determines the threshold where Amazon Lex V2 will insert the ``AMAZON.FallbackIntent`` , ``AMAZON.KendraSearchIntent`` , or both when returning alternative intents in a response. ``AMAZON.FallbackIntent`` and ``AMAZON.KendraSearchIntent`` are only inserted if they are configured for the bot.
+
+              
+              
+
+              - **score** *(float) --* 
+
+                A score that indicates how confident Amazon Lex V2 is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+
+                
+          
+            
+
+            - **sentimentResponse** *(dict) --* 
+
+              The sentiment expressed in an utterance. 
+
+               
+
+              When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
+
+              
+              
+
+              - **sentiment** *(string) --* 
+
+                The overall sentiment expressed in the user's response. This is the sentiment most likely expressed by the user based on the analysis by Amazon Comprehend.
+
+                
+              
+
+              - **sentimentScore** *(dict) --* 
+
+                The individual sentiment responses for the utterance.
+
+                
+                
+
+                - **positive** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``POSITIVE`` sentiment.
+
+                  
+                
+
+                - **negative** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``NEGATIVE`` sentiment.
+
+                  
+                
+
+                - **neutral** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``NEUTRAL`` sentiment.
+
+                  
+                
+
+                - **mixed** *(float) --* 
+
+                  The level of confidence that Amazon Comprehend has in the accuracy of its detection of the ``MIXED`` sentiment.
+
+                  
+            
+          
+            
+
+            - **intent** *(dict) --* 
+
+              A list of intents that might satisfy the user's utterance. The intents are ordered by the confidence score.
+
+              
+              
+
+              - **name** *(string) --* 
+
+                The name of the intent.
+
+                
+              
+
+              - **slots** *(dict) --* 
+
+                A map of all of the slots for the intent. The name of the slot maps to the value of the slot. If a slot has not been filled, the value is null.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(dict) --* 
+
+                    A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                    
+                    
+
+                    - **value** *(dict) --* 
+
+                      The current value of the slot.
+
+                      
+                      
+
+                      - **originalValue** *(string) --* 
+
+                        The text of the utterance from the user that was entered for the slot.
+
+                        
+                      
+
+                      - **interpretedValue** *(string) --* 
+
+                        The value that Amazon Lex V2 determines for the slot. The actual value depends on the setting of the value selection strategy for the bot. You can choose to use the value entered by the user, or you can have Amazon Lex V2 choose the first value in the ``resolvedValues`` list.
+
+                        
+                      
+
+                      - **resolvedValues** *(list) --* 
+
+                        A list of additional values that have been recognized for the slot.
+
+                        
+                        
+
+                        - *(string) --* 
+                    
+                  
+                    
+
+                    - **shape** *(string) --* 
+
+                      When the ``shape`` value is ``List`` , it indicates that the ``values`` field contains a list of slot values. When the value is ``Scalar`` , it indicates that the ``value`` field contains a single value.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      A list of one or more values that the user provided for the slot. For example, if a for a slot that elicits pizza toppings, the values might be "pepperoni" and "pineapple." 
+
+                      
+                      
+
+                      - *(dict) --* 
+
+                        A value that Amazon Lex V2 uses to fulfill an intent. 
+
+                        
+                  
+                
+            
+          
+              
+
+              - **state** *(string) --* 
+
+                Contains fulfillment information for the intent. 
+
+                
+              
+
+              - **confirmationState** *(string) --* 
+
+                Contains information about whether fulfillment of the intent has been confirmed.
+
+                
+          
+        
+      
+        
+
+        - **requestAttributes** *(dict) --* 
+
+          The attributes sent in the request.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+        
+
+        - **sessionId** *(string) --* 
+
+          The identifier of the session in use.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.DependencyFailedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.BadGatewayException`
+
+    
+
+  .. py:method:: recognize_utterance(**kwargs)
+
+    
+
+    Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot.
+
+     
+
+    The following request fields must be compressed with gzip and then base64 encoded before you send them to Amazon Lex V2. 
+
+     
+
+     
+    * requestAttributes 
+     
+    * sessionState 
+     
+
+     
+
+    The following response fields are compressed using gzip and then base64 encoded by Amazon Lex V2. Before you can use these fields, you must decode and decompress them. 
+
+     
+
+     
+    * inputTranscript 
+     
+    * interpretations 
+     
+    * messages 
+     
+    * requestAttributes 
+     
+    * sessionState 
+     
+
+     
+
+    The example contains a Java application that compresses and encodes a Java object to send to Amazon Lex V2, and a second that decodes and decompresses a response from Amazon Lex V2.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RecognizeUtterance>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.recognize_utterance(
+          botId='string',
+          botAliasId='string',
+          localeId='string',
+          sessionId='string',
+          sessionState='string',
+          requestAttributes='string',
+          requestContentType='string',
+          responseContentType='string',
+          inputStream=b'bytes'|file
+      )
+    :type botId: string
+    :param botId: **[REQUIRED]** 
+
+      The identifier of the bot that should receive the request.
+
+      
+
+    
+    :type botAliasId: string
+    :param botAliasId: **[REQUIRED]** 
+
+      The alias identifier in use for the bot that should receive the request.
+
+      
+
+    
+    :type localeId: string
+    :param localeId: **[REQUIRED]** 
+
+      The locale where the session is in use.
+
+      
+
+    
+    :type sessionId: string
+    :param sessionId: **[REQUIRED]** 
+
+      The identifier of the session in use.
+
+      
+
+    
+    :type sessionState: string
+    :param sessionState: 
+
+      Sets the state of the session with the user. You can use this to set the current intent, attributes, context, and dialog action. Use the dialog action to determine the next step that Amazon Lex V2 should use in the conversation with the user.
+
+       
+
+      The ``sessionState`` field must be compressed using gzip and then base64 encoded before sending to Amazon Lex V2.
+
+      
+
+    
+    :type requestAttributes: string
+    :param requestAttributes: 
+
+      Request-specific information passed between the client application and Amazon Lex V2 
+
+       
+
+      The namespace ``x-amz-lex:`` is reserved for special attributes. Don't create any request attributes for prefix ``x-amz-lex:`` .
+
+       
+
+      The ``requestAttributes`` field must be compressed using gzip and then base64 encoded before sending to Amazon Lex V2.
+
+      
+
+    
+    :type requestContentType: string
+    :param requestContentType: **[REQUIRED]** 
+
+      Indicates the format for audio input or that the content is text. The header must start with one of the following prefixes:
+
+       
+
+       
+      * PCM format, audio data must be in little-endian byte order. 
+
+         
+        * audio/l16; rate=16000; channels=1 
+         
+        * audio/x-l16; sample-rate=16000; channel-count=1 
+         
+        * audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false 
+         
+
+       
+       
+      * Opus format 
+
+         
+        * audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4 
+         
+
+       
+       
+      * Text format 
+
+         
+        * text/plain; charset=utf-8 
+         
+
+       
+       
+
+      
+
+    
+    :type responseContentType: string
+    :param responseContentType: 
+
+      The message that Amazon Lex V2 returns in the response can be either text or speech based on the ``responseContentType`` value.
+
+       
+
+       
+      * If the value is ``text/plain;charset=utf-8`` , Amazon Lex V2 returns text in the response. 
+       
+      * If the value begins with ``audio/`` , Amazon Lex V2 returns speech in the response. Amazon Lex V2 uses Amazon Polly to generate the speech using the configuration that you specified in the ``requestContentType`` parameter. For example, if you specify ``audio/mpeg`` as the value, Amazon Lex V2 returns speech in the MPEG format. 
+       
+      * If the value is ``audio/pcm`` , the speech returned is ``audio/pcm`` at 16 KHz in 16-bit, little-endian format. 
+       
+      * The following are the accepted values: 
+
+         
+        * audio/mpeg 
+         
+        * audio/ogg 
+         
+        * audio/pcm (16 KHz) 
+         
+        * audio/* (defaults to mpeg) 
+         
+        * text/plain; charset=utf-8 
+         
+
+       
+       
+
+      
+
+    
+    :type inputStream: bytes or seekable file-like object
+    :param inputStream: 
+
+      User input in PCM or Opus audio format or text format as described in the ``requestContentType`` parameter.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'inputMode': 'string',
+            'contentType': 'string',
+            'messages': 'string',
+            'interpretations': 'string',
+            'sessionState': 'string',
+            'requestAttributes': 'string',
+            'sessionId': 'string',
+            'inputTranscript': 'string',
+            'audioStream': StreamingBody()
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **inputMode** *(string) --* 
+
+          Indicates whether the input mode to the operation was text or speech. 
+
+          
+        
+
+        - **contentType** *(string) --* 
+
+          Content type as specified in the ``responseContentType`` in the request.
+
+          
+        
+
+        - **messages** *(string) --* 
+
+          A list of messages that were last sent to the user. The messages are ordered based on the order that you returned the messages from your Lambda function or the order that the messages are defined in the bot.
+
+           
+
+          The ``messages`` field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
+
+          
+        
+
+        - **interpretations** *(string) --* 
+
+          A list of intents that Amazon Lex V2 determined might satisfy the user's utterance.
+
+           
+
+          Each interpretation includes the intent, a score that indicates how confident Amazon Lex V2 is that the interpretation is the correct one, and an optional sentiment response that indicates the sentiment expressed in the utterance.
+
+           
+
+          The ``interpretations`` field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
+
+          
+        
+
+        - **sessionState** *(string) --* 
+
+          Represents the current state of the dialog between the user and the bot.
+
+           
+
+          Use this to determine the progress of the conversation and what the next action might be.
+
+           
+
+          The ``sessionState`` field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
+
+          
+        
+
+        - **requestAttributes** *(string) --* 
+
+          The attributes sent in the request.
+
+           
+
+          The ``requestAttributes`` field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents.
+
+          
+        
+
+        - **sessionId** *(string) --* 
+
+          The identifier of the session in use.
+
+          
+        
+
+        - **inputTranscript** *(string) --* 
+
+          The text used to process the request.
+
+           
+
+          If the input was an audio stream, the ``inputTranscript`` field contains the text extracted from the audio stream. This is the text that is actually processed to recognize intents and slot values. You can use this information to determine if Amazon Lex V2 is correctly processing the audio that you send.
+
+           
+
+          The ``inputTranscript`` field is compressed with gzip and then base64 encoded. Before you can use the contents of the field, you must decode and decompress the contents. See the example for a simple function to decode and decompress the contents.
+
+          
+        
+
+        - **audioStream** (:class:`.StreamingBody`) -- 
+
+          The prompt or statement to send to the user. This is based on the bot configuration and context. For example, if Amazon Lex V2 did not understand the user intent, it sends the ``clarificationPrompt`` configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the ``confirmationPrompt`` . Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex V2 sends that message in the response.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.DependencyFailedException`
+
+    
+    *     :py:class:`LexRuntimeV2.Client.exceptions.BadGatewayException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

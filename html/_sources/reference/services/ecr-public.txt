@@ -1,0 +1,4546 @@
+
+
+*********
+ECRPublic
+*********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ECRPublic.Client
+
+  A low-level client representing Amazon Elastic Container Registry Public (ECR Public)
+   
+
+  Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Amazon ECR provides both public and private registries to host your container images. You can use the familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry for your Docker or Open Container Initiative (OCI) images. Amazon ECR supports public repositories with this API. For information about the Amazon ECR API for private repositories, see `Amazon Elastic Container Registry API Reference <https://docs.aws.amazon.com/AmazonECR/latest/APIReference/Welcome.html>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ecr-public')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ECRPublic.Client.batch_check_layer_availability`
+
+  
+  *   :py:meth:`~ECRPublic.Client.batch_delete_image`
+
+  
+  *   :py:meth:`~ECRPublic.Client.can_paginate`
+
+  
+  *   :py:meth:`~ECRPublic.Client.complete_layer_upload`
+
+  
+  *   :py:meth:`~ECRPublic.Client.create_repository`
+
+  
+  *   :py:meth:`~ECRPublic.Client.delete_repository`
+
+  
+  *   :py:meth:`~ECRPublic.Client.delete_repository_policy`
+
+  
+  *   :py:meth:`~ECRPublic.Client.describe_image_tags`
+
+  
+  *   :py:meth:`~ECRPublic.Client.describe_images`
+
+  
+  *   :py:meth:`~ECRPublic.Client.describe_registries`
+
+  
+  *   :py:meth:`~ECRPublic.Client.describe_repositories`
+
+  
+  *   :py:meth:`~ECRPublic.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_authorization_token`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_paginator`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_registry_catalog_data`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_repository_catalog_data`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_repository_policy`
+
+  
+  *   :py:meth:`~ECRPublic.Client.get_waiter`
+
+  
+  *   :py:meth:`~ECRPublic.Client.initiate_layer_upload`
+
+  
+  *   :py:meth:`~ECRPublic.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~ECRPublic.Client.put_image`
+
+  
+  *   :py:meth:`~ECRPublic.Client.put_registry_catalog_data`
+
+  
+  *   :py:meth:`~ECRPublic.Client.put_repository_catalog_data`
+
+  
+  *   :py:meth:`~ECRPublic.Client.set_repository_policy`
+
+  
+  *   :py:meth:`~ECRPublic.Client.tag_resource`
+
+  
+  *   :py:meth:`~ECRPublic.Client.untag_resource`
+
+  
+  *   :py:meth:`~ECRPublic.Client.upload_layer_part`
+
+  
+
+  .. py:method:: batch_check_layer_availability(**kwargs)
+
+    
+
+    Checks the availability of one or more image layers within a repository in a public registry. When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.
+
+     
+
+    .. note::
+
+       
+
+      This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the ``docker`` CLI to pull, tag, and push images.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/BatchCheckLayerAvailability>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_check_layer_availability(
+          registryId='string',
+          repositoryName='string',
+          layerDigests=[
+              'string',
+          ]
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the image layers to check. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository that is associated with the image layers to check.
+
+      
+
+    
+    :type layerDigests: list
+    :param layerDigests: **[REQUIRED]** 
+
+      The digests of the image layers to check.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'layers': [
+                {
+                    'layerDigest': 'string',
+                    'layerAvailability': 'AVAILABLE'|'UNAVAILABLE',
+                    'layerSize': 123,
+                    'mediaType': 'string'
+                },
+            ],
+            'failures': [
+                {
+                    'layerDigest': 'string',
+                    'failureCode': 'InvalidLayerDigest'|'MissingLayerDigest',
+                    'failureReason': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **layers** *(list) --* 
+
+          A list of image layer objects corresponding to the image layer references in the request.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing an Amazon ECR image layer.
+
+            
+            
+
+            - **layerDigest** *(string) --* 
+
+              The ``sha256`` digest of the image layer.
+
+              
+            
+
+            - **layerAvailability** *(string) --* 
+
+              The availability status of the image layer.
+
+              
+            
+
+            - **layerSize** *(integer) --* 
+
+              The size, in bytes, of the image layer.
+
+              
+            
+
+            - **mediaType** *(string) --* 
+
+              The media type of the layer, such as ``application/vnd.docker.image.rootfs.diff.tar.gzip`` or ``application/vnd.oci.image.layer.v1.tar+gzip`` .
+
+              
+        
+      
+        
+
+        - **failures** *(list) --* 
+
+          Any failures associated with the call.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing an Amazon ECR image layer failure.
+
+            
+            
+
+            - **layerDigest** *(string) --* 
+
+              The layer digest associated with the failure.
+
+              
+            
+
+            - **failureCode** *(string) --* 
+
+              The failure code associated with the failure.
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reason for the failure.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RegistryNotFoundException`
+
+    
+
+  .. py:method:: batch_delete_image(**kwargs)
+
+    
+
+    Deletes a list of specified images within a repository in a public registry. Images are specified with either an ``imageTag`` or ``imageDigest`` .
+
+     
+
+    You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.
+
+     
+
+    You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/BatchDeleteImage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_delete_image(
+          registryId='string',
+          repositoryName='string',
+          imageIds=[
+              {
+                  'imageDigest': 'string',
+                  'imageTag': 'string'
+              },
+          ]
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The repository in a public registry that contains the image to delete.
+
+      
+
+    
+    :type imageIds: list
+    :param imageIds: **[REQUIRED]** 
+
+      A list of image ID references that correspond to images to delete. The format of the ``imageIds`` reference is ``imageTag=tag`` or ``imageDigest=digest`` .
+
+      
+
+    
+      - *(dict) --* 
+
+        An object with identifying information for an Amazon ECR image.
+
+        
+
+      
+        - **imageDigest** *(string) --* 
+
+          The ``sha256`` digest of the image manifest.
+
+          
+
+        
+        - **imageTag** *(string) --* 
+
+          The tag used for the image.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'imageIds': [
+                {
+                    'imageDigest': 'string',
+                    'imageTag': 'string'
+                },
+            ],
+            'failures': [
+                {
+                    'imageId': {
+                        'imageDigest': 'string',
+                        'imageTag': 'string'
+                    },
+                    'failureCode': 'InvalidImageDigest'|'InvalidImageTag'|'ImageTagDoesNotMatchDigest'|'ImageNotFound'|'MissingDigestAndTag'|'ImageReferencedByManifestList'|'KmsError',
+                    'failureReason': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **imageIds** *(list) --* 
+
+          The image IDs of the deleted images.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object with identifying information for an Amazon ECR image.
+
+            
+            
+
+            - **imageDigest** *(string) --* 
+
+              The ``sha256`` digest of the image manifest.
+
+              
+            
+
+            - **imageTag** *(string) --* 
+
+              The tag used for the image.
+
+              
+        
+      
+        
+
+        - **failures** *(list) --* 
+
+          Any failures associated with the call.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing an Amazon ECR image failure.
+
+            
+            
+
+            - **imageId** *(dict) --* 
+
+              The image ID associated with the failure.
+
+              
+              
+
+              - **imageDigest** *(string) --* 
+
+                The ``sha256`` digest of the image manifest.
+
+                
+              
+
+              - **imageTag** *(string) --* 
+
+                The tag used for the image.
+
+                
+          
+            
+
+            - **failureCode** *(string) --* 
+
+              The code associated with the failure.
+
+              
+            
+
+            - **failureReason** *(string) --* 
+
+              The reason for the failure.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: complete_layer_upload(**kwargs)
+
+    
+
+    Informs Amazon ECR that the image layer upload has completed for a specified public registry, repository name, and upload ID. You can optionally provide a ``sha256`` digest of the image layer for data validation purposes.
+
+     
+
+    When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.
+
+     
+
+    .. note::
+
+       
+
+      This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the ``docker`` CLI to pull, tag, and push images.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/CompleteLayerUpload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.complete_layer_upload(
+          registryId='string',
+          repositoryName='string',
+          uploadId='string',
+          layerDigests=[
+              'string',
+          ]
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository in a public registry to associate with the image layer.
+
+      
+
+    
+    :type uploadId: string
+    :param uploadId: **[REQUIRED]** 
+
+      The upload ID from a previous  InitiateLayerUpload operation to associate with the image layer.
+
+      
+
+    
+    :type layerDigests: list
+    :param layerDigests: **[REQUIRED]** 
+
+      The ``sha256`` digest of the image layer.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryId': 'string',
+            'repositoryName': 'string',
+            'uploadId': 'string',
+            'layerDigest': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryId** *(string) --* 
+
+          The public registry ID associated with the request.
+
+          
+        
+
+        - **repositoryName** *(string) --* 
+
+          The repository name associated with the request.
+
+          
+        
+
+        - **uploadId** *(string) --* 
+
+          The upload ID associated with the layer.
+
+          
+        
+
+        - **layerDigest** *(string) --* 
+
+          The ``sha256`` digest of the image layer.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UploadNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidLayerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LayerPartTooSmallException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LayerAlreadyExistsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.EmptyUploadException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RegistryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+  .. py:method:: create_repository(**kwargs)
+
+    
+
+    Creates a repository in a public registry. For more information, see `Amazon ECR repositories <https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html>`__ in the *Amazon Elastic Container Registry User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/CreateRepository>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_repository(
+          repositoryName='string',
+          catalogData={
+              'description': 'string',
+              'architectures': [
+                  'string',
+              ],
+              'operatingSystems': [
+                  'string',
+              ],
+              'logoImageBlob': b'bytes',
+              'aboutText': 'string',
+              'usageText': 'string'
+          },
+          tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name to use for the repository. This appears publicly in the Amazon ECR Public Gallery. The repository name may be specified on its own (such as ``nginx-web-app`` ) or it can be prepended with a namespace to group the repository into a category (such as ``project-a/nginx-web-app`` ).
+
+      
+
+    
+    :type catalogData: dict
+    :param catalogData: 
+
+      The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
+
+      
+
+    
+      - **description** *(string) --* 
+
+        A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
+
+        
+
+      
+      - **architectures** *(list) --* 
+
+        The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters.
+
+         
+
+         
+        * ``Linux``   
+         
+        * ``Windows``   
+         
+
+         
+
+        .. note::
+
+           
+
+          If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.
+
+           
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **operatingSystems** *(list) --* 
+
+        The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters.
+
+         
+
+         
+        * ``ARM``   
+         
+        * ``ARM 64``   
+         
+        * ``x86``   
+         
+        * ``x86-64``   
+         
+
+         
+
+        .. note::
+
+           
+
+          If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.
+
+           
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **logoImageBlob** *(bytes) --* 
+
+        The base64-encoded repository logo payload.
+
+         
+
+        .. note::
+
+           
+
+          The repository logo is only publicly visible in the Amazon ECR Public Gallery for verified accounts.
+
+           
+
+        
+
+      
+      - **aboutText** *(string) --* 
+
+        A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
+
+        
+
+      
+      - **usageText** *(string) --* 
+
+        Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
+
+        
+
+      
+    
+    :type tags: list
+    :param tags: 
+
+      The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+
+      
+
+    
+      - *(dict) --* 
+
+        The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'repository': {
+                'repositoryArn': 'string',
+                'registryId': 'string',
+                'repositoryName': 'string',
+                'repositoryUri': 'string',
+                'createdAt': datetime(2015, 1, 1)
+            },
+            'catalogData': {
+                'description': 'string',
+                'architectures': [
+                    'string',
+                ],
+                'operatingSystems': [
+                    'string',
+                ],
+                'logoUrl': 'string',
+                'aboutText': 'string',
+                'usageText': 'string',
+                'marketplaceCertified': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **repository** *(dict) --* 
+
+          The repository that was created.
+
+          
+          
+
+          - **repositoryArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the ``arn:aws:ecr`` namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, ``arn:aws:ecr:region:012345678910:repository/test`` .
+
+            
+          
+
+          - **registryId** *(string) --* 
+
+            The AWS account ID associated with the public registry that contains the repository.
+
+            
+          
+
+          - **repositoryName** *(string) --* 
+
+            The name of the repository.
+
+            
+          
+
+          - **repositoryUri** *(string) --* 
+
+            The URI for the repository. You can use this URI for container image ``push`` and ``pull`` operations.
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The date and time, in JavaScript date format, when the repository was created.
+
+            
+      
+        
+
+        - **catalogData** *(dict) --* 
+
+          The catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
+
+          
+          
+
+          - **description** *(string) --* 
+
+            The short description of the repository.
+
+            
+          
+
+          - **architectures** *(list) --* 
+
+            The architecture tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **operatingSystems** *(list) --* 
+
+            The operating system tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **logoUrl** *(string) --* 
+
+            The URL containing the logo associated with the repository.
+
+            
+          
+
+          - **aboutText** *(string) --* 
+
+            The longform description of the contents of the repository. This text appears in the repository details on the Amazon ECR Public Gallery.
+
+            
+          
+
+          - **usageText** *(string) --* 
+
+            The longform usage details of the contents of the repository. The usage text provides context for users of the repository.
+
+            
+          
+
+          - **marketplaceCertified** *(boolean) --* 
+
+            Whether or not the repository is certified by AWS Marketplace.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidTagParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.TooManyTagsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryAlreadyExistsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: delete_repository(**kwargs)
+
+    
+
+    Deletes a repository in a public registry. If the repository contains images, you must either delete all images in the repository or use the ``force`` option which deletes all images on your behalf before deleting the repository.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DeleteRepository>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_repository(
+          registryId='string',
+          repositoryName='string',
+          force=True|False
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository to delete. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to delete.
+
+      
+
+    
+    :type force: boolean
+    :param force: 
+
+      If a repository contains images, forces the deletion.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'repository': {
+                'repositoryArn': 'string',
+                'registryId': 'string',
+                'repositoryName': 'string',
+                'repositoryUri': 'string',
+                'createdAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **repository** *(dict) --* 
+
+          The repository that was deleted.
+
+          
+          
+
+          - **repositoryArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the ``arn:aws:ecr`` namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, ``arn:aws:ecr:region:012345678910:repository/test`` .
+
+            
+          
+
+          - **registryId** *(string) --* 
+
+            The AWS account ID associated with the public registry that contains the repository.
+
+            
+          
+
+          - **repositoryName** *(string) --* 
+
+            The name of the repository.
+
+            
+          
+
+          - **repositoryUri** *(string) --* 
+
+            The URI for the repository. You can use this URI for container image ``push`` and ``pull`` operations.
+
+            
+          
+
+          - **createdAt** *(datetime) --* 
+
+            The date and time, in JavaScript date format, when the repository was created.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotEmptyException`
+
+    
+
+  .. py:method:: delete_repository_policy(**kwargs)
+
+    
+
+    Deletes the repository policy associated with the specified repository.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DeleteRepositoryPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_repository_policy(
+          registryId='string',
+          repositoryName='string'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository policy to delete. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository that is associated with the repository policy to delete.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryId': 'string',
+            'repositoryName': 'string',
+            'policyText': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryId** *(string) --* 
+
+          The registry ID associated with the request.
+
+          
+        
+
+        - **repositoryName** *(string) --* 
+
+          The repository name associated with the request.
+
+          
+        
+
+        - **policyText** *(string) --* 
+
+          The JSON repository policy that was deleted from the repository.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryPolicyNotFoundException`
+
+    
+
+  .. py:method:: describe_image_tags(**kwargs)
+
+    
+
+    Returns the image tag details for a repository in a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImageTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_image_tags(
+          registryId='string',
+          repositoryName='string',
+          nextToken='string',
+          maxResults=123
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository that contains the image tag details to describe.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``DescribeImageTags`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. This value is ``null`` when there are no more results to return. This option cannot be used when you specify images with ``imageIds`` .
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of repository results returned by ``DescribeImageTags`` in paginated output. When this parameter is used, ``DescribeImageTags`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``DescribeImageTags`` request with the returned ``nextToken`` value. This value can be between 1 and 1000. If this parameter is not used, then ``DescribeImageTags`` returns up to 100 results and a ``nextToken`` value, if applicable. This option cannot be used when you specify images with ``imageIds`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'imageTagDetails': [
+                {
+                    'imageTag': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'imageDetail': {
+                        'imageDigest': 'string',
+                        'imageSizeInBytes': 123,
+                        'imagePushedAt': datetime(2015, 1, 1),
+                        'imageManifestMediaType': 'string',
+                        'artifactMediaType': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **imageTagDetails** *(list) --* 
+
+          The image tag details for the images in the requested repository.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing the image tag details for an image.
+
+            
+            
+
+            - **imageTag** *(string) --* 
+
+              The tag associated with the image.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time stamp indicating when the image tag was created.
+
+              
+            
+
+            - **imageDetail** *(dict) --* 
+
+              An object that describes the details of an image.
+
+              
+              
+
+              - **imageDigest** *(string) --* 
+
+                The ``sha256`` digest of the image manifest.
+
+                
+              
+
+              - **imageSizeInBytes** *(integer) --* 
+
+                The size, in bytes, of the image in the repository.
+
+                 
+
+                If the image is a manifest list, this will be the max size of all manifests in the list.
+
+                 
+
+                .. note::
+
+                   
+
+                  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the ``docker images`` command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .
+
+                   
+
+                
+              
+
+              - **imagePushedAt** *(datetime) --* 
+
+                The date and time, expressed in standard JavaScript date format, at which the current image tag was pushed to the repository.
+
+                
+              
+
+              - **imageManifestMediaType** *(string) --* 
+
+                The media type of the image manifest.
+
+                
+              
+
+              - **artifactMediaType** *(string) --* 
+
+                The artifact media type of the image.
+
+                
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``DescribeImageTags`` request. When the results of a ``DescribeImageTags`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: describe_images(**kwargs)
+
+    
+
+    Returns metadata about the images in a repository in a public registry.
+
+     
+
+    .. note::
+
+       
+
+      Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the ``docker images`` command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImages>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_images(
+          registryId='string',
+          repositoryName='string',
+          imageIds=[
+              {
+                  'imageDigest': 'string',
+                  'imageTag': 'string'
+              },
+          ],
+          nextToken='string',
+          maxResults=123
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The repository that contains the images to describe.
+
+      
+
+    
+    :type imageIds: list
+    :param imageIds: 
+
+      The list of image IDs for the requested repository.
+
+      
+
+    
+      - *(dict) --* 
+
+        An object with identifying information for an Amazon ECR image.
+
+        
+
+      
+        - **imageDigest** *(string) --* 
+
+          The ``sha256`` digest of the image manifest.
+
+          
+
+        
+        - **imageTag** *(string) --* 
+
+          The tag used for the image.
+
+          
+
+        
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``DescribeImages`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. This value is ``null`` when there are no more results to return. This option cannot be used when you specify images with ``imageIds`` .
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of repository results returned by ``DescribeImages`` in paginated output. When this parameter is used, ``DescribeImages`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``DescribeImages`` request with the returned ``nextToken`` value. This value can be between 1 and 1000. If this parameter is not used, then ``DescribeImages`` returns up to 100 results and a ``nextToken`` value, if applicable. This option cannot be used when you specify images with ``imageIds`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'imageDetails': [
+                {
+                    'registryId': 'string',
+                    'repositoryName': 'string',
+                    'imageDigest': 'string',
+                    'imageTags': [
+                        'string',
+                    ],
+                    'imageSizeInBytes': 123,
+                    'imagePushedAt': datetime(2015, 1, 1),
+                    'imageManifestMediaType': 'string',
+                    'artifactMediaType': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **imageDetails** *(list) --* 
+
+          A list of  ImageDetail objects that contain data about the image.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes an image returned by a  DescribeImages operation.
+
+            
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the public registry to which this image belongs.
+
+              
+            
+
+            - **repositoryName** *(string) --* 
+
+              The name of the repository to which this image belongs.
+
+              
+            
+
+            - **imageDigest** *(string) --* 
+
+              The ``sha256`` digest of the image manifest.
+
+              
+            
+
+            - **imageTags** *(list) --* 
+
+              The list of tags associated with this image.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **imageSizeInBytes** *(integer) --* 
+
+              The size, in bytes, of the image in the repository.
+
+               
+
+              If the image is a manifest list, this will be the max size of all manifests in the list.
+
+               
+
+              .. note::
+
+                 
+
+                Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the ``docker images`` command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .
+
+                 
+
+              
+            
+
+            - **imagePushedAt** *(datetime) --* 
+
+              The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. 
+
+              
+            
+
+            - **imageManifestMediaType** *(string) --* 
+
+              The media type of the image manifest.
+
+              
+            
+
+            - **artifactMediaType** *(string) --* 
+
+              The artifact media type of the image.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``DescribeImages`` request. When the results of a ``DescribeImages`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ImageNotFoundException`
+
+    
+
+  .. py:method:: describe_registries(**kwargs)
+
+    
+
+    Returns details for a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRegistries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_registries(
+          nextToken='string',
+          maxResults=123
+      )
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``DescribeRegistries`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. This value is ``null`` when there are no more results to return.
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of repository results returned by ``DescribeRegistries`` in paginated output. When this parameter is used, ``DescribeRegistries`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``DescribeRegistries`` request with the returned ``nextToken`` value. This value can be between 1 and 1000. If this parameter is not used, then ``DescribeRegistries`` returns up to 100 results and a ``nextToken`` value, if applicable.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registries': [
+                {
+                    'registryId': 'string',
+                    'registryArn': 'string',
+                    'registryUri': 'string',
+                    'verified': True|False,
+                    'aliases': [
+                        {
+                            'name': 'string',
+                            'status': 'ACTIVE'|'PENDING'|'REJECTED',
+                            'primaryRegistryAlias': True|False,
+                            'defaultRegistryAlias': True|False
+                        },
+                    ]
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registries** *(list) --* 
+
+          An object containing the details for a public registry.
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of a public registry.
+
+            
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the registry. If you do not specify a registry, the default public registry is assumed.
+
+              
+            
+
+            - **registryArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the public registry.
+
+              
+            
+
+            - **registryUri** *(string) --* 
+
+              The URI of a public registry. The URI contains a universal prefix and the registry alias.
+
+              
+            
+
+            - **verified** *(boolean) --* 
+
+              Whether the account is verified. This indicates whether the account is an AWS Marketplace vendor. If an account is verified, each public repository will received a verified account badge on the Amazon ECR Public Gallery.
+
+              
+            
+
+            - **aliases** *(list) --* 
+
+              An array of objects representing the aliases for a public registry.
+
+              
+              
+
+              - *(dict) --* 
+
+                An object representing the aliases for a public registry. A public registry is given an alias upon creation but a custom alias can be set using the Amazon ECR console. For more information, see `Registries <https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html>`__ in the *Amazon Elastic Container Registry User Guide* .
+
+                
+                
+
+                - **name** *(string) --* 
+
+                  The name of the registry alias.
+
+                  
+                
+
+                - **status** *(string) --* 
+
+                  The status of the registry alias.
+
+                  
+                
+
+                - **primaryRegistryAlias** *(boolean) --* 
+
+                  Whether or not the registry alias is the primary alias for the registry. If true, the alias is the primary registry alias and is displayed in both the repository URL and the image URI used in the ``docker pull`` commands on the Amazon ECR Public Gallery.
+
+                   
+
+                  .. note::
+
+                     
+
+                    A registry alias that is not the primary registry alias can be used in the repository URI in a ``docker pull`` command.
+
+                     
+
+                  
+                
+
+                - **defaultRegistryAlias** *(boolean) --* 
+
+                  Whether or not the registry alias is the default alias for the registry. When the first public repository is created, your public registry is assigned a default registry alias.
+
+                  
+            
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``DescribeRepositories`` request. When the results of a ``DescribeRepositories`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+
+  .. py:method:: describe_repositories(**kwargs)
+
+    
+
+    Describes repositories in a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRepositories>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_repositories(
+          registryId='string',
+          repositoryNames=[
+              'string',
+          ],
+          nextToken='string',
+          maxResults=123
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryNames: list
+    :param repositoryNames: 
+
+      A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type nextToken: string
+    :param nextToken: 
+
+      The ``nextToken`` value returned from a previous paginated ``DescribeRepositories`` request where ``maxResults`` was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the ``nextToken`` value. This value is ``null`` when there are no more results to return. This option cannot be used when you specify repositories with ``repositoryNames`` .
+
+       
+
+      .. note::
+
+         
+
+        This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.
+
+         
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of repository results returned by ``DescribeRepositories`` in paginated output. When this parameter is used, ``DescribeRepositories`` only returns ``maxResults`` results in a single page along with a ``nextToken`` response element. The remaining results of the initial request can be seen by sending another ``DescribeRepositories`` request with the returned ``nextToken`` value. This value can be between 1 and 1000. If this parameter is not used, then ``DescribeRepositories`` returns up to 100 results and a ``nextToken`` value, if applicable. This option cannot be used when you specify repositories with ``repositoryNames`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'repositories': [
+                {
+                    'repositoryArn': 'string',
+                    'registryId': 'string',
+                    'repositoryName': 'string',
+                    'repositoryUri': 'string',
+                    'createdAt': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **repositories** *(list) --* 
+
+          A list of repository objects corresponding to valid repositories.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing a repository.
+
+            
+            
+
+            - **repositoryArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the ``arn:aws:ecr`` namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, ``arn:aws:ecr:region:012345678910:repository/test`` .
+
+              
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the public registry that contains the repository.
+
+              
+            
+
+            - **repositoryName** *(string) --* 
+
+              The name of the repository.
+
+              
+            
+
+            - **repositoryUri** *(string) --* 
+
+              The URI for the repository. You can use this URI for container image ``push`` and ``pull`` operations.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time, in JavaScript date format, when the repository was created.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The ``nextToken`` value to include in a future ``DescribeRepositories`` request. When the results of a ``DescribeRepositories`` request exceed ``maxResults`` , this value can be used to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_authorization_token()
+
+    
+
+    Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. This API requires the ``ecr-public:GetAuthorizationToken`` and ``sts:GetServiceBearerToken`` permissions.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetAuthorizationToken>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_authorization_token()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'authorizationData': {
+                'authorizationToken': 'string',
+                'expiresAt': datetime(2015, 1, 1)
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **authorizationData** *(dict) --* 
+
+          An authorization token data object that corresponds to a public registry.
+
+          
+          
+
+          - **authorizationToken** *(string) --* 
+
+            A base64-encoded string that contains authorization data for a public Amazon ECR registry. When the string is decoded, it is presented in the format ``user:password`` for public registry authentication using ``docker login`` .
+
+            
+          
+
+          - **expiresAt** *(datetime) --* 
+
+            The Unix time in seconds and milliseconds when the authorization token expires. Authorization tokens are valid for 12 hours.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_registry_catalog_data()
+
+    
+
+    Retrieves catalog metadata for a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRegistryCatalogData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_registry_catalog_data()
+      
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryCatalogData': {
+                'displayName': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryCatalogData** *(dict) --* 
+
+          The catalog metadata for the public registry.
+
+          
+          
+
+          - **displayName** *(string) --* 
+
+            The display name for a public registry. This appears on the Amazon ECR Public Gallery.
+
+             
+
+            .. warning::
+
+               
+
+              Only accounts that have the verified account badge can have a registry display name.
+
+               
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+  .. py:method:: get_repository_catalog_data(**kwargs)
+
+    
+
+    Retrieve catalog metadata for a repository in a public registry. This metadata is displayed publicly in the Amazon ECR Public Gallery.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRepositoryCatalogData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_repository_catalog_data(
+          registryId='string',
+          repositoryName='string'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to retrieve the catalog metadata for.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'catalogData': {
+                'description': 'string',
+                'architectures': [
+                    'string',
+                ],
+                'operatingSystems': [
+                    'string',
+                ],
+                'logoUrl': 'string',
+                'aboutText': 'string',
+                'usageText': 'string',
+                'marketplaceCertified': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **catalogData** *(dict) --* 
+
+          The catalog metadata for the repository.
+
+          
+          
+
+          - **description** *(string) --* 
+
+            The short description of the repository.
+
+            
+          
+
+          - **architectures** *(list) --* 
+
+            The architecture tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **operatingSystems** *(list) --* 
+
+            The operating system tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **logoUrl** *(string) --* 
+
+            The URL containing the logo associated with the repository.
+
+            
+          
+
+          - **aboutText** *(string) --* 
+
+            The longform description of the contents of the repository. This text appears in the repository details on the Amazon ECR Public Gallery.
+
+            
+          
+
+          - **usageText** *(string) --* 
+
+            The longform usage details of the contents of the repository. The usage text provides context for users of the repository.
+
+            
+          
+
+          - **marketplaceCertified** *(boolean) --* 
+
+            Whether or not the repository is certified by AWS Marketplace.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: get_repository_policy(**kwargs)
+
+    
+
+    Retrieves the repository policy for the specified repository.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRepositoryPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_repository_policy(
+          registryId='string',
+          repositoryName='string'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository with the policy to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryId': 'string',
+            'repositoryName': 'string',
+            'policyText': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryId** *(string) --* 
+
+          The registry ID associated with the request.
+
+          
+        
+
+        - **repositoryName** *(string) --* 
+
+          The repository name associated with the request.
+
+          
+        
+
+        - **policyText** *(string) --* 
+
+          The repository policy text associated with the repository. The policy text will be in JSON format.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryPolicyNotFoundException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: initiate_layer_upload(**kwargs)
+
+    
+
+    Notifies Amazon ECR that you intend to upload an image layer.
+
+     
+
+    When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.
+
+     
+
+    .. note::
+
+       
+
+      This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the ``docker`` CLI to pull, tag, and push images.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/InitiateLayerUpload>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.initiate_layer_upload(
+          registryId='string',
+          repositoryName='string'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to which you intend to upload layers.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'uploadId': 'string',
+            'partSize': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **uploadId** *(string) --* 
+
+          The upload ID for the layer upload. This parameter is passed to further  UploadLayerPart and  CompleteLayerUpload operations.
+
+          
+        
+
+        - **partSize** *(integer) --* 
+
+          The size, in bytes, that Amazon ECR expects future layer part uploads to be.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RegistryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    List the tags for an Amazon ECR Public resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(list) --* 
+
+          The tags for the resource.
+
+          
+          
+
+          - *(dict) --* 
+
+            The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+
+  .. py:method:: put_image(**kwargs)
+
+    
+
+    Creates or updates the image manifest and tags associated with an image.
+
+     
+
+    When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.
+
+     
+
+    .. note::
+
+       
+
+      This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the ``docker`` CLI to pull, tag, and push images.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/PutImage>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_image(
+          registryId='string',
+          repositoryName='string',
+          imageManifest='string',
+          imageManifestMediaType='string',
+          imageTag='string',
+          imageDigest='string'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository in which to put the image. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository in which to put the image.
+
+      
+
+    
+    :type imageManifest: string
+    :param imageManifest: **[REQUIRED]** 
+
+      The image manifest corresponding to the image to be uploaded.
+
+      
+
+    
+    :type imageManifestMediaType: string
+    :param imageManifestMediaType: 
+
+      The media type of the image manifest. If you push an image manifest that does not contain the ``mediaType`` field, you must specify the ``imageManifestMediaType`` in the request.
+
+      
+
+    
+    :type imageTag: string
+    :param imageTag: 
+
+      The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.
+
+      
+
+    
+    :type imageDigest: string
+    :param imageDigest: 
+
+      The image digest of the image manifest corresponding to the image.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'image': {
+                'registryId': 'string',
+                'repositoryName': 'string',
+                'imageId': {
+                    'imageDigest': 'string',
+                    'imageTag': 'string'
+                },
+                'imageManifest': 'string',
+                'imageManifestMediaType': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **image** *(dict) --* 
+
+          Details of the image uploaded.
+
+          
+          
+
+          - **registryId** *(string) --* 
+
+            The AWS account ID associated with the registry containing the image.
+
+            
+          
+
+          - **repositoryName** *(string) --* 
+
+            The name of the repository associated with the image.
+
+            
+          
+
+          - **imageId** *(dict) --* 
+
+            An object containing the image tag and image digest associated with an image.
+
+            
+            
+
+            - **imageDigest** *(string) --* 
+
+              The ``sha256`` digest of the image manifest.
+
+              
+            
+
+            - **imageTag** *(string) --* 
+
+              The tag used for the image.
+
+              
+        
+          
+
+          - **imageManifest** *(string) --* 
+
+            The image manifest associated with the image.
+
+            
+          
+
+          - **imageManifestMediaType** *(string) --* 
+
+            The manifest media type of the image.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ImageAlreadyExistsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LayersNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ReferencedImagesNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ImageTagAlreadyExistsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ImageDigestDoesNotMatchException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RegistryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+  .. py:method:: put_registry_catalog_data(**kwargs)
+
+    
+
+    Create or updates the catalog data for a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/PutRegistryCatalogData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_registry_catalog_data(
+          displayName='string'
+      )
+    :type displayName: string
+    :param displayName: 
+
+      The display name for a public registry. The display name is shown as the repository author in the Amazon ECR Public Gallery.
+
+       
+
+      .. note::
+
+         
+
+        The registry display name is only publicly visible in the Amazon ECR Public Gallery for verified accounts.
+
+         
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryCatalogData': {
+                'displayName': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryCatalogData** *(dict) --* 
+
+          The catalog data for the public registry.
+
+          
+          
+
+          - **displayName** *(string) --* 
+
+            The display name for a public registry. This appears on the Amazon ECR Public Gallery.
+
+             
+
+            .. warning::
+
+               
+
+              Only accounts that have the verified account badge can have a registry display name.
+
+               
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+  .. py:method:: put_repository_catalog_data(**kwargs)
+
+    
+
+    Creates or updates the catalog data for a repository in a public registry.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/PutRepositoryCatalogData>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_repository_catalog_data(
+          registryId='string',
+          repositoryName='string',
+          catalogData={
+              'description': 'string',
+              'architectures': [
+                  'string',
+              ],
+              'operatingSystems': [
+                  'string',
+              ],
+              'logoImageBlob': b'bytes',
+              'aboutText': 'string',
+              'usageText': 'string'
+          }
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry the repository is in. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to create or update the catalog data for.
+
+      
+
+    
+    :type catalogData: dict
+    :param catalogData: **[REQUIRED]** 
+
+      An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
+
+      
+
+    
+      - **description** *(string) --* 
+
+        A short description of the contents of the repository. This text appears in both the image details and also when searching for repositories on the Amazon ECR Public Gallery.
+
+        
+
+      
+      - **architectures** *(list) --* 
+
+        The system architecture that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported architectures will appear as badges on the repository and are used as search filters.
+
+         
+
+         
+        * ``Linux``   
+         
+        * ``Windows``   
+         
+
+         
+
+        .. note::
+
+           
+
+          If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.
+
+           
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **operatingSystems** *(list) --* 
+
+        The operating systems that the images in the repository are compatible with. On the Amazon ECR Public Gallery, the following supported operating systems will appear as badges on the repository and are used as search filters.
+
+         
+
+         
+        * ``ARM``   
+         
+        * ``ARM 64``   
+         
+        * ``x86``   
+         
+        * ``x86-64``   
+         
+
+         
+
+        .. note::
+
+           
+
+          If an unsupported tag is added to your repository catalog data, it will be associated with the repository and can be retrieved using the API but will not be discoverable in the Amazon ECR Public Gallery.
+
+           
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **logoImageBlob** *(bytes) --* 
+
+        The base64-encoded repository logo payload.
+
+         
+
+        .. note::
+
+           
+
+          The repository logo is only publicly visible in the Amazon ECR Public Gallery for verified accounts.
+
+           
+
+        
+
+      
+      - **aboutText** *(string) --* 
+
+        A detailed description of the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The text must be in markdown format.
+
+        
+
+      
+      - **usageText** *(string) --* 
+
+        Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'catalogData': {
+                'description': 'string',
+                'architectures': [
+                    'string',
+                ],
+                'operatingSystems': [
+                    'string',
+                ],
+                'logoUrl': 'string',
+                'aboutText': 'string',
+                'usageText': 'string',
+                'marketplaceCertified': True|False
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **catalogData** *(dict) --* 
+
+          The catalog data for the repository.
+
+          
+          
+
+          - **description** *(string) --* 
+
+            The short description of the repository.
+
+            
+          
+
+          - **architectures** *(list) --* 
+
+            The architecture tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **operatingSystems** *(list) --* 
+
+            The operating system tags that are associated with the repository.
+
+             
+
+            .. note::
+
+               
+
+              Only supported operating system tags appear publicly in the Amazon ECR Public Gallery. For more information, see  RepositoryCatalogDataInput .
+
+               
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **logoUrl** *(string) --* 
+
+            The URL containing the logo associated with the repository.
+
+            
+          
+
+          - **aboutText** *(string) --* 
+
+            The longform description of the contents of the repository. This text appears in the repository details on the Amazon ECR Public Gallery.
+
+            
+          
+
+          - **usageText** *(string) --* 
+
+            The longform usage details of the contents of the repository. The usage text provides context for users of the repository.
+
+            
+          
+
+          - **marketplaceCertified** *(boolean) --* 
+
+            Whether or not the repository is certified by AWS Marketplace.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: set_repository_policy(**kwargs)
+
+    
+
+    Applies a repository policy to the specified public repository to control access permissions. For more information, see `Amazon ECR Repository Policies <https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html>`__ in the *Amazon Elastic Container Registry User Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/SetRepositoryPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.set_repository_policy(
+          registryId='string',
+          repositoryName='string',
+          policyText='string',
+          force=True|False
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to receive the policy.
+
+      
+
+    
+    :type policyText: string
+    :param policyText: **[REQUIRED]** 
+
+      The JSON repository policy text to apply to the repository. For more information, see `Amazon ECR Repository Policies <https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html>`__ in the *Amazon Elastic Container Registry User Guide* .
+
+      
+
+    
+    :type force: boolean
+    :param force: 
+
+      If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the  SetRepositoryPolicy operation. This is intended to prevent accidental repository lock outs.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryId': 'string',
+            'repositoryName': 'string',
+            'policyText': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryId** *(string) --* 
+
+          The registry ID associated with the request.
+
+          
+        
+
+        - **repositoryName** *(string) --* 
+
+          The repository name associated with the request.
+
+          
+        
+
+        - **policyText** *(string) --* 
+
+          The JSON repository policy text applied to the repository.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Associates the specified tags to a resource with the specified ``resourceArn`` . If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.
+
+      
+
+    
+    :type tags: list
+    :param tags: **[REQUIRED]** 
+
+      The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+
+      
+
+    
+      - *(dict) --* 
+
+        The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+
+        
+
+      
+        - **Key** *(string) --* 
+
+          One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+
+          
+
+        
+        - **Value** *(string) --* 
+
+          The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidTagParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.TooManyTagsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Deletes specified tags from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The keys of the tags to be removed.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidTagParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.TooManyTagsException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+
+  .. py:method:: upload_layer_part(**kwargs)
+
+    
+
+    Uploads an image layer part to Amazon ECR.
+
+     
+
+    When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.
+
+     
+
+    .. note::
+
+       
+
+      This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the ``docker`` CLI to pull, tag, and push images.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/UploadLayerPart>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.upload_layer_part(
+          registryId='string',
+          repositoryName='string',
+          uploadId='string',
+          partFirstByte=123,
+          partLastByte=123,
+          layerPartBlob=b'bytes'
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository to which you are uploading layer parts.
+
+      
+
+    
+    :type uploadId: string
+    :param uploadId: **[REQUIRED]** 
+
+      The upload ID from a previous  InitiateLayerUpload operation to associate with the layer part upload.
+
+      
+
+    
+    :type partFirstByte: integer
+    :param partFirstByte: **[REQUIRED]** 
+
+      The position of the first byte of the layer part witin the overall image layer.
+
+      
+
+    
+    :type partLastByte: integer
+    :param partLastByte: **[REQUIRED]** 
+
+      The position of the last byte of the layer part within the overall image layer.
+
+      
+
+    
+    :type layerPartBlob: bytes
+    :param layerPartBlob: **[REQUIRED]** 
+
+      The base64-encoded layer part payload.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registryId': 'string',
+            'repositoryName': 'string',
+            'uploadId': 'string',
+            'lastByteReceived': 123
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registryId** *(string) --* 
+
+          The registry ID associated with the request.
+
+          
+        
+
+        - **repositoryName** *(string) --* 
+
+          The repository name associated with the request.
+
+          
+        
+
+        - **uploadId** *(string) --* 
+
+          The upload ID associated with the request.
+
+          
+        
+
+        - **lastByteReceived** *(integer) --* 
+
+          The integer value of the last byte received in the request.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ECRPublic.Client.exceptions.ServerException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.InvalidLayerPartException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RepositoryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UploadNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.RegistryNotFoundException`
+
+    
+    *     :py:class:`ECRPublic.Client.exceptions.UnsupportedCommandException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`ECRPublic.Paginator.DescribeImageTags`
+
+
+* :py:class:`ECRPublic.Paginator.DescribeImages`
+
+
+* :py:class:`ECRPublic.Paginator.DescribeRegistries`
+
+
+* :py:class:`ECRPublic.Paginator.DescribeRepositories`
+
+
+
+.. py:class:: ECRPublic.Paginator.DescribeImageTags
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_image_tags')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ECRPublic.Client.describe_image_tags`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImageTags>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          registryId='string',
+          repositoryName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The name of the repository that contains the image tag details to describe.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'imageTagDetails': [
+                {
+                    'imageTag': 'string',
+                    'createdAt': datetime(2015, 1, 1),
+                    'imageDetail': {
+                        'imageDigest': 'string',
+                        'imageSizeInBytes': 123,
+                        'imagePushedAt': datetime(2015, 1, 1),
+                        'imageManifestMediaType': 'string',
+                        'artifactMediaType': 'string'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **imageTagDetails** *(list) --* 
+
+          The image tag details for the images in the requested repository.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing the image tag details for an image.
+
+            
+            
+
+            - **imageTag** *(string) --* 
+
+              The tag associated with the image.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The time stamp indicating when the image tag was created.
+
+              
+            
+
+            - **imageDetail** *(dict) --* 
+
+              An object that describes the details of an image.
+
+              
+              
+
+              - **imageDigest** *(string) --* 
+
+                The ``sha256`` digest of the image manifest.
+
+                
+              
+
+              - **imageSizeInBytes** *(integer) --* 
+
+                The size, in bytes, of the image in the repository.
+
+                 
+
+                If the image is a manifest list, this will be the max size of all manifests in the list.
+
+                 
+
+                .. note::
+
+                   
+
+                  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the ``docker images`` command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .
+
+                   
+
+                
+              
+
+              - **imagePushedAt** *(datetime) --* 
+
+                The date and time, expressed in standard JavaScript date format, at which the current image tag was pushed to the repository.
+
+                
+              
+
+              - **imageManifestMediaType** *(string) --* 
+
+                The media type of the image manifest.
+
+                
+              
+
+              - **artifactMediaType** *(string) --* 
+
+                The artifact media type of the image.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: ECRPublic.Paginator.DescribeImages
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_images')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ECRPublic.Client.describe_images`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImages>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          registryId='string',
+          repositoryName='string',
+          imageIds=[
+              {
+                  'imageDigest': 'string',
+                  'imageTag': 'string'
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the public registry that contains the repository in which to describe images. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryName: string
+    :param repositoryName: **[REQUIRED]** 
+
+      The repository that contains the images to describe.
+
+      
+
+    
+    :type imageIds: list
+    :param imageIds: 
+
+      The list of image IDs for the requested repository.
+
+      
+
+    
+      - *(dict) --* 
+
+        An object with identifying information for an Amazon ECR image.
+
+        
+
+      
+        - **imageDigest** *(string) --* 
+
+          The ``sha256`` digest of the image manifest.
+
+          
+
+        
+        - **imageTag** *(string) --* 
+
+          The tag used for the image.
+
+          
+
+        
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'imageDetails': [
+                {
+                    'registryId': 'string',
+                    'repositoryName': 'string',
+                    'imageDigest': 'string',
+                    'imageTags': [
+                        'string',
+                    ],
+                    'imageSizeInBytes': 123,
+                    'imagePushedAt': datetime(2015, 1, 1),
+                    'imageManifestMediaType': 'string',
+                    'artifactMediaType': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **imageDetails** *(list) --* 
+
+          A list of  ImageDetail objects that contain data about the image.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object that describes an image returned by a  DescribeImages operation.
+
+            
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the public registry to which this image belongs.
+
+              
+            
+
+            - **repositoryName** *(string) --* 
+
+              The name of the repository to which this image belongs.
+
+              
+            
+
+            - **imageDigest** *(string) --* 
+
+              The ``sha256`` digest of the image manifest.
+
+              
+            
+
+            - **imageTags** *(list) --* 
+
+              The list of tags associated with this image.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **imageSizeInBytes** *(integer) --* 
+
+              The size, in bytes, of the image in the repository.
+
+               
+
+              If the image is a manifest list, this will be the max size of all manifests in the list.
+
+               
+
+              .. note::
+
+                 
+
+                Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the ``docker images`` command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .
+
+                 
+
+              
+            
+
+            - **imagePushedAt** *(datetime) --* 
+
+              The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository. 
+
+              
+            
+
+            - **imageManifestMediaType** *(string) --* 
+
+              The media type of the image manifest.
+
+              
+            
+
+            - **artifactMediaType** *(string) --* 
+
+              The artifact media type of the image.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: ECRPublic.Paginator.DescribeRegistries
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_registries')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ECRPublic.Client.describe_registries`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRegistries>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'registries': [
+                {
+                    'registryId': 'string',
+                    'registryArn': 'string',
+                    'registryUri': 'string',
+                    'verified': True|False,
+                    'aliases': [
+                        {
+                            'name': 'string',
+                            'status': 'ACTIVE'|'PENDING'|'REJECTED',
+                            'primaryRegistryAlias': True|False,
+                            'defaultRegistryAlias': True|False
+                        },
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **registries** *(list) --* 
+
+          An object containing the details for a public registry.
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of a public registry.
+
+            
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the registry. If you do not specify a registry, the default public registry is assumed.
+
+              
+            
+
+            - **registryArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the public registry.
+
+              
+            
+
+            - **registryUri** *(string) --* 
+
+              The URI of a public registry. The URI contains a universal prefix and the registry alias.
+
+              
+            
+
+            - **verified** *(boolean) --* 
+
+              Whether the account is verified. This indicates whether the account is an AWS Marketplace vendor. If an account is verified, each public repository will received a verified account badge on the Amazon ECR Public Gallery.
+
+              
+            
+
+            - **aliases** *(list) --* 
+
+              An array of objects representing the aliases for a public registry.
+
+              
+              
+
+              - *(dict) --* 
+
+                An object representing the aliases for a public registry. A public registry is given an alias upon creation but a custom alias can be set using the Amazon ECR console. For more information, see `Registries <https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html>`__ in the *Amazon Elastic Container Registry User Guide* .
+
+                
+                
+
+                - **name** *(string) --* 
+
+                  The name of the registry alias.
+
+                  
+                
+
+                - **status** *(string) --* 
+
+                  The status of the registry alias.
+
+                  
+                
+
+                - **primaryRegistryAlias** *(boolean) --* 
+
+                  Whether or not the registry alias is the primary alias for the registry. If true, the alias is the primary registry alias and is displayed in both the repository URL and the image URI used in the ``docker pull`` commands on the Amazon ECR Public Gallery.
+
+                   
+
+                  .. note::
+
+                     
+
+                    A registry alias that is not the primary registry alias can be used in the repository URI in a ``docker pull`` command.
+
+                     
+
+                  
+                
+
+                - **defaultRegistryAlias** *(boolean) --* 
+
+                  Whether or not the registry alias is the default alias for the registry. When the first public repository is created, your public registry is assigned a default registry alias.
+
+                  
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: ECRPublic.Paginator.DescribeRepositories
+
+  ::
+
+    
+    paginator = client.get_paginator('describe_repositories')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`ECRPublic.Client.describe_repositories`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRepositories>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          registryId='string',
+          repositoryNames=[
+              'string',
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type registryId: string
+    :param registryId: 
+
+      The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default public registry is assumed.
+
+      
+
+    
+    :type repositoryNames: list
+    :param repositoryNames: 
+
+      A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'repositories': [
+                {
+                    'repositoryArn': 'string',
+                    'registryId': 'string',
+                    'repositoryName': 'string',
+                    'repositoryUri': 'string',
+                    'createdAt': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **repositories** *(list) --* 
+
+          A list of repository objects corresponding to valid repositories.
+
+          
+          
+
+          - *(dict) --* 
+
+            An object representing a repository.
+
+            
+            
+
+            - **repositoryArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the ``arn:aws:ecr`` namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, ``arn:aws:ecr:region:012345678910:repository/test`` .
+
+              
+            
+
+            - **registryId** *(string) --* 
+
+              The AWS account ID associated with the public registry that contains the repository.
+
+              
+            
+
+            - **repositoryName** *(string) --* 
+
+              The name of the repository.
+
+              
+            
+
+            - **repositoryUri** *(string) --* 
+
+              The URI for the repository. You can use this URI for container image ``push`` and ``pull`` operations.
+
+              
+            
+
+            - **createdAt** *(datetime) --* 
+
+              The date and time, in JavaScript date format, when the repository was created.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

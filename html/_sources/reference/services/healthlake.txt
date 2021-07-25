@@ -1,0 +1,2307 @@
+
+
+**********
+HealthLake
+**********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: HealthLake.Client
+
+  A low-level client representing Amazon HealthLake
+  
+
+  Amazon HealthLake is a HIPAA eligibile service that allows customers to store, transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('healthlake')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~HealthLake.Client.can_paginate`
+
+  
+  *   :py:meth:`~HealthLake.Client.create_fhir_datastore`
+
+  
+  *   :py:meth:`~HealthLake.Client.delete_fhir_datastore`
+
+  
+  *   :py:meth:`~HealthLake.Client.describe_fhir_datastore`
+
+  
+  *   :py:meth:`~HealthLake.Client.describe_fhir_export_job`
+
+  
+  *   :py:meth:`~HealthLake.Client.describe_fhir_import_job`
+
+  
+  *   :py:meth:`~HealthLake.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~HealthLake.Client.get_paginator`
+
+  
+  *   :py:meth:`~HealthLake.Client.get_waiter`
+
+  
+  *   :py:meth:`~HealthLake.Client.list_fhir_datastores`
+
+  
+  *   :py:meth:`~HealthLake.Client.list_fhir_export_jobs`
+
+  
+  *   :py:meth:`~HealthLake.Client.list_fhir_import_jobs`
+
+  
+  *   :py:meth:`~HealthLake.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~HealthLake.Client.start_fhir_export_job`
+
+  
+  *   :py:meth:`~HealthLake.Client.start_fhir_import_job`
+
+  
+  *   :py:meth:`~HealthLake.Client.tag_resource`
+
+  
+  *   :py:meth:`~HealthLake.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_fhir_datastore(**kwargs)
+
+    
+
+    Creates a Data Store that can ingest and export FHIR formatted data.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/CreateFHIRDatastore>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_fhir_datastore(
+          DatastoreName='string',
+          DatastoreTypeVersion='R4',
+          SseConfiguration={
+              'KmsEncryptionConfig': {
+                  'CmkType': 'CUSTOMER_MANAGED_KMS_KEY'|'AWS_OWNED_KMS_KEY',
+                  'KmsKeyId': 'string'
+              }
+          },
+          PreloadDataConfig={
+              'PreloadDataType': 'SYNTHEA'
+          },
+          ClientToken='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type DatastoreName: string
+    :param DatastoreName: 
+
+      The user generated name for the Data Store.
+
+      
+
+    
+    :type DatastoreTypeVersion: string
+    :param DatastoreTypeVersion: **[REQUIRED]** 
+
+      The FHIR version of the Data Store. The only supported version is R4.
+
+      
+
+    
+    :type SseConfiguration: dict
+    :param SseConfiguration: 
+
+      The server-side encryption key configuration for a customer provided encryption key specified for creating a Data Store. 
+
+      
+
+    
+      - **KmsEncryptionConfig** *(dict) --* **[REQUIRED]** 
+
+        The KMS encryption configuration used to provide details for data encryption. 
+
+        
+
+      
+        - **CmkType** *(string) --* **[REQUIRED]** 
+
+          The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
+
+          
+
+        
+        - **KmsKeyId** *(string) --* 
+
+          The KMS encryption key id/alias used to encrypt the Data Store contents at rest. 
+
+          
+
+        
+      
+    
+    :type PreloadDataConfig: dict
+    :param PreloadDataConfig: 
+
+      Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.
+
+      
+
+    
+      - **PreloadDataType** *(string) --* **[REQUIRED]** 
+
+        The type of preloaded data. Only Synthea preloaded data is supported.
+
+        
+
+      
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      Optional user provided token used for ensuring idempotency.
+
+      This field is autopopulated if not provided.
+
+    
+    :type Tags: list
+    :param Tags: 
+
+      Resource tags that are applied to a Data Store when it is created. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a label consisting of a user-defined key and value. The form for tags is {"Key", "Value"} 
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key portion of a tag. Tag keys are case sensitive. 
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value portion of tag. Tag values are case sensitive. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatastoreId': 'string',
+            'DatastoreArn': 'string',
+            'DatastoreStatus': 'CREATING'|'ACTIVE'|'DELETING'|'DELETED',
+            'DatastoreEndpoint': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatastoreId** *(string) --* 
+
+          The AWS-generated Data Store id. This id is in the output from the initial Data Store creation call.
+
+          
+        
+
+        - **DatastoreArn** *(string) --* 
+
+          The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
+
+          
+        
+
+        - **DatastoreStatus** *(string) --* 
+
+          The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.
+
+          
+        
+
+        - **DatastoreEndpoint** *(string) --* 
+
+          The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_fhir_datastore(**kwargs)
+
+    
+
+    Deletes a Data Store. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DeleteFHIRDatastore>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_fhir_datastore(
+          DatastoreId='string'
+      )
+    :type DatastoreId: string
+    :param DatastoreId: 
+
+      The AWS-generated ID for the Data Store to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatastoreId': 'string',
+            'DatastoreArn': 'string',
+            'DatastoreStatus': 'CREATING'|'ACTIVE'|'DELETING'|'DELETED',
+            'DatastoreEndpoint': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatastoreId** *(string) --* 
+
+          The AWS-generated ID for the Data Store to be deleted.
+
+          
+        
+
+        - **DatastoreArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+
+          
+        
+
+        - **DatastoreStatus** *(string) --* 
+
+          The status of the Data Store that the user has requested to be deleted. 
+
+          
+        
+
+        - **DatastoreEndpoint** *(string) --* 
+
+          The AWS endpoint for the Data Store the user has requested to be deleted.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_fhir_datastore(**kwargs)
+
+    
+
+    Gets the properties associated with the FHIR Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRDatastore>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_fhir_datastore(
+          DatastoreId='string'
+      )
+    :type DatastoreId: string
+    :param DatastoreId: 
+
+      The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatastoreProperties': {
+                'DatastoreId': 'string',
+                'DatastoreArn': 'string',
+                'DatastoreName': 'string',
+                'DatastoreStatus': 'CREATING'|'ACTIVE'|'DELETING'|'DELETED',
+                'CreatedAt': datetime(2015, 1, 1),
+                'DatastoreTypeVersion': 'R4',
+                'DatastoreEndpoint': 'string',
+                'SseConfiguration': {
+                    'KmsEncryptionConfig': {
+                        'CmkType': 'CUSTOMER_MANAGED_KMS_KEY'|'AWS_OWNED_KMS_KEY',
+                        'KmsKeyId': 'string'
+                    }
+                },
+                'PreloadDataConfig': {
+                    'PreloadDataType': 'SYNTHEA'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatastoreProperties** *(dict) --* 
+
+          All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.
+
+          
+          
+
+          - **DatastoreId** *(string) --* 
+
+            The AWS-generated ID number for the Data Store.
+
+            
+          
+
+          - **DatastoreArn** *(string) --* 
+
+            The Amazon Resource Name used in the creation of the Data Store.
+
+            
+          
+
+          - **DatastoreName** *(string) --* 
+
+            The user-generated name for the Data Store.
+
+            
+          
+
+          - **DatastoreStatus** *(string) --* 
+
+            The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
+
+            
+          
+
+          - **CreatedAt** *(datetime) --* 
+
+            The time that a Data Store was created. 
+
+            
+          
+
+          - **DatastoreTypeVersion** *(string) --* 
+
+            The FHIR version. Only R4 version data is supported.
+
+            
+          
+
+          - **DatastoreEndpoint** *(string) --* 
+
+            The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
+
+            
+          
+
+          - **SseConfiguration** *(dict) --* 
+
+            The server-side encryption key configuration for a customer provided encryption key (CMK). 
+
+            
+            
+
+            - **KmsEncryptionConfig** *(dict) --* 
+
+              The KMS encryption configuration used to provide details for data encryption. 
+
+              
+              
+
+              - **CmkType** *(string) --* 
+
+                The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
+
+                
+              
+
+              - **KmsKeyId** *(string) --* 
+
+                The KMS encryption key id/alias used to encrypt the Data Store contents at rest. 
+
+                
+          
+        
+          
+
+          - **PreloadDataConfig** *(dict) --* 
+
+            The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
+
+            
+            
+
+            - **PreloadDataType** *(string) --* 
+
+              The type of preloaded data. Only Synthea preloaded data is supported.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_fhir_export_job(**kwargs)
+
+    
+
+    Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRExportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_fhir_export_job(
+          DatastoreId='string',
+          JobId='string'
+      )
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      The AWS generated ID for the Data Store from which files are being exported from for an export job.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The AWS generated ID for an export job.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ExportJobProperties': {
+                'JobId': 'string',
+                'JobName': 'string',
+                'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+                'SubmitTime': datetime(2015, 1, 1),
+                'EndTime': datetime(2015, 1, 1),
+                'DatastoreId': 'string',
+                'OutputDataConfig': {
+                    'S3Configuration': {
+                        'S3Uri': 'string',
+                        'KmsKeyId': 'string'
+                    }
+                },
+                'DataAccessRoleArn': 'string',
+                'Message': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ExportJobProperties** *(dict) --* 
+
+          Displays the properties of the export job, including the ID, Arn, Name, and the status of the job. 
+
+          
+          
+
+          - **JobId** *(string) --* 
+
+            The AWS generated ID for an export job.
+
+            
+          
+
+          - **JobName** *(string) --* 
+
+            The user generated name for an export job.
+
+            
+          
+
+          - **JobStatus** *(string) --* 
+
+            The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.
+
+            
+          
+
+          - **SubmitTime** *(datetime) --* 
+
+            The time an export job was initiated.
+
+            
+          
+
+          - **EndTime** *(datetime) --* 
+
+            The time an export job completed.
+
+            
+          
+
+          - **DatastoreId** *(string) --* 
+
+            The AWS generated ID for the Data Store from which files are being exported for an export job.
+
+            
+          
+
+          - **OutputDataConfig** *(dict) --* 
+
+            The output data configuration that was supplied when the export job was created.
+
+            
+            
+
+            - **S3Configuration** *(dict) --* 
+
+              The output data configuration that was supplied when the export job was created. 
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+                
+              
+
+              - **KmsKeyId** *(string) --* 
+
+                The KMS key ID used to access the S3 bucket. 
+
+                
+          
+        
+          
+
+          - **DataAccessRoleArn** *(string) --* 
+
+            The Amazon Resource Name used during the initiation of the job.
+
+            
+          
+
+          - **Message** *(string) --* 
+
+            An explanation of any errors that may have occurred during the export job.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: describe_fhir_import_job(**kwargs)
+
+    
+
+    Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/DescribeFHIRImportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_fhir_import_job(
+          DatastoreId='string',
+          JobId='string'
+      )
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      The AWS-generated ID of the Data Store.
+
+      
+
+    
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The AWS-generated job ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ImportJobProperties': {
+                'JobId': 'string',
+                'JobName': 'string',
+                'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+                'SubmitTime': datetime(2015, 1, 1),
+                'EndTime': datetime(2015, 1, 1),
+                'DatastoreId': 'string',
+                'InputDataConfig': {
+                    'S3Uri': 'string'
+                },
+                'JobOutputDataConfig': {
+                    'S3Configuration': {
+                        'S3Uri': 'string',
+                        'KmsKeyId': 'string'
+                    }
+                },
+                'DataAccessRoleArn': 'string',
+                'Message': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ImportJobProperties** *(dict) --* 
+
+          The properties of the Import job request, including the ID, ARN, name, and the status of the job.
+
+          
+          
+
+          - **JobId** *(string) --* 
+
+            The AWS-generated id number for the Import job.
+
+            
+          
+
+          - **JobName** *(string) --* 
+
+            The user-generated name for an Import job.
+
+            
+          
+
+          - **JobStatus** *(string) --* 
+
+            The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.
+
+            
+          
+
+          - **SubmitTime** *(datetime) --* 
+
+            The time that the Import job was submitted for processing.
+
+            
+          
+
+          - **EndTime** *(datetime) --* 
+
+            The time that the Import job was completed.
+
+            
+          
+
+          - **DatastoreId** *(string) --* 
+
+            The datastore id used when the Import job was created. 
+
+            
+          
+
+          - **InputDataConfig** *(dict) --* 
+
+            The input data configuration that was supplied when the Import job was created.
+
+            
+            
+
+            - **S3Uri** *(string) --* 
+
+              The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+              
+        
+          
+
+          - **JobOutputDataConfig** *(dict) --* 
+
+            The output data configuration that was supplied when the export job was created.
+
+            
+            
+
+            - **S3Configuration** *(dict) --* 
+
+              The output data configuration that was supplied when the export job was created. 
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+                
+              
+
+              - **KmsKeyId** *(string) --* 
+
+                The KMS key ID used to access the S3 bucket. 
+
+                
+          
+        
+          
+
+          - **DataAccessRoleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
+
+            
+          
+
+          - **Message** *(string) --* 
+
+            An explanation of any errors that may have occurred during the FHIR import job. 
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_fhir_datastores(**kwargs)
+
+    
+
+    Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRDatastores>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_fhir_datastores(
+          Filter={
+              'DatastoreName': 'string',
+              'DatastoreStatus': 'CREATING'|'ACTIVE'|'DELETING'|'DELETED',
+              'CreatedBefore': datetime(2015, 1, 1),
+              'CreatedAfter': datetime(2015, 1, 1)
+          },
+          NextToken='string',
+          MaxResults=123
+      )
+    :type Filter: dict
+    :param Filter: 
+
+      Lists all filters associated with a FHIR Data Store request.
+
+      
+
+    
+      - **DatastoreName** *(string) --* 
+
+        Allows the user to filter Data Store results by name.
+
+        
+
+      
+      - **DatastoreStatus** *(string) --* 
+
+        Allows the user to filter Data Store results by status.
+
+        
+
+      
+      - **CreatedBefore** *(datetime) --* 
+
+        A filter that allows the user to set cutoff dates for records. All Data Stores created before the specified date will be included in the results. 
+
+        
+
+      
+      - **CreatedAfter** *(datetime) --* 
+
+        A filter that allows the user to set cutoff dates for records. All Data Stores created after the specified date will be included in the results.
+
+        
+
+      
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      Fetches the next page of Data Stores when results are paginated.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of Data Stores returned in a single page of a ListFHIRDatastoresRequest call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'DatastorePropertiesList': [
+                {
+                    'DatastoreId': 'string',
+                    'DatastoreArn': 'string',
+                    'DatastoreName': 'string',
+                    'DatastoreStatus': 'CREATING'|'ACTIVE'|'DELETING'|'DELETED',
+                    'CreatedAt': datetime(2015, 1, 1),
+                    'DatastoreTypeVersion': 'R4',
+                    'DatastoreEndpoint': 'string',
+                    'SseConfiguration': {
+                        'KmsEncryptionConfig': {
+                            'CmkType': 'CUSTOMER_MANAGED_KMS_KEY'|'AWS_OWNED_KMS_KEY',
+                            'KmsKeyId': 'string'
+                        }
+                    },
+                    'PreloadDataConfig': {
+                        'PreloadDataType': 'SYNTHEA'
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **DatastorePropertiesList** *(list) --* 
+
+          All properties associated with the listed Data Stores.
+
+          
+          
+
+          - *(dict) --* 
+
+            Displays the properties of the Data Store, including the ID, Arn, name, and the status of the Data Store.
+
+            
+            
+
+            - **DatastoreId** *(string) --* 
+
+              The AWS-generated ID number for the Data Store.
+
+              
+            
+
+            - **DatastoreArn** *(string) --* 
+
+              The Amazon Resource Name used in the creation of the Data Store.
+
+              
+            
+
+            - **DatastoreName** *(string) --* 
+
+              The user-generated name for the Data Store.
+
+              
+            
+
+            - **DatastoreStatus** *(string) --* 
+
+              The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
+
+              
+            
+
+            - **CreatedAt** *(datetime) --* 
+
+              The time that a Data Store was created. 
+
+              
+            
+
+            - **DatastoreTypeVersion** *(string) --* 
+
+              The FHIR version. Only R4 version data is supported.
+
+              
+            
+
+            - **DatastoreEndpoint** *(string) --* 
+
+              The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
+
+              
+            
+
+            - **SseConfiguration** *(dict) --* 
+
+              The server-side encryption key configuration for a customer provided encryption key (CMK). 
+
+              
+              
+
+              - **KmsEncryptionConfig** *(dict) --* 
+
+                The KMS encryption configuration used to provide details for data encryption. 
+
+                
+                
+
+                - **CmkType** *(string) --* 
+
+                  The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
+
+                  
+                
+
+                - **KmsKeyId** *(string) --* 
+
+                  The KMS encryption key id/alias used to encrypt the Data Store contents at rest. 
+
+                  
+            
+          
+            
+
+            - **PreloadDataConfig** *(dict) --* 
+
+              The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
+
+              
+              
+
+              - **PreloadDataType** *(string) --* 
+
+                The type of preloaded data. Only Synthea preloaded data is supported.
+
+                
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          Pagination token that can be used to retrieve the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_fhir_export_jobs(**kwargs)
+
+    
+
+    Lists all FHIR export jobs associated with an account and their statuses. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRExportJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_fhir_export_jobs(
+          DatastoreId='string',
+          NextToken='string',
+          MaxResults=123,
+          JobName='string',
+          JobStatus='SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+          SubmittedBefore=datetime(2015, 1, 1),
+          SubmittedAfter=datetime(2015, 1, 1)
+      )
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      This parameter limits the response to the export job with the specified Data Store ID. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. 
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      This parameter limits the number of results returned for a ListFHIRExportJobs to a maximum quantity specified by the user. 
+
+      
+
+    
+    :type JobName: string
+    :param JobName: 
+
+      This parameter limits the response to the export job with the specified job name. 
+
+      
+
+    
+    :type JobStatus: string
+    :param JobStatus: 
+
+      This parameter limits the response to the export jobs with the specified job status. 
+
+      
+
+    
+    :type SubmittedBefore: datetime
+    :param SubmittedBefore: 
+
+      This parameter limits the response to FHIR export jobs submitted before a user specified date. 
+
+      
+
+    
+    :type SubmittedAfter: datetime
+    :param SubmittedAfter: 
+
+      This parameter limits the response to FHIR export jobs submitted after a user specified date. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ExportJobPropertiesList': [
+                {
+                    'JobId': 'string',
+                    'JobName': 'string',
+                    'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+                    'SubmitTime': datetime(2015, 1, 1),
+                    'EndTime': datetime(2015, 1, 1),
+                    'DatastoreId': 'string',
+                    'OutputDataConfig': {
+                        'S3Configuration': {
+                            'S3Uri': 'string',
+                            'KmsKeyId': 'string'
+                        }
+                    },
+                    'DataAccessRoleArn': 'string',
+                    'Message': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ExportJobPropertiesList** *(list) --* 
+
+          The properties of listed FHIR export jobs, including the ID, ARN, name, and the status of the job. 
+
+          
+          
+
+          - *(dict) --* 
+
+            The properties of a FHIR export job, including the ID, ARN, name, and the status of the job.
+
+            
+            
+
+            - **JobId** *(string) --* 
+
+              The AWS generated ID for an export job.
+
+              
+            
+
+            - **JobName** *(string) --* 
+
+              The user generated name for an export job.
+
+              
+            
+
+            - **JobStatus** *(string) --* 
+
+              The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.
+
+              
+            
+
+            - **SubmitTime** *(datetime) --* 
+
+              The time an export job was initiated.
+
+              
+            
+
+            - **EndTime** *(datetime) --* 
+
+              The time an export job completed.
+
+              
+            
+
+            - **DatastoreId** *(string) --* 
+
+              The AWS generated ID for the Data Store from which files are being exported for an export job.
+
+              
+            
+
+            - **OutputDataConfig** *(dict) --* 
+
+              The output data configuration that was supplied when the export job was created.
+
+              
+              
+
+              - **S3Configuration** *(dict) --* 
+
+                The output data configuration that was supplied when the export job was created. 
+
+                
+                
+
+                - **S3Uri** *(string) --* 
+
+                  The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+                  
+                
+
+                - **KmsKeyId** *(string) --* 
+
+                  The KMS key ID used to access the S3 bucket. 
+
+                  
+            
+          
+            
+
+            - **DataAccessRoleArn** *(string) --* 
+
+              The Amazon Resource Name used during the initiation of the job.
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              An explanation of any errors that may have occurred during the export job.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_fhir_import_jobs(**kwargs)
+
+    
+
+    Lists all FHIR import jobs associated with an account and their statuses. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListFHIRImportJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_fhir_import_jobs(
+          DatastoreId='string',
+          NextToken='string',
+          MaxResults=123,
+          JobName='string',
+          JobStatus='SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+          SubmittedBefore=datetime(2015, 1, 1),
+          SubmittedAfter=datetime(2015, 1, 1)
+      )
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      This parameter limits the response to the import job with the specified Data Store ID. 
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. 
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      This parameter limits the number of results returned for a ListFHIRImportJobs to a maximum quantity specified by the user. 
+
+      
+
+    
+    :type JobName: string
+    :param JobName: 
+
+      This parameter limits the response to the import job with the specified job name. 
+
+      
+
+    
+    :type JobStatus: string
+    :param JobStatus: 
+
+      This parameter limits the response to the import job with the specified job status. 
+
+      
+
+    
+    :type SubmittedBefore: datetime
+    :param SubmittedBefore: 
+
+      This parameter limits the response to FHIR import jobs submitted before a user specified date. 
+
+      
+
+    
+    :type SubmittedAfter: datetime
+    :param SubmittedAfter: 
+
+      This parameter limits the response to FHIR import jobs submitted after a user specified date. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ImportJobPropertiesList': [
+                {
+                    'JobId': 'string',
+                    'JobName': 'string',
+                    'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+                    'SubmitTime': datetime(2015, 1, 1),
+                    'EndTime': datetime(2015, 1, 1),
+                    'DatastoreId': 'string',
+                    'InputDataConfig': {
+                        'S3Uri': 'string'
+                    },
+                    'JobOutputDataConfig': {
+                        'S3Configuration': {
+                            'S3Uri': 'string',
+                            'KmsKeyId': 'string'
+                        }
+                    },
+                    'DataAccessRoleArn': 'string',
+                    'Message': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ImportJobPropertiesList** *(list) --* 
+
+          The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job. 
+
+          
+          
+
+          - *(dict) --* 
+
+            Displays the properties of the import job, including the ID, Arn, Name, and the status of the Data Store.
+
+            
+            
+
+            - **JobId** *(string) --* 
+
+              The AWS-generated id number for the Import job.
+
+              
+            
+
+            - **JobName** *(string) --* 
+
+              The user-generated name for an Import job.
+
+              
+            
+
+            - **JobStatus** *(string) --* 
+
+              The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.
+
+              
+            
+
+            - **SubmitTime** *(datetime) --* 
+
+              The time that the Import job was submitted for processing.
+
+              
+            
+
+            - **EndTime** *(datetime) --* 
+
+              The time that the Import job was completed.
+
+              
+            
+
+            - **DatastoreId** *(string) --* 
+
+              The datastore id used when the Import job was created. 
+
+              
+            
+
+            - **InputDataConfig** *(dict) --* 
+
+              The input data configuration that was supplied when the Import job was created.
+
+              
+              
+
+              - **S3Uri** *(string) --* 
+
+                The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+                
+          
+            
+
+            - **JobOutputDataConfig** *(dict) --* 
+
+              The output data configuration that was supplied when the export job was created.
+
+              
+              
+
+              - **S3Configuration** *(dict) --* 
+
+                The output data configuration that was supplied when the export job was created. 
+
+                
+                
+
+                - **S3Uri** *(string) --* 
+
+                  The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+                  
+                
+
+                - **KmsKeyId** *(string) --* 
+
+                  The KMS key ID used to access the S3 bucket. 
+
+                  
+            
+          
+            
+
+            - **DataAccessRoleArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
+
+              
+            
+
+            - **Message** *(string) --* 
+
+              An explanation of any errors that may have occurred during the FHIR import job. 
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Returns a list of all existing tags associated with a Data Store. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceARN='string'
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name(ARN) of the Data Store for which tags are being added. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          Returns a list of tags associated with a Data Store. 
+
+          
+          
+
+          - *(dict) --* 
+
+            A tag is a label consisting of a user-defined key and value. The form for tags is {"Key", "Value"} 
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key portion of a tag. Tag keys are case sensitive. 
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value portion of tag. Tag values are case sensitive. 
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: start_fhir_export_job(**kwargs)
+
+    
+
+    Begins a FHIR export job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRExportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_fhir_export_job(
+          JobName='string',
+          OutputDataConfig={
+              'S3Configuration': {
+                  'S3Uri': 'string',
+                  'KmsKeyId': 'string'
+              }
+          },
+          DatastoreId='string',
+          DataAccessRoleArn='string',
+          ClientToken='string'
+      )
+    :type JobName: string
+    :param JobName: 
+
+      The user generated name for an export job.
+
+      
+
+    
+    :type OutputDataConfig: dict
+    :param OutputDataConfig: **[REQUIRED]** 
+
+      The output data configuration that was supplied when the export job was created.
+
+      
+
+    
+      - **S3Configuration** *(dict) --* 
+
+        The output data configuration that was supplied when the export job was created. 
+
+        
+
+      
+        - **S3Uri** *(string) --* **[REQUIRED]** 
+
+          The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+          
+
+        
+        - **KmsKeyId** *(string) --* **[REQUIRED]** 
+
+          The KMS key ID used to access the S3 bucket. 
+
+          
+
+        
+      
+    
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      The AWS generated ID for the Data Store from which files are being exported for an export job.
+
+      
+
+    
+    :type DataAccessRoleArn: string
+    :param DataAccessRoleArn: **[REQUIRED]** 
+
+      The Amazon Resource Name used during the initiation of the job.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      An optional user provided token used for ensuring idempotency.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'JobId': 'string',
+            'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+            'DatastoreId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **JobId** *(string) --* 
+
+          The AWS generated ID for an export job.
+
+          
+        
+
+        - **JobStatus** *(string) --* 
+
+          The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, or FAILED.
+
+          
+        
+
+        - **DatastoreId** *(string) --* 
+
+          The AWS generated ID for the Data Store from which files are being exported for an export job.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_fhir_import_job(**kwargs)
+
+    
+
+    Begins a FHIR Import job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/StartFHIRImportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_fhir_import_job(
+          JobName='string',
+          InputDataConfig={
+              'S3Uri': 'string'
+          },
+          JobOutputDataConfig={
+              'S3Configuration': {
+                  'S3Uri': 'string',
+                  'KmsKeyId': 'string'
+              }
+          },
+          DatastoreId='string',
+          DataAccessRoleArn='string',
+          ClientToken='string'
+      )
+    :type JobName: string
+    :param JobName: 
+
+      The name of the FHIR Import job in the StartFHIRImport job request.
+
+      
+
+    
+    :type InputDataConfig: dict
+    :param InputDataConfig: **[REQUIRED]** 
+
+      The input properties of the FHIR Import job in the StartFHIRImport job request.
+
+      
+
+    
+      - **S3Uri** *(string) --* 
+
+        The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+        
+
+      
+    
+    :type JobOutputDataConfig: dict
+    :param JobOutputDataConfig: **[REQUIRED]** 
+
+      The output data configuration that was supplied when the export job was created.
+
+      
+
+    
+      - **S3Configuration** *(dict) --* 
+
+        The output data configuration that was supplied when the export job was created. 
+
+        
+
+      
+        - **S3Uri** *(string) --* **[REQUIRED]** 
+
+          The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+
+          
+
+        
+        - **KmsKeyId** *(string) --* **[REQUIRED]** 
+
+          The KMS key ID used to access the S3 bucket. 
+
+          
+
+        
+      
+    
+    :type DatastoreId: string
+    :param DatastoreId: **[REQUIRED]** 
+
+      The AWS-generated Data Store ID.
+
+      
+
+    
+    :type DataAccessRoleArn: string
+    :param DataAccessRoleArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      Optional user provided token used for ensuring idempotency.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'JobId': 'string',
+            'JobStatus': 'SUBMITTED'|'IN_PROGRESS'|'COMPLETED_WITH_ERRORS'|'COMPLETED'|'FAILED',
+            'DatastoreId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **JobId** *(string) --* 
+
+          The AWS-generated job ID.
+
+          
+        
+
+        - **JobStatus** *(string) --* 
+
+          The status of an import job.
+
+          
+        
+
+        - **DatastoreId** *(string) --* 
+
+          The AWS-generated Data Store ID.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds a user specifed key and value tag to a Data Store. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceARN='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The Amazon Resource Name(ARN)that gives Amazon HealthLake access to the Data Store which tags are being added to. 
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The user specified key and value pair tags being added to a Data Store. 
+
+      
+
+    
+      - *(dict) --* 
+
+        A tag is a label consisting of a user-defined key and value. The form for tags is {"Key", "Value"} 
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key portion of a tag. Tag keys are case sensitive. 
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value portion of tag. Tag values are case sensitive. 
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from a Data Store. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/healthlake-2017-07-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceARN='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      "The Amazon Resource Name(ARN) of the Data Store for which tags are being removed 
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The keys for the tags to be removed from the Healthlake Data Store. 
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`HealthLake.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`HealthLake.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

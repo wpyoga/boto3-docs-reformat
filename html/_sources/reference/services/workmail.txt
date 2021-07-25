@@ -1,0 +1,7744 @@
+
+
+********
+WorkMail
+********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: WorkMail.Client
+
+  A low-level client representing Amazon WorkMail
+  
+
+  Amazon WorkMail is a secure, managed business email and calendaring service with support for existing desktop and mobile email clients. You can access your email, contacts, and calendars using Microsoft Outlook, your browser, or other native iOS and Android email applications. You can integrate WorkMail with your existing corporate directory and control both the keys that encrypt your data and the location in which your data is stored.
+
+   
+
+  The WorkMail API is designed for the following scenarios:
+
+   
+
+   
+  * Listing and describing organizations 
+   
+
+   
+
+   
+  * Managing users 
+   
+
+   
+
+   
+  * Managing groups 
+   
+
+   
+
+   
+  * Managing resources 
+   
+
+   
+
+  All WorkMail API operations are Amazon-authenticated and certificate-signed. They not only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the WorkMail site, the IAM user gains full administrative visibility into the entire WorkMail organization (or as set in the IAM policy). This includes, but is not limited to, the ability to create, update, and delete users, groups, and resources. This allows developers to perform the scenarios listed above, as well as give users the ability to grant access on a selective basis using the IAM model.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('workmail')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~WorkMail.Client.associate_delegate_to_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.associate_member_to_group`
+
+  
+  *   :py:meth:`~WorkMail.Client.can_paginate`
+
+  
+  *   :py:meth:`~WorkMail.Client.cancel_mailbox_export_job`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_alias`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_group`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_mobile_device_access_rule`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_organization`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.create_user`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_access_control_rule`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_alias`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_group`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_mailbox_permissions`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_mobile_device_access_rule`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_organization`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_retention_policy`
+
+  
+  *   :py:meth:`~WorkMail.Client.delete_user`
+
+  
+  *   :py:meth:`~WorkMail.Client.deregister_from_work_mail`
+
+  
+  *   :py:meth:`~WorkMail.Client.describe_group`
+
+  
+  *   :py:meth:`~WorkMail.Client.describe_mailbox_export_job`
+
+  
+  *   :py:meth:`~WorkMail.Client.describe_organization`
+
+  
+  *   :py:meth:`~WorkMail.Client.describe_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.describe_user`
+
+  
+  *   :py:meth:`~WorkMail.Client.disassociate_delegate_from_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.disassociate_member_from_group`
+
+  
+  *   :py:meth:`~WorkMail.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_access_control_effect`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_default_retention_policy`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_mailbox_details`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_mobile_device_access_effect`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_paginator`
+
+  
+  *   :py:meth:`~WorkMail.Client.get_waiter`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_access_control_rules`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_aliases`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_group_members`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_groups`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_mailbox_export_jobs`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_mailbox_permissions`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_mobile_device_access_rules`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_organizations`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_resource_delegates`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_resources`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.list_users`
+
+  
+  *   :py:meth:`~WorkMail.Client.put_access_control_rule`
+
+  
+  *   :py:meth:`~WorkMail.Client.put_mailbox_permissions`
+
+  
+  *   :py:meth:`~WorkMail.Client.put_retention_policy`
+
+  
+  *   :py:meth:`~WorkMail.Client.register_to_work_mail`
+
+  
+  *   :py:meth:`~WorkMail.Client.reset_password`
+
+  
+  *   :py:meth:`~WorkMail.Client.start_mailbox_export_job`
+
+  
+  *   :py:meth:`~WorkMail.Client.tag_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.untag_resource`
+
+  
+  *   :py:meth:`~WorkMail.Client.update_mailbox_quota`
+
+  
+  *   :py:meth:`~WorkMail.Client.update_mobile_device_access_rule`
+
+  
+  *   :py:meth:`~WorkMail.Client.update_primary_email_address`
+
+  
+  *   :py:meth:`~WorkMail.Client.update_resource`
+
+  
+
+  .. py:method:: associate_delegate_to_resource(**kwargs)
+
+    
+
+    Adds a member (user or group) to the resource's set of delegates.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateDelegateToResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_delegate_to_resource(
+          OrganizationId='string',
+          ResourceId='string',
+          EntityId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization under which the resource exists.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The resource for which members (users or groups) are associated.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The member (user or group) to associate to the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: associate_member_to_group(**kwargs)
+
+    
+
+    Adds a member (user or group) to the group's set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateMemberToGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.associate_member_to_group(
+          OrganizationId='string',
+          GroupId='string',
+          MemberId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization under which the group exists.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The group to which the member (user or group) is associated.
+
+      
+
+    
+    :type MemberId: string
+    :param MemberId: **[REQUIRED]** 
+
+      The member (user or group) to associate to the group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_mailbox_export_job(**kwargs)
+
+    
+
+    Cancels a mailbox export job.
+
+     
+
+    .. note::
+
+       
+
+      If the mailbox export job is near completion, it might not be possible to cancel it.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CancelMailboxExportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_mailbox_export_job(
+          ClientToken='string',
+          JobId='string',
+          OrganizationId='string'
+      )
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      The idempotency token for the client request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The job ID.
+
+      
+
+    
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+
+  .. py:method:: create_alias(**kwargs)
+
+    
+
+    Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateAlias>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_alias(
+          OrganizationId='string',
+          EntityId='string',
+          Alias='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization under which the member (user or group) exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The member (user or group) to which this alias is added.
+
+      
+
+    
+    :type Alias: string
+    :param Alias: **[REQUIRED]** 
+
+      The alias to add to the member set.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EmailAddressInUseException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: create_group(**kwargs)
+
+    
+
+    Creates a group that can be used in Amazon WorkMail by calling the  RegisterToWorkMail operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_group(
+          OrganizationId='string',
+          Name='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization under which the group is to be created.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupId** *(string) --* 
+
+          The identifier of the group.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.NameAvailabilityException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.ReservedNameException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: create_mobile_device_access_rule(**kwargs)
+
+    
+
+    Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateMobileDeviceAccessRule>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_mobile_device_access_rule(
+          OrganizationId='string',
+          ClientToken='string',
+          Name='string',
+          Description='string',
+          Effect='ALLOW'|'DENY',
+          DeviceTypes=[
+              'string',
+          ],
+          NotDeviceTypes=[
+              'string',
+          ],
+          DeviceModels=[
+              'string',
+          ],
+          NotDeviceModels=[
+              'string',
+          ],
+          DeviceOperatingSystems=[
+              'string',
+          ],
+          NotDeviceOperatingSystems=[
+              'string',
+          ],
+          DeviceUserAgents=[
+              'string',
+          ],
+          NotDeviceUserAgents=[
+              'string',
+          ]
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The Amazon WorkMail organization under which the rule will be created.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      The idempotency token for the client request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The rule name.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The rule description.
+
+      
+
+    
+    :type Effect: string
+    :param Effect: **[REQUIRED]** 
+
+      The effect of the rule when it matches. Allowed values are ``ALLOW`` or ``DENY`` .
+
+      
+
+    
+    :type DeviceTypes: list
+    :param DeviceTypes: 
+
+      Device types that the rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceTypes: list
+    :param NotDeviceTypes: 
+
+      Device types that the rule **will not** match. All other device types will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceModels: list
+    :param DeviceModels: 
+
+      Device models that the rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceModels: list
+    :param NotDeviceModels: 
+
+      Device models that the rule **will not** match. All other device models will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceOperatingSystems: list
+    :param DeviceOperatingSystems: 
+
+      Device operating systems that the rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceOperatingSystems: list
+    :param NotDeviceOperatingSystems: 
+
+      Device operating systems that the rule **will not** match. All other device operating systems will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceUserAgents: list
+    :param DeviceUserAgents: 
+
+      Device user agents that the rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceUserAgents: list
+    :param NotDeviceUserAgents: 
+
+      Device user agents that the rule **will not** match. All other device user agents will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'MobileDeviceAccessRuleId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **MobileDeviceAccessRuleId** *(string) --* 
+
+          The identifier for the newly created mobile device access rule.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: create_organization(**kwargs)
+
+    
+
+    Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see `Adding an organization <https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html>`__ in the *Amazon WorkMail Administrator Guide* .
+
+     
+
+    You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see `Adding a domain <https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html>`__ and `Choosing the default domain <https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html>`__ in the *Amazon WorkMail Administrator Guide* .
+
+     
+
+    Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateOrganization>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_organization(
+          DirectoryId='string',
+          Alias='string',
+          ClientToken='string',
+          Domains=[
+              {
+                  'DomainName': 'string',
+                  'HostedZoneId': 'string'
+              },
+          ],
+          KmsKeyArn='string',
+          EnableInteroperability=True|False
+      )
+    :type DirectoryId: string
+    :param DirectoryId: 
+
+      The AWS Directory Service directory ID.
+
+      
+
+    
+    :type Alias: string
+    :param Alias: **[REQUIRED]** 
+
+      The organization alias.
+
+      
+
+    
+    :type ClientToken: string
+    :param ClientToken: 
+
+      The idempotency token associated with the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type Domains: list
+    :param Domains: 
+
+      The email domains to associate with the organization.
+
+      
+
+    
+      - *(dict) --* 
+
+        The domain to associate with an Amazon WorkMail organization.
+
+         
+
+        When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see `Adding a domain <https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html>`__ in the *Amazon WorkMail Administrator Guide* .
+
+        
+
+      
+        - **DomainName** *(string) --* 
+
+          The fully qualified domain name.
+
+          
+
+        
+        - **HostedZoneId** *(string) --* 
+
+          The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
+
+          
+
+        
+      
+  
+    :type KmsKeyArn: string
+    :param KmsKeyArn: 
+
+      The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+
+      
+
+    
+    :type EnableInteroperability: boolean
+    :param EnableInteroperability: 
+
+      When ``true`` , allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to ``true`` if an AD Connector directory ID is included in the request.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OrganizationId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **OrganizationId** *(string) --* 
+
+          The organization ID.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryInUseException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.NameAvailabilityException`
+
+    
+
+  .. py:method:: create_resource(**kwargs)
+
+    
+
+    Creates a new Amazon WorkMail resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_resource(
+          OrganizationId='string',
+          Name='string',
+          Type='ROOM'|'EQUIPMENT'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier associated with the organization for which the resource is created.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the new resource.
+
+      
+
+    
+    :type Type: string
+    :param Type: **[REQUIRED]** 
+
+      The type of the new resource. The available types are ``equipment`` and ``room`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceId** *(string) --* 
+
+          The identifier of the new resource.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.NameAvailabilityException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.ReservedNameException`
+
+    
+
+  .. py:method:: create_user(**kwargs)
+
+    
+
+    Creates a user who can be used in Amazon WorkMail by calling the  RegisterToWorkMail operation.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/CreateUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_user(
+          OrganizationId='string',
+          Name='string',
+          DisplayName='string',
+          Password='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization for which the user is created.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name for the new user. WorkMail directory user names have a maximum length of 64. All others have a maximum length of 20.
+
+      
+
+    
+    :type DisplayName: string
+    :param DisplayName: **[REQUIRED]** 
+
+      The display name for the new user.
+
+      
+
+    
+    :type Password: string
+    :param Password: **[REQUIRED]** 
+
+      The password for the new user.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'UserId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **UserId** *(string) --* 
+
+          The identifier for the new user.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidPasswordException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.NameAvailabilityException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.ReservedNameException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: delete_access_control_rule(**kwargs)
+
+    
+
+    Deletes an access control rule for the specified WorkMail organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAccessControlRule>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_access_control_rule(
+          OrganizationId='string',
+          Name='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the access control rule.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_alias(**kwargs)
+
+    
+
+    Remove one or more specified aliases from a set of aliases for a given user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAlias>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_alias(
+          OrganizationId='string',
+          EntityId='string',
+          Alias='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the user exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the member (user or group) from which to have the aliases removed.
+
+      
+
+    
+    :type Alias: string
+    :param Alias: **[REQUIRED]** 
+
+      The aliases to be removed from the user's set of aliases. Duplicate entries in the list are collapsed into single entries (the list is transformed into a set).
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_group(**kwargs)
+
+    
+
+    Deletes a group from Amazon WorkMail.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_group(
+          OrganizationId='string',
+          GroupId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization that contains the group.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier of the group to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: delete_mailbox_permissions(**kwargs)
+
+    
+
+    Deletes permissions granted to a member (user or group).
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_mailbox_permissions(
+          OrganizationId='string',
+          EntityId='string',
+          GranteeId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization under which the member (user or group) exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier of the member (user or group) that owns the mailbox.
+
+      
+
+    
+    :type GranteeId: string
+    :param GranteeId: **[REQUIRED]** 
+
+      The identifier of the member (user or group) for which to delete granted permissions.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_mobile_device_access_rule(**kwargs)
+
+    
+
+    Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMobileDeviceAccessRule>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_mobile_device_access_rule(
+          OrganizationId='string',
+          MobileDeviceAccessRuleId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The Amazon WorkMail organization under which the rule will be deleted.
+
+      
+
+    
+    :type MobileDeviceAccessRuleId: string
+    :param MobileDeviceAccessRuleId: **[REQUIRED]** 
+
+      The identifier of the rule to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_organization(**kwargs)
+
+    
+
+    Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see `Removing an organization <https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html>`__ in the *Amazon WorkMail Administrator Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteOrganization>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_organization(
+          ClientToken='string',
+          OrganizationId='string',
+          DeleteDirectory=True|False
+      )
+    :type ClientToken: string
+    :param ClientToken: 
+
+      The idempotency token associated with the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    :type DeleteDirectory: boolean
+    :param DeleteDirectory: **[REQUIRED]** 
+
+      If true, deletes the AWS Directory Service directory associated with the organization.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OrganizationId': 'string',
+            'State': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **OrganizationId** *(string) --* 
+
+          The organization ID.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the organization.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_resource(**kwargs)
+
+    
+
+    Deletes the specified resource. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_resource(
+          OrganizationId='string',
+          ResourceId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier associated with the organization from which the resource is deleted.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier of the resource to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_retention_policy(**kwargs)
+
+    
+
+    Deletes the specified retention policy from the specified organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteRetentionPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_retention_policy(
+          OrganizationId='string',
+          Id='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    :type Id: string
+    :param Id: **[REQUIRED]** 
+
+      The retention policy ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: delete_user(**kwargs)
+
+    
+
+    Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be ``DISABLED`` . Use the  DescribeUser action to confirm the user state.
+
+     
+
+    Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_user(
+          OrganizationId='string',
+          UserId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization that contains the user to be deleted.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifier of the user to be deleted.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: deregister_from_work_mail(**kwargs)
+
+    
+
+    Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is *Disable* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterFromWorkMail>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.deregister_from_work_mail(
+          OrganizationId='string',
+          EntityId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the Amazon WorkMail entity exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the member (user or group) to be updated.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: describe_group(**kwargs)
+
+    
+
+    Returns the data available for the group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_group(
+          OrganizationId='string',
+          GroupId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the group exists.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier for the group to be described.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'GroupId': 'string',
+            'Name': 'string',
+            'Email': 'string',
+            'State': 'ENABLED'|'DISABLED'|'DELETED',
+            'EnabledDate': datetime(2015, 1, 1),
+            'DisabledDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **GroupId** *(string) --* 
+
+          The identifier of the described group.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the described group.
+
+          
+        
+
+        - **Email** *(string) --* 
+
+          The email of the described group.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
+
+          
+        
+
+        - **EnabledDate** *(datetime) --* 
+
+          The date and time when a user was registered to WorkMail, in UNIX epoch time format.
+
+          
+        
+
+        - **DisabledDate** *(datetime) --* 
+
+          The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: describe_mailbox_export_job(**kwargs)
+
+    
+
+    Describes the current status of a mailbox export job.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeMailboxExportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_mailbox_export_job(
+          JobId='string',
+          OrganizationId='string'
+      )
+    :type JobId: string
+    :param JobId: **[REQUIRED]** 
+
+      The mailbox export job ID.
+
+      
+
+    
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'EntityId': 'string',
+            'Description': 'string',
+            'RoleArn': 'string',
+            'KmsKeyArn': 'string',
+            'S3BucketName': 'string',
+            'S3Prefix': 'string',
+            'S3Path': 'string',
+            'EstimatedProgress': 123,
+            'State': 'RUNNING'|'COMPLETED'|'FAILED'|'CANCELLED',
+            'ErrorInfo': 'string',
+            'StartTime': datetime(2015, 1, 1),
+            'EndTime': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **EntityId** *(string) --* 
+
+          The identifier of the user or resource associated with the mailbox.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The mailbox export job description.
+
+          
+        
+
+        - **RoleArn** *(string) --* 
+
+          The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
+
+          
+        
+
+        - **KmsKeyArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+
+          
+        
+
+        - **S3BucketName** *(string) --* 
+
+          The name of the S3 bucket.
+
+          
+        
+
+        - **S3Prefix** *(string) --* 
+
+          The S3 bucket prefix.
+
+          
+        
+
+        - **S3Path** *(string) --* 
+
+          The path to the S3 bucket and file that the mailbox export job is exporting to.
+
+          
+        
+
+        - **EstimatedProgress** *(integer) --* 
+
+          The estimated progress of the mailbox export job, in percentage points.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of the mailbox export job.
+
+          
+        
+
+        - **ErrorInfo** *(string) --* 
+
+          Error information for failed mailbox export jobs.
+
+          
+        
+
+        - **StartTime** *(datetime) --* 
+
+          The mailbox export job start timestamp.
+
+          
+        
+
+        - **EndTime** *(datetime) --* 
+
+          The mailbox export job end timestamp.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+
+  .. py:method:: describe_organization(**kwargs)
+
+    
+
+    Provides more information regarding a given organization based on its identifier.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeOrganization>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_organization(
+          OrganizationId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization to be described.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OrganizationId': 'string',
+            'Alias': 'string',
+            'State': 'string',
+            'DirectoryId': 'string',
+            'DirectoryType': 'string',
+            'DefaultMailDomain': 'string',
+            'CompletedDate': datetime(2015, 1, 1),
+            'ErrorMessage': 'string',
+            'ARN': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **OrganizationId** *(string) --* 
+
+          The identifier of an organization.
+
+          
+        
+
+        - **Alias** *(string) --* 
+
+          The alias for an organization.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of an organization.
+
+          
+        
+
+        - **DirectoryId** *(string) --* 
+
+          The identifier for the directory associated with an Amazon WorkMail organization.
+
+          
+        
+
+        - **DirectoryType** *(string) --* 
+
+          The type of directory associated with the WorkMail organization.
+
+          
+        
+
+        - **DefaultMailDomain** *(string) --* 
+
+          The default mail domain associated with the organization.
+
+          
+        
+
+        - **CompletedDate** *(datetime) --* 
+
+          The date at which the organization became usable in the WorkMail context, in UNIX epoch time format.
+
+          
+        
+
+        - **ErrorMessage** *(string) --* 
+
+          (Optional) The error message indicating if unexpected behavior was encountered with regards to the organization.
+
+          
+        
+
+        - **ARN** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the organization.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+
+  .. py:method:: describe_resource(**kwargs)
+
+    
+
+    Returns the data available for the resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_resource(
+          OrganizationId='string',
+          ResourceId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier associated with the organization for which the resource is described.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier of the resource to be described.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'ResourceId': 'string',
+            'Email': 'string',
+            'Name': 'string',
+            'Type': 'ROOM'|'EQUIPMENT',
+            'BookingOptions': {
+                'AutoAcceptRequests': True|False,
+                'AutoDeclineRecurringRequests': True|False,
+                'AutoDeclineConflictingRequests': True|False
+            },
+            'State': 'ENABLED'|'DISABLED'|'DELETED',
+            'EnabledDate': datetime(2015, 1, 1),
+            'DisabledDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **ResourceId** *(string) --* 
+
+          The identifier of the described resource.
+
+          
+        
+
+        - **Email** *(string) --* 
+
+          The email of the described resource.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name of the described resource.
+
+          
+        
+
+        - **Type** *(string) --* 
+
+          The type of the described resource.
+
+          
+        
+
+        - **BookingOptions** *(dict) --* 
+
+          The booking options for the described resource.
+
+          
+          
+
+          - **AutoAcceptRequests** *(boolean) --* 
+
+            The resource's ability to automatically reply to requests. If disabled, delegates must be associated to the resource.
+
+            
+          
+
+          - **AutoDeclineRecurringRequests** *(boolean) --* 
+
+            The resource's ability to automatically decline any recurring requests.
+
+            
+          
+
+          - **AutoDeclineConflictingRequests** *(boolean) --* 
+
+            The resource's ability to automatically decline any conflicting requests.
+
+            
+      
+        
+
+        - **State** *(string) --* 
+
+          The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered or never registered to WorkMail), or deleted.
+
+          
+        
+
+        - **EnabledDate** *(datetime) --* 
+
+          The date and time when a resource was enabled for WorkMail, in UNIX epoch time format.
+
+          
+        
+
+        - **DisabledDate** *(datetime) --* 
+
+          The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: describe_user(**kwargs)
+
+    
+
+    Provides information regarding the user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeUser>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_user(
+          OrganizationId='string',
+          UserId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the user exists.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifier for the user to be described.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'UserId': 'string',
+            'Name': 'string',
+            'Email': 'string',
+            'DisplayName': 'string',
+            'State': 'ENABLED'|'DISABLED'|'DELETED',
+            'UserRole': 'USER'|'RESOURCE'|'SYSTEM_USER',
+            'EnabledDate': datetime(2015, 1, 1),
+            'DisabledDate': datetime(2015, 1, 1)
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **UserId** *(string) --* 
+
+          The identifier for the described user.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The name for the user.
+
+          
+        
+
+        - **Email** *(string) --* 
+
+          The email of the user.
+
+          
+        
+
+        - **DisplayName** *(string) --* 
+
+          The display name of the user.
+
+          
+        
+
+        - **State** *(string) --* 
+
+          The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or never registered to WorkMail).
+
+          
+        
+
+        - **UserRole** *(string) --* 
+
+          In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.
+
+          
+        
+
+        - **EnabledDate** *(datetime) --* 
+
+          The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch time format.
+
+          
+        
+
+        - **DisabledDate** *(datetime) --* 
+
+          The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: disassociate_delegate_from_resource(**kwargs)
+
+    
+
+    Removes a member from the resource's set of delegates.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateDelegateFromResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_delegate_from_resource(
+          OrganizationId='string',
+          ResourceId='string',
+          EntityId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the resource exists.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier of the resource from which delegates' set members are removed. 
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the member (user, group) to be removed from the resource's delegates.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: disassociate_member_from_group(**kwargs)
+
+    
+
+    Removes a member from a group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DisassociateMemberFromGroup>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.disassociate_member_from_group(
+          OrganizationId='string',
+          GroupId='string',
+          MemberId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the group exists.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier for the group from which members are removed.
+
+      
+
+    
+    :type MemberId: string
+    :param MemberId: **[REQUIRED]** 
+
+      The identifier for the member to be removed to the group.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_access_control_effect(**kwargs)
+
+    
+
+    Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetAccessControlEffect>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_access_control_effect(
+          OrganizationId='string',
+          IpAddress='string',
+          Action='string',
+          UserId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization.
+
+      
+
+    
+    :type IpAddress: string
+    :param IpAddress: **[REQUIRED]** 
+
+      The IPv4 address.
+
+      
+
+    
+    :type Action: string
+    :param Action: **[REQUIRED]** 
+
+      The access protocol action. Valid values include ``ActiveSync`` , ``AutoDiscover`` , ``EWS`` , ``IMAP`` , ``SMTP`` , ``WindowsOutlook`` , and ``WebMail`` .
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The user ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Effect': 'ALLOW'|'DENY',
+            'MatchedRules': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Effect** *(string) --* 
+
+          The rule effect.
+
+          
+        
+
+        - **MatchedRules** *(list) --* 
+
+          The rules that match the given parameters, resulting in an effect.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: get_default_retention_policy(**kwargs)
+
+    
+
+    Gets the default retention policy details for the specified organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetDefaultRetentionPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_default_retention_policy(
+          OrganizationId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Id': 'string',
+            'Name': 'string',
+            'Description': 'string',
+            'FolderConfigurations': [
+                {
+                    'Name': 'INBOX'|'DELETED_ITEMS'|'SENT_ITEMS'|'DRAFTS'|'JUNK_EMAIL',
+                    'Action': 'NONE'|'DELETE'|'PERMANENTLY_DELETE',
+                    'Period': 123
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Id** *(string) --* 
+
+          The retention policy ID.
+
+          
+        
+
+        - **Name** *(string) --* 
+
+          The retention policy name.
+
+          
+        
+
+        - **Description** *(string) --* 
+
+          The retention policy description.
+
+          
+        
+
+        - **FolderConfigurations** *(list) --* 
+
+          The retention policy folder configurations.
+
+          
+          
+
+          - *(dict) --* 
+
+            The configuration applied to an organization's folders by its retention policy.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The folder name.
+
+              
+            
+
+            - **Action** *(string) --* 
+
+              The action to take on the folder contents at the end of the folder configuration period.
+
+              
+            
+
+            - **Period** *(integer) --* 
+
+              The period of time at which the folder configuration action is applied.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+
+  .. py:method:: get_mailbox_details(**kwargs)
+
+    
+
+    Requests a user's mailbox details for a specified organization and user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMailboxDetails>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_mailbox_details(
+          OrganizationId='string',
+          UserId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization that contains the user whose mailbox details are being requested.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifier for the user whose mailbox details are being requested.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'MailboxQuota': 123,
+            'MailboxSize': 123.0
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **MailboxQuota** *(integer) --* 
+
+          The maximum allowed mailbox size, in MB, for the specified user.
+
+          
+        
+
+        - **MailboxSize** *(float) --* 
+
+          The current mailbox size, in MB, for the specified user.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+
+  .. py:method:: get_mobile_device_access_effect(**kwargs)
+
+    
+
+    Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetMobileDeviceAccessEffect>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_mobile_device_access_effect(
+          OrganizationId='string',
+          DeviceType='string',
+          DeviceModel='string',
+          DeviceOperatingSystem='string',
+          DeviceUserAgent='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The Amazon WorkMail organization to simulate the access effect for.
+
+      
+
+    
+    :type DeviceType: string
+    :param DeviceType: 
+
+      Device type the simulated user will report.
+
+      
+
+    
+    :type DeviceModel: string
+    :param DeviceModel: 
+
+      Device model the simulated user will report.
+
+      
+
+    
+    :type DeviceOperatingSystem: string
+    :param DeviceOperatingSystem: 
+
+      Device operating system the simulated user will report.
+
+      
+
+    
+    :type DeviceUserAgent: string
+    :param DeviceUserAgent: 
+
+      Device user agent the simulated user will report.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Effect': 'ALLOW'|'DENY',
+            'MatchedRules': [
+                {
+                    'MobileDeviceAccessRuleId': 'string',
+                    'Name': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Effect** *(string) --* 
+
+          The effect of the simulated access, ``ALLOW`` or ``DENY`` , after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.
+
+          
+        
+
+        - **MatchedRules** *(list) --* 
+
+          A list of the rules which matched the simulated user input and produced the effect.
+
+          
+          
+
+          - *(dict) --* 
+
+            The rule that a simulated user matches.
+
+            
+            
+
+            - **MobileDeviceAccessRuleId** *(string) --* 
+
+              Identifier of the rule that a simulated user matches.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              Name of a rule that a simulated user matches.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_access_control_rules(**kwargs)
+
+    
+
+    Lists the access control rules for the specified organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAccessControlRules>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_access_control_rules(
+          OrganizationId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Rules': [
+                {
+                    'Name': 'string',
+                    'Effect': 'ALLOW'|'DENY',
+                    'Description': 'string',
+                    'IpRanges': [
+                        'string',
+                    ],
+                    'NotIpRanges': [
+                        'string',
+                    ],
+                    'Actions': [
+                        'string',
+                    ],
+                    'NotActions': [
+                        'string',
+                    ],
+                    'UserIds': [
+                        'string',
+                    ],
+                    'NotUserIds': [
+                        'string',
+                    ],
+                    'DateCreated': datetime(2015, 1, 1),
+                    'DateModified': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Rules** *(list) --* 
+
+          The access control rules.
+
+          
+          
+
+          - *(dict) --* 
+
+            A rule that controls access to an Amazon WorkMail organization.
+
+            
+            
+
+            - **Name** *(string) --* 
+
+              The rule name.
+
+              
+            
+
+            - **Effect** *(string) --* 
+
+              The rule effect.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The rule description.
+
+              
+            
+
+            - **IpRanges** *(list) --* 
+
+              IPv4 CIDR ranges to include in the rule.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotIpRanges** *(list) --* 
+
+              IPv4 CIDR ranges to exclude from the rule.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **Actions** *(list) --* 
+
+              Access protocol actions to include in the rule. Valid values include ``ActiveSync`` , ``AutoDiscover`` , ``EWS`` , ``IMAP`` , ``SMTP`` , ``WindowsOutlook`` , and ``WebMail`` .
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotActions** *(list) --* 
+
+              Access protocol actions to exclude from the rule. Valid values include ``ActiveSync`` , ``AutoDiscover`` , ``EWS`` , ``IMAP`` , ``SMTP`` , ``WindowsOutlook`` , and ``WebMail`` .
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **UserIds** *(list) --* 
+
+              User IDs to include in the rule.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotUserIds** *(list) --* 
+
+              User IDs to exclude from the rule.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **DateCreated** *(datetime) --* 
+
+              The date that the rule was created.
+
+              
+            
+
+            - **DateModified** *(datetime) --* 
+
+              The date that the rule was modified.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_aliases(**kwargs)
+
+    
+
+    Creates a paginated call to list the aliases associated with a given entity.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAliases>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_aliases(
+          OrganizationId='string',
+          EntityId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the entity exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the entity for which to list the aliases.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Aliases': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Aliases** *(list) --* 
+
+          The entity's paginated aliases.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_group_members(**kwargs)
+
+    
+
+    Returns an overview of the members of a group. Users and groups can be members of a group.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupMembers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_group_members(
+          OrganizationId='string',
+          GroupId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the group exists.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier for the group to which the members (users or groups) are associated.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Members': [
+                {
+                    'Id': 'string',
+                    'Name': 'string',
+                    'Type': 'GROUP'|'USER',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Members** *(list) --* 
+
+          The members associated to the group.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of a user or group.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the member.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the member.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              A member can be a user or group.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the member, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the member was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the member was disabled from Amazon WorkMail use.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_groups(**kwargs)
+
+    
+
+    Returns summaries of the organization's groups.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_groups(
+          OrganizationId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the groups exist.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Groups': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Groups** *(list) --* 
+
+          The overview of groups for an organization.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an Amazon WorkMail group.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the group.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the group.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the group.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the group, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the group was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the group was disabled from Amazon WorkMail use.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_mailbox_export_jobs(**kwargs)
+
+    
+
+    Lists the mailbox export jobs started for the specified organization within the last seven days.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxExportJobs>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_mailbox_export_jobs(
+          OrganizationId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Jobs': [
+                {
+                    'JobId': 'string',
+                    'EntityId': 'string',
+                    'Description': 'string',
+                    'S3BucketName': 'string',
+                    'S3Path': 'string',
+                    'EstimatedProgress': 123,
+                    'State': 'RUNNING'|'COMPLETED'|'FAILED'|'CANCELLED',
+                    'StartTime': datetime(2015, 1, 1),
+                    'EndTime': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Jobs** *(list) --* 
+
+          The mailbox export job details.
+
+          
+          
+
+          - *(dict) --* 
+
+            The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.
+
+            
+            
+
+            - **JobId** *(string) --* 
+
+              The identifier of the mailbox export job.
+
+              
+            
+
+            - **EntityId** *(string) --* 
+
+              The identifier of the user or resource associated with the mailbox.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The mailbox export job description.
+
+              
+            
+
+            - **S3BucketName** *(string) --* 
+
+              The name of the S3 bucket.
+
+              
+            
+
+            - **S3Path** *(string) --* 
+
+              The path to the S3 bucket and file that the mailbox export job exports to.
+
+              
+            
+
+            - **EstimatedProgress** *(integer) --* 
+
+              The estimated progress of the mailbox export job, in percentage points.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the mailbox export job.
+
+              
+            
+
+            - **StartTime** *(datetime) --* 
+
+              The mailbox export job start timestamp.
+
+              
+            
+
+            - **EndTime** *(datetime) --* 
+
+              The mailbox export job end timestamp.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_mailbox_permissions(**kwargs)
+
+    
+
+    Lists the mailbox permissions associated with a user, group, or resource mailbox.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_mailbox_permissions(
+          OrganizationId='string',
+          EntityId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization under which the user, group, or resource exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier of the user, group, or resource for which to list mailbox permissions.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Permissions': [
+                {
+                    'GranteeId': 'string',
+                    'GranteeType': 'GROUP'|'USER',
+                    'PermissionValues': [
+                        'FULL_ACCESS'|'SEND_AS'|'SEND_ON_BEHALF',
+                    ]
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Permissions** *(list) --* 
+
+          One page of the user, group, or resource mailbox permissions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.
+
+            
+            
+
+            - **GranteeId** *(string) --* 
+
+              The identifier of the user, group, or resource to which the permissions are granted.
+
+              
+            
+
+            - **GranteeType** *(string) --* 
+
+              The type of user, group, or resource referred to in GranteeId.
+
+              
+            
+
+            - **PermissionValues** *(list) --* 
+
+              The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_mobile_device_access_rules(**kwargs)
+
+    
+
+    Lists the mobile device access rules for the specified Amazon WorkMail organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMobileDeviceAccessRules>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_mobile_device_access_rules(
+          OrganizationId='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The Amazon WorkMail organization for which to list the rules.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Rules': [
+                {
+                    'MobileDeviceAccessRuleId': 'string',
+                    'Name': 'string',
+                    'Description': 'string',
+                    'Effect': 'ALLOW'|'DENY',
+                    'DeviceTypes': [
+                        'string',
+                    ],
+                    'NotDeviceTypes': [
+                        'string',
+                    ],
+                    'DeviceModels': [
+                        'string',
+                    ],
+                    'NotDeviceModels': [
+                        'string',
+                    ],
+                    'DeviceOperatingSystems': [
+                        'string',
+                    ],
+                    'NotDeviceOperatingSystems': [
+                        'string',
+                    ],
+                    'DeviceUserAgents': [
+                        'string',
+                    ],
+                    'NotDeviceUserAgents': [
+                        'string',
+                    ],
+                    'DateCreated': datetime(2015, 1, 1),
+                    'DateModified': datetime(2015, 1, 1)
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Rules** *(list) --* 
+
+          The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
+
+          
+          
+
+          - *(dict) --* 
+
+            A rule that controls access to mobile devices for an Amazon WorkMail group.
+
+            
+            
+
+            - **MobileDeviceAccessRuleId** *(string) --* 
+
+              The ID assigned to a mobile access rule. 
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of a mobile access rule.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of a mobile access rule.
+
+              
+            
+
+            - **Effect** *(string) --* 
+
+              The effect of the rule when it matches. Allowed values are ``ALLOW`` or ``DENY`` .
+
+              
+            
+
+            - **DeviceTypes** *(list) --* 
+
+              Device types that a rule will match. 
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotDeviceTypes** *(list) --* 
+
+              Device types that a rule **will not** match. All other device types will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **DeviceModels** *(list) --* 
+
+              Device models that a rule will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotDeviceModels** *(list) --* 
+
+              Device models that a rule **will not** match. All other device models will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **DeviceOperatingSystems** *(list) --* 
+
+              Device operating systems that a rule will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotDeviceOperatingSystems** *(list) --* 
+
+              Device operating systems that a rule **will not** match. All other device types will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **DeviceUserAgents** *(list) --* 
+
+              Device user agents that a rule will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **NotDeviceUserAgents** *(list) --* 
+
+              Device user agents that a rule **will not** match. All other device user agents will match.
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **DateCreated** *(datetime) --* 
+
+              The date and time at which an access rule was created.
+
+              
+            
+
+            - **DateModified** *(datetime) --* 
+
+              The date and time at which an access rule was modified.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_organizations(**kwargs)
+
+    
+
+    Returns summaries of the customer's organizations.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_organizations(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OrganizationSummaries': [
+                {
+                    'OrganizationId': 'string',
+                    'Alias': 'string',
+                    'DefaultMailDomain': 'string',
+                    'ErrorMessage': 'string',
+                    'State': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **OrganizationSummaries** *(list) --* 
+
+          The overview of owned organizations presented as a list of organization summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an organization.
+
+            
+            
+
+            - **OrganizationId** *(string) --* 
+
+              The identifier associated with the organization.
+
+              
+            
+
+            - **Alias** *(string) --* 
+
+              The alias associated with the organization.
+
+              
+            
+
+            - **DefaultMailDomain** *(string) --* 
+
+              The default email domain associated with the organization.
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state associated with the organization.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+
+  .. py:method:: list_resource_delegates(**kwargs)
+
+    
+
+    Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourceDelegates>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_resource_delegates(
+          OrganizationId='string',
+          ResourceId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization that contains the resource for which delegates are listed.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier for the resource whose delegates are listed.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token used to paginate through the delegates associated with a resource.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The number of maximum results in a page.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Delegates': [
+                {
+                    'Id': 'string',
+                    'Type': 'GROUP'|'USER'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Delegates** *(list) --* 
+
+          One page of the resource's delegates.
+
+          
+          
+
+          - *(dict) --* 
+
+            The name of the attribute, which is one of the values defined in the UserAttribute enumeration.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier for the user or group associated as the resource's delegate.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the delegate: user or group.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token used to paginate through the delegates associated with a resource. While results are still available, it has an associated value. When the last page is reached, the token is empty. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_resources(**kwargs)
+
+    
+
+    Returns summaries of the organization's resources.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_resources(
+          OrganizationId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the resources exist.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Resources': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'Type': 'ROOM'|'EQUIPMENT',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Resources** *(list) --* 
+
+          One page of the organization's resource representation.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of a resource.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the resource.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the resource.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the resource.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the resource: equipment or room.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the resource, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the resource was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the resource was disabled from Amazon WorkMail use.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token used to paginate through all the organization's resources. While results are still available, it has an associated value. When the last page is reached, the token is empty.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags applied to an Amazon WorkMail organization resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceARN='string'
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(list) --* 
+
+          A list of tag key-value pairs.
+
+          
+          
+
+          - *(dict) --* 
+
+            Describes a tag applied to a resource.
+
+            
+            
+
+            - **Key** *(string) --* 
+
+              The key of the tag.
+
+              
+            
+
+            - **Value** *(string) --* 
+
+              The value of the tag.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: list_users(**kwargs)
+
+    
+
+    Returns summaries of the organization's users.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_users(
+          OrganizationId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the users exist.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token to use to retrieve the next page of results. The first call does not contain any tokens.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum number of results to return in a single call.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Users': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'DisplayName': 'string',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'UserRole': 'USER'|'RESOURCE'|'SYSTEM_USER',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Users** *(list) --* 
+
+          The overview of users for an organization.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an Amazon WorkMail user.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the user.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the user.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the user.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              The display name of the user.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the user, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **UserRole** *(string) --* 
+
+              The role of the user.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the user was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the user was disabled from Amazon WorkMail use.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: put_access_control_rule(**kwargs)
+
+    
+
+    Adds a new access control rule for the specified organization. The rule allows or denies access to the organization for the specified IPv4 addresses, access protocol actions, and user IDs. Adding a new rule with the same name as an existing rule replaces the older rule.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRule>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_access_control_rule(
+          Name='string',
+          Effect='ALLOW'|'DENY',
+          Description='string',
+          IpRanges=[
+              'string',
+          ],
+          NotIpRanges=[
+              'string',
+          ],
+          Actions=[
+              'string',
+          ],
+          NotActions=[
+              'string',
+          ],
+          UserIds=[
+              'string',
+          ],
+          NotUserIds=[
+              'string',
+          ],
+          OrganizationId='string'
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The rule name.
+
+      
+
+    
+    :type Effect: string
+    :param Effect: **[REQUIRED]** 
+
+      The rule effect.
+
+      
+
+    
+    :type Description: string
+    :param Description: **[REQUIRED]** 
+
+      The rule description.
+
+      
+
+    
+    :type IpRanges: list
+    :param IpRanges: 
+
+      IPv4 CIDR ranges to include in the rule.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotIpRanges: list
+    :param NotIpRanges: 
+
+      IPv4 CIDR ranges to exclude from the rule.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type Actions: list
+    :param Actions: 
+
+      Access protocol actions to include in the rule. Valid values include ``ActiveSync`` , ``AutoDiscover`` , ``EWS`` , ``IMAP`` , ``SMTP`` , ``WindowsOutlook`` , and ``WebMail`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotActions: list
+    :param NotActions: 
+
+      Access protocol actions to exclude from the rule. Valid values include ``ActiveSync`` , ``AutoDiscover`` , ``EWS`` , ``IMAP`` , ``SMTP`` , ``WindowsOutlook`` , and ``WebMail`` .
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type UserIds: list
+    :param UserIds: 
+
+      User IDs to include in the rule.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotUserIds: list
+    :param NotUserIds: 
+
+      User IDs to exclude from the rule.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: put_mailbox_permissions(**kwargs)
+
+    
+
+    Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_mailbox_permissions(
+          OrganizationId='string',
+          EntityId='string',
+          GranteeId='string',
+          PermissionValues=[
+              'FULL_ACCESS'|'SEND_AS'|'SEND_ON_BEHALF',
+          ]
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization under which the user, group, or resource exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier of the user, group, or resource for which to update mailbox permissions.
+
+      
+
+    
+    :type GranteeId: string
+    :param GranteeId: **[REQUIRED]** 
+
+      The identifier of the user, group, or resource to which to grant the permissions.
+
+      
+
+    
+    :type PermissionValues: list
+    :param PermissionValues: **[REQUIRED]** 
+
+      The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: put_retention_policy(**kwargs)
+
+    
+
+    Puts a retention policy to the specified organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutRetentionPolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_retention_policy(
+          OrganizationId='string',
+          Id='string',
+          Name='string',
+          Description='string',
+          FolderConfigurations=[
+              {
+                  'Name': 'INBOX'|'DELETED_ITEMS'|'SENT_ITEMS'|'DRAFTS'|'JUNK_EMAIL',
+                  'Action': 'NONE'|'DELETE'|'PERMANENTLY_DELETE',
+                  'Period': 123
+              },
+          ]
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization ID.
+
+      
+
+    
+    :type Id: string
+    :param Id: 
+
+      The retention policy ID.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The retention policy name.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The retention policy description.
+
+      
+
+    
+    :type FolderConfigurations: list
+    :param FolderConfigurations: **[REQUIRED]** 
+
+      The retention policy folder configurations.
+
+      
+
+    
+      - *(dict) --* 
+
+        The configuration applied to an organization's folders by its retention policy.
+
+        
+
+      
+        - **Name** *(string) --* **[REQUIRED]** 
+
+          The folder name.
+
+          
+
+        
+        - **Action** *(string) --* **[REQUIRED]** 
+
+          The action to take on the folder contents at the end of the folder configuration period.
+
+          
+
+        
+        - **Period** *(integer) --* 
+
+          The period of time at which the folder configuration action is applied.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: register_to_work_mail(**kwargs)
+
+    
+
+    Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see `Pricing <https://aws.amazon.com/workmail/pricing>`__ . The equivalent console functionality for this operation is *Enable* . 
+
+     
+
+    Users can either be created by calling the  CreateUser API operation or they can be synchronized from your directory. For more information, see  DeregisterFromWorkMail .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMail>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.register_to_work_mail(
+          OrganizationId='string',
+          EntityId='string',
+          Email='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the user, group, or resource exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the user, group, or resource to be updated.
+
+      
+
+    
+    :type Email: string
+    :param Email: **[REQUIRED]** 
+
+      The email for the user, group, or resource to be updated.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EmailAddressInUseException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityAlreadyRegisteredException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: reset_password(**kwargs)
+
+    
+
+    Allows the administrator to reset the password for a user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ResetPassword>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.reset_password(
+          OrganizationId='string',
+          UserId='string',
+          Password='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization that contains the user for which the password is reset.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifier of the user for whom the password is reset.
+
+      
+
+    
+    :type Password: string
+    :param Password: **[REQUIRED]** 
+
+      The new password for the user.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidPasswordException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: start_mailbox_export_job(**kwargs)
+
+    
+
+    Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see `Exporting mailbox content <https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html>`__ in the *Amazon WorkMail Administrator Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/StartMailboxExportJob>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_mailbox_export_job(
+          ClientToken='string',
+          OrganizationId='string',
+          EntityId='string',
+          Description='string',
+          RoleArn='string',
+          KmsKeyArn='string',
+          S3BucketName='string',
+          S3Prefix='string'
+      )
+    :type ClientToken: string
+    :param ClientToken: **[REQUIRED]** 
+
+      The idempotency token for the client request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier associated with the organization.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier of the user or resource associated with the mailbox.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The mailbox export job description.
+
+      
+
+    
+    :type RoleArn: string
+    :param RoleArn: **[REQUIRED]** 
+
+      The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
+
+      
+
+    
+    :type KmsKeyArn: string
+    :param KmsKeyArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+
+      
+
+    
+    :type S3BucketName: string
+    :param S3BucketName: **[REQUIRED]** 
+
+      The name of the S3 bucket.
+
+      
+
+    
+    :type S3Prefix: string
+    :param S3Prefix: **[REQUIRED]** 
+
+      The S3 bucket prefix.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'JobId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **JobId** *(string) --* 
+
+          The job ID.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.LimitExceededException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Applies the specified tags to the specified Amazon WorkMail organization resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceARN='string',
+          Tags=[
+              {
+                  'Key': 'string',
+                  'Value': 'string'
+              },
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    :type Tags: list
+    :param Tags: **[REQUIRED]** 
+
+      The tag key-value pairs.
+
+      
+
+    
+      - *(dict) --* 
+
+        Describes a tag applied to a resource.
+
+        
+
+      
+        - **Key** *(string) --* **[REQUIRED]** 
+
+          The key of the tag.
+
+          
+
+        
+        - **Value** *(string) --* **[REQUIRED]** 
+
+          The value of the tag.
+
+          
+
+        
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.TooManyTagsException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Untags the specified tags from the specified Amazon WorkMail organization resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceARN='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceARN: string
+    :param ResourceARN: **[REQUIRED]** 
+
+      The resource ARN.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The tag keys.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: update_mailbox_quota(**kwargs)
+
+    
+
+    Updates a user's current mailbox quota for a specified organization and user.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMailboxQuota>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_mailbox_quota(
+          OrganizationId='string',
+          UserId='string',
+          MailboxQuota=123
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization that contains the user for whom to update the mailbox quota.
+
+      
+
+    
+    :type UserId: string
+    :param UserId: **[REQUIRED]** 
+
+      The identifer for the user for whom to update the mailbox quota.
+
+      
+
+    
+    :type MailboxQuota: integer
+    :param MailboxQuota: **[REQUIRED]** 
+
+      The updated mailbox quota, in MB, for the specified user.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+
+  .. py:method:: update_mobile_device_access_rule(**kwargs)
+
+    
+
+    Updates a mobile device access rule for the specified Amazon WorkMail organization.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateMobileDeviceAccessRule>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_mobile_device_access_rule(
+          OrganizationId='string',
+          MobileDeviceAccessRuleId='string',
+          Name='string',
+          Description='string',
+          Effect='ALLOW'|'DENY',
+          DeviceTypes=[
+              'string',
+          ],
+          NotDeviceTypes=[
+              'string',
+          ],
+          DeviceModels=[
+              'string',
+          ],
+          NotDeviceModels=[
+              'string',
+          ],
+          DeviceOperatingSystems=[
+              'string',
+          ],
+          NotDeviceOperatingSystems=[
+              'string',
+          ],
+          DeviceUserAgents=[
+              'string',
+          ],
+          NotDeviceUserAgents=[
+              'string',
+          ]
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The Amazon WorkMail organization under which the rule will be updated.
+
+      
+
+    
+    :type MobileDeviceAccessRuleId: string
+    :param MobileDeviceAccessRuleId: **[REQUIRED]** 
+
+      The identifier of the rule to be updated.
+
+      
+
+    
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The updated rule name.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The updated rule description.
+
+      
+
+    
+    :type Effect: string
+    :param Effect: **[REQUIRED]** 
+
+      The effect of the rule when it matches. Allowed values are ``ALLOW`` or ``DENY`` .
+
+      
+
+    
+    :type DeviceTypes: list
+    :param DeviceTypes: 
+
+      Device types that the updated rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceTypes: list
+    :param NotDeviceTypes: 
+
+      Device types that the updated rule **will not** match. All other device types will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceModels: list
+    :param DeviceModels: 
+
+      Device models that the updated rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceModels: list
+    :param NotDeviceModels: 
+
+      Device models that the updated rule **will not** match. All other device models will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceOperatingSystems: list
+    :param DeviceOperatingSystems: 
+
+      Device operating systems that the updated rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceOperatingSystems: list
+    :param NotDeviceOperatingSystems: 
+
+      Device operating systems that the updated rule **will not** match. All other device operating systems will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type DeviceUserAgents: list
+    :param DeviceUserAgents: 
+
+      User agents that the updated rule will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type NotDeviceUserAgents: list
+    :param NotDeviceUserAgents: 
+
+      User agents that the updated rule **will not** match. All other user agents will match.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+  .. py:method:: update_primary_email_address(**kwargs)
+
+    
+
+    Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdatePrimaryEmailAddress>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_primary_email_address(
+          OrganizationId='string',
+          EntityId='string',
+          Email='string'
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The organization that contains the user, group, or resource to update.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The user, group, or resource to update.
+
+      
+
+    
+    :type Email: string
+    :param Email: **[REQUIRED]** 
+
+      The value of the email to be updated as primary.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryServiceAuthenticationFailedException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EmailAddressInUseException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidParameterException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.UnsupportedOperationException`
+
+    
+
+  .. py:method:: update_resource(**kwargs)
+
+    
+
+    Updates data for the resource. To have the latest information, it must be preceded by a  DescribeResource call. The dataset in the request should be the one expected when performing another ``DescribeResource`` call.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/UpdateResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_resource(
+          OrganizationId='string',
+          ResourceId='string',
+          Name='string',
+          BookingOptions={
+              'AutoAcceptRequests': True|False,
+              'AutoDeclineRecurringRequests': True|False,
+              'AutoDeclineConflictingRequests': True|False
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier associated with the organization for which the resource is updated.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier of the resource to be updated.
+
+      
+
+    
+    :type Name: string
+    :param Name: 
+
+      The name of the resource to be updated.
+
+      
+
+    
+    :type BookingOptions: dict
+    :param BookingOptions: 
+
+      The resource's booking options to be updated.
+
+      
+
+    
+      - **AutoAcceptRequests** *(boolean) --* 
+
+        The resource's ability to automatically reply to requests. If disabled, delegates must be associated to the resource.
+
+        
+
+      
+      - **AutoDeclineRecurringRequests** *(boolean) --* 
+
+        The resource's ability to automatically decline any recurring requests.
+
+        
+
+      
+      - **AutoDeclineConflictingRequests** *(boolean) --* 
+
+        The resource's ability to automatically decline any conflicting requests.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`WorkMail.Client.exceptions.DirectoryUnavailableException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EntityStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.InvalidConfigurationException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.EmailAddressInUseException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.MailDomainStateException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.NameAvailabilityException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationNotFoundException`
+
+    
+    *     :py:class:`WorkMail.Client.exceptions.OrganizationStateException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`WorkMail.Paginator.ListAliases`
+
+
+* :py:class:`WorkMail.Paginator.ListGroupMembers`
+
+
+* :py:class:`WorkMail.Paginator.ListGroups`
+
+
+* :py:class:`WorkMail.Paginator.ListMailboxPermissions`
+
+
+* :py:class:`WorkMail.Paginator.ListOrganizations`
+
+
+* :py:class:`WorkMail.Paginator.ListResourceDelegates`
+
+
+* :py:class:`WorkMail.Paginator.ListResources`
+
+
+* :py:class:`WorkMail.Paginator.ListUsers`
+
+
+
+.. py:class:: WorkMail.Paginator.ListAliases
+
+  ::
+
+    
+    paginator = client.get_paginator('list_aliases')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_aliases`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAliases>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          EntityId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the entity exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier for the entity for which to list the aliases.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Aliases': [
+                'string',
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Aliases** *(list) --* 
+
+          The entity's paginated aliases.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListGroupMembers
+
+  ::
+
+    
+    paginator = client.get_paginator('list_group_members')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_group_members`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroupMembers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          GroupId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the group exists.
+
+      
+
+    
+    :type GroupId: string
+    :param GroupId: **[REQUIRED]** 
+
+      The identifier for the group to which the members (users or groups) are associated.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Members': [
+                {
+                    'Id': 'string',
+                    'Name': 'string',
+                    'Type': 'GROUP'|'USER',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Members** *(list) --* 
+
+          The members associated to the group.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of a user or group.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the member.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the member.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              A member can be a user or group.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the member, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the member was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the member was disabled from Amazon WorkMail use.
+
+              
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListGroups
+
+  ::
+
+    
+    paginator = client.get_paginator('list_groups')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_groups`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListGroups>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the groups exist.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Groups': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Groups** *(list) --* 
+
+          The overview of groups for an organization.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an Amazon WorkMail group.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the group.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the group.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the group.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the group, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the group was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the group was disabled from Amazon WorkMail use.
+
+              
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListMailboxPermissions
+
+  ::
+
+    
+    paginator = client.get_paginator('list_mailbox_permissions')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_mailbox_permissions`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          EntityId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier of the organization under which the user, group, or resource exists.
+
+      
+
+    
+    :type EntityId: string
+    :param EntityId: **[REQUIRED]** 
+
+      The identifier of the user, group, or resource for which to list mailbox permissions.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Permissions': [
+                {
+                    'GranteeId': 'string',
+                    'GranteeType': 'GROUP'|'USER',
+                    'PermissionValues': [
+                        'FULL_ACCESS'|'SEND_AS'|'SEND_ON_BEHALF',
+                    ]
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Permissions** *(list) --* 
+
+          One page of the user, group, or resource mailbox permissions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Permission granted to a user, group, or resource to access a certain aspect of another user, group, or resource mailbox.
+
+            
+            
+
+            - **GranteeId** *(string) --* 
+
+              The identifier of the user, group, or resource to which the permissions are granted.
+
+              
+            
+
+            - **GranteeType** *(string) --* 
+
+              The type of user, group, or resource referred to in GranteeId.
+
+              
+            
+
+            - **PermissionValues** *(list) --* 
+
+              The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
+
+              
+              
+
+              - *(string) --* 
+          
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListOrganizations
+
+  ::
+
+    
+    paginator = client.get_paginator('list_organizations')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_organizations`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizations>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'OrganizationSummaries': [
+                {
+                    'OrganizationId': 'string',
+                    'Alias': 'string',
+                    'DefaultMailDomain': 'string',
+                    'ErrorMessage': 'string',
+                    'State': 'string'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **OrganizationSummaries** *(list) --* 
+
+          The overview of owned organizations presented as a list of organization summaries.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an organization.
+
+            
+            
+
+            - **OrganizationId** *(string) --* 
+
+              The identifier associated with the organization.
+
+              
+            
+
+            - **Alias** *(string) --* 
+
+              The alias associated with the organization.
+
+              
+            
+
+            - **DefaultMailDomain** *(string) --* 
+
+              The default email domain associated with the organization.
+
+              
+            
+
+            - **ErrorMessage** *(string) --* 
+
+              The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state associated with the organization.
+
+              
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListResourceDelegates
+
+  ::
+
+    
+    paginator = client.get_paginator('list_resource_delegates')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_resource_delegates`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResourceDelegates>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          ResourceId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization that contains the resource for which delegates are listed.
+
+      
+
+    
+    :type ResourceId: string
+    :param ResourceId: **[REQUIRED]** 
+
+      The identifier for the resource whose delegates are listed.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Delegates': [
+                {
+                    'Id': 'string',
+                    'Type': 'GROUP'|'USER'
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Delegates** *(list) --* 
+
+          One page of the resource's delegates.
+
+          
+          
+
+          - *(dict) --* 
+
+            The name of the attribute, which is one of the values defined in the UserAttribute enumeration.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier for the user or group associated as the resource's delegate.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the delegate: user or group.
+
+              
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListResources
+
+  ::
+
+    
+    paginator = client.get_paginator('list_resources')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_resources`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListResources>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the resources exist.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Resources': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'Type': 'ROOM'|'EQUIPMENT',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Resources** *(list) --* 
+
+          One page of the organization's resource representation.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of a resource.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the resource.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the resource.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the resource.
+
+              
+            
+
+            - **Type** *(string) --* 
+
+              The type of the resource: equipment or room.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the resource, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the resource was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the resource was disabled from Amazon WorkMail use.
+
+              
+        
+      
+    
+
+.. py:class:: WorkMail.Paginator.ListUsers
+
+  ::
+
+    
+    paginator = client.get_paginator('list_users')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`WorkMail.Client.list_users`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListUsers>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          OrganizationId='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type OrganizationId: string
+    :param OrganizationId: **[REQUIRED]** 
+
+      The identifier for the organization under which the users exist.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Users': [
+                {
+                    'Id': 'string',
+                    'Email': 'string',
+                    'Name': 'string',
+                    'DisplayName': 'string',
+                    'State': 'ENABLED'|'DISABLED'|'DELETED',
+                    'UserRole': 'USER'|'RESOURCE'|'SYSTEM_USER',
+                    'EnabledDate': datetime(2015, 1, 1),
+                    'DisabledDate': datetime(2015, 1, 1)
+                },
+            ],
+            
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Users** *(list) --* 
+
+          The overview of users for an organization.
+
+          
+          
+
+          - *(dict) --* 
+
+            The representation of an Amazon WorkMail user.
+
+            
+            
+
+            - **Id** *(string) --* 
+
+              The identifier of the user.
+
+              
+            
+
+            - **Email** *(string) --* 
+
+              The email of the user.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the user.
+
+              
+            
+
+            - **DisplayName** *(string) --* 
+
+              The display name of the user.
+
+              
+            
+
+            - **State** *(string) --* 
+
+              The state of the user, which can be ENABLED, DISABLED, or DELETED.
+
+              
+            
+
+            - **UserRole** *(string) --* 
+
+              The role of the user.
+
+              
+            
+
+            - **EnabledDate** *(datetime) --* 
+
+              The date indicating when the user was enabled for Amazon WorkMail use.
+
+              
+            
+
+            - **DisabledDate** *(datetime) --* 
+
+              The date indicating when the user was disabled from Amazon WorkMail use.
+
+              
+        
+      
+    

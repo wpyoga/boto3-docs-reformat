@@ -1,0 +1,5687 @@
+
+
+************
+GreengrassV2
+************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: GreengrassV2.Client
+
+  A low-level client representing AWS IoT Greengrass V2 (GreengrassV2)
+  
+
+  AWS IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities to edge devices. This enables devices to collect and analyze data closer to the source of information, react autonomously to local events, and communicate securely with each other on local networks. Local devices can also communicate securely with AWS IoT Core and export IoT data to the AWS Cloud. AWS IoT Greengrass developers can use AWS Lambda functions and components to create and deploy applications to fleets of edge devices for local operation.
+
+   
+
+  AWS IoT Greengrass Version 2 provides a new major version of the AWS IoT Greengrass Core software, new APIs, and a new console. Use this API reference to learn how to use the AWS IoT Greengrass V2 API operations to manage components, manage deployments, and core devices.
+
+   
+
+  For more information, see `What is AWS IoT Greengrass? <https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('greengrassv2')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~GreengrassV2.Client.batch_associate_client_device_with_core_device`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.batch_disassociate_client_device_from_core_device`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.can_paginate`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.cancel_deployment`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.create_component_version`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.create_deployment`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.delete_component`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.delete_core_device`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.describe_component`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_component`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_component_version_artifact`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_core_device`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_deployment`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_paginator`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.get_waiter`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_client_devices_associated_with_core_device`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_component_versions`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_components`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_core_devices`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_deployments`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_effective_deployments`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_installed_components`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.resolve_component_candidates`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.tag_resource`
+
+  
+  *   :py:meth:`~GreengrassV2.Client.untag_resource`
+
+  
+
+  .. py:method:: batch_associate_client_device_with_core_device(**kwargs)
+
+    
+
+    Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see `Configure cloud discovery <https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+     
+
+    .. note::
+
+       
+
+      Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see `Interact with local IoT devices <https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchAssociateClientDeviceWithCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_associate_client_device_with_core_device(
+          entries=[
+              {
+                  'thingName': 'string'
+              },
+          ],
+          coreDeviceThingName='string'
+      )
+    :type entries: list
+    :param entries: 
+
+      The list of client devices to associate.
+
+      
+
+    
+      - *(dict) --* 
+
+        Contains a request to associate a client device with a core device. The `BatchAssociateClientDeviceWithCoreDevice <https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html>`__ operation consumes a list of these requests.
+
+        
+
+      
+        - **thingName** *(string) --* **[REQUIRED]** 
+
+          The name of the AWS IoT thing that represents the client device to associate.
+
+          
+
+        
+      
+  
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'errorEntries': [
+                {
+                    'thingName': 'string',
+                    'code': 'string',
+                    'message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **errorEntries** *(list) --* 
+
+          The list of any errors for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to associate.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains an error that occurs from a request to associate a client device with a core device. The `BatchAssociateClientDeviceWithCoreDevice <https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html>`__ operation returns a list of these errors.
+
+            
+            
+
+            - **thingName** *(string) --* 
+
+              The name of the AWS IoT thing whose associate request failed.
+
+              
+            
+
+            - **code** *(string) --* 
+
+              The error code for the request.
+
+              
+            
+
+            - **message** *(string) --* 
+
+              A message that provides additional information about the error.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: batch_disassociate_client_device_from_core_device(**kwargs)
+
+    
+
+    Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/BatchDisassociateClientDeviceFromCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.batch_disassociate_client_device_from_core_device(
+          entries=[
+              {
+                  'thingName': 'string'
+              },
+          ],
+          coreDeviceThingName='string'
+      )
+    :type entries: list
+    :param entries: 
+
+      The list of client devices to disassociate.
+
+      
+
+    
+      - *(dict) --* 
+
+        Contains a request to disassociate a client device from a core device. The `BatchDisassociateClientDeviceWithCoreDevice <https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html>`__ operation consumes a list of these requests.
+
+        
+
+      
+        - **thingName** *(string) --* **[REQUIRED]** 
+
+          The name of the AWS IoT thing that represents the client device to disassociate.
+
+          
+
+        
+      
+  
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'errorEntries': [
+                {
+                    'thingName': 'string',
+                    'code': 'string',
+                    'message': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **errorEntries** *(list) --* 
+
+          The list of errors (if any) for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to disassociate.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains an error that occurs from a request to disassociate a client device from a core device. The `BatchDisassociateClientDeviceWithCoreDevice <https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html>`__ operation returns a list of these errors.
+
+            
+            
+
+            - **thingName** *(string) --* 
+
+              The name of the AWS IoT thing whose disassociate request failed.
+
+              
+            
+
+            - **code** *(string) --* 
+
+              The error code for the request.
+
+              
+            
+
+            - **message** *(string) --* 
+
+              A message that provides additional information about the error.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: cancel_deployment(**kwargs)
+
+    
+
+    Cancels a deployment. This operation cancels the deployment for devices that haven't yet received it. If a device already received the deployment, this operation doesn't change anything for that device.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CancelDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.cancel_deployment(
+          deploymentId='string'
+      )
+    :type deploymentId: string
+    :param deploymentId: **[REQUIRED]** 
+
+      The ID of the deployment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'message': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **message** *(string) --* 
+
+          A message that communicates if the cancel was successful.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: create_component_version(**kwargs)
+
+    
+
+    Creates a component. Components are software that run on AWS IoT Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to AWS IoT Greengrass. Then, you can deploy the component to other core devices.
+
+     
+
+    You can use this operation to do the following:
+
+     
+
+     
+    * **Create components from recipes**   Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see `AWS IoT Greengrass component recipe reference <https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* . To create a component from a recipe, specify ``inlineRecipe`` when you call this operation. 
+     
+    * **Create components from Lambda functions**   Create a component from an AWS Lambda function that runs on AWS IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from AWS IoT Greengrass V1 to AWS IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes: 
+
+       
+      * Python 2.7 – ``python2.7``   
+       
+      * Python 3.7 – ``python3.7``   
+       
+      * Python 3.8 – ``python3.8``   
+       
+      * Java 8 – ``java8``   
+       
+      * Node.js 10 – ``nodejs10.x``   
+       
+      * Node.js 12 – ``nodejs12.x``   
+       
+
+     
+
+    To create a component from a Lambda function, specify ``lambdaFunction`` when you call this operation.
+
+     
+     
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateComponentVersion>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_component_version(
+          inlineRecipe=b'bytes',
+          lambdaFunction={
+              'lambdaArn': 'string',
+              'componentName': 'string',
+              'componentVersion': 'string',
+              'componentPlatforms': [
+                  {
+                      'name': 'string',
+                      'attributes': {
+                          'string': 'string'
+                      }
+                  },
+              ],
+              'componentDependencies': {
+                  'string': {
+                      'versionRequirement': 'string',
+                      'dependencyType': 'HARD'|'SOFT'
+                  }
+              },
+              'componentLambdaParameters': {
+                  'eventSources': [
+                      {
+                          'topic': 'string',
+                          'type': 'PUB_SUB'|'IOT_CORE'
+                      },
+                  ],
+                  'maxQueueSize': 123,
+                  'maxInstancesCount': 123,
+                  'maxIdleTimeInSeconds': 123,
+                  'timeoutInSeconds': 123,
+                  'statusTimeoutInSeconds': 123,
+                  'pinned': True|False,
+                  'inputPayloadEncodingType': 'json'|'binary',
+                  'execArgs': [
+                      'string',
+                  ],
+                  'environmentVariables': {
+                      'string': 'string'
+                  },
+                  'linuxProcessParams': {
+                      'isolationMode': 'GreengrassContainer'|'NoContainer',
+                      'containerParams': {
+                          'memorySizeInKB': 123,
+                          'mountROSysfs': True|False,
+                          'volumes': [
+                              {
+                                  'sourcePath': 'string',
+                                  'destinationPath': 'string',
+                                  'permission': 'ro'|'rw',
+                                  'addGroupOwner': True|False
+                              },
+                          ],
+                          'devices': [
+                              {
+                                  'path': 'string',
+                                  'permission': 'ro'|'rw',
+                                  'addGroupOwner': True|False
+                              },
+                          ]
+                      }
+                  }
+              }
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type inlineRecipe: bytes
+    :param inlineRecipe: 
+
+      The recipe to use to create the component. The recipe defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform compatibility.
+
+       
+
+      You must specify either ``inlineRecipe`` or ``lambdaFunction`` .
+
+      
+
+    
+    :type lambdaFunction: dict
+    :param lambdaFunction: 
+
+      The parameters to create a component from a Lambda function.
+
+       
+
+      You must specify either ``inlineRecipe`` or ``lambdaFunction`` .
+
+      
+
+    
+      - **lambdaArn** *(string) --* **[REQUIRED]** 
+
+        The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the Lambda function. The ARN must include the version of the function to import. You can't use version aliases like ``$LATEST`` .
+
+        
+
+      
+      - **componentName** *(string) --* 
+
+        The name of the component.
+
+         
+
+        Defaults to the name of the Lambda function.
+
+        
+
+      
+      - **componentVersion** *(string) --* 
+
+        The version of the component.
+
+         
+
+        Defaults to the version of the Lambda function as a semantic version. For example, if your function version is ``3`` , the component version becomes ``3.0.0`` .
+
+        
+
+      
+      - **componentPlatforms** *(list) --* 
+
+        The platforms that the component version supports.
+
+        
+
+      
+        - *(dict) --* 
+
+          Contains information about a platform that a component supports.
+
+          
+
+        
+          - **name** *(string) --* 
+
+            The friendly name of the platform. This name helps you identify the platform.
+
+             
+
+            If you omit this parameter, AWS IoT Greengrass creates a friendly name from the ``os`` and ``architecture`` of the platform.
+
+            
+
+          
+          - **attributes** *(dict) --* 
+
+            A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the ``os`` and ``platform`` by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+        
+    
+      - **componentDependencies** *(dict) --* 
+
+        The component versions on which this Lambda function component depends.
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(dict) --* 
+
+            Contains information about a component dependency for a Lambda function component.
+
+            
+
+          
+            - **versionRequirement** *(string) --* 
+
+              The component version requirement for the component dependency.
+
+               
+
+              AWS IoT Greengrass V2 uses semantic version constraints. For more information, see `Semantic Versioning <https://semver.org/>`__ .
+
+              
+
+            
+            - **dependencyType** *(string) --* 
+
+              The type of this dependency. Choose from the following options:
+
+               
+
+               
+              * ``SOFT`` – The component doesn't restart if the dependency changes state. 
+               
+              * ``HARD`` – The component restarts if the dependency changes state. 
+               
+
+               
+
+              Default: ``HARD``  
+
+              
+
+            
+          
+    
+  
+      - **componentLambdaParameters** *(dict) --* 
+
+        The system and runtime parameters for the Lambda function as it runs on the AWS IoT Greengrass core device.
+
+        
+
+      
+        - **eventSources** *(list) --* 
+
+          The list of event sources to which to subscribe to receive work messages. The Lambda function runs when it receives a message from an event source. You can subscribe this function to local publish/subscribe messages and AWS IoT Core MQTT messages.
+
+          
+
+        
+          - *(dict) --* 
+
+            Contains information about an event source for an AWS Lambda function. The event source defines the topics on which this Lambda function subscribes to receive messages that run the function.
+
+            
+
+          
+            - **topic** *(string) --* **[REQUIRED]** 
+
+              The topic to which to subscribe to receive event messages.
+
+              
+
+            
+            - **type** *(string) --* **[REQUIRED]** 
+
+              The type of event source. Choose from the following options:
+
+               
+
+               
+              * ``PUB_SUB`` – Subscribe to local publish/subscribe messages. This event source type doesn't support MQTT wildcards (``+`` and ``#`` ) in the event source topic. 
+               
+              * ``IOT_CORE`` – Subscribe to AWS IoT Core MQTT messages. This event source type supports MQTT wildcards (``+`` and ``#`` ) in the event source topic. 
+               
+
+              
+
+            
+          
+      
+        - **maxQueueSize** *(integer) --* 
+
+          The maximum size of the message queue for the Lambda function component. The AWS IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to consume each message.
+
+          
+
+        
+        - **maxInstancesCount** *(integer) --* 
+
+          The maximum number of instances that a non-pinned Lambda function can run at the same time.
+
+          
+
+        
+        - **maxIdleTimeInSeconds** *(integer) --* 
+
+          The maximum amount of time in seconds that a non-pinned Lambda function can idle before the AWS IoT Greengrass Core software stops its process.
+
+          
+
+        
+        - **timeoutInSeconds** *(integer) --* 
+
+          The maximum amount of time in seconds that the Lambda function can process a work item.
+
+          
+
+        
+        - **statusTimeoutInSeconds** *(integer) --* 
+
+          The interval in seconds at which a pinned (also known as long-lived) Lambda function component sends status updates to the Lambda manager component.
+
+          
+
+        
+        - **pinned** *(boolean) --* 
+
+          Whether or not the Lambda function is pinned, or long-lived.
+
+           
+
+           
+          * A pinned Lambda function starts when AWS IoT Greengrass starts and keeps running in its own container. 
+           
+          * A non-pinned Lambda function starts only when it receives a work item and exists after it idles for ``maxIdleTimeInSeconds`` . If the function has multiple work items, the AWS IoT Greengrass Core software creates multiple instances of the function. 
+           
+
+           
+
+          Default: ``true``  
+
+          
+
+        
+        - **inputPayloadEncodingType** *(string) --* 
+
+          The encoding type that the Lambda function supports.
+
+           
+
+          Default: ``json``  
+
+          
+
+        
+        - **execArgs** *(list) --* 
+
+          The list of arguments to pass to the Lambda function when it runs.
+
+          
+
+        
+          - *(string) --* 
+
+          
+      
+        - **environmentVariables** *(dict) --* 
+
+          The map of environment variables that are available to the Lambda function when it runs.
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(string) --* 
+
+            
+      
+    
+        - **linuxProcessParams** *(dict) --* 
+
+          The parameters for the Linux process that contains the Lambda function.
+
+          
+
+        
+          - **isolationMode** *(string) --* 
+
+            The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the AWS IoT Greengrass container, or as a regular process outside any container.
+
+             
+
+            Default: ``GreengrassContainer``  
+
+            
+
+          
+          - **containerParams** *(dict) --* 
+
+            The parameters for the container in which the Lambda function runs.
+
+            
+
+          
+            - **memorySizeInKB** *(integer) --* 
+
+              The memory size of the container, expressed in kilobytes.
+
+               
+
+              Default: ``16384`` (16 MB)
+
+              
+
+            
+            - **mountROSysfs** *(boolean) --* 
+
+              Whether or not the container can read information from the device's ``/sys`` folder.
+
+               
+
+              Default: ``false``  
+
+              
+
+            
+            - **volumes** *(list) --* 
+
+              The list of volumes that the container can access.
+
+              
+
+            
+              - *(dict) --* 
+
+                Contains information about a volume that Linux processes in a container can access. When you define a volume, the AWS IoT Greengrass Core software mounts the source files to the destination inside the container.
+
+                
+
+              
+                - **sourcePath** *(string) --* **[REQUIRED]** 
+
+                  The path to the physical volume in the file system.
+
+                  
+
+                
+                - **destinationPath** *(string) --* **[REQUIRED]** 
+
+                  The path to the logical volume in the file system.
+
+                  
+
+                
+                - **permission** *(string) --* 
+
+                  The permission to access the volume: read/only (``ro`` ) or read/write (``rw`` ).
+
+                   
+
+                  Default: ``ro``  
+
+                  
+
+                
+                - **addGroupOwner** *(boolean) --* 
+
+                  Whether or not to add the AWS IoT Greengrass user group as an owner of the volume.
+
+                   
+
+                  Default: ``false``  
+
+                  
+
+                
+              
+          
+            - **devices** *(list) --* 
+
+              The list of system devices that the container can access.
+
+              
+
+            
+              - *(dict) --* 
+
+                Contains information about a device that Linux processes in a container can access.
+
+                
+
+              
+                - **path** *(string) --* **[REQUIRED]** 
+
+                  The mount path for the device in the file system.
+
+                  
+
+                
+                - **permission** *(string) --* 
+
+                  The permission to access the device: read/only (``ro`` ) or read/write (``rw`` ).
+
+                   
+
+                  Default: ``ro``  
+
+                  
+
+                
+                - **addGroupOwner** *(boolean) --* 
+
+                  Whether or not to add the component's system user as an owner of the device.
+
+                   
+
+                  Default: ``false``  
+
+                  
+
+                
+              
+          
+          
+        
+      
+    
+    :type tags: dict
+    :param tags: 
+
+      A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string',
+            'componentName': 'string',
+            'componentVersion': 'string',
+            'creationTimestamp': datetime(2015, 1, 1),
+            'status': {
+                'componentState': 'REQUESTED'|'INITIATED'|'DEPLOYABLE'|'FAILED'|'DEPRECATED',
+                'message': 'string',
+                'errors': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **arn** *(string) --* 
+
+          The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+          
+        
+
+        - **componentName** *(string) --* 
+
+          The name of the component.
+
+          
+        
+
+        - **componentVersion** *(string) --* 
+
+          The version of the component.
+
+          
+        
+
+        - **creationTimestamp** *(datetime) --* 
+
+          The time at which the component was created, expressed in ISO 8601 format.
+
+          
+        
+
+        - **status** *(dict) --* 
+
+          The status of the component version in AWS IoT Greengrass V2. This status is different from the status of the component on a core device.
+
+          
+          
+
+          - **componentState** *(string) --* 
+
+            The state of the component.
+
+            
+          
+
+          - **message** *(string) --* 
+
+            A message that communicates details, such as errors, about the status of the component.
+
+            
+          
+
+          - **errors** *(dict) --* 
+
+            A dictionary of errors that communicate why the component is in an error state. For example, if AWS IoT Greengrass can't access an artifact for the component, then ``errors`` contains the artifact's URI as a key, and the error message as the value for that key.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_deployment(**kwargs)
+
+    
+
+    Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass deploys that group's deployment to the new device.
+
+     
+
+    You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the new deployment to the target devices.
+
+     
+
+    Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it.
+
+     
+
+    For more information, see the `Create deployments <https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/CreateDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_deployment(
+          targetArn='string',
+          deploymentName='string',
+          components={
+              'string': {
+                  'componentVersion': 'string',
+                  'configurationUpdate': {
+                      'merge': 'string',
+                      'reset': [
+                          'string',
+                      ]
+                  },
+                  'runWith': {
+                      'posixUser': 'string'
+                  }
+              }
+          },
+          iotJobConfiguration={
+              'jobExecutionsRolloutConfig': {
+                  'exponentialRate': {
+                      'baseRatePerMinute': 123,
+                      'incrementFactor': 123.0,
+                      'rateIncreaseCriteria': {
+                          'numberOfNotifiedThings': 123,
+                          'numberOfSucceededThings': 123
+                      }
+                  },
+                  'maximumPerMinute': 123
+              },
+              'abortConfig': {
+                  'criteriaList': [
+                      {
+                          'failureType': 'FAILED'|'REJECTED'|'TIMED_OUT'|'ALL',
+                          'action': 'CANCEL',
+                          'thresholdPercentage': 123.0,
+                          'minNumberOfExecutedThings': 123
+                      },
+                  ]
+              },
+              'timeoutConfig': {
+                  'inProgressTimeoutInMinutes': 123
+              }
+          },
+          deploymentPolicies={
+              'failureHandlingPolicy': 'ROLLBACK'|'DO_NOTHING',
+              'componentUpdatePolicy': {
+                  'timeoutInSeconds': 123,
+                  'action': 'NOTIFY_COMPONENTS'|'SKIP_NOTIFY_COMPONENTS'
+              },
+              'configurationValidationPolicy': {
+                  'timeoutInSeconds': 123
+              }
+          },
+          tags={
+              'string': 'string'
+          }
+      )
+    :type targetArn: string
+    :param targetArn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+      
+
+    
+    :type deploymentName: string
+    :param deploymentName: 
+
+      The name of the deployment.
+
+       
+
+      You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+      
+
+    
+    :type components: dict
+    :param components: 
+
+      The components to deploy. This is a dictionary, where each key is the name of a component, and each key's value is the version and configuration to deploy for that component.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          Contains information about a component to deploy.
+
+          
+
+        
+          - **componentVersion** *(string) --* 
+
+            The version of the component.
+
+            
+
+          
+          - **configurationUpdate** *(dict) --* 
+
+            The configuration updates to deploy for the component. You can define *reset* updates and *merge* updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device's component configuration with the keys and values that you specify. The AWS IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see `Update component configurations <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+            
+
+          
+            - **merge** *(string) --* 
+
+              A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component's existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component's default configuration. This means that the core device keeps it's existing configuration for keys and values that you don't specify in this object. For more information, see `Merge configuration updates <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+              
+
+            
+            - **reset** *(list) --* 
+
+              The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (``/`` ) and use forward slashes to separate the key for each level in the object. For more information, see the `JSON pointer specification <https://tools.ietf.org/html/rfc6901>`__ and `Reset configuration updates <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+          - **runWith** *(dict) --* 
+
+            The system user and group that the AWS IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the AWS IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see `Configure the user and group that run components <https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+            
+
+          
+            - **posixUser** *(string) --* 
+
+              The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (``:`` ) in the following format: ``user:group`` . The group is optional. If you don't specify a group, the AWS IoT Greengrass Core software uses the primary user for the group.
+
+              
+
+            
+          
+        
+  
+
+    :type iotJobConfiguration: dict
+    :param iotJobConfiguration: 
+
+      The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.
+
+      
+
+    
+      - **jobExecutionsRolloutConfig** *(dict) --* 
+
+        The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
+
+        
+
+      
+        - **exponentialRate** *(dict) --* 
+
+          The exponential rate to increase the job rollout rate.
+
+          
+
+        
+          - **baseRatePerMinute** *(integer) --* **[REQUIRED]** 
+
+            The minimum number of devices that receive a pending job notification, per minute, when the job starts. This parameter defines the initial rollout rate of the job.
+
+            
+
+          
+          - **incrementFactor** *(float) --* **[REQUIRED]** 
+
+            The exponential factor to increase the rollout rate for the job.
+
+             
+
+            This parameter supports up to one digit after the decimal (for example, you can specify ``1.5`` , but not ``1.55`` ).
+
+            
+
+          
+          - **rateIncreaseCriteria** *(dict) --* **[REQUIRED]** 
+
+            The criteria to increase the rollout rate for the job.
+
+            
+
+          
+            - **numberOfNotifiedThings** *(integer) --* 
+
+              The number of devices to receive the job notification before the rollout rate increases.
+
+              
+
+            
+            - **numberOfSucceededThings** *(integer) --* 
+
+              The number of devices to successfully run the configuration job before the rollout rate increases.
+
+              
+
+            
+          
+        
+        - **maximumPerMinute** *(integer) --* 
+
+          The maximum number of devices that receive a pending job notification, per minute.
+
+          
+
+        
+      
+      - **abortConfig** *(dict) --* 
+
+        The stop configuration for the job. This configuration defines when and how to stop a job rollout.
+
+        
+
+      
+        - **criteriaList** *(list) --* **[REQUIRED]** 
+
+          The list of criteria that define when and how to cancel the configuration deployment.
+
+          
+
+        
+          - *(dict) --* 
+
+            Contains criteria that define when and how to cancel a job.
+
+             
+
+            The deployment stops if the following conditions are true:
+
+             
+
+             
+            * The number of things that receive the deployment exceeds the ``minNumberOfExecutedThings`` . 
+             
+            * The percentage of failures with type ``failureType`` exceeds the ``thresholdPercentage`` . 
+             
+
+            
+
+          
+            - **failureType** *(string) --* **[REQUIRED]** 
+
+              The type of job deployment failure that can cancel a job.
+
+              
+
+            
+            - **action** *(string) --* **[REQUIRED]** 
+
+              The action to perform when the criteria are met.
+
+              
+
+            
+            - **thresholdPercentage** *(float) --* **[REQUIRED]** 
+
+              The minimum percentage of ``failureType`` failures that occur before the job can cancel.
+
+               
+
+              This parameter supports up to two digits after the decimal (for example, you can specify ``10.9`` or ``10.99`` , but not ``10.999`` ).
+
+              
+
+            
+            - **minNumberOfExecutedThings** *(integer) --* **[REQUIRED]** 
+
+              The minimum number of things that receive the configuration before the job can cancel.
+
+              
+
+            
+          
+      
+      
+      - **timeoutConfig** *(dict) --* 
+
+        The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
+
+        
+
+      
+        - **inProgressTimeoutInMinutes** *(integer) --* 
+
+          The amount of time, in minutes, that devices have to complete the job. The timer starts when the job status is set to ``IN_PROGRESS`` . If the job status doesn't change to a terminal state before the time expires, then the job status is set to ``TIMED_OUT`` .
+
+           
+
+          The timeout interval must be between 1 minute and 7 days (10080 minutes).
+
+          
+
+        
+      
+    
+    :type deploymentPolicies: dict
+    :param deploymentPolicies: 
+
+      The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
+
+      
+
+    
+      - **failureHandlingPolicy** *(string) --* 
+
+        The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.
+
+         
+
+        Default: ``ROLLBACK``  
+
+        
+
+      
+      - **componentUpdatePolicy** *(dict) --* 
+
+        The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
+
+        
+
+      
+        - **timeoutInSeconds** *(integer) --* 
+
+          The amount of time in seconds that each component on a device has to report that it's safe to update. If the component waits for longer than this timeout, then the deployment proceeds on the device.
+
+           
+
+          Default: ``60``  
+
+          
+
+        
+        - **action** *(string) --* 
+
+          Whether or not to notify components and wait for components to become safe to update. Choose from the following options:
+
+           
+
+           
+          * ``NOTIFY_COMPONENTS`` – The deployment notifies each component before it stops and updates that component. Components can use the `SubscribeToComponentUpdates <https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates>`__ IPC operation to receive these notifications. Then, components can respond with the `DeferComponentUpdate <https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate>`__ IPC operation. For more information, see `Create deployments <https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* . 
+           
+          * ``SKIP_NOTIFY_COMPONENTS`` – The deployment doesn't notify components or wait for them to be safe to update. 
+           
+
+           
+
+          Default: ``NOTIFY_COMPONENTS``  
+
+          
+
+        
+      
+      - **configurationValidationPolicy** *(dict) --* 
+
+        The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
+
+        
+
+      
+        - **timeoutInSeconds** *(integer) --* 
+
+          The amount of time in seconds that a component can validate its configuration updates. If the validation time exceeds this timeout, then the deployment proceeds for the device.
+
+           
+
+          Default: ``30``  
+
+          
+
+        
+      
+    
+    :type tags: dict
+    :param tags: 
+
+      A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'deploymentId': 'string',
+            'iotJobId': 'string',
+            'iotJobArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **deploymentId** *(string) --* 
+
+          The ID of the deployment.
+
+          
+        
+
+        - **iotJobId** *(string) --* 
+
+          The ID of the AWS IoT job that applies the deployment to target devices.
+
+          
+        
+
+        - **iotJobArn** *(string) --* 
+
+          The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT job that applies the deployment to target devices.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_component(**kwargs)
+
+    
+
+    Deletes a version of a component from AWS IoT Greengrass.
+
+     
+
+    .. note::
+
+       
+
+      This operation deletes the component's recipe and artifacts. As a result, deployments that refer to this component version will fail. If you have deployments that use this component version, you can remove the component from the deployment or update the deployment to use a valid version.
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteComponent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_component(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_core_device(**kwargs)
+
+    
+
+    Deletes a AWS IoT Greengrass core device, which is an AWS IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the AWS IoT thing. For more information about how to delete the AWS IoT thing, see `DeleteThing <https://docs.aws.amazon.com/iot/latest/apireference/API_DeleteThing.html>`__ in the *AWS IoT API Reference* .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DeleteCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_core_device(
+          coreDeviceThingName='string'
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    
+    :returns: None
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: describe_component(**kwargs)
+
+    
+
+    Retrieves metadata for a version of a component.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DescribeComponent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.describe_component(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string',
+            'componentName': 'string',
+            'componentVersion': 'string',
+            'creationTimestamp': datetime(2015, 1, 1),
+            'publisher': 'string',
+            'description': 'string',
+            'status': {
+                'componentState': 'REQUESTED'|'INITIATED'|'DEPLOYABLE'|'FAILED'|'DEPRECATED',
+                'message': 'string',
+                'errors': {
+                    'string': 'string'
+                }
+            },
+            'platforms': [
+                {
+                    'name': 'string',
+                    'attributes': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **arn** *(string) --* 
+
+          The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+          
+        
+
+        - **componentName** *(string) --* 
+
+          The name of the component.
+
+          
+        
+
+        - **componentVersion** *(string) --* 
+
+          The version of the component.
+
+          
+        
+
+        - **creationTimestamp** *(datetime) --* 
+
+          The time at which the component was created, expressed in ISO 8601 format.
+
+          
+        
+
+        - **publisher** *(string) --* 
+
+          The publisher of the component version.
+
+          
+        
+
+        - **description** *(string) --* 
+
+          The description of the component version.
+
+          
+        
+
+        - **status** *(dict) --* 
+
+          The status of the component version in AWS IoT Greengrass V2. This status is different from the status of the component on a core device.
+
+          
+          
+
+          - **componentState** *(string) --* 
+
+            The state of the component.
+
+            
+          
+
+          - **message** *(string) --* 
+
+            A message that communicates details, such as errors, about the status of the component.
+
+            
+          
+
+          - **errors** *(dict) --* 
+
+            A dictionary of errors that communicate why the component is in an error state. For example, if AWS IoT Greengrass can't access an artifact for the component, then ``errors`` contains the artifact's URI as a key, and the error message as the value for that key.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+        
+
+        - **platforms** *(list) --* 
+
+          The platforms that the component version supports.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a platform that a component supports.
+
+            
+            
+
+            - **name** *(string) --* 
+
+              The friendly name of the platform. This name helps you identify the platform.
+
+               
+
+              If you omit this parameter, AWS IoT Greengrass creates a friendly name from the ``os`` and ``architecture`` of the platform.
+
+              
+            
+
+            - **attributes** *(dict) --* 
+
+              A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the ``os`` and ``platform`` by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **tags** *(dict) --* 
+
+          A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_component(**kwargs)
+
+    
+
+    Gets the recipe for a version of a component. Core devices can call this operation to identify the artifacts and requirements to install a component.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_component(
+          recipeOutputFormat='JSON'|'YAML',
+          arn='string'
+      )
+    :type recipeOutputFormat: string
+    :param recipeOutputFormat: 
+
+      The format of the recipe.
+
+      
+
+    
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'recipeOutputFormat': 'JSON'|'YAML',
+            'recipe': b'bytes',
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **recipeOutputFormat** *(string) --* 
+
+          The format of the recipe.
+
+          
+        
+
+        - **recipe** *(bytes) --* 
+
+          The recipe of the component version.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_component_version_artifact(**kwargs)
+
+    
+
+    Gets the pre-signed URL to download a public component artifact. Core devices call this operation to identify the URL that they can use to download an artifact to install.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifact>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_component_version_artifact(
+          arn='string',
+          artifactName='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version. Specify the ARN of a public component version.
+
+      
+
+    
+    :type artifactName: string
+    :param artifactName: **[REQUIRED]** 
+
+      The name of the artifact.
+
+       
+
+      You can use the `GetComponent <https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html>`__ operation to download the component recipe, which includes the URI of the artifact. The artifact name is the section of the URI after the scheme. For example, in the artifact URI ``greengrass:SomeArtifact.zip`` , the artifact name is ``SomeArtifact.zip`` .
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'preSignedUrl': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **preSignedUrl** *(string) --* 
+
+          The URL of the artifact.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_core_device(**kwargs)
+
+    
+
+    Retrieves metadata for a AWS IoT Greengrass core device.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_core_device(
+          coreDeviceThingName='string'
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'coreDeviceThingName': 'string',
+            'coreVersion': 'string',
+            'platform': 'string',
+            'architecture': 'string',
+            'status': 'HEALTHY'|'UNHEALTHY',
+            'lastStatusUpdateTimestamp': datetime(2015, 1, 1),
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **coreDeviceThingName** *(string) --* 
+
+          The name of the core device. This is also the name of the AWS IoT thing.
+
+          
+        
+
+        - **coreVersion** *(string) --* 
+
+          The version of the AWS IoT Greengrass Core software that the core device runs. This version is equivalent to the version of the AWS IoT Greengrass nucleus component that runs on the core device. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+        
+
+        - **platform** *(string) --* 
+
+          The operating system platform that the core device runs.
+
+          
+        
+
+        - **architecture** *(string) --* 
+
+          The computer architecture of the core device.
+
+          
+        
+
+        - **status** *(string) --* 
+
+          The status of the core device. The core device status can be:
+
+           
+
+           
+          * ``HEALTHY`` – The AWS IoT Greengrass Core software and all components run on the core device without issue. 
+           
+          * ``UNHEALTHY`` – The AWS IoT Greengrass Core software or a component is in a failed state on the core device. 
+           
+
+          
+        
+
+        - **lastStatusUpdateTimestamp** *(datetime) --* 
+
+          The time at which the core device's status last updated, expressed in ISO 8601 format.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_deployment(**kwargs)
+
+    
+
+    Gets a deployment. Deployments define the components that run on AWS IoT Greengrass core devices.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetDeployment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_deployment(
+          deploymentId='string'
+      )
+    :type deploymentId: string
+    :param deploymentId: **[REQUIRED]** 
+
+      The ID of the deployment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'targetArn': 'string',
+            'revisionId': 'string',
+            'deploymentId': 'string',
+            'deploymentName': 'string',
+            'deploymentStatus': 'ACTIVE'|'COMPLETED'|'CANCELED'|'FAILED'|'INACTIVE',
+            'iotJobId': 'string',
+            'iotJobArn': 'string',
+            'components': {
+                'string': {
+                    'componentVersion': 'string',
+                    'configurationUpdate': {
+                        'merge': 'string',
+                        'reset': [
+                            'string',
+                        ]
+                    },
+                    'runWith': {
+                        'posixUser': 'string'
+                    }
+                }
+            },
+            'deploymentPolicies': {
+                'failureHandlingPolicy': 'ROLLBACK'|'DO_NOTHING',
+                'componentUpdatePolicy': {
+                    'timeoutInSeconds': 123,
+                    'action': 'NOTIFY_COMPONENTS'|'SKIP_NOTIFY_COMPONENTS'
+                },
+                'configurationValidationPolicy': {
+                    'timeoutInSeconds': 123
+                }
+            },
+            'iotJobConfiguration': {
+                'jobExecutionsRolloutConfig': {
+                    'exponentialRate': {
+                        'baseRatePerMinute': 123,
+                        'incrementFactor': 123.0,
+                        'rateIncreaseCriteria': {
+                            'numberOfNotifiedThings': 123,
+                            'numberOfSucceededThings': 123
+                        }
+                    },
+                    'maximumPerMinute': 123
+                },
+                'abortConfig': {
+                    'criteriaList': [
+                        {
+                            'failureType': 'FAILED'|'REJECTED'|'TIMED_OUT'|'ALL',
+                            'action': 'CANCEL',
+                            'thresholdPercentage': 123.0,
+                            'minNumberOfExecutedThings': 123
+                        },
+                    ]
+                },
+                'timeoutConfig': {
+                    'inProgressTimeoutInMinutes': 123
+                }
+            },
+            'creationTimestamp': datetime(2015, 1, 1),
+            'isLatestForTarget': True|False,
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **targetArn** *(string) --* 
+
+          The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+          
+        
+
+        - **revisionId** *(string) --* 
+
+          The revision number of the deployment.
+
+          
+        
+
+        - **deploymentId** *(string) --* 
+
+          The ID of the deployment.
+
+          
+        
+
+        - **deploymentName** *(string) --* 
+
+          The name of the deployment.
+
+           
+
+          You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+          
+        
+
+        - **deploymentStatus** *(string) --* 
+
+          The status of the deployment.
+
+          
+        
+
+        - **iotJobId** *(string) --* 
+
+          The ID of the AWS IoT job that applies the deployment to target devices.
+
+          
+        
+
+        - **iotJobArn** *(string) --* 
+
+          The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT job that applies the deployment to target devices.
+
+          
+        
+
+        - **components** *(dict) --* 
+
+          The components to deploy. This is a dictionary, where each key is the name of a component, and each key's value is the version and configuration to deploy for that component.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(dict) --* 
+
+              Contains information about a component to deploy.
+
+              
+              
+
+              - **componentVersion** *(string) --* 
+
+                The version of the component.
+
+                
+              
+
+              - **configurationUpdate** *(dict) --* 
+
+                The configuration updates to deploy for the component. You can define *reset* updates and *merge* updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device's component configuration with the keys and values that you specify. The AWS IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see `Update component configurations <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                
+                
+
+                - **merge** *(string) --* 
+
+                  A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component's existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component's default configuration. This means that the core device keeps it's existing configuration for keys and values that you don't specify in this object. For more information, see `Merge configuration updates <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                  
+                
+
+                - **reset** *(list) --* 
+
+                  The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (``/`` ) and use forward slashes to separate the key for each level in the object. For more information, see the `JSON pointer specification <https://tools.ietf.org/html/rfc6901>`__ and `Reset configuration updates <https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+              
+
+              - **runWith** *(dict) --* 
+
+                The system user and group that the AWS IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the AWS IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see `Configure the user and group that run components <https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                
+                
+
+                - **posixUser** *(string) --* 
+
+                  The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (``:`` ) in the following format: ``user:group`` . The group is optional. If you don't specify a group, the AWS IoT Greengrass Core software uses the primary user for the group.
+
+                  
+            
+          
+      
+    
+        
+
+        - **deploymentPolicies** *(dict) --* 
+
+          The deployment policies for the deployment. These policies define how the deployment updates components and handles failure.
+
+          
+          
+
+          - **failureHandlingPolicy** *(string) --* 
+
+            The failure handling policy for the configuration deployment. This policy defines what to do if the deployment fails.
+
+             
+
+            Default: ``ROLLBACK``  
+
+            
+          
+
+          - **componentUpdatePolicy** *(dict) --* 
+
+            The component update policy for the configuration deployment. This policy defines when it's safe to deploy the configuration to devices.
+
+            
+            
+
+            - **timeoutInSeconds** *(integer) --* 
+
+              The amount of time in seconds that each component on a device has to report that it's safe to update. If the component waits for longer than this timeout, then the deployment proceeds on the device.
+
+               
+
+              Default: ``60``  
+
+              
+            
+
+            - **action** *(string) --* 
+
+              Whether or not to notify components and wait for components to become safe to update. Choose from the following options:
+
+               
+
+               
+              * ``NOTIFY_COMPONENTS`` – The deployment notifies each component before it stops and updates that component. Components can use the `SubscribeToComponentUpdates <https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates>`__ IPC operation to receive these notifications. Then, components can respond with the `DeferComponentUpdate <https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate>`__ IPC operation. For more information, see `Create deployments <https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* . 
+               
+              * ``SKIP_NOTIFY_COMPONENTS`` – The deployment doesn't notify components or wait for them to be safe to update. 
+               
+
+               
+
+              Default: ``NOTIFY_COMPONENTS``  
+
+              
+        
+          
+
+          - **configurationValidationPolicy** *(dict) --* 
+
+            The configuration validation policy for the configuration deployment. This policy defines how long each component has to validate its configure updates.
+
+            
+            
+
+            - **timeoutInSeconds** *(integer) --* 
+
+              The amount of time in seconds that a component can validate its configuration updates. If the validation time exceeds this timeout, then the deployment proceeds for the device.
+
+               
+
+              Default: ``30``  
+
+              
+        
+      
+        
+
+        - **iotJobConfiguration** *(dict) --* 
+
+          The job configuration for the deployment configuration. The job configuration specifies the rollout, timeout, and stop configurations for the deployment configuration.
+
+          
+          
+
+          - **jobExecutionsRolloutConfig** *(dict) --* 
+
+            The rollout configuration for the job. This configuration defines the rate at which the job rolls out to the fleet of target devices.
+
+            
+            
+
+            - **exponentialRate** *(dict) --* 
+
+              The exponential rate to increase the job rollout rate.
+
+              
+              
+
+              - **baseRatePerMinute** *(integer) --* 
+
+                The minimum number of devices that receive a pending job notification, per minute, when the job starts. This parameter defines the initial rollout rate of the job.
+
+                
+              
+
+              - **incrementFactor** *(float) --* 
+
+                The exponential factor to increase the rollout rate for the job.
+
+                 
+
+                This parameter supports up to one digit after the decimal (for example, you can specify ``1.5`` , but not ``1.55`` ).
+
+                
+              
+
+              - **rateIncreaseCriteria** *(dict) --* 
+
+                The criteria to increase the rollout rate for the job.
+
+                
+                
+
+                - **numberOfNotifiedThings** *(integer) --* 
+
+                  The number of devices to receive the job notification before the rollout rate increases.
+
+                  
+                
+
+                - **numberOfSucceededThings** *(integer) --* 
+
+                  The number of devices to successfully run the configuration job before the rollout rate increases.
+
+                  
+            
+          
+            
+
+            - **maximumPerMinute** *(integer) --* 
+
+              The maximum number of devices that receive a pending job notification, per minute.
+
+              
+        
+          
+
+          - **abortConfig** *(dict) --* 
+
+            The stop configuration for the job. This configuration defines when and how to stop a job rollout.
+
+            
+            
+
+            - **criteriaList** *(list) --* 
+
+              The list of criteria that define when and how to cancel the configuration deployment.
+
+              
+              
+
+              - *(dict) --* 
+
+                Contains criteria that define when and how to cancel a job.
+
+                 
+
+                The deployment stops if the following conditions are true:
+
+                 
+
+                 
+                * The number of things that receive the deployment exceeds the ``minNumberOfExecutedThings`` . 
+                 
+                * The percentage of failures with type ``failureType`` exceeds the ``thresholdPercentage`` . 
+                 
+
+                
+                
+
+                - **failureType** *(string) --* 
+
+                  The type of job deployment failure that can cancel a job.
+
+                  
+                
+
+                - **action** *(string) --* 
+
+                  The action to perform when the criteria are met.
+
+                  
+                
+
+                - **thresholdPercentage** *(float) --* 
+
+                  The minimum percentage of ``failureType`` failures that occur before the job can cancel.
+
+                   
+
+                  This parameter supports up to two digits after the decimal (for example, you can specify ``10.9`` or ``10.99`` , but not ``10.999`` ).
+
+                  
+                
+
+                - **minNumberOfExecutedThings** *(integer) --* 
+
+                  The minimum number of things that receive the configuration before the job can cancel.
+
+                  
+            
+          
+        
+          
+
+          - **timeoutConfig** *(dict) --* 
+
+            The timeout configuration for the job. This configuration defines the amount of time each device has to complete the job.
+
+            
+            
+
+            - **inProgressTimeoutInMinutes** *(integer) --* 
+
+              The amount of time, in minutes, that devices have to complete the job. The timer starts when the job status is set to ``IN_PROGRESS`` . If the job status doesn't change to a terminal state before the time expires, then the job status is set to ``TIMED_OUT`` .
+
+               
+
+              The timeout interval must be between 1 minute and 7 days (10080 minutes).
+
+              
+        
+      
+        
+
+        - **creationTimestamp** *(datetime) --* 
+
+          The time at which the deployment was created, expressed in ISO 8601 format.
+
+          
+        
+
+        - **isLatestForTarget** *(boolean) --* 
+
+          Whether or not the deployment is the latest revision for its target.
+
+          
+        
+
+        - **tags** *(dict) --* 
+
+          A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_client_devices_associated_with_core_device(**kwargs)
+
+    
+
+    Retrieves a paginated list of client devices that are associated with a core device.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_client_devices_associated_with_core_device(
+          coreDeviceThingName='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'associatedClientDevices': [
+                {
+                    'thingName': 'string',
+                    'associationTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **associatedClientDevices** *(list) --* 
+
+          A list that describes the client devices that are associated with the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a client device that is associated to a core device for cloud discovery.
+
+            
+            
+
+            - **thingName** *(string) --* 
+
+              The name of the AWS IoT thing that represents the associated client device.
+
+              
+            
+
+            - **associationTimestamp** *(datetime) --* 
+
+              The time that the client device was associated, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_component_versions(**kwargs)
+
+    
+
+    Retrieves a paginated list of all versions for a component. Greater versions are listed first.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentVersions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_component_versions(
+          arn='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'componentVersions': [
+                {
+                    'componentName': 'string',
+                    'componentVersion': 'string',
+                    'arn': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **componentVersions** *(list) --* 
+
+          A list of versions that exist for the component.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component version in a list.
+
+            
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **componentVersion** *(string) --* 
+
+              The version of the component.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_components(**kwargs)
+
+    
+
+    Retrieves a paginated list of component summaries. This list includes components that you have permission to view.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_components(
+          scope='PRIVATE'|'PUBLIC',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type scope: string
+    :param scope: 
+
+      The scope of the components to list.
+
+       
+
+      Default: ``PRIVATE``  
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'components': [
+                {
+                    'arn': 'string',
+                    'componentName': 'string',
+                    'latestVersion': {
+                        'arn': 'string',
+                        'componentVersion': 'string',
+                        'creationTimestamp': datetime(2015, 1, 1),
+                        'description': 'string',
+                        'publisher': 'string',
+                        'platforms': [
+                            {
+                                'name': 'string',
+                                'attributes': {
+                                    'string': 'string'
+                                }
+                            },
+                        ]
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **components** *(list) --* 
+
+          A list that summarizes each component.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+              
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **latestVersion** *(dict) --* 
+
+              The latest version of the component and its details.
+
+              
+              
+
+              - **arn** *(string) --* 
+
+                The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+                
+              
+
+              - **componentVersion** *(string) --* 
+
+                The version of the component.
+
+                
+              
+
+              - **creationTimestamp** *(datetime) --* 
+
+                The time at which the component was created, expressed in ISO 8601 format.
+
+                
+              
+
+              - **description** *(string) --* 
+
+                The description of the component version.
+
+                
+              
+
+              - **publisher** *(string) --* 
+
+                The publisher of the component version.
+
+                
+              
+
+              - **platforms** *(list) --* 
+
+                The platforms that the component version supports.
+
+                
+                
+
+                - *(dict) --* 
+
+                  Contains information about a platform that a component supports.
+
+                  
+                  
+
+                  - **name** *(string) --* 
+
+                    The friendly name of the platform. This name helps you identify the platform.
+
+                     
+
+                    If you omit this parameter, AWS IoT Greengrass creates a friendly name from the ``os`` and ``architecture`` of the platform.
+
+                    
+                  
+
+                  - **attributes** *(dict) --* 
+
+                    A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the ``os`` and ``platform`` by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+              
+            
+          
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_core_devices(**kwargs)
+
+    
+
+    Retrieves a paginated list of AWS IoT Greengrass core devices.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListCoreDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_core_devices(
+          thingGroupArn='string',
+          status='HEALTHY'|'UNHEALTHY',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type thingGroupArn: string
+    :param thingGroupArn: 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that are members of this thing group.
+
+      
+
+    
+    :type status: string
+    :param status: 
+
+      The core device status by which to filter. If you specify this parameter, the list includes only core devices that have this status. Choose one of the following options:
+
+       
+
+       
+      * ``HEALTHY`` – The AWS IoT Greengrass Core software and all components run on the core device without issue. 
+       
+      * ``UNHEALTHY`` – The AWS IoT Greengrass Core software or a component is in a failed state on the core device. 
+       
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'coreDevices': [
+                {
+                    'coreDeviceThingName': 'string',
+                    'status': 'HEALTHY'|'UNHEALTHY',
+                    'lastStatusUpdateTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **coreDevices** *(list) --* 
+
+          A list that summarizes each core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a AWS IoT Greengrass core device, which is an AWS IoT thing that runs the AWS IoT Greengrass Core software.
+
+            
+            
+
+            - **coreDeviceThingName** *(string) --* 
+
+              The name of the core device. This is also the name of the AWS IoT thing.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the core device. Core devices can have the following statuses:
+
+               
+
+               
+              * ``HEALTHY`` – The AWS IoT Greengrass Core software and all components run on the core device without issue. 
+               
+              * ``UNHEALTHY`` – The AWS IoT Greengrass Core software or a component is in a failed state on the core device. 
+               
+
+              
+            
+
+            - **lastStatusUpdateTimestamp** *(datetime) --* 
+
+              The time at which the core device's status last updated, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_deployments(**kwargs)
+
+    
+
+    Retrieves a paginated list of deployments.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListDeployments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_deployments(
+          targetArn='string',
+          historyFilter='ALL'|'LATEST_ONLY',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type targetArn: string
+    :param targetArn: 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+      
+
+    
+    :type historyFilter: string
+    :param historyFilter: 
+
+      The filter for the list of deployments. Choose one of the following options:
+
+       
+
+       
+      * ``ALL`` – The list includes all deployments. 
+       
+      * ``LATEST_ONLY`` – The list includes only the latest revision of each deployment. 
+       
+
+       
+
+      Default: ``LATEST_ONLY``  
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'deployments': [
+                {
+                    'targetArn': 'string',
+                    'revisionId': 'string',
+                    'deploymentId': 'string',
+                    'deploymentName': 'string',
+                    'creationTimestamp': datetime(2015, 1, 1),
+                    'deploymentStatus': 'ACTIVE'|'COMPLETED'|'CANCELED'|'FAILED'|'INACTIVE',
+                    'isLatestForTarget': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **deployments** *(list) --* 
+
+          A list that summarizes each deployment.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a deployment.
+
+            
+            
+
+            - **targetArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+              
+            
+
+            - **revisionId** *(string) --* 
+
+              The revision number of the deployment.
+
+              
+            
+
+            - **deploymentId** *(string) --* 
+
+              The ID of the deployment.
+
+              
+            
+
+            - **deploymentName** *(string) --* 
+
+              The name of the deployment.
+
+               
+
+              You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+              
+            
+
+            - **creationTimestamp** *(datetime) --* 
+
+              The time at which the deployment was created, expressed in ISO 8601 format.
+
+              
+            
+
+            - **deploymentStatus** *(string) --* 
+
+              The status of the deployment.
+
+              
+            
+
+            - **isLatestForTarget** *(boolean) --* 
+
+              Whether or not the deployment is the latest revision for its target.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_effective_deployments(**kwargs)
+
+    
+
+    Retrieves a paginated list of deployment jobs that AWS IoT Greengrass sends to AWS IoT Greengrass core devices.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListEffectiveDeployments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_effective_deployments(
+          coreDeviceThingName='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'effectiveDeployments': [
+                {
+                    'deploymentId': 'string',
+                    'deploymentName': 'string',
+                    'iotJobId': 'string',
+                    'iotJobArn': 'string',
+                    'description': 'string',
+                    'targetArn': 'string',
+                    'coreDeviceExecutionStatus': 'IN_PROGRESS'|'QUEUED'|'FAILED'|'COMPLETED'|'TIMED_OUT'|'CANCELED'|'REJECTED',
+                    'reason': 'string',
+                    'creationTimestamp': datetime(2015, 1, 1),
+                    'modifiedTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **effectiveDeployments** *(list) --* 
+
+          A list that summarizes each deployment on the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a deployment job that AWS IoT Greengrass sends to a AWS IoT Greengrass core device.
+
+            
+            
+
+            - **deploymentId** *(string) --* 
+
+              The ID of the deployment.
+
+              
+            
+
+            - **deploymentName** *(string) --* 
+
+              The name of the deployment.
+
+               
+
+              You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+              
+            
+
+            - **iotJobId** *(string) --* 
+
+              The ID of the AWS IoT job that applies the deployment to target devices.
+
+              
+            
+
+            - **iotJobArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT job that applies the deployment to target devices.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              The description of the deployment job.
+
+              
+            
+
+            - **targetArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+              
+            
+
+            - **coreDeviceExecutionStatus** *(string) --* 
+
+              The status of the deployment job on the AWS IoT Greengrass core device.
+
+              
+            
+
+            - **reason** *(string) --* 
+
+              The reason code for the update, if the job was updated.
+
+              
+            
+
+            - **creationTimestamp** *(datetime) --* 
+
+              The time at which the deployment was created, expressed in ISO 8601 format.
+
+              
+            
+
+            - **modifiedTimestamp** *(datetime) --* 
+
+              The time at which the deployment job was last modified, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_installed_components(**kwargs)
+
+    
+
+    Retrieves a paginated list of the components that a AWS IoT Greengrass core device runs.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_installed_components(
+          coreDeviceThingName='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to be returned per paginated request.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token to be used for the next set of paginated results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'installedComponents': [
+                {
+                    'componentName': 'string',
+                    'componentVersion': 'string',
+                    'lifecycleState': 'NEW'|'INSTALLED'|'STARTING'|'RUNNING'|'STOPPING'|'ERRORED'|'BROKEN'|'FINISHED',
+                    'lifecycleStateDetails': 'string',
+                    'isRoot': True|False
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **installedComponents** *(list) --* 
+
+          A list that summarizes each component on the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component on a AWS IoT Greengrass core device.
+
+            
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **componentVersion** *(string) --* 
+
+              The version of the component.
+
+              
+            
+
+            - **lifecycleState** *(string) --* 
+
+              The lifecycle state of the component.
+
+              
+            
+
+            - **lifecycleStateDetails** *(string) --* 
+
+              The details about the lifecycle state of the component.
+
+              
+            
+
+            - **isRoot** *(boolean) --* 
+
+              Whether or not the component is a root component.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token for the next set of results, or null if there are no additional results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Retrieves the list of tags for an AWS IoT Greengrass resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: resolve_component_candidates(**kwargs)
+
+    
+
+    Retrieves a list of components that meet the component, version, and platform requirements of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to identify the components to install.
+
+     
+
+    This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component ``A`` requires version ``>2.0.0`` and component ``B`` requires version ``<2.0.0`` of a component dependency.
+
+     
+
+    When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's digest from the core device with the component's digest in the AWS Cloud. If the digests don't match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.
+
+     
+
+    .. warning::
+
+       
+
+      To use this operation, you must use the data plane API endpoint and authenticate with an AWS IoT device certificate. For more information, see `AWS IoT Greengrass endpoints and quotas <https://docs.aws.amazon.com/general/latest/gr/greengrass.html>`__ .
+
+       
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ResolveComponentCandidates>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.resolve_component_candidates(
+          platform={
+              'name': 'string',
+              'attributes': {
+                  'string': 'string'
+              }
+          },
+          componentCandidates=[
+              {
+                  'componentName': 'string',
+                  'componentVersion': 'string',
+                  'versionRequirements': {
+                      'string': 'string'
+                  }
+              },
+          ]
+      )
+    :type platform: dict
+    :param platform: **[REQUIRED]** 
+
+      The platform to use to resolve compatible components.
+
+      
+
+    
+      - **name** *(string) --* 
+
+        The friendly name of the platform. This name helps you identify the platform.
+
+         
+
+        If you omit this parameter, AWS IoT Greengrass creates a friendly name from the ``os`` and ``architecture`` of the platform.
+
+        
+
+      
+      - **attributes** *(dict) --* 
+
+        A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the ``os`` and ``platform`` by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+        
+
+      
+        - *(string) --* 
+
+        
+          - *(string) --* 
+
+          
+    
+  
+    
+    :type componentCandidates: list
+    :param componentCandidates: **[REQUIRED]** 
+
+      The list of components to resolve.
+
+      
+
+    
+      - *(dict) --* 
+
+        Contains information about a component that is a candidate to deploy to a AWS IoT Greengrass core device.
+
+        
+
+      
+        - **componentName** *(string) --* 
+
+          The name of the component.
+
+          
+
+        
+        - **componentVersion** *(string) --* 
+
+          The version of the component.
+
+          
+
+        
+        - **versionRequirements** *(dict) --* 
+
+          The version requirements for the component's dependencies. AWS IoT Greengrass core devices get the version requirements from component recipes.
+
+           
+
+          AWS IoT Greengrass V2 uses semantic version constraints. For more information, see `Semantic Versioning <https://semver.org/>`__ .
+
+          
+
+        
+          - *(string) --* 
+
+          
+            - *(string) --* 
+
+            
+      
+    
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resolvedComponentVersions': [
+                {
+                    'arn': 'string',
+                    'componentName': 'string',
+                    'componentVersion': 'string',
+                    'recipe': b'bytes'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resolvedComponentVersions** *(list) --* 
+
+          A list of components that meet the requirements that you specify in the request. This list includes each component's recipe that you can use to install the component.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component version that is compatible to run on a AWS IoT Greengrass core device.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+              
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **componentVersion** *(string) --* 
+
+              The version of the component.
+
+              
+            
+
+            - **recipe** *(bytes) --* 
+
+              The recipe of the component version.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ConflictException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds tags to an AWS IoT Greengrass resource. If a tag already exists for the resource, this operation updates the tag's value.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the resource to tag.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      A list of key-value pairs that contain metadata for the resource. For more information, see `Tag your resources <https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes a tag from an AWS IoT Greengrass resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the resource to untag.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      A list of keys for tags to remove from the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`GreengrassV2.Client.exceptions.ResourceNotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`GreengrassV2.Paginator.ListClientDevicesAssociatedWithCoreDevice`
+
+
+* :py:class:`GreengrassV2.Paginator.ListComponentVersions`
+
+
+* :py:class:`GreengrassV2.Paginator.ListComponents`
+
+
+* :py:class:`GreengrassV2.Paginator.ListCoreDevices`
+
+
+* :py:class:`GreengrassV2.Paginator.ListDeployments`
+
+
+* :py:class:`GreengrassV2.Paginator.ListEffectiveDeployments`
+
+
+* :py:class:`GreengrassV2.Paginator.ListInstalledComponents`
+
+
+
+.. py:class:: GreengrassV2.Paginator.ListClientDevicesAssociatedWithCoreDevice
+
+  ::
+
+    
+    paginator = client.get_paginator('list_client_devices_associated_with_core_device')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_client_devices_associated_with_core_device`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListClientDevicesAssociatedWithCoreDevice>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          coreDeviceThingName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'associatedClientDevices': [
+                {
+                    'thingName': 'string',
+                    'associationTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **associatedClientDevices** *(list) --* 
+
+          A list that describes the client devices that are associated with the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a client device that is associated to a core device for cloud discovery.
+
+            
+            
+
+            - **thingName** *(string) --* 
+
+              The name of the AWS IoT thing that represents the associated client device.
+
+              
+            
+
+            - **associationTimestamp** *(datetime) --* 
+
+              The time that the client device was associated, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListComponentVersions
+
+  ::
+
+    
+    paginator = client.get_paginator('list_component_versions')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_component_versions`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponentVersions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          arn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'componentVersions': [
+                {
+                    'componentName': 'string',
+                    'componentVersion': 'string',
+                    'arn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **componentVersions** *(list) --* 
+
+          A list of versions that exist for the component.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component version in a list.
+
+            
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **componentVersion** *(string) --* 
+
+              The version of the component.
+
+              
+            
+
+            - **arn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListComponents
+
+  ::
+
+    
+    paginator = client.get_paginator('list_components')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_components`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListComponents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          scope='PRIVATE'|'PUBLIC',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type scope: string
+    :param scope: 
+
+      The scope of the components to list.
+
+       
+
+      Default: ``PRIVATE``  
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'components': [
+                {
+                    'arn': 'string',
+                    'componentName': 'string',
+                    'latestVersion': {
+                        'arn': 'string',
+                        'componentVersion': 'string',
+                        'creationTimestamp': datetime(2015, 1, 1),
+                        'description': 'string',
+                        'publisher': 'string',
+                        'platforms': [
+                            {
+                                'name': 'string',
+                                'attributes': {
+                                    'string': 'string'
+                                }
+                            },
+                        ]
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **components** *(list) --* 
+
+          A list that summarizes each component.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+              
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **latestVersion** *(dict) --* 
+
+              The latest version of the component and its details.
+
+              
+              
+
+              - **arn** *(string) --* 
+
+                The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the component version.
+
+                
+              
+
+              - **componentVersion** *(string) --* 
+
+                The version of the component.
+
+                
+              
+
+              - **creationTimestamp** *(datetime) --* 
+
+                The time at which the component was created, expressed in ISO 8601 format.
+
+                
+              
+
+              - **description** *(string) --* 
+
+                The description of the component version.
+
+                
+              
+
+              - **publisher** *(string) --* 
+
+                The publisher of the component version.
+
+                
+              
+
+              - **platforms** *(list) --* 
+
+                The platforms that the component version supports.
+
+                
+                
+
+                - *(dict) --* 
+
+                  Contains information about a platform that a component supports.
+
+                  
+                  
+
+                  - **name** *(string) --* 
+
+                    The friendly name of the platform. This name helps you identify the platform.
+
+                     
+
+                    If you omit this parameter, AWS IoT Greengrass creates a friendly name from the ``os`` and ``architecture`` of the platform.
+
+                    
+                  
+
+                  - **attributes** *(dict) --* 
+
+                    A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the ``os`` and ``platform`` by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the `AWS IoT Greengrass nucleus component <https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html>`__ in the *AWS IoT Greengrass V2 Developer Guide* .
+
+                    
+                    
+
+                    - *(string) --* 
+                      
+
+                      - *(string) --* 
+                
+              
+              
+            
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListCoreDevices
+
+  ::
+
+    
+    paginator = client.get_paginator('list_core_devices')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_core_devices`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListCoreDevices>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          thingGroupArn='string',
+          status='HEALTHY'|'UNHEALTHY',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type thingGroupArn: string
+    :param thingGroupArn: 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that are members of this thing group.
+
+      
+
+    
+    :type status: string
+    :param status: 
+
+      The core device status by which to filter. If you specify this parameter, the list includes only core devices that have this status. Choose one of the following options:
+
+       
+
+       
+      * ``HEALTHY`` – The AWS IoT Greengrass Core software and all components run on the core device without issue. 
+       
+      * ``UNHEALTHY`` – The AWS IoT Greengrass Core software or a component is in a failed state on the core device. 
+       
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'coreDevices': [
+                {
+                    'coreDeviceThingName': 'string',
+                    'status': 'HEALTHY'|'UNHEALTHY',
+                    'lastStatusUpdateTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **coreDevices** *(list) --* 
+
+          A list that summarizes each core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a AWS IoT Greengrass core device, which is an AWS IoT thing that runs the AWS IoT Greengrass Core software.
+
+            
+            
+
+            - **coreDeviceThingName** *(string) --* 
+
+              The name of the core device. This is also the name of the AWS IoT thing.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The status of the core device. Core devices can have the following statuses:
+
+               
+
+               
+              * ``HEALTHY`` – The AWS IoT Greengrass Core software and all components run on the core device without issue. 
+               
+              * ``UNHEALTHY`` – The AWS IoT Greengrass Core software or a component is in a failed state on the core device. 
+               
+
+              
+            
+
+            - **lastStatusUpdateTimestamp** *(datetime) --* 
+
+              The time at which the core device's status last updated, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListDeployments
+
+  ::
+
+    
+    paginator = client.get_paginator('list_deployments')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_deployments`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListDeployments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          targetArn='string',
+          historyFilter='ALL'|'LATEST_ONLY',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type targetArn: string
+    :param targetArn: 
+
+      The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+      
+
+    
+    :type historyFilter: string
+    :param historyFilter: 
+
+      The filter for the list of deployments. Choose one of the following options:
+
+       
+
+       
+      * ``ALL`` – The list includes all deployments. 
+       
+      * ``LATEST_ONLY`` – The list includes only the latest revision of each deployment. 
+       
+
+       
+
+      Default: ``LATEST_ONLY``  
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'deployments': [
+                {
+                    'targetArn': 'string',
+                    'revisionId': 'string',
+                    'deploymentId': 'string',
+                    'deploymentName': 'string',
+                    'creationTimestamp': datetime(2015, 1, 1),
+                    'deploymentStatus': 'ACTIVE'|'COMPLETED'|'CANCELED'|'FAILED'|'INACTIVE',
+                    'isLatestForTarget': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **deployments** *(list) --* 
+
+          A list that summarizes each deployment.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a deployment.
+
+            
+            
+
+            - **targetArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+              
+            
+
+            - **revisionId** *(string) --* 
+
+              The revision number of the deployment.
+
+              
+            
+
+            - **deploymentId** *(string) --* 
+
+              The ID of the deployment.
+
+              
+            
+
+            - **deploymentName** *(string) --* 
+
+              The name of the deployment.
+
+               
+
+              You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+              
+            
+
+            - **creationTimestamp** *(datetime) --* 
+
+              The time at which the deployment was created, expressed in ISO 8601 format.
+
+              
+            
+
+            - **deploymentStatus** *(string) --* 
+
+              The status of the deployment.
+
+              
+            
+
+            - **isLatestForTarget** *(boolean) --* 
+
+              Whether or not the deployment is the latest revision for its target.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListEffectiveDeployments
+
+  ::
+
+    
+    paginator = client.get_paginator('list_effective_deployments')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_effective_deployments`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListEffectiveDeployments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          coreDeviceThingName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'effectiveDeployments': [
+                {
+                    'deploymentId': 'string',
+                    'deploymentName': 'string',
+                    'iotJobId': 'string',
+                    'iotJobArn': 'string',
+                    'description': 'string',
+                    'targetArn': 'string',
+                    'coreDeviceExecutionStatus': 'IN_PROGRESS'|'QUEUED'|'FAILED'|'COMPLETED'|'TIMED_OUT'|'CANCELED'|'REJECTED',
+                    'reason': 'string',
+                    'creationTimestamp': datetime(2015, 1, 1),
+                    'modifiedTimestamp': datetime(2015, 1, 1)
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **effectiveDeployments** *(list) --* 
+
+          A list that summarizes each deployment on the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a deployment job that AWS IoT Greengrass sends to a AWS IoT Greengrass core device.
+
+            
+            
+
+            - **deploymentId** *(string) --* 
+
+              The ID of the deployment.
+
+              
+            
+
+            - **deploymentName** *(string) --* 
+
+              The name of the deployment.
+
+               
+
+              You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as ``<targetType>:<targetName>`` , where ``targetType`` and ``targetName`` are the type and name of the deployment target.
+
+              
+            
+
+            - **iotJobId** *(string) --* 
+
+              The ID of the AWS IoT job that applies the deployment to target devices.
+
+              
+            
+
+            - **iotJobArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the AWS IoT job that applies the deployment to target devices.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              The description of the deployment job.
+
+              
+            
+
+            - **targetArn** *(string) --* 
+
+              The `ARN <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__ of the target AWS IoT thing or thing group.
+
+              
+            
+
+            - **coreDeviceExecutionStatus** *(string) --* 
+
+              The status of the deployment job on the AWS IoT Greengrass core device.
+
+              
+            
+
+            - **reason** *(string) --* 
+
+              The reason code for the update, if the job was updated.
+
+              
+            
+
+            - **creationTimestamp** *(datetime) --* 
+
+              The time at which the deployment was created, expressed in ISO 8601 format.
+
+              
+            
+
+            - **modifiedTimestamp** *(datetime) --* 
+
+              The time at which the deployment job was last modified, expressed in ISO 8601 format.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: GreengrassV2.Paginator.ListInstalledComponents
+
+  ::
+
+    
+    paginator = client.get_paginator('list_installed_components')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`GreengrassV2.Client.list_installed_components`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ListInstalledComponents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          coreDeviceThingName='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type coreDeviceThingName: string
+    :param coreDeviceThingName: **[REQUIRED]** 
+
+      The name of the core device. This is also the name of the AWS IoT thing.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'installedComponents': [
+                {
+                    'componentName': 'string',
+                    'componentVersion': 'string',
+                    'lifecycleState': 'NEW'|'INSTALLED'|'STARTING'|'RUNNING'|'STOPPING'|'ERRORED'|'BROKEN'|'FINISHED',
+                    'lifecycleStateDetails': 'string',
+                    'isRoot': True|False
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **installedComponents** *(list) --* 
+
+          A list that summarizes each component on the core device.
+
+          
+          
+
+          - *(dict) --* 
+
+            Contains information about a component on a AWS IoT Greengrass core device.
+
+            
+            
+
+            - **componentName** *(string) --* 
+
+              The name of the component.
+
+              
+            
+
+            - **componentVersion** *(string) --* 
+
+              The version of the component.
+
+              
+            
+
+            - **lifecycleState** *(string) --* 
+
+              The lifecycle state of the component.
+
+              
+            
+
+            - **lifecycleStateDetails** *(string) --* 
+
+              The details about the lifecycle state of the component.
+
+              
+            
+
+            - **isRoot** *(boolean) --* 
+
+              Whether or not the component is a root component.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    

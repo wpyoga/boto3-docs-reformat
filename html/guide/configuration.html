@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>Configuration &mdash; Boto3 Docs 1.18.5 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.18.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Boto3 Docs 1.18.5 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Credentials" href="credentials.html" />
+    <link rel="prev" title="Developer guide" href="index.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="credentials.html" title="Credentials"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Developer guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar"><a href="
+    ../index.html" class="text-logo">Boto3 Docs 1.18.5 documentation</a><div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table Of Contents</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sqs.html">A sample tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Code examples</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#sdk-features">SDK features</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="credentials.html">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clients.html">Low-level clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="session.html">Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="collections.html">Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="paginators.html">Paginators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="retries.html">Retries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Extensibility guide</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#tools">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#migrations">Migrations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/services/index.html">Available services</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/core/index.html">Core references</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/customizations/index.html">Customization references</a></li>
+</ul>
+
+    
+  </div>
+</div>
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+        <div id="right-column">
+          
+
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../index.html">Docs</a></li>
+              
+                <li><a href="index.html">Developer guide</a></li>
+              
+              <li>Configuration</li>
+            </ol>
+          </div>
+          
+<!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
+          <div class="document clearer body">
+            
+  <div class="section" id="configuration">
+<span id="guide-configuration"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 looks at various configuration locations until it finds configuration values. Boto3 adheres to the following lookup order when searching through sources for configuration values:</p>
+<ul class="simple">
+<li>A <tt class="docutils literal"><span class="pre">Config</span></tt> object that's created and passed as the <tt class="docutils literal"><span class="pre">config</span></tt> parameter when creating a client</li>
+<li>Environment variables</li>
+<li>The <tt class="docutils literal"><span class="pre">~/.aws/config</span></tt> file</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Configurations are not wholly atomic. This means configuration values set in your AWS config file can be singularly overwritten by setting a specific environment variable or through the use of a <tt class="docutils literal"><span class="pre">Config</span></tt> object.</p>
+</div>
+<p>For details about credential configuration, see the <a class="reference internal" href="credentials.html#guide-credentials"><em>Credentials</em></a> guide.</p>
+</div>
+<div class="section" id="using-the-config-object">
+<h2>Using the Config object<a class="headerlink" href="#using-the-config-object" title="Permalink to this headline">¶</a></h2>
+<p>This option is for configuring client-specific configurations that affect the behavior of your specific client object only. As described earlier, there are options used here that will supersede those found in other configuration locations:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">region_name</span></tt> (string) - The AWS Region used in instantiating the client. If used, this takes precedence over environment variable and configuration file values. But it doesn't overwrite a <tt class="docutils literal"><span class="pre">region_name</span></tt> value <em>explicitly</em> passed to individual service methods.</li>
+<li><tt class="docutils literal"><span class="pre">signature_version</span></tt> (string) - The signature version used when signing requests. Note that the default version is Signature Version 4. If you're using a presigned URL with an expiry of greater than 7 days, you should specify Signature Version 2.</li>
+<li><tt class="docutils literal"><span class="pre">s3</span></tt> (related configurations; dictionary) - Amazon S3 service-specific configurations. For more information, see the <a class="reference external" href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html">Botocore config reference</a>.</li>
+<li><tt class="docutils literal"><span class="pre">proxies</span></tt> (dictionary) - Each entry maps a protocol name to the proxy server Boto3 should use to communicate using that protocol. See <a class="reference internal" href="#specify-proxies"><em>Specifying proxy servers</em></a> for more information.</li>
+<li><tt class="docutils literal"><span class="pre">proxies_config</span></tt> (dictionary) - Additional proxy configuration settings. For more information, see <a class="reference internal" href="#configure-proxies"><em>Configuring proxies</em></a>.</li>
+<li><tt class="docutils literal"><span class="pre">retries</span></tt> (dictionary) - Client retry behavior configuration options that include retry mode and maximum retry attempts. For more information, see the <a class="reference internal" href="retries.html#guide-retries"><em>Retries</em></a> guide.</li>
+</ul>
+<p>For more information about additional options, or for a complete list of options, see the <a class="reference external" href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html">Config reference</a>.</p>
+<p>To set these configuration options, create a <tt class="docutils literal"><span class="pre">Config</span></tt> object with the options you want, and then pass them into your client.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.config</span> <span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">my_config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span>
+    <span class="n">region_name</span> <span class="o">=</span> <span class="s1">&#39;us-west-2&#39;</span><span class="p">,</span>
+    <span class="n">signature_version</span> <span class="o">=</span> <span class="s1">&#39;v4&#39;</span><span class="p">,</span>
+    <span class="n">retries</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;max_attempts&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s1">&#39;standard&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="using-proxies">
+<h3>Using proxies<a class="headerlink" href="#using-proxies" title="Permalink to this headline">¶</a></h3>
+<p>With Boto3, you can use proxies as intermediaries between your code and AWS. Proxies can provide functions such as filtering, security, firewalls, and privacy assurance.</p>
+<div class="section" id="specifying-proxy-servers">
+<span id="specify-proxies"></span><h4>Specifying proxy servers<a class="headerlink" href="#specifying-proxy-servers" title="Permalink to this headline">¶</a></h4>
+<p>You can specify proxy servers to be used for connections when using specific protocols. The <tt class="docutils literal"><span class="pre">proxies</span></tt> option in the <tt class="docutils literal"><span class="pre">Config</span></tt> object is a dictionary in which each entry maps a protocol to the address and port number of the proxy server for that protocol.</p>
+<p>In the following example, a proxy list is set up to use <tt class="docutils literal"><span class="pre">proxy.amazon.com</span></tt>, port 6502 as the proxy for all HTTP requests by default. HTTPS requests use port 2010 on <tt class="docutils literal"><span class="pre">proxy.amazon.org</span></tt> instead.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.config</span> <span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">proxy_definitions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;http://proxy.amazon.com:6502&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https&#39;</span><span class="p">:</span> <span class="s1">&#39;https://proxy.amazon.org:2010&#39;</span>
+<span class="p">}</span>
+
+<span class="n">my_config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span>
+    <span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-2&#39;</span><span class="p">,</span>
+    <span class="n">signature_version</span><span class="o">=</span><span class="s1">&#39;v4&#39;</span><span class="p">,</span>
+    <span class="n">proxies</span><span class="o">=</span><span class="n">proxy_definitions</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-proxies">
+<span id="configure-proxies"></span><h4>Configuring proxies<a class="headerlink" href="#configuring-proxies" title="Permalink to this headline">¶</a></h4>
+<p>You can configure how Boto3 uses proxies by specifying the <tt class="docutils literal"><span class="pre">proxies_config</span></tt> option, which is a dictionary that specifies the values of several proxy options by name.  There are three keys in this dictionary: <tt class="docutils literal"><span class="pre">proxy_ca_bundle</span></tt>, <tt class="docutils literal"><span class="pre">proxy_client_cert</span></tt>, and <tt class="docutils literal"><span class="pre">proxy_use_forwarding_for_https</span></tt>. For more information about these keys, see the <a class="reference external" href="https://botocore.amazonaws.com/v1/documentation/api/latest/reference/config.html#botocore.config.Config">Botocore config reference</a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">botocore.config</span> <span class="kn">import</span> <span class="n">Config</span>
+
+<span class="n">proxy_definitions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;http://proxy.amazon.com:6502&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https&#39;</span><span class="p">:</span> <span class="s1">&#39;https://proxy.amazon.org:2010&#39;</span>
+<span class="p">}</span>
+
+<span class="n">my_config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span>
+    <span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-2&#39;</span><span class="p">,</span>
+    <span class="n">signature_version</span><span class="o">=</span><span class="s1">&#39;v4&#39;</span><span class="p">,</span>
+    <span class="n">proxies</span><span class="o">=</span><span class="n">proxy_definitions</span><span class="p">,</span>
+    <span class="n">proxies_config</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;proxy_client_cert&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/of/certificate&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis&#39;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">my_config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With the addition of the <tt class="docutils literal"><span class="pre">proxies_config</span></tt> option shown here, the proxy will use the specified certificate file for authentication when using the HTTPS proxy.</p>
+</div>
+</div>
+</div>
+<div class="section" id="using-environment-variables">
+<h2>Using environment variables<a class="headerlink" href="#using-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>You can set configuration settings using system-wide environment variables. These configurations are global and will affect all clients created unless you override them with a <tt class="docutils literal"><span class="pre">Config</span></tt> object.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only the configuration settings listed below can be set using environment variables.</p>
+</div>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">AWS_ACCESS_KEY_ID</span></tt></dt>
+<dd>The access key for your AWS account.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_SECRET_ACCESS_KEY</span></tt></dt>
+<dd>The secret key for your AWS account.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_SESSION_TOKEN</span></tt></dt>
+<dd>The session key for your AWS account. This is only needed when
+you are using temporary credentials. The <tt class="docutils literal"><span class="pre">AWS_SECURITY_TOKEN</span></tt>
+environment variable can also be used, but is only supported
+for backward-compatibility purposes.  <tt class="docutils literal"><span class="pre">AWS_SESSION_TOKEN</span></tt> is
+supported by multiple AWS SDKs in addition to Boto3.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_DEFAULT_REGION</span></tt></dt>
+<dd>The default AWS Region to use, for example, <tt class="docutils literal"><span class="pre">us-west-1</span></tt> or <tt class="docutils literal"><span class="pre">us-west-2</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_PROFILE</span></tt></dt>
+<dd>The default profile to use, if any.  If no value is specified, Boto3
+attempts to search the shared credentials file and the config file
+for the <tt class="docutils literal"><span class="pre">default</span></tt> profile.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_CONFIG_FILE</span></tt></dt>
+<dd>The location of the config file used by Boto3.  By default this
+value is <tt class="docutils literal"><span class="pre">~/.aws/config</span></tt>.  You only need to set this variable if
+you want to change this location.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_SHARED_CREDENTIALS_FILE</span></tt></dt>
+<dd>The location of the shared credentials file.  By default this value
+is <tt class="docutils literal"><span class="pre">~/.aws/credentials</span></tt>.  You only need to set this variable if
+you want to change this location.</dd>
+<dt><tt class="docutils literal"><span class="pre">BOTO_CONFIG</span></tt></dt>
+<dd>The location of the Boto2 credentials file. This is not set by default.
+You only need to set this variable if you want to use credentials stored in
+Boto2 format in a location other than <tt class="docutils literal"><span class="pre">/etc/boto.cfg</span></tt> or <tt class="docutils literal"><span class="pre">~/.boto</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_CA_BUNDLE</span></tt></dt>
+<dd>The path to a custom certificate bundle to use when establishing
+SSL/TLS connections.  Boto3 includes a CA bundle that it
+uses by default, but you can set this environment variable to use
+a different CA bundle.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_METADATA_SERVICE_TIMEOUT</span></tt></dt>
+<dd>The number of seconds before a connection to the instance metadata
+service should time out.  When attempting to retrieve credentials
+on an Amazon EC2 instance that is configured with an IAM role,
+a connection to the instance metadata service will time out after
+1 second by default.  If you know you're running on an EC2 instance
+with an IAM role configured, you can increase this value if needed.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_METADATA_SERVICE_NUM_ATTEMPTS</span></tt></dt>
+<dd>When attempting to retrieve credentials on an Amazon EC2 instance that has
+been configured with an IAM role, Boto3 will make only one attempt
+to retrieve credentials from the instance metadata service before
+giving up.  If you know your code will be running on an EC2 instance,
+you can increase this value to make Boto3 retry multiple times
+before giving up.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_DATA_PATH</span></tt></dt>
+<dd>A list of <strong>additional</strong> directories to check when loading botocore data.
+You typically don't need to set this value.  There are two built-in search
+paths: <tt class="docutils literal"><span class="pre">&lt;botocoreroot&gt;/data/</span></tt> and <tt class="docutils literal"><span class="pre">~/.aws/models</span></tt>. Setting this
+environment variable indicates additional directories to check first before
+falling back to the built-in search paths.  Multiple entries should be
+separated with the <tt class="docutils literal"><span class="pre">os.pathsep</span></tt> character, which is <tt class="docutils literal"><span class="pre">:</span></tt> on Linux and
+<tt class="docutils literal"><span class="pre">;</span></tt> on Windows.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_STS_REGIONAL_ENDPOINTS</span></tt></dt>
+<dd>Sets AWS STS endpoint resolution logic. See the <tt class="docutils literal"><span class="pre">sts_regional_endpoints</span></tt>
+configuration file section for more information on how to use this.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_MAX_ATTEMPTS</span></tt></dt>
+<dd>The total number of attempts made for a single request.  For more information,
+see the <tt class="docutils literal"><span class="pre">max_attempts</span></tt> configuration file section.</dd>
+<dt><tt class="docutils literal"><span class="pre">AWS_RETRY_MODE</span></tt></dt>
+<dd>Specifies the types of retries the SDK will use.  For more information,
+see the <tt class="docutils literal"><span class="pre">retry_mode</span></tt> configuration file section.</dd>
+</dl>
+</div>
+<div class="section" id="using-a-configuration-file">
+<h2>Using a configuration file<a class="headerlink" href="#using-a-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Boto3 will also search the <tt class="docutils literal"><span class="pre">~/.aws/config</span></tt> file when looking for
+configuration values.  You can change the location of this file by
+setting the <tt class="docutils literal"><span class="pre">AWS_CONFIG_FILE</span></tt> environment variable.</p>
+<p>This file is an INI-formatted file that contains at least one
+section: <tt class="docutils literal"><span class="pre">[default]</span></tt>.  You can create multiple profiles (logical
+groups of configuration) by creating sections named <tt class="docutils literal"><span class="pre">[profile</span> <span class="pre">profile-name]</span></tt>.
+If your profile name has spaces, you need to surround this value with quotation marks:
+<tt class="docutils literal"><span class="pre">[profile</span> <span class="pre">&quot;my</span> <span class="pre">profile</span> <span class="pre">name&quot;]</span></tt>.  The following are all the config variables supported
+in the <tt class="docutils literal"><span class="pre">~/.aws/config</span></tt> file.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">api_versions</span></tt></dt>
+<dd><p class="first">Specifies the API version to use for a particular AWS service.</p>
+<p>The <tt class="docutils literal"><span class="pre">api_versions</span></tt> settings are nested configuration values that require special
+formatting in the AWS configuration file. If the values are set by the
+AWS CLI or programmatically by an SDK, the formatting is handled
+automatically. If you set them by manually editing the AWS configuration
+file, the following is the required format. Notice the indentation of each
+value.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span></span>[default]
+region = us-east-1
+api_versions =
+    ec2 = 2015-03-01
+    cloudfront = 2015-09-17
+</pre></div>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">aws_access_key_id</span></tt></dt>
+<dd>The access key to use.</dd>
+<dt><tt class="docutils literal"><span class="pre">aws_secret_access_key</span></tt></dt>
+<dd>The secret access key to use.</dd>
+<dt><tt class="docutils literal"><span class="pre">aws_session_token</span></tt></dt>
+<dd>The session token to use. This is typically needed only when using
+temporary credentials. Note <tt class="docutils literal"><span class="pre">aws_security_token</span></tt> is supported for
+backward compatibility.</dd>
+<dt><tt class="docutils literal"><span class="pre">ca_bundle</span></tt></dt>
+<dd>The CA bundle to use. For more information, see the previous description
+of the <tt class="docutils literal"><span class="pre">AWS_CA_BUNDLE</span></tt> environment variable.</dd>
+<dt><tt class="docutils literal"><span class="pre">credential_process</span></tt></dt>
+<dd>Specifies an external command to run to generate or retrieve
+authentication credentials. For more information,
+see <a class="reference external" href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html">Sourcing credentials with an external process</a>.</dd>
+<dt><tt class="docutils literal"><span class="pre">credential_source</span></tt></dt>
+<dd><p class="first">To invoke an AWS service from an Amazon EC2 instance, you can use
+an IAM role attached to either an EC2 instance profile or an Amazon ECS
+container. In such a scenario, use the <tt class="docutils literal"><span class="pre">credential_source</span></tt> setting to
+specify where to find the credentials.</p>
+<p>The <tt class="docutils literal"><span class="pre">credential_source</span></tt> and <tt class="docutils literal"><span class="pre">source_profile</span></tt> settings are mutually
+exclusive.</p>
+<p>The following values are supported.</p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">Ec2InstanceMetadata</span></tt></dt>
+<dd>Use the IAM role attached to the Amazon EC2 instance profile.</dd>
+<dt><tt class="docutils literal"><span class="pre">EcsContainer</span></tt></dt>
+<dd>Use the IAM role attached to the Amazon ECS container.</dd>
+<dt><tt class="docutils literal"><span class="pre">Environment</span></tt></dt>
+<dd>Retrieve the credentials from environment variables.</dd>
+</dl>
+</div></blockquote>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">duration_seconds</span></tt></dt>
+<dd>The length of time in seconds of the role session. The value can range
+from 900 seconds (15 minutes) to the maximum session duration setting
+for the role. The default value is 3600 seconds (one hour).</dd>
+<dt><tt class="docutils literal"><span class="pre">external_id</span></tt></dt>
+<dd>Unique identifier to pass when making <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> calls.</dd>
+<dt><tt class="docutils literal"><span class="pre">metadata_service_timeout</span></tt></dt>
+<dd>The number of seconds before timing out when retrieving data from the
+instance metadata service.  For more information, see the previous documentation on
+<tt class="docutils literal"><span class="pre">AWS_METADATA_SERVICE_TIMEOUT</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">metadata_service_num_attempts</span></tt></dt>
+<dd>The number of attempts to make before giving up when retrieving data from
+the instance metadata service.  For more information, see the previous documentation on
+<tt class="docutils literal"><span class="pre">AWS_METADATA_SERVICE_NUM_ATTEMPTS</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">mfa_serial</span></tt></dt>
+<dd>Serial number of the Amazon Resource Name (ARN) of a multi-factor authentication (MFA) device to use when assuming a role.</dd>
+<dt><tt class="docutils literal"><span class="pre">parameter_validation</span></tt></dt>
+<dd>Disable parameter validation (default is true, parameters are
+validated).  This is a Boolean value that
+is either <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">false</span></tt>.  Whenever you make an
+API call using a client, the parameters you provide are run through
+a set of validation checks, including (but not limited to) required
+parameters provided, type checking, no unknown parameters,
+minimum length checks, and so on.  Typically, you should leave parameter
+validation enabled.</dd>
+<dt><tt class="docutils literal"><span class="pre">region</span></tt></dt>
+<dd>The default AWS Region to use, for example, <tt class="docutils literal"><span class="pre">us-west-1</span></tt> or <tt class="docutils literal"><span class="pre">us-west-2</span></tt>. When
+specifying a Region inline during client initialization, this property
+is named <tt class="docutils literal"><span class="pre">region_name</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">role_arn</span></tt></dt>
+<dd>The ARN of the role you want to assume.</dd>
+<dt><tt class="docutils literal"><span class="pre">role_session_name</span></tt></dt>
+<dd>The role name to use when assuming a role.  If this value is not
+provided, a session name will be automatically generated.</dd>
+<dt><tt class="docutils literal"><span class="pre">web_identity_token_file</span></tt></dt>
+<dd>The path to a file that contains an OAuth 2.0 access token or OpenID
+Connect ID token that is provided by the identity provider. The contents of
+this file will be loaded and passed as the <tt class="docutils literal"><span class="pre">WebIdentityToken</span></tt> argument to
+the <tt class="docutils literal"><span class="pre">AssumeRoleWithWebIdentity</span></tt> operation.</dd>
+<dt><tt class="docutils literal"><span class="pre">s3</span></tt></dt>
+<dd><p class="first">Set Amazon S3-specific configuration data. Typically, these values do not need
+to be set.</p>
+<p>The <tt class="docutils literal"><span class="pre">s3</span></tt> settings are nested configuration values that require special
+formatting in the AWS configuration file. If the values are set by the
+AWS CLI or programmatically by an SDK, the formatting is handled
+automatically. If you set them manually by editing the AWS configuration
+file, the following is the required format. Notice the indentation of each
+value.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>[default]
+region = us-east-1
+s3 =
+    addressing_style = path
+    signature_version = s3v4
+</pre></div>
+</div>
+<ul class="last">
+<li><p class="first"><tt class="docutils literal"><span class="pre">addressing_style</span></tt>: The S3 addressing style. When necessary, Boto
+automatically switches the addressing style to an appropriate value.
+The following values are supported.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">auto</span></tt></dt>
+<dd><p class="first last">(Default) Attempts to use <tt class="docutils literal"><span class="pre">virtual</span></tt>, but falls back to <tt class="docutils literal"><span class="pre">path</span></tt>
+if necessary.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">path</span></tt></dt>
+<dd><p class="first last">Bucket name is included in the URI path.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">virtual</span></tt></dt>
+<dd><p class="first last">Bucket name is included in the hostname.</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">payload_signing_enabled</span></tt>: Specifies whether to include an SHA-256
+checksum with Amazon Signature Version 4 payloads. Valid settings are
+<tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">false</span></tt>.</p>
+<p>For streaming uploads (<tt class="docutils literal"><span class="pre">UploadPart</span></tt> and <tt class="docutils literal"><span class="pre">PutObject</span></tt>) that use HTTPS
+and include a <tt class="docutils literal"><span class="pre">content-md5</span></tt> header, this setting is disabled by default.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">signature_version</span></tt>: The AWS signature version to use when signing
+requests. When necessary, Boto automatically switches the signature
+version to an appropriate value. The following values are recognized.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">s3v4</span></tt></dt>
+<dd><p class="first last">(Default) Signature Version 4</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">s3</span></tt></dt>
+<dd><p class="first last">(Deprecated) Signature Version 2</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">use_accelerate_endpoint</span></tt>: Specifies whether to use the Amazon S3 Accelerate
+endpoint. The bucket must be enabled to use S3 Accelerate. Valid settings
+are <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">false</span></tt>. Default: <tt class="docutils literal"><span class="pre">false</span></tt></p>
+<p>Either <tt class="docutils literal"><span class="pre">use_accelerate_endpoint</span></tt> or <tt class="docutils literal"><span class="pre">use_dualstack_endpoint</span></tt> can be
+enabled, but not both.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">use_dualstack_endpoint</span></tt>: Specifies whether to direct all Amazon S3
+requests to the dual IPv4/IPv6 endpoint for the configured Region. Valid
+settings are <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">false</span></tt>. Default: <tt class="docutils literal"><span class="pre">false</span></tt></p>
+<p>Either <tt class="docutils literal"><span class="pre">use_accelerate_endpoint</span></tt> or <tt class="docutils literal"><span class="pre">use_dualstack_endpoint</span></tt> can be
+enabled, but not both.</p>
+</li>
+</ul>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">source_profile</span></tt></dt>
+<dd><p class="first">The profile name that contains credentials to use for the initial
+<tt class="docutils literal"><span class="pre">AssumeRole</span></tt> call.</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">credential_source</span></tt> and <tt class="docutils literal"><span class="pre">source_profile</span></tt> settings are mutually
+exclusive.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">sts_regional_endpoints</span></tt></dt>
+<dd><p class="first">Sets AWS STS endpoint resolution logic. This configuration can also be set
+using the environment variable <tt class="docutils literal"><span class="pre">AWS_STS_REGIONAL_ENDPOINTS</span></tt>. By default,
+this configuration option is set to <tt class="docutils literal"><span class="pre">legacy</span></tt>. Valid values are the following:</p>
+<ul class="last">
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">regional</span></tt></dt>
+<dd><p class="first last">Uses the STS endpoint that corresponds to the configured Region. For
+example, if the client is configured to use <tt class="docutils literal"><span class="pre">us-west-2</span></tt>, all calls
+to STS will be made to the <tt class="docutils literal"><span class="pre">sts.us-west-2.amazonaws.com</span></tt> regional
+endpoint instead of the global <tt class="docutils literal"><span class="pre">sts.amazonaws.com</span></tt> endpoint.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">legacy</span></tt></dt>
+<dd><p class="first">Uses the global STS endpoint, <tt class="docutils literal"><span class="pre">sts.amazonaws.com</span></tt>, for the following
+configured Regions:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ap-northeast-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ap-south-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ap-southeast-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ap-southeast-2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">aws-global</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ca-central-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">eu-central-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">eu-north-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">eu-west-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">eu-west-2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">eu-west-3</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">sa-east-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">us-east-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">us-east-2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">us-west-1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">us-west-2</span></tt></li>
+</ul>
+<p class="last">All other Regions will use their respective regional endpoint.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">tcp_keepalive</span></tt></dt>
+<dd>Toggles the TCP Keep-Alive socket option used when creating connections.
+By default this value is <tt class="docutils literal"><span class="pre">false</span></tt>; TCP Keepalive will not be used
+when creating connections. To enable TCP Keepalive with the system default configurations,
+set this value to <tt class="docutils literal"><span class="pre">true</span></tt>.</dd>
+<dt><tt class="docutils literal"><span class="pre">max_attempts</span></tt></dt>
+<dd>An integer representing the maximum number of attempts that will be made for
+a single request, including the initial attempt.  For example,
+setting this value to 5 will result in a request being retried up to
+4 times.  If not provided, the number of retries will default to whatever
+is modeled, which is typically 5 total attempts in the <tt class="docutils literal"><span class="pre">legacy</span></tt> retry mode,
+and 3 in the <tt class="docutils literal"><span class="pre">standard</span></tt> and <tt class="docutils literal"><span class="pre">adaptive</span></tt> retry modes.</dd>
+<dt><tt class="docutils literal"><span class="pre">retry_mode</span></tt></dt>
+<dd><p class="first">A string representing the type of retries Boto3 will perform.  Valid values are the following:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">legacy</span></tt> - The preexisting retry behavior.  This is the default value if
+no retry mode is provided.</li>
+<li><tt class="docutils literal"><span class="pre">standard</span></tt> - A standardized set of retry rules across the AWS SDKs.
+This includes a standard set of errors that are retried and
+support for retry quotas, which limit the number of unsuccessful retries
+an SDK can make.  This mode will default the maximum number of attempts
+to 3 unless a <tt class="docutils literal"><span class="pre">max_attempts</span></tt> is explicitly provided.</li>
+<li><tt class="docutils literal"><span class="pre">adaptive</span></tt> - An experimental retry mode that includes all the
+functionality of <tt class="docutils literal"><span class="pre">standard</span></tt> mode with automatic client-side
+throttling.  This is a provisional mode whose behavior might change.</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="index.html" title="previous chapter (use the left arrow)">Developer guide</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="credentials.html" title="next chapter (use the right arrow)">Credentials</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="credentials.html" title="Credentials"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Developer guide"
+             >previous</a> |</li>
+        <li><a href="../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    <script type="text/javascript" src="../_static/shortbreadv1.js"></script>
+    <script type="text/javascript">
+            const shortbread = AWSCShortbread({
+                domain: ".amazonaws.com",
+});
+            shortbread.checkForCookieConsent();
+    </script>
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
+        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
+</div>
+  </body>
+</html>

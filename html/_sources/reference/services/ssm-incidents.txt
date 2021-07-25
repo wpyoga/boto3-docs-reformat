@@ -1,0 +1,5905 @@
+
+
+************
+SSMIncidents
+************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: SSMIncidents.Client
+
+  A low-level client representing AWS Systems Manager Incident Manager (SSM Incidents)
+  
+
+  AWS Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their AWS-hosted applications. An incident is any unplanned interruption or reduction in quality of services. 
+
+   
+
+  Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation. 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('ssm-incidents')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~SSMIncidents.Client.can_paginate`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.create_replication_set`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.create_response_plan`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.create_timeline_event`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.delete_incident_record`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.delete_replication_set`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.delete_resource_policy`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.delete_response_plan`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.delete_timeline_event`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_incident_record`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_paginator`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_replication_set`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_resource_policies`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_response_plan`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_timeline_event`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.get_waiter`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_incident_records`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_related_items`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_replication_sets`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_response_plans`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.list_timeline_events`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.put_resource_policy`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.start_incident`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.tag_resource`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.untag_resource`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_deletion_protection`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_incident_record`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_related_items`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_replication_set`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_response_plan`
+
+  
+  *   :py:meth:`~SSMIncidents.Client.update_timeline_event`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_replication_set(**kwargs)
+
+    
+
+    A replication set replicates and encrypts your data to the provided Regions with the provided KMS key. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CreateReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_replication_set(
+          clientToken='string',
+          regions={
+              'string': {
+                  'sseKmsKeyId': 'string'
+              }
+          }
+      )
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type regions: dict
+    :param regions: **[REQUIRED]** 
+
+      The Regions that Incident Manager replicates your data to. You can have up to three Regions in your replication set.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          The mapping between a Region and the key that's used to encrypt the data.
+
+          
+
+        
+          - **sseKmsKeyId** *(string) --* 
+
+            The KMS key used to encrypt the data in your replication set.
+
+            
+
+          
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the replication set. 
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_response_plan(**kwargs)
+
+    
+
+    Creates a response plan that automates the initial response to incidents. A response plan engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning of an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CreateResponsePlan>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_response_plan(
+          actions=[
+              {
+                  'ssmAutomation': {
+                      'documentName': 'string',
+                      'documentVersion': 'string',
+                      'parameters': {
+                          'string': [
+                              'string',
+                          ]
+                      },
+                      'roleArn': 'string',
+                      'targetAccount': 'RESPONSE_PLAN_OWNER_ACCOUNT'|'IMPACTED_ACCOUNT'
+                  }
+              },
+          ],
+          chatChannel={
+              'chatbotSns': [
+                  'string',
+              ],
+              'empty': {}
+              
+          },
+          clientToken='string',
+          displayName='string',
+          engagements=[
+              'string',
+          ],
+          incidentTemplate={
+              'dedupeString': 'string',
+              'impact': 123,
+              'notificationTargets': [
+                  {
+                      'snsTopicArn': 'string'
+                  },
+              ],
+              'summary': 'string',
+              'title': 'string'
+          },
+          name='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type actions: list
+    :param actions: 
+
+      The actions that the response plan starts at the beginning of an incident.
+
+      
+
+    
+      - *(dict) --* 
+
+        The action that starts at the beginning of an incident. The response plan defines the action.
+
+        
+
+      
+        - **ssmAutomation** *(dict) --* 
+
+          The Systems Manager automation document to start as the runbook at the beginning of the incident.
+
+          
+
+        
+          - **documentName** *(string) --* **[REQUIRED]** 
+
+            The automation document's name.
+
+            
+
+          
+          - **documentVersion** *(string) --* 
+
+            The automation document's version to use when running.
+
+            
+
+          
+          - **parameters** *(dict) --* 
+
+            The key-value pair parameters to use when running the automation document.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(list) --* 
+
+              
+                - *(string) --* 
+
+                
+            
+        
+      
+          - **roleArn** *(string) --* **[REQUIRED]** 
+
+            The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.
+
+            
+
+          
+          - **targetAccount** *(string) --* 
+
+            The account that the automation document will be run in. This can be in either the management account or an application account.
+
+            
+
+          
+        
+      
+  
+    :type chatChannel: dict
+    :param chatChannel: 
+
+      The AWS Chatbot chat channel used for collaboration during an incident.
+
+      
+
+    
+      - **chatbotSns** *(list) --* 
+
+        The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **empty** *(dict) --* 
+
+        Used to remove the chat channel from an incident record or response plan.
+
+        
+
+      
+      
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type displayName: string
+    :param displayName: 
+
+      The long format of the response plan name. This field can contain spaces.
+
+      
+
+    
+    :type engagements: list
+    :param engagements: 
+
+      The contacts and escalation plans that the response plan engages during an incident.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type incidentTemplate: dict
+    :param incidentTemplate: **[REQUIRED]** 
+
+      Details used to create an incident when using this response plan.
+
+      
+
+    
+      - **dedupeString** *(string) --* 
+
+        Used to stop Incident Manager from creating multiple incident records for the same incident. 
+
+        
+
+      
+      - **impact** *(integer) --* **[REQUIRED]** 
+
+        The impact of the incident on your customers and applications. 
+
+        
+
+      
+      - **notificationTargets** *(list) --* 
+
+        The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. 
+
+        
+
+      
+        - *(dict) --* 
+
+          The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+
+          
+
+        
+          - **snsTopicArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the SNS topic.
+
+            
+
+          
+        
+    
+      - **summary** *(string) --* 
+
+        The summary of the incident. The summary is a brief synopsis of what occurred, what's currently happening, and context.
+
+        
+
+      
+      - **title** *(string) --* **[REQUIRED]** 
+
+        The title of the incident. 
+
+        
+
+      
+    
+    :type name: string
+    :param name: **[REQUIRED]** 
+
+      The short format name of the response plan. Can't include spaces.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      A list of tags that you are adding to the response plan.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'arn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **arn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the response plan.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: create_timeline_event(**kwargs)
+
+    
+
+    Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/CreateTimelineEvent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_timeline_event(
+          clientToken='string',
+          eventData='string',
+          eventTime=datetime(2015, 1, 1),
+          eventType='string',
+          incidentRecordArn='string'
+      )
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type eventData: string
+    :param eventData: **[REQUIRED]** 
+
+      A short description of the event.
+
+      
+
+    
+    :type eventTime: datetime
+    :param eventTime: **[REQUIRED]** 
+
+      The time that the event occurred.
+
+      
+
+    
+    :type eventType: string
+    :param eventType: **[REQUIRED]** 
+
+      The type of the event. You can create timeline events of type ``Custom Event`` .
+
+      
+
+    
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record you are adding the event to.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'eventId': 'string',
+            'incidentRecordArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **eventId** *(string) --* 
+
+          The ID of the event for easy reference later. 
+
+          
+        
+
+        - **incidentRecordArn** *(string) --* 
+
+          The ARN of the incident record that you added the event to.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_incident_record(**kwargs)
+
+    
+
+    Delete an incident record from Incident Manager. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteIncidentRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_incident_record(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record you are deleting.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_replication_set(**kwargs)
+
+    
+
+    Deletes all Regions in your replication set. Deleting the replication set deletes all Incident Manager data.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_replication_set(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you're deleting.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_resource_policy(**kwargs)
+
+    
+
+    Deletes the resource policy that AWS Resource Access Manager uses to share your Incident Manager resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteResourcePolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_resource_policy(
+          policyId='string',
+          resourceArn='string'
+      )
+    :type policyId: string
+    :param policyId: **[REQUIRED]** 
+
+      The ID of the resource policy you're deleting.
+
+      
+
+    
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource you're deleting the policy from.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_response_plan(**kwargs)
+
+    
+
+    Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteResponsePlan>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_response_plan(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_timeline_event(**kwargs)
+
+    
+
+    Deletes a timeline event from an incident.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteTimelineEvent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_timeline_event(
+          eventId='string',
+          incidentRecordArn='string'
+      )
+    :type eventId: string
+    :param eventId: **[REQUIRED]** 
+
+      The ID of the event you are updating. You can find this by using ``ListTimelineEvents`` .
+
+      
+
+    
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident that the event is part of.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_incident_record(**kwargs)
+
+    
+
+    Returns the details of the specified incident record.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetIncidentRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_incident_record(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'incidentRecord': {
+                'arn': 'string',
+                'automationExecutions': [
+                    {
+                        'ssmExecutionArn': 'string'
+                    },
+                ],
+                'chatChannel': {
+                    'chatbotSns': [
+                        'string',
+                    ],
+                    'empty': {}
+                },
+                'creationTime': datetime(2015, 1, 1),
+                'dedupeString': 'string',
+                'impact': 123,
+                'incidentRecordSource': {
+                    'createdBy': 'string',
+                    'invokedBy': 'string',
+                    'resourceArn': 'string',
+                    'source': 'string'
+                },
+                'lastModifiedBy': 'string',
+                'lastModifiedTime': datetime(2015, 1, 1),
+                'notificationTargets': [
+                    {
+                        'snsTopicArn': 'string'
+                    },
+                ],
+                'resolvedTime': datetime(2015, 1, 1),
+                'status': 'OPEN'|'RESOLVED',
+                'summary': 'string',
+                'title': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **incidentRecord** *(dict) --* 
+
+          Details structure of the incident record.
+
+          
+          
+
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the incident record.
+
+            
+          
+
+          - **automationExecutions** *(list) --* 
+
+            The runbook, or automation document, that's run at the beginning of the incident.
+
+            
+            
+
+            - *(dict) --* 
+
+              The Systems Manager automation document process to start as the runbook at the beginning of the incident.
+
+              
+              
+
+              - **ssmExecutionArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the automation process.
+
+                
+          
+        
+          
+
+          - **chatChannel** *(dict) --* 
+
+            The chat channel used for collaboration during an incident.
+
+            
+            
+
+            - **chatbotSns** *(list) --* 
+
+              The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+
+              
+              
+
+              - *(string) --* 
+          
+            
+
+            - **empty** *(dict) --* 
+
+              Used to remove the chat channel from an incident record or response plan.
+
+              
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time that Incident Manager created the incident record.
+
+            
+          
+
+          - **dedupeString** *(string) --* 
+
+            The string Incident Manager uses to prevent duplicate incidents from being created by the same incident.
+
+            
+          
+
+          - **impact** *(integer) --* 
+
+            The impact of the incident on customers and applications.
+
+            
+          
+
+          - **incidentRecordSource** *(dict) --* 
+
+            Details about the action that started the incident.
+
+            
+            
+
+            - **createdBy** *(string) --* 
+
+              The principal that started the incident.
+
+              
+            
+
+            - **invokedBy** *(string) --* 
+
+              The principal the assumed the role specified of the ``createdBy`` .
+
+              
+            
+
+            - **resourceArn** *(string) --* 
+
+              The resource that caused the incident to be created.
+
+              
+            
+
+            - **source** *(string) --* 
+
+              The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.
+
+              
+        
+          
+
+          - **lastModifiedBy** *(string) --* 
+
+            Who modified the incident most recently.
+
+            
+          
+
+          - **lastModifiedTime** *(datetime) --* 
+
+            The time at which the incident was most recently modified.
+
+            
+          
+
+          - **notificationTargets** *(list) --* 
+
+            The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+
+            
+            
+
+            - *(dict) --* 
+
+              The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+
+              
+              
+
+              - **snsTopicArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the SNS topic.
+
+                
+          
+        
+          
+
+          - **resolvedTime** *(datetime) --* 
+
+            The time at which the incident was resolved. This appears as a timeline event.
+
+            
+          
+
+          - **status** *(string) --* 
+
+            The current status of the incident.
+
+            
+          
+
+          - **summary** *(string) --* 
+
+            The summary of the incident. The summary is a brief synopsis of what occurred, what is currently happening, and context.
+
+            
+          
+
+          - **title** *(string) --* 
+
+            The title of the incident.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_replication_set(**kwargs)
+
+    
+
+    Retrieve your Incident Manager replication set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_replication_set(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you want to retrieve.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'replicationSet': {
+                'createdBy': 'string',
+                'createdTime': datetime(2015, 1, 1),
+                'deletionProtected': True|False,
+                'lastModifiedBy': 'string',
+                'lastModifiedTime': datetime(2015, 1, 1),
+                'regionMap': {
+                    'string': {
+                        'sseKmsKeyId': 'string',
+                        'status': 'ACTIVE'|'CREATING'|'DELETING'|'FAILED',
+                        'statusMessage': 'string',
+                        'statusUpdateDateTime': datetime(2015, 1, 1)
+                    }
+                },
+                'status': 'ACTIVE'|'CREATING'|'UPDATING'|'DELETING'|'FAILED'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **replicationSet** *(dict) --* 
+
+          Details of the replication set.
+
+          
+          
+
+          - **createdBy** *(string) --* 
+
+            Details about who created the replication set.
+
+            
+          
+
+          - **createdTime** *(datetime) --* 
+
+            When the replication set was created.
+
+            
+          
+
+          - **deletionProtected** *(boolean) --* 
+
+            Determines if the replication set deletion protection is enabled or not. If deletion protection is enabled, you can't delete the last Region in the replication set. 
+
+            
+          
+
+          - **lastModifiedBy** *(string) --* 
+
+            Who last modified the replication set.
+
+            
+          
+
+          - **lastModifiedTime** *(datetime) --* 
+
+            When the replication set was last updated.
+
+            
+          
+
+          - **regionMap** *(dict) --* 
+
+            The map between each Region in your replication set and the KMS key that is used to encrypt the data in that Region.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Information about a Region in your replication set.
+
+                
+                
+
+                - **sseKmsKeyId** *(string) --* 
+
+                  The ID of the KMS key used to encrypt the data in this Region.
+
+                  
+                
+
+                - **status** *(string) --* 
+
+                  The status of the Region in the replication set.
+
+                  
+                
+
+                - **statusMessage** *(string) --* 
+
+                  Information displayed about the status of the Region.
+
+                  
+                
+
+                - **statusUpdateDateTime** *(datetime) --* 
+
+                  The most recent date and time that the Region's status was updated.
+
+                  
+            
+        
+      
+          
+
+          - **status** *(string) --* 
+
+            The status of the replication set. If the replication set is still pending, you can't use Incident Manager functionality.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_resource_policies(**kwargs)
+
+    
+
+    Retrieves the resource policies attached to the specified response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetResourcePolicies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_resource_policies(
+          maxResults=123,
+          nextToken='string',
+          resourceArn='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of resource policies to display per page of results.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan with the attached resource policy. 
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'resourcePolicies': [
+                {
+                    'policyDocument': 'string',
+                    'policyId': 'string',
+                    'ramResourceShareRegion': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **resourcePolicies** *(list) --* 
+
+          Details about the resource policy attached to the response plan.
+
+          
+          
+
+          - *(dict) --* 
+
+            The resource policy that allows Incident Manager to perform actions on resources on your behalf.
+
+            
+            
+
+            - **policyDocument** *(string) --* 
+
+              The JSON blob that describes the policy.
+
+              
+            
+
+            - **policyId** *(string) --* 
+
+              The ID of the resource policy.
+
+              
+            
+
+            - **ramResourceShareRegion** *(string) --* 
+
+              The Region that policy allows resources to be used in.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_response_plan(**kwargs)
+
+    
+
+    Retrieves the details of the specified response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetResponsePlan>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_response_plan(
+          arn='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'actions': [
+                {
+                    'ssmAutomation': {
+                        'documentName': 'string',
+                        'documentVersion': 'string',
+                        'parameters': {
+                            'string': [
+                                'string',
+                            ]
+                        },
+                        'roleArn': 'string',
+                        'targetAccount': 'RESPONSE_PLAN_OWNER_ACCOUNT'|'IMPACTED_ACCOUNT'
+                    }
+                },
+            ],
+            'arn': 'string',
+            'chatChannel': {
+                'chatbotSns': [
+                    'string',
+                ],
+                'empty': {}
+            },
+            'displayName': 'string',
+            'engagements': [
+                'string',
+            ],
+            'incidentTemplate': {
+                'dedupeString': 'string',
+                'impact': 123,
+                'notificationTargets': [
+                    {
+                        'snsTopicArn': 'string'
+                    },
+                ],
+                'summary': 'string',
+                'title': 'string'
+            },
+            'name': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **actions** *(list) --* 
+
+          The actions that this response plan takes at the beginning of the incident.
+
+          
+          
+
+          - *(dict) --* 
+
+            The action that starts at the beginning of an incident. The response plan defines the action.
+
+            
+            
+
+            - **ssmAutomation** *(dict) --* 
+
+              The Systems Manager automation document to start as the runbook at the beginning of the incident.
+
+              
+              
+
+              - **documentName** *(string) --* 
+
+                The automation document's name.
+
+                
+              
+
+              - **documentVersion** *(string) --* 
+
+                The automation document's version to use when running.
+
+                
+              
+
+              - **parameters** *(dict) --* 
+
+                The key-value pair parameters to use when running the automation document.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(list) --* 
+                    
+
+                    - *(string) --* 
+                
+            
+          
+              
+
+              - **roleArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.
+
+                
+              
+
+              - **targetAccount** *(string) --* 
+
+                The account that the automation document will be run in. This can be in either the management account or an application account.
+
+                
+          
+        
+      
+        
+
+        - **arn** *(string) --* 
+
+          The ARN of the response plan.
+
+          
+        
+
+        - **chatChannel** *(dict) --* 
+
+          The AWS Chatbot chat channel used for collaboration during an incident.
+
+          
+          
+
+          - **chatbotSns** *(list) --* 
+
+            The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+
+            
+            
+
+            - *(string) --* 
+        
+          
+
+          - **empty** *(dict) --* 
+
+            Used to remove the chat channel from an incident record or response plan.
+
+            
+        
+      
+        
+
+        - **displayName** *(string) --* 
+
+          The long format name of the response plan. Can contain spaces.
+
+          
+        
+
+        - **engagements** *(list) --* 
+
+          The contacts and escalation plans that the response plan engages during an incident.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **incidentTemplate** *(dict) --* 
+
+          Details used to create the incident when using this response plan.
+
+          
+          
+
+          - **dedupeString** *(string) --* 
+
+            Used to stop Incident Manager from creating multiple incident records for the same incident. 
+
+            
+          
+
+          - **impact** *(integer) --* 
+
+            The impact of the incident on your customers and applications. 
+
+            
+          
+
+          - **notificationTargets** *(list) --* 
+
+            The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. 
+
+            
+            
+
+            - *(dict) --* 
+
+              The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+
+              
+              
+
+              - **snsTopicArn** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the SNS topic.
+
+                
+          
+        
+          
+
+          - **summary** *(string) --* 
+
+            The summary of the incident. The summary is a brief synopsis of what occurred, what's currently happening, and context.
+
+            
+          
+
+          - **title** *(string) --* 
+
+            The title of the incident. 
+
+            
+      
+        
+
+        - **name** *(string) --* 
+
+          The short format name of the response plan. Can't contain spaces.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_timeline_event(**kwargs)
+
+    
+
+    Retrieves a timeline event based on its ID and incident record.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetTimelineEvent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_timeline_event(
+          eventId='string',
+          incidentRecordArn='string'
+      )
+    :type eventId: string
+    :param eventId: **[REQUIRED]** 
+
+      The ID of the event. You can get an event's ID when you create it or by using ``ListTimelineEvents`` .
+
+      
+
+    
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'event': {
+                'eventData': 'string',
+                'eventId': 'string',
+                'eventTime': datetime(2015, 1, 1),
+                'eventType': 'string',
+                'eventUpdatedTime': datetime(2015, 1, 1),
+                'incidentRecordArn': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **event** *(dict) --* 
+
+          Details about the timeline event.
+
+          
+          
+
+          - **eventData** *(string) --* 
+
+            A short description of the event.
+
+            
+          
+
+          - **eventId** *(string) --* 
+
+            The ID of the timeline event.
+
+            
+          
+
+          - **eventTime** *(datetime) --* 
+
+            The time that the event occurred.
+
+            
+          
+
+          - **eventType** *(string) --* 
+
+            The type of event that occurred. Currently Incident Manager supports only the ``Custom Event`` type.
+
+            
+          
+
+          - **eventUpdatedTime** *(datetime) --* 
+
+            The time that the timeline event was last updated.
+
+            
+          
+
+          - **incidentRecordArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the incident that the event occurred during.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_incident_records(**kwargs)
+
+    
+
+    Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentRecords>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_incident_records(
+          filters=[
+              {
+                  'condition': {
+                      'after': datetime(2015, 1, 1),
+                      'before': datetime(2015, 1, 1),
+                      'equals': {
+                          'integerValues': [
+                              123,
+                          ],
+                          'stringValues': [
+                              'string',
+                          ]
+                      }
+                  },
+                  'key': 'string'
+              },
+          ],
+          maxResults=123,
+          nextToken='string'
+      )
+    :type filters: list
+    :param filters: 
+
+      Filter the list of incident records you are searching through. You can filter on the following keys:
+
+       
+
+       
+      * ``creationTime``   
+       
+      * ``impact``   
+       
+      * ``status``   
+       
+      * ``createdBy``   
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        Filter the selection by using a condition.
+
+        
+
+      
+        - **condition** *(dict) --* **[REQUIRED]** 
+
+          The condition accepts before or after a specified time, equal to a string, or equal to an integer.
+
+          
+
+        
+          - **after** *(datetime) --* 
+
+            After the specified timestamp.
+
+            
+
+          
+          - **before** *(datetime) --* 
+
+            Before the specified timestamp
+
+            
+
+          
+          - **equals** *(dict) --* 
+
+            The value is equal to the provided string or integer. 
+
+            
+
+          
+            - **integerValues** *(list) --* 
+
+              The list of integer values that the filter matches.
+
+              
+
+            
+              - *(integer) --* 
+
+              
+          
+            - **stringValues** *(list) --* 
+
+              The list of string values that the filter matches.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key that you're filtering on.
+
+          
+
+        
+      
+  
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results per page.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'incidentRecordSummaries': [
+                {
+                    'arn': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'impact': 123,
+                    'incidentRecordSource': {
+                        'createdBy': 'string',
+                        'invokedBy': 'string',
+                        'resourceArn': 'string',
+                        'source': 'string'
+                    },
+                    'resolvedTime': datetime(2015, 1, 1),
+                    'status': 'OPEN'|'RESOLVED',
+                    'title': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **incidentRecordSummaries** *(list) --* 
+
+          The details of each listed incident record.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details describing an incident record.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the incident.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time the incident was created.
+
+              
+            
+
+            - **impact** *(integer) --* 
+
+              Defines the impact to customers and applications.
+
+              
+            
+
+            - **incidentRecordSource** *(dict) --* 
+
+              What caused Incident Manager to create the incident.
+
+              
+              
+
+              - **createdBy** *(string) --* 
+
+                The principal that started the incident.
+
+                
+              
+
+              - **invokedBy** *(string) --* 
+
+                The principal the assumed the role specified of the ``createdBy`` .
+
+                
+              
+
+              - **resourceArn** *(string) --* 
+
+                The resource that caused the incident to be created.
+
+                
+              
+
+              - **source** *(string) --* 
+
+                The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.
+
+                
+          
+            
+
+            - **resolvedTime** *(datetime) --* 
+
+              The time the incident was resolved.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The current status of the incident.
+
+              
+            
+
+            - **title** *(string) --* 
+
+              The title of the incident. This value is either provided by the response plan or overwritten on creation.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_related_items(**kwargs)
+
+    
+
+    List all related items for an incident record.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListRelatedItems>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_related_items(
+          incidentRecordArn='string',
+          maxResults=123,
+          nextToken='string'
+      )
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record that you are listing related items for.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of related items per page.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'relatedItems': [
+                {
+                    'identifier': {
+                        'type': 'ANALYSIS'|'INCIDENT'|'METRIC'|'PARENT'|'ATTACHMENT'|'OTHER',
+                        'value': {
+                            'arn': 'string',
+                            'metricDefinition': 'string',
+                            'url': 'string'
+                        }
+                    },
+                    'title': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **relatedItems** *(list) --* 
+
+          Details about each related item.
+
+          
+          
+
+          - *(dict) --* 
+
+            Resources that responders use to triage and mitigate the incident.
+
+            
+            
+
+            - **identifier** *(dict) --* 
+
+              Details about the related item.
+
+              
+              
+
+              - **type** *(string) --* 
+
+                The type of related item. Incident Manager supports the following types:
+
+                 
+
+                 
+                * ``ANALYSIS``   
+                 
+                * ``INCIDENT``   
+                 
+                * ``METRIC``   
+                 
+                * ``PARENT``   
+                 
+                * ``ATTACHMENT``   
+                 
+                * ``OTHER``   
+                 
+
+                
+              
+
+              - **value** *(dict) --* 
+
+                Details about the related item.
+
+                
+                
+
+                - **arn** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
+
+                  
+                
+
+                - **metricDefinition** *(string) --* 
+
+                  The metric definition, if the related item is a metric in CloudWatch.
+
+                  
+                
+
+                - **url** *(string) --* 
+
+                  The URL, if the related item is a non-AWS resource.
+
+                  
+            
+          
+            
+
+            - **title** *(string) --* 
+
+              The title of the related item.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_replication_sets(**kwargs)
+
+    
+
+    Lists details about the replication set configured in your account. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListReplicationSets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_replication_sets(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results per page. 
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'replicationSetArns': [
+                'string',
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **replicationSetArns** *(list) --* 
+
+          The Amazon Resource Name (ARN) of the list replication set.
+
+          
+          
+
+          - *(string) --* 
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_response_plans(**kwargs)
+
+    
+
+    Lists all response plans in your account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListResponsePlans>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_response_plans(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of response plans per page.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'nextToken': 'string',
+            'responsePlanSummaries': [
+                {
+                    'arn': 'string',
+                    'displayName': 'string',
+                    'name': 'string'
+                },
+            ]
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+        
+
+        - **responsePlanSummaries** *(list) --* 
+
+          Details of each response plan.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details of the response plan that are used when creating an incident.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the response plan.
+
+              
+            
+
+            - **displayName** *(string) --* 
+
+              The human readable name of the response plan. This can include spaces.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the response plan. This can't include spaces.
+
+              
+        
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags that are attached to the specified response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          A list of tags for the response plan.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_timeline_events(**kwargs)
+
+    
+
+    Lists timeline events of the specified incident record.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTimelineEvents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_timeline_events(
+          filters=[
+              {
+                  'condition': {
+                      'after': datetime(2015, 1, 1),
+                      'before': datetime(2015, 1, 1),
+                      'equals': {
+                          'integerValues': [
+                              123,
+                          ],
+                          'stringValues': [
+                              'string',
+                          ]
+                      }
+                  },
+                  'key': 'string'
+              },
+          ],
+          incidentRecordArn='string',
+          maxResults=123,
+          nextToken='string',
+          sortBy='EVENT_TIME',
+          sortOrder='ASCENDING'|'DESCENDING'
+      )
+    :type filters: list
+    :param filters: 
+
+      Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:
+
+       
+
+       
+      * ``eventTime``   
+       
+      * ``eventType``   
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        Filter the selection by using a condition.
+
+        
+
+      
+        - **condition** *(dict) --* **[REQUIRED]** 
+
+          The condition accepts before or after a specified time, equal to a string, or equal to an integer.
+
+          
+
+        
+          - **after** *(datetime) --* 
+
+            After the specified timestamp.
+
+            
+
+          
+          - **before** *(datetime) --* 
+
+            Before the specified timestamp
+
+            
+
+          
+          - **equals** *(dict) --* 
+
+            The value is equal to the provided string or integer. 
+
+            
+
+          
+            - **integerValues** *(list) --* 
+
+              The list of integer values that the filter matches.
+
+              
+
+            
+              - *(integer) --* 
+
+              
+          
+            - **stringValues** *(list) --* 
+
+              The list of string values that the filter matches.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key that you're filtering on.
+
+          
+
+        
+      
+  
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident that the event is part of.
+
+      
+
+    
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results per page.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The pagination token to continue to the next page of results.
+
+      
+
+    
+    :type sortBy: string
+    :param sortBy: 
+
+      Sort by the specified key value pair.
+
+      
+
+    
+    :type sortOrder: string
+    :param sortOrder: 
+
+      Sorts the order of timeline events by the value specified in the ``sortBy`` field.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'eventSummaries': [
+                {
+                    'eventId': 'string',
+                    'eventTime': datetime(2015, 1, 1),
+                    'eventType': 'string',
+                    'eventUpdatedTime': datetime(2015, 1, 1),
+                    'incidentRecordArn': 'string'
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **eventSummaries** *(list) --* 
+
+          Details about each event that occurred during the incident.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details about a timeline event during an incident.
+
+            
+            
+
+            - **eventId** *(string) --* 
+
+              The timeline event ID.
+
+              
+            
+
+            - **eventTime** *(datetime) --* 
+
+              The time that the event occurred.
+
+              
+            
+
+            - **eventType** *(string) --* 
+
+              The type of event. The timeline event must be ``Custom Event`` .
+
+              
+            
+
+            - **eventUpdatedTime** *(datetime) --* 
+
+              The time that the timeline event was last updated.
+
+              
+            
+
+            - **incidentRecordArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the incident that the event happened during.
+
+              
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The pagination token to continue to the next page of results.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: put_resource_policy(**kwargs)
+
+    
+
+    Adds a resource policy to the specified response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/PutResourcePolicy>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.put_resource_policy(
+          policy='string',
+          resourceArn='string'
+      )
+    :type policy: string
+    :param policy: **[REQUIRED]** 
+
+      Details of the resource policy.
+
+      
+
+    
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan you're adding the resource policy to.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'policyId': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **policyId** *(string) --* 
+
+          The ID of the resource policy.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: start_incident(**kwargs)
+
+    
+
+    Used to start an incident from CloudWatch alarms, EventBridge events, or manually. 
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/StartIncident>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_incident(
+          clientToken='string',
+          impact=123,
+          relatedItems=[
+              {
+                  'identifier': {
+                      'type': 'ANALYSIS'|'INCIDENT'|'METRIC'|'PARENT'|'ATTACHMENT'|'OTHER',
+                      'value': {
+                          'arn': 'string',
+                          'metricDefinition': 'string',
+                          'url': 'string'
+                      }
+                  },
+                  'title': 'string'
+              },
+          ],
+          responsePlanArn='string',
+          title='string',
+          triggerDetails={
+              'rawData': 'string',
+              'source': 'string',
+              'timestamp': datetime(2015, 1, 1),
+              'triggerArn': 'string'
+          }
+      )
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type impact: integer
+    :param impact: 
+
+      Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.
+
+       
+
+       **Possible impacts:**  
+
+       
+
+       
+      * ``1`` - Critical impact, this typically relates to full application failure that impacts many to all customers.  
+       
+      * ``2`` - High impact, partial application failure with impact to many customers. 
+       
+      * ``3`` - Medium impact, the application is providing reduced service to customers. 
+       
+      * ``4`` - Low impact, customer might aren't impacted by the problem yet. 
+       
+      * ``5`` - No impact, customers aren't currently impacted but urgent action is needed to avoid impact. 
+       
+
+      
+
+    
+    :type relatedItems: list
+    :param relatedItems: 
+
+      Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an S3 bucket. 
+
+      
+
+    
+      - *(dict) --* 
+
+        Resources that responders use to triage and mitigate the incident.
+
+        
+
+      
+        - **identifier** *(dict) --* **[REQUIRED]** 
+
+          Details about the related item.
+
+          
+
+        
+          - **type** *(string) --* **[REQUIRED]** 
+
+            The type of related item. Incident Manager supports the following types:
+
+             
+
+             
+            * ``ANALYSIS``   
+             
+            * ``INCIDENT``   
+             
+            * ``METRIC``   
+             
+            * ``PARENT``   
+             
+            * ``ATTACHMENT``   
+             
+            * ``OTHER``   
+             
+
+            
+
+          
+          - **value** *(dict) --* **[REQUIRED]** 
+
+            Details about the related item.
+
+            
+
+          
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
+
+              
+
+            
+            - **metricDefinition** *(string) --* 
+
+              The metric definition, if the related item is a metric in CloudWatch.
+
+              
+
+            
+            - **url** *(string) --* 
+
+              The URL, if the related item is a non-AWS resource.
+
+              
+
+            
+          
+        
+        - **title** *(string) --* 
+
+          The title of the related item.
+
+          
+
+        
+      
+  
+    :type responsePlanArn: string
+    :param responsePlanArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat channels, SNS topics, runbooks, title, and impact of the incident. 
+
+      
+
+    
+    :type title: string
+    :param title: 
+
+      Provide a title for the incident. Providing a title overwrites the title provided by the response plan. 
+
+      
+
+    
+    :type triggerDetails: dict
+    :param triggerDetails: 
+
+      Details of what created the incident record in Incident Manager.
+
+      
+
+    
+      - **rawData** *(string) --* 
+
+        Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an incident is created.
+
+        
+
+      
+      - **source** *(string) --* **[REQUIRED]** 
+
+        Identifies the service that sourced the event. All events sourced from within AWS begin with "aws." Customer-generated events can have any value here, as long as it doesn't begin with "aws." We recommend the use of Java package-name style reverse domain-name strings. 
+
+        
+
+      
+      - **timestamp** *(datetime) --* **[REQUIRED]** 
+
+        The time that the incident was detected.
+
+        
+
+      
+      - **triggerArn** *(string) --* 
+
+        The ARN of the source that detected the incident.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'incidentRecordArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **incidentRecordArn** *(string) --* 
+
+          The ARN of the newly created incident record.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds a tag to a response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan you're adding the tags to.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      A list of tags that you are adding to the response plan.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ServiceQuotaExceededException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes a tag from a resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan you're removing a tag from.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: **[REQUIRED]** 
+
+      The name of the tag you're removing from the response plan.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_deletion_protection(**kwargs)
+
+    
+
+    Update deletion protection to either allow or deny deletion of the final Region in a replication set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateDeletionProtection>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_deletion_protection(
+          arn='string',
+          clientToken='string',
+          deletionProtected=True|False
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you're updating.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type deletionProtected: boolean
+    :param deletionProtected: **[REQUIRED]** 
+
+      Details if deletion protection is enabled or disabled in your account.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_incident_record(**kwargs)
+
+    
+
+    Update the details of an incident record. You can use this action to update an incident record from the defined chat channel. For more information about using actions in chat channels, see `Interacting through chat <https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateIncidentRecord>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_incident_record(
+          arn='string',
+          chatChannel={
+              'chatbotSns': [
+                  'string',
+              ],
+              'empty': {}
+              
+          },
+          clientToken='string',
+          impact=123,
+          notificationTargets=[
+              {
+                  'snsTopicArn': 'string'
+              },
+          ],
+          status='OPEN'|'RESOLVED',
+          summary='string',
+          title='string'
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record you are updating.
+
+      
+
+    
+    :type chatChannel: dict
+    :param chatChannel: 
+
+      The AWS Chatbot chat channel for responders to collaborate in.
+
+      
+
+    
+      - **chatbotSns** *(list) --* 
+
+        The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **empty** *(dict) --* 
+
+        Used to remove the chat channel from an incident record or response plan.
+
+        
+
+      
+      
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type impact: integer
+    :param impact: 
+
+      Defines the impact to customers and applications. Providing an impact overwrites the impact provided by the response plan.
+
+       
+
+       **Possible impacts:**  
+
+       
+
+       
+      * ``1`` - Critical impact, this typically relates to full application failure that impacts many to all customers.  
+       
+      * ``2`` - High impact, partial application failure with impact to many customers. 
+       
+      * ``3`` - Medium impact, the application is providing reduced service to customers. 
+       
+      * ``4`` - Low impact, customer might aren't impacted by the problem yet. 
+       
+      * ``5`` - No impact, customers aren't currently impacted but urgent action is needed to avoid impact. 
+       
+
+      
+
+    
+    :type notificationTargets: list
+    :param notificationTargets: 
+
+      The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. 
+
+       
+
+      Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.
+
+      
+
+    
+      - *(dict) --* 
+
+        The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+
+        
+
+      
+        - **snsTopicArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the SNS topic.
+
+          
+
+        
+      
+  
+    :type status: string
+    :param status: 
+
+      The status of the incident. An incident can be ``Open`` or ``Resolved`` .
+
+      
+
+    
+    :type summary: string
+    :param summary: 
+
+      The summary describes what has happened during the incident.
+
+      
+
+    
+    :type title: string
+    :param title: 
+
+      The title of the incident is a brief and easily recognizable.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_related_items(**kwargs)
+
+    
+
+    Add or remove related items from the related items tab of an incident record.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateRelatedItems>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_related_items(
+          clientToken='string',
+          incidentRecordArn='string',
+          relatedItemsUpdate={
+              'itemToAdd': {
+                  'identifier': {
+                      'type': 'ANALYSIS'|'INCIDENT'|'METRIC'|'PARENT'|'ATTACHMENT'|'OTHER',
+                      'value': {
+                          'arn': 'string',
+                          'metricDefinition': 'string',
+                          'url': 'string'
+                      }
+                  },
+                  'title': 'string'
+              },
+              'itemToRemove': {
+                  'type': 'ANALYSIS'|'INCIDENT'|'METRIC'|'PARENT'|'ATTACHMENT'|'OTHER',
+                  'value': {
+                      'arn': 'string',
+                      'metricDefinition': 'string',
+                      'url': 'string'
+                  }
+              }
+          }
+      )
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record you are updating related items in.
+
+      
+
+    
+    :type relatedItemsUpdate: dict
+    :param relatedItemsUpdate: **[REQUIRED]** 
+
+      Details about the item you are adding or deleting.
+
+      
+
+    
+      - **itemToAdd** *(dict) --* 
+
+        Details about the related item you're adding.
+
+        
+
+      
+        - **identifier** *(dict) --* **[REQUIRED]** 
+
+          Details about the related item.
+
+          
+
+        
+          - **type** *(string) --* **[REQUIRED]** 
+
+            The type of related item. Incident Manager supports the following types:
+
+             
+
+             
+            * ``ANALYSIS``   
+             
+            * ``INCIDENT``   
+             
+            * ``METRIC``   
+             
+            * ``PARENT``   
+             
+            * ``ATTACHMENT``   
+             
+            * ``OTHER``   
+             
+
+            
+
+          
+          - **value** *(dict) --* **[REQUIRED]** 
+
+            Details about the related item.
+
+            
+
+          
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
+
+              
+
+            
+            - **metricDefinition** *(string) --* 
+
+              The metric definition, if the related item is a metric in CloudWatch.
+
+              
+
+            
+            - **url** *(string) --* 
+
+              The URL, if the related item is a non-AWS resource.
+
+              
+
+            
+          
+        
+        - **title** *(string) --* 
+
+          The title of the related item.
+
+          
+
+        
+      
+      - **itemToRemove** *(dict) --* 
+
+        Details about the related item you're deleting.
+
+        
+
+      
+        - **type** *(string) --* **[REQUIRED]** 
+
+          The type of related item. Incident Manager supports the following types:
+
+           
+
+           
+          * ``ANALYSIS``   
+           
+          * ``INCIDENT``   
+           
+          * ``METRIC``   
+           
+          * ``PARENT``   
+           
+          * ``ATTACHMENT``   
+           
+          * ``OTHER``   
+           
+
+          
+
+        
+        - **value** *(dict) --* **[REQUIRED]** 
+
+          Details about the related item.
+
+          
+
+        
+          - **arn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
+
+            
+
+          
+          - **metricDefinition** *(string) --* 
+
+            The metric definition, if the related item is a metric in CloudWatch.
+
+            
+
+          
+          - **url** *(string) --* 
+
+            The URL, if the related item is a non-AWS resource.
+
+            
+
+          
+        
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_replication_set(**kwargs)
+
+    
+
+    Add or delete Regions from your replication set.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_replication_set(
+          actions=[
+              {
+                  'addRegionAction': {
+                      'regionName': 'string',
+                      'sseKmsKeyId': 'string'
+                  },
+                  'deleteRegionAction': {
+                      'regionName': 'string'
+                  }
+              },
+          ],
+          arn='string',
+          clientToken='string'
+      )
+    :type actions: list
+    :param actions: **[REQUIRED]** 
+
+      An action to add or delete a Region.
+
+      
+
+    
+      - *(dict) --* 
+
+        Details used when updating the replication set.
+
+        
+
+      
+        - **addRegionAction** *(dict) --* 
+
+          Details about the Region that you're adding to the replication set.
+
+          
+
+        
+          - **regionName** *(string) --* **[REQUIRED]** 
+
+            The Region name to add to the replication set.
+
+            
+
+          
+          - **sseKmsKeyId** *(string) --* 
+
+            The KMS key ID to use to encrypt your replication set.
+
+            
+
+          
+        
+        - **deleteRegionAction** *(dict) --* 
+
+          Details about the Region that you're deleting to the replication set.
+
+          
+
+        
+          - **regionName** *(string) --* **[REQUIRED]** 
+
+            The name of the Region you're deleting from the replication set.
+
+            
+
+          
+        
+      
+  
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you're updating.
+
+      
+
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_response_plan(**kwargs)
+
+    
+
+    Updates the specified response plan.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateResponsePlan>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_response_plan(
+          actions=[
+              {
+                  'ssmAutomation': {
+                      'documentName': 'string',
+                      'documentVersion': 'string',
+                      'parameters': {
+                          'string': [
+                              'string',
+                          ]
+                      },
+                      'roleArn': 'string',
+                      'targetAccount': 'RESPONSE_PLAN_OWNER_ACCOUNT'|'IMPACTED_ACCOUNT'
+                  }
+              },
+          ],
+          arn='string',
+          chatChannel={
+              'chatbotSns': [
+                  'string',
+              ],
+              'empty': {}
+              
+          },
+          clientToken='string',
+          displayName='string',
+          engagements=[
+              'string',
+          ],
+          incidentTemplateDedupeString='string',
+          incidentTemplateImpact=123,
+          incidentTemplateNotificationTargets=[
+              {
+                  'snsTopicArn': 'string'
+              },
+          ],
+          incidentTemplateSummary='string',
+          incidentTemplateTitle='string'
+      )
+    :type actions: list
+    :param actions: 
+
+      The actions that this response plan takes at the beginning of an incident.
+
+      
+
+    
+      - *(dict) --* 
+
+        The action that starts at the beginning of an incident. The response plan defines the action.
+
+        
+
+      
+        - **ssmAutomation** *(dict) --* 
+
+          The Systems Manager automation document to start as the runbook at the beginning of the incident.
+
+          
+
+        
+          - **documentName** *(string) --* **[REQUIRED]** 
+
+            The automation document's name.
+
+            
+
+          
+          - **documentVersion** *(string) --* 
+
+            The automation document's version to use when running.
+
+            
+
+          
+          - **parameters** *(dict) --* 
+
+            The key-value pair parameters to use when running the automation document.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(list) --* 
+
+              
+                - *(string) --* 
+
+                
+            
+        
+      
+          - **roleArn** *(string) --* **[REQUIRED]** 
+
+            The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.
+
+            
+
+          
+          - **targetAccount** *(string) --* 
+
+            The account that the automation document will be run in. This can be in either the management account or an application account.
+
+            
+
+          
+        
+      
+  
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan.
+
+      
+
+    
+    :type chatChannel: dict
+    :param chatChannel: 
+
+      The AWS Chatbot chat channel used for collaboration during an incident.
+
+      
+
+    
+      - **chatbotSns** *(list) --* 
+
+        The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel by using the SNS topics. 
+
+        
+
+      
+        - *(string) --* 
+
+        
+    
+      - **empty** *(dict) --* 
+
+        Used to remove the chat channel from an incident record or response plan.
+
+        
+
+      
+      
+    
+    :type clientToken: string
+    :param clientToken: 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type displayName: string
+    :param displayName: 
+
+      The long format name of the response plan. Can't contain spaces.
+
+      
+
+    
+    :type engagements: list
+    :param engagements: 
+
+      The contacts and escalation plans that Incident Manager engages at the start of the incident.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    :type incidentTemplateDedupeString: string
+    :param incidentTemplateDedupeString: 
+
+      Used to create only one incident record for an incident.
+
+      
+
+    
+    :type incidentTemplateImpact: integer
+    :param incidentTemplateImpact: 
+
+      Defines the impact to the customers. Providing an impact overwrites the impact provided by a response plan.
+
+       
+
+       **Possible impacts:**  
+
+       
+
+       
+      * ``5`` - Severe impact 
+       
+      * ``4`` - High impact 
+       
+      * ``3`` - Medium impact 
+       
+      * ``2`` - Low impact 
+       
+      * ``1`` - No impact 
+       
+
+      
+
+    
+    :type incidentTemplateNotificationTargets: list
+    :param incidentTemplateNotificationTargets: 
+
+      The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+
+      
+
+    
+      - *(dict) --* 
+
+        The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+
+        
+
+      
+        - **snsTopicArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the SNS topic.
+
+          
+
+        
+      
+  
+    :type incidentTemplateSummary: string
+    :param incidentTemplateSummary: 
+
+      A brief summary of the incident. This typically contains what has happened, what's currently happening, and next steps.
+
+      
+
+    
+    :type incidentTemplateTitle: string
+    :param incidentTemplateTitle: 
+
+      The short format name of the incident. Can't contain spaces.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: update_timeline_event(**kwargs)
+
+    
+
+    Updates a timeline event. You can update events of type ``Custom Event`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/UpdateTimelineEvent>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_timeline_event(
+          clientToken='string',
+          eventData='string',
+          eventId='string',
+          eventTime=datetime(2015, 1, 1),
+          eventType='string',
+          incidentRecordArn='string'
+      )
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      A token ensuring that the action is called only once with the specified details.
+
+      This field is autopopulated if not provided.
+
+    
+    :type eventData: string
+    :param eventData: 
+
+      A short description of the event.
+
+      
+
+    
+    :type eventId: string
+    :param eventId: **[REQUIRED]** 
+
+      The ID of the event you are updating. You can find this by using ``ListTimelineEvents`` .
+
+      
+
+    
+    :type eventTime: datetime
+    :param eventTime: 
+
+      The time that the event occurred.
+
+      
+
+    
+    :type eventType: string
+    :param eventType: 
+
+      The type of the event. You can update events of type ``Custom Event`` .
+
+      
+
+    
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident that the timeline event is part of.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ThrottlingException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`SSMIncidents.Client.exceptions.InternalServerException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
+
+* :py:class:`SSMIncidents.Paginator.GetResourcePolicies`
+
+
+* :py:class:`SSMIncidents.Paginator.ListIncidentRecords`
+
+
+* :py:class:`SSMIncidents.Paginator.ListRelatedItems`
+
+
+* :py:class:`SSMIncidents.Paginator.ListReplicationSets`
+
+
+* :py:class:`SSMIncidents.Paginator.ListResponsePlans`
+
+
+* :py:class:`SSMIncidents.Paginator.ListTimelineEvents`
+
+
+
+.. py:class:: SSMIncidents.Paginator.GetResourcePolicies
+
+  ::
+
+    
+    paginator = client.get_paginator('get_resource_policies')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.get_resource_policies`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetResourcePolicies>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          resourceArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the response plan with the attached resource policy. 
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'resourcePolicies': [
+                {
+                    'policyDocument': 'string',
+                    'policyId': 'string',
+                    'ramResourceShareRegion': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **resourcePolicies** *(list) --* 
+
+          Details about the resource policy attached to the response plan.
+
+          
+          
+
+          - *(dict) --* 
+
+            The resource policy that allows Incident Manager to perform actions on resources on your behalf.
+
+            
+            
+
+            - **policyDocument** *(string) --* 
+
+              The JSON blob that describes the policy.
+
+              
+            
+
+            - **policyId** *(string) --* 
+
+              The ID of the resource policy.
+
+              
+            
+
+            - **ramResourceShareRegion** *(string) --* 
+
+              The Region that policy allows resources to be used in.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSMIncidents.Paginator.ListIncidentRecords
+
+  ::
+
+    
+    paginator = client.get_paginator('list_incident_records')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.list_incident_records`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListIncidentRecords>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          filters=[
+              {
+                  'condition': {
+                      'after': datetime(2015, 1, 1),
+                      'before': datetime(2015, 1, 1),
+                      'equals': {
+                          'integerValues': [
+                              123,
+                          ],
+                          'stringValues': [
+                              'string',
+                          ]
+                      }
+                  },
+                  'key': 'string'
+              },
+          ],
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type filters: list
+    :param filters: 
+
+      Filter the list of incident records you are searching through. You can filter on the following keys:
+
+       
+
+       
+      * ``creationTime``   
+       
+      * ``impact``   
+       
+      * ``status``   
+       
+      * ``createdBy``   
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        Filter the selection by using a condition.
+
+        
+
+      
+        - **condition** *(dict) --* **[REQUIRED]** 
+
+          The condition accepts before or after a specified time, equal to a string, or equal to an integer.
+
+          
+
+        
+          - **after** *(datetime) --* 
+
+            After the specified timestamp.
+
+            
+
+          
+          - **before** *(datetime) --* 
+
+            Before the specified timestamp
+
+            
+
+          
+          - **equals** *(dict) --* 
+
+            The value is equal to the provided string or integer. 
+
+            
+
+          
+            - **integerValues** *(list) --* 
+
+              The list of integer values that the filter matches.
+
+              
+
+            
+              - *(integer) --* 
+
+              
+          
+            - **stringValues** *(list) --* 
+
+              The list of string values that the filter matches.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key that you're filtering on.
+
+          
+
+        
+      
+  
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'incidentRecordSummaries': [
+                {
+                    'arn': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'impact': 123,
+                    'incidentRecordSource': {
+                        'createdBy': 'string',
+                        'invokedBy': 'string',
+                        'resourceArn': 'string',
+                        'source': 'string'
+                    },
+                    'resolvedTime': datetime(2015, 1, 1),
+                    'status': 'OPEN'|'RESOLVED',
+                    'title': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **incidentRecordSummaries** *(list) --* 
+
+          The details of each listed incident record.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details describing an incident record.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the incident.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time the incident was created.
+
+              
+            
+
+            - **impact** *(integer) --* 
+
+              Defines the impact to customers and applications.
+
+              
+            
+
+            - **incidentRecordSource** *(dict) --* 
+
+              What caused Incident Manager to create the incident.
+
+              
+              
+
+              - **createdBy** *(string) --* 
+
+                The principal that started the incident.
+
+                
+              
+
+              - **invokedBy** *(string) --* 
+
+                The principal the assumed the role specified of the ``createdBy`` .
+
+                
+              
+
+              - **resourceArn** *(string) --* 
+
+                The resource that caused the incident to be created.
+
+                
+              
+
+              - **source** *(string) --* 
+
+                The service that started the incident. This can be manually created from Incident Manager, automatically created using an AWS CloudWatch alarm, or Amazon EventBridge event.
+
+                
+          
+            
+
+            - **resolvedTime** *(datetime) --* 
+
+              The time the incident was resolved.
+
+              
+            
+
+            - **status** *(string) --* 
+
+              The current status of the incident.
+
+              
+            
+
+            - **title** *(string) --* 
+
+              The title of the incident. This value is either provided by the response plan or overwritten on creation.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSMIncidents.Paginator.ListRelatedItems
+
+  ::
+
+    
+    paginator = client.get_paginator('list_related_items')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.list_related_items`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListRelatedItems>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          incidentRecordArn='string',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident record that you are listing related items for.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'relatedItems': [
+                {
+                    'identifier': {
+                        'type': 'ANALYSIS'|'INCIDENT'|'METRIC'|'PARENT'|'ATTACHMENT'|'OTHER',
+                        'value': {
+                            'arn': 'string',
+                            'metricDefinition': 'string',
+                            'url': 'string'
+                        }
+                    },
+                    'title': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **relatedItems** *(list) --* 
+
+          Details about each related item.
+
+          
+          
+
+          - *(dict) --* 
+
+            Resources that responders use to triage and mitigate the incident.
+
+            
+            
+
+            - **identifier** *(dict) --* 
+
+              Details about the related item.
+
+              
+              
+
+              - **type** *(string) --* 
+
+                The type of related item. Incident Manager supports the following types:
+
+                 
+
+                 
+                * ``ANALYSIS``   
+                 
+                * ``INCIDENT``   
+                 
+                * ``METRIC``   
+                 
+                * ``PARENT``   
+                 
+                * ``ATTACHMENT``   
+                 
+                * ``OTHER``   
+                 
+
+                
+              
+
+              - **value** *(dict) --* 
+
+                Details about the related item.
+
+                
+                
+
+                - **arn** *(string) --* 
+
+                  The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon resource.
+
+                  
+                
+
+                - **metricDefinition** *(string) --* 
+
+                  The metric definition, if the related item is a metric in CloudWatch.
+
+                  
+                
+
+                - **url** *(string) --* 
+
+                  The URL, if the related item is a non-AWS resource.
+
+                  
+            
+          
+            
+
+            - **title** *(string) --* 
+
+              The title of the related item.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSMIncidents.Paginator.ListReplicationSets
+
+  ::
+
+    
+    paginator = client.get_paginator('list_replication_sets')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.list_replication_sets`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListReplicationSets>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'replicationSetArns': [
+                'string',
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **replicationSetArns** *(list) --* 
+
+          The Amazon Resource Name (ARN) of the list replication set.
+
+          
+          
+
+          - *(string) --* 
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSMIncidents.Paginator.ListResponsePlans
+
+  ::
+
+    
+    paginator = client.get_paginator('list_response_plans')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.list_response_plans`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListResponsePlans>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'responsePlanSummaries': [
+                {
+                    'arn': 'string',
+                    'displayName': 'string',
+                    'name': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **responsePlanSummaries** *(list) --* 
+
+          Details of each response plan.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details of the response plan that are used when creating an incident.
+
+            
+            
+
+            - **arn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the response plan.
+
+              
+            
+
+            - **displayName** *(string) --* 
+
+              The human readable name of the response plan. This can include spaces.
+
+              
+            
+
+            - **name** *(string) --* 
+
+              The name of the response plan. This can't include spaces.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+.. py:class:: SSMIncidents.Paginator.ListTimelineEvents
+
+  ::
+
+    
+    paginator = client.get_paginator('list_timeline_events')
+
+  
+  
+
+  .. py:method:: paginate(**kwargs)
+
+    Creates an iterator that will paginate through responses from :py:meth:`SSMIncidents.Client.list_timeline_events`.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/ListTimelineEvents>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response_iterator = paginator.paginate(
+          filters=[
+              {
+                  'condition': {
+                      'after': datetime(2015, 1, 1),
+                      'before': datetime(2015, 1, 1),
+                      'equals': {
+                          'integerValues': [
+                              123,
+                          ],
+                          'stringValues': [
+                              'string',
+                          ]
+                      }
+                  },
+                  'key': 'string'
+              },
+          ],
+          incidentRecordArn='string',
+          sortBy='EVENT_TIME',
+          sortOrder='ASCENDING'|'DESCENDING',
+          PaginationConfig={
+              'MaxItems': 123,
+              'PageSize': 123,
+              'StartingToken': 'string'
+          }
+      )
+    :type filters: list
+    :param filters: 
+
+      Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:
+
+       
+
+       
+      * ``eventTime``   
+       
+      * ``eventType``   
+       
+
+      
+
+    
+      - *(dict) --* 
+
+        Filter the selection by using a condition.
+
+        
+
+      
+        - **condition** *(dict) --* **[REQUIRED]** 
+
+          The condition accepts before or after a specified time, equal to a string, or equal to an integer.
+
+          
+
+        
+          - **after** *(datetime) --* 
+
+            After the specified timestamp.
+
+            
+
+          
+          - **before** *(datetime) --* 
+
+            Before the specified timestamp
+
+            
+
+          
+          - **equals** *(dict) --* 
+
+            The value is equal to the provided string or integer. 
+
+            
+
+          
+            - **integerValues** *(list) --* 
+
+              The list of integer values that the filter matches.
+
+              
+
+            
+              - *(integer) --* 
+
+              
+          
+            - **stringValues** *(list) --* 
+
+              The list of string values that the filter matches.
+
+              
+
+            
+              - *(string) --* 
+
+              
+          
+          
+        
+        - **key** *(string) --* **[REQUIRED]** 
+
+          The key that you're filtering on.
+
+          
+
+        
+      
+  
+    :type incidentRecordArn: string
+    :param incidentRecordArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the incident that the event is part of.
+
+      
+
+    
+    :type sortBy: string
+    :param sortBy: 
+
+      Sort by the specified key value pair.
+
+      
+
+    
+    :type sortOrder: string
+    :param sortOrder: 
+
+      Sorts the order of timeline events by the value specified in the ``sortBy`` field.
+
+      
+
+    
+    :type PaginationConfig: dict
+    :param PaginationConfig: 
+
+      A dictionary that provides parameters to control pagination.
+
+      
+
+    
+      - **MaxItems** *(integer) --* 
+
+        The total number of items to return. If the total number of items available is more than the value specified in max-items then a ``NextToken`` will be provided in the output that you can use to resume pagination.
+
+        
+
+      
+      - **PageSize** *(integer) --* 
+
+        The size of each page.
+
+        
+
+        
+
+        
+
+      
+      - **StartingToken** *(string) --* 
+
+        A token to specify where to start paginating. This is the ``NextToken`` from a previous response.
+
+        
+
+      
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'eventSummaries': [
+                {
+                    'eventId': 'string',
+                    'eventTime': datetime(2015, 1, 1),
+                    'eventType': 'string',
+                    'eventUpdatedTime': datetime(2015, 1, 1),
+                    'incidentRecordArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **eventSummaries** *(list) --* 
+
+          Details about each event that occurred during the incident.
+
+          
+          
+
+          - *(dict) --* 
+
+            Details about a timeline event during an incident.
+
+            
+            
+
+            - **eventId** *(string) --* 
+
+              The timeline event ID.
+
+              
+            
+
+            - **eventTime** *(datetime) --* 
+
+              The time that the event occurred.
+
+              
+            
+
+            - **eventType** *(string) --* 
+
+              The type of event. The timeline event must be ``Custom Event`` .
+
+              
+            
+
+            - **eventUpdatedTime** *(datetime) --* 
+
+              The time that the timeline event was last updated.
+
+              
+            
+
+            - **incidentRecordArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the incident that the event happened during.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          A token to resume pagination.
+
+          
+    
+
+=======
+Waiters
+=======
+
+
+The available waiters are:
+
+* :py:class:`SSMIncidents.Waiter.WaitForReplicationSetActive`
+
+
+* :py:class:`SSMIncidents.Waiter.WaitForReplicationSetDeleted`
+
+
+
+.. py:class:: SSMIncidents.Waiter.WaitForReplicationSetActive
+
+  ::
+
+    
+    waiter = client.get_waiter('wait_for_replication_set_active')
+
+  
+  
+
+  .. py:method:: wait(**kwargs)
+
+    Polls :py:meth:`SSMIncidents.Client.get_replication_set` every 30 seconds until a successful state is reached. An error is returned after 5 failed checks.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      waiter.wait(
+          arn='string',
+          WaiterConfig={
+              'Delay': 123,
+              'MaxAttempts': 123
+          }
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you want to retrieve.
+
+      
+
+    
+    :type WaiterConfig: dict
+    :param WaiterConfig: 
+
+      A dictionary that provides parameters to control waiting behavior.
+
+      
+
+    
+      - **Delay** *(integer) --* 
+
+        The amount of time in seconds to wait between attempts. Default: 30
+
+        
+
+      
+      - **MaxAttempts** *(integer) --* 
+
+        The maximum number of attempts to be made. Default: 5
+
+        
+
+      
+    
+    
+    :returns: None
+
+.. py:class:: SSMIncidents.Waiter.WaitForReplicationSetDeleted
+
+  ::
+
+    
+    waiter = client.get_waiter('wait_for_replication_set_deleted')
+
+  
+  
+
+  .. py:method:: wait(**kwargs)
+
+    Polls :py:meth:`SSMIncidents.Client.get_replication_set` every 30 seconds until a successful state is reached. An error is returned after 5 failed checks.
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/GetReplicationSet>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      waiter.wait(
+          arn='string',
+          WaiterConfig={
+              'Delay': 123,
+              'MaxAttempts': 123
+          }
+      )
+    :type arn: string
+    :param arn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the replication set you want to retrieve.
+
+      
+
+    
+    :type WaiterConfig: dict
+    :param WaiterConfig: 
+
+      A dictionary that provides parameters to control waiting behavior.
+
+      
+
+    
+      - **Delay** *(integer) --* 
+
+        The amount of time in seconds to wait between attempts. Default: 30
+
+        
+
+      
+      - **MaxAttempts** *(integer) --* 
+
+        The maximum number of attempts to be made. Default: 5
+
+        
+
+      
+    
+    
+    :returns: None

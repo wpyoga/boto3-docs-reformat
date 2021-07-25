@@ -1,0 +1,4258 @@
+
+
+***
+FIS
+***
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: FIS.Client
+
+  A low-level client representing AWS Fault Injection Simulator (FIS)
+  
+
+  AWS Fault Injection Simulator is a managed service that enables you to perform fault injection experiments on your AWS workloads. For more information, see the `AWS Fault Injection Simulator User Guide <https://docs.aws.amazon.com/fis/latest/userguide/>`__ .
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('fis')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~FIS.Client.can_paginate`
+
+  
+  *   :py:meth:`~FIS.Client.create_experiment_template`
+
+  
+  *   :py:meth:`~FIS.Client.delete_experiment_template`
+
+  
+  *   :py:meth:`~FIS.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~FIS.Client.get_action`
+
+  
+  *   :py:meth:`~FIS.Client.get_experiment`
+
+  
+  *   :py:meth:`~FIS.Client.get_experiment_template`
+
+  
+  *   :py:meth:`~FIS.Client.get_paginator`
+
+  
+  *   :py:meth:`~FIS.Client.get_waiter`
+
+  
+  *   :py:meth:`~FIS.Client.list_actions`
+
+  
+  *   :py:meth:`~FIS.Client.list_experiment_templates`
+
+  
+  *   :py:meth:`~FIS.Client.list_experiments`
+
+  
+  *   :py:meth:`~FIS.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~FIS.Client.start_experiment`
+
+  
+  *   :py:meth:`~FIS.Client.stop_experiment`
+
+  
+  *   :py:meth:`~FIS.Client.tag_resource`
+
+  
+  *   :py:meth:`~FIS.Client.untag_resource`
+
+  
+  *   :py:meth:`~FIS.Client.update_experiment_template`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_experiment_template(**kwargs)
+
+    
+
+    Creates an experiment template. 
+
+     
+
+    To create a template, specify the following information: 
+
+     
+
+     
+    * **Targets** : A target can be a specific resource in your AWS environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags. 
+     
+    * **Actions** : The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment. 
+     
+    * **Stop conditions** : If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm. 
+     
+
+     
+
+    For more information, see the `AWS Fault Injection Simulator User Guide <https://docs.aws.amazon.com/fis/latest/userguide/>`__ .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_experiment_template(
+          clientToken='string',
+          description='string',
+          stopConditions=[
+              {
+                  'source': 'string',
+                  'value': 'string'
+              },
+          ],
+          targets={
+              'string': {
+                  'resourceType': 'string',
+                  'resourceArns': [
+                      'string',
+                  ],
+                  'resourceTags': {
+                      'string': 'string'
+                  },
+                  'filters': [
+                      {
+                          'path': 'string',
+                          'values': [
+                              'string',
+                          ]
+                      },
+                  ],
+                  'selectionMode': 'string'
+              }
+          },
+          actions={
+              'string': {
+                  'actionId': 'string',
+                  'description': 'string',
+                  'parameters': {
+                      'string': 'string'
+                  },
+                  'targets': {
+                      'string': 'string'
+                  },
+                  'startAfter': [
+                      'string',
+                  ]
+              }
+          },
+          roleArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type description: string
+    :param description: **[REQUIRED]** 
+
+      A description for the experiment template. Can contain up to 64 letters (A-Z and a-z).
+
+      
+
+    
+    :type stopConditions: list
+    :param stopConditions: **[REQUIRED]** 
+
+      The stop conditions.
+
+      
+
+    
+      - *(dict) --* 
+
+        Specifies a stop condition for an experiment template.
+
+        
+
+      
+        - **source** *(string) --* **[REQUIRED]** 
+
+          The source for the stop condition. Specify ``aws:cloudwatch:alarm`` if the stop condition is defined by a CloudWatch alarm. Specify ``none`` if there is no stop condition.
+
+          
+
+        
+        - **value** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the CloudWatch alarm. This is required if the source is a CloudWatch alarm.
+
+          
+
+        
+      
+  
+    :type targets: dict
+    :param targets: 
+
+      The targets for the experiment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs and tags.
+
+          
+
+        
+          - **resourceType** *(string) --* **[REQUIRED]** 
+
+            The AWS resource type. The resource type must be supported for the specified action.
+
+            
+
+          
+          - **resourceArns** *(list) --* 
+
+            The Amazon Resource Names (ARNs) of the resources.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **resourceTags** *(dict) --* 
+
+            The tags for the target resources.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **filters** *(list) --* 
+
+            The filters to apply to identify target resources using specific attributes.
+
+            
+
+          
+            - *(dict) --* 
+
+              Describes a filter used for the target resource input in an experiment template.
+
+              
+
+            
+              - **path** *(string) --* **[REQUIRED]** 
+
+                The attribute path for the filter.
+
+                
+
+              
+              - **values** *(list) --* **[REQUIRED]** 
+
+                The attribute values for the filter.
+
+                
+
+              
+                - *(string) --* 
+
+                
+            
+            
+        
+          - **selectionMode** *(string) --* **[REQUIRED]** 
+
+            Scopes the identified resources to a specific count of the resources at random, or a percentage of the resources. All identified resources are included in the target.
+
+             
+
+             
+            * ALL - Run the action on all identified targets. This is the default. 
+             
+            * COUNT(n) - Run the action on the specified number of targets, chosen from the identified targets at random. For example, COUNT(1) selects one of the targets. 
+             
+            * PERCENT(n) - Run the action on the specified percentage of targets, chosen from the identified targets at random. For example, PERCENT(25) selects 25% of the targets. 
+             
+
+            
+
+          
+        
+  
+
+    :type actions: dict
+    :param actions: **[REQUIRED]** 
+
+      The actions for the experiment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          Specifies an action for an experiment template.
+
+          
+
+        
+          - **actionId** *(string) --* **[REQUIRED]** 
+
+            The ID of the action.
+
+            
+
+          
+          - **description** *(string) --* 
+
+            A description for the action.
+
+            
+
+          
+          - **parameters** *(dict) --* 
+
+            The parameters for the action, if applicable.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **targets** *(dict) --* 
+
+            The targets for the action.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **startAfter** *(list) --* 
+
+            The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+        
+  
+
+    :type roleArn: string
+    :param roleArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags to apply to the experiment template.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experimentTemplate': {
+                'id': 'string',
+                'description': 'string',
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ]
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdateTime': datetime(2015, 1, 1),
+                'roleArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experimentTemplate** *(dict) --* 
+
+          Information about the experiment template.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description for the experiment template.
+
+            
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment template.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the targets.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment template.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes an action for an experiment template.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  A description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before the current action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a stop condition for an experiment template.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment template was created.
+
+            
+          
+
+          - **lastUpdateTime** *(datetime) --* 
+
+            The time the experiment template was last updated.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment template.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: delete_experiment_template(**kwargs)
+
+    
+
+    Deletes the specified experiment template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteExperimentTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_experiment_template(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the experiment template.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experimentTemplate': {
+                'id': 'string',
+                'description': 'string',
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ]
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdateTime': datetime(2015, 1, 1),
+                'roleArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experimentTemplate** *(dict) --* 
+
+          Information about the experiment template.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description for the experiment template.
+
+            
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment template.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the targets.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment template.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes an action for an experiment template.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  A description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before the current action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a stop condition for an experiment template.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment template was created.
+
+            
+          
+
+          - **lastUpdateTime** *(datetime) --* 
+
+            The time the experiment template was last updated.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment template.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_action(**kwargs)
+
+    
+
+    Gets information about the specified AWS FIS action.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetAction>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_action(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the action.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'action': {
+                'id': 'string',
+                'description': 'string',
+                'parameters': {
+                    'string': {
+                        'description': 'string',
+                        'required': True|False
+                    }
+                },
+                'targets': {
+                    'string': {
+                        'resourceType': 'string'
+                    }
+                },
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **action** *(dict) --* 
+
+          Information about the action.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the action.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description for the action.
+
+            
+          
+
+          - **parameters** *(dict) --* 
+
+            The action parameters, if applicable.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a parameter for an action.
+
+                
+                
+
+                - **description** *(string) --* 
+
+                  The parameter description.
+
+                  
+                
+
+                - **required** *(boolean) --* 
+
+                  Indicates whether the parameter is required.
+
+                  
+            
+        
+      
+          
+
+          - **targets** *(dict) --* 
+
+            The supported targets for the action.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an action.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type of the target.
+
+                  
+            
+        
+      
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the action.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_experiment(**kwargs)
+
+    
+
+    Gets information about the specified experiment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperiment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_experiment(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the experiment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experiment': {
+                'id': 'string',
+                'experimentTemplateId': 'string',
+                'roleArn': 'string',
+                'state': {
+                    'status': 'pending'|'initiating'|'running'|'completed'|'stopping'|'stopped'|'failed',
+                    'reason': 'string'
+                },
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ],
+                        'state': {
+                            'status': 'pending'|'initiating'|'running'|'completed'|'cancelled'|'stopping'|'stopped'|'failed',
+                            'reason': 'string'
+                        }
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'startTime': datetime(2015, 1, 1),
+                'endTime': datetime(2015, 1, 1),
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experiment** *(dict) --* 
+
+          Information about the experiment.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment.
+
+            
+          
+
+          - **experimentTemplateId** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+
+            
+          
+
+          - **state** *(dict) --* 
+
+            The state of the experiment.
+
+            
+            
+
+            - **status** *(string) --* 
+
+              The state of the experiment.
+
+              
+            
+
+            - **reason** *(string) --* 
+
+              The reason for the state.
+
+              
+        
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the resources.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes the action for an experiment.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  The description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before this action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **state** *(dict) --* 
+
+                  The state of the action.
+
+                  
+                  
+
+                  - **status** *(string) --* 
+
+                    The state of the action.
+
+                    
+                  
+
+                  - **reason** *(string) --* 
+
+                    The reason for the state.
+
+                    
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes the stop condition for an experiment.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment was created.
+
+            
+          
+
+          - **startTime** *(datetime) --* 
+
+            The time that the experiment was started.
+
+            
+          
+
+          - **endTime** *(datetime) --* 
+
+            The time that the experiment ended.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_experiment_template(**kwargs)
+
+    
+
+    Gets information about the specified experiment template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_experiment_template(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the experiment template.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experimentTemplate': {
+                'id': 'string',
+                'description': 'string',
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ]
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdateTime': datetime(2015, 1, 1),
+                'roleArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experimentTemplate** *(dict) --* 
+
+          Information about the experiment template.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description for the experiment template.
+
+            
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment template.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the targets.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment template.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes an action for an experiment template.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  A description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before the current action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a stop condition for an experiment template.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment template was created.
+
+            
+          
+
+          - **lastUpdateTime** *(datetime) --* 
+
+            The time the experiment template was last updated.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment template.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_actions(**kwargs)
+
+    
+
+    Lists the available AWS FIS actions.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListActions>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_actions(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'actions': [
+                {
+                    'id': 'string',
+                    'description': 'string',
+                    'targets': {
+                        'string': {
+                            'resourceType': 'string'
+                        }
+                    },
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **actions** *(list) --* 
+
+          The actions.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a summary of an action.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the action.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              The description for the action.
+
+              
+            
+
+            - **targets** *(dict) --* 
+
+              The targets for the action.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(dict) --* 
+
+                  Describes a target for an action.
+
+                  
+                  
+
+                  - **resourceType** *(string) --* 
+
+                    The resource type of the target.
+
+                    
+              
+          
+        
+            
+
+            - **tags** *(dict) --* 
+
+              The tags for the action.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_experiment_templates(**kwargs)
+
+    
+
+    Lists your experiment templates.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperimentTemplates>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_experiment_templates(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experimentTemplates': [
+                {
+                    'id': 'string',
+                    'description': 'string',
+                    'creationTime': datetime(2015, 1, 1),
+                    'lastUpdateTime': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experimentTemplates** *(list) --* 
+
+          The experiment templates.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a summary of an experiment template.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the experiment template.
+
+              
+            
+
+            - **description** *(string) --* 
+
+              The description of the experiment template.
+
+              
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time that the experiment template was created.
+
+              
+            
+
+            - **lastUpdateTime** *(datetime) --* 
+
+              The time that the experiment template was last updated.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The tags for the experiment template.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_experiments(**kwargs)
+
+    
+
+    Lists your experiments.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListExperiments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_experiments(
+          maxResults=123,
+          nextToken='string'
+      )
+    :type maxResults: integer
+    :param maxResults: 
+
+      The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned ``nextToken`` value.
+
+      
+
+    
+    :type nextToken: string
+    :param nextToken: 
+
+      The token for the next page of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experiments': [
+                {
+                    'id': 'string',
+                    'experimentTemplateId': 'string',
+                    'state': {
+                        'status': 'pending'|'initiating'|'running'|'completed'|'stopping'|'stopped'|'failed',
+                        'reason': 'string'
+                    },
+                    'creationTime': datetime(2015, 1, 1),
+                    'tags': {
+                        'string': 'string'
+                    }
+                },
+            ],
+            'nextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experiments** *(list) --* 
+
+          The experiments.
+
+          
+          
+
+          - *(dict) --* 
+
+            Provides a summary of an experiment.
+
+            
+            
+
+            - **id** *(string) --* 
+
+              The ID of the experiment.
+
+              
+            
+
+            - **experimentTemplateId** *(string) --* 
+
+              The ID of the experiment template.
+
+              
+            
+
+            - **state** *(dict) --* 
+
+              The state of the experiment.
+
+              
+              
+
+              - **status** *(string) --* 
+
+                The state of the experiment.
+
+                
+              
+
+              - **reason** *(string) --* 
+
+                The reason for the state.
+
+                
+          
+            
+
+            - **creationTime** *(datetime) --* 
+
+              The time that the experiment was created.
+
+              
+            
+
+            - **tags** *(dict) --* 
+
+              The tags for the experiment.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+        
+      
+        
+
+        - **nextToken** *(string) --* 
+
+          The token to use to retrieve the next page of results. This value is ``null`` when there are no more results to return.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags for the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          resourceArn='string'
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **tags** *(dict) --* 
+
+          The tags for the resource.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+
+  .. py:method:: start_experiment(**kwargs)
+
+    
+
+    Starts running an experiment from the specified experiment template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StartExperiment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.start_experiment(
+          clientToken='string',
+          experimentTemplateId='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type clientToken: string
+    :param clientToken: **[REQUIRED]** 
+
+      Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+
+      This field is autopopulated if not provided.
+
+    
+    :type experimentTemplateId: string
+    :param experimentTemplateId: **[REQUIRED]** 
+
+      The ID of the experiment template.
+
+      
+
+    
+    :type tags: dict
+    :param tags: 
+
+      The tags to apply to the experiment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experiment': {
+                'id': 'string',
+                'experimentTemplateId': 'string',
+                'roleArn': 'string',
+                'state': {
+                    'status': 'pending'|'initiating'|'running'|'completed'|'stopping'|'stopped'|'failed',
+                    'reason': 'string'
+                },
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ],
+                        'state': {
+                            'status': 'pending'|'initiating'|'running'|'completed'|'cancelled'|'stopping'|'stopped'|'failed',
+                            'reason': 'string'
+                        }
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'startTime': datetime(2015, 1, 1),
+                'endTime': datetime(2015, 1, 1),
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experiment** *(dict) --* 
+
+          Information about the experiment.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment.
+
+            
+          
+
+          - **experimentTemplateId** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+
+            
+          
+
+          - **state** *(dict) --* 
+
+            The state of the experiment.
+
+            
+            
+
+            - **status** *(string) --* 
+
+              The state of the experiment.
+
+              
+            
+
+            - **reason** *(string) --* 
+
+              The reason for the state.
+
+              
+        
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the resources.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes the action for an experiment.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  The description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before this action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **state** *(dict) --* 
+
+                  The state of the action.
+
+                  
+                  
+
+                  - **status** *(string) --* 
+
+                    The state of the action.
+
+                    
+                  
+
+                  - **reason** *(string) --* 
+
+                    The reason for the state.
+
+                    
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes the stop condition for an experiment.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment was created.
+
+            
+          
+
+          - **startTime** *(datetime) --* 
+
+            The time that the experiment was started.
+
+            
+          
+
+          - **endTime** *(datetime) --* 
+
+            The time that the experiment ended.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: stop_experiment(**kwargs)
+
+    
+
+    Stops the specified experiment.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StopExperiment>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.stop_experiment(
+          id='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the experiment.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experiment': {
+                'id': 'string',
+                'experimentTemplateId': 'string',
+                'roleArn': 'string',
+                'state': {
+                    'status': 'pending'|'initiating'|'running'|'completed'|'stopping'|'stopped'|'failed',
+                    'reason': 'string'
+                },
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ],
+                        'state': {
+                            'status': 'pending'|'initiating'|'running'|'completed'|'cancelled'|'stopping'|'stopped'|'failed',
+                            'reason': 'string'
+                        }
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'startTime': datetime(2015, 1, 1),
+                'endTime': datetime(2015, 1, 1),
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experiment** *(dict) --* 
+
+          Information about the experiment.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment.
+
+            
+          
+
+          - **experimentTemplateId** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+
+            
+          
+
+          - **state** *(dict) --* 
+
+            The state of the experiment.
+
+            
+            
+
+            - **status** *(string) --* 
+
+              The state of the experiment.
+
+              
+            
+
+            - **reason** *(string) --* 
+
+              The reason for the state.
+
+              
+        
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the resources.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes the action for an experiment.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  The description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before this action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **state** *(dict) --* 
+
+                  The state of the action.
+
+                  
+                  
+
+                  - **status** *(string) --* 
+
+                    The state of the action.
+
+                    
+                  
+
+                  - **reason** *(string) --* 
+
+                    The reason for the state.
+
+                    
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes the stop condition for an experiment.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment was created.
+
+            
+          
+
+          - **startTime** *(datetime) --* 
+
+            The time that the experiment was started.
+
+            
+          
+
+          - **endTime** *(datetime) --* 
+
+            The time that the experiment ended.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Applies the specified tags to the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          resourceArn='string',
+          tags={
+              'string': 'string'
+          }
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type tags: dict
+    :param tags: **[REQUIRED]** 
+
+      The tags for the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes the specified tags from the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          resourceArn='string',
+          tagKeys=[
+              'string',
+          ]
+      )
+    :type resourceArn: string
+    :param resourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type tagKeys: list
+    :param tagKeys: 
+
+      The tag keys to remove.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+
+  .. py:method:: update_experiment_template(**kwargs)
+
+    
+
+    Updates the specified experiment template.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplate>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.update_experiment_template(
+          id='string',
+          description='string',
+          stopConditions=[
+              {
+                  'source': 'string',
+                  'value': 'string'
+              },
+          ],
+          targets={
+              'string': {
+                  'resourceType': 'string',
+                  'resourceArns': [
+                      'string',
+                  ],
+                  'resourceTags': {
+                      'string': 'string'
+                  },
+                  'filters': [
+                      {
+                          'path': 'string',
+                          'values': [
+                              'string',
+                          ]
+                      },
+                  ],
+                  'selectionMode': 'string'
+              }
+          },
+          actions={
+              'string': {
+                  'actionId': 'string',
+                  'description': 'string',
+                  'parameters': {
+                      'string': 'string'
+                  },
+                  'targets': {
+                      'string': 'string'
+                  },
+                  'startAfter': [
+                      'string',
+                  ]
+              }
+          },
+          roleArn='string'
+      )
+    :type id: string
+    :param id: **[REQUIRED]** 
+
+      The ID of the experiment template.
+
+      
+
+    
+    :type description: string
+    :param description: 
+
+      A description for the template.
+
+      
+
+    
+    :type stopConditions: list
+    :param stopConditions: 
+
+      The stop conditions for the experiment.
+
+      
+
+    
+      - *(dict) --* 
+
+        Specifies a stop condition for an experiment. You can define a stop condition as a CloudWatch alarm.
+
+        
+
+      
+        - **source** *(string) --* **[REQUIRED]** 
+
+          The source for the stop condition. Specify ``aws:cloudwatch:alarm`` if the stop condition is defined by a CloudWatch alarm. Specify ``none`` if there is no stop condition.
+
+          
+
+        
+        - **value** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the CloudWatch alarm.
+
+          
+
+        
+      
+  
+    :type targets: dict
+    :param targets: 
+
+      The targets for the experiment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          Specifies a target for an experiment. You must specify at least one Amazon Resource Name (ARN) or at least one resource tag. You cannot specify both.
+
+          
+
+        
+          - **resourceType** *(string) --* **[REQUIRED]** 
+
+            The AWS resource type. The resource type must be supported for the specified action.
+
+            
+
+          
+          - **resourceArns** *(list) --* 
+
+            The Amazon Resource Names (ARNs) of the targets.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+          - **resourceTags** *(dict) --* 
+
+            The tags for the target resources.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **filters** *(list) --* 
+
+            The filters to apply to identify target resources using specific attributes.
+
+            
+
+          
+            - *(dict) --* 
+
+              Describes a filter used for the target resource input in an experiment template.
+
+              
+
+            
+              - **path** *(string) --* **[REQUIRED]** 
+
+                The attribute path for the filter.
+
+                
+
+              
+              - **values** *(list) --* **[REQUIRED]** 
+
+                The attribute values for the filter.
+
+                
+
+              
+                - *(string) --* 
+
+                
+            
+            
+        
+          - **selectionMode** *(string) --* **[REQUIRED]** 
+
+            Scopes the identified resources to a specific count or percentage.
+
+            
+
+          
+        
+  
+
+    :type actions: dict
+    :param actions: 
+
+      The actions for the experiment.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(dict) --* 
+
+          Specifies an action for an experiment template.
+
+          
+
+        
+          - **actionId** *(string) --* 
+
+            The ID of the action.
+
+            
+
+          
+          - **description** *(string) --* 
+
+            A description for the action.
+
+            
+
+          
+          - **parameters** *(dict) --* 
+
+            The parameters for the action, if applicable.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **targets** *(dict) --* 
+
+            The targets for the action.
+
+            
+
+          
+            - *(string) --* 
+
+            
+              - *(string) --* 
+
+              
+        
+      
+          - **startAfter** *(list) --* 
+
+            The name of the action that must be completed before the current action starts. Omit this parameter to run the action at the start of the experiment.
+
+            
+
+          
+            - *(string) --* 
+
+            
+        
+        
+  
+
+    :type roleArn: string
+    :param roleArn: 
+
+      The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'experimentTemplate': {
+                'id': 'string',
+                'description': 'string',
+                'targets': {
+                    'string': {
+                        'resourceType': 'string',
+                        'resourceArns': [
+                            'string',
+                        ],
+                        'resourceTags': {
+                            'string': 'string'
+                        },
+                        'filters': [
+                            {
+                                'path': 'string',
+                                'values': [
+                                    'string',
+                                ]
+                            },
+                        ],
+                        'selectionMode': 'string'
+                    }
+                },
+                'actions': {
+                    'string': {
+                        'actionId': 'string',
+                        'description': 'string',
+                        'parameters': {
+                            'string': 'string'
+                        },
+                        'targets': {
+                            'string': 'string'
+                        },
+                        'startAfter': [
+                            'string',
+                        ]
+                    }
+                },
+                'stopConditions': [
+                    {
+                        'source': 'string',
+                        'value': 'string'
+                    },
+                ],
+                'creationTime': datetime(2015, 1, 1),
+                'lastUpdateTime': datetime(2015, 1, 1),
+                'roleArn': 'string',
+                'tags': {
+                    'string': 'string'
+                }
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **experimentTemplate** *(dict) --* 
+
+          Information about the experiment template.
+
+          
+          
+
+          - **id** *(string) --* 
+
+            The ID of the experiment template.
+
+            
+          
+
+          - **description** *(string) --* 
+
+            The description for the experiment template.
+
+            
+          
+
+          - **targets** *(dict) --* 
+
+            The targets for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes a target for an experiment template.
+
+                
+                
+
+                - **resourceType** *(string) --* 
+
+                  The resource type.
+
+                  
+                
+
+                - **resourceArns** *(list) --* 
+
+                  The Amazon Resource Names (ARNs) of the targets.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+                
+
+                - **resourceTags** *(dict) --* 
+
+                  The tags for the target resources.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **filters** *(list) --* 
+
+                  The filters to apply to identify target resources using specific attributes.
+
+                  
+                  
+
+                  - *(dict) --* 
+
+                    Describes a filter used for the target resources in an experiment template.
+
+                    
+                    
+
+                    - **path** *(string) --* 
+
+                      The attribute path for the filter.
+
+                      
+                    
+
+                    - **values** *(list) --* 
+
+                      The attribute values for the filter.
+
+                      
+                      
+
+                      - *(string) --* 
+                  
+                
+              
+                
+
+                - **selectionMode** *(string) --* 
+
+                  Scopes the identified resources to a specific count or percentage.
+
+                  
+            
+        
+      
+          
+
+          - **actions** *(dict) --* 
+
+            The actions for the experiment.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(dict) --* 
+
+                Describes an action for an experiment template.
+
+                
+                
+
+                - **actionId** *(string) --* 
+
+                  The ID of the action.
+
+                  
+                
+
+                - **description** *(string) --* 
+
+                  A description for the action.
+
+                  
+                
+
+                - **parameters** *(dict) --* 
+
+                  The parameters for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **targets** *(dict) --* 
+
+                  The targets for the action.
+
+                  
+                  
+
+                  - *(string) --* 
+                    
+
+                    - *(string) --* 
+              
+            
+                
+
+                - **startAfter** *(list) --* 
+
+                  The name of the action that must be completed before the current action starts.
+
+                  
+                  
+
+                  - *(string) --* 
+              
+            
+        
+      
+          
+
+          - **stopConditions** *(list) --* 
+
+            The stop conditions for the experiment.
+
+            
+            
+
+            - *(dict) --* 
+
+              Describes a stop condition for an experiment template.
+
+              
+              
+
+              - **source** *(string) --* 
+
+                The source for the stop condition.
+
+                
+              
+
+              - **value** *(string) --* 
+
+                The Amazon Resource Name (ARN) of the CloudWatch alarm, if applicable.
+
+                
+          
+        
+          
+
+          - **creationTime** *(datetime) --* 
+
+            The time the experiment template was created.
+
+            
+          
+
+          - **lastUpdateTime** *(datetime) --* 
+
+            The time the experiment template was last updated.
+
+            
+          
+
+          - **roleArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of an IAM role.
+
+            
+          
+
+          - **tags** *(dict) --* 
+
+            The tags for the experiment template.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`FIS.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`FIS.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

@@ -1,0 +1,1419 @@
+
+
+********
+Outposts
+********
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: Outposts.Client
+
+  A low-level client representing AWS Outposts
+  
+
+  AWS Outposts is a fully managed service that extends AWS infrastructure, APIs, and tools to customer premises. By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWS Regions, while using local compute and storage resources for lower latency and local data processing needs.
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('outposts')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~Outposts.Client.can_paginate`
+
+  
+  *   :py:meth:`~Outposts.Client.create_outpost`
+
+  
+  *   :py:meth:`~Outposts.Client.delete_outpost`
+
+  
+  *   :py:meth:`~Outposts.Client.delete_site`
+
+  
+  *   :py:meth:`~Outposts.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~Outposts.Client.get_outpost`
+
+  
+  *   :py:meth:`~Outposts.Client.get_outpost_instance_types`
+
+  
+  *   :py:meth:`~Outposts.Client.get_paginator`
+
+  
+  *   :py:meth:`~Outposts.Client.get_waiter`
+
+  
+  *   :py:meth:`~Outposts.Client.list_outposts`
+
+  
+  *   :py:meth:`~Outposts.Client.list_sites`
+
+  
+  *   :py:meth:`~Outposts.Client.list_tags_for_resource`
+
+  
+  *   :py:meth:`~Outposts.Client.tag_resource`
+
+  
+  *   :py:meth:`~Outposts.Client.untag_resource`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: create_outpost(**kwargs)
+
+    
+
+    Creates an Outpost.
+
+     
+
+    You can specify ``AvailabilityZone`` or ``AvailabilityZoneId`` .
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.create_outpost(
+          Name='string',
+          Description='string',
+          SiteId='string',
+          AvailabilityZone='string',
+          AvailabilityZoneId='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type Name: string
+    :param Name: **[REQUIRED]** 
+
+      The name of the Outpost.
+
+      
+
+    
+    :type Description: string
+    :param Description: 
+
+      The description of the Outpost.
+
+      
+
+    
+    :type SiteId: string
+    :param SiteId: **[REQUIRED]** 
+
+      The ID of the site.
+
+      
+
+    
+    :type AvailabilityZone: string
+    :param AvailabilityZone: 
+
+      The Availability Zone.
+
+      
+
+    
+    :type AvailabilityZoneId: string
+    :param AvailabilityZoneId: 
+
+      The ID of the Availability Zone.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: 
+
+      The tags to apply to the Outpost.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Outpost': {
+                'OutpostId': 'string',
+                'OwnerId': 'string',
+                'OutpostArn': 'string',
+                'SiteId': 'string',
+                'Name': 'string',
+                'Description': 'string',
+                'LifeCycleStatus': 'string',
+                'AvailabilityZone': 'string',
+                'AvailabilityZoneId': 'string',
+                'Tags': {
+                    'string': 'string'
+                },
+                'SiteArn': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Outpost** *(dict) --* 
+
+          Information about an Outpost.
+
+          
+          
+
+          - **OutpostId** *(string) --* 
+
+            The ID of the Outpost.
+
+            
+          
+
+          - **OwnerId** *(string) --* 
+
+            The AWS account ID of the Outpost owner.
+
+            
+          
+
+          - **OutpostArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the Outpost.
+
+            
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the Outpost.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the Outpost.
+
+            
+          
+
+          - **LifeCycleStatus** *(string) --* 
+
+            The life cycle status.
+
+            
+          
+
+          - **AvailabilityZone** *(string) --* 
+
+            The Availability Zone.
+
+            
+          
+
+          - **AvailabilityZoneId** *(string) --* 
+
+            The ID of the Availability Zone.
+
+            
+          
+
+          - **Tags** *(dict) --* 
+
+            The Outpost tags.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **SiteArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the site.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ServiceQuotaExceededException`
+
+    
+
+  .. py:method:: delete_outpost(**kwargs)
+
+    
+
+    Deletes the Outpost.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_outpost(
+          OutpostId='string'
+      )
+    :type OutpostId: string
+    :param OutpostId: **[REQUIRED]** 
+
+      The ID of the Outpost.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: delete_site(**kwargs)
+
+    
+
+    Deletes the site.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSite>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.delete_site(
+          SiteId='string'
+      )
+    :type SiteId: string
+    :param SiteId: **[REQUIRED]** 
+
+      The ID of the site.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ConflictException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_outpost(**kwargs)
+
+    
+
+    Gets information about the specified Outpost.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_outpost(
+          OutpostId='string'
+      )
+    :type OutpostId: string
+    :param OutpostId: **[REQUIRED]** 
+
+      The ID of the Outpost.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Outpost': {
+                'OutpostId': 'string',
+                'OwnerId': 'string',
+                'OutpostArn': 'string',
+                'SiteId': 'string',
+                'Name': 'string',
+                'Description': 'string',
+                'LifeCycleStatus': 'string',
+                'AvailabilityZone': 'string',
+                'AvailabilityZoneId': 'string',
+                'Tags': {
+                    'string': 'string'
+                },
+                'SiteArn': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Outpost** *(dict) --* 
+
+          Information about an Outpost.
+
+          
+          
+
+          - **OutpostId** *(string) --* 
+
+            The ID of the Outpost.
+
+            
+          
+
+          - **OwnerId** *(string) --* 
+
+            The AWS account ID of the Outpost owner.
+
+            
+          
+
+          - **OutpostArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the Outpost.
+
+            
+          
+
+          - **SiteId** *(string) --* 
+
+            The ID of the site.
+
+            
+          
+
+          - **Name** *(string) --* 
+
+            The name of the Outpost.
+
+            
+          
+
+          - **Description** *(string) --* 
+
+            The description of the Outpost.
+
+            
+          
+
+          - **LifeCycleStatus** *(string) --* 
+
+            The life cycle status.
+
+            
+          
+
+          - **AvailabilityZone** *(string) --* 
+
+            The Availability Zone.
+
+            
+          
+
+          - **AvailabilityZoneId** *(string) --* 
+
+            The ID of the Availability Zone.
+
+            
+          
+
+          - **Tags** *(dict) --* 
+
+            The Outpost tags.
+
+            
+            
+
+            - *(string) --* 
+              
+
+              - *(string) --* 
+        
+      
+          
+
+          - **SiteArn** *(string) --* 
+
+            The Amazon Resource Name (ARN) of the site.
+
+            
+      
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_outpost_instance_types(**kwargs)
+
+    
+
+    Lists the instance types for the specified Outpost.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostInstanceTypes>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.get_outpost_instance_types(
+          OutpostId='string',
+          NextToken='string',
+          MaxResults=123
+      )
+    :type OutpostId: string
+    :param OutpostId: **[REQUIRED]** 
+
+      The ID of the Outpost.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum page size.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'InstanceTypes': [
+                {
+                    'InstanceType': 'string'
+                },
+            ],
+            'NextToken': 'string',
+            'OutpostId': 'string',
+            'OutpostArn': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **InstanceTypes** *(list) --* 
+
+          Information about the instance types.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about an instance type.
+
+            
+            
+
+            - **InstanceType** *(string) --* 
+
+              The instance type.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token.
+
+          
+        
+
+        - **OutpostId** *(string) --* 
+
+          The ID of the Outpost.
+
+          
+        
+
+        - **OutpostArn** *(string) --* 
+
+          The Amazon Resource Name (ARN) of the Outpost.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_outposts(**kwargs)
+
+    
+
+    Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (``us-east-1a`` ), and AZ ID (``use1-az1`` ). 
+
+     
+
+    If you specify multiple filters, the filters are joined with an ``AND`` , and the request returns only results that match all of the specified filters.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_outposts(
+          NextToken='string',
+          MaxResults=123,
+          LifeCycleStatusFilter=[
+              'string',
+          ],
+          AvailabilityZoneFilter=[
+              'string',
+          ],
+          AvailabilityZoneIdFilter=[
+              'string',
+          ]
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum page size.
+
+      
+
+    
+    :type LifeCycleStatusFilter: list
+    :param LifeCycleStatusFilter: 
+
+      A filter for the lifecycle status of the Outpost. 
+
+       
+
+      Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an ``OR`` , and the request returns all results that match any of the specified values. 
+
+      
+
+    
+      - *(string) --* 
+
+        The life cycle status.
+
+        
+
+      
+  
+    :type AvailabilityZoneFilter: list
+    :param AvailabilityZoneFilter: 
+
+      A filter for the Availibility Zone (``us-east-1a`` ) of the Outpost. 
+
+       
+
+      Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an ``OR`` , and the request returns all results that match any of the specified values. 
+
+      
+
+    
+      - *(string) --* 
+
+        The Availability Zone.
+
+        
+
+      
+  
+    :type AvailabilityZoneIdFilter: list
+    :param AvailabilityZoneIdFilter: 
+
+      A filter for the AZ IDs (``use1-az1`` ) of the Outpost. 
+
+       
+
+      Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an ``OR`` , and the request returns all results that match any of the specified values. 
+
+      
+
+    
+      - *(string) --* 
+
+        The ID of the Availability Zone.
+
+        
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Outposts': [
+                {
+                    'OutpostId': 'string',
+                    'OwnerId': 'string',
+                    'OutpostArn': 'string',
+                    'SiteId': 'string',
+                    'Name': 'string',
+                    'Description': 'string',
+                    'LifeCycleStatus': 'string',
+                    'AvailabilityZone': 'string',
+                    'AvailabilityZoneId': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    },
+                    'SiteArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Outposts** *(list) --* 
+
+          Information about the Outposts.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about an Outpost.
+
+            
+            
+
+            - **OutpostId** *(string) --* 
+
+              The ID of the Outpost.
+
+              
+            
+
+            - **OwnerId** *(string) --* 
+
+              The AWS account ID of the Outpost owner.
+
+              
+            
+
+            - **OutpostArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the Outpost.
+
+              
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the Outpost.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the Outpost.
+
+              
+            
+
+            - **LifeCycleStatus** *(string) --* 
+
+              The life cycle status.
+
+              
+            
+
+            - **AvailabilityZone** *(string) --* 
+
+              The Availability Zone.
+
+              
+            
+
+            - **AvailabilityZoneId** *(string) --* 
+
+              The ID of the Availability Zone.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              The Outpost tags.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **SiteArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the site.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_sites(**kwargs)
+
+    
+
+    Lists the sites for the specified AWS account.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSites>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_sites(
+          NextToken='string',
+          MaxResults=123
+      )
+    :type NextToken: string
+    :param NextToken: 
+
+      The pagination token.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximum page size.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Sites': [
+                {
+                    'SiteId': 'string',
+                    'AccountId': 'string',
+                    'Name': 'string',
+                    'Description': 'string',
+                    'Tags': {
+                        'string': 'string'
+                    },
+                    'SiteArn': 'string'
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Sites** *(list) --* 
+
+          Information about the sites.
+
+          
+          
+
+          - *(dict) --* 
+
+            Information about a site.
+
+            
+            
+
+            - **SiteId** *(string) --* 
+
+              The ID of the site.
+
+              
+            
+
+            - **AccountId** *(string) --* 
+
+              The ID of the AWS account.
+
+              
+            
+
+            - **Name** *(string) --* 
+
+              The name of the site.
+
+              
+            
+
+            - **Description** *(string) --* 
+
+              The description of the site.
+
+              
+            
+
+            - **Tags** *(dict) --* 
+
+              The site tags.
+
+              
+              
+
+              - *(string) --* 
+                
+
+                - *(string) --* 
+          
+        
+            
+
+            - **SiteArn** *(string) --* 
+
+              The Amazon Resource Name (ARN) of the site.
+
+              
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          The pagination token.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+
+  .. py:method:: list_tags_for_resource(**kwargs)
+
+    
+
+    Lists the tags for the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListTagsForResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_tags_for_resource(
+          ResourceArn='string'
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Tags': {
+                'string': 'string'
+            }
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Tags** *(dict) --* 
+
+          The resource tags.
+
+          
+          
+
+          - *(string) --* 
+            
+
+            - *(string) --* 
+      
+    
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+
+  .. py:method:: tag_resource(**kwargs)
+
+    
+
+    Adds tags to the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/TagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.tag_resource(
+          ResourceArn='string',
+          Tags={
+              'string': 'string'
+          }
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type Tags: dict
+    :param Tags: **[REQUIRED]** 
+
+      The tags to add to the resource.
+
+      
+
+    
+      - *(string) --* 
+
+      
+        - *(string) --* 
+
+        
+  
+
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+
+  .. py:method:: untag_resource(**kwargs)
+
+    
+
+    Removes tags from the specified resource.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UntagResource>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.untag_resource(
+          ResourceArn='string',
+          TagKeys=[
+              'string',
+          ]
+      )
+    :type ResourceArn: string
+    :param ResourceArn: **[REQUIRED]** 
+
+      The Amazon Resource Name (ARN) of the resource.
+
+      
+
+    
+    :type TagKeys: list
+    :param TagKeys: **[REQUIRED]** 
+
+      The tag keys.
+
+      
+
+    
+      - *(string) --* 
+
+      
+  
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {}
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+    
+    **Exceptions** 
+    
+    *     :py:class:`Outposts.Client.exceptions.InternalServerException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.ValidationException`
+
+    
+    *     :py:class:`Outposts.Client.exceptions.NotFoundException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:

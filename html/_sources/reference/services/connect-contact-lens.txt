@@ -1,0 +1,456 @@
+
+
+******************
+ConnectContactLens
+******************
+
+.. contents:: Table of Contents
+   :depth: 2
+
+
+======
+Client
+======
+
+
+
+.. py:class:: ConnectContactLens.Client
+
+  A low-level client representing Amazon Connect Contact Lens
+  
+
+  Contact Lens for Amazon Connect enables you to analyze conversations between customer and agents, by using speech transcription, natural language processing, and intelligent search capabilities. It performs sentiment analysis, detects issues, and enables you to automatically categorize contacts.
+
+   
+
+  Contact Lens for Amazon Connect provides both real-time and post-call analytics of customer-agent conversations. For more information, see `Analyze conversations using Contact Lens <https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html>`__ in the *Amazon Connect Administrator Guide* . 
+
+  ::
+
+    
+    import boto3
+    
+    client = boto3.client('connect-contact-lens')
+
+  
+  These are the available methods:
+  
+  *   :py:meth:`~ConnectContactLens.Client.can_paginate`
+
+  
+  *   :py:meth:`~ConnectContactLens.Client.generate_presigned_url`
+
+  
+  *   :py:meth:`~ConnectContactLens.Client.get_paginator`
+
+  
+  *   :py:meth:`~ConnectContactLens.Client.get_waiter`
+
+  
+  *   :py:meth:`~ConnectContactLens.Client.list_realtime_contact_analysis_segments`
+
+  
+
+  .. py:method:: can_paginate(operation_name)
+
+        
+    Check if an operation can be paginated.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :return: ``True`` if the operation can be paginated,
+        ``False`` otherwise.
+
+
+  .. py:method:: generate_presigned_url(ClientMethod, Params=None, ExpiresIn=3600, HttpMethod=None)
+
+        
+    Generate a presigned url given a client, its method, and arguments
+    
+    :type ClientMethod: string
+    :param ClientMethod: The client method to presign for
+    
+    :type Params: dict
+    :param Params: The parameters normally passed to
+        ``ClientMethod``.
+    
+    :type ExpiresIn: int
+    :param ExpiresIn: The number of seconds the presigned url is valid
+        for. By default it expires in an hour (3600 seconds)
+    
+    :type HttpMethod: string
+    :param HttpMethod: The http method to use on the generated url. By
+        default, the http method is whatever is used in the method's model.
+    
+    :returns: The presigned url
+
+
+  .. py:method:: get_paginator(operation_name)
+
+        
+    Create a paginator for an operation.
+    
+    :type operation_name: string
+    :param operation_name: The operation name.  This is the same name
+        as the method name on the client.  For example, if the
+        method name is ``create_foo``, and you'd normally invoke the
+        operation as ``client.create_foo(**kwargs)``, if the
+        ``create_foo`` operation can be paginated, you can use the
+        call ``client.get_paginator("create_foo")``.
+    
+    :raise OperationNotPageableError: Raised if the operation is not
+        pageable.  You can use the ``client.can_paginate`` method to
+        check if an operation is pageable.
+    
+    :rtype: L{botocore.paginate.Paginator}
+    :return: A paginator object.
+
+
+  .. py:method:: get_waiter(waiter_name)
+
+        
+    Returns an object that can wait for some condition.
+    
+    :type waiter_name: str
+    :param waiter_name: The name of the waiter to get. See the waiters
+        section of the service docs for a list of available waiters.
+    
+    :returns: The specified waiter object.
+    :rtype: botocore.waiter.Waiter
+
+
+  .. py:method:: list_realtime_contact_analysis_segments(**kwargs)
+
+    
+
+    Provides a list of analysis segments for a real-time analysis session.
+
+    
+
+    See also: `AWS API Documentation <https://docs.aws.amazon.com/goto/WebAPI/connect-contact-lens-2020-08-21/ListRealtimeContactAnalysisSegments>`_    
+
+
+    **Request Syntax** 
+    ::
+
+      response = client.list_realtime_contact_analysis_segments(
+          InstanceId='string',
+          ContactId='string',
+          MaxResults=123,
+          NextToken='string'
+      )
+    :type InstanceId: string
+    :param InstanceId: **[REQUIRED]** 
+
+      The identifier of the Amazon Connect instance.
+
+      
+
+    
+    :type ContactId: string
+    :param ContactId: **[REQUIRED]** 
+
+      The identifier of the contact.
+
+      
+
+    
+    :type MaxResults: integer
+    :param MaxResults: 
+
+      The maximimum number of results to return per page.
+
+      
+
+    
+    :type NextToken: string
+    :param NextToken: 
+
+      The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+
+      
+
+    
+    
+    :rtype: dict
+    :returns: 
+      
+      **Response Syntax** 
+
+      
+      ::
+
+        {
+            'Segments': [
+                {
+                    'Transcript': {
+                        'Id': 'string',
+                        'ParticipantId': 'string',
+                        'ParticipantRole': 'string',
+                        'Content': 'string',
+                        'BeginOffsetMillis': 123,
+                        'EndOffsetMillis': 123,
+                        'Sentiment': 'POSITIVE'|'NEUTRAL'|'NEGATIVE',
+                        'IssuesDetected': [
+                            {
+                                'CharacterOffsets': {
+                                    'BeginOffsetChar': 123,
+                                    'EndOffsetChar': 123
+                                }
+                            },
+                        ]
+                    },
+                    'Categories': {
+                        'MatchedCategories': [
+                            'string',
+                        ],
+                        'MatchedDetails': {
+                            'string': {
+                                'PointsOfInterest': [
+                                    {
+                                        'BeginOffsetMillis': 123,
+                                        'EndOffsetMillis': 123
+                                    },
+                                ]
+                            }
+                        }
+                    }
+                },
+            ],
+            'NextToken': 'string'
+        }
+      **Response Structure** 
+
+      
+
+      - *(dict) --* 
+        
+
+        - **Segments** *(list) --* 
+
+          An analyzed transcript or category.
+
+          
+          
+
+          - *(dict) --* 
+
+            An analyzed segment for a real-time analysis session.
+
+            
+            
+
+            - **Transcript** *(dict) --* 
+
+              The analyzed transcript.
+
+              
+              
+
+              - **Id** *(string) --* 
+
+                The identifier of the transcript.
+
+                
+              
+
+              - **ParticipantId** *(string) --* 
+
+                The identifier of the participant.
+
+                
+              
+
+              - **ParticipantRole** *(string) --* 
+
+                The role of participant. For example, is it a customer, agent, or system.
+
+                
+              
+
+              - **Content** *(string) --* 
+
+                The content of the transcript.
+
+                
+              
+
+              - **BeginOffsetMillis** *(integer) --* 
+
+                The beginning offset in the contact for this transcript.
+
+                
+              
+
+              - **EndOffsetMillis** *(integer) --* 
+
+                The end offset in the contact for this transcript.
+
+                
+              
+
+              - **Sentiment** *(string) --* 
+
+                The sentiment of the detected for this piece of transcript.
+
+                
+              
+
+              - **IssuesDetected** *(list) --* 
+
+                List of positions where issues were detected on the transcript.
+
+                
+                
+
+                - *(dict) --* 
+
+                  Potential issues that are detected based on an artificial intelligence analysis of each turn in the conversation.
+
+                  
+                  
+
+                  - **CharacterOffsets** *(dict) --* 
+
+                    The offset for when the issue was detected in the segment.
+
+                    
+                    
+
+                    - **BeginOffsetChar** *(integer) --* 
+
+                      The beginning of the issue.
+
+                      
+                    
+
+                    - **EndOffsetChar** *(integer) --* 
+
+                      The end of the issue.
+
+                      
+                
+              
+            
+          
+            
+
+            - **Categories** *(dict) --* 
+
+              The matched category rules.
+
+              
+              
+
+              - **MatchedCategories** *(list) --* 
+
+                The category rules that have been matched in the analyzed segment.
+
+                
+                
+
+                - *(string) --* 
+            
+              
+
+              - **MatchedDetails** *(dict) --* 
+
+                The category rule that was matched and when it occurred in the transcript.
+
+                
+                
+
+                - *(string) --* 
+                  
+
+                  - *(dict) --* 
+
+                    Provides information about the category rule that was matched.
+
+                    
+                    
+
+                    - **PointsOfInterest** *(list) --* 
+
+                      The section of audio where the category rule was detected.
+
+                      
+                      
+
+                      - *(dict) --* 
+
+                        The section of the contact audio where that category rule was detected.
+
+                        
+                        
+
+                        - **BeginOffsetMillis** *(integer) --* 
+
+                          The beginning offset in milliseconds where the category rule was detected.
+
+                          
+                        
+
+                        - **EndOffsetMillis** *(integer) --* 
+
+                          The ending offset in milliseconds where the category rule was detected.
+
+                          
+                    
+                  
+                
+            
+          
+          
+        
+      
+        
+
+        - **NextToken** *(string) --* 
+
+          If there are additional results, this is the token for the next set of results. If response includes ``nextToken`` there are two possible scenarios:
+
+           
+
+           
+          * There are more segments so another call is required to get them. 
+           
+          * There are no more segments at this time, but more may be available later (real-time analysis is in progress) so the client should call the operation again to get new segments. 
+           
+
+           
+
+          If response does not include ``nextToken`` , the analysis is completed (successfully or failed) and there are no more segments to retrieve.
+
+          
+    
+    **Exceptions** 
+    
+    *     :py:class:`ConnectContactLens.Client.exceptions.InvalidRequestException`
+
+    
+    *     :py:class:`ConnectContactLens.Client.exceptions.AccessDeniedException`
+
+    
+    *     :py:class:`ConnectContactLens.Client.exceptions.ResourceNotFoundException`
+
+    
+    *     :py:class:`ConnectContactLens.Client.exceptions.InternalServiceException`
+
+    
+    *     :py:class:`ConnectContactLens.Client.exceptions.ThrottlingException`
+
+    
+
+==========
+Paginators
+==========
+
+
+The available paginators are:
