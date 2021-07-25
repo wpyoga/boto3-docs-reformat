@@ -38,7 +38,7 @@ After all that, we will have the HTML documentation inside `boto3:docs/build/htm
 
 ## Bugs
 
-It's currently a simple hack and slash. I'm planning to rewrite the script, to read the HTML file into memory as a nested OrderedDict, and then manipulate the tags there. I don't want to have to resort to a 3rd party library, so I would just have to do this myself.
+It's currently a simple hack and slash. I'm planning to rewrite the script, to read the HTML file into memory as a nested OrderedDict, and then manipulate the tags there. I don't want to have to resort to a 3rd party library, so I would just have to do this myself. Using an OrderedDict will also make all the transformation goals much easier to achieve.
 
 Also, currently everything has to be done by hand, and all these can actually be automated:
 - the html docs need to be copied over
@@ -53,6 +53,8 @@ Eventually, maybe we will have a `Makefile` with a few commands:
 - `make rebuild`: do everything from scratch, including cloning the latest boto3 from github (as in, remove the pregenerated html, start over, then run `make refresh`)
 
 Also, it might be better to split each service subclass into its own HTML file. For example, DynamoDB can be split up into Client, Paginators, Waiters, Service Resource, and Table. The naming can be: dynamodb.client.html, dynamodb.paginators.html, ... We don't usually read up on Paginators while working on the Client anyway.
+
+I know, it might be easier to work with sphinx in order to achieve the transformations that I want, but then I would need to learn how to use sphinx. Not to mention, boto3 still uses sphinx version 1.2.3 from 2014 (!!!). Most of the things I learn about that version would be obsolete by now.
 
 ## Licensing status
 
