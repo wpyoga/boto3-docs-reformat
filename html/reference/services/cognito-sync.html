@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -433,32 +451,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#CognitoSync.Client.bulk_publish" title="CognitoSync.Client.bulk_publish"><tt class="xref py py-meth docutils literal"><span class="pre">bulk_publish()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.can_paginate" title="CognitoSync.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.delete_dataset" title="CognitoSync.Client.delete_dataset"><tt class="xref py py-meth docutils literal"><span class="pre">delete_dataset()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.describe_dataset" title="CognitoSync.Client.describe_dataset"><tt class="xref py py-meth docutils literal"><span class="pre">describe_dataset()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.describe_identity_pool_usage" title="CognitoSync.Client.describe_identity_pool_usage"><tt class="xref py py-meth docutils literal"><span class="pre">describe_identity_pool_usage()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.describe_identity_usage" title="CognitoSync.Client.describe_identity_usage"><tt class="xref py py-meth docutils literal"><span class="pre">describe_identity_usage()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.generate_presigned_url" title="CognitoSync.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.get_bulk_publish_details" title="CognitoSync.Client.get_bulk_publish_details"><tt class="xref py py-meth docutils literal"><span class="pre">get_bulk_publish_details()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.get_cognito_events" title="CognitoSync.Client.get_cognito_events"><tt class="xref py py-meth docutils literal"><span class="pre">get_cognito_events()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.get_identity_pool_configuration" title="CognitoSync.Client.get_identity_pool_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">get_identity_pool_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.get_paginator" title="CognitoSync.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.get_waiter" title="CognitoSync.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.list_datasets" title="CognitoSync.Client.list_datasets"><tt class="xref py py-meth docutils literal"><span class="pre">list_datasets()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.list_identity_pool_usage" title="CognitoSync.Client.list_identity_pool_usage"><tt class="xref py py-meth docutils literal"><span class="pre">list_identity_pool_usage()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.list_records" title="CognitoSync.Client.list_records"><tt class="xref py py-meth docutils literal"><span class="pre">list_records()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.register_device" title="CognitoSync.Client.register_device"><tt class="xref py py-meth docutils literal"><span class="pre">register_device()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.set_cognito_events" title="CognitoSync.Client.set_cognito_events"><tt class="xref py py-meth docutils literal"><span class="pre">set_cognito_events()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.set_identity_pool_configuration" title="CognitoSync.Client.set_identity_pool_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">set_identity_pool_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.subscribe_to_dataset" title="CognitoSync.Client.subscribe_to_dataset"><tt class="xref py py-meth docutils literal"><span class="pre">subscribe_to_dataset()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.unsubscribe_from_dataset" title="CognitoSync.Client.unsubscribe_from_dataset"><tt class="xref py py-meth docutils literal"><span class="pre">unsubscribe_from_dataset()</span></tt></a></li>
-<li><a class="reference internal" href="#CognitoSync.Client.update_records" title="CognitoSync.Client.update_records"><tt class="xref py py-meth docutils literal"><span class="pre">update_records()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.bulk_publish">
 <tt class="descname">bulk_publish</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.bulk_publish" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish">AWS API Documentation</a></p>
@@ -495,10 +495,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.AlreadyStreamedException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -511,10 +516,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.delete_dataset">
 <tt class="descname">delete_dataset</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.delete_dataset" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException.</p>
 <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset">AWS API Documentation</a></p>
@@ -578,10 +588,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.ResourceConflictException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.describe_dataset">
 <tt class="descname">describe_dataset</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.describe_dataset" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p>
 <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset">AWS API Documentation</a></p>
@@ -644,10 +659,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.describe_identity_pool_usage">
 <tt class="descname">describe_identity_pool_usage</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.describe_identity_pool_usage" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets usage details (for example, data storage) about a particular identity pool.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage">AWS API Documentation</a></p>
@@ -694,10 +714,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.describe_identity_usage">
 <tt class="descname">describe_identity_usage</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.describe_identity_usage" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets usage information for an identity, including number of datasets and data usage.</p>
 <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage">AWS API Documentation</a></p>
@@ -754,10 +779,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -774,10 +804,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.get_bulk_publish_details">
 <tt class="descname">get_bulk_publish_details</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.get_bulk_publish_details" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Get the status of the last BulkPublish operation for an identity pool.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails">AWS API Documentation</a></p>
@@ -824,10 +859,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.InternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.get_cognito_events">
 <tt class="descname">get_cognito_events</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.get_cognito_events" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents">AWS API Documentation</a></p>
@@ -875,10 +915,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.get_identity_pool_configuration">
 <tt class="descname">get_identity_pool_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.get_identity_pool_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets the configuration settings of an identity pool.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration">AWS API Documentation</a></p>
@@ -948,10 +993,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -967,10 +1017,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -979,10 +1034,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.list_datasets">
 <tt class="descname">list_datasets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.list_datasets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p>
 <p>ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets">AWS API Documentation</a></p>
@@ -1055,10 +1115,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.list_identity_pool_usage">
 <tt class="descname">list_identity_pool_usage</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.list_identity_pool_usage" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets a list of identity pools registered with Cognito.</p>
 <p>ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage">AWS API Documentation</a></p>
@@ -1123,10 +1188,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.list_records">
 <tt class="descname">list_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.list_records" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p>
 <p>ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords">AWS API Documentation</a></p>
@@ -1220,10 +1290,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.InternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.register_device">
 <tt class="descname">register_device</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.register_device" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Registers a device to receive push sync notifications.</p>
 <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice">AWS API Documentation</a></p>
@@ -1284,10 +1359,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.set_cognito_events">
 <tt class="descname">set_cognito_events</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.set_cognito_events" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents">AWS API Documentation</a></p>
@@ -1328,10 +1408,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.set_identity_pool_configuration">
 <tt class="descname">set_identity_pool_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.set_identity_pool_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Sets the necessary configuration for push sync.</p>
 <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration">AWS API Documentation</a></p>
@@ -1448,10 +1533,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.ConcurrentModificationException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.subscribe_to_dataset">
 <tt class="descname">subscribe_to_dataset</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.subscribe_to_dataset" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Subscribes to receive notifications when a dataset is modified by another device.</p>
 <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset">AWS API Documentation</a></p>
@@ -1505,10 +1595,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.unsubscribe_from_dataset">
 <tt class="descname">unsubscribe_from_dataset</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.unsubscribe_from_dataset" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p>
 <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset">AWS API Documentation</a></p>
@@ -1562,10 +1657,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="CognitoSync.Client.update_records">
 <tt class="descname">update_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#CognitoSync.Client.update_records" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Posts updates to records and adds and deletes records for a dataset and user.</p>
 <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p>
 <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p>
@@ -1664,6 +1764,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">CognitoSync.Client.exceptions.InternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1694,22 +1795,7 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="comprehend.html" title="Comprehend"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="cognito-idp.html" title="CognitoIdentityProvider"
-             >previous</a> |</li>
-        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
-      </ul>
+      &raquo;&raquo;
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -1723,5 +1809,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

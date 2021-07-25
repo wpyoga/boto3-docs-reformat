@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -437,92 +455,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#WAF.Client.can_paginate" title="WAF.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_byte_match_set" title="WAF.Client.create_byte_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_byte_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_geo_match_set" title="WAF.Client.create_geo_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_geo_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_ip_set" title="WAF.Client.create_ip_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_ip_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_rate_based_rule" title="WAF.Client.create_rate_based_rule"><tt class="xref py py-meth docutils literal"><span class="pre">create_rate_based_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_regex_match_set" title="WAF.Client.create_regex_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_regex_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_regex_pattern_set" title="WAF.Client.create_regex_pattern_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_regex_pattern_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_rule" title="WAF.Client.create_rule"><tt class="xref py py-meth docutils literal"><span class="pre">create_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_rule_group" title="WAF.Client.create_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">create_rule_group()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_size_constraint_set" title="WAF.Client.create_size_constraint_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_size_constraint_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_sql_injection_match_set" title="WAF.Client.create_sql_injection_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_sql_injection_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_web_acl" title="WAF.Client.create_web_acl"><tt class="xref py py-meth docutils literal"><span class="pre">create_web_acl()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_web_acl_migration_stack" title="WAF.Client.create_web_acl_migration_stack"><tt class="xref py py-meth docutils literal"><span class="pre">create_web_acl_migration_stack()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.create_xss_match_set" title="WAF.Client.create_xss_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">create_xss_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_byte_match_set" title="WAF.Client.delete_byte_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_byte_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_geo_match_set" title="WAF.Client.delete_geo_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_geo_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_ip_set" title="WAF.Client.delete_ip_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_ip_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_logging_configuration" title="WAF.Client.delete_logging_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">delete_logging_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_permission_policy" title="WAF.Client.delete_permission_policy"><tt class="xref py py-meth docutils literal"><span class="pre">delete_permission_policy()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_rate_based_rule" title="WAF.Client.delete_rate_based_rule"><tt class="xref py py-meth docutils literal"><span class="pre">delete_rate_based_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_regex_match_set" title="WAF.Client.delete_regex_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_regex_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_regex_pattern_set" title="WAF.Client.delete_regex_pattern_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_regex_pattern_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_rule" title="WAF.Client.delete_rule"><tt class="xref py py-meth docutils literal"><span class="pre">delete_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_rule_group" title="WAF.Client.delete_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">delete_rule_group()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_size_constraint_set" title="WAF.Client.delete_size_constraint_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_size_constraint_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_sql_injection_match_set" title="WAF.Client.delete_sql_injection_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_sql_injection_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_web_acl" title="WAF.Client.delete_web_acl"><tt class="xref py py-meth docutils literal"><span class="pre">delete_web_acl()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.delete_xss_match_set" title="WAF.Client.delete_xss_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">delete_xss_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.generate_presigned_url" title="WAF.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_byte_match_set" title="WAF.Client.get_byte_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_byte_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_change_token" title="WAF.Client.get_change_token"><tt class="xref py py-meth docutils literal"><span class="pre">get_change_token()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_change_token_status" title="WAF.Client.get_change_token_status"><tt class="xref py py-meth docutils literal"><span class="pre">get_change_token_status()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_geo_match_set" title="WAF.Client.get_geo_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_geo_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_ip_set" title="WAF.Client.get_ip_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_ip_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_logging_configuration" title="WAF.Client.get_logging_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">get_logging_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_paginator" title="WAF.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_permission_policy" title="WAF.Client.get_permission_policy"><tt class="xref py py-meth docutils literal"><span class="pre">get_permission_policy()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_rate_based_rule" title="WAF.Client.get_rate_based_rule"><tt class="xref py py-meth docutils literal"><span class="pre">get_rate_based_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_rate_based_rule_managed_keys" title="WAF.Client.get_rate_based_rule_managed_keys"><tt class="xref py py-meth docutils literal"><span class="pre">get_rate_based_rule_managed_keys()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_regex_match_set" title="WAF.Client.get_regex_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_regex_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_regex_pattern_set" title="WAF.Client.get_regex_pattern_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_regex_pattern_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_rule" title="WAF.Client.get_rule"><tt class="xref py py-meth docutils literal"><span class="pre">get_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_rule_group" title="WAF.Client.get_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">get_rule_group()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_sampled_requests" title="WAF.Client.get_sampled_requests"><tt class="xref py py-meth docutils literal"><span class="pre">get_sampled_requests()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_size_constraint_set" title="WAF.Client.get_size_constraint_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_size_constraint_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_sql_injection_match_set" title="WAF.Client.get_sql_injection_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_sql_injection_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_waiter" title="WAF.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_web_acl" title="WAF.Client.get_web_acl"><tt class="xref py py-meth docutils literal"><span class="pre">get_web_acl()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.get_xss_match_set" title="WAF.Client.get_xss_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">get_xss_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_activated_rules_in_rule_group" title="WAF.Client.list_activated_rules_in_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">list_activated_rules_in_rule_group()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_byte_match_sets" title="WAF.Client.list_byte_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_byte_match_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_geo_match_sets" title="WAF.Client.list_geo_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_geo_match_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_ip_sets" title="WAF.Client.list_ip_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_ip_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_logging_configurations" title="WAF.Client.list_logging_configurations"><tt class="xref py py-meth docutils literal"><span class="pre">list_logging_configurations()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_rate_based_rules" title="WAF.Client.list_rate_based_rules"><tt class="xref py py-meth docutils literal"><span class="pre">list_rate_based_rules()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_regex_match_sets" title="WAF.Client.list_regex_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_regex_match_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_regex_pattern_sets" title="WAF.Client.list_regex_pattern_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_regex_pattern_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_rule_groups" title="WAF.Client.list_rule_groups"><tt class="xref py py-meth docutils literal"><span class="pre">list_rule_groups()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_rules" title="WAF.Client.list_rules"><tt class="xref py py-meth docutils literal"><span class="pre">list_rules()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_size_constraint_sets" title="WAF.Client.list_size_constraint_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_size_constraint_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_sql_injection_match_sets" title="WAF.Client.list_sql_injection_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_sql_injection_match_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_subscribed_rule_groups" title="WAF.Client.list_subscribed_rule_groups"><tt class="xref py py-meth docutils literal"><span class="pre">list_subscribed_rule_groups()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_tags_for_resource" title="WAF.Client.list_tags_for_resource"><tt class="xref py py-meth docutils literal"><span class="pre">list_tags_for_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_web_acls" title="WAF.Client.list_web_acls"><tt class="xref py py-meth docutils literal"><span class="pre">list_web_acls()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.list_xss_match_sets" title="WAF.Client.list_xss_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">list_xss_match_sets()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.put_logging_configuration" title="WAF.Client.put_logging_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">put_logging_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.put_permission_policy" title="WAF.Client.put_permission_policy"><tt class="xref py py-meth docutils literal"><span class="pre">put_permission_policy()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.tag_resource" title="WAF.Client.tag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">tag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.untag_resource" title="WAF.Client.untag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">untag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_byte_match_set" title="WAF.Client.update_byte_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_byte_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_geo_match_set" title="WAF.Client.update_geo_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_geo_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_ip_set" title="WAF.Client.update_ip_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_ip_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_rate_based_rule" title="WAF.Client.update_rate_based_rule"><tt class="xref py py-meth docutils literal"><span class="pre">update_rate_based_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_regex_match_set" title="WAF.Client.update_regex_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_regex_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_regex_pattern_set" title="WAF.Client.update_regex_pattern_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_regex_pattern_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_rule" title="WAF.Client.update_rule"><tt class="xref py py-meth docutils literal"><span class="pre">update_rule()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_rule_group" title="WAF.Client.update_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">update_rule_group()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_size_constraint_set" title="WAF.Client.update_size_constraint_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_size_constraint_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_sql_injection_match_set" title="WAF.Client.update_sql_injection_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_sql_injection_match_set()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_web_acl" title="WAF.Client.update_web_acl"><tt class="xref py py-meth docutils literal"><span class="pre">update_web_acl()</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Client.update_xss_match_set" title="WAF.Client.update_xss_match_set"><tt class="xref py py-meth docutils literal"><span class="pre">update_xss_match_set()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#WAF.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -535,10 +475,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_byte_match_set">
 <tt class="descname">create_byte_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_byte_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -775,10 +720,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_geo_match_set">
 <tt class="descname">create_geo_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_geo_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -890,10 +840,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_ip_set">
 <tt class="descname">create_ip_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_ip_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1044,10 +999,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_rate_based_rule">
 <tt class="descname">create_rate_based_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_rate_based_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1226,10 +1186,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFBadRequestException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_regex_match_set">
 <tt class="descname">create_regex_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_regex_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1427,10 +1392,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_regex_pattern_set">
 <tt class="descname">create_regex_pattern_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_regex_pattern_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1520,10 +1490,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_rule">
 <tt class="descname">create_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1711,10 +1686,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_rule_group">
 <tt class="descname">create_rule_group</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_rule_group" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -1827,10 +1807,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFBadRequestException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_size_constraint_set">
 <tt class="descname">create_size_constraint_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_size_constraint_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -2065,10 +2050,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_sql_injection_match_set">
 <tt class="descname">create_sql_injection_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_sql_injection_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -2283,10 +2273,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_web_acl">
 <tt class="descname">create_web_acl</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_web_acl" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -2594,10 +2589,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_web_acl_migration_stack">
 <tt class="descname">create_web_acl_migration_stack</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_web_acl_migration_stack" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an AWS CloudFormation WAFV2 template for the specified web ACL in the specified Amazon S3 bucket. Then, in CloudFormation, you create a stack from the template, to create the web ACL and its resources in AWS WAFV2. Use this to migrate your AWS WAF Classic web ACL to the latest version of AWS WAF.</p>
 <p>This is part of a larger migration procedure for web ACLs from AWS WAF Classic to the latest version of AWS WAF. For the full procedure, including caveats and manual steps to complete the migration and switch over to the new web ACL, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-migrating-from-classic.html">Migrating your AWS WAF Classic resources to AWS WAF</a> in the <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACLMigrationStack">AWS API Documentation</a></p>
@@ -2657,10 +2657,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFEntityMigrationException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.create_xss_match_set">
 <tt class="descname">create_xss_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.create_xss_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -2875,10 +2880,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_byte_match_set">
 <tt class="descname">delete_byte_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_byte_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -2961,10 +2971,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_geo_match_set">
 <tt class="descname">delete_geo_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_geo_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3028,10 +3043,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonEmptyEntityException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_ip_set">
 <tt class="descname">delete_ip_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_ip_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3114,10 +3134,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_logging_configuration">
 <tt class="descname">delete_logging_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_logging_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3153,10 +3178,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFStaleDataException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_permission_policy">
 <tt class="descname">delete_permission_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_permission_policy" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3194,10 +3224,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_rate_based_rule">
 <tt class="descname">delete_rate_based_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_rate_based_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3263,10 +3298,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFTagOperationInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_regex_match_set">
 <tt class="descname">delete_regex_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_regex_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3330,10 +3370,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonEmptyEntityException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_regex_pattern_set">
 <tt class="descname">delete_regex_pattern_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_regex_pattern_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3390,10 +3435,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonEmptyEntityException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_rule">
 <tt class="descname">delete_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3478,10 +3528,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_rule_group">
 <tt class="descname">delete_rule_group</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_rule_group" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3547,10 +3602,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFTagOperationInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_size_constraint_set">
 <tt class="descname">delete_size_constraint_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_size_constraint_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3633,10 +3693,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_sql_injection_match_set">
 <tt class="descname">delete_sql_injection_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_sql_injection_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3720,10 +3785,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_web_acl">
 <tt class="descname">delete_web_acl</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_web_acl" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3807,10 +3877,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.delete_xss_match_set">
 <tt class="descname">delete_xss_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.delete_xss_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -3894,10 +3969,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#WAF.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -3914,10 +3994,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_byte_match_set">
 <tt class="descname">get_byte_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_byte_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4139,10 +4224,15 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_change_token">
 <tt class="descname">get_change_token</tt><big>(</big><big>)</big><a class="headerlink" href="#WAF.Client.get_change_token" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4196,10 +4286,15 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_change_token_status">
 <tt class="descname">get_change_token_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_change_token_status" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4263,10 +4358,15 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_geo_match_set">
 <tt class="descname">get_geo_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_geo_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4343,10 +4443,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_ip_set">
 <tt class="descname">get_ip_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_ip_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4464,10 +4569,15 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_logging_configuration">
 <tt class="descname">get_logging_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_logging_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4557,10 +4667,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#WAF.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -4576,10 +4691,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_permission_policy">
 <tt class="descname">get_permission_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_permission_policy" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4620,10 +4740,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_rate_based_rule">
 <tt class="descname">get_rate_based_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_rate_based_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4711,10 +4836,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_rate_based_rule_managed_keys">
 <tt class="descname">get_rate_based_rule_managed_keys</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_rate_based_rule_managed_keys" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4776,10 +4906,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_regex_match_set">
 <tt class="descname">get_regex_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_regex_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4934,10 +5069,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_regex_pattern_set">
 <tt class="descname">get_regex_pattern_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_regex_pattern_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -4998,10 +5138,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_rule">
 <tt class="descname">get_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -5118,10 +5263,15 @@ check if an operation is pageable.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_rule_group">
 <tt class="descname">get_rule_group</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_rule_group" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -5177,10 +5327,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFNonexistentItemException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_sampled_requests">
 <tt class="descname">get_sampled_requests</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_sampled_requests" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -5416,10 +5571,15 @@ check if an operation is pageable.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_size_constraint_set">
 <tt class="descname">get_size_constraint_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_size_constraint_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -5611,10 +5771,15 @@ check if an operation is pageable.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_sql_injection_match_set">
 <tt class="descname">get_sql_injection_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_sql_injection_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -5789,10 +5954,15 @@ check if an operation is pageable.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#WAF.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -5801,10 +5971,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_web_acl">
 <tt class="descname">get_web_acl</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_web_acl" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6013,10 +6188,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.get_xss_match_set">
 <tt class="descname">get_xss_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.get_xss_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6191,10 +6371,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_activated_rules_in_rule_group">
 <tt class="descname">list_activated_rules_in_rule_group</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_activated_rules_in_rule_group" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6360,10 +6545,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_byte_match_sets">
 <tt class="descname">list_byte_match_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_byte_match_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6444,10 +6634,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_geo_match_sets">
 <tt class="descname">list_geo_match_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_geo_match_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6525,10 +6720,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_ip_sets">
 <tt class="descname">list_ip_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_ip_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6629,10 +6829,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_logging_configurations">
 <tt class="descname">list_logging_configurations</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_logging_configurations" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6756,10 +6961,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_rate_based_rules">
 <tt class="descname">list_rate_based_rules</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_rate_based_rules" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6840,10 +7050,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_regex_match_sets">
 <tt class="descname">list_regex_match_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_regex_match_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -6924,10 +7139,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_regex_pattern_sets">
 <tt class="descname">list_regex_pattern_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_regex_pattern_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7008,10 +7228,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_rule_groups">
 <tt class="descname">list_rule_groups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_rule_groups" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7091,10 +7316,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_rules">
 <tt class="descname">list_rules</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_rules" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7198,10 +7428,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_size_constraint_sets">
 <tt class="descname">list_size_constraint_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_size_constraint_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7305,10 +7540,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_sql_injection_match_sets">
 <tt class="descname">list_sql_injection_match_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_sql_injection_match_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7413,10 +7653,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_subscribed_rule_groups">
 <tt class="descname">list_subscribed_rule_groups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_subscribed_rule_groups" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7498,10 +7743,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_tags_for_resource">
 <tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7590,10 +7840,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFTagOperationInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_web_acls">
 <tt class="descname">list_web_acls</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_web_acls" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7697,10 +7952,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.list_xss_match_sets">
 <tt class="descname">list_xss_match_sets</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.list_xss_match_sets" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7805,10 +8065,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.put_logging_configuration">
 <tt class="descname">put_logging_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.put_logging_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -7965,10 +8230,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFServiceLinkedRoleErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.put_permission_policy">
 <tt class="descname">put_permission_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.put_permission_policy" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8028,10 +8298,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidPermissionPolicyException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.tag_resource">
 <tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8099,10 +8374,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFTagOperationInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.untag_resource">
 <tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8152,10 +8432,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFTagOperationInternalErrorException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_byte_match_set">
 <tt class="descname">update_byte_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_byte_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8409,10 +8694,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_geo_match_set">
 <tt class="descname">update_geo_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_geo_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8523,10 +8813,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_ip_set">
 <tt class="descname">update_ip_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_ip_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8686,10 +8981,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_rate_based_rule">
 <tt class="descname">update_rate_based_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_rate_based_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8807,10 +9107,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFLimitsExceededException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_regex_match_set">
 <tt class="descname">update_regex_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_regex_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -8985,10 +9290,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidAccountException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_regex_pattern_set">
 <tt class="descname">update_regex_pattern_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_regex_pattern_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -9090,10 +9400,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidRegexPatternException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_rule">
 <tt class="descname">update_rule</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_rule" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -9240,10 +9555,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_rule_group">
 <tt class="descname">update_rule_group</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_rule_group" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -9420,10 +9740,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">WAF.Client.exceptions.WAFInvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_size_constraint_set">
 <tt class="descname">update_size_constraint_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_size_constraint_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -9648,10 +9973,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_sql_injection_match_set">
 <tt class="descname">update_sql_injection_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_sql_injection_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -9856,10 +10186,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_web_acl">
 <tt class="descname">update_web_acl</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_web_acl" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -10094,10 +10429,15 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Client.update_xss_match_set">
 <tt class="descname">update_xss_match_set</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Client.update_xss_match_set" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This is <strong>AWS WAF Classic</strong> documentation. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html">AWS WAF Classic</a> in the developer guide.</p>
@@ -10302,6 +10642,7 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10309,33 +10650,20 @@ section of the service docs for a list of available waiters.</dd>
 <div class="section" id="paginators">
 <h2><a class="toc-backref" href="#id95">Paginators</a><a class="headerlink" href="#paginators" title="Permalink to this headline">¶</a></h2>
 <p>The available paginators are:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#WAF.Paginator.GetRateBasedRuleManagedKeys" title="WAF.Paginator.GetRateBasedRuleManagedKeys"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.GetRateBasedRuleManagedKeys</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListActivatedRulesInRuleGroup" title="WAF.Paginator.ListActivatedRulesInRuleGroup"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListActivatedRulesInRuleGroup</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListByteMatchSets" title="WAF.Paginator.ListByteMatchSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListByteMatchSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListGeoMatchSets" title="WAF.Paginator.ListGeoMatchSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListGeoMatchSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListIPSets" title="WAF.Paginator.ListIPSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListIPSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListLoggingConfigurations" title="WAF.Paginator.ListLoggingConfigurations"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListLoggingConfigurations</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListRateBasedRules" title="WAF.Paginator.ListRateBasedRules"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListRateBasedRules</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListRegexMatchSets" title="WAF.Paginator.ListRegexMatchSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListRegexMatchSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListRegexPatternSets" title="WAF.Paginator.ListRegexPatternSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListRegexPatternSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListRuleGroups" title="WAF.Paginator.ListRuleGroups"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListRuleGroups</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListRules" title="WAF.Paginator.ListRules"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListRules</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListSizeConstraintSets" title="WAF.Paginator.ListSizeConstraintSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListSizeConstraintSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListSqlInjectionMatchSets" title="WAF.Paginator.ListSqlInjectionMatchSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListSqlInjectionMatchSets</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListSubscribedRuleGroups" title="WAF.Paginator.ListSubscribedRuleGroups"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListSubscribedRuleGroups</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListWebACLs" title="WAF.Paginator.ListWebACLs"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListWebACLs</span></tt></a></li>
-<li><a class="reference internal" href="#WAF.Paginator.ListXssMatchSets" title="WAF.Paginator.ListXssMatchSets"><tt class="xref py py-class docutils literal"><span class="pre">WAF.Paginator.ListXssMatchSets</span></tt></a></li>
-</ul>
+
 <dl class="class">
 <dt id="WAF.Paginator.GetRateBasedRuleManagedKeys">
 <em class="property">class </em><tt class="descclassname">WAF.Paginator.</tt><tt class="descname">GetRateBasedRuleManagedKeys</tt><a class="headerlink" href="#WAF.Paginator.GetRateBasedRuleManagedKeys" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;get_rate_based_rule_managed_keys&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.GetRateBasedRuleManagedKeys.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.GetRateBasedRuleManagedKeys.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.get_rate_based_rule_managed_keys" title="WAF.Client.get_rate_based_rule_managed_keys"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.get_rate_based_rule_managed_keys()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeys">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10394,6 +10722,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10403,9 +10732,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_activated_rules_in_rule_group&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListActivatedRulesInRuleGroup.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListActivatedRulesInRuleGroup.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_activated_rules_in_rule_group" title="WAF.Client.list_activated_rules_in_rule_group"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_activated_rules_in_rule_group()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroup">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10570,6 +10903,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10579,9 +10913,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_byte_match_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListByteMatchSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListByteMatchSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_byte_match_sets" title="WAF.Client.list_byte_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_byte_match_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10648,6 +10986,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10657,9 +10996,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_geo_match_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListGeoMatchSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListGeoMatchSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_geo_match_sets" title="WAF.Client.list_geo_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_geo_match_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListGeoMatchSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10724,6 +11067,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10733,9 +11077,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_ip_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListIPSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListIPSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_ip_sets" title="WAF.Client.list_ip_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_ip_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10800,6 +11148,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10809,9 +11158,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_logging_configurations&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListLoggingConfigurations.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListLoggingConfigurations.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_logging_configurations" title="WAF.Client.list_logging_configurations"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_logging_configurations()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListLoggingConfigurations">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10916,6 +11269,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -10925,9 +11279,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_rate_based_rules&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListRateBasedRules.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListRateBasedRules.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_rate_based_rules" title="WAF.Client.list_rate_based_rules"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_rate_based_rules()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRules">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10994,6 +11352,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11003,9 +11362,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_regex_match_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListRegexMatchSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListRegexMatchSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_regex_match_sets" title="WAF.Client.list_regex_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_regex_match_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexMatchSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11072,6 +11435,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11081,9 +11445,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_regex_pattern_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListRegexPatternSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListRegexPatternSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_regex_pattern_sets" title="WAF.Client.list_regex_pattern_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_regex_pattern_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRegexPatternSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11150,6 +11518,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11159,9 +11528,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_rule_groups&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListRuleGroups.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListRuleGroups.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_rule_groups" title="WAF.Client.list_rule_groups"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_rule_groups()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroups">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11228,6 +11601,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11237,9 +11611,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_rules&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListRules.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListRules.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_rules" title="WAF.Client.list_rules"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_rules()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRules">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11306,6 +11684,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11315,9 +11694,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_size_constraint_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListSizeConstraintSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListSizeConstraintSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_size_constraint_sets" title="WAF.Client.list_size_constraint_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_size_constraint_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11384,6 +11767,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11393,9 +11777,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_sql_injection_match_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListSqlInjectionMatchSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListSqlInjectionMatchSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_sql_injection_match_sets" title="WAF.Client.list_sql_injection_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_sql_injection_match_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSqlInjectionMatchSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11463,6 +11851,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11472,9 +11861,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_subscribed_rule_groups&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListSubscribedRuleGroups.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListSubscribedRuleGroups.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_subscribed_rule_groups" title="WAF.Client.list_subscribed_rule_groups"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_subscribed_rule_groups()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroups">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11542,6 +11935,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11551,9 +11945,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_web_acls&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListWebACLs.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListWebACLs.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_web_acls" title="WAF.Client.list_web_acls"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_web_acls()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLs">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11620,6 +12018,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11629,9 +12028,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_xss_match_sets&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="WAF.Paginator.ListXssMatchSets.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#WAF.Paginator.ListXssMatchSets.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#WAF.Client.list_xss_match_sets" title="WAF.Client.list_xss_match_sets"><tt class="xref py py-meth docutils literal"><span class="pre">WAF.Client.list_xss_match_sets()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListXssMatchSets">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -11699,6 +12102,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -11754,5 +12158,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

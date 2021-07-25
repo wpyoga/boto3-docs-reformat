@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -431,58 +449,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#kendra.Client.batch_delete_document" title="kendra.Client.batch_delete_document"><tt class="xref py py-meth docutils literal"><span class="pre">batch_delete_document()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.batch_get_document_status" title="kendra.Client.batch_get_document_status"><tt class="xref py py-meth docutils literal"><span class="pre">batch_get_document_status()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.batch_put_document" title="kendra.Client.batch_put_document"><tt class="xref py py-meth docutils literal"><span class="pre">batch_put_document()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.can_paginate" title="kendra.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.clear_query_suggestions" title="kendra.Client.clear_query_suggestions"><tt class="xref py py-meth docutils literal"><span class="pre">clear_query_suggestions()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.create_data_source" title="kendra.Client.create_data_source"><tt class="xref py py-meth docutils literal"><span class="pre">create_data_source()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.create_faq" title="kendra.Client.create_faq"><tt class="xref py py-meth docutils literal"><span class="pre">create_faq()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.create_index" title="kendra.Client.create_index"><tt class="xref py py-meth docutils literal"><span class="pre">create_index()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.create_query_suggestions_block_list" title="kendra.Client.create_query_suggestions_block_list"><tt class="xref py py-meth docutils literal"><span class="pre">create_query_suggestions_block_list()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.create_thesaurus" title="kendra.Client.create_thesaurus"><tt class="xref py py-meth docutils literal"><span class="pre">create_thesaurus()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_data_source" title="kendra.Client.delete_data_source"><tt class="xref py py-meth docutils literal"><span class="pre">delete_data_source()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_faq" title="kendra.Client.delete_faq"><tt class="xref py py-meth docutils literal"><span class="pre">delete_faq()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_index" title="kendra.Client.delete_index"><tt class="xref py py-meth docutils literal"><span class="pre">delete_index()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_principal_mapping" title="kendra.Client.delete_principal_mapping"><tt class="xref py py-meth docutils literal"><span class="pre">delete_principal_mapping()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_query_suggestions_block_list" title="kendra.Client.delete_query_suggestions_block_list"><tt class="xref py py-meth docutils literal"><span class="pre">delete_query_suggestions_block_list()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.delete_thesaurus" title="kendra.Client.delete_thesaurus"><tt class="xref py py-meth docutils literal"><span class="pre">delete_thesaurus()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_data_source" title="kendra.Client.describe_data_source"><tt class="xref py py-meth docutils literal"><span class="pre">describe_data_source()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_faq" title="kendra.Client.describe_faq"><tt class="xref py py-meth docutils literal"><span class="pre">describe_faq()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_index" title="kendra.Client.describe_index"><tt class="xref py py-meth docutils literal"><span class="pre">describe_index()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_principal_mapping" title="kendra.Client.describe_principal_mapping"><tt class="xref py py-meth docutils literal"><span class="pre">describe_principal_mapping()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_query_suggestions_block_list" title="kendra.Client.describe_query_suggestions_block_list"><tt class="xref py py-meth docutils literal"><span class="pre">describe_query_suggestions_block_list()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_query_suggestions_config" title="kendra.Client.describe_query_suggestions_config"><tt class="xref py py-meth docutils literal"><span class="pre">describe_query_suggestions_config()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.describe_thesaurus" title="kendra.Client.describe_thesaurus"><tt class="xref py py-meth docutils literal"><span class="pre">describe_thesaurus()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.generate_presigned_url" title="kendra.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.get_paginator" title="kendra.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.get_query_suggestions" title="kendra.Client.get_query_suggestions"><tt class="xref py py-meth docutils literal"><span class="pre">get_query_suggestions()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.get_waiter" title="kendra.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_data_source_sync_jobs" title="kendra.Client.list_data_source_sync_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">list_data_source_sync_jobs()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_data_sources" title="kendra.Client.list_data_sources"><tt class="xref py py-meth docutils literal"><span class="pre">list_data_sources()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_faqs" title="kendra.Client.list_faqs"><tt class="xref py py-meth docutils literal"><span class="pre">list_faqs()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_groups_older_than_ordering_id" title="kendra.Client.list_groups_older_than_ordering_id"><tt class="xref py py-meth docutils literal"><span class="pre">list_groups_older_than_ordering_id()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_indices" title="kendra.Client.list_indices"><tt class="xref py py-meth docutils literal"><span class="pre">list_indices()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_query_suggestions_block_lists" title="kendra.Client.list_query_suggestions_block_lists"><tt class="xref py py-meth docutils literal"><span class="pre">list_query_suggestions_block_lists()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_tags_for_resource" title="kendra.Client.list_tags_for_resource"><tt class="xref py py-meth docutils literal"><span class="pre">list_tags_for_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.list_thesauri" title="kendra.Client.list_thesauri"><tt class="xref py py-meth docutils literal"><span class="pre">list_thesauri()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.put_principal_mapping" title="kendra.Client.put_principal_mapping"><tt class="xref py py-meth docutils literal"><span class="pre">put_principal_mapping()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.query" title="kendra.Client.query"><tt class="xref py py-meth docutils literal"><span class="pre">query()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.start_data_source_sync_job" title="kendra.Client.start_data_source_sync_job"><tt class="xref py py-meth docutils literal"><span class="pre">start_data_source_sync_job()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.stop_data_source_sync_job" title="kendra.Client.stop_data_source_sync_job"><tt class="xref py py-meth docutils literal"><span class="pre">stop_data_source_sync_job()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.submit_feedback" title="kendra.Client.submit_feedback"><tt class="xref py py-meth docutils literal"><span class="pre">submit_feedback()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.tag_resource" title="kendra.Client.tag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">tag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.untag_resource" title="kendra.Client.untag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">untag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.update_data_source" title="kendra.Client.update_data_source"><tt class="xref py py-meth docutils literal"><span class="pre">update_data_source()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.update_index" title="kendra.Client.update_index"><tt class="xref py py-meth docutils literal"><span class="pre">update_index()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.update_query_suggestions_block_list" title="kendra.Client.update_query_suggestions_block_list"><tt class="xref py py-meth docutils literal"><span class="pre">update_query_suggestions_block_list()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.update_query_suggestions_config" title="kendra.Client.update_query_suggestions_config"><tt class="xref py py-meth docutils literal"><span class="pre">update_query_suggestions_config()</span></tt></a></li>
-<li><a class="reference internal" href="#kendra.Client.update_thesaurus" title="kendra.Client.update_thesaurus"><tt class="xref py py-meth docutils literal"><span class="pre">update_thesaurus()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.batch_delete_document">
 <tt class="descname">batch_delete_document</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.batch_delete_document" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Removes one or more documents from an index. The documents must have been added with the <tt class="docutils literal"><span class="pre">BatchPutDocument</span></tt> operation.</p>
 <p>The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BatchDeleteDocument">AWS API Documentation</a></p>
@@ -575,10 +549,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.batch_get_document_status">
 <tt class="descname">batch_get_document_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.batch_get_document_status" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns the indexing status for one or more documents submitted with the <a class="reference external" href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html">BatchPutDocument</a> operation.</p>
 <p>When you use the <tt class="docutils literal"><span class="pre">BatchPutDocument</span></tt> operation, documents are indexed asynchronously. You can use the <tt class="docutils literal"><span class="pre">BatchGetDocumentStatus</span></tt> operation to get the current status of a list of documents so that you can determine if they have been successfully indexed.</p>
 <p>You can also use the <tt class="docutils literal"><span class="pre">BatchGetDocumentStatus</span></tt> operation to check the status of the <a class="reference external" href="https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html">BatchDeleteDocument</a> operation. When a document is deleted from the index, Amazon Kendra returns <tt class="docutils literal"><span class="pre">NOT_FOUND</span></tt> as the status.</p>
@@ -747,10 +726,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.batch_put_document">
 <tt class="descname">batch_put_document</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.batch_put_document" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Adds one or more documents to an index.</p>
 <p>The <tt class="docutils literal"><span class="pre">BatchPutDocument</span></tt> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p>
 <p>The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.</p>
@@ -970,10 +954,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#kendra.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -986,10 +975,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.clear_query_suggestions">
 <tt class="descname">clear_query_suggestions</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.clear_query_suggestions" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Clears existing query suggestions from an index.</p>
 <p>This deletes existing suggestions only, not the queries in the query log. After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. If you do not see any new suggestions, then please allow Amazon Kendra to collect enough queries to learn new suggestions.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ClearQuerySuggestions">AWS API Documentation</a></p>
@@ -1015,10 +1009,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.create_data_source">
 <tt class="descname">create_data_source</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.create_data_source" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a data source that you use to with an Amazon Kendra index.</p>
 <p>You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p>
 <blockquote>
@@ -2334,10 +2333,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.create_faq">
 <tt class="descname">create_faq</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.create_faq" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an new set of frequently asked question (FAQ) questions and answers.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateFaq">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2435,10 +2439,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.create_index">
 <tt class="descname">create_index</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.create_index" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <tt class="docutils literal"><span class="pre">Status</span></tt> field returned from a call to <tt class="docutils literal"><span class="pre">DescribeIndex</span></tt> . The <tt class="docutils literal"><span class="pre">Status</span></tt> field is set to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> when the index is ready to use.</p>
 <p>Once the index is active you can index your documents using the <tt class="docutils literal"><span class="pre">BatchPutDocument</span></tt> operation or using one of the supported data sources.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateIndex">AWS API Documentation</a></p>
@@ -2589,10 +2598,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.create_query_suggestions_block_list">
 <tt class="descname">create_query_suggestions_block_list</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.create_query_suggestions_block_list" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a block list to exlcude certain queries from suggestions.</p>
 <p>Any query that contains words or phrases specified in the block list is blocked or filtered out from being shown as a suggestion.</p>
 <p>You need to provide the file location of your block list text file in your S3 bucket. In your text file, enter each block word or phrase on a separate line.</p>
@@ -2694,10 +2708,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.create_thesaurus">
 <tt class="descname">create_thesaurus</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.create_thesaurus" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a thesaurus for an index. The thesaurus contains a list of synonyms in Solr format.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/CreateThesaurus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2790,10 +2809,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_data_source">
 <tt class="descname">delete_data_source</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_data_source" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <tt class="docutils literal"><span class="pre">Status</span></tt> field returned by a call to the <tt class="docutils literal"><span class="pre">DescribeDataSource</span></tt> operation is set to <tt class="docutils literal"><span class="pre">DELETING</span></tt> . For more information, see <a class="reference external" href="https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html">Deleting Data Sources</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteDataSource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2826,10 +2850,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_faq">
 <tt class="descname">delete_faq</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_faq" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Removes an FAQ from an index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteFaq">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2862,10 +2891,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_index">
 <tt class="descname">delete_index</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_index" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <tt class="docutils literal"><span class="pre">Status</span></tt> field returned by a call to the <tt class="docutils literal"><span class="pre">DescribeIndex</span></tt> operation is set to <tt class="docutils literal"><span class="pre">DELETING</span></tt> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteIndex">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2890,10 +2924,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_principal_mapping">
 <tt class="descname">delete_principal_mapping</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_principal_mapping" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group.</p>
 <p>For example, after deleting the group &quot;Summer Interns&quot;, all interns who belonged to that group no longer see intern-only documents in their search results.</p>
 <p>If you want to delete or replace users or sub groups of a group, you need to use the <tt class="docutils literal"><span class="pre">PutPrincipalMapping</span></tt> operation. For example, if a user in the group &quot;Engineering&quot; leaves the engineering team and another user takes their place, you provide an updated list of users or sub groups that belong to the &quot;Engineering&quot; group when calling <tt class="docutils literal"><span class="pre">PutPrincipalMapping</span></tt> . You can update your internal list of users or sub groups and input this list when calling <tt class="docutils literal"><span class="pre">PutPrincipalMapping</span></tt> .</p>
@@ -2937,10 +2976,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_query_suggestions_block_list">
 <tt class="descname">delete_query_suggestions_block_list</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_query_suggestions_block_list" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes a block list used for query suggestions for an index.</p>
 <p>A deleted block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to add back the queries that were previously blocked.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteQuerySuggestionsBlockList">AWS API Documentation</a></p>
@@ -2974,10 +3018,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.delete_thesaurus">
 <tt class="descname">delete_thesaurus</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.delete_thesaurus" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes an existing Amazon Kendra thesaurus.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DeleteThesaurus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3010,10 +3059,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_data_source">
 <tt class="descname">describe_data_source</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_data_source" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets information about a Amazon Kendra data source.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeDataSource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4564,10 +4618,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_faq">
 <tt class="descname">describe_faq</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_faq" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets information about an FAQ list.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeFaq">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4668,10 +4727,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_index">
 <tt class="descname">describe_index</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_index" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Describes an existing Amazon Kendra index</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeIndex">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4908,10 +4972,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_principal_mapping">
 <tt class="descname">describe_principal_mapping</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_principal_mapping" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Describes the processing of <tt class="docutils literal"><span class="pre">PUT</span></tt> and <tt class="docutils literal"><span class="pre">DELETE</span></tt> actions for mapping users to their groups. This includes information on the status of actions currently processing or yet to be processed, when actions were last updated, when actions were received by Amazon Kendra, the latest action that should process and apply after other actions, and useful error messages if an action could not be processed.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribePrincipalMapping">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5012,10 +5081,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_query_suggestions_block_list">
 <tt class="descname">describe_query_suggestions_block_list</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_query_suggestions_block_list" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Describes a block list used for query suggestions for an index.</p>
 <p>This is used to check the current settings that are applied to a block list.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsBlockList">AWS API Documentation</a></p>
@@ -5124,10 +5198,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_query_suggestions_config">
 <tt class="descname">describe_query_suggestions_config</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_query_suggestions_config" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Describes the settings of query suggestions for an index.</p>
 <p>This is used to check the current settings applied to query suggestions.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeQuerySuggestionsConfig">AWS API Documentation</a></p>
@@ -5194,10 +5273,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.describe_thesaurus">
 <tt class="descname">describe_thesaurus</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.describe_thesaurus" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Describes an existing Amazon Kendra thesaurus.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DescribeThesaurus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5307,10 +5391,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#kendra.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -5327,10 +5416,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#kendra.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -5346,10 +5440,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.get_query_suggestions">
 <tt class="descname">get_query_suggestions</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.get_query_suggestions" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Fetches the queries that are suggested to your users.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GetQuerySuggestions">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5464,10 +5563,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#kendra.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -5476,10 +5580,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_data_source_sync_jobs">
 <tt class="descname">list_data_source_sync_jobs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_data_source_sync_jobs" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets statistics about synchronizing Amazon Kendra with a data source.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSourceSyncJobs">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5617,10 +5726,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_data_sources">
 <tt class="descname">list_data_sources</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_data_sources" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists the data sources that you have created.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListDataSources">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5708,10 +5822,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_faqs">
 <tt class="descname">list_faqs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_faqs" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets a list of FAQ lists associated with an index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListFaqs">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5799,10 +5918,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_groups_older_than_ordering_id">
 <tt class="descname">list_groups_older_than_ordering_id</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_groups_older_than_ordering_id" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListGroupsOlderThanOrderingId">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5881,10 +6005,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_indices">
 <tt class="descname">list_indices</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_indices" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists the Amazon Kendra indexes that you have created.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListIndices">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -5967,10 +6096,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_query_suggestions_block_lists">
 <tt class="descname">list_query_suggestions_block_lists</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_query_suggestions_block_lists" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists the block lists used for query suggestions for an index.</p>
 <p>For information on the current quota limits for block lists, see <a class="reference external" href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas for Amazon Kendra</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListQuerySuggestionsBlockLists">AWS API Documentation</a></p>
@@ -6064,10 +6198,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_tags_for_resource">
 <tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -6120,10 +6259,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.list_thesauri">
 <tt class="descname">list_thesauri</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.list_thesauri" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists the Amazon Kendra thesauri associated with an index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ListThesauri">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -6207,10 +6351,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.put_principal_mapping">
 <tt class="descname">put_principal_mapping</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.put_principal_mapping" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Maps users to their groups. You can also map sub groups to groups. For example, the group &quot;Company Intellectual Property Teams&quot; includes sub groups &quot;Research&quot; and &quot;Engineering&quot;. These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.</p>
 <p>You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see <a class="reference external" href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">Filtering on user context</a> .</p>
 <p>If more than five <tt class="docutils literal"><span class="pre">PUT</span></tt> actions for a group are currently processing, a validation exception is thrown.</p>
@@ -6313,10 +6462,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.query">
 <tt class="descname">query</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.query" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Searches an active index. Use this API to search your documents using query. The <tt class="docutils literal"><span class="pre">Query</span></tt> operation enables to do faceted search and to filter results based on document attributes.</p>
 <p>It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.</p>
 <p>Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.</p>
@@ -7115,10 +7269,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.start_data_source_sync_job">
 <tt class="descname">start_data_source_sync_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.start_data_source_sync_job" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Starts a synchronization job for a data source. If a synchronization job is already in progress, Amazon Kendra returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> exception.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/StartDataSourceSyncJob">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7170,10 +7329,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.stop_data_source_sync_job">
 <tt class="descname">stop_data_source_sync_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.stop_data_source_sync_job" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Stops a running synchronization job. You can't stop a scheduled synchronization job.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/StopDataSourceSyncJob">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7205,10 +7369,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.submit_feedback">
 <tt class="descname">submit_feedback</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.submit_feedback" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Enables you to provide feedback to Amazon Kendra to improve the performance of your index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SubmitFeedback">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7277,10 +7446,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.tag_resource">
 <tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Adds the specified tag to the specified index, FAQ, or data source resource. If the tag already exists, the existing value is replaced with the new value.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/TagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7337,10 +7511,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.untag_resource">
 <tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Removes a tag from an index, FAQ, or a data source.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7387,10 +7566,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.update_data_source">
 <tt class="descname">update_data_source</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.update_data_source" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates an existing Amazon Kendra data source.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateDataSource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8652,10 +8836,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.update_index">
 <tt class="descname">update_index</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.update_index" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates an existing Amazon Kendra index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateIndex">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8830,10 +9019,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.update_query_suggestions_block_list">
 <tt class="descname">update_query_suggestions_block_list</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.update_query_suggestions_block_list" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates a block list used for query suggestions for an index.</p>
 <p>Updates to a block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to apply any updates to the block list. Other changes not related to the block list apply immediately.</p>
 <p>If a block list is updating, then you need to wait for the first update to finish before submitting another update.</p>
@@ -8889,10 +9083,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.update_query_suggestions_config">
 <tt class="descname">update_query_suggestions_config</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.update_query_suggestions_config" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates the settings of query suggestions for an index.</p>
 <p>Amazon Kendra supports partial updates, so you only need to provide the fields you want to update.</p>
 <p>If an update is currently processing (i.e. 'happening'), you need to wait for the update to finish before making another update.</p>
@@ -8952,10 +9151,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="kendra.Client.update_thesaurus">
 <tt class="descname">update_thesaurus</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#kendra.Client.update_thesaurus" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates a thesaurus file associated with an index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/UpdateThesaurus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -9006,6 +9210,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">kendra.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -9036,22 +9241,7 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="kinesis.html" title="Kinesis"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="kafka.html" title="Kafka"
-             >previous</a> |</li>
-        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
-      </ul>
+      &raquo;&raquo;
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -9065,5 +9255,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

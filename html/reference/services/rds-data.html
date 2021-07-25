@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -432,21 +450,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#RDSDataService.Client.batch_execute_statement" title="RDSDataService.Client.batch_execute_statement"><tt class="xref py py-meth docutils literal"><span class="pre">batch_execute_statement()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.begin_transaction" title="RDSDataService.Client.begin_transaction"><tt class="xref py py-meth docutils literal"><span class="pre">begin_transaction()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.can_paginate" title="RDSDataService.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.commit_transaction" title="RDSDataService.Client.commit_transaction"><tt class="xref py py-meth docutils literal"><span class="pre">commit_transaction()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.execute_sql" title="RDSDataService.Client.execute_sql"><tt class="xref py py-meth docutils literal"><span class="pre">execute_sql()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.execute_statement" title="RDSDataService.Client.execute_statement"><tt class="xref py py-meth docutils literal"><span class="pre">execute_statement()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.generate_presigned_url" title="RDSDataService.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.get_paginator" title="RDSDataService.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.get_waiter" title="RDSDataService.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#RDSDataService.Client.rollback_transaction" title="RDSDataService.Client.rollback_transaction"><tt class="xref py py-meth docutils literal"><span class="pre">rollback_transaction()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.batch_execute_statement">
 <tt class="descname">batch_execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.batch_execute_statement" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Runs a batch SQL statement over an array of data.</p>
 <p>You can run bulk update and insert operations for multiple records using a DML statement with different parameter sets. Bulk operations can provide a significant performance improvement over individual insert and update operations.</p>
 <div class="admonition warning">
@@ -727,10 +738,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.ServiceUnavailableError</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.begin_transaction">
 <tt class="descname">begin_transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.begin_transaction" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Starts a SQL transaction.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">&lt;important&gt;</span> <span class="pre">&lt;p&gt;A</span> <span class="pre">transaction</span> <span class="pre">can</span> <span class="pre">run</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">maximum</span> <span class="pre">of</span> <span class="pre">24</span> <span class="pre">hours.</span> <span class="pre">A</span> <span class="pre">transaction</span> <span class="pre">is</span> <span class="pre">terminated</span> <span class="pre">and</span> <span class="pre">rolled</span> <span class="pre">back</span> <span class="pre">automatically</span> <span class="pre">after</span> <span class="pre">24</span> <span class="pre">hours.&lt;/p&gt;</span> <span class="pre">&lt;p&gt;A</span> <span class="pre">transaction</span> <span class="pre">times</span> <span class="pre">out</span> <span class="pre">if</span> <span class="pre">no</span> <span class="pre">calls</span> <span class="pre">use</span> <span class="pre">its</span> <span class="pre">transaction</span> <span class="pre">ID</span> <span class="pre">in</span> <span class="pre">three</span> <span class="pre">minutes.</span> <span class="pre">If</span> <span class="pre">a</span> <span class="pre">transaction</span> <span class="pre">times</span> <span class="pre">out</span> <span class="pre">before</span> <span class="pre">it's</span> <span class="pre">committed,</span> <span class="pre">it's</span> <span class="pre">rolled</span> <span class="pre">back</span> <span class="pre">automatically.&lt;/p&gt;</span> <span class="pre">&lt;p&gt;DDL</span> <span class="pre">statements</span> <span class="pre">inside</span> <span class="pre">a</span> <span class="pre">transaction</span> <span class="pre">cause</span> <span class="pre">an</span> <span class="pre">implicit</span> <span class="pre">commit.</span> <span class="pre">We</span> <span class="pre">recommend</span> <span class="pre">that</span> <span class="pre">you</span> <span class="pre">run</span> <span class="pre">each</span> <span class="pre">DDL</span> <span class="pre">statement</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">separate</span> <span class="pre">&lt;code&gt;ExecuteStatement&lt;/code&gt;</span> <span class="pre">call</span> <span class="pre">with</span> <span class="pre">&lt;code&gt;continueAfterTimeout&lt;/code&gt;</span> <span class="pre">enabled.&lt;/p&gt;</span> <span class="pre">&lt;/important&gt;</span></tt></div></blockquote>
@@ -787,10 +803,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.ServiceUnavailableError</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -803,10 +824,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.commit_transaction">
 <tt class="descname">commit_transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.commit_transaction" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Ends a SQL transaction started with the <tt class="docutils literal"><span class="pre">BeginTransaction</span></tt> operation and commits the changes.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/CommitTransaction">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -862,10 +888,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.NotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.execute_sql">
 <tt class="descname">execute_sql</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.execute_sql" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Runs one or more SQL statements.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1135,10 +1166,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.ServiceUnavailableError</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.execute_statement">
 <tt class="descname">execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.execute_statement" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Runs a SQL statement against a database.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1597,10 +1633,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.ServiceUnavailableError</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -1617,10 +1658,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -1636,10 +1682,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -1648,10 +1699,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="RDSDataService.Client.rollback_transaction">
 <tt class="descname">rollback_transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#RDSDataService.Client.rollback_transaction" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Performs a rollback of a transaction. Rolling back a transaction cancels its changes.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/RollbackTransaction">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1707,6 +1763,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">RDSDataService.Client.exceptions.NotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1737,22 +1794,7 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="redshift.html" title="Redshift"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="rds.html" title="RDS"
-             >previous</a> |</li>
-        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
-      </ul>
+      &raquo;&raquo;
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -1766,5 +1808,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

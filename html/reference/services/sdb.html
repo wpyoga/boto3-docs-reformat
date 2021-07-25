@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -433,25 +451,14 @@ Amazon SimpleDB is a web service providing the core database functions of data i
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#SimpleDB.Client.batch_delete_attributes" title="SimpleDB.Client.batch_delete_attributes"><tt class="xref py py-meth docutils literal"><span class="pre">batch_delete_attributes()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.batch_put_attributes" title="SimpleDB.Client.batch_put_attributes"><tt class="xref py py-meth docutils literal"><span class="pre">batch_put_attributes()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.can_paginate" title="SimpleDB.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.create_domain" title="SimpleDB.Client.create_domain"><tt class="xref py py-meth docutils literal"><span class="pre">create_domain()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.delete_attributes" title="SimpleDB.Client.delete_attributes"><tt class="xref py py-meth docutils literal"><span class="pre">delete_attributes()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.delete_domain" title="SimpleDB.Client.delete_domain"><tt class="xref py py-meth docutils literal"><span class="pre">delete_domain()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.domain_metadata" title="SimpleDB.Client.domain_metadata"><tt class="xref py py-meth docutils literal"><span class="pre">domain_metadata()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.generate_presigned_url" title="SimpleDB.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.get_attributes" title="SimpleDB.Client.get_attributes"><tt class="xref py py-meth docutils literal"><span class="pre">get_attributes()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.get_paginator" title="SimpleDB.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.get_waiter" title="SimpleDB.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.list_domains" title="SimpleDB.Client.list_domains"><tt class="xref py py-meth docutils literal"><span class="pre">list_domains()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.put_attributes" title="SimpleDB.Client.put_attributes"><tt class="xref py py-meth docutils literal"><span class="pre">put_attributes()</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Client.select" title="SimpleDB.Client.select"><tt class="xref py py-meth docutils literal"><span class="pre">select()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.batch_delete_attributes">
 <tt class="descname">batch_delete_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.batch_delete_attributes" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Performs multiple DeleteAttributes operations in a single call, which reduces round trips and latencies. This enables Amazon SimpleDB to optimize requests, which generally yields better throughput.</p>
 <p>The following limitations are enforced for this operation:</p>
 <ul class="simple">
@@ -505,10 +512,15 @@ Amazon SimpleDB is a web service providing the core database functions of data i
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.batch_put_attributes">
 <tt class="descname">batch_put_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.batch_put_attributes" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The <tt class="docutils literal"><span class="pre">BatchPutAttributes</span></tt> operation creates or replaces attributes within one or more items. By using this operation, the client can perform multiple  PutAttribute operation with a single call. This helps yield savings in round trips and latencies, enabling Amazon SimpleDB to optimize requests and generally produce better throughput.</p>
 <p>The client may specify the item name with the <tt class="docutils literal"><span class="pre">Item.X.ItemName</span></tt> parameter. The client may specify new attributes using a combination of the <tt class="docutils literal"><span class="pre">Item.X.Attribute.Y.Name</span></tt> and <tt class="docutils literal"><span class="pre">Item.X.Attribute.Y.Value</span></tt> parameters. The client may specify the first attribute for the first item using the parameters <tt class="docutils literal"><span class="pre">Item.0.Attribute.0.Name</span></tt> and <tt class="docutils literal"><span class="pre">Item.0.Attribute.0.Value</span></tt> , and for the second attribute for the first item by the parameters <tt class="docutils literal"><span class="pre">Item.0.Attribute.1.Name</span></tt> and <tt class="docutils literal"><span class="pre">Item.0.Attribute.1.Value</span></tt> , and so on.</p>
 <p>Attributes are uniquely identified within an item by their name/value combination. For example, a single item can have the attributes <tt class="docutils literal"><span class="pre">{</span> <span class="pre">&quot;first_name&quot;,</span> <span class="pre">&quot;first_value&quot;</span> <span class="pre">}</span></tt> and <tt class="docutils literal"><span class="pre">{</span> <span class="pre">&quot;first_name&quot;,</span> <span class="pre">&quot;second_value&quot;</span> <span class="pre">}</span></tt> . However, it cannot have two attribute instances where both the <tt class="docutils literal"><span class="pre">Item.X.Attribute.Y.Name</span></tt> and <tt class="docutils literal"><span class="pre">Item.X.Attribute.Y.Value</span></tt> are the same.</p>
@@ -583,10 +595,15 @@ Amazon SimpleDB is a web service providing the core database functions of data i
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.NumberSubmittedAttributesExceeded</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -599,10 +616,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.create_domain">
 <tt class="descname">create_domain</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.create_domain" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The <tt class="docutils literal"><span class="pre">CreateDomain</span></tt> operation creates a new domain. The domain name should be unique among the domains associated with the Access Key ID provided in the request. The <tt class="docutils literal"><span class="pre">CreateDomain</span></tt> operation may take 10 or more seconds to complete.</p>
 <p>The client can create up to 100 domains per account.</p>
 <p>If the client requires additional domains, go to <a class="reference external" href="http://aws.amazon.com/contact-us/simpledb-limit-request/">http://aws.amazon.com/contact-us/simpledb-limit-request/</a> .</p>
@@ -624,10 +646,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.NumberDomainsExceeded</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.delete_attributes">
 <tt class="descname">delete_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.delete_attributes" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes one or more attributes associated with an item. If all attributes of the item are deleted, the item is deleted.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">DeleteAttributes</span></tt> is an idempotent operation; running it multiple times on the same item or attribute does not result in an error response.</div></blockquote>
@@ -691,10 +718,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.AttributeDoesNotExist</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.delete_domain">
 <tt class="descname">delete_domain</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.delete_domain" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The <tt class="docutils literal"><span class="pre">DeleteDomain</span></tt> operation deletes a domain. Any items (and their attributes) in the domain are deleted as well. The <tt class="docutils literal"><span class="pre">DeleteDomain</span></tt> operation might take 10 or more seconds to complete.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/DeleteDomain">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -712,10 +744,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.MissingParameter</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.domain_metadata">
 <tt class="descname">domain_metadata</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.domain_metadata" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns information about the domain, including when the domain was created, the number of items and attributes in the domain, and the size of the attribute names and values.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/DomainMetadata">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -759,10 +796,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.NoSuchDomain</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -779,10 +821,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.get_attributes">
 <tt class="descname">get_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.get_attributes" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns all of the attributes associated with the specified item. Optionally, the attributes returned can be limited to one or more attributes by specifying an attribute name parameter.</p>
 <p>If the item does not exist on the replica that was accessed for this operation, an empty set is returned. The system does not return an error as it cannot guarantee the item does not exist on other replicas.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/GetAttributes">AWS API Documentation</a></p>
@@ -850,10 +897,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.NoSuchDomain</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -869,10 +921,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -881,10 +938,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.list_domains">
 <tt class="descname">list_domains</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.list_domains" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The <tt class="docutils literal"><span class="pre">ListDomains</span></tt> operation lists all domains associated with the Access Key ID. It returns domain names up to the limit set by <a class="reference external" href="#MaxNumberOfDomains">MaxNumberOfDomains</a> . A <a class="reference external" href="#NextToken">NextToken</a> is returned if there are more than <tt class="docutils literal"><span class="pre">MaxNumberOfDomains</span></tt> domains. Calling <tt class="docutils literal"><span class="pre">ListDomains</span></tt> successive times with the <tt class="docutils literal"><span class="pre">NextToken</span></tt> provided by the operation returns up to <tt class="docutils literal"><span class="pre">MaxNumberOfDomains</span></tt> more domain names with each successive operation call.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/ListDomains">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -931,10 +993,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.InvalidNextToken</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.put_attributes">
 <tt class="descname">put_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.put_attributes" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The PutAttributes operation creates or replaces attributes in an item. The client may specify new attributes using a combination of the <tt class="docutils literal"><span class="pre">Attribute.X.Name</span></tt> and <tt class="docutils literal"><span class="pre">Attribute.X.Value</span></tt> parameters. The client specifies the first attribute by the parameters <tt class="docutils literal"><span class="pre">Attribute.0.Name</span></tt> and <tt class="docutils literal"><span class="pre">Attribute.0.Value</span></tt> , the second attribute by the parameters <tt class="docutils literal"><span class="pre">Attribute.1.Name</span></tt> and <tt class="docutils literal"><span class="pre">Attribute.1.Value</span></tt> , and so on.</p>
 <p>Attributes are uniquely identified in an item by their name/value combination. For example, a single item can have the attributes <tt class="docutils literal"><span class="pre">{</span> <span class="pre">&quot;first_name&quot;,</span> <span class="pre">&quot;first_value&quot;</span> <span class="pre">}</span></tt> and <tt class="docutils literal"><span class="pre">{</span> <span class="pre">&quot;first_name&quot;,</span> <span class="pre">second_value&quot;</span> <span class="pre">}</span></tt> . However, it cannot have two attribute instances where both the <tt class="docutils literal"><span class="pre">Attribute.X.Name</span></tt> and <tt class="docutils literal"><span class="pre">Attribute.X.Value</span></tt> are the same.</p>
 <p>Optionally, the requestor can supply the <tt class="docutils literal"><span class="pre">Replace</span></tt> parameter for each individual attribute. Setting this value to <tt class="docutils literal"><span class="pre">true</span></tt> causes the new attribute value to replace the existing attribute value(s). For example, if an item has the attributes <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'a',</span> <span class="pre">'1'</span> <span class="pre">}</span></tt> , <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'b',</span> <span class="pre">'2'}</span></tt> and <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'b',</span> <span class="pre">'3'</span> <span class="pre">}</span></tt> and the requestor calls <tt class="docutils literal"><span class="pre">PutAttributes</span></tt> using the attributes <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'b',</span> <span class="pre">'4'</span> <span class="pre">}</span></tt> with the <tt class="docutils literal"><span class="pre">Replace</span></tt> parameter set to true, the final attributes of the item are changed to <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'a',</span> <span class="pre">'1'</span> <span class="pre">}</span></tt> and <tt class="docutils literal"><span class="pre">{</span> <span class="pre">'b',</span> <span class="pre">'4'</span> <span class="pre">}</span></tt> , which replaces the previous values of the 'b' attribute with the new value.</p>
@@ -1006,10 +1073,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.AttributeDoesNotExist</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Client.select">
 <tt class="descname">select</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Client.select" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>The <tt class="docutils literal"><span class="pre">Select</span></tt> operation returns a set of attributes for <tt class="docutils literal"><span class="pre">ItemNames</span></tt> that match the select expression. <tt class="docutils literal"><span class="pre">Select</span></tt> is similar to the standard SQL SELECT statement.</p>
 <p>The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB automatically adjusts the number of items returned per page to enforce this limit. For example, if the client asks to retrieve 2500 items, but each individual item is 10 kB in size, the system returns 100 items and an appropriate <tt class="docutils literal"><span class="pre">NextToken</span></tt> so the client can access the next page of results.</p>
 <p>For information on how to construct select expressions, see Using Select to Create Amazon SimpleDB Queries in the Developer Guide.</p>
@@ -1092,6 +1164,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Client.exceptions.TooManyRequestedAttributes</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1099,19 +1172,20 @@ section of the service docs for a list of available waiters.</dd>
 <div class="section" id="paginators">
 <h2><a class="toc-backref" href="#id14">Paginators</a><a class="headerlink" href="#paginators" title="Permalink to this headline">¶</a></h2>
 <p>The available paginators are:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#SimpleDB.Paginator.ListDomains" title="SimpleDB.Paginator.ListDomains"><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Paginator.ListDomains</span></tt></a></li>
-<li><a class="reference internal" href="#SimpleDB.Paginator.Select" title="SimpleDB.Paginator.Select"><tt class="xref py py-class docutils literal"><span class="pre">SimpleDB.Paginator.Select</span></tt></a></li>
-</ul>
+
 <dl class="class">
 <dt id="SimpleDB.Paginator.ListDomains">
 <em class="property">class </em><tt class="descclassname">SimpleDB.Paginator.</tt><tt class="descname">ListDomains</tt><a class="headerlink" href="#SimpleDB.Paginator.ListDomains" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_domains&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Paginator.ListDomains.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Paginator.ListDomains.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#SimpleDB.Client.list_domains" title="SimpleDB.Client.list_domains"><tt class="xref py py-meth docutils literal"><span class="pre">SimpleDB.Client.list_domains()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/ListDomains">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1157,6 +1231,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1166,9 +1241,13 @@ section of the service docs for a list of available waiters.</dd>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;select&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="SimpleDB.Paginator.Select.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#SimpleDB.Paginator.Select.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#SimpleDB.Client.select" title="SimpleDB.Client.select"><tt class="xref py py-meth docutils literal"><span class="pre">SimpleDB.Client.select()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/sdb-2009-04-15/Select">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1246,6 +1325,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1301,5 +1381,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

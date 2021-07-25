@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -433,30 +451,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#ACM.Client.add_tags_to_certificate" title="ACM.Client.add_tags_to_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">add_tags_to_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.can_paginate" title="ACM.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.delete_certificate" title="ACM.Client.delete_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">delete_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.describe_certificate" title="ACM.Client.describe_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">describe_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.export_certificate" title="ACM.Client.export_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">export_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.generate_presigned_url" title="ACM.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.get_account_configuration" title="ACM.Client.get_account_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">get_account_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.get_certificate" title="ACM.Client.get_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">get_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.get_paginator" title="ACM.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.get_waiter" title="ACM.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.import_certificate" title="ACM.Client.import_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">import_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.list_certificates" title="ACM.Client.list_certificates"><tt class="xref py py-meth docutils literal"><span class="pre">list_certificates()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.list_tags_for_certificate" title="ACM.Client.list_tags_for_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">list_tags_for_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.put_account_configuration" title="ACM.Client.put_account_configuration"><tt class="xref py py-meth docutils literal"><span class="pre">put_account_configuration()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.remove_tags_from_certificate" title="ACM.Client.remove_tags_from_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">remove_tags_from_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.renew_certificate" title="ACM.Client.renew_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">renew_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.request_certificate" title="ACM.Client.request_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">request_certificate()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.resend_validation_email" title="ACM.Client.resend_validation_email"><tt class="xref py py-meth docutils literal"><span class="pre">resend_validation_email()</span></tt></a></li>
-<li><a class="reference internal" href="#ACM.Client.update_certificate_options" title="ACM.Client.update_certificate_options"><tt class="xref py py-meth docutils literal"><span class="pre">update_certificate_options()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.add_tags_to_certificate">
 <tt class="descname">add_tags_to_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.add_tags_to_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to identify and organize your Amazon Web Services resources. Each tag consists of a <tt class="docutils literal"><span class="pre">key</span></tt> and an optional <tt class="docutils literal"><span class="pre">value</span></tt> . You specify the certificate on input by its Amazon Resource Name (ARN). You specify the tag by using a key-value pair.</p>
 <p>You can apply a tag to just one certificate if you want to identify a specific characteristic of that certificate, or you can apply the same tag to multiple certificates if you want to filter for a common relationship among those certificates. Similarly, you can apply the same tag to multiple resources if you want to specify a relationship among those resources. For example, you can add the same tag to an ACM certificate and an Elastic Load Balancing load balancer to indicate that they are both used by the same website. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/tags.html">Tagging ACM certificates</a> .</p>
 <p>To remove one or more tags, use the  RemoveTagsFromCertificate action. To view all of the tags that have been applied to the certificate, use the  ListTagsForCertificate action.</p>
@@ -510,10 +512,15 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.ThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ACM.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -526,10 +533,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.delete_certificate">
 <tt class="descname">delete_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.delete_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes a certificate and its associated private key. If this action succeeds, the certificate no longer appears in the list that can be displayed by calling the  ListCertificates action or be retrieved by calling the  GetCertificate action. The certificate will not be available for use by Amazon Web Services services integrated with ACM.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -558,10 +570,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.describe_certificate">
 <tt class="descname">describe_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.describe_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns detailed metadata about the specified ACM certificate.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -851,10 +868,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.export_certificate">
 <tt class="descname">export_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.export_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Exports a private certificate issued by a private certificate authority (CA) for use anywhere. The exported file contains the certificate, the certificate chain, and the encrypted private 2048-bit RSA key associated with the public key that is embedded in the certificate. For security, you must assign a passphrase for the private key when exporting it.</p>
 <p>For information about exporting and formatting a certificate using the ACM console or CLI, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html">Export a Private Certificate</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificate">AWS API Documentation</a></p>
@@ -915,10 +937,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#ACM.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -935,10 +962,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.get_account_configuration">
 <tt class="descname">get_account_configuration</tt><big>(</big><big>)</big><a class="headerlink" href="#ACM.Client.get_account_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns the account configuration options associated with an Amazon Web Services account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetAccountConfiguration">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -974,10 +1006,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.ThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.get_certificate">
 <tt class="descname">get_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.get_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Retrieves an Amazon-issued certificate and its certificate chain. The chain consists of the certificate of the issuing CA and the intermediate certificates of any other subordinate CAs. All of the certificates are base64 encoded. You can use <a class="reference external" href="https://wiki.openssl.org/index.php/Command_Line_Utilities">OpenSSL</a> to decode the certificates and inspect individual fields.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1019,10 +1056,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ACM.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -1038,10 +1080,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#ACM.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -1050,10 +1097,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.import_certificate">
 <tt class="descname">import_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.import_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Imports a certificate into Amazon Web Services Certificate Manager (ACM) to use with services that are integrated with ACM. Note that <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html">integrated services</a> allow only certificate types and keys they support to be associated with their resources. Further, their support differs depending on whether the certificate is imported into IAM or into ACM. For more information, see the documentation for each service. For more information about importing certificates into ACM, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing Certificates</a> in the <em>Amazon Web Services Certificate Manager User Guide</em> .</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1149,10 +1201,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.list_certificates">
 <tt class="descname">list_certificates</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.list_certificates" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Retrieves a list of certificate ARNs and domain names. You can request that only certificates that match a specific status be listed. You can also filter by specific attributes of the certificate. Default filtering returns only <tt class="docutils literal"><span class="pre">RSA_2048</span></tt> certificates. For more information, see  Filters .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1259,10 +1316,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArgsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.list_tags_for_certificate">
 <tt class="descname">list_tags_for_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.list_tags_for_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Lists the tags that have been applied to the ACM certificate. Use the certificate's Amazon Resource Name (ARN) to specify the certificate. To add a tag to an ACM certificate, use the  AddTagsToCertificate action. To delete a tag, use the  RemoveTagsFromCertificate action.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1315,10 +1377,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.put_account_configuration">
 <tt class="descname">put_account_configuration</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.put_account_configuration" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Adds or modifies account-level configurations in ACM.</p>
 <p>The supported configuration option is <tt class="docutils literal"><span class="pre">DaysBeforeExpiry</span></tt> . This option specifies the number of days prior to certificate expiration when ACM starts generating <tt class="docutils literal"><span class="pre">EventBridge</span></tt> events. ACM sends one event per day per certificate until the certificate expires. By default, accounts receive events starting 45 days before certificate expiration.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/PutAccountConfiguration">AWS API Documentation</a></p>
@@ -1355,10 +1422,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.ConflictException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.remove_tags_from_certificate">
 <tt class="descname">remove_tags_from_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.remove_tags_from_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If you do not specify the value portion of the tag when calling this function, the tag will be removed regardless of value. If you specify a value, the tag is removed only if it is associated with the specified value.</p>
 <p>To add tags to a certificate, use the  AddTagsToCertificate action. To view all of the tags that have been applied to a specific ACM certificate, use the  ListTagsForCertificate action.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate">AWS API Documentation</a></p>
@@ -1410,10 +1482,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.ThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.renew_certificate">
 <tt class="descname">renew_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.renew_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Renews an eligible ACM certificate. At this time, only exported private certificates can be renewed with this operation. In order to renew your ACM PCA certificates with ACM, you must first <a class="reference external" href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html">grant the ACM service principal permission to do so</a> . For more information, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html">Testing Managed Renewal</a> in the ACM User Guide.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewCertificate">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1437,10 +1514,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.request_certificate">
 <tt class="descname">request_certificate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.request_certificate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Requests an ACM certificate for use with other Amazon Web Services services. To request an ACM certificate, you must specify a fully qualified domain name (FQDN) in the <tt class="docutils literal"><span class="pre">DomainName</span></tt> parameter. You can also specify additional FQDNs in the <tt class="docutils literal"><span class="pre">SubjectAlternativeNames</span></tt> parameter.</p>
 <p>If you are requesting a private certificate, domain validation is not required. If you are requesting a public certificate, each domain name that you specify must be validated to verify that you own or control the domain. You can use <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html">DNS validation</a> or <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html">email validation</a> . We recommend that you use DNS validation. ACM issues public certificates after receiving approval from the domain owner.</p>
 <div class="admonition note">
@@ -1572,10 +1654,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.resend_validation_email">
 <tt class="descname">resend_validation_email</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.resend_validation_email" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Resends the email that requests domain ownership validation. The domain owner or an authorized representative must approve the ACM certificate before it can be issued. The certificate can be approved by clicking a link in the mail to navigate to the Amazon certificate approval website and then clicking <strong>I Approve</strong> . However, the validation email can be blocked by spam filters. Therefore, if you do not receive the original mail, you can request that the mail be resent within 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed since your original request or since your last attempt to resend validation mail, you must request a new certificate. For more information about setting up your contact email addresses, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html">Configure Email for your Domain</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1619,10 +1706,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidDomainValidationOptionsException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Client.update_certificate_options">
 <tt class="descname">update_certificate_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Client.update_certificate_options" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates a certificate. Currently, you can use this function to specify whether to opt in to or out of recording your certificate in a certificate transparency log. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency">Opting Out of Certificate Transparency Logging</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptions">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1661,6 +1753,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ACM.Client.exceptions.InvalidArnException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1668,18 +1761,20 @@ section of the service docs for a list of available waiters.</dd>
 <div class="section" id="paginators">
 <h2><a class="toc-backref" href="#id23">Paginators</a><a class="headerlink" href="#paginators" title="Permalink to this headline">¶</a></h2>
 <p>The available paginators are:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#ACM.Paginator.ListCertificates" title="ACM.Paginator.ListCertificates"><tt class="xref py py-class docutils literal"><span class="pre">ACM.Paginator.ListCertificates</span></tt></a></li>
-</ul>
+
 <dl class="class">
 <dt id="ACM.Paginator.ListCertificates">
 <em class="property">class </em><tt class="descclassname">ACM.Paginator.</tt><tt class="descname">ListCertificates</tt><a class="headerlink" href="#ACM.Paginator.ListCertificates" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_certificates&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Paginator.ListCertificates.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Paginator.ListCertificates.paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#ACM.Client.list_certificates" title="ACM.Client.list_certificates"><tt class="xref py py-meth docutils literal"><span class="pre">ACM.Client.list_certificates()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1789,6 +1884,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1796,18 +1892,20 @@ section of the service docs for a list of available waiters.</dd>
 <div class="section" id="waiters">
 <h2><a class="toc-backref" href="#id24">Waiters</a><a class="headerlink" href="#waiters" title="Permalink to this headline">¶</a></h2>
 <p>The available waiters are:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#ACM.Waiter.CertificateValidated" title="ACM.Waiter.CertificateValidated"><tt class="xref py py-class docutils literal"><span class="pre">ACM.Waiter.CertificateValidated</span></tt></a></li>
-</ul>
+
 <dl class="class">
 <dt id="ACM.Waiter.CertificateValidated">
 <em class="property">class </em><tt class="descclassname">ACM.Waiter.</tt><tt class="descname">CertificateValidated</tt><a class="headerlink" href="#ACM.Waiter.CertificateValidated" title="Permalink to this definition">¶</a></dt>
 <dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;certificate_validated&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="ACM.Waiter.CertificateValidated.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ACM.Waiter.CertificateValidated.wait" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#ACM.Client.describe_certificate" title="ACM.Client.describe_certificate"><tt class="xref py py-meth docutils literal"><span class="pre">ACM.Client.describe_certificate()</span></tt></a> every 60 seconds until a successful state is reached. An error is returned after 40 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1842,6 +1940,7 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -1897,5 +1996,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>

@@ -39,7 +39,25 @@
   
    
 
-  </head>
+  <!-- collapsible -->
+<style>
+.collapsible {
+  background-color: aliceblue;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+.collapsible:hover {
+  background-color: #faf3e8;
+}
+.active {
+  background-color: aliceblue;
+}
+.content {
+  display: none;
+}
+</style>
+</head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
@@ -431,35 +449,14 @@
 </pre></div>
 </div>
 <p>These are the available methods:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#QLDB.Client.can_paginate" title="QLDB.Client.can_paginate"><tt class="xref py py-meth docutils literal"><span class="pre">can_paginate()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.cancel_journal_kinesis_stream" title="QLDB.Client.cancel_journal_kinesis_stream"><tt class="xref py py-meth docutils literal"><span class="pre">cancel_journal_kinesis_stream()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.create_ledger" title="QLDB.Client.create_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">create_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.delete_ledger" title="QLDB.Client.delete_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">delete_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.describe_journal_kinesis_stream" title="QLDB.Client.describe_journal_kinesis_stream"><tt class="xref py py-meth docutils literal"><span class="pre">describe_journal_kinesis_stream()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.describe_journal_s3_export" title="QLDB.Client.describe_journal_s3_export"><tt class="xref py py-meth docutils literal"><span class="pre">describe_journal_s3_export()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.describe_ledger" title="QLDB.Client.describe_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">describe_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.export_journal_to_s3" title="QLDB.Client.export_journal_to_s3"><tt class="xref py py-meth docutils literal"><span class="pre">export_journal_to_s3()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.generate_presigned_url" title="QLDB.Client.generate_presigned_url"><tt class="xref py py-meth docutils literal"><span class="pre">generate_presigned_url()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.get_block" title="QLDB.Client.get_block"><tt class="xref py py-meth docutils literal"><span class="pre">get_block()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.get_digest" title="QLDB.Client.get_digest"><tt class="xref py py-meth docutils literal"><span class="pre">get_digest()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.get_paginator" title="QLDB.Client.get_paginator"><tt class="xref py py-meth docutils literal"><span class="pre">get_paginator()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.get_revision" title="QLDB.Client.get_revision"><tt class="xref py py-meth docutils literal"><span class="pre">get_revision()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.get_waiter" title="QLDB.Client.get_waiter"><tt class="xref py py-meth docutils literal"><span class="pre">get_waiter()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.list_journal_kinesis_streams_for_ledger" title="QLDB.Client.list_journal_kinesis_streams_for_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">list_journal_kinesis_streams_for_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.list_journal_s3_exports" title="QLDB.Client.list_journal_s3_exports"><tt class="xref py py-meth docutils literal"><span class="pre">list_journal_s3_exports()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.list_journal_s3_exports_for_ledger" title="QLDB.Client.list_journal_s3_exports_for_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">list_journal_s3_exports_for_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.list_ledgers" title="QLDB.Client.list_ledgers"><tt class="xref py py-meth docutils literal"><span class="pre">list_ledgers()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.list_tags_for_resource" title="QLDB.Client.list_tags_for_resource"><tt class="xref py py-meth docutils literal"><span class="pre">list_tags_for_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.stream_journal_to_kinesis" title="QLDB.Client.stream_journal_to_kinesis"><tt class="xref py py-meth docutils literal"><span class="pre">stream_journal_to_kinesis()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.tag_resource" title="QLDB.Client.tag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">tag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.untag_resource" title="QLDB.Client.untag_resource"><tt class="xref py py-meth docutils literal"><span class="pre">untag_resource()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.update_ledger" title="QLDB.Client.update_ledger"><tt class="xref py py-meth docutils literal"><span class="pre">update_ledger()</span></tt></a></li>
-<li><a class="reference internal" href="#QLDB.Client.update_ledger_permissions_mode" title="QLDB.Client.update_ledger_permissions_mode"><tt class="xref py py-meth docutils literal"><span class="pre">update_ledger_permissions_mode()</span></tt></a></li>
-</ul>
-<dl class="method">
+
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.can_paginate">
 <tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#QLDB.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -472,10 +469,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.cancel_journal_kinesis_stream">
 <tt class="descname">cancel_journal_kinesis_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.cancel_journal_kinesis_stream" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Ends a given Amazon QLDB journal stream. Before a stream can be canceled, its current status must be <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> .</p>
 <p>You can't restart a stream after you cancel it. Canceled QLDB stream resources are subject to a 7-day retention period, so they are automatically deleted after this limit expires.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CancelJournalKinesisStream">AWS API Documentation</a></p>
@@ -524,10 +526,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.create_ledger">
 <tt class="descname">create_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.create_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a new ledger in your account in the current Region.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/CreateLedger">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -643,10 +650,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.delete_ledger">
 <tt class="descname">delete_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.delete_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Deletes a ledger and all of its contents. This action is irreversible.</p>
 <p>If deletion protection is enabled, you must first disable it before you can delete the ledger. You can disable it by calling the <tt class="docutils literal"><span class="pre">UpdateLedger</span></tt> operation to set the flag to <tt class="docutils literal"><span class="pre">false</span></tt> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DeleteLedger">AWS API Documentation</a></p>
@@ -670,10 +682,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.describe_journal_kinesis_stream">
 <tt class="descname">describe_journal_kinesis_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.describe_journal_kinesis_stream" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of the original stream creation request.</p>
 <p>This action does not return any expired journal streams. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration">Expiration for terminal streams</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeJournalKinesisStream">AWS API Documentation</a></p>
@@ -783,10 +800,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.describe_journal_s3_export">
 <tt class="descname">describe_journal_s3_export</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.describe_journal_s3_export" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns information about a journal export job, including the ledger name, export ID, creation time, current status, and the parameters of the original export creation request.</p>
 <p>This action does not return any expired export jobs. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
 <p>If the export job with the given <tt class="docutils literal"><span class="pre">ExportId</span></tt> doesn't exist, then throws <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
@@ -913,10 +935,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.describe_ledger">
 <tt class="descname">describe_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.describe_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns information about a ledger, including its state, permissions mode, encryption at rest settings, and when it was created.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/DescribeLedger">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -988,10 +1015,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.export_journal_to_s3">
 <tt class="descname">export_journal_to_s3</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.export_journal_to_s3" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Exports journal contents within a date and time range from a ledger into a specified Amazon Simple Storage Service (Amazon S3) bucket. The data is written as files in Amazon Ion format.</p>
 <p>If the ledger with the given <tt class="docutils literal"><span class="pre">Name</span></tt> doesn't exist, then throws <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
 <p>If the ledger with the given <tt class="docutils literal"><span class="pre">Name</span></tt> is in <tt class="docutils literal"><span class="pre">CREATING</span></tt> status, then throws <tt class="docutils literal"><span class="pre">ResourcePreconditionNotMetException</span></tt> .</p>
@@ -1096,10 +1128,15 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.generate_presigned_url">
 <tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#QLDB.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
@@ -1116,10 +1153,15 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.get_block">
 <tt class="descname">get_block</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.get_block" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns a block object at a specified address in a journal. Also returns a proof of the specified block for verification if <tt class="docutils literal"><span class="pre">DigestTipAddress</span></tt> is provided.</p>
 <p>For information about the data contents in a block, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html">Journal contents</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
 <p>If the specified ledger doesn't exist or is in <tt class="docutils literal"><span class="pre">DELETING</span></tt> status, then throws <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
@@ -1206,10 +1248,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.get_digest">
 <tt class="descname">get_digest</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.get_digest" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns the digest of a ledger at the latest committed block in the journal. The response includes a 256-bit hash value and a block address.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetDigest">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1254,10 +1301,15 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.get_paginator">
 <tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#QLDB.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
@@ -1273,10 +1325,15 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.get_revision">
 <tt class="descname">get_revision</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.get_revision" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns a revision data object for a specified document ID and block address. Also returns a proof of the specified revision for verification if <tt class="docutils literal"><span class="pre">DigestTipAddress</span></tt> is provided.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/GetRevision">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1363,10 +1420,15 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.get_waiter">
 <tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#QLDB.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
@@ -1375,10 +1437,15 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.list_journal_kinesis_streams_for_ledger">
 <tt class="descname">list_journal_kinesis_streams_for_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.list_journal_kinesis_streams_for_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by <tt class="docutils literal"><span class="pre">DescribeJournalKinesisStream</span></tt> .</p>
 <p>This action does not return any expired journal streams. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration">Expiration for terminal streams</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
 <p>This action returns a maximum of <tt class="docutils literal"><span class="pre">MaxResults</span></tt> items. It is paginated so that you can retrieve all the items by calling <tt class="docutils literal"><span class="pre">ListJournalKinesisStreamsForLedger</span></tt> multiple times.</p>
@@ -1503,10 +1570,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.list_journal_s3_exports">
 <tt class="descname">list_journal_s3_exports</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.list_journal_s3_exports" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an array of journal export job descriptions for all ledgers that are associated with the current account and Region.</p>
 <p>This action returns a maximum of <tt class="docutils literal"><span class="pre">MaxResults</span></tt> items, and is paginated so that you can retrieve all the items by calling <tt class="docutils literal"><span class="pre">ListJournalS3Exports</span></tt> multiple times.</p>
 <p>This action does not return any expired export jobs. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
@@ -1638,10 +1710,15 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.list_journal_s3_exports_for_ledger">
 <tt class="descname">list_journal_s3_exports_for_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.list_journal_s3_exports_for_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an array of journal export job descriptions for a specified ledger.</p>
 <p>This action returns a maximum of <tt class="docutils literal"><span class="pre">MaxResults</span></tt> items, and is paginated so that you can retrieve all the items by calling <tt class="docutils literal"><span class="pre">ListJournalS3ExportsForLedger</span></tt> multiple times.</p>
 <p>This action does not return any expired export jobs. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration">Export job expiration</a> in the <em>Amazon QLDB Developer Guide</em> .</p>
@@ -1777,10 +1854,15 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.list_ledgers">
 <tt class="descname">list_ledgers</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.list_ledgers" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns an array of ledger summaries that are associated with the current account and Region.</p>
 <p>This action returns a maximum of 100 items and is paginated so that you can retrieve all the items by calling <tt class="docutils literal"><span class="pre">ListLedgers</span></tt> multiple times.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListLedgers">AWS API Documentation</a></p>
@@ -1849,10 +1931,15 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.list_tags_for_resource">
 <tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Returns all tags for a specified Amazon QLDB resource.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1897,10 +1984,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.stream_journal_to_kinesis">
 <tt class="descname">stream_journal_to_kinesis</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.stream_journal_to_kinesis" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Creates a journal stream for a given Amazon QLDB ledger. The stream captures every document revision that is committed to the ledger's journal and delivers the data to a specified Amazon Kinesis Data Streams resource.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/StreamJournalToKinesis">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1989,10 +2081,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourcePreconditionNotMetException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.tag_resource">
 <tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Adds one or more tags to a specified Amazon QLDB resource.</p>
 <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/TagResource">AWS API Documentation</a></p>
@@ -2042,10 +2139,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.untag_resource">
 <tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Removes one or more tags from a specified Amazon QLDB resource. You can specify up to 50 tag keys to remove.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2091,10 +2193,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.update_ledger">
 <tt class="descname">update_ledger</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.update_ledger" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates properties on a ledger.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/qldb-2019-01-02/UpdateLedger">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2201,10 +2308,15 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
-<dl class="method">
+<!-- collapsible -->
+<button type="button" class="collapsible">
 <dt id="QLDB.Client.update_ledger_permissions_mode">
 <tt class="descname">update_ledger_permissions_mode</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#QLDB.Client.update_ledger_permissions_mode" title="Permalink to this definition">¶</a></dt>
+</button>
+<div class="content">
+<dl class="method">
 <dd><p>Updates the permissions mode of a ledger.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -2271,6 +2383,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">QLDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
+</div>
 
 </dd></dl>
 
@@ -2301,22 +2414,7 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="qldb-session.html" title="QLDBSession"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="proton.html" title="Proton"
-             >previous</a> |</li>
-        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
-      </ul>
+      &raquo;&raquo;
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -2330,5 +2428,20 @@ section of the service docs for a list of available waiters.</dd>
         href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  </body>
+  <!-- collapsible -->
+<script>
+var coll = document.getElementsByClassName("collapsible");
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+</body>
 </html>
