@@ -1,3 +1,5 @@
+I thought DynamoDB's documentation was long. Well, it turns out that EC2's documentation is even longer.
+
 The current boto3 HTML documentation is very long and it's not easy to read. From my personal experience, when I was learning DynamoDB, the reference documentation is very long. Each function's documentation is also very long, and it's quite difficult to find my way around.
 
 For example, when I wanted to learn how to query a DynamoDB table, I opened up the [API reference for that function](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.query). It's quite a long section, and if I wanted to go to the end of the section to see the Response Syntax, I either had to scroll down, potentially missing the section altogether, or I had to go back to the table of contents, pick the next function, and then scroll up a little bit from there. It was not a pleasant experience. The extremely verbose syntax of `KeyConditionExpression` didn't help, either.
@@ -55,6 +57,10 @@ Eventually, maybe we will have a `Makefile` with a few commands:
 Also, it might be better to split each service subclass into its own HTML file. For example, DynamoDB can be split up into Client, Paginators, Waiters, Service Resource, and Table. The naming can be: dynamodb.client.html, dynamodb.paginators.html, ... We don't usually read up on Paginators while working on the Client anyway.
 
 I know, it might be easier to work with sphinx in order to achieve the transformations that I want, but then I would need to learn how to use sphinx. Not to mention, boto3 still uses sphinx version 1.2.3 from 2014 (!!!). Most of the things I learn about that version would be obsolete by now.
+
+## Using custom JavaScript to modify the tags at runtime
+
+This can also be done, but we need to measure the performance impact on page load times.
 
 ## Licensing status
 
