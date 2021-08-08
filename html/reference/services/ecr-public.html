@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="ecs.html" title="ECS"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="ecr.html" title="ECR"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="ecs.html" title="ECS" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="ecr.html" title="ECR" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -450,14 +468,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.batch_check_layer_availability">
-<tt class="descname">batch_check_layer_availability</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.batch_check_layer_availability" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Checks the availability of one or more image layers within a repository in a public registry. When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.</p>
+<dt id="ECRPublic.Client.batch_check_layer_availability" class="collapsible-title">
+<tt class="descname">batch_check_layer_availability</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.batch_check_layer_availability" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Checks the availability of one or more image layers within a repository in a public registry. When an image is pushed to a repository, each image layer is checked to verify if it has been uploaded before. If it has been uploaded, then the image layer is skipped.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <tt class="docutils literal"><span class="pre">docker</span></tt> CLI to pull, tag, and push images.</p>
@@ -568,16 +582,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RegistryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.batch_delete_image">
-<tt class="descname">batch_delete_image</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.batch_delete_image" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a list of specified images within a repository in a public registry. Images are specified with either an <tt class="docutils literal"><span class="pre">imageTag</span></tt> or <tt class="docutils literal"><span class="pre">imageDigest</span></tt> .</p>
+<dt id="ECRPublic.Client.batch_delete_image" class="collapsible-title">
+<tt class="descname">batch_delete_image</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.batch_delete_image" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a list of specified images within a repository in a public registry. Images are specified with either an <tt class="docutils literal"><span class="pre">imageTag</span></tt> or <tt class="docutils literal"><span class="pre">imageDigest</span></tt> .</p>
 <p>You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p>
 <p>You can completely delete an image (and all of its tags) by specifying the image's digest in your request.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/BatchDeleteImage">AWS API Documentation</a></p>
@@ -698,16 +707,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="ECRPublic.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -719,16 +723,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.complete_layer_upload">
-<tt class="descname">complete_layer_upload</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.complete_layer_upload" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Informs Amazon ECR that the image layer upload has completed for a specified public registry, repository name, and upload ID. You can optionally provide a <tt class="docutils literal"><span class="pre">sha256</span></tt> digest of the image layer for data validation purposes.</p>
+<dt id="ECRPublic.Client.complete_layer_upload" class="collapsible-title">
+<tt class="descname">complete_layer_upload</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.complete_layer_upload" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Informs Amazon ECR that the image layer upload has completed for a specified public registry, repository name, and upload ID. You can optionally provide a <tt class="docutils literal"><span class="pre">sha256</span></tt> digest of the image layer for data validation purposes.</p>
 <p>When an image is pushed, the CompleteLayerUpload API is called once per each new image layer to verify that the upload has completed.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -810,16 +809,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.create_repository">
-<tt class="descname">create_repository</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.create_repository" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a repository in a public registry. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR repositories</a> in the <em>Amazon Elastic Container Registry User Guide</em> .</p>
+<dt id="ECRPublic.Client.create_repository" class="collapsible-title">
+<tt class="descname">create_repository</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.create_repository" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a repository in a public registry. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html">Amazon ECR repositories</a> in the <em>Amazon Elastic Container Registry User Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/CreateRepository">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_repository</span><span class="p">(</span>
@@ -1015,16 +1009,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.delete_repository">
-<tt class="descname">delete_repository</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.delete_repository" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a repository in a public registry. If the repository contains images, you must either delete all images in the repository or use the <tt class="docutils literal"><span class="pre">force</span></tt> option which deletes all images on your behalf before deleting the repository.</p>
+<dt id="ECRPublic.Client.delete_repository" class="collapsible-title">
+<tt class="descname">delete_repository</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.delete_repository" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a repository in a public registry. If the repository contains images, you must either delete all images in the repository or use the <tt class="docutils literal"><span class="pre">force</span></tt> option which deletes all images on your behalf before deleting the repository.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DeleteRepository">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete_repository</span><span class="p">(</span>
@@ -1095,16 +1084,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotEmptyException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.delete_repository_policy">
-<tt class="descname">delete_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.delete_repository_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes the repository policy associated with the specified repository.</p>
+<dt id="ECRPublic.Client.delete_repository_policy" class="collapsible-title">
+<tt class="descname">delete_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.delete_repository_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes the repository policy associated with the specified repository.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DeleteRepositoryPolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete_repository_policy</span><span class="p">(</span>
@@ -1158,16 +1142,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryPolicyNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.describe_image_tags">
-<tt class="descname">describe_image_tags</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_image_tags" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the image tag details for a repository in a public registry.</p>
+<dt id="ECRPublic.Client.describe_image_tags" class="collapsible-title">
+<tt class="descname">describe_image_tags</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_image_tags" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the image tag details for a repository in a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImageTags">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_image_tags</span><span class="p">(</span>
@@ -1270,16 +1249,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.describe_images">
-<tt class="descname">describe_images</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_images" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns metadata about the images in a repository in a public registry.</p>
+<dt id="ECRPublic.Client.describe_images" class="collapsible-title">
+<tt class="descname">describe_images</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_images" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns metadata about the images in a repository in a public registry.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <tt class="docutils literal"><span class="pre">docker</span> <span class="pre">images</span></tt> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by  DescribeImages .</p>
@@ -1407,16 +1381,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.ImageNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.describe_registries">
-<tt class="descname">describe_registries</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_registries" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns details for a public registry.</p>
+<dt id="ECRPublic.Client.describe_registries" class="collapsible-title">
+<tt class="descname">describe_registries</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_registries" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns details for a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRegistries">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_registries</span><span class="p">(</span>
@@ -1528,16 +1497,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.describe_repositories">
-<tt class="descname">describe_repositories</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_repositories" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes repositories in a public registry.</p>
+<dt id="ECRPublic.Client.describe_repositories" class="collapsible-title">
+<tt class="descname">describe_repositories</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.describe_repositories" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes repositories in a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRepositories">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_repositories</span><span class="p">(</span>
@@ -1629,16 +1593,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="ECRPublic.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -1654,16 +1613,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_authorization_token">
-<tt class="descname">get_authorization_token</tt><big>(</big><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_authorization_token" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. This API requires the <tt class="docutils literal"><span class="pre">ecr-public:GetAuthorizationToken</span></tt> and <tt class="docutils literal"><span class="pre">sts:GetServiceBearerToken</span></tt> permissions.</p>
+<dt id="ECRPublic.Client.get_authorization_token" class="collapsible-title">
+<tt class="descname">get_authorization_token</tt><big>(</big><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_authorization_token" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours. This API requires the <tt class="docutils literal"><span class="pre">ecr-public:GetAuthorizationToken</span></tt> and <tt class="docutils literal"><span class="pre">sts:GetServiceBearerToken</span></tt> permissions.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetAuthorizationToken">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_authorization_token</span><span class="p">()</span>
@@ -1701,16 +1655,11 @@ default, the http method is whatever is used in the method's model.</li>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.InvalidParameterException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="ECRPublic.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -1725,16 +1674,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_registry_catalog_data">
-<tt class="descname">get_registry_catalog_data</tt><big>(</big><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_registry_catalog_data" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves catalog metadata for a public registry.</p>
+<dt id="ECRPublic.Client.get_registry_catalog_data" class="collapsible-title">
+<tt class="descname">get_registry_catalog_data</tt><big>(</big><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_registry_catalog_data" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves catalog metadata for a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRegistryCatalogData">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_registry_catalog_data</span><span class="p">()</span>
@@ -1773,16 +1717,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_repository_catalog_data">
-<tt class="descname">get_repository_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_repository_catalog_data" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieve catalog metadata for a repository in a public registry. This metadata is displayed publicly in the Amazon ECR Public Gallery.</p>
+<dt id="ECRPublic.Client.get_repository_catalog_data" class="collapsible-title">
+<tt class="descname">get_repository_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_repository_catalog_data" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieve catalog metadata for a repository in a public registry. This metadata is displayed publicly in the Amazon ECR Public Gallery.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRepositoryCatalogData">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_repository_catalog_data</span><span class="p">(</span>
@@ -1876,16 +1815,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_repository_policy">
-<tt class="descname">get_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_repository_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves the repository policy for the specified repository.</p>
+<dt id="ECRPublic.Client.get_repository_policy" class="collapsible-title">
+<tt class="descname">get_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_repository_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves the repository policy for the specified repository.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/GetRepositoryPolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_repository_policy</span><span class="p">(</span>
@@ -1939,16 +1873,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryPolicyNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="ECRPublic.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -1956,16 +1885,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.initiate_layer_upload">
-<tt class="descname">initiate_layer_upload</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.initiate_layer_upload" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Notifies Amazon ECR that you intend to upload an image layer.</p>
+<dt id="ECRPublic.Client.initiate_layer_upload" class="collapsible-title">
+<tt class="descname">initiate_layer_upload</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.initiate_layer_upload" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Notifies Amazon ECR that you intend to upload an image layer.</p>
 <p>When an image is pushed, the InitiateLayerUpload API is called once per image layer that has not already been uploaded. Whether or not an image layer has been uploaded is determined by the BatchCheckLayerAvailability API action.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -2021,16 +1945,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.list_tags_for_resource">
-<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>List the tags for an Amazon ECR Public resource.</p>
+<dt id="ECRPublic.Client.list_tags_for_resource" class="collapsible-title">
+<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>List the tags for an Amazon ECR Public resource.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tags_for_resource</span><span class="p">(</span>
@@ -2080,16 +1999,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.put_image">
-<tt class="descname">put_image</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_image" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates or updates the image manifest and tags associated with an image.</p>
+<dt id="ECRPublic.Client.put_image" class="collapsible-title">
+<tt class="descname">put_image</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_image" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates or updates the image manifest and tags associated with an image.</p>
 <p>When an image is pushed and all new image layers have been uploaded, the PutImage API is called once to create or update the image manifest and the tags associated with the image.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -2191,16 +2105,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.put_registry_catalog_data">
-<tt class="descname">put_registry_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_registry_catalog_data" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create or updates the catalog data for a public registry.</p>
+<dt id="ECRPublic.Client.put_registry_catalog_data" class="collapsible-title">
+<tt class="descname">put_registry_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_registry_catalog_data" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create or updates the catalog data for a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/PutRegistryCatalogData">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put_registry_catalog_data</span><span class="p">(</span>
@@ -2248,16 +2157,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.put_repository_catalog_data">
-<tt class="descname">put_repository_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_repository_catalog_data" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates or updates the catalog data for a repository in a public registry.</p>
+<dt id="ECRPublic.Client.put_repository_catalog_data" class="collapsible-title">
+<tt class="descname">put_repository_catalog_data</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.put_repository_catalog_data" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates or updates the catalog data for a repository in a public registry.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/PutRepositoryCatalogData">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">put_repository_catalog_data</span><span class="p">(</span>
@@ -2408,16 +2312,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.set_repository_policy">
-<tt class="descname">set_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.set_repository_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Applies a repository policy to the specified public repository to control access permissions. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html">Amazon ECR Repository Policies</a> in the <em>Amazon Elastic Container Registry User Guide</em> .</p>
+<dt id="ECRPublic.Client.set_repository_policy" class="collapsible-title">
+<tt class="descname">set_repository_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.set_repository_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Applies a repository policy to the specified public repository to control access permissions. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html">Amazon ECR Repository Policies</a> in the <em>Amazon Elastic Container Registry User Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/SetRepositoryPolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">set_repository_policy</span><span class="p">(</span>
@@ -2476,16 +2375,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.RepositoryNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.tag_resource">
-<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Associates the specified tags to a resource with the specified <tt class="docutils literal"><span class="pre">resourceArn</span></tt> . If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>
+<dt id="ECRPublic.Client.tag_resource" class="collapsible-title">
+<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Associates the specified tags to a resource with the specified <tt class="docutils literal"><span class="pre">resourceArn</span></tt> . If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/TagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">tag_resource</span><span class="p">(</span>
@@ -2541,16 +2435,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.untag_resource">
-<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes specified tags from a resource.</p>
+<dt id="ECRPublic.Client.untag_resource" class="collapsible-title">
+<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes specified tags from a resource.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">untag_resource</span><span class="p">(</span>
@@ -2596,16 +2485,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="ECRPublic.Client.upload_layer_part">
-<tt class="descname">upload_layer_part</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.upload_layer_part" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Uploads an image layer part to Amazon ECR.</p>
+<dt id="ECRPublic.Client.upload_layer_part" class="collapsible-title">
+<tt class="descname">upload_layer_part</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Client.upload_layer_part" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Uploads an image layer part to Amazon ECR.</p>
 <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of each image layer part can be 20971520 bytes (or about 20MB). The UploadLayerPart API is called once per each new image layer part.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -2688,7 +2572,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">ECRPublic.Client.exceptions.UnsupportedCommandException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -2698,18 +2581,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="ECRPublic.Paginator.DescribeImageTags">
+<dt id="ECRPublic.Paginator.DescribeImageTags" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">ECRPublic.Paginator.</tt><tt class="descname">DescribeImageTags</tt><a class="headerlink" href="#ECRPublic.Paginator.DescribeImageTags" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_image_tags&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_image_tags&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="ECRPublic.Paginator.DescribeImageTags.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Paginator.DescribeImageTags.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#ECRPublic.Client.describe_image_tags" title="ECRPublic.Client.describe_image_tags"><tt class="xref py py-meth docutils literal"><span class="pre">ECRPublic.Client.describe_image_tags()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImageTags">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2818,23 +2697,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="ECRPublic.Paginator.DescribeImages">
+<dt id="ECRPublic.Paginator.DescribeImages" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">ECRPublic.Paginator.</tt><tt class="descname">DescribeImages</tt><a class="headerlink" href="#ECRPublic.Paginator.DescribeImages" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_images&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_images&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="ECRPublic.Paginator.DescribeImages.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Paginator.DescribeImages.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#ECRPublic.Client.describe_images" title="ECRPublic.Client.describe_images"><tt class="xref py py-meth docutils literal"><span class="pre">ECRPublic.Client.describe_images()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeImages">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2963,23 +2837,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="ECRPublic.Paginator.DescribeRegistries">
+<dt id="ECRPublic.Paginator.DescribeRegistries" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">ECRPublic.Paginator.</tt><tt class="descname">DescribeRegistries</tt><a class="headerlink" href="#ECRPublic.Paginator.DescribeRegistries" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_registries&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_registries&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="ECRPublic.Paginator.DescribeRegistries.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Paginator.DescribeRegistries.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#ECRPublic.Client.describe_registries" title="ECRPublic.Client.describe_registries"><tt class="xref py py-meth docutils literal"><span class="pre">ECRPublic.Client.describe_registries()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRegistries">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3072,23 +2941,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="ECRPublic.Paginator.DescribeRepositories">
+<dt id="ECRPublic.Paginator.DescribeRepositories" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">ECRPublic.Paginator.</tt><tt class="descname">DescribeRepositories</tt><a class="headerlink" href="#ECRPublic.Paginator.DescribeRepositories" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_repositories&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_repositories&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="ECRPublic.Paginator.DescribeRepositories.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#ECRPublic.Paginator.DescribeRepositories.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#ECRPublic.Client.describe_repositories" title="ECRPublic.Client.describe_repositories"><tt class="xref py py-meth docutils literal"><span class="pre">ECRPublic.Client.describe_repositories()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ecr-public-2020-10-30/DescribeRepositories">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3181,7 +3045,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3210,19 +3073,15 @@ section of the service docs for a list of available waiters.</dd>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="ecs.html" title="ECS"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="ecr.html" title="ECR"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="ecs.html" title="ECS">next</a> |</li>
+        <li class="right">
+          <a href="ecr.html" title="ECR">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -3233,24 +3092,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

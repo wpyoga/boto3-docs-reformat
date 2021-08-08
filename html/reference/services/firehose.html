@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="fis.html" title="FIS"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="finspace-data.html" title="FinSpaceData"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="fis.html" title="FIS" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="finspace-data.html" title="FinSpaceData" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -450,14 +468,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="Firehose.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -469,16 +483,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.create_delivery_stream">
-<tt class="descname">create_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.create_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a Kinesis Data Firehose delivery stream.</p>
+<dt id="Firehose.Client.create_delivery_stream" class="collapsible-title">
+<tt class="descname">create_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.create_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a Kinesis Data Firehose delivery stream.</p>
 <p>By default, you can create up to 50 delivery streams per AWS Region.</p>
 <p>This is an asynchronous operation that immediately returns. The initial status of the delivery stream is <tt class="docutils literal"><span class="pre">CREATING</span></tt> . After the delivery stream is created, its status is <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> and it now accepts data. If the delivery stream creation fails, the status transitions to <tt class="docutils literal"><span class="pre">CREATING_FAILED</span></tt> . Attempts to send data to a delivery stream that is not in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state cause an exception. To check the state of a delivery stream, use  DescribeDeliveryStream .</p>
 <p>If the status of a delivery stream is <tt class="docutils literal"><span class="pre">CREATING_FAILED</span></tt> , this status doesn't change, and you can't invoke <tt class="docutils literal"><span class="pre">CreateDeliveryStream</span></tt> again on it. However, you can invoke the  DeleteDeliveryStream operation to delete it.</p>
@@ -1819,16 +1828,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.InvalidKMSResourceException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.delete_delivery_stream">
-<tt class="descname">delete_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.delete_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a delivery stream and its data.</p>
+<dt id="Firehose.Client.delete_delivery_stream" class="collapsible-title">
+<tt class="descname">delete_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.delete_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a delivery stream and its data.</p>
 <p>To check the state of a delivery stream, use  DescribeDeliveryStream . You can delete a delivery stream only if it is in one of the following states: <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> , <tt class="docutils literal"><span class="pre">DELETING</span></tt> , <tt class="docutils literal"><span class="pre">CREATING_FAILED</span></tt> , or <tt class="docutils literal"><span class="pre">DELETING_FAILED</span></tt> . You can't delete a delivery stream that is in the <tt class="docutils literal"><span class="pre">CREATING</span></tt> state. While the deletion request is in process, the delivery stream is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state.</p>
 <p>While the delivery stream is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, the service might continue to accept records, but it doesn't make any guarantees with respect to delivering the data. Therefore, as a best practice, first stop any applications that are sending records before you delete a delivery stream.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream">AWS API Documentation</a></p>
@@ -1868,16 +1872,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.describe_delivery_stream">
-<tt class="descname">describe_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.describe_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes the specified delivery stream and its status. For example, after your delivery stream is created, call <tt class="docutils literal"><span class="pre">DescribeDeliveryStream</span></tt> to see whether the delivery stream is <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> and therefore ready for data to be sent to it.</p>
+<dt id="Firehose.Client.describe_delivery_stream" class="collapsible-title">
+<tt class="descname">describe_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.describe_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes the specified delivery stream and its status. For example, after your delivery stream is created, call <tt class="docutils literal"><span class="pre">DescribeDeliveryStream</span></tt> to see whether the delivery stream is <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> and therefore ready for data to be sent to it.</p>
 <p>If the status of a delivery stream is <tt class="docutils literal"><span class="pre">CREATING_FAILED</span></tt> , this status doesn't change, and you can't invoke  CreateDeliveryStream again on it. However, you can invoke the  DeleteDeliveryStream operation to delete it. If the status is <tt class="docutils literal"><span class="pre">DELETING_FAILED</span></tt> , you can force deletion by invoking  DeleteDeliveryStream again but with  DeleteDeliveryStreamInput$AllowForceDelete set to true.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3558,16 +3557,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Firehose.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="Firehose.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Firehose.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -3583,16 +3577,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="Firehose.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -3607,16 +3596,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="Firehose.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Firehose.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -3624,16 +3608,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.list_delivery_streams">
-<tt class="descname">list_delivery_streams</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.list_delivery_streams" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists your delivery streams in alphabetical order of their names.</p>
+<dt id="Firehose.Client.list_delivery_streams" class="collapsible-title">
+<tt class="descname">list_delivery_streams</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.list_delivery_streams" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists your delivery streams in alphabetical order of their names.</p>
 <p>The number of delivery streams might be too large to return using a single call to <tt class="docutils literal"><span class="pre">ListDeliveryStreams</span></tt> . You can limit the number of delivery streams returned, using the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter. To determine whether there are more delivery streams to list, check the value of <tt class="docutils literal"><span class="pre">HasMoreDeliveryStreams</span></tt> in the output. If there are more delivery streams to list, you can request them by calling this operation again and setting the <tt class="docutils literal"><span class="pre">ExclusiveStartDeliveryStreamName</span></tt> parameter to the name of the last delivery stream returned in the last call.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3688,16 +3667,11 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.list_tags_for_delivery_stream">
-<tt class="descname">list_tags_for_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.list_tags_for_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the tags for the specified delivery stream. This operation has a limit of five transactions per second per account.</p>
+<dt id="Firehose.Client.list_tags_for_delivery_stream" class="collapsible-title">
+<tt class="descname">list_tags_for_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.list_tags_for_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the tags for the specified delivery stream. This operation has a limit of five transactions per second per account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListTagsForDeliveryStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tags_for_delivery_stream</span><span class="p">(</span>
@@ -3766,16 +3740,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.put_record">
-<tt class="descname">put_record</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.put_record" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use  PutRecordBatch . Applications using these operations are referred to as producers.</p>
+<dt id="Firehose.Client.put_record" class="collapsible-title">
+<tt class="descname">put_record</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.put_record" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use  PutRecordBatch . Applications using these operations are referred to as producers.</p>
 <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use  PutRecord and  PutRecordBatch , the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a class="reference external" href="https://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Limits</a> .</p>
 <p>You must specify the name of the delivery stream and the data record when using  PutRecord . The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p>
 <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<tt class="docutils literal"><span class="pre">\n</span></tt> ) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p>
@@ -3843,16 +3812,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.ServiceUnavailableException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.put_record_batch">
-<tt class="descname">put_record_batch</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.put_record_batch" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use  PutRecord . Applications using these operations are referred to as producers.</p>
+<dt id="Firehose.Client.put_record_batch" class="collapsible-title">
+<tt class="descname">put_record_batch</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.put_record_batch" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use  PutRecord . Applications using these operations are referred to as producers.</p>
 <p>For information about service quota, see <a class="reference external" href="https://docs.aws.amazon.com/firehose/latest/dev/limits.html">Amazon Kinesis Data Firehose Quota</a> .</p>
 <p>Each  PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p>
 <p>You must specify the name of the delivery stream and the data record when using  PutRecord . The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p>
@@ -3955,16 +3919,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.ServiceUnavailableException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.start_delivery_stream_encryption">
-<tt class="descname">start_delivery_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.start_delivery_stream_encryption" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables server-side encryption (SSE) for the delivery stream.</p>
+<dt id="Firehose.Client.start_delivery_stream_encryption" class="collapsible-title">
+<tt class="descname">start_delivery_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.start_delivery_stream_encryption" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables server-side encryption (SSE) for the delivery stream.</p>
 <p>This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to <tt class="docutils literal"><span class="pre">ENABLING</span></tt> , and then to <tt class="docutils literal"><span class="pre">ENABLED</span></tt> . The encryption status of a delivery stream is the <tt class="docutils literal"><span class="pre">Status</span></tt> property in  DeliveryStreamEncryptionConfiguration . If the operation fails, the encryption status changes to <tt class="docutils literal"><span class="pre">ENABLING_FAILED</span></tt> . You can continue to read and write data to your delivery stream while the encryption status is <tt class="docutils literal"><span class="pre">ENABLING</span></tt> , but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to <tt class="docutils literal"><span class="pre">ENABLED</span></tt> before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements  PutRecordOutput$Encrypted and  PutRecordBatchOutput$Encrypted , respectively.</p>
 <p>To check the encryption status of a delivery stream, use  DescribeDeliveryStream .</p>
 <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this method to change the CMK, and the old CMK is of type <tt class="docutils literal"><span class="pre">CUSTOMER_MANAGED_CMK</span></tt> , Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. If the new CMK is of type <tt class="docutils literal"><span class="pre">CUSTOMER_MANAGED_CMK</span></tt> , Kinesis Data Firehose creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant.</p>
@@ -4026,16 +3985,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.InvalidKMSResourceException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.stop_delivery_stream_encryption">
-<tt class="descname">stop_delivery_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.stop_delivery_stream_encryption" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disables server-side encryption (SSE) for the delivery stream.</p>
+<dt id="Firehose.Client.stop_delivery_stream_encryption" class="collapsible-title">
+<tt class="descname">stop_delivery_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.stop_delivery_stream_encryption" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disables server-side encryption (SSE) for the delivery stream.</p>
 <p>This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to <tt class="docutils literal"><span class="pre">DISABLING</span></tt> , and then to <tt class="docutils literal"><span class="pre">DISABLED</span></tt> . You can continue to read and write data to your stream while its status is <tt class="docutils literal"><span class="pre">DISABLING</span></tt> . It can take up to 5 seconds after the encryption status changes to <tt class="docutils literal"><span class="pre">DISABLED</span></tt> before all records written to the delivery stream are no longer subject to encryption. To find out whether a record or a batch of records was encrypted, check the response elements  PutRecordOutput$Encrypted and  PutRecordBatchOutput$Encrypted , respectively.</p>
 <p>To check the encryption state of a delivery stream, use  DescribeDeliveryStream .</p>
 <p>If SSE is enabled using a customer managed CMK and then you invoke <tt class="docutils literal"><span class="pre">StopDeliveryStreamEncryption</span></tt> , Kinesis Data Firehose schedules the related KMS grant for retirement and then retires it after it ensures that it is finished delivering records to the destination.</p>
@@ -4069,16 +4023,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.tag_delivery_stream">
-<tt class="descname">tag_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.tag_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a class="reference external" href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <em>AWS Billing and Cost Management User Guide</em> .</p>
+<dt id="Firehose.Client.tag_delivery_stream" class="collapsible-title">
+<tt class="descname">tag_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.tag_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Adds or updates tags for the specified delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a class="reference external" href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <em>AWS Billing and Cost Management User Guide</em> .</p>
 <p>Each delivery stream can have up to 50 tags.</p>
 <p>This operation has a limit of five transactions per second per account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStream">AWS API Documentation</a></p>
@@ -4135,16 +4084,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.untag_delivery_stream">
-<tt class="descname">untag_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.untag_delivery_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes tags from the specified delivery stream. Removed tags are deleted, and you can't recover them after this operation successfully completes.</p>
+<dt id="Firehose.Client.untag_delivery_stream" class="collapsible-title">
+<tt class="descname">untag_delivery_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.untag_delivery_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes tags from the specified delivery stream. Removed tags are deleted, and you can't recover them after this operation successfully completes.</p>
 <p>If you specify a tag that doesn't exist, the operation ignores it.</p>
 <p>This operation has a limit of five transactions per second per account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStream">AWS API Documentation</a></p>
@@ -4191,16 +4135,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Firehose.Client.update_destination">
-<tt class="descname">update_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.update_destination" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates the specified destination of the specified delivery stream.</p>
+<dt id="Firehose.Client.update_destination" class="collapsible-title">
+<tt class="descname">update_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Firehose.Client.update_destination" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates the specified destination of the specified delivery stream.</p>
 <p>Use this operation to change the destination type (for example, to replace the Amazon S3 destination with Amazon Redshift) or change the parameters associated with a destination (for example, to change the bucket name of the Amazon S3 destination). The update might not occur immediately. The target delivery stream remains active while the configurations are updated, so data writes to the delivery stream can continue during this process. The updated configurations are usually effective within a few minutes.</p>
 <p>Switching between Amazon ES and other services is not supported. For an Amazon ES destination, you can only update to another Amazon ES destination.</p>
 <p>If the destination type is the same, Kinesis Data Firehose merges the configuration parameters specified with the destination configuration that already exists on the delivery stream. If any of the parameters are not specified in the call, the existing values are retained. For example, in the Amazon S3 destination, if  EncryptionConfiguration is not specified, then the existing <tt class="docutils literal"><span class="pre">EncryptionConfiguration</span></tt> is maintained on the destination.</p>
@@ -5435,7 +5374,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Firehose.Client.exceptions.ConcurrentModificationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -5466,7 +5404,18 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      &raquo;&raquo;
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="fis.html" title="FIS">next</a> |</li>
+        <li class="right">
+          <a href="finspace-data.html" title="FinSpaceData">previous</a> |</li>
+        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html">Available services</a> &raquo;</li> 
+      </ul>
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -5476,24 +5425,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

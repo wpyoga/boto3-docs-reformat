@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="support.html" title="Support"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="storagegateway.html" title="StorageGateway"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="support.html" title="Support" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="storagegateway.html" title="StorageGateway" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -450,14 +468,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.assume_role">
-<tt class="descname">assume_role</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a set of temporary security credentials that you can use to access Amazon Web Services resources that you might not normally have access to. These temporary credentials consist of an access key ID, a secret access key, and a security token. Typically, you use <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> within your account or for cross-account access. For a comparison of <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> with other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
+<dt id="STS.Client.assume_role" class="collapsible-title">
+<tt class="descname">assume_role</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a set of temporary security credentials that you can use to access Amazon Web Services resources that you might not normally have access to. These temporary credentials consist of an access key ID, a secret access key, and a security token. Typically, you use <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> within your account or for cross-account access. For a comparison of <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> with other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
 <blockquote>
 <div><strong>Permissions</strong></div></blockquote>
 <p>The temporary security credentials created by <tt class="docutils literal"><span class="pre">AssumeRole</span></tt> can be used to make API calls to any Amazon Web Services service with the following exception: You cannot call the STS <tt class="docutils literal"><span class="pre">GetFederationToken</span></tt> or <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> API operations.</p>
@@ -703,16 +717,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.assume_role_with_saml">
-<tt class="descname">assume_role_with_saml</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role_with_saml" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a set of temporary security credentials for users who have been authenticated via a SAML authentication response. This operation provides a mechanism for tying an enterprise identity store or directory to role-based Amazon Web Services access without user-specific credentials or configuration. For a comparison of <tt class="docutils literal"><span class="pre">AssumeRoleWithSAML</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
+<dt id="STS.Client.assume_role_with_saml" class="collapsible-title">
+<tt class="descname">assume_role_with_saml</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role_with_saml" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a set of temporary security credentials for users who have been authenticated via a SAML authentication response. This operation provides a mechanism for tying an enterprise identity store or directory to role-based Amazon Web Services access without user-specific credentials or configuration. For a comparison of <tt class="docutils literal"><span class="pre">AssumeRoleWithSAML</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
 <p>The temporary security credentials returned by this operation consist of an access key ID, a secret access key, and a security token. Applications can use these temporary security credentials to sign calls to Amazon Web Services services.</p>
 <blockquote>
 <div><strong>Session Duration</strong></div></blockquote>
@@ -923,16 +932,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">STS.Client.exceptions.RegionDisabledException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.assume_role_with_web_identity">
-<tt class="descname">assume_role_with_web_identity</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role_with_web_identity" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider. Example providers include Amazon Cognito, Login with Amazon, Facebook, Google, or any OpenID Connect-compatible identity provider.</p>
+<dt id="STS.Client.assume_role_with_web_identity" class="collapsible-title">
+<tt class="descname">assume_role_with_web_identity</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.assume_role_with_web_identity" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider. Example providers include Amazon Cognito, Login with Amazon, Facebook, Google, or any OpenID Connect-compatible identity provider.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>For mobile applications, we recommend that you use Amazon Cognito. You can use Amazon Cognito with the <a class="reference external" href="http://aws.amazon.com/sdkforios/">Amazon Web Services SDK for iOS Developer Guide</a> and the <a class="reference external" href="http://aws.amazon.com/sdkforandroid/">Amazon Web Services SDK for Android Developer Guide</a> to uniquely identify a user. You can also supply the user with a consistent identity throughout the lifetime of an application.</p>
@@ -1165,16 +1169,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#STS.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="STS.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#STS.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -1186,16 +1185,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.decode_authorization_message">
-<tt class="descname">decode_authorization_message</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.decode_authorization_message" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Decodes additional information about the authorization status of a request from an encoded message returned in response to an Amazon Web Services request.</p>
+<dt id="STS.Client.decode_authorization_message" class="collapsible-title">
+<tt class="descname">decode_authorization_message</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.decode_authorization_message" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Decodes additional information about the authorization status of a request from an encoded message returned in response to an Amazon Web Services request.</p>
 <p>For example, if a user is not authorized to perform an operation that he or she has requested, the request returns a <tt class="docutils literal"><span class="pre">Client.UnauthorizedOperation</span></tt> response (an HTTP 403 response). Some Amazon Web Services operations additionally return an encoded message that can provide details about this authorization failure.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1260,16 +1254,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#STS.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="STS.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#STS.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -1285,16 +1274,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_access_key_info">
-<tt class="descname">get_access_key_info</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_access_key_info" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the account identifier for the specified access key ID.</p>
+<dt id="STS.Client.get_access_key_info" class="collapsible-title">
+<tt class="descname">get_access_key_info</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_access_key_info" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the account identifier for the specified access key ID.</p>
 <p>Access keys consist of two parts: an access key ID (for example, <tt class="docutils literal"><span class="pre">AKIAIOSFODNN7EXAMPLE</span></tt> ) and a secret access key (for example, <tt class="docutils literal"><span class="pre">wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</span></tt> ). For more information about access keys, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">Managing Access Keys for IAM Users</a> in the <em>IAM User Guide</em> .</p>
 <p>When you pass an access key ID to this operation, it returns the ID of the Amazon Web Services account to which the keys belong. Access key IDs beginning with <tt class="docutils literal"><span class="pre">AKIA</span></tt> are long-term credentials for an IAM user or the Amazon Web Services account root user. Access key IDs beginning with <tt class="docutils literal"><span class="pre">ASIA</span></tt> are temporary credentials that are created using STS operations. If the account in the response belongs to you, you can sign in as the root user and review your root user access keys. Then, you can pull a <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html">credentials report</a> to learn which IAM user owns the keys. To learn who requested the temporary credentials for an <tt class="docutils literal"><span class="pre">ASIA</span></tt> access key, view the STS events in your <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html">CloudTrail logs</a> in the <em>IAM User Guide</em> .</p>
 <p>This operation does not indicate the state of the access key. The key might be active, inactive, or deleted. Active keys might not have permissions to perform an operation. Providing a deleted access key might return an error that the key doesn't exist.</p>
@@ -1327,16 +1311,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_caller_identity">
-<tt class="descname">get_caller_identity</tt><big>(</big><big>)</big><a class="headerlink" href="#STS.Client.get_caller_identity" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns details about the IAM user or role whose credentials are used to call the operation.</p>
+<dt id="STS.Client.get_caller_identity" class="collapsible-title">
+<tt class="descname">get_caller_identity</tt><big>(</big><big>)</big><a class="headerlink" href="#STS.Client.get_caller_identity" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns details about the IAM user or role whose credentials are used to call the operation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">No permissions are required to perform this operation. If an administrator adds a policy to your IAM user or role that explicitly denies access to the <tt class="docutils literal"><span class="pre">sts:GetCallerIdentity</span></tt> action, you can still perform this operation. Permissions are not required because the same information is returned when an IAM user or role is denied access. To view an example response, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_access-denied-delete-mfa">I Am Not Authorized to Perform: iam:DeleteVirtualMFADevice</a> in the <em>IAM User Guide</em> .</p>
@@ -1426,16 +1405,11 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_federation_token">
-<tt class="descname">get_federation_token</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_federation_token" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a set of temporary security credentials (consisting of an access key ID, a secret access key, and a security token) for a federated user. A typical use is in a proxy application that gets temporary security credentials on behalf of distributed applications inside a corporate network. You must call the <tt class="docutils literal"><span class="pre">GetFederationToken</span></tt> operation using the long-term security credentials of an IAM user. As a result, this call is appropriate in contexts where those credentials can be safely stored, usually in a server-based application. For a comparison of <tt class="docutils literal"><span class="pre">GetFederationToken</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
+<dt id="STS.Client.get_federation_token" class="collapsible-title">
+<tt class="descname">get_federation_token</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_federation_token" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a set of temporary security credentials (consisting of an access key ID, a secret access key, and a security token) for a federated user. A typical use is in a proxy application that gets temporary security credentials on behalf of distributed applications inside a corporate network. You must call the <tt class="docutils literal"><span class="pre">GetFederationToken</span></tt> operation using the long-term security credentials of an IAM user. As a result, this call is appropriate in contexts where those credentials can be safely stored, usually in a server-based application. For a comparison of <tt class="docutils literal"><span class="pre">GetFederationToken</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You can create a mobile-based or browser-based app that can authenticate users using a web identity provider like Login with Amazon, Facebook, Google, or an OpenID Connect-compatible identity provider. In this case, we recommend that you use <a class="reference external" href="http://aws.amazon.com/cognito/">Amazon Cognito</a> or <tt class="docutils literal"><span class="pre">AssumeRoleWithWebIdentity</span></tt> . For more information, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity">Federation Through a Web-based Identity Provider</a> in the <em>IAM User Guide</em> .</p>
@@ -1659,16 +1633,11 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#STS.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="STS.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#STS.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -1683,16 +1652,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_session_token">
-<tt class="descname">get_session_token</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_session_token" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a set of temporary credentials for an Amazon Web Services account or IAM user. The credentials consist of an access key ID, a secret access key, and a security token. Typically, you use <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> if you want to use MFA to protect programmatic calls to specific Amazon Web Services API operations like Amazon EC2 <tt class="docutils literal"><span class="pre">StopInstances</span></tt> . MFA-enabled IAM users would need to call <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> and submit an MFA code that is associated with their MFA device. Using the temporary security credentials that are returned from the call, IAM users can then make programmatic calls to API operations that require MFA authentication. If you do not supply a correct MFA code, then the API returns an access denied error. For a comparison of <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
+<dt id="STS.Client.get_session_token" class="collapsible-title">
+<tt class="descname">get_session_token</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#STS.Client.get_session_token" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a set of temporary credentials for an Amazon Web Services account or IAM user. The credentials consist of an access key ID, a secret access key, and a security token. Typically, you use <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> if you want to use MFA to protect programmatic calls to specific Amazon Web Services API operations like Amazon EC2 <tt class="docutils literal"><span class="pre">StopInstances</span></tt> . MFA-enabled IAM users would need to call <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> and submit an MFA code that is associated with their MFA device. Using the temporary security credentials that are returned from the call, IAM users can then make programmatic calls to API operations that require MFA authentication. If you do not supply a correct MFA code, then the API returns an access denied error. For a comparison of <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> with the other API operations that produce temporary credentials, see <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html">Requesting Temporary Security Credentials</a> and <a class="reference external" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison">Comparing the STS API operations</a> in the <em>IAM User Guide</em> .</p>
 <blockquote>
 <div><strong>Session Duration</strong></div></blockquote>
 <p>The <tt class="docutils literal"><span class="pre">GetSessionToken</span></tt> operation must be called by using the long-term Amazon Web Services security credentials of the Amazon Web Services account root user or an IAM user. Credentials that are created by IAM users are valid for the duration that you specify. This duration can range from 900 seconds (15 minutes) up to a maximum of 129,600 seconds (36 hours), with a default of 43,200 seconds (12 hours). Credentials based on account credentials can range from 900 seconds (15 minutes) up to 3,600 seconds (1 hour), with a default of 1 hour.</p>
@@ -1803,16 +1767,11 @@ check if an operation is pageable.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="STS.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#STS.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="STS.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#STS.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -1820,7 +1779,6 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -1851,7 +1809,18 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      &raquo;&raquo;
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="support.html" title="Support">next</a> |</li>
+        <li class="right">
+          <a href="storagegateway.html" title="StorageGateway">previous</a> |</li>
+        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html">Available services</a> &raquo;</li> 
+      </ul>
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -1861,24 +1830,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

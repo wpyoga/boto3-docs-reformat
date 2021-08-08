@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="braket.html" title="Braket"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="backup.html" title="Backup"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="braket.html" title="Braket" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="backup.html" title="Backup" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -451,14 +469,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Batch.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="Batch.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Batch.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -470,16 +484,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.cancel_job">
-<tt class="descname">cancel_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.cancel_job" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Cancels a job in an AWS Batch job queue. Jobs that are in the <tt class="docutils literal"><span class="pre">SUBMITTED</span></tt> , <tt class="docutils literal"><span class="pre">PENDING</span></tt> , or <tt class="docutils literal"><span class="pre">RUNNABLE</span></tt> state are canceled. Jobs that have progressed to <tt class="docutils literal"><span class="pre">STARTING</span></tt> or <tt class="docutils literal"><span class="pre">RUNNING</span></tt> aren't canceled, but the API operation still succeeds, even if no job is canceled. These jobs must be terminated with the  TerminateJob operation.</p>
+<dt id="Batch.Client.cancel_job" class="collapsible-title">
+<tt class="descname">cancel_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.cancel_job" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Cancels a job in an AWS Batch job queue. Jobs that are in the <tt class="docutils literal"><span class="pre">SUBMITTED</span></tt> , <tt class="docutils literal"><span class="pre">PENDING</span></tt> , or <tt class="docutils literal"><span class="pre">RUNNABLE</span></tt> state are canceled. Jobs that have progressed to <tt class="docutils literal"><span class="pre">STARTING</span></tt> or <tt class="docutils literal"><span class="pre">RUNNING</span></tt> aren't canceled, but the API operation still succeeds, even if no job is canceled. These jobs must be terminated with the  TerminateJob operation.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">cancel_job</span><span class="p">(</span>
@@ -535,16 +544,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.create_compute_environment">
-<tt class="descname">create_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.create_compute_environment" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an AWS Batch compute environment. You can create <tt class="docutils literal"><span class="pre">MANAGED</span></tt> or <tt class="docutils literal"><span class="pre">UNMANAGED</span></tt> compute environments. <tt class="docutils literal"><span class="pre">MANAGED</span></tt> compute environments can use Amazon EC2 or AWS Fargate resources. <tt class="docutils literal"><span class="pre">UNMANAGED</span></tt> compute environments can only use EC2 resources.</p>
+<dt id="Batch.Client.create_compute_environment" class="collapsible-title">
+<tt class="descname">create_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.create_compute_environment" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an AWS Batch compute environment. You can create <tt class="docutils literal"><span class="pre">MANAGED</span></tt> or <tt class="docutils literal"><span class="pre">UNMANAGED</span></tt> compute environments. <tt class="docutils literal"><span class="pre">MANAGED</span></tt> compute environments can use Amazon EC2 or AWS Fargate resources. <tt class="docutils literal"><span class="pre">UNMANAGED</span></tt> compute environments can only use EC2 resources.</p>
 <p>In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the <a class="reference external" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">launch template</a> that you specify when you create the compute environment. Either, you can choose to use EC2 On-Demand Instances and EC2 Spot Instances. Or, you can use Fargate and Fargate Spot capacity in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is less than a specified percentage of the On-Demand price.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -942,16 +946,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.create_job_queue">
-<tt class="descname">create_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.create_job_queue" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an AWS Batch job queue. When you create a job queue, you associate one or more compute environments to the queue and assign an order of preference for the compute environments.</p>
+<dt id="Batch.Client.create_job_queue" class="collapsible-title">
+<tt class="descname">create_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.create_job_queue" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an AWS Batch job queue. When you create a job queue, you associate one or more compute environments to the queue and assign an order of preference for the compute environments.</p>
 <p>You also set a priority to the job queue that determines the order that the AWS Batch scheduler places jobs onto its associated compute environments. For example, if a compute environment is associated with more than one job queue, the job queue with a higher priority is given preference for scheduling jobs to that compute environment.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1099,16 +1098,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.delete_compute_environment">
-<tt class="descname">delete_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.delete_compute_environment" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes an AWS Batch compute environment.</p>
+<dt id="Batch.Client.delete_compute_environment" class="collapsible-title">
+<tt class="descname">delete_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.delete_compute_environment" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes an AWS Batch compute environment.</p>
 <p>Before you can delete a compute environment, you must set its state to <tt class="docutils literal"><span class="pre">DISABLED</span></tt> with the  UpdateComputeEnvironment API operation and disassociate it from any job queues with the  UpdateJobQueue API operation. Compute environments that use AWS Fargate resources must terminate all active jobs on that compute environment before deleting the compute environment. If this isn't done, the compute environment enters an invalid state.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1154,16 +1148,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.delete_job_queue">
-<tt class="descname">delete_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.delete_job_queue" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes the specified job queue. You must first disable submissions for a queue with the  UpdateJobQueue operation. All jobs in the queue are eventually terminated when you delete a job queue. The jobs are terminated at a rate of about 16 jobs each second.</p>
+<dt id="Batch.Client.delete_job_queue" class="collapsible-title">
+<tt class="descname">delete_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.delete_job_queue" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes the specified job queue. You must first disable submissions for a queue with the  UpdateJobQueue operation. All jobs in the queue are eventually terminated when you delete a job queue. The jobs are terminated at a rate of about 16 jobs each second.</p>
 <p>It's not necessary to disassociate compute environments from a queue before submitting a <tt class="docutils literal"><span class="pre">DeleteJobQueue</span></tt> request.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1209,16 +1198,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.deregister_job_definition">
-<tt class="descname">deregister_job_definition</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.deregister_job_definition" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deregisters an AWS Batch job definition. Job definitions are permanently deleted after 180 days.</p>
+<dt id="Batch.Client.deregister_job_definition" class="collapsible-title">
+<tt class="descname">deregister_job_definition</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.deregister_job_definition" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deregisters an AWS Batch job definition. Job definitions are permanently deleted after 180 days.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">deregister_job_definition</span><span class="p">(</span>
@@ -1263,16 +1247,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.describe_compute_environments">
-<tt class="descname">describe_compute_environments</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_compute_environments" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes one or more of your compute environments.</p>
+<dt id="Batch.Client.describe_compute_environments" class="collapsible-title">
+<tt class="descname">describe_compute_environments</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_compute_environments" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes one or more of your compute environments.</p>
 <p>If you're using an unmanaged compute environment, you can use the <tt class="docutils literal"><span class="pre">DescribeComputeEnvironment</span></tt> operation to determine the <tt class="docutils literal"><span class="pre">ecsClusterArn</span></tt> that you should launch your Amazon ECS container instances into.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1680,16 +1659,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.describe_job_definitions">
-<tt class="descname">describe_job_definitions</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_job_definitions" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes a list of job definitions. You can specify a <tt class="docutils literal"><span class="pre">status</span></tt> (such as <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> ) to only return job definitions that match that status.</p>
+<dt id="Batch.Client.describe_job_definitions" class="collapsible-title">
+<tt class="descname">describe_job_definitions</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_job_definitions" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes a list of job definitions. You can specify a <tt class="docutils literal"><span class="pre">status</span></tt> (such as <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> ) to only return job definitions that match that status.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_job_definitions</span><span class="p">(</span>
@@ -3215,16 +3189,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.describe_job_queues">
-<tt class="descname">describe_job_queues</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_job_queues" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes one or more of your job queues.</p>
+<dt id="Batch.Client.describe_job_queues" class="collapsible-title">
+<tt class="descname">describe_job_queues</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_job_queues" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes one or more of your job queues.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_job_queues</span><span class="p">(</span>
@@ -3390,16 +3359,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.describe_jobs">
-<tt class="descname">describe_jobs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_jobs" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes a list of AWS Batch jobs.</p>
+<dt id="Batch.Client.describe_jobs" class="collapsible-title">
+<tt class="descname">describe_jobs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.describe_jobs" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes a list of AWS Batch jobs.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_jobs</span><span class="p">(</span>
@@ -4848,16 +4812,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Batch.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="Batch.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Batch.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -4873,16 +4832,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Batch.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="Batch.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Batch.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -4897,16 +4851,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Batch.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="Batch.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Batch.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -4914,16 +4863,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.list_jobs">
-<tt class="descname">list_jobs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.list_jobs" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of AWS Batch jobs.</p>
+<dt id="Batch.Client.list_jobs" class="collapsible-title">
+<tt class="descname">list_jobs</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.list_jobs" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of AWS Batch jobs.</p>
 <p>You must specify only one of the following items:</p>
 <ul class="simple">
 <li>A job queue ID to return a list of jobs in that job queue</li>
@@ -5130,16 +5074,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.list_tags_for_resource">
-<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.</p>
+<dt id="Batch.Client.list_tags_for_resource" class="collapsible-title">
+<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tags_for_resource</span><span class="p">(</span>
@@ -5181,16 +5120,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Batch.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.register_job_definition">
-<tt class="descname">register_job_definition</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.register_job_definition" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Registers an AWS Batch job definition.</p>
+<dt id="Batch.Client.register_job_definition" class="collapsible-title">
+<tt class="descname">register_job_definition</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.register_job_definition" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Registers an AWS Batch job definition.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinition">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">register_job_definition</span><span class="p">(</span>
@@ -6463,16 +6397,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.submit_job">
-<tt class="descname">submit_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.submit_job" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Submits an AWS Batch job from a job definition. Parameters that are specified during  SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the <tt class="docutils literal"><span class="pre">ResourceRequirements</span></tt> objects in the job definition are the exception. They can't be overridden this way using the <tt class="docutils literal"><span class="pre">memory</span></tt> and <tt class="docutils literal"><span class="pre">vcpus</span></tt> parameters. Rather, you must specify updates to job definition parameters in a <tt class="docutils literal"><span class="pre">ResourceRequirements</span></tt> object that's included in the <tt class="docutils literal"><span class="pre">containerOverrides</span></tt> parameter.</p>
+<dt id="Batch.Client.submit_job" class="collapsible-title">
+<tt class="descname">submit_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.submit_job" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Submits an AWS Batch job from a job definition. Parameters that are specified during  SubmitJob override parameters defined in the job definition. vCPU and memory requirements that are specified in the <tt class="docutils literal"><span class="pre">ResourceRequirements</span></tt> objects in the job definition are the exception. They can't be overridden this way using the <tt class="docutils literal"><span class="pre">memory</span></tt> and <tt class="docutils literal"><span class="pre">vcpus</span></tt> parameters. Rather, you must specify updates to job definition parameters in a <tt class="docutils literal"><span class="pre">ResourceRequirements</span></tt> object that's included in the <tt class="docutils literal"><span class="pre">containerOverrides</span></tt> parameter.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Jobs that run on Fargate resources can't be guaranteed to run for more than 14 days. This is because, after 14 days, Fargate resources might become unavailable and job might be terminated.</p>
@@ -6957,16 +6886,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.tag_resource">
-<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Associates the specified tags to a resource with the specified <tt class="docutils literal"><span class="pre">resourceArn</span></tt> . If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.</p>
+<dt id="Batch.Client.tag_resource" class="collapsible-title">
+<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Associates the specified tags to a resource with the specified <tt class="docutils literal"><span class="pre">resourceArn</span></tt> . If existing tags on a resource aren't specified in the request parameters, they aren't changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">tag_resource</span><span class="p">(</span>
@@ -7012,16 +6936,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Batch.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.terminate_job">
-<tt class="descname">terminate_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.terminate_job" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Terminates a job in a job queue. Jobs that are in the <tt class="docutils literal"><span class="pre">STARTING</span></tt> or <tt class="docutils literal"><span class="pre">RUNNING</span></tt> state are terminated, which causes them to transition to <tt class="docutils literal"><span class="pre">FAILED</span></tt> . Jobs that have not progressed to the <tt class="docutils literal"><span class="pre">STARTING</span></tt> state are cancelled.</p>
+<dt id="Batch.Client.terminate_job" class="collapsible-title">
+<tt class="descname">terminate_job</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.terminate_job" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Terminates a job in a job queue. Jobs that are in the <tt class="docutils literal"><span class="pre">STARTING</span></tt> or <tt class="docutils literal"><span class="pre">RUNNING</span></tt> state are terminated, which causes them to transition to <tt class="docutils literal"><span class="pre">FAILED</span></tt> . Jobs that have not progressed to the <tt class="docutils literal"><span class="pre">STARTING</span></tt> state are cancelled.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJob">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">terminate_job</span><span class="p">(</span>
@@ -7077,16 +6996,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.untag_resource">
-<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes specified tags from an AWS Batch resource.</p>
+<dt id="Batch.Client.untag_resource" class="collapsible-title">
+<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes specified tags from an AWS Batch resource.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">untag_resource</span><span class="p">(</span>
@@ -7129,16 +7043,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Batch.Client.exceptions.ServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.update_compute_environment">
-<tt class="descname">update_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.update_compute_environment" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates an AWS Batch compute environment.</p>
+<dt id="Batch.Client.update_compute_environment" class="collapsible-title">
+<tt class="descname">update_compute_environment</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.update_compute_environment" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates an AWS Batch compute environment.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_compute_environment</span><span class="p">(</span>
@@ -7264,16 +7173,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Batch.Client.update_job_queue">
-<tt class="descname">update_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.update_job_queue" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates a job queue.</p>
+<dt id="Batch.Client.update_job_queue" class="collapsible-title">
+<tt class="descname">update_job_queue</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Client.update_job_queue" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates a job queue.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_job_queue</span><span class="p">(</span>
@@ -7369,7 +7273,6 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -7379,18 +7282,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="Batch.Paginator.DescribeComputeEnvironments">
+<dt id="Batch.Paginator.DescribeComputeEnvironments" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Batch.Paginator.</tt><tt class="descname">DescribeComputeEnvironments</tt><a class="headerlink" href="#Batch.Paginator.DescribeComputeEnvironments" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_compute_environments&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_compute_environments&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Batch.Paginator.DescribeComputeEnvironments.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Paginator.DescribeComputeEnvironments.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Batch.Client.describe_compute_environments" title="Batch.Client.describe_compute_environments"><tt class="xref py py-meth docutils literal"><span class="pre">Batch.Client.describe_compute_environments()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7746,23 +7645,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Batch.Paginator.DescribeJobDefinitions">
+<dt id="Batch.Paginator.DescribeJobDefinitions" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Batch.Paginator.</tt><tt class="descname">DescribeJobDefinitions</tt><a class="headerlink" href="#Batch.Paginator.DescribeJobDefinitions" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_job_definitions&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_job_definitions&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Batch.Paginator.DescribeJobDefinitions.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Paginator.DescribeJobDefinitions.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Batch.Client.describe_job_definitions" title="Batch.Client.describe_job_definitions"><tt class="xref py py-meth docutils literal"><span class="pre">Batch.Client.describe_job_definitions()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -9247,23 +9141,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Batch.Paginator.DescribeJobQueues">
+<dt id="Batch.Paginator.DescribeJobQueues" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Batch.Paginator.</tt><tt class="descname">DescribeJobQueues</tt><a class="headerlink" href="#Batch.Paginator.DescribeJobQueues" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_job_queues&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_job_queues&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Batch.Paginator.DescribeJobQueues.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Paginator.DescribeJobQueues.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Batch.Client.describe_job_queues" title="Batch.Client.describe_job_queues"><tt class="xref py py-meth docutils literal"><span class="pre">Batch.Client.describe_job_queues()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -9396,23 +9285,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Batch.Paginator.ListJobs">
+<dt id="Batch.Paginator.ListJobs" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Batch.Paginator.</tt><tt class="descname">ListJobs</tt><a class="headerlink" href="#Batch.Paginator.ListJobs" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_jobs&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_jobs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Batch.Paginator.ListJobs.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Batch.Paginator.ListJobs.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Batch.Client.list_jobs" title="Batch.Client.list_jobs"><tt class="xref py py-meth docutils literal"><span class="pre">Batch.Client.list_jobs()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -9568,7 +9452,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -9597,19 +9480,15 @@ section of the service docs for a list of available waiters.</dd>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="braket.html" title="Braket"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="backup.html" title="Backup"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="braket.html" title="Braket">next</a> |</li>
+        <li class="right">
+          <a href="backup.html" title="Backup">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -9620,24 +9499,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="dynamodbstreams.html" title="DynamoDBStreams"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="ds.html" title="DirectoryService"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="dynamodbstreams.html" title="DynamoDBStreams" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="ds.html" title="DirectoryService" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -458,14 +476,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.batch_execute_statement">
-<tt class="descname">batch_execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_execute_statement" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL.</p>
+<dt id="DynamoDB.Client.batch_execute_statement" class="collapsible-title">
+<tt class="descname">batch_execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_execute_statement" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchExecuteStatement">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">batch_execute_statement</span><span class="p">(</span>
@@ -741,16 +755,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.batch_get_item">
-<tt class="descname">batch_get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_get_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.</p>
+<dt id="DynamoDB.Client.batch_get_item" class="collapsible-title">
+<tt class="descname">batch_get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_get_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.</p>
 <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for <tt class="docutils literal"><span class="pre">UnprocessedKeys</span></tt> . You can use this value to retry the operation starting with the next item to get.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -1562,16 +1571,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.batch_write_item">
-<tt class="descname">batch_write_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_write_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> operation puts or deletes multiple items in one or more tables. A single call to <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p>
+<dt id="DynamoDB.Client.batch_write_item" class="collapsible-title">
+<tt class="descname">batch_write_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.batch_write_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> operation puts or deletes multiple items in one or more tables. A single call to <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> cannot update items. To update items, use the <tt class="docutils literal"><span class="pre">UpdateItem</span></tt> action.</p>
@@ -2547,16 +2551,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="DynamoDB.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -2568,16 +2567,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.create_backup">
-<tt class="descname">create_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a backup for an existing table.</p>
+<dt id="DynamoDB.Client.create_backup" class="collapsible-title">
+<tt class="descname">create_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a backup for an existing table.</p>
 <p>Each time you create an on-demand backup, the entire table data is backed up. There is no limit to the number of on-demand backups that can be taken.</p>
 <p>When you create an on-demand backup, a time marker of the request is cataloged, and the backup is created asynchronously, by applying all changes until the time of the request to the last full table snapshot. Backup requests are processed instantaneously and become available for restore within minutes.</p>
 <p>You can call <tt class="docutils literal"><span class="pre">CreateBackup</span></tt> at a maximum rate of 50 times per second.</p>
@@ -2675,16 +2669,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.create_global_table">
-<tt class="descname">create_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_global_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.</p>
+<dt id="DynamoDB.Client.create_global_table" class="collapsible-title">
+<tt class="descname">create_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_global_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a global table from an existing table. A global table creates a replication relationship between two or more DynamoDB tables with the same table name in the provided Regions.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p>
@@ -2891,16 +2880,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.TableNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.create_table">
-<tt class="descname">create_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.</p>
+<dt id="DynamoDB.Client.create_table" class="collapsible-title">
+<tt class="descname">create_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.create_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">CreateTable</span></tt> is an asynchronous operation. Upon receiving a <tt class="docutils literal"><span class="pre">CreateTable</span></tt> request, DynamoDB immediately returns a response with a <tt class="docutils literal"><span class="pre">TableStatus</span></tt> of <tt class="docutils literal"><span class="pre">CREATING</span></tt> . After the table is created, DynamoDB sets the <tt class="docutils literal"><span class="pre">TableStatus</span></tt> to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> . You can perform read and write operations only on an <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> table.</div></blockquote>
 <p>You can optionally define secondary indexes on the new table, as part of the <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the <tt class="docutils literal"><span class="pre">CREATING</span></tt> state at any given time.</p>
@@ -4038,16 +4022,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.delete_backup">
-<tt class="descname">delete_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes an existing backup of a table.</p>
+<dt id="DynamoDB.Client.delete_backup" class="collapsible-title">
+<tt class="descname">delete_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes an existing backup of a table.</p>
 <p>You can call <tt class="docutils literal"><span class="pre">DeleteBackup</span></tt> at a maximum rate of 10 times per second.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4420,16 +4399,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.delete_item">
-<tt class="descname">delete_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>
+<dt id="DynamoDB.Client.delete_item" class="collapsible-title">
+<tt class="descname">delete_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>
 <p>In addition to deleting an item, you can also return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <p>Unless you specify conditions, the <tt class="docutils literal"><span class="pre">DeleteItem</span></tt> is an idempotent operation; running it multiple times on the same item or attribute does <em>not</em> result in an error response.</p>
 <p>Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.</p>
@@ -5437,16 +5411,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.delete_table">
-<tt class="descname">delete_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> operation deletes a table and all of its items. After a <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> request, the specified table is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until DynamoDB completes the deletion. If the table is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can delete it. If a table is in <tt class="docutils literal"><span class="pre">CREATING</span></tt> or <tt class="docutils literal"><span class="pre">UPDATING</span></tt> states, then DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If the specified table does not exist, DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> . If table is already in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, no error is returned.</p>
+<dt id="DynamoDB.Client.delete_table" class="collapsible-title">
+<tt class="descname">delete_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.delete_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> operation deletes a table and all of its items. After a <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> request, the specified table is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until DynamoDB completes the deletion. If the table is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can delete it. If a table is in <tt class="docutils literal"><span class="pre">CREATING</span></tt> or <tt class="docutils literal"><span class="pre">UPDATING</span></tt> states, then DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If the specified table does not exist, DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> . If table is already in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, no error is returned.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">DynamoDB might continue to accept data read and write operations, such as <tt class="docutils literal"><span class="pre">GetItem</span></tt> and <tt class="docutils literal"><span class="pre">PutItem</span></tt> , on a table in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until the table deletion is complete.</p>
@@ -6086,16 +6055,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_backup">
-<tt class="descname">describe_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes an existing backup of a table.</p>
+<dt id="DynamoDB.Client.describe_backup" class="collapsible-title">
+<tt class="descname">describe_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes an existing backup of a table.</p>
 <p>You can call <tt class="docutils literal"><span class="pre">DescribeBackup</span></tt> at a maximum rate of 10 times per second.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -6466,16 +6430,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_continuous_backups">
-<tt class="descname">describe_continuous_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_continuous_backups" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <tt class="docutils literal"><span class="pre">ENABLED</span></tt> on all tables at table creation. If point in time recovery is enabled, <tt class="docutils literal"><span class="pre">PointInTimeRecoveryStatus</span></tt> will be set to ENABLED.</p>
+<dt id="DynamoDB.Client.describe_continuous_backups" class="collapsible-title">
+<tt class="descname">describe_continuous_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_continuous_backups" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Checks the status of continuous backups and point in time recovery on the specified table. Continuous backups are <tt class="docutils literal"><span class="pre">ENABLED</span></tt> on all tables at table creation. If point in time recovery is enabled, <tt class="docutils literal"><span class="pre">PointInTimeRecoveryStatus</span></tt> will be set to ENABLED.</p>
 <p>After continuous backups and point in time recovery are enabled, you can restore to any point in time within <tt class="docutils literal"><span class="pre">EarliestRestorableDateTime</span></tt> and <tt class="docutils literal"><span class="pre">LatestRestorableDateTime</span></tt> .</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">LatestRestorableDateTime</span></tt> is typically 5 minutes before the current time. You can restore your table to any point in time during the last 35 days.</div></blockquote>
@@ -6541,16 +6500,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_contributor_insights">
-<tt class="descname">describe_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_contributor_insights" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about contributor insights, for a given table or global secondary index.</p>
+<dt id="DynamoDB.Client.describe_contributor_insights" class="collapsible-title">
+<tt class="descname">describe_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_contributor_insights" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about contributor insights, for a given table or global secondary index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsights">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_contributor_insights</span><span class="p">(</span>
@@ -6637,16 +6591,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_endpoints">
-<tt class="descname">describe_endpoints</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_endpoints" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the regional endpoint information.</p>
+<dt id="DynamoDB.Client.describe_endpoints" class="collapsible-title">
+<tt class="descname">describe_endpoints</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_endpoints" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the regional endpoint information.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_endpoints</span><span class="p">()</span>
@@ -6685,16 +6634,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_export">
-<tt class="descname">describe_export</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_export" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes an existing table export.</p>
+<dt id="DynamoDB.Client.describe_export" class="collapsible-title">
+<tt class="descname">describe_export</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_export" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes an existing table export.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeExport">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_export</span><span class="p">(</span>
@@ -6793,16 +6737,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_global_table">
-<tt class="descname">describe_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_global_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about the specified global table.</p>
+<dt id="DynamoDB.Client.describe_global_table" class="collapsible-title">
+<tt class="descname">describe_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_global_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about the specified global table.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables. If you are using global tables <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> you can use <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html">DescribeTable</a> instead.</p>
@@ -6942,16 +6881,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.GlobalTableNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_global_table_settings">
-<tt class="descname">describe_global_table_settings</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_global_table_settings" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes Region-specific settings for a global table.</p>
+<dt id="DynamoDB.Client.describe_global_table_settings" class="collapsible-title">
+<tt class="descname">describe_global_table_settings</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_global_table_settings" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes Region-specific settings for a global table.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p>
@@ -7269,16 +7203,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_kinesis_streaming_destination">
-<tt class="descname">describe_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about the status of Kinesis streaming.</p>
+<dt id="DynamoDB.Client.describe_kinesis_streaming_destination" class="collapsible-title">
+<tt class="descname">describe_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about the status of Kinesis streaming.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_kinesis_streaming_destination</span><span class="p">(</span>
@@ -7333,16 +7262,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_limits">
-<tt class="descname">describe_limits</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_limits" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there.</p>
+<dt id="DynamoDB.Client.describe_limits" class="collapsible-title">
+<tt class="descname">describe_limits</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_limits" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there.</p>
 <p>When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html">Service, Account, and Table Quotas</a> page in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <p>Although you can increase these quotas by filing a case at <a class="reference external" href="https://console.aws.amazon.com/support/home#/">AWS Support Center</a> , obtaining the increase is not instantaneous. The <tt class="docutils literal"><span class="pre">DescribeLimits</span></tt> action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota.</p>
 <p>For example, you could use one of the AWS SDKs to do the following:</p>
@@ -7423,16 +7347,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_table">
-<tt class="descname">describe_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p>
+<dt id="DynamoDB.Client.describe_table" class="collapsible-title">
+<tt class="descname">describe_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you issue a <tt class="docutils literal"><span class="pre">DescribeTable</span></tt> request immediately after a <tt class="docutils literal"><span class="pre">CreateTable</span></tt> request, DynamoDB might return a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> . This is because <tt class="docutils literal"><span class="pre">DescribeTable</span></tt> uses an eventually consistent query, and the metadata for your table might not be available at that moment. Wait for a few seconds, and then try the <tt class="docutils literal"><span class="pre">DescribeTable</span></tt> request again.</p>
@@ -8088,16 +8007,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_table_replica_auto_scaling">
-<tt class="descname">describe_table_replica_auto_scaling</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_table_replica_auto_scaling" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes auto scaling settings across replicas of the global table at once.</p>
+<dt id="DynamoDB.Client.describe_table_replica_auto_scaling" class="collapsible-title">
+<tt class="descname">describe_table_replica_auto_scaling</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_table_replica_auto_scaling" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes auto scaling settings across replicas of the global table at once.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p>
@@ -8402,16 +8316,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.describe_time_to_live">
-<tt class="descname">describe_time_to_live</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_time_to_live" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Gives a description of the Time to Live (TTL) status on the specified table.</p>
+<dt id="DynamoDB.Client.describe_time_to_live" class="collapsible-title">
+<tt class="descname">describe_time_to_live</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.describe_time_to_live" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Gives a description of the Time to Live (TTL) status on the specified table.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLive">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">describe_time_to_live</span><span class="p">(</span>
@@ -8453,16 +8362,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.disable_kinesis_streaming_destination">
-<tt class="descname">disable_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.disable_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.</p>
+<dt id="DynamoDB.Client.disable_kinesis_streaming_destination" class="collapsible-title">
+<tt class="descname">disable_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.disable_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisableKinesisStreamingDestination">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">disable_kinesis_streaming_destination</span><span class="p">(</span>
@@ -8518,16 +8422,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.enable_kinesis_streaming_destination">
-<tt class="descname">enable_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.enable_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.</p>
+<dt id="DynamoDB.Client.enable_kinesis_streaming_destination" class="collapsible-title">
+<tt class="descname">enable_kinesis_streaming_destination</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.enable_kinesis_streaming_destination" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingDestination">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">enable_kinesis_streaming_destination</span><span class="p">(</span>
@@ -8583,16 +8482,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.execute_statement">
-<tt class="descname">execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.execute_statement" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL.</p>
+<dt id="DynamoDB.Client.execute_statement" class="collapsible-title">
+<tt class="descname">execute_statement</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.execute_statement" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatement">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">execute_statement</span><span class="p">(</span>
@@ -8879,16 +8773,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.DuplicateItemException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.execute_transaction">
-<tt class="descname">execute_transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.execute_transaction" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.</p>
+<dt id="DynamoDB.Client.execute_transaction" class="collapsible-title">
+<tt class="descname">execute_transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.execute_transaction" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteTransaction">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">execute_transaction</span><span class="p">(</span>
@@ -9190,16 +9079,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.export_table_to_point_in_time">
-<tt class="descname">export_table_to_point_in_time</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.export_table_to_point_in_time" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.</p>
+<dt id="DynamoDB.Client.export_table_to_point_in_time" class="collapsible-title">
+<tt class="descname">export_table_to_point_in_time</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.export_table_to_point_in_time" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExportTableToPointInTime">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">export_table_to_point_in_time</span><span class="p">(</span>
@@ -9355,16 +9239,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="DynamoDB.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -9380,16 +9259,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.get_item">
-<tt class="descname">get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">GetItem</span></tt> operation returns a set of attributes for the item with the given primary key. If there is no matching item, <tt class="docutils literal"><span class="pre">GetItem</span></tt> does not return any data and there will be no <tt class="docutils literal"><span class="pre">Item</span></tt> element in the response.</p>
+<dt id="DynamoDB.Client.get_item" class="collapsible-title">
+<tt class="descname">get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">GetItem</span></tt> operation returns a set of attributes for the item with the given primary key. If there is no matching item, <tt class="docutils literal"><span class="pre">GetItem</span></tt> does not return any data and there will be no <tt class="docutils literal"><span class="pre">Item</span></tt> element in the response.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">GetItem</span></tt> provides an eventually consistent read by default. If your application requires a strongly consistent read, set <tt class="docutils literal"><span class="pre">ConsistentRead</span></tt> to <tt class="docutils literal"><span class="pre">true</span></tt> . Although a strongly consistent read might take more time than an eventually consistent read, it always returns the last updated value.</div></blockquote>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem">AWS API Documentation</a></p>
@@ -9860,16 +9734,11 @@ default, the http method is whatever is used in the method's model.</li>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="DynamoDB.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -9884,16 +9753,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="DynamoDB.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -9901,16 +9765,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_backups">
-<tt class="descname">list_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_backups" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>List backups associated with an AWS account. To list backups for a given table, specify <tt class="docutils literal"><span class="pre">TableName</span></tt> . <tt class="docutils literal"><span class="pre">ListBackups</span></tt> returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.</p>
+<dt id="DynamoDB.Client.list_backups" class="collapsible-title">
+<tt class="descname">list_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_backups" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>List backups associated with an AWS account. To list backups for a given table, specify <tt class="docutils literal"><span class="pre">TableName</span></tt> . <tt class="docutils literal"><span class="pre">ListBackups</span></tt> returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.</p>
 <p>In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested.</p>
 <p>You can call <tt class="docutils literal"><span class="pre">ListBackups</span></tt> a maximum of five times per second.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackups">AWS API Documentation</a></p>
@@ -10029,16 +9888,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_contributor_insights">
-<tt class="descname">list_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_contributor_insights" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.</p>
+<dt id="DynamoDB.Client.list_contributor_insights" class="collapsible-title">
+<tt class="descname">list_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_contributor_insights" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListContributorInsights">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_contributor_insights</span><span class="p">(</span>
@@ -10108,16 +9962,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_exports">
-<tt class="descname">list_exports</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_exports" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists completed exports within the past 90 days.</p>
+<dt id="DynamoDB.Client.list_exports" class="collapsible-title">
+<tt class="descname">list_exports</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_exports" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists completed exports within the past 90 days.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListExports">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_exports</span><span class="p">(</span>
@@ -10183,16 +10032,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_global_tables">
-<tt class="descname">list_global_tables</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_global_tables" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists all global tables that have a replica in the specified Region.</p>
+<dt id="DynamoDB.Client.list_global_tables" class="collapsible-title">
+<tt class="descname">list_global_tables</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_global_tables" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists all global tables that have a replica in the specified Region.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html">Version 2017.11.29</a> of global tables.</p>
@@ -10277,16 +10121,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_tables">
-<tt class="descname">list_tables</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_tables" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an array of table names associated with the current account and endpoint. The output from <tt class="docutils literal"><span class="pre">ListTables</span></tt> is paginated, with each page returning a maximum of 100 table names.</p>
+<dt id="DynamoDB.Client.list_tables" class="collapsible-title">
+<tt class="descname">list_tables</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_tables" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an array of table names associated with the current account and endpoint. The output from <tt class="docutils literal"><span class="pre">ListTables</span></tt> is paginated, with each page returning a maximum of 100 table names.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tables</span><span class="p">(</span>
@@ -10361,16 +10200,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.list_tags_of_resource">
-<tt class="descname">list_tags_of_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_tags_of_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.</p>
+<dt id="DynamoDB.Client.list_tags_of_resource" class="collapsible-title">
+<tt class="descname">list_tags_of_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.list_tags_of_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.</p>
 <p>For an overview on tagging DynamoDB resources, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -10439,16 +10273,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.put_item">
-<tt class="descname">put_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.put_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
+<dt id="DynamoDB.Client.put_item" class="collapsible-title">
+<tt class="descname">put_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.put_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>This topic provides general information about the <tt class="docutils literal"><span class="pre">PutItem</span></tt> API.</p>
@@ -11485,16 +11314,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.query">
-<tt class="descname">query</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.query" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">Query</span></tt> operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).</p>
+<dt id="DynamoDB.Client.query" class="collapsible-title">
+<tt class="descname">query</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.query" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">Query</span></tt> operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).</p>
 <p>Use the <tt class="docutils literal"><span class="pre">KeyConditionExpression</span></tt> parameter to provide a specific value for the partition key. The <tt class="docutils literal"><span class="pre">Query</span></tt> operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the <tt class="docutils literal"><span class="pre">Query</span></tt> operation by specifying a sort key value and a comparison operator in <tt class="docutils literal"><span class="pre">KeyConditionExpression</span></tt> . To further refine the <tt class="docutils literal"><span class="pre">Query</span></tt> results, you can optionally provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> . A <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> determines which items within the results should be returned to you. All of the other results are discarded.</p>
 <p>A <tt class="docutils literal"><span class="pre">Query</span></tt> operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.</p>
 <div class="admonition note">
@@ -12620,16 +12444,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.restore_table_from_backup">
-<tt class="descname">restore_table_from_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.restore_table_from_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>
+<dt id="DynamoDB.Client.restore_table_from_backup" class="collapsible-title">
+<tt class="descname">restore_table_from_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.restore_table_from_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>
 <p>You can call <tt class="docutils literal"><span class="pre">RestoreTableFromBackup</span></tt> at a maximum rate of 10 times per second.</p>
 <p>You must manually set up the following on the restored table:</p>
 <ul class="simple">
@@ -13551,16 +13370,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.restore_table_to_point_in_time">
-<tt class="descname">restore_table_to_point_in_time</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.restore_table_to_point_in_time" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Restores the specified table to the specified point in time within <tt class="docutils literal"><span class="pre">EarliestRestorableDateTime</span></tt> and <tt class="docutils literal"><span class="pre">LatestRestorableDateTime</span></tt> . You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>
+<dt id="DynamoDB.Client.restore_table_to_point_in_time" class="collapsible-title">
+<tt class="descname">restore_table_to_point_in_time</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.restore_table_to_point_in_time" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Restores the specified table to the specified point in time within <tt class="docutils literal"><span class="pre">EarliestRestorableDateTime</span></tt> and <tt class="docutils literal"><span class="pre">LatestRestorableDateTime</span></tt> . You can restore your table to any point in time during the last 35 days. Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.</p>
 <p>When you restore using point in time recovery, DynamoDB restores your table data to the state based on the selected date and time (day:hour:minute:second) to a new table.</p>
 <p>Along with data, the following are also included on the new restored table using point in time recovery:</p>
 <ul class="simple">
@@ -14499,16 +14313,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.scan">
-<tt class="descname">scan</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.scan" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">Scan</span></tt> operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> operation.</p>
+<dt id="DynamoDB.Client.scan" class="collapsible-title">
+<tt class="descname">scan</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.scan" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">Scan</span></tt> operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> operation.</p>
 <p>If the total number of scanned items exceeds the maximum dataset size limit of 1 MB, the scan stops and results are returned to the user as a <tt class="docutils literal"><span class="pre">LastEvaluatedKey</span></tt> value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.</p>
 <p>A single <tt class="docutils literal"><span class="pre">Scan</span></tt> operation reads up to the maximum number of items set (if using the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter) or a maximum of 1 MB of data and then apply any filtering to the results using <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> . If <tt class="docutils literal"><span class="pre">LastEvaluatedKey</span></tt> is present in the response, you need to paginate the result set. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination">Paginating the Results</a> in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <blockquote>
@@ -15462,16 +15271,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.tag_resource">
-<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to five times per second, per account.</p>
+<dt id="DynamoDB.Client.tag_resource" class="collapsible-title">
+<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking. You can call TagResource up to five times per second, per account.</p>
 <p>For an overview on tagging DynamoDB resources, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -15519,16 +15323,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.transact_get_items">
-<tt class="descname">transact_get_items</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.transact_get_items" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><blockquote>
+<dt id="DynamoDB.Client.transact_get_items" class="collapsible-title">
+<tt class="descname">transact_get_items</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.transact_get_items" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><blockquote>
 <div><tt class="docutils literal"><span class="pre">TransactGetItems</span></tt> is a synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A <tt class="docutils literal"><span class="pre">TransactGetItems</span></tt> call can contain up to 25 <tt class="docutils literal"><span class="pre">TransactGetItem</span></tt> objects, each of which contains a <tt class="docutils literal"><span class="pre">Get</span></tt> structure that specifies an item to retrieve from a table in the account and Region. A call to <tt class="docutils literal"><span class="pre">TransactGetItems</span></tt> cannot retrieve items from tables in more than one AWS account or Region. The aggregate size of the items in the transaction cannot exceed 4 MB.</div></blockquote>
 <p>DynamoDB rejects the entire <tt class="docutils literal"><span class="pre">TransactGetItems</span></tt> request if any of the following is true:</p>
 <ul class="simple">
@@ -15967,16 +15766,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.transact_write_items">
-<tt class="descname">transact_write_items</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.transact_write_items" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><blockquote>
+<dt id="DynamoDB.Client.transact_write_items" class="collapsible-title">
+<tt class="descname">transact_write_items</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.transact_write_items" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><blockquote>
 <div><tt class="docutils literal"><span class="pre">TransactWriteItems</span></tt> is a synchronous write operation that groups up to 25 action requests. These actions can target items in different tables, but not in different AWS accounts or Regions, and no two actions can target the same item. For example, you cannot both <tt class="docutils literal"><span class="pre">ConditionCheck</span></tt> and <tt class="docutils literal"><span class="pre">Update</span></tt> the same item. The aggregate size of the items in the transaction cannot exceed 4 MB.</div></blockquote>
 <p>The actions are completed atomically so that either all of them succeed, or all of them fail. They are defined by the following objects:</p>
 <ul class="simple">
@@ -17265,16 +17059,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.untag_resource">
-<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes the association of tags from an Amazon DynamoDB resource. You can call <tt class="docutils literal"><span class="pre">UntagResource</span></tt> up to five times per second, per account.</p>
+<dt id="DynamoDB.Client.untag_resource" class="collapsible-title">
+<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes the association of tags from an Amazon DynamoDB resource. You can call <tt class="docutils literal"><span class="pre">UntagResource</span></tt> up to five times per second, per account.</p>
 <p>For an overview on tagging DynamoDB resources, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html">Tagging for DynamoDB</a> in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -17310,16 +17099,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_continuous_backups">
-<tt class="descname">update_continuous_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_continuous_backups" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><blockquote>
+<dt id="DynamoDB.Client.update_continuous_backups" class="collapsible-title">
+<tt class="descname">update_continuous_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_continuous_backups" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><blockquote>
 <div><tt class="docutils literal"><span class="pre">UpdateContinuousBackups</span></tt> enables or disables point in time recovery for the specified table. A successful <tt class="docutils literal"><span class="pre">UpdateContinuousBackups</span></tt> call returns the current <tt class="docutils literal"><span class="pre">ContinuousBackupsDescription</span></tt> . Continuous backups are <tt class="docutils literal"><span class="pre">ENABLED</span></tt> on all tables at table creation. If point in time recovery is enabled, <tt class="docutils literal"><span class="pre">PointInTimeRecoveryStatus</span></tt> will be set to ENABLED.</div></blockquote>
 <p>Once continuous backups and point in time recovery are enabled, you can restore to any point in time within <tt class="docutils literal"><span class="pre">EarliestRestorableDateTime</span></tt> and <tt class="docutils literal"><span class="pre">LatestRestorableDateTime</span></tt> .</p>
 <blockquote>
@@ -17411,16 +17195,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_contributor_insights">
-<tt class="descname">update_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_contributor_insights" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates the status for contributor insights for a specific table or index.</p>
+<dt id="DynamoDB.Client.update_contributor_insights" class="collapsible-title">
+<tt class="descname">update_contributor_insights</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_contributor_insights" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates the status for contributor insights for a specific table or index.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsights">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_contributor_insights</span><span class="p">(</span>
@@ -17476,16 +17255,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_global_table">
-<tt class="descname">update_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_global_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.</p>
+<dt id="DynamoDB.Client.update_global_table" class="collapsible-title">
+<tt class="descname">update_global_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_global_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Adds or removes replicas in the specified global table. The global table must already exist to be able to use this operation. Any replica to be added must be empty, have the same name as the global table, have the same key schema, have DynamoDB Streams enabled, and have the same provisioned and maximum write capacity units.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Although you can use <tt class="docutils literal"><span class="pre">UpdateGlobalTable</span></tt> to add replicas and remove replicas in a single request, for simplicity we recommend that you issue separate requests for adding or removing replicas.</p>
@@ -17697,16 +17471,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.TableNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_global_table_settings">
-<tt class="descname">update_global_table_settings</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_global_table_settings" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates settings for a global table.</p>
+<dt id="DynamoDB.Client.update_global_table_settings" class="collapsible-title">
+<tt class="descname">update_global_table_settings</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_global_table_settings" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates settings for a global table.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_global_table_settings</span><span class="p">(</span>
@@ -18342,16 +18111,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_item">
-<tt class="descname">update_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).</p>
+<dt id="DynamoDB.Client.update_item" class="collapsible-title">
+<tt class="descname">update_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).</p>
 <p>You can also return the item's attribute values in the same <tt class="docutils literal"><span class="pre">UpdateItem</span></tt> operation using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -19564,16 +19328,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_table">
-<tt class="descname">update_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p>
+<dt id="DynamoDB.Client.update_table" class="collapsible-title">
+<tt class="descname">update_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p>
 <p>You can only perform one of the following operations at once:</p>
 <ul class="simple">
 <li>Modify the provisioned throughput settings of the table.</li>
@@ -20686,16 +20445,11 @@ section of the service docs for a list of available waiters.</dd>
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_table_replica_auto_scaling">
-<tt class="descname">update_table_replica_auto_scaling</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_table_replica_auto_scaling" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates auto scaling settings on your global tables at once.</p>
+<dt id="DynamoDB.Client.update_table_replica_auto_scaling" class="collapsible-title">
+<tt class="descname">update_table_replica_auto_scaling</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_table_replica_auto_scaling" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates auto scaling settings on your global tables at once.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This operation only applies to <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html">Version 2019.11.21</a> of global tables.</p>
@@ -21297,16 +21051,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Client.update_time_to_live">
-<tt class="descname">update_time_to_live</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_time_to_live" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> method enables or disables Time to Live (TTL) for the specified table. A successful <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> call returns the current <tt class="docutils literal"><span class="pre">TimeToLiveSpecification</span></tt> . It can take up to one hour for the change to fully process. Any additional <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> calls for the same table during this one hour duration result in a <tt class="docutils literal"><span class="pre">ValidationException</span></tt> .</p>
+<dt id="DynamoDB.Client.update_time_to_live" class="collapsible-title">
+<tt class="descname">update_time_to_live</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Client.update_time_to_live" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> method enables or disables Time to Live (TTL) for the specified table. A successful <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> call returns the current <tt class="docutils literal"><span class="pre">TimeToLiveSpecification</span></tt> . It can take up to one hour for the change to fully process. Any additional <tt class="docutils literal"><span class="pre">UpdateTimeToLive</span></tt> calls for the same table during this one hour duration result in a <tt class="docutils literal"><span class="pre">ValidationException</span></tt> .</p>
 <p>TTL compares the current time in epoch time format to the time stored in the TTL attribute of an item. If the epoch time value stored in the attribute is less than the current time, the item is marked as expired and subsequently deleted.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -21386,7 +21135,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">DynamoDB.Client.exceptions.InternalServerError</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -21396,18 +21144,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="DynamoDB.Paginator.ListBackups">
+<dt id="DynamoDB.Paginator.ListBackups" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Paginator.</tt><tt class="descname">ListBackups</tt><a class="headerlink" href="#DynamoDB.Paginator.ListBackups" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_backups&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_backups&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Paginator.ListBackups.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Paginator.ListBackups.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#DynamoDB.Client.list_backups" title="DynamoDB.Client.list_backups"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.list_backups()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackups">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -21530,23 +21274,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="DynamoDB.Paginator.ListTables">
+<dt id="DynamoDB.Paginator.ListTables" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Paginator.</tt><tt class="descname">ListTables</tt><a class="headerlink" href="#DynamoDB.Paginator.ListTables" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tables&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tables&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Paginator.ListTables.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Paginator.ListTables.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#DynamoDB.Client.list_tables" title="DynamoDB.Client.list_tables"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.list_tables()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -21597,23 +21336,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="DynamoDB.Paginator.ListTagsOfResource">
+<dt id="DynamoDB.Paginator.ListTagsOfResource" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Paginator.</tt><tt class="descname">ListTagsOfResource</tt><a class="headerlink" href="#DynamoDB.Paginator.ListTagsOfResource" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_of_resource&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_of_resource&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Paginator.ListTagsOfResource.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Paginator.ListTagsOfResource.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#DynamoDB.Client.list_tags_of_resource" title="DynamoDB.Client.list_tags_of_resource"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.list_tags_of_resource()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -21684,23 +21418,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="DynamoDB.Paginator.Query">
+<dt id="DynamoDB.Paginator.Query" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Paginator.</tt><tt class="descname">Query</tt><a class="headerlink" href="#DynamoDB.Paginator.Query" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;query&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;query&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Paginator.Query.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Paginator.Query.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#DynamoDB.Client.query" title="DynamoDB.Client.query"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.query()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -22551,23 +22280,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="DynamoDB.Paginator.Scan">
+<dt id="DynamoDB.Paginator.Scan" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Paginator.</tt><tt class="descname">Scan</tt><a class="headerlink" href="#DynamoDB.Paginator.Scan" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Paginator.Scan.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Paginator.Scan.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#DynamoDB.Client.scan" title="DynamoDB.Client.scan"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.scan()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -23240,7 +22964,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -23250,18 +22973,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available waiters are:</p>
 
 <dl class="class">
-<dt id="DynamoDB.Waiter.TableExists">
+<dt id="DynamoDB.Waiter.TableExists" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Waiter.</tt><tt class="descname">TableExists</tt><a class="headerlink" href="#DynamoDB.Waiter.TableExists" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;table_exists&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;table_exists&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Waiter.TableExists.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Waiter.TableExists.wait" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -23293,23 +23012,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="DynamoDB.Waiter.TableNotExists">
+<dt id="DynamoDB.Waiter.TableNotExists" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">DynamoDB.Waiter.</tt><tt class="descname">TableNotExists</tt><a class="headerlink" href="#DynamoDB.Waiter.TableNotExists" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;table_not_exists&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;table_not_exists&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="DynamoDB.Waiter.TableNotExists.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Waiter.TableNotExists.wait" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -23341,7 +23055,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -23357,32 +23070,19 @@ section of the service docs for a list of available waiters.</dd>
 <span class="n">dynamodb</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>These are the resource's available actions:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.batch_get_item" title="DynamoDB.ServiceResource.batch_get_item"><tt class="xref py py-meth docutils literal"><span class="pre">batch_get_item()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.batch_write_item" title="DynamoDB.ServiceResource.batch_write_item"><tt class="xref py py-meth docutils literal"><span class="pre">batch_write_item()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.create_table" title="DynamoDB.ServiceResource.create_table"><tt class="xref py py-meth docutils literal"><span class="pre">create_table()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.get_available_subresources" title="DynamoDB.ServiceResource.get_available_subresources"><tt class="xref py py-meth docutils literal"><span class="pre">get_available_subresources()</span></tt></a></li>
-</ul>
-<p>These are the resource's available sub-resources:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.Table" title="DynamoDB.ServiceResource.Table"><tt class="xref py py-meth docutils literal"><span class="pre">Table()</span></tt></a></li>
-</ul>
-<p>These are the resource's available collections:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.ServiceResource.tables" title="DynamoDB.ServiceResource.tables"><tt class="xref py py-attr docutils literal"><span class="pre">tables</span></tt></a></li>
-</ul>
+
+
+
+
+
+
 <p class="admonition-title">Actions</p>
 <p>Actions call operations on resources.  They may automatically handle the passing in of arguments set from identifiers and some attributes.
 For more information about actions refer to the <a class="reference internal" href="../../guide/resources.html#actions-intro"><em>Resources Introduction Guide</em></a>.</p>
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.batch_get_item">
-<tt class="descname">batch_get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.batch_get_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.</p>
+<dt id="DynamoDB.ServiceResource.batch_get_item" class="collapsible-title">
+<tt class="descname">batch_get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.batch_get_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key.</p>
 <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. <tt class="docutils literal"><span class="pre">BatchGetItem</span></tt> returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for <tt class="docutils literal"><span class="pre">UnprocessedKeys</span></tt> . You can use this value to retry the operation starting with the next item to get.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -23791,16 +23491,11 @@ For more information about actions refer to the <a class="reference internal" hr
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.batch_write_item">
-<tt class="descname">batch_write_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.batch_write_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> operation puts or deletes multiple items in one or more tables. A single call to <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p>
+<dt id="DynamoDB.ServiceResource.batch_write_item" class="collapsible-title">
+<tt class="descname">batch_write_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.batch_write_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> operation puts or deletes multiple items in one or more tables. A single call to <tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> can write up to 16 MB of data, which can comprise as many as 25 put or delete requests. Individual items to be written can be as large as 400 KB.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><tt class="docutils literal"><span class="pre">BatchWriteItem</span></tt> cannot update items. To update items, use the <tt class="docutils literal"><span class="pre">UpdateItem</span></tt> action.</p>
@@ -24168,16 +23863,11 @@ For more information about actions refer to the <a class="reference internal" hr
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.create_table">
-<tt class="descname">create_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.create_table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.</p>
+<dt id="DynamoDB.ServiceResource.create_table" class="collapsible-title">
+<tt class="descname">create_table</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.create_table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation adds a new table to your account. In an AWS account, table names must be unique within each Region. That is, you can have two tables with same name if you create the tables in different Regions.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">CreateTable</span></tt> is an asynchronous operation. Upon receiving a <tt class="docutils literal"><span class="pre">CreateTable</span></tt> request, DynamoDB immediately returns a response with a <tt class="docutils literal"><span class="pre">TableStatus</span></tt> of <tt class="docutils literal"><span class="pre">CREATING</span></tt> . After the table is created, DynamoDB sets the <tt class="docutils literal"><span class="pre">TableStatus</span></tt> to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> . You can perform read and write operations only on an <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> table.</div></blockquote>
 <p>You can optionally define secondary indexes on the new table, as part of the <tt class="docutils literal"><span class="pre">CreateTable</span></tt> operation. If you want to create multiple tables with secondary indexes on them, you must create the tables sequentially. Only one table with secondary indexes can be in the <tt class="docutils literal"><span class="pre">CREATING</span></tt> state at any given time.</p>
@@ -24559,16 +24249,11 @@ For more information about actions refer to the <a class="reference internal" hr
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.get_available_subresources">
-<tt class="descname">get_available_subresources</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.get_available_subresources" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of all the available sub-resources for this
+<dt id="DynamoDB.ServiceResource.get_available_subresources" class="collapsible-title">
+<tt class="descname">get_available_subresources</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.get_available_subresources" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of all the available sub-resources for this
 Resource.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Returns</dt><dd class="field-body">A list containing the name of each sub-resource for this
@@ -24576,19 +24261,14 @@ resource</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">list of str</dd>
 </dl>
 </dd></dl>
-</div>
 
 <p class="admonition-title">Sub-resources</p>
 <p>Sub-resources are methods that create a new instance of a child resource. This resource's identifiers get passed along to the child.
 For more information about sub-resources refer to the <a class="reference internal" href="../../guide/resources.html#subresources-intro"><em>Resources Introduction Guide</em></a>.</p>
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.Table">
-<tt class="descname">Table</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.Table" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a Table resource.:</p>
+<dt id="DynamoDB.ServiceResource.Table" class="collapsible-title">
+<tt class="descname">Table</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.Table" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a Table resource.:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -24598,23 +24278,18 @@ For more information about sub-resources refer to the <a class="reference intern
 <dt class="field-name">Returns</dt><dd class="field-body">A Table resource</dd>
 </dl>
 </dd></dl>
-</div>
 
 <p class="admonition-title">Collections</p>
 <p>Collections provide an interface to iterate over and manipulate groups of resources.
 For more information about collections refer to the <a class="reference internal" href="../../guide/collections.html#guide-collections"><em>Resources Introduction Guide</em></a>.</p>
 <dl class="attribute">
-<dt id="DynamoDB.ServiceResource.tables">
+<dt id="DynamoDB.ServiceResource.tables" class="collapsible-title">
 <tt class="descname">tables</tt><a class="headerlink" href="#DynamoDB.ServiceResource.tables" title="Permalink to this definition">¶</a></dt>
-<dd><p>A collection of Table resources.A Table Collection will include all resources by default, and extreme caution should be taken when performing actions on all resources.</p>
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.all">
-<tt class="descname">all</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.all" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
+<dd class="collapsible-content"><p>A collection of Table resources.A Table Collection will include all resources by default, and extreme caution should be taken when performing actions on all resources.</p>
 <dl class="method">
-<dd><p>Creates an iterable of all Table resources in the collection.</p>
+<dt id="DynamoDB.ServiceResource.all" class="collapsible-title">
+<tt class="descname">all</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.all" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an iterable of all Table resources in the collection.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table_iterator</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -24625,16 +24300,11 @@ For more information about collections refer to the <a class="reference internal
 <dt class="field-name">Returns</dt><dd class="field-body">A list of Table resources</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.filter">
-<tt class="descname">filter</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.filter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an iterable of all Table resources in the collection filtered by kwargs passed to method.A Table collection will include all resources by default if no filters are provided, and extreme caution should be taken when performing actions on all resources.</p>
+<dt id="DynamoDB.ServiceResource.filter" class="collapsible-title">
+<tt class="descname">filter</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.filter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an iterable of all Table resources in the collection filtered by kwargs passed to method.A Table collection will include all resources by default if no filters are provided, and extreme caution should be taken when performing actions on all resources.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table_iterator</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
@@ -24655,16 +24325,11 @@ For more information about collections refer to the <a class="reference internal
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.limit">
-<tt class="descname">limit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.limit" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an iterable up to a specified amount of Table resources in the collection.</p>
+<dt id="DynamoDB.ServiceResource.limit" class="collapsible-title">
+<tt class="descname">limit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.limit" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an iterable up to a specified amount of Table resources in the collection.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table_iterator</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span>
@@ -24678,16 +24343,11 @@ For more information about collections refer to the <a class="reference internal
 <dt class="field-name">Returns</dt><dd class="field-body">A list of Table resources</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.ServiceResource.page_size">
-<tt class="descname">page_size</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.page_size" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an iterable of all Table resources in the collection, but limits the number of items returned by each service call by the specified amount.</p>
+<dt id="DynamoDB.ServiceResource.page_size" class="collapsible-title">
+<tt class="descname">page_size</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.ServiceResource.page_size" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an iterable of all Table resources in the collection, but limits the number of items returned by each service call by the specified amount.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table_iterator</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">page_size</span><span class="p">(</span>
@@ -24701,7 +24361,6 @@ For more information about collections refer to the <a class="reference internal
 <dt class="field-name">Returns</dt><dd class="field-body">A list of Table resources</dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -24723,70 +24382,30 @@ For more information about collections refer to the <a class="reference internal
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>name</strong> (<em>string</em>) -- The Table's name identifier. This <strong>must</strong> be set.</dd>
 </dl>
-<p>These are the resource's available identifiers:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.Table.name" title="DynamoDB.Table.name"><tt class="xref py py-attr docutils literal"><span class="pre">name</span></tt></a></li>
-</ul>
-<p>These are the resource's available attributes:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.Table.archival_summary" title="DynamoDB.Table.archival_summary"><tt class="xref py py-attr docutils literal"><span class="pre">archival_summary</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.attribute_definitions" title="DynamoDB.Table.attribute_definitions"><tt class="xref py py-attr docutils literal"><span class="pre">attribute_definitions</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.billing_mode_summary" title="DynamoDB.Table.billing_mode_summary"><tt class="xref py py-attr docutils literal"><span class="pre">billing_mode_summary</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.creation_date_time" title="DynamoDB.Table.creation_date_time"><tt class="xref py py-attr docutils literal"><span class="pre">creation_date_time</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.global_secondary_indexes" title="DynamoDB.Table.global_secondary_indexes"><tt class="xref py py-attr docutils literal"><span class="pre">global_secondary_indexes</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.global_table_version" title="DynamoDB.Table.global_table_version"><tt class="xref py py-attr docutils literal"><span class="pre">global_table_version</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.item_count" title="DynamoDB.Table.item_count"><tt class="xref py py-attr docutils literal"><span class="pre">item_count</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.key_schema" title="DynamoDB.Table.key_schema"><tt class="xref py py-attr docutils literal"><span class="pre">key_schema</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.latest_stream_arn" title="DynamoDB.Table.latest_stream_arn"><tt class="xref py py-attr docutils literal"><span class="pre">latest_stream_arn</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.latest_stream_label" title="DynamoDB.Table.latest_stream_label"><tt class="xref py py-attr docutils literal"><span class="pre">latest_stream_label</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.local_secondary_indexes" title="DynamoDB.Table.local_secondary_indexes"><tt class="xref py py-attr docutils literal"><span class="pre">local_secondary_indexes</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.provisioned_throughput" title="DynamoDB.Table.provisioned_throughput"><tt class="xref py py-attr docutils literal"><span class="pre">provisioned_throughput</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.replicas" title="DynamoDB.Table.replicas"><tt class="xref py py-attr docutils literal"><span class="pre">replicas</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.restore_summary" title="DynamoDB.Table.restore_summary"><tt class="xref py py-attr docutils literal"><span class="pre">restore_summary</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.sse_description" title="DynamoDB.Table.sse_description"><tt class="xref py py-attr docutils literal"><span class="pre">sse_description</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.stream_specification" title="DynamoDB.Table.stream_specification"><tt class="xref py py-attr docutils literal"><span class="pre">stream_specification</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.table_arn" title="DynamoDB.Table.table_arn"><tt class="xref py py-attr docutils literal"><span class="pre">table_arn</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.table_id" title="DynamoDB.Table.table_id"><tt class="xref py py-attr docutils literal"><span class="pre">table_id</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.table_name" title="DynamoDB.Table.table_name"><tt class="xref py py-attr docutils literal"><span class="pre">table_name</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.table_size_bytes" title="DynamoDB.Table.table_size_bytes"><tt class="xref py py-attr docutils literal"><span class="pre">table_size_bytes</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.table_status" title="DynamoDB.Table.table_status"><tt class="xref py py-attr docutils literal"><span class="pre">table_status</span></tt></a></li>
-</ul>
-<p>These are the resource's available actions:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.Table.batch_writer" title="DynamoDB.Table.batch_writer"><tt class="xref py py-meth docutils literal"><span class="pre">batch_writer()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.delete" title="DynamoDB.Table.delete"><tt class="xref py py-meth docutils literal"><span class="pre">delete()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.delete_item" title="DynamoDB.Table.delete_item"><tt class="xref py py-meth docutils literal"><span class="pre">delete_item()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.get_available_subresources" title="DynamoDB.Table.get_available_subresources"><tt class="xref py py-meth docutils literal"><span class="pre">get_available_subresources()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.get_item" title="DynamoDB.Table.get_item"><tt class="xref py py-meth docutils literal"><span class="pre">get_item()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.load" title="DynamoDB.Table.load"><tt class="xref py py-meth docutils literal"><span class="pre">load()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.put_item" title="DynamoDB.Table.put_item"><tt class="xref py py-meth docutils literal"><span class="pre">put_item()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.query" title="DynamoDB.Table.query"><tt class="xref py py-meth docutils literal"><span class="pre">query()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.reload" title="DynamoDB.Table.reload"><tt class="xref py py-meth docutils literal"><span class="pre">reload()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.scan" title="DynamoDB.Table.scan"><tt class="xref py py-meth docutils literal"><span class="pre">scan()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.update" title="DynamoDB.Table.update"><tt class="xref py py-meth docutils literal"><span class="pre">update()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.update_item" title="DynamoDB.Table.update_item"><tt class="xref py py-meth docutils literal"><span class="pre">update_item()</span></tt></a></li>
-</ul>
-<p>These are the resource's available waiters:</p>
-<ul class="simple">
-<li><a class="reference internal" href="#DynamoDB.Table.wait_until_exists" title="DynamoDB.Table.wait_until_exists"><tt class="xref py py-meth docutils literal"><span class="pre">wait_until_exists()</span></tt></a></li>
-<li><a class="reference internal" href="#DynamoDB.Table.wait_until_not_exists" title="DynamoDB.Table.wait_until_not_exists"><tt class="xref py py-meth docutils literal"><span class="pre">wait_until_not_exists()</span></tt></a></li>
-</ul>
+
+
+
+
+
+
+
+
 <p class="admonition-title">Identifiers</p>
 <p>Identifiers are properties of a resource that are set upon instantation of the resource.
 For more information about identifiers refer to the <a class="reference internal" href="../../guide/resources.html#identifiers-attributes-intro"><em>Resources Introduction Guide</em></a>.</p>
 <dl class="attribute">
-<dt id="DynamoDB.Table.name">
+<dt id="DynamoDB.Table.name" class="collapsible-title">
 <tt class="descname">name</tt><a class="headerlink" href="#DynamoDB.Table.name" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>(string)</em> The Table's name identifier. This <strong>must</strong> be set.</p>
+<dd class="collapsible-content"><p><em>(string)</em> The Table's name identifier. This <strong>must</strong> be set.</p>
 </dd></dl>
 
 <p class="admonition-title">Attributes</p>
 <p>Attributes provide access to the properties of a resource. Attributes are lazy-loaded the first time one is accessed via the <a class="reference internal" href="#DynamoDB.Table.load" title="DynamoDB.Table.load"><tt class="xref py py-meth docutils literal"><span class="pre">load()</span></tt></a> method.
 For more information about attributes refer to the <a class="reference internal" href="../../guide/resources.html#identifiers-attributes-intro"><em>Resources Introduction Guide</em></a>.</p>
 <dl class="attribute">
-<dt id="DynamoDB.Table.archival_summary">
+<dt id="DynamoDB.Table.archival_summary" class="collapsible-title">
 <tt class="descname">archival_summary</tt><a class="headerlink" href="#DynamoDB.Table.archival_summary" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>Contains information about the table archive.</p>
 <ul>
@@ -24808,9 +24427,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.attribute_definitions">
+<dt id="DynamoDB.Table.attribute_definitions" class="collapsible-title">
 <tt class="descname">attribute_definitions</tt><a class="headerlink" href="#DynamoDB.Table.attribute_definitions" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(list) --</em></p>
 <p>An array of <tt class="docutils literal"><span class="pre">AttributeDefinition</span></tt> objects. Each of these objects describes one attribute in the table and index key schema.</p>
 <p>Each <tt class="docutils literal"><span class="pre">AttributeDefinition</span></tt> object in this array is composed of:</p>
@@ -24841,9 +24460,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.billing_mode_summary">
+<dt id="DynamoDB.Table.billing_mode_summary" class="collapsible-title">
 <tt class="descname">billing_mode_summary</tt><a class="headerlink" href="#DynamoDB.Table.billing_mode_summary" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>Contains the details for the read/write capacity mode.</p>
 <ul>
@@ -24863,9 +24482,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.creation_date_time">
+<dt id="DynamoDB.Table.creation_date_time" class="collapsible-title">
 <tt class="descname">creation_date_time</tt><a class="headerlink" href="#DynamoDB.Table.creation_date_time" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(datetime) --</em></p>
 <p>The date and time when the table was created, in <a class="reference external" href="http://www.epochconverter.com/">UNIX epoch time</a> format.</p>
 </li>
@@ -24873,9 +24492,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.global_secondary_indexes">
+<dt id="DynamoDB.Table.global_secondary_indexes" class="collapsible-title">
 <tt class="descname">global_secondary_indexes</tt><a class="headerlink" href="#DynamoDB.Table.global_secondary_indexes" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(list) --</em></p>
 <p>The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:</p>
 <ul class="simple">
@@ -25022,9 +24641,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.global_table_version">
+<dt id="DynamoDB.Table.global_table_version" class="collapsible-title">
 <tt class="descname">global_table_version</tt><a class="headerlink" href="#DynamoDB.Table.global_table_version" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>Represents the version of <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">global tables</a> in use, if the table is replicated across AWS Regions.</p>
 </li>
@@ -25032,9 +24651,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.item_count">
+<dt id="DynamoDB.Table.item_count" class="collapsible-title">
 <tt class="descname">item_count</tt><a class="headerlink" href="#DynamoDB.Table.item_count" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(integer) --</em></p>
 <p>The number of items in the specified table. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.</p>
 </li>
@@ -25042,9 +24661,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.key_schema">
+<dt id="DynamoDB.Table.key_schema" class="collapsible-title">
 <tt class="descname">key_schema</tt><a class="headerlink" href="#DynamoDB.Table.key_schema" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(list) --</em></p>
 <p>The primary key structure for the table. Each <tt class="docutils literal"><span class="pre">KeySchemaElement</span></tt> consists of:</p>
 <ul class="simple">
@@ -25090,9 +24709,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.latest_stream_arn">
+<dt id="DynamoDB.Table.latest_stream_arn" class="collapsible-title">
 <tt class="descname">latest_stream_arn</tt><a class="headerlink" href="#DynamoDB.Table.latest_stream_arn" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>The Amazon Resource Name (ARN) that uniquely identifies the latest stream for this table.</p>
 </li>
@@ -25100,9 +24719,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.latest_stream_label">
+<dt id="DynamoDB.Table.latest_stream_label" class="collapsible-title">
 <tt class="descname">latest_stream_label</tt><a class="headerlink" href="#DynamoDB.Table.latest_stream_label" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>A timestamp, in ISO 8601 format, for this stream.</p>
 <p>Note that <tt class="docutils literal"><span class="pre">LatestStreamLabel</span></tt> is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:</p>
@@ -25116,9 +24735,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.local_secondary_indexes">
+<dt id="DynamoDB.Table.local_secondary_indexes" class="collapsible-title">
 <tt class="descname">local_secondary_indexes</tt><a class="headerlink" href="#DynamoDB.Table.local_secondary_indexes" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(list) --</em></p>
 <p>Represents one or more local secondary indexes on the table. Each index is scoped to a given partition key value. Tables with one or more local secondary indexes are subject to an item collection size limit, where the amount of data within a given item collection cannot exceed 10 GB. Each element is composed of:</p>
 <ul class="simple">
@@ -25218,9 +24837,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.provisioned_throughput">
+<dt id="DynamoDB.Table.provisioned_throughput" class="collapsible-title">
 <tt class="descname">provisioned_throughput</tt><a class="headerlink" href="#DynamoDB.Table.provisioned_throughput" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>The provisioned throughput settings for the table, consisting of read and write capacity units, along with data about increases and decreases.</p>
 <ul>
@@ -25245,9 +24864,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.replicas">
+<dt id="DynamoDB.Table.replicas" class="collapsible-title">
 <tt class="descname">replicas</tt><a class="headerlink" href="#DynamoDB.Table.replicas" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(list) --</em></p>
 <p>Represents replicas of the table.</p>
 <ul>
@@ -25327,9 +24946,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.restore_summary">
+<dt id="DynamoDB.Table.restore_summary" class="collapsible-title">
 <tt class="descname">restore_summary</tt><a class="headerlink" href="#DynamoDB.Table.restore_summary" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>Contains details for the restore.</p>
 <ul>
@@ -25351,9 +24970,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.sse_description">
+<dt id="DynamoDB.Table.sse_description" class="collapsible-title">
 <tt class="descname">sse_description</tt><a class="headerlink" href="#DynamoDB.Table.sse_description" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>The description of the server-side encryption status on the specified table.</p>
 <ul>
@@ -25382,9 +25001,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.stream_specification">
+<dt id="DynamoDB.Table.stream_specification" class="collapsible-title">
 <tt class="descname">stream_specification</tt><a class="headerlink" href="#DynamoDB.Table.stream_specification" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(dict) --</em></p>
 <p>The current DynamoDB Streams configuration for the table.</p>
 <ul>
@@ -25406,9 +25025,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.table_arn">
+<dt id="DynamoDB.Table.table_arn" class="collapsible-title">
 <tt class="descname">table_arn</tt><a class="headerlink" href="#DynamoDB.Table.table_arn" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>The Amazon Resource Name (ARN) that uniquely identifies the table.</p>
 </li>
@@ -25416,9 +25035,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.table_id">
+<dt id="DynamoDB.Table.table_id" class="collapsible-title">
 <tt class="descname">table_id</tt><a class="headerlink" href="#DynamoDB.Table.table_id" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>Unique identifier for the table for which the backup was created.</p>
 </li>
@@ -25426,9 +25045,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.table_name">
+<dt id="DynamoDB.Table.table_name" class="collapsible-title">
 <tt class="descname">table_name</tt><a class="headerlink" href="#DynamoDB.Table.table_name" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>The name of the table.</p>
 </li>
@@ -25436,9 +25055,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.table_size_bytes">
+<dt id="DynamoDB.Table.table_size_bytes" class="collapsible-title">
 <tt class="descname">table_size_bytes</tt><a class="headerlink" href="#DynamoDB.Table.table_size_bytes" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(integer) --</em></p>
 <p>The total size of the specified table, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.</p>
 </li>
@@ -25446,9 +25065,9 @@ For more information about attributes refer to the <a class="reference internal"
 </dd></dl>
 
 <dl class="attribute">
-<dt id="DynamoDB.Table.table_status">
+<dt id="DynamoDB.Table.table_status" class="collapsible-title">
 <tt class="descname">table_status</tt><a class="headerlink" href="#DynamoDB.Table.table_status" title="Permalink to this definition">¶</a></dt>
-<dd><ul>
+<dd class="collapsible-content"><ul>
 <li><p class="first"><em>(string) --</em></p>
 <p>The current state of the table:</p>
 <ul class="simple">
@@ -25467,14 +25086,10 @@ For more information about attributes refer to the <a class="reference internal"
 <p class="admonition-title">Actions</p>
 <p>Actions call operations on resources.  They may automatically handle the passing in of arguments set from identifiers and some attributes.
 For more information about actions refer to the <a class="reference internal" href="../../guide/resources.html#actions-intro"><em>Resources Introduction Guide</em></a>.</p>
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.batch_writer">
-<tt class="descname">batch_writer</tt><big>(</big><em>overwrite_by_pkeys=None</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.batch_writer" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a batch writer object.</p>
+<dt id="DynamoDB.Table.batch_writer" class="collapsible-title">
+<tt class="descname">batch_writer</tt><big>(</big><em>overwrite_by_pkeys=None</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.batch_writer" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a batch writer object.</p>
 <p>This method creates a context manager for writing
 objects to Amazon DynamoDB in batch.</p>
 <p>The batch writer will automatically handle buffering and sending items
@@ -25497,16 +25112,11 @@ if match new request item on specified primary keys. i.e
 <tt class="docutils literal"><span class="pre">[&quot;partition_key1&quot;,</span> <span class="pre">&quot;sort_key2&quot;,</span> <span class="pre">&quot;sort_key3&quot;]</span></tt></dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.delete">
-<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.delete" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> operation deletes a table and all of its items. After a <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> request, the specified table is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until DynamoDB completes the deletion. If the table is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can delete it. If a table is in <tt class="docutils literal"><span class="pre">CREATING</span></tt> or <tt class="docutils literal"><span class="pre">UPDATING</span></tt> states, then DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If the specified table does not exist, DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> . If table is already in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, no error is returned.</p>
+<dt id="DynamoDB.Table.delete" class="collapsible-title">
+<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.delete" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> operation deletes a table and all of its items. After a <tt class="docutils literal"><span class="pre">DeleteTable</span></tt> request, the specified table is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until DynamoDB completes the deletion. If the table is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can delete it. If a table is in <tt class="docutils literal"><span class="pre">CREATING</span></tt> or <tt class="docutils literal"><span class="pre">UPDATING</span></tt> states, then DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If the specified table does not exist, DynamoDB returns a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> . If table is already in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, no error is returned.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">DynamoDB might continue to accept data read and write operations, such as <tt class="docutils literal"><span class="pre">GetItem</span></tt> and <tt class="docutils literal"><span class="pre">PutItem</span></tt> , on a table in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until the table deletion is complete.</p>
@@ -26106,16 +25716,11 @@ if match new request item on specified primary keys. i.e
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.delete_item">
-<tt class="descname">delete_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.delete_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>
+<dt id="DynamoDB.Table.delete_item" class="collapsible-title">
+<tt class="descname">delete_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.delete_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>
 <p>In addition to deleting an item, you can also return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <p>Unless you specify conditions, the <tt class="docutils literal"><span class="pre">DeleteItem</span></tt> is an idempotent operation; running it multiple times on the same item or attribute does <em>not</em> result in an error response.</p>
 <p>Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.</p>
@@ -26470,16 +26075,11 @@ if match new request item on specified primary keys. i.e
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.get_available_subresources">
-<tt class="descname">get_available_subresources</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.get_available_subresources" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of all the available sub-resources for this
+<dt id="DynamoDB.Table.get_available_subresources" class="collapsible-title">
+<tt class="descname">get_available_subresources</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.get_available_subresources" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of all the available sub-resources for this
 Resource.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Returns</dt><dd class="field-body">A list containing the name of each sub-resource for this
@@ -26487,16 +26087,11 @@ resource</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">list of str</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.get_item">
-<tt class="descname">get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.get_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">GetItem</span></tt> operation returns a set of attributes for the item with the given primary key. If there is no matching item, <tt class="docutils literal"><span class="pre">GetItem</span></tt> does not return any data and there will be no <tt class="docutils literal"><span class="pre">Item</span></tt> element in the response.</p>
+<dt id="DynamoDB.Table.get_item" class="collapsible-title">
+<tt class="descname">get_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.get_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">GetItem</span></tt> operation returns a set of attributes for the item with the given primary key. If there is no matching item, <tt class="docutils literal"><span class="pre">GetItem</span></tt> does not return any data and there will be no <tt class="docutils literal"><span class="pre">Item</span></tt> element in the response.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">GetItem</span></tt> provides an eventually consistent read by default. If your application requires a strongly consistent read, set <tt class="docutils literal"><span class="pre">ConsistentRead</span></tt> to <tt class="docutils literal"><span class="pre">true</span></tt> . Although a strongly consistent read might take more time than an eventually consistent read, it always returns the last updated value.</div></blockquote>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem">AWS API Documentation</a></p>
@@ -26711,16 +26306,11 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.load">
-<tt class="descname">load</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.load" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Calls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> to update the attributes of the Table resource. Note that the load and reload methods are the same method and can be used interchangeably.</p>
+<dt id="DynamoDB.Table.load" class="collapsible-title">
+<tt class="descname">load</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.load" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Calls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> to update the attributes of the Table resource. Note that the load and reload methods are the same method and can be used interchangeably.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/None">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
@@ -26730,16 +26320,11 @@ resource</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">None</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.put_item">
-<tt class="descname">put_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.put_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
+<dt id="DynamoDB.Table.put_item" class="collapsible-title">
+<tt class="descname">put_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.put_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>This topic provides general information about the <tt class="docutils literal"><span class="pre">PutItem</span></tt> API.</p>
@@ -27119,16 +26704,11 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.query">
-<tt class="descname">query</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.query" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">Query</span></tt> operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).</p>
+<dt id="DynamoDB.Table.query" class="collapsible-title">
+<tt class="descname">query</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.query" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">Query</span></tt> operation finds items based on primary key values. You can query any table or secondary index that has a composite primary key (a partition key and a sort key).</p>
 <p>Use the <tt class="docutils literal"><span class="pre">KeyConditionExpression</span></tt> parameter to provide a specific value for the partition key. The <tt class="docutils literal"><span class="pre">Query</span></tt> operation will return all of the items from the table or index with that partition key value. You can optionally narrow the scope of the <tt class="docutils literal"><span class="pre">Query</span></tt> operation by specifying a sort key value and a comparison operator in <tt class="docutils literal"><span class="pre">KeyConditionExpression</span></tt> . To further refine the <tt class="docutils literal"><span class="pre">Query</span></tt> results, you can optionally provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> . A <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> determines which items within the results should be returned to you. All of the other results are discarded.</p>
 <p>A <tt class="docutils literal"><span class="pre">Query</span></tt> operation always returns a result set. If no matching items are found, the result set will be empty. Queries that do not return results consume the minimum number of read capacity units for that type of read operation.</p>
 <div class="admonition note">
@@ -27568,16 +27148,11 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.reload">
-<tt class="descname">reload</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.reload" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Calls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> to update the attributes of the Table resource. Note that the load and reload methods are the same method and can be used interchangeably.</p>
+<dt id="DynamoDB.Table.reload" class="collapsible-title">
+<tt class="descname">reload</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.reload" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Calls <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> to update the attributes of the Table resource. Note that the load and reload methods are the same method and can be used interchangeably.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/None">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
@@ -27587,16 +27162,11 @@ resource</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">None</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.scan">
-<tt class="descname">scan</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.scan" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>The <tt class="docutils literal"><span class="pre">Scan</span></tt> operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> operation.</p>
+<dt id="DynamoDB.Table.scan" class="collapsible-title">
+<tt class="descname">scan</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.scan" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>The <tt class="docutils literal"><span class="pre">Scan</span></tt> operation returns one or more items and item attributes by accessing every item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> operation.</p>
 <p>If the total number of scanned items exceeds the maximum dataset size limit of 1 MB, the scan stops and results are returned to the user as a <tt class="docutils literal"><span class="pre">LastEvaluatedKey</span></tt> value to continue the scan in a subsequent operation. The results also include the number of items exceeding the limit. A scan can result in no table data meeting the filter criteria.</p>
 <p>A single <tt class="docutils literal"><span class="pre">Scan</span></tt> operation reads up to the maximum number of items set (if using the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter) or a maximum of 1 MB of data and then apply any filtering to the results using <tt class="docutils literal"><span class="pre">FilterExpression</span></tt> . If <tt class="docutils literal"><span class="pre">LastEvaluatedKey</span></tt> is present in the response, you need to paginate the result set. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination">Paginating the Results</a> in the <em>Amazon DynamoDB Developer Guide</em> .</p>
 <blockquote>
@@ -27972,16 +27542,11 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.update">
-<tt class="descname">update</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.update" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p>
+<dt id="DynamoDB.Table.update" class="collapsible-title">
+<tt class="descname">update</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.update" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p>
 <p>You can only perform one of the following operations at once:</p>
 <ul class="simple">
 <li>Modify the provisioned throughput settings of the table.</li>
@@ -28351,16 +27916,11 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.update_item">
-<tt class="descname">update_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.update_item" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).</p>
+<dt id="DynamoDB.Table.update_item" class="collapsible-title">
+<tt class="descname">update_item</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#DynamoDB.Table.update_item" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).</p>
 <p>You can also return the item's attribute values in the same <tt class="docutils literal"><span class="pre">UpdateItem</span></tt> operation using the <tt class="docutils literal"><span class="pre">ReturnValues</span></tt> parameter.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -28804,19 +28364,14 @@ resource</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 <p class="admonition-title">Waiters</p>
 <p>Waiters provide an interface to wait for a resource to reach a specific state.
 For more information about waiters refer to the <a class="reference internal" href="../../guide/resources.html#waiters-intro"><em>Resources Introduction Guide</em></a>.</p>
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.wait_until_exists">
-<tt class="descname">wait_until_exists</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.wait_until_exists" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Waits until this Table is exists. This method calls <tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Waiter.table_exists.wait()</span></tt> which polls. <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
+<dt id="DynamoDB.Table.wait_until_exists" class="collapsible-title">
+<tt class="descname">wait_until_exists</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.wait_until_exists" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Waits until this Table is exists. This method calls <tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Waiter.table_exists.wait()</span></tt> which polls. <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">wait_until_exists</span><span class="p">()</span>
@@ -28826,16 +28381,11 @@ For more information about waiters refer to the <a class="reference internal" hr
 <dt class="field-name">Returns</dt><dd class="field-body">None</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="DynamoDB.Table.wait_until_not_exists">
-<tt class="descname">wait_until_not_exists</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.wait_until_not_exists" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Waits until this Table is not exists. This method calls <tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Waiter.table_not_exists.wait()</span></tt> which polls. <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
+<dt id="DynamoDB.Table.wait_until_not_exists" class="collapsible-title">
+<tt class="descname">wait_until_not_exists</tt><big>(</big><big>)</big><a class="headerlink" href="#DynamoDB.Table.wait_until_not_exists" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Waits until this Table is not exists. This method calls <tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Waiter.table_not_exists.wait()</span></tt> which polls. <a class="reference internal" href="#DynamoDB.Client.describe_table" title="DynamoDB.Client.describe_table"><tt class="xref py py-meth docutils literal"><span class="pre">DynamoDB.Client.describe_table()</span></tt></a> every 20 seconds until a successful state is reached. An error is returned after 25 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">wait_until_not_exists</span><span class="p">()</span>
@@ -28845,7 +28395,6 @@ For more information about waiters refer to the <a class="reference internal" hr
 <dt class="field-name">Returns</dt><dd class="field-body">None</dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -28874,19 +28423,15 @@ For more information about waiters refer to the <a class="reference internal" hr
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="dynamodbstreams.html" title="DynamoDBStreams"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="ds.html" title="DirectoryService"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="dynamodbstreams.html" title="DynamoDBStreams">next</a> |</li>
+        <li class="right">
+          <a href="ds.html" title="DirectoryService">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -28897,24 +28442,21 @@ For more information about waiters refer to the <a class="reference internal" hr
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

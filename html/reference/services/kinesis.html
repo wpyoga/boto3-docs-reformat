@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="kinesis-video-archived-media.html" title="KinesisVideoArchivedMedia"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="kendra.html" title="kendra"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="kinesis-video-archived-media.html" title="KinesisVideoArchivedMedia" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="kendra.html" title="kendra" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -452,14 +470,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.add_tags_to_stream">
-<tt class="descname">add_tags_to_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.add_tags_to_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Adds or updates tags for the specified Kinesis data stream. Each time you invoke this operation, you can specify up to 10 tags. If you want to add more than 10 tags to your stream, you can invoke this operation multiple times. In total, each stream can have up to 50 tags.</p>
+<dt id="Kinesis.Client.add_tags_to_stream" class="collapsible-title">
+<tt class="descname">add_tags_to_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.add_tags_to_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Adds or updates tags for the specified Kinesis data stream. Each time you invoke this operation, you can specify up to 10 tags. If you want to add more than 10 tags to your stream, you can invoke this operation multiple times. In total, each stream can have up to 50 tags.</p>
 <p>If tags have already been assigned to the stream, <tt class="docutils literal"><span class="pre">AddTagsToStream</span></tt> overwrites any existing tags that correspond to the specified tag keys.</p>
 <blockquote>
 <div>AddTagsToStream has a limit of five transactions per second per account.</div></blockquote>
@@ -500,16 +514,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="Kinesis.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -521,16 +530,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.create_stream">
-<tt class="descname">create_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.create_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a Kinesis data stream. A stream captures and transports data records that are continuously emitted from different data sources or <em>producers</em> . Scale-out within a stream is explicitly supported by means of shards, which are uniquely identified groups of data records in a stream.</p>
+<dt id="Kinesis.Client.create_stream" class="collapsible-title">
+<tt class="descname">create_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.create_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a Kinesis data stream. A stream captures and transports data records that are continuously emitted from different data sources or <em>producers</em> . Scale-out within a stream is explicitly supported by means of shards, which are uniquely identified groups of data records in a stream.</p>
 <p>You specify and control the number of shards that a stream is composed of. Each shard can support reads up to five transactions per second, up to a maximum data read total of 2 MiB per second. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second. If the amount of data input increases or decreases, you can add or remove shards.</p>
 <p>The stream name identifies the stream. The name is scoped to the AWS account used by the application. It is also scoped by AWS Region. That is, two streams in two different accounts can have the same name, and two streams in the same account, but in two different Regions, can have the same name.</p>
 <blockquote>
@@ -572,16 +576,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.InvalidArgumentException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.decrease_stream_retention_period">
-<tt class="descname">decrease_stream_retention_period</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.decrease_stream_retention_period" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Decreases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream. The minimum value of a stream's retention period is 24 hours.</p>
+<dt id="Kinesis.Client.decrease_stream_retention_period" class="collapsible-title">
+<tt class="descname">decrease_stream_retention_period</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.decrease_stream_retention_period" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Decreases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream. The minimum value of a stream's retention period is 24 hours.</p>
 <p>This operation may result in lost data. For example, if the stream's retention period is 48 hours and is decreased to 24 hours, any data already in the stream that is older than 24 hours is inaccessible.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriod">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -612,16 +611,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.InvalidArgumentException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.delete_stream">
-<tt class="descname">delete_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.delete_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a Kinesis data stream and all its shards and data. You must shut down any applications that are operating on the stream before you delete the stream. If an application attempts to operate on a deleted stream, it receives the exception <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
+<dt id="Kinesis.Client.delete_stream" class="collapsible-title">
+<tt class="descname">delete_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.delete_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a Kinesis data stream and all its shards and data. You must shut down any applications that are operating on the stream before you delete the stream. If an application attempts to operate on a deleted stream, it receives the exception <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
 <p>If the stream is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can delete it. After a <tt class="docutils literal"><span class="pre">DeleteStream</span></tt> request, the specified stream is in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until Kinesis Data Streams completes the deletion.</p>
 <blockquote>
 <div><strong>Note:</strong> Kinesis Data Streams might continue to accept data read and write operations, such as  PutRecord ,  PutRecords , and  GetRecords , on a stream in the <tt class="docutils literal"><span class="pre">DELETING</span></tt> state until the stream deletion is complete.</div></blockquote>
@@ -655,16 +649,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.deregister_stream_consumer">
-<tt class="descname">deregister_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.deregister_stream_consumer" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>To deregister a consumer, provide its ARN. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don't conflict with each other. If you don't know the name or ARN of the consumer that you want to deregister, you can use the  ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its name and ARN.</p>
+<dt id="Kinesis.Client.deregister_stream_consumer" class="collapsible-title">
+<tt class="descname">deregister_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.deregister_stream_consumer" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>To deregister a consumer, provide its ARN. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don't conflict with each other. If you don't know the name or ARN of the consumer that you want to deregister, you can use the  ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its name and ARN.</p>
 <p>This operation has a limit of five transactions per second per stream.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumer">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -692,16 +681,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.InvalidArgumentException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.describe_limits">
-<tt class="descname">describe_limits</tt><big>(</big><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_limits" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes the shard limits and usage for the account.</p>
+<dt id="Kinesis.Client.describe_limits" class="collapsible-title">
+<tt class="descname">describe_limits</tt><big>(</big><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_limits" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes the shard limits and usage for the account.</p>
 <p>If you update your account limits, the old limits might be returned for a few minutes.</p>
 <p>This operation has a limit of one transaction per second per account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits">AWS API Documentation</a></p>
@@ -734,16 +718,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.describe_stream">
-<tt class="descname">describe_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes the specified Kinesis data stream.</p>
+<dt id="Kinesis.Client.describe_stream" class="collapsible-title">
+<tt class="descname">describe_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes the specified Kinesis data stream.</p>
 <p>The information returned includes the stream name, Amazon Resource Name (ARN), creation time, enhanced metric configuration, and shard map. The shard map is an array of shard objects. For each shard object, there is the hash key and sequence number ranges that the shard spans, and the IDs of any earlier shards that played in a role in creating the shard. Every record ingested in the stream is identified by a sequence number, which is assigned when the record is put into the stream.</p>
 <p>You can limit the number of shards returned by each call. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html">Retrieving Shards from a Stream</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> .</p>
 <p>There are no guarantees about the chronological order shards returned. To process shards in chronological order, use the ID of the parent shard to track the lineage to the oldest shard.</p>
@@ -937,16 +916,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.describe_stream_consumer">
-<tt class="descname">describe_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream_consumer" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>To get the description of a registered consumer, provide the ARN of the consumer. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don't conflict with each other. If you don't know the name or ARN of the consumer that you want to describe, you can use the  ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream.</p>
+<dt id="Kinesis.Client.describe_stream_consumer" class="collapsible-title">
+<tt class="descname">describe_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream_consumer" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>To get the description of a registered consumer, provide the ARN of the consumer. Alternatively, you can provide the ARN of the data stream and the name you gave the consumer when you registered it. You may also provide all three parameters, as long as they don't conflict with each other. If you don't know the name or ARN of the consumer that you want to describe, you can use the  ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream.</p>
 <p>This operation has a limit of 20 transactions per second per stream.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumer">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1015,16 +989,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.InvalidArgumentException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.describe_stream_summary">
-<tt class="descname">describe_stream_summary</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream_summary" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Provides a summarized description of the specified Kinesis data stream without the shard list.</p>
+<dt id="Kinesis.Client.describe_stream_summary" class="collapsible-title">
+<tt class="descname">describe_stream_summary</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.describe_stream_summary" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Provides a summarized description of the specified Kinesis data stream without the shard list.</p>
 <p>The information returned includes the stream name, Amazon Resource Name (ARN), status, record retention period, approximate creation time, monitoring, encryption details, and open shard count.</p>
 <blockquote>
 <div>DescribeStreamSummary has a limit of 20 transactions per second per account.</div></blockquote>
@@ -1140,16 +1109,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.disable_enhanced_monitoring">
-<tt class="descname">disable_enhanced_monitoring</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.disable_enhanced_monitoring" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disables enhanced monitoring.</p>
+<dt id="Kinesis.Client.disable_enhanced_monitoring" class="collapsible-title">
+<tt class="descname">disable_enhanced_monitoring</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.disable_enhanced_monitoring" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disables enhanced monitoring.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">disable_enhanced_monitoring</span><span class="p">(</span>
@@ -1233,16 +1197,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.enable_enhanced_monitoring">
-<tt class="descname">enable_enhanced_monitoring</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.enable_enhanced_monitoring" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables enhanced Kinesis data stream monitoring for shard-level metrics.</p>
+<dt id="Kinesis.Client.enable_enhanced_monitoring" class="collapsible-title">
+<tt class="descname">enable_enhanced_monitoring</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.enable_enhanced_monitoring" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables enhanced Kinesis data stream monitoring for shard-level metrics.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoring">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">enable_enhanced_monitoring</span><span class="p">(</span>
@@ -1326,16 +1285,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Kinesis.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="Kinesis.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Kinesis.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -1351,16 +1305,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="Kinesis.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -1375,16 +1324,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.get_records">
-<tt class="descname">get_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_records" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Gets data records from a Kinesis data stream's shard.</p>
+<dt id="Kinesis.Client.get_records" class="collapsible-title">
+<tt class="descname">get_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_records" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Gets data records from a Kinesis data stream's shard.</p>
 <p>Specify a shard iterator using the <tt class="docutils literal"><span class="pre">ShardIterator</span></tt> parameter. The shard iterator specifies the position in the shard from which you want to start reading data records sequentially. If there are no records available in the portion of the shard that the iterator points to,  GetRecords returns an empty list. It might take multiple calls to get to a portion of the shard that contains records.</p>
 <p>You can scale by provisioning multiple shards per stream while considering service limits (for more information, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Amazon Kinesis Data Streams Limits</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> ). Your application should have one thread per shard, each reading continuously from its stream. To read from a stream continually, call  GetRecords in a loop. Use  GetShardIterator to get the shard iterator to specify in the first  GetRecords call.  GetRecords returns a new shard iterator in <tt class="docutils literal"><span class="pre">NextShardIterator</span></tt> . Specify the shard iterator returned in <tt class="docutils literal"><span class="pre">NextShardIterator</span></tt> in subsequent calls to  GetRecords . If the shard has been closed, the shard iterator can't return more data and  GetRecords returns <tt class="docutils literal"><span class="pre">null</span></tt> in <tt class="docutils literal"><span class="pre">NextShardIterator</span></tt> . You can terminate the loop when the shard is closed, or when the shard iterator reaches the record with the sequence number or other attribute that marks it as the last record to process.</p>
 <p>Each data record can be up to 1 MiB in size, and each shard can read up to 2 MiB per second. You can ensure that your calls don't exceed the maximum supported size or throughput by using the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter to specify the maximum number of records that  GetRecords can return. Consider your average record size when determining this limit. The maximum number of records that can be returned per call is 10,000.</p>
@@ -1524,16 +1468,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.KMSThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.get_shard_iterator">
-<tt class="descname">get_shard_iterator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_shard_iterator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after it is returned to the requester.</p>
+<dt id="Kinesis.Client.get_shard_iterator" class="collapsible-title">
+<tt class="descname">get_shard_iterator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_shard_iterator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after it is returned to the requester.</p>
 <p>A shard iterator specifies the shard position from which to start reading data records sequentially. The position is specified using the sequence number of a data record in a shard. A sequence number is the identifier associated with every record ingested in the stream, and is assigned when a record is put into the stream. Each stream has one or more shards.</p>
 <p>You must specify the shard iterator type. For example, you can set the <tt class="docutils literal"><span class="pre">ShardIteratorType</span></tt> parameter to read exactly from the position denoted by a specific sequence number by using the <tt class="docutils literal"><span class="pre">AT_SEQUENCE_NUMBER</span></tt> shard iterator type. Alternatively, the parameter can read right after the sequence number by using the <tt class="docutils literal"><span class="pre">AFTER_SEQUENCE_NUMBER</span></tt> shard iterator type, using sequence numbers returned by earlier calls to  PutRecord ,  PutRecords ,  GetRecords , or  DescribeStream . In the request, you can specify the shard iterator type <tt class="docutils literal"><span class="pre">AT_TIMESTAMP</span></tt> to read records from an arbitrary point in time, <tt class="docutils literal"><span class="pre">TRIM_HORIZON</span></tt> to cause <tt class="docutils literal"><span class="pre">ShardIterator</span></tt> to point to the last untrimmed record in the shard in the system (the oldest data record in the shard), or <tt class="docutils literal"><span class="pre">LATEST</span></tt> so that you always read the most recent data in the shard.</p>
 <p>When you read repeatedly from a stream, use a  GetShardIterator request to get the first shard iterator for use in your first  GetRecords request and for subsequent reads use the shard iterator returned by the  GetRecords request in <tt class="docutils literal"><span class="pre">NextShardIterator</span></tt> . A new shard iterator is returned by every  GetRecords request in <tt class="docutils literal"><span class="pre">NextShardIterator</span></tt> , which you use in the <tt class="docutils literal"><span class="pre">ShardIterator</span></tt> parameter of the next  GetRecords request.</p>
@@ -1604,16 +1543,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ProvisionedThroughputExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="Kinesis.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Kinesis.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -1621,16 +1555,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.increase_stream_retention_period">
-<tt class="descname">increase_stream_retention_period</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.increase_stream_retention_period" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Increases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours (7 days).</p>
+<dt id="Kinesis.Client.increase_stream_retention_period" class="collapsible-title">
+<tt class="descname">increase_stream_retention_period</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.increase_stream_retention_period" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Increases the Kinesis data stream's retention period, which is the length of time data records are accessible after they are added to the stream. The maximum value of a stream's retention period is 168 hours (7 days).</p>
 <p>If you choose a longer stream retention period, this operation increases the time period during which records that have not yet expired are accessible. However, it does not make previous, expired data (older than the stream's previous retention period) accessible after the operation has been called. For example, if a stream's retention period is set to 24 hours and is increased to 168 hours, any data that is older than 24 hours remains inaccessible to consumer applications.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1661,16 +1590,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.InvalidArgumentException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.list_shards">
-<tt class="descname">list_shards</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_shards" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the shards in a stream and provides information about each shard. This operation has a limit of 100 transactions per second per data stream.</p>
+<dt id="Kinesis.Client.list_shards" class="collapsible-title">
+<tt class="descname">list_shards</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_shards" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the shards in a stream and provides information about each shard. This operation has a limit of 100 transactions per second per data stream.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This API is a new operation that is used by the Amazon Kinesis Client Library (KCL). If you have a fine-grained IAM policy that only allows specific operations, you must update your policy to allow calls to this API. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html">Controlling Access to Amazon Kinesis Data Streams Resources Using IAM</a> .</p>
@@ -1812,16 +1736,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.list_stream_consumers">
-<tt class="descname">list_stream_consumers</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_stream_consumers" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the consumers registered to receive data from a stream using enhanced fan-out, and provides information about each consumer.</p>
+<dt id="Kinesis.Client.list_stream_consumers" class="collapsible-title">
+<tt class="descname">list_stream_consumers</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_stream_consumers" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the consumers registered to receive data from a stream using enhanced fan-out, and provides information about each consumer.</p>
 <p>This operation has a limit of 5 transactions per second per stream.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumers">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1916,16 +1835,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceInUseException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.list_streams">
-<tt class="descname">list_streams</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_streams" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists your Kinesis data streams.</p>
+<dt id="Kinesis.Client.list_streams" class="collapsible-title">
+<tt class="descname">list_streams</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_streams" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists your Kinesis data streams.</p>
 <p>The number of streams may be too large to return from a single call to <tt class="docutils literal"><span class="pre">ListStreams</span></tt> . You can limit the number of returned streams using the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter. If you do not specify a value for the <tt class="docutils literal"><span class="pre">Limit</span></tt> parameter, Kinesis Data Streams uses the default limit, which is currently 10.</p>
 <p>You can detect if there are more streams available to list by using the <tt class="docutils literal"><span class="pre">HasMoreStreams</span></tt> flag from the returned output. If there are more streams available, you can request more streams by using the name of the last stream returned by the <tt class="docutils literal"><span class="pre">ListStreams</span></tt> request in the <tt class="docutils literal"><span class="pre">ExclusiveStartStreamName</span></tt> parameter in a subsequent request to <tt class="docutils literal"><span class="pre">ListStreams</span></tt> . The group of stream names returned by the subsequent request is then added to the list. You can continue this process until all the stream names have been collected in the list.</p>
 <blockquote>
@@ -1980,16 +1894,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.list_tags_for_stream">
-<tt class="descname">list_tags_for_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_tags_for_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the tags for the specified Kinesis data stream. This operation has a limit of five transactions per second per account.</p>
+<dt id="Kinesis.Client.list_tags_for_stream" class="collapsible-title">
+<tt class="descname">list_tags_for_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.list_tags_for_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the tags for the specified Kinesis data stream. This operation has a limit of five transactions per second per account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tags_for_stream</span><span class="p">(</span>
@@ -2059,16 +1968,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.merge_shards">
-<tt class="descname">merge_shards</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.merge_shards" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Merges two adjacent shards in a Kinesis data stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.</p>
+<dt id="Kinesis.Client.merge_shards" class="collapsible-title">
+<tt class="descname">merge_shards</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.merge_shards" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Merges two adjacent shards in a Kinesis data stream and combines them into a single shard to reduce the stream's capacity to ingest and transport data. Two shards are considered adjacent if the union of the hash key ranges for the two shards form a contiguous set with no gaps. For example, if you have two shards, one with a hash key range of 276...381 and the other with a hash key range of 382...454, then you could merge these two shards into a single shard that would have a hash key range of 276...454. After the merge, the single child shard receives data for all hash key values covered by the two parent shards.</p>
 <blockquote>
 <div><tt class="docutils literal"><span class="pre">MergeShards</span></tt> is called when there is a need to reduce the overall capacity of a stream because of excess capacity that is not being used. You must specify the shard to be merged and the adjacent shard for a stream. For more information about merging shards, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html">Merge Two Shards</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> .</div></blockquote>
 <p>If the stream is in the <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> state, you can call <tt class="docutils literal"><span class="pre">MergeShards</span></tt> . If a stream is in the <tt class="docutils literal"><span class="pre">CREATING</span></tt> , <tt class="docutils literal"><span class="pre">UPDATING</span></tt> , or <tt class="docutils literal"><span class="pre">DELETING</span></tt> state, <tt class="docutils literal"><span class="pre">MergeShards</span></tt> returns a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If the specified stream does not exist, <tt class="docutils literal"><span class="pre">MergeShards</span></tt> returns a <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> .</p>
@@ -2112,16 +2016,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.put_record">
-<tt class="descname">put_record</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.put_record" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Writes a single data record into an Amazon Kinesis data stream. Call <tt class="docutils literal"><span class="pre">PutRecord</span></tt> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second.</p>
+<dt id="Kinesis.Client.put_record" class="collapsible-title">
+<tt class="descname">put_record</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.put_record" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Writes a single data record into an Amazon Kinesis data stream. Call <tt class="docutils literal"><span class="pre">PutRecord</span></tt> to send data into the stream for real-time ingestion and subsequent processing, one record at a time. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second.</p>
 <p>You must specify the name of the stream that captures, stores, and transports the data; a partition key; and the data blob itself.</p>
 <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p>
 <p>The partition key is used by Kinesis Data Streams to distribute data across shards. Kinesis Data Streams segregates the data records that belong to a stream into multiple shards, using the partition key associated with each data record to determine the shard to which a given data record belongs.</p>
@@ -2208,16 +2107,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.KMSThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.put_records">
-<tt class="descname">put_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.put_records" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Writes multiple data records into a Kinesis data stream in a single call (also referred to as a <tt class="docutils literal"><span class="pre">PutRecords</span></tt> request). Use this operation to send data into the stream for data ingestion and processing.</p>
+<dt id="Kinesis.Client.put_records" class="collapsible-title">
+<tt class="descname">put_records</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.put_records" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Writes multiple data records into a Kinesis data stream in a single call (also referred to as a <tt class="docutils literal"><span class="pre">PutRecords</span></tt> request). Use this operation to send data into the stream for data ingestion and processing.</p>
 <p>Each <tt class="docutils literal"><span class="pre">PutRecords</span></tt> request can support up to 500 records. Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys. Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second.</p>
 <p>You must specify the name of the stream that captures, stores, and transports the data; and an array of request <tt class="docutils literal"><span class="pre">Records</span></tt> , with each record in the array requiring a partition key and data blob. The record size limit applies to the total size of the partition key and data blob.</p>
 <p>The data blob can be any type of data; for example, a segment from a log file, geographic/location data, website clickstream data, and so on.</p>
@@ -2343,16 +2237,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.KMSThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.register_stream_consumer">
-<tt class="descname">register_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.register_stream_consumer" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Registers a consumer with a Kinesis data stream. When you use this operation, the consumer you register can then call  SubscribeToShard to receive data from the stream using enhanced fan-out, at a rate of up to 2 MiB per second for every shard you subscribe to. This rate is unaffected by the total number of consumers that read from the same stream.</p>
+<dt id="Kinesis.Client.register_stream_consumer" class="collapsible-title">
+<tt class="descname">register_stream_consumer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.register_stream_consumer" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Registers a consumer with a Kinesis data stream. When you use this operation, the consumer you register can then call  SubscribeToShard to receive data from the stream using enhanced fan-out, at a rate of up to 2 MiB per second for every shard you subscribe to. This rate is unaffected by the total number of consumers that read from the same stream.</p>
 <p>You can register up to 20 consumers per stream. A given consumer can only be registered with one stream at a time.</p>
 <p>For an example of how to use this operations, see <a class="reference external" href="/streams/latest/dev/building-enhanced-consumers-api.html">Enhanced Fan-Out Using the Kinesis Data Streams API</a> .</p>
 <p>The use of this operation has a limit of five transactions per second per account. Also, only 5 consumers can be created simultaneously. In other words, you cannot have more than 5 consumers in a <tt class="docutils literal"><span class="pre">CREATING</span></tt> status at the same time. Registering a 6th consumer while there are 5 in a <tt class="docutils literal"><span class="pre">CREATING</span></tt> status results in a <tt class="docutils literal"><span class="pre">LimitExceededException</span></tt> .</p>
@@ -2422,16 +2311,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.remove_tags_from_stream">
-<tt class="descname">remove_tags_from_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.remove_tags_from_stream" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes tags from the specified Kinesis data stream. Removed tags are deleted and cannot be recovered after this operation successfully completes.</p>
+<dt id="Kinesis.Client.remove_tags_from_stream" class="collapsible-title">
+<tt class="descname">remove_tags_from_stream</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.remove_tags_from_stream" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes tags from the specified Kinesis data stream. Removed tags are deleted and cannot be recovered after this operation successfully completes.</p>
 <p>If you specify a tag that does not exist, it is ignored.</p>
 <blockquote>
 <div>RemoveTagsFromStream has a limit of five transactions per second per account.</div></blockquote>
@@ -2469,16 +2353,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.split_shard">
-<tt class="descname">split_shard</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.split_shard" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Splits a shard into two new shards in the Kinesis data stream, to increase the stream's capacity to ingest and transport data. <tt class="docutils literal"><span class="pre">SplitShard</span></tt> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested.</p>
+<dt id="Kinesis.Client.split_shard" class="collapsible-title">
+<tt class="descname">split_shard</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.split_shard" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Splits a shard into two new shards in the Kinesis data stream, to increase the stream's capacity to ingest and transport data. <tt class="docutils literal"><span class="pre">SplitShard</span></tt> is called when there is a need to increase the overall capacity of a stream because of an expected increase in the volume of data records being ingested.</p>
 <p>You can also use <tt class="docutils literal"><span class="pre">SplitShard</span></tt> when a shard appears to be approaching its maximum utilization; for example, the producers sending data into the specific shard are suddenly sending more than previously anticipated. You can also call <tt class="docutils literal"><span class="pre">SplitShard</span></tt> to increase stream capacity, so that more Kinesis Data Streams applications can simultaneously read data from the stream for real-time processing.</p>
 <p>You must specify the shard to be split and the new hash key, which is the position in the shard where the shard gets split in two. In many cases, the new hash key might be the average of the beginning and ending hash key, but it can be any hash key value in the range being mapped into the shard. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html">Split a Shard</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> .</p>
 <p>You can use  DescribeStream to determine the shard ID and hash key values for the <tt class="docutils literal"><span class="pre">ShardToSplit</span></tt> and <tt class="docutils literal"><span class="pre">NewStartingHashKey</span></tt> parameters that are specified in the <tt class="docutils literal"><span class="pre">SplitShard</span></tt> request.</p>
@@ -2523,16 +2402,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.start_stream_encryption">
-<tt class="descname">start_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.start_stream_encryption" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables or updates server-side encryption using an AWS KMS key for a specified stream.</p>
+<dt id="Kinesis.Client.start_stream_encryption" class="collapsible-title">
+<tt class="descname">start_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.start_stream_encryption" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables or updates server-side encryption using an AWS KMS key for a specified stream.</p>
 <p>Starting encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <tt class="docutils literal"><span class="pre">UPDATING</span></tt> . After the update is complete, Kinesis Data Streams sets the status of the stream back to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> . Updating or applying encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <tt class="docutils literal"><span class="pre">UPDATING</span></tt> . Once the status of the stream is <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> , encryption begins for records written to the stream.</p>
 <p>API Limits: You can successfully apply a new AWS KMS key for server-side encryption 25 times in a rolling 24-hour period.</p>
 <p>Note: It can take up to 5 seconds after the stream is in an <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> status before all records written to the stream are encrypted. After you enable encryption, you can verify that encryption is applied by inspecting the API response from <tt class="docutils literal"><span class="pre">PutRecord</span></tt> or <tt class="docutils literal"><span class="pre">PutRecords</span></tt> .</p>
@@ -2582,16 +2456,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.KMSThrottlingException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.stop_stream_encryption">
-<tt class="descname">stop_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.stop_stream_encryption" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disables server-side encryption for a specified stream.</p>
+<dt id="Kinesis.Client.stop_stream_encryption" class="collapsible-title">
+<tt class="descname">stop_stream_encryption</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.stop_stream_encryption" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disables server-side encryption for a specified stream.</p>
 <p>Stopping encryption is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <tt class="docutils literal"><span class="pre">UPDATING</span></tt> . After the update is complete, Kinesis Data Streams sets the status of the stream back to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> . Stopping encryption normally takes a few seconds to complete, but it can take minutes. You can continue to read and write data to your stream while its status is <tt class="docutils literal"><span class="pre">UPDATING</span></tt> . Once the status of the stream is <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> , records written to the stream are no longer encrypted by Kinesis Data Streams.</p>
 <p>API Limits: You can successfully disable server-side encryption 25 times in a rolling 24-hour period.</p>
 <p>Note: It can take up to 5 seconds after the stream is in an <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> status before all records written to the stream are no longer subject to encryption. After you disabled encryption, you can verify that encryption is not applied by inspecting the API response from <tt class="docutils literal"><span class="pre">PutRecord</span></tt> or <tt class="docutils literal"><span class="pre">PutRecords</span></tt> .</p>
@@ -2635,16 +2504,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.subscribe_to_shard">
-<tt class="descname">subscribe_to_shard</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.subscribe_to_shard" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>This operation establishes an HTTP/2 connection between the consumer you specify in the <tt class="docutils literal"><span class="pre">ConsumerARN</span></tt> parameter and the shard you specify in the <tt class="docutils literal"><span class="pre">ShardId</span></tt> parameter. After the connection is successfully established, Kinesis Data Streams pushes records from the shard to the consumer over this connection. Before you call this operation, call  RegisterStreamConsumer to register the consumer with Kinesis Data Streams.</p>
+<dt id="Kinesis.Client.subscribe_to_shard" class="collapsible-title">
+<tt class="descname">subscribe_to_shard</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.subscribe_to_shard" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>This operation establishes an HTTP/2 connection between the consumer you specify in the <tt class="docutils literal"><span class="pre">ConsumerARN</span></tt> parameter and the shard you specify in the <tt class="docutils literal"><span class="pre">ShardId</span></tt> parameter. After the connection is successfully established, Kinesis Data Streams pushes records from the shard to the consumer over this connection. Before you call this operation, call  RegisterStreamConsumer to register the consumer with Kinesis Data Streams.</p>
 <p>When the <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> call succeeds, your consumer starts receiving events of type  SubscribeToShardEvent over the HTTP/2 connection for up to 5 minutes, after which time you need to call <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> again to renew the subscription if you want to continue to receive records.</p>
 <p>You can make one call to <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> per second per registered consumer per shard. For example, if you have a 4000 shard stream and two registered stream consumers, you can make one <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> request per second for each combination of shard and registered consumer, allowing you to subscribe both consumers to all 4000 shards in one second.</p>
 <p>If you call <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> again with the same <tt class="docutils literal"><span class="pre">ConsumerARN</span></tt> and <tt class="docutils literal"><span class="pre">ShardId</span></tt> within 5 seconds of a successful call, you'll get a <tt class="docutils literal"><span class="pre">ResourceInUseException</span></tt> . If you call <tt class="docutils literal"><span class="pre">SubscribeToShard</span></tt> 5 seconds or more after a successful call, the first connection will expire and the second call will take over the subscription.</p>
@@ -2908,16 +2772,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.LimitExceededException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Kinesis.Client.update_shard_count">
-<tt class="descname">update_shard_count</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.update_shard_count" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates the shard count of the specified stream to the specified number of shards.</p>
+<dt id="Kinesis.Client.update_shard_count" class="collapsible-title">
+<tt class="descname">update_shard_count</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Client.update_shard_count" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates the shard count of the specified stream to the specified number of shards.</p>
 <p>Updating the shard count is an asynchronous operation. Upon receiving the request, Kinesis Data Streams returns immediately and sets the status of the stream to <tt class="docutils literal"><span class="pre">UPDATING</span></tt> . After the update is complete, Kinesis Data Streams sets the status of the stream back to <tt class="docutils literal"><span class="pre">ACTIVE</span></tt> . Depending on the size of the stream, the scaling action could take a few minutes to complete. You can continue to read and write data to your stream while its status is <tt class="docutils literal"><span class="pre">UPDATING</span></tt> .</p>
 <p>To update the shard count, Kinesis Data Streams performs splits or merges on individual shards. This can cause short-lived shards to be created, in addition to the final shards. These short-lived shards count towards your total shard limit for your account in the Region.</p>
 <p>When using this operation, we recommend that you specify a target shard count that is a multiple of 25% (25%, 50%, 75%, 100%). You can specify any target value within your shard limit. However, if you specify a target that isn't a multiple of 25%, the scaling action might take longer to complete.</p>
@@ -2930,7 +2789,7 @@ section of the service docs for a list of available waiters.</dd>
 <li>Scale a stream with more than 500 shards down unless the result is less than 500 shards</li>
 <li>Scale up to more than the shard limit for your account</li>
 </ul>
-<p>For the default limits for an AWS account, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> . To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a class="reference external" href="https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&amp;limitType=service-code-kinesis">limits form</a> .</p>
+<p>For the default limits for an AWS account, see <a class="reference external" href="https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html">Streams Limits</a> in the <em>Amazon Kinesis Data Streams Developer Guide</em> . To request an increase in the call rate limit, the shard limit for this API, or your overall shard limit, use the <a class="reference external" href="https://console.aws.amazon.com/support/v1#/case/create?issueType=service-limit-increase&limitType=service-code-kinesis">limits form</a> .</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_shard_count</span><span class="p">(</span>
@@ -2996,7 +2855,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Kinesis.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3006,18 +2864,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="Kinesis.Paginator.DescribeStream">
+<dt id="Kinesis.Paginator.DescribeStream" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Paginator.</tt><tt class="descname">DescribeStream</tt><a class="headerlink" href="#Kinesis.Paginator.DescribeStream" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_stream&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_stream&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Paginator.DescribeStream.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Paginator.DescribeStream.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Kinesis.Client.describe_stream" title="Kinesis.Client.describe_stream"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.describe_stream()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3218,23 +3072,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Kinesis.Paginator.ListShards">
+<dt id="Kinesis.Paginator.ListShards" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Paginator.</tt><tt class="descname">ListShards</tt><a class="headerlink" href="#Kinesis.Paginator.ListShards" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_shards&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_shards&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Paginator.ListShards.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Paginator.ListShards.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Kinesis.Client.list_shards" title="Kinesis.Client.list_shards"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.list_shards()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListShards">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3360,23 +3209,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Kinesis.Paginator.ListStreamConsumers">
+<dt id="Kinesis.Paginator.ListStreamConsumers" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Paginator.</tt><tt class="descname">ListStreamConsumers</tt><a class="headerlink" href="#Kinesis.Paginator.ListStreamConsumers" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_stream_consumers&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_stream_consumers&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Paginator.ListStreamConsumers.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Paginator.ListStreamConsumers.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Kinesis.Client.list_stream_consumers" title="Kinesis.Client.list_stream_consumers"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.list_stream_consumers()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumers">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3460,23 +3304,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Kinesis.Paginator.ListStreams">
+<dt id="Kinesis.Paginator.ListStreams" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Paginator.</tt><tt class="descname">ListStreams</tt><a class="headerlink" href="#Kinesis.Paginator.ListStreams" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_streams&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_streams&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Paginator.ListStreams.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Paginator.ListStreams.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Kinesis.Client.list_streams" title="Kinesis.Client.list_streams"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.list_streams()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3529,7 +3368,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3539,18 +3377,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available waiters are:</p>
 
 <dl class="class">
-<dt id="Kinesis.Waiter.StreamExists">
+<dt id="Kinesis.Waiter.StreamExists" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Waiter.</tt><tt class="descname">StreamExists</tt><a class="headerlink" href="#Kinesis.Waiter.StreamExists" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;stream_exists&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;stream_exists&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Waiter.StreamExists.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Waiter.StreamExists.wait" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#Kinesis.Client.describe_stream" title="Kinesis.Client.describe_stream"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.describe_stream()</span></tt></a> every 10 seconds until a successful state is reached. An error is returned after 18 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3586,23 +3420,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Kinesis.Waiter.StreamNotExists">
+<dt id="Kinesis.Waiter.StreamNotExists" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Kinesis.Waiter.</tt><tt class="descname">StreamNotExists</tt><a class="headerlink" href="#Kinesis.Waiter.StreamNotExists" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;stream_not_exists&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;stream_not_exists&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Kinesis.Waiter.StreamNotExists.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Kinesis.Waiter.StreamNotExists.wait" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#Kinesis.Client.describe_stream" title="Kinesis.Client.describe_stream"><tt class="xref py py-meth docutils literal"><span class="pre">Kinesis.Client.describe_stream()</span></tt></a> every 10 seconds until a successful state is reached. An error is returned after 18 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3638,7 +3467,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3667,19 +3495,15 @@ section of the service docs for a list of available waiters.</dd>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="kinesis-video-archived-media.html" title="KinesisVideoArchivedMedia"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="kendra.html" title="kendra"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="kinesis-video-archived-media.html" title="KinesisVideoArchivedMedia">next</a> |</li>
+        <li class="right">
+          <a href="kendra.html" title="kendra">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -3690,24 +3514,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

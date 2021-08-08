@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="ec2.html" title="EC2"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="dynamodbstreams.html" title="DynamoDBStreams"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="ec2.html" title="EC2" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="dynamodbstreams.html" title="DynamoDBStreams" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -452,14 +470,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#EBS.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="EBS.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#EBS.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -471,16 +485,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.complete_snapshot">
-<tt class="descname">complete_snapshot</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.complete_snapshot" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to <tt class="docutils literal"><span class="pre">completed</span></tt> . You cannot write new blocks to a snapshot after it has been completed.</p>
+<dt id="EBS.Client.complete_snapshot" class="collapsible-title">
+<tt class="descname">complete_snapshot</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.complete_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to <tt class="docutils literal"><span class="pre">completed</span></tt> . You cannot write new blocks to a snapshot after it has been completed.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/CompleteSnapshot">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">complete_snapshot</span><span class="p">(</span>
@@ -538,16 +547,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#EBS.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="EBS.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#EBS.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -563,16 +567,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#EBS.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="EBS.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#EBS.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -587,16 +586,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.get_snapshot_block">
-<tt class="descname">get_snapshot_block</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.get_snapshot_block" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>
+<dt id="EBS.Client.get_snapshot_block" class="collapsible-title">
+<tt class="descname">get_snapshot_block</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.get_snapshot_block" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/GetSnapshotBlock">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_snapshot_block</span><span class="p">(</span>
@@ -664,16 +658,11 @@ check if an operation is pageable.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#EBS.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="EBS.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#EBS.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -681,16 +670,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.list_changed_blocks">
-<tt class="descname">list_changed_blocks</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.list_changed_blocks" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>
+<dt id="EBS.Client.list_changed_blocks" class="collapsible-title">
+<tt class="descname">list_changed_blocks</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.list_changed_blocks" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListChangedBlocks">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_changed_blocks</span><span class="p">(</span>
@@ -793,16 +777,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.list_snapshot_blocks">
-<tt class="descname">list_snapshot_blocks</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.list_snapshot_blocks" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p>
+<dt id="EBS.Client.list_snapshot_blocks" class="collapsible-title">
+<tt class="descname">list_snapshot_blocks</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.list_snapshot_blocks" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListSnapshotBlocks">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_snapshot_blocks</span><span class="p">(</span>
@@ -888,16 +867,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.put_snapshot_block">
-<tt class="descname">put_snapshot_block</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.put_snapshot_block" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the <tt class="docutils literal"><span class="pre">pending</span></tt> state.</p>
+<dt id="EBS.Client.put_snapshot_block" class="collapsible-title">
+<tt class="descname">put_snapshot_block</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.put_snapshot_block" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the <tt class="docutils literal"><span class="pre">pending</span></tt> state.</p>
 <p>Data written to a snapshot must be aligned with 512-byte sectors.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/PutSnapshotBlock">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -972,16 +946,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.InternalServerException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="EBS.Client.start_snapshot">
-<tt class="descname">start_snapshot</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.start_snapshot" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a new Amazon EBS snapshot. The new snapshot enters the <tt class="docutils literal"><span class="pre">pending</span></tt> state after the request completes.</p>
+<dt id="EBS.Client.start_snapshot" class="collapsible-title">
+<tt class="descname">start_snapshot</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#EBS.Client.start_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a new Amazon EBS snapshot. The new snapshot enters the <tt class="docutils literal"><span class="pre">pending</span></tt> state after the request completes.</p>
 <p>After creating the snapshot, use <a class="reference external" href="https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html">PutSnapshotBlock</a> to write blocks of data to the snapshot.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/StartSnapshot">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1134,7 +1103,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">EBS.Client.exceptions.ConflictException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -1165,7 +1133,18 @@ section of the service docs for a list of available waiters.</dd>
     </div>
     <div class="related">
       <h3>Navigation</h3>
-      &raquo;&raquo;
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="ec2.html" title="EC2">next</a> |</li>
+        <li class="right">
+          <a href="dynamodbstreams.html" title="DynamoDBStreams">previous</a> |</li>
+        <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
+          <li><a href="index.html">Available services</a> &raquo;</li> 
+      </ul>
     </div>
 <div class="footer">
     <script type="text/javascript" src="../../_static/shortbreadv1.js"></script>
@@ -1175,24 +1154,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

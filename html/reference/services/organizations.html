@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="outposts.html" title="Outposts"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="opsworkscm.html" title="OpsWorksCM"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="outposts.html" title="Outposts" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="opsworkscm.html" title="OpsWorksCM" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -446,7 +464,7 @@
 <p>This guide provides descriptions of the Organizations operations. For more information about using this service, see the <a class="reference external" href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">AWS Organizations User Guide</a> .</p>
 <blockquote>
 <div><strong>Support and feedback for AWS Organizations</strong></div></blockquote>
-<p>We welcome your feedback. Send your comments to <a class="reference external" href="mailto:feedback-awsorganizations&#37;&#52;&#48;amazon&#46;com">feedback-awsorganizations<span>&#64;</span>amazon<span>&#46;</span>com</a> or post your feedback and questions in the <a class="reference external" href="http://forums.aws.amazon.com/forum.jspa?forumID=219">AWS Organizations support forum</a> . For more information about the AWS support forums, see <a class="reference external" href="http://forums.aws.amazon.com/help.jspa">Forums Help</a> .</p>
+<p>We welcome your feedback. Send your comments to <a class="reference external" href="mailto:feedback-awsorganizations%40amazon.com">feedback-awsorganizations<span>&#64;</span>amazon<span>&#46;</span>com</a> or post your feedback and questions in the <a class="reference external" href="http://forums.aws.amazon.com/forum.jspa?forumID=219">AWS Organizations support forum</a> . For more information about the AWS support forums, see <a class="reference external" href="http://forums.aws.amazon.com/help.jspa">Forums Help</a> .</p>
 <blockquote>
 <div><strong>Endpoint to call When using the AWS CLI or the AWS SDK</strong></div></blockquote>
 <p>For the current release of Organizations, specify the <tt class="docutils literal"><span class="pre">us-east-1</span></tt> region for all AWS API and AWS CLI calls made from the commercial AWS Regions outside of China. If calling from one of the AWS Regions in China, then specify <tt class="docutils literal"><span class="pre">cn-northwest-1</span></tt> . You can do this in the AWS CLI by using these parameters and commands:</p>
@@ -465,14 +483,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.accept_handshake">
-<tt class="descname">accept_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.accept_handshake" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Sends a response to the originator of a handshake agreeing to the action proposed by the handshake request.</p>
+<dt id="Organizations.Client.accept_handshake" class="collapsible-title">
+<tt class="descname">accept_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.accept_handshake" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Sends a response to the originator of a handshake agreeing to the action proposed by the handshake request.</p>
 <p>This operation can be called only by the following principals when they also have the relevant IAM permissions:</p>
 <ul class="simple">
 <li><strong>Invitation to join</strong> or <strong>Approve all features request</strong> handshakes: only a principal from the member account. The user who calls the API for an invitation to join must have the <tt class="docutils literal"><span class="pre">organizations:AcceptHandshake</span></tt> permission. If you enabled all features in the organization, the user must also have the <tt class="docutils literal"><span class="pre">iam:CreateServiceLinkedRole</span></tt> permission so that AWS Organizations can create the required service-linked role named <tt class="docutils literal"><span class="pre">AWSServiceRoleForOrganizations</span></tt> . For more information, see <a class="reference external" href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles">AWS Organizations and Service-Linked Roles</a> in the <em>AWS Organizations User Guide</em> .</li>
@@ -665,16 +679,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.attach_policy">
-<tt class="descname">attach_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.attach_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the <em>AWS Organizations User Guide</em> for information about each policy type:</p>
+<dt id="Organizations.Client.attach_policy" class="collapsible-title">
+<tt class="descname">attach_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.attach_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the <em>AWS Organizations User Guide</em> for information about each policy type:</p>
 <ul class="simple">
 <li><a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html">AISERVICES_OPT_OUT_POLICY</a></li>
 <li><a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html">BACKUP_POLICY</a></li>
@@ -762,16 +771,11 @@
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="Organizations.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -783,16 +787,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.cancel_handshake">
-<tt class="descname">cancel_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.cancel_handshake" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Cancels a handshake. Canceling a handshake sets the handshake state to <tt class="docutils literal"><span class="pre">CANCELED</span></tt> .</p>
+<dt id="Organizations.Client.cancel_handshake" class="collapsible-title">
+<tt class="descname">cancel_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.cancel_handshake" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Cancels a handshake. Canceling a handshake sets the handshake state to <tt class="docutils literal"><span class="pre">CANCELED</span></tt> .</p>
 <p>This operation can be called only from the account that originated the handshake. The recipient of the handshake can't cancel it, but can use  DeclineHandshake instead. After a handshake is canceled, the recipient can no longer respond to that handshake.</p>
 <p>After you cancel a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that, it's deleted.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CancelHandshake">AWS API Documentation</a></p>
@@ -982,16 +981,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.create_account">
-<tt class="descname">create_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. Because <tt class="docutils literal"><span class="pre">CreateAccount</span></tt> operates asynchronously, it can return a successful completion message even though account initialization might still be in progress. You might need to wait a few minutes before you can successfully access the account. To check the status of the request, do one of the following:</p>
+<dt id="Organizations.Client.create_account" class="collapsible-title">
+<tt class="descname">create_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an AWS account that is automatically a member of the organization whose credentials made the request. This is an asynchronous request that AWS performs in the background. Because <tt class="docutils literal"><span class="pre">CreateAccount</span></tt> operates asynchronously, it can return a successful completion message even though account initialization might still be in progress. You might need to wait a few minutes before you can successfully access the account. To check the status of the request, do one of the following:</p>
 <ul class="simple">
 <li>Use the <tt class="docutils literal"><span class="pre">Id</span></tt> member of the <tt class="docutils literal"><span class="pre">CreateAccountStatus</span></tt> response element from this operation to provide as a parameter to the  DescribeCreateAccountStatus operation.</li>
 <li>Check the AWS CloudTrail log for the <tt class="docutils literal"><span class="pre">CreateAccountResult</span></tt> event. For information on using AWS CloudTrail with AWS Organizations, see <a class="reference external" href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration">Logging and monitoring in AWS Organizations</a> in the <em>AWS Organizations User Guide.</em></li>
@@ -1162,7 +1156,7 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 <p><strong>Examples</strong></p>
-<p>The owner of an organization creates a member account in the organization. The following example shows that when the organization owner creates the member account, the account is preconfigured with the name &quot;Production Account&quot; and an owner email address of <a class="reference external" href="mailto:susan&#37;&#52;&#48;example&#46;com">susan<span>&#64;</span>example<span>&#46;</span>com</a>.  An IAM role is automatically created using the default name because the roleName parameter is not used. AWS Organizations sends Susan a &quot;Welcome to AWS&quot; email:</p>
+<p>The owner of an organization creates a member account in the organization. The following example shows that when the organization owner creates the member account, the account is preconfigured with the name &quot;Production Account&quot; and an owner email address of <a class="reference external" href="mailto:susan%40example.com">susan<span>&#64;</span>example<span>&#46;</span>com</a>.  An IAM role is automatically created using the default name because the roleName parameter is not used. AWS Organizations sends Susan a &quot;Welcome to AWS&quot; email:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_account</span><span class="p">(</span>
     <span class="n">AccountName</span><span class="o">=</span><span class="s1">&#39;Production Account&#39;</span><span class="p">,</span>
     <span class="n">Email</span><span class="o">=</span><span class="s1">&#39;susan@example.com&#39;</span><span class="p">,</span>
@@ -1184,16 +1178,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.create_gov_cloud_account">
-<tt class="descname">create_gov_cloud_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_gov_cloud_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>This action is available if all of the following are true:</p>
+<dt id="Organizations.Client.create_gov_cloud_account" class="collapsible-title">
+<tt class="descname">create_gov_cloud_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_gov_cloud_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>This action is available if all of the following are true:</p>
 <ul class="simple">
 <li>You're authorized to create accounts in the AWS GovCloud (US) Region. For more information on the AWS GovCloud (US) Region, see the ` <em>AWS GovCloud User Guide</em> . &lt;<a class="reference external" href="http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html">http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html</a>&gt;`__</li>
 <li>You already have an account in the AWS GovCloud (US) Region that is paired with a management account of an organization in the commercial Region.</li>
@@ -1374,16 +1363,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.create_organization">
-<tt class="descname">create_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an AWS organization. The account whose user is calling the <tt class="docutils literal"><span class="pre">CreateOrganization</span></tt> operation automatically becomes the <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">management account</a> of the new organization.</p>
+<dt id="Organizations.Client.create_organization" class="collapsible-title">
+<tt class="descname">create_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an AWS organization. The account whose user is calling the <tt class="docutils literal"><span class="pre">CreateOrganization</span></tt> operation automatically becomes the <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account">management account</a> of the new organization.</p>
 <p>This operation must be called using credentials from the account that is to become the new organization's management account. The principal must also have the relevant IAM permissions.</p>
 <p>By default (or if you set the <tt class="docutils literal"><span class="pre">FeatureSet</span></tt> parameter to <tt class="docutils literal"><span class="pre">ALL</span></tt> ), the new organization is created with all features enabled and service control policies automatically enabled in the root. If you instead choose to create the organization supporting only the consolidated billing features by setting the <tt class="docutils literal"><span class="pre">FeatureSet</span></tt> parameter to <tt class="docutils literal"><span class="pre">CONSOLIDATED_BILLING&quot;</span></tt> , no policy types are enabled by default, and you can't use organization policies</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization">AWS API Documentation</a></p>
@@ -1531,16 +1515,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.create_organizational_unit">
-<tt class="descname">create_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_organizational_unit" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an organizational unit (OU) within a root or parent OU. An OU is a container for accounts that enables you to organize your accounts to apply policies according to your business requirements. The number of levels deep that you can nest OUs is dependent upon the policy types enabled for that root. For service control policies, the limit is five.</p>
+<dt id="Organizations.Client.create_organizational_unit" class="collapsible-title">
+<tt class="descname">create_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_organizational_unit" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an organizational unit (OU) within a root or parent OU. An OU is a container for accounts that enables you to organize your accounts to apply policies according to your business requirements. The number of levels deep that you can nest OUs is dependent upon the policy types enabled for that root. For service control policies, the limit is five.</p>
 <p>For more information about OUs, see <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html">Managing Organizational Units</a> in the <em>AWS Organizations User Guide.</em></p>
 <p>If the request includes tags, then the requester must have the <tt class="docutils literal"><span class="pre">organizations:TagResource</span></tt> permission.</p>
 <p>This operation can be called only from the organization's management account.</p>
@@ -1671,16 +1650,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.create_policy">
-<tt class="descname">create_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates a policy of a specified type that you can attach to a root, an organizational unit (OU), or an individual AWS account.</p>
+<dt id="Organizations.Client.create_policy" class="collapsible-title">
+<tt class="descname">create_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.create_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates a policy of a specified type that you can attach to a root, an organizational unit (OU), or an individual AWS account.</p>
 <p>For more information about policies and their use, see <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html">Managing Organization Policies</a> .</p>
 <p>If the request includes tags, then the requester must have the <tt class="docutils literal"><span class="pre">organizations:TagResource</span></tt> permission.</p>
 <p>This operation can be called only from the organization's management account.</p>
@@ -1852,16 +1826,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.decline_handshake">
-<tt class="descname">decline_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.decline_handshake" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Declines a handshake request. This sets the handshake state to <tt class="docutils literal"><span class="pre">DECLINED</span></tt> and effectively deactivates the request.</p>
+<dt id="Organizations.Client.decline_handshake" class="collapsible-title">
+<tt class="descname">decline_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.decline_handshake" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Declines a handshake request. This sets the handshake state to <tt class="docutils literal"><span class="pre">DECLINED</span></tt> and effectively deactivates the request.</p>
 <p>This operation can be called only from the account that received the handshake. The originator of the handshake can use  CancelHandshake instead. The originator can't reactivate a declined request, but can reinitiate the process with a new handshake request.</p>
 <p>After you decline a handshake, it continues to appear in the results of relevant APIs for only 30 days. After that, it's deleted.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeclineHandshake">AWS API Documentation</a></p>
@@ -2047,16 +2016,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.delete_organization">
-<tt class="descname">delete_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.delete_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes the organization. You can delete an organization only by using credentials from the management account. The organization must be empty of member accounts.</p>
+<dt id="Organizations.Client.delete_organization" class="collapsible-title">
+<tt class="descname">delete_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.delete_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes the organization. You can delete an organization only by using credentials from the management account. The organization must be empty of member accounts.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganization">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">delete_organization</span><span class="p">()</span>
@@ -2076,16 +2040,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.delete_organizational_unit">
-<tt class="descname">delete_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.delete_organizational_unit" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes an organizational unit (OU) from a root or another OU. You must first remove all accounts and child OUs from the OU that you want to delete.</p>
+<dt id="Organizations.Client.delete_organizational_unit" class="collapsible-title">
+<tt class="descname">delete_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.delete_organizational_unit" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes an organizational unit (OU) from a root or another OU. You must first remove all accounts and child OUs from the OU that you want to delete.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeleteOrganizationalUnit">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2130,16 +2089,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.delete_policy">
-<tt class="descname">delete_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.delete_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes the specified policy from your organization. Before you perform this operation, you must first detach the policy from all organizational units (OUs), roots, and accounts.</p>
+<dt id="Organizations.Client.delete_policy" class="collapsible-title">
+<tt class="descname">delete_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.delete_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes the specified policy from your organization. Before you perform this operation, you must first detach the policy from all organizational units (OUs), roots, and accounts.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DeletePolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2185,16 +2139,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.deregister_delegated_administrator">
-<tt class="descname">deregister_delegated_administrator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.deregister_delegated_administrator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes the specified member AWS account as a delegated administrator for the specified AWS service.</p>
+<dt id="Organizations.Client.deregister_delegated_administrator" class="collapsible-title">
+<tt class="descname">deregister_delegated_administrator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.deregister_delegated_administrator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes the specified member AWS account as a delegated administrator for the specified AWS service.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Deregistering a delegated administrator can have unintended impacts on the functionality of the enabled AWS service. See the documentation for the enabled service before you deregister a delegated administrator so that you understand any potential impacts.</p>
@@ -2237,16 +2186,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_account">
-<tt class="descname">describe_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves AWS Organizations-related information about the specified account.</p>
+<dt id="Organizations.Client.describe_account" class="collapsible-title">
+<tt class="descname">describe_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves AWS Organizations-related information about the specified account.</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeAccount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2337,16 +2281,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_create_account_status">
-<tt class="descname">describe_create_account_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_create_account_status" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves the current status of an asynchronous request to create an account.</p>
+<dt id="Organizations.Client.describe_create_account_status" class="collapsible-title">
+<tt class="descname">describe_create_account_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_create_account_status" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves the current status of an asynchronous request to create an account.</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2453,16 +2392,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_effective_policy">
-<tt class="descname">describe_effective_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_effective_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the contents of the effective policy for specified policy type and account. The effective policy is the aggregation of any policies of the specified type that the account inherits, plus any policy of that type that is directly attached to the account.</p>
+<dt id="Organizations.Client.describe_effective_policy" class="collapsible-title">
+<tt class="descname">describe_effective_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_effective_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the contents of the effective policy for specified policy type and account. The effective policy is the aggregation of any policies of the specified type that the account inherits, plus any policy of that type that is directly attached to the account.</p>
 <p>This operation applies only to policy types <em>other</em> than service control policies (SCPs).</p>
 <p>For more information about policy inheritance, see <a class="reference external" href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html">How Policy Inheritance Works</a> in the <em>AWS Organizations User Guide</em> .</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
@@ -2540,16 +2474,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_handshake">
-<tt class="descname">describe_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_handshake" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves information about a previously requested handshake. The handshake ID comes from the response to the original  InviteAccountToOrganization operation that generated the handshake.</p>
+<dt id="Organizations.Client.describe_handshake" class="collapsible-title">
+<tt class="descname">describe_handshake</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_handshake" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves information about a previously requested handshake. The handshake ID comes from the response to the original  InviteAccountToOrganization operation that generated the handshake.</p>
 <p>You can access handshakes that are <tt class="docutils literal"><span class="pre">ACCEPTED</span></tt> , <tt class="docutils literal"><span class="pre">DECLINED</span></tt> , or <tt class="docutils literal"><span class="pre">CANCELED</span></tt> for only 30 days after they change to that state. They're then deleted and no longer accessible.</p>
 <p>This operation can be called from any account in the organization.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeHandshake">AWS API Documentation</a></p>
@@ -2729,16 +2658,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_organization">
-<tt class="descname">describe_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.describe_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves information about the organization that the user's account belongs to.</p>
+<dt id="Organizations.Client.describe_organization" class="collapsible-title">
+<tt class="descname">describe_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.describe_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves information about the organization that the user's account belongs to.</p>
 <p>This operation can be called from any account in the organization.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -2855,16 +2779,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_organizational_unit">
-<tt class="descname">describe_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_organizational_unit" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves information about an organizational unit (OU).</p>
+<dt id="Organizations.Client.describe_organizational_unit" class="collapsible-title">
+<tt class="descname">describe_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_organizational_unit" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves information about an organizational unit (OU).</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganizationalUnit">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2941,16 +2860,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.describe_policy">
-<tt class="descname">describe_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves information about a policy.</p>
+<dt id="Organizations.Client.describe_policy" class="collapsible-title">
+<tt class="descname">describe_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.describe_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves information about a policy.</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribePolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3052,16 +2966,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.detach_policy">
-<tt class="descname">detach_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.detach_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Detaches a policy from a target root, organizational unit (OU), or account.</p>
+<dt id="Organizations.Client.detach_policy" class="collapsible-title">
+<tt class="descname">detach_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.detach_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Detaches a policy from a target root, organizational unit (OU), or account.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">If the policy being detached is a service control policy (SCP), the changes to permissions for AWS Identity and Access Management (IAM) users and roles in affected accounts are immediate.</p>
@@ -3130,16 +3039,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.disable_aws_service_access">
-<tt class="descname">disable_aws_service_access</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.disable_aws_service_access" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disables the integration of an AWS service (the service that is specified by <tt class="docutils literal"><span class="pre">ServicePrincipal</span></tt> ) with AWS Organizations. When you disable integration, the specified service no longer can create a <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in <em>new</em> accounts in your organization. This means the service can't perform operations on your behalf on any new accounts in your organization. The service can still perform operations in older accounts until the service completes its clean-up from AWS Organizations.</p>
+<dt id="Organizations.Client.disable_aws_service_access" class="collapsible-title">
+<tt class="descname">disable_aws_service_access</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.disable_aws_service_access" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disables the integration of an AWS service (the service that is specified by <tt class="docutils literal"><span class="pre">ServicePrincipal</span></tt> ) with AWS Organizations. When you disable integration, the specified service no longer can create a <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in <em>new</em> accounts in your organization. This means the service can't perform operations on your behalf on any new accounts in your organization. The service can still perform operations in older accounts until the service completes its clean-up from AWS Organizations.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p>We ** <em>strongly recommend</em> ** that you don't use this command to disable integration between AWS Organizations and the specified AWS service. Instead, use the console or commands that are provided by the specified service. This lets the trusted service perform any required initialization when enabling trusted access, such as creating any required resources and any required clean up of resources when disabling trusted access.</p>
@@ -3180,16 +3084,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.disable_policy_type">
-<tt class="descname">disable_policy_type</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.disable_policy_type" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disables an organizational policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any organizational unit (OU) or account in that root. You can undo this by using the  EnablePolicyType operation.</p>
+<dt id="Organizations.Client.disable_policy_type" class="collapsible-title">
+<tt class="descname">disable_policy_type</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.disable_policy_type" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disables an organizational policy type in a root. A policy of a certain type can be attached to entities in a root only if that type is enabled in the root. After you perform this operation, you no longer can attach policies of the specified type to that root or to any organizational unit (OU) or account in that root. You can undo this by using the  EnablePolicyType operation.</p>
 <p>This is an asynchronous request that AWS performs in the background. If you disable a policy type for a root, it still appears enabled for the organization if <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">all features</a> are enabled for the organization. AWS recommends that you first use  ListRoots to see the status of policy types for a specified root, and then use this operation.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>To view the status of available policy types in the organization, use  DescribeOrganization .</p>
@@ -3323,16 +3222,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.enable_all_features">
-<tt class="descname">enable_all_features</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.enable_all_features" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables all features in an organization. This enables the use of organization policies that can restrict the services and actions that can be called in each account. Until you enable all features, you have access only to consolidated billing, and you can't use any of the advanced account administration features that AWS Organizations supports. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <em>AWS Organizations User Guide.</em></p>
+<dt id="Organizations.Client.enable_all_features" class="collapsible-title">
+<tt class="descname">enable_all_features</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.enable_all_features" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables all features in an organization. This enables the use of organization policies that can restrict the services and actions that can be called in each account. Until you enable all features, you have access only to consolidated billing, and you can't use any of the advanced account administration features that AWS Organizations supports. For more information, see <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html">Enabling All Features in Your Organization</a> in the <em>AWS Organizations User Guide.</em></p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">This operation is required only for organizations that were created explicitly with only the consolidated billing features enabled. Calling this operation sends a handshake to every invited account in the organization. The feature set change can be finalized and the additional features enabled only after all administrators in the invited accounts approve the change by accepting the handshake.</p>
@@ -3494,16 +3388,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.enable_aws_service_access">
-<tt class="descname">enable_aws_service_access</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.enable_aws_service_access" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables the integration of an AWS service (the service that is specified by <tt class="docutils literal"><span class="pre">ServicePrincipal</span></tt> ) with AWS Organizations. When you enable integration, you allow the specified service to create a <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in all the accounts in your organization. This allows the service to perform operations on your behalf in your organization and its accounts.</p>
+<dt id="Organizations.Client.enable_aws_service_access" class="collapsible-title">
+<tt class="descname">enable_aws_service_access</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.enable_aws_service_access" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables the integration of an AWS service (the service that is specified by <tt class="docutils literal"><span class="pre">ServicePrincipal</span></tt> ) with AWS Organizations. When you enable integration, you allow the specified service to create a <a class="reference external" href="http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">service-linked role</a> in all the accounts in your organization. This allows the service to perform operations on your behalf in your organization and its accounts.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">We recommend that you enable integration between AWS Organizations and the specified AWS service by using the console or commands that are provided by the specified service. Doing so ensures that the service is aware that it can create the resources that are required for the integration. How the service creates those resources in the organization's accounts depends on that service. For more information, see the documentation for the other AWS service.</p>
@@ -3535,16 +3424,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.enable_policy_type">
-<tt class="descname">enable_policy_type</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.enable_policy_type" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables a policy type in a root. After you enable a policy type in a root, you can attach policies of that type to the root, any organizational unit (OU), or account in that root. You can undo this by using the  DisablePolicyType operation.</p>
+<dt id="Organizations.Client.enable_policy_type" class="collapsible-title">
+<tt class="descname">enable_policy_type</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.enable_policy_type" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables a policy type in a root. After you enable a policy type in a root, you can attach policies of that type to the root, any organizational unit (OU), or account in that root. You can undo this by using the  DisablePolicyType operation.</p>
 <p>This is an asynchronous request that AWS performs in the background. AWS recommends that you first use  ListRoots to see the status of policy types for a specified root, and then use this operation.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>You can enable a policy type in a root only if that policy type is available in the organization. To view the status of available policy types in the organization, use  DescribeOrganization .</p>
@@ -3683,16 +3567,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Organizations.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="Organizations.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#Organizations.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -3708,16 +3587,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="Organizations.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -3732,16 +3606,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="Organizations.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#Organizations.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -3749,16 +3618,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.invite_account_to_organization">
-<tt class="descname">invite_account_to_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.invite_account_to_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Sends an invitation to another account to join your organization as a member account. AWS Organizations sends email on your behalf to the email address that is associated with the other account's owner. The invitation is implemented as a  Handshake whose details are in the response.</p>
+<dt id="Organizations.Client.invite_account_to_organization" class="collapsible-title">
+<tt class="descname">invite_account_to_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.invite_account_to_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Sends an invitation to another account to join your organization as a member account. AWS Organizations sends email on your behalf to the email address that is associated with the other account's owner. The invitation is implemented as a  Handshake whose details are in the response.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <ul class="last simple">
@@ -3970,7 +3834,7 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 <p><strong>Examples</strong></p>
-<p>The following example shows the admin of the master account owned by <a class="reference external" href="mailto:bill&#37;&#52;&#48;example&#46;com">bill<span>&#64;</span>example<span>&#46;</span>com</a> inviting the account owned by <a class="reference external" href="mailto:juan&#37;&#52;&#48;example&#46;com">juan<span>&#64;</span>example<span>&#46;</span>com</a> to join an organization.</p>
+<p>The following example shows the admin of the master account owned by <a class="reference external" href="mailto:bill%40example.com">bill<span>&#64;</span>example<span>&#46;</span>com</a> inviting the account owned by <a class="reference external" href="mailto:juan%40example.com">juan<span>&#64;</span>example<span>&#46;</span>com</a> to join an organization.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>response = client.invite_account_to_organization(
     Notes=&#39;This is a request for Juan&#39;s account to join Bill&#39;s organization&#39;,
     Target={
@@ -4033,16 +3897,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.leave_organization">
-<tt class="descname">leave_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.leave_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes a member account from its parent organization. This version of the operation is performed by the account that wants to leave. To remove a member account as a user in the management account, use  RemoveAccountFromOrganization instead.</p>
+<dt id="Organizations.Client.leave_organization" class="collapsible-title">
+<tt class="descname">leave_organization</tt><big>(</big><big>)</big><a class="headerlink" href="#Organizations.Client.leave_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes a member account from its parent organization. This version of the operation is performed by the account that wants to leave. To remove a member account as a user in the management account, use  RemoveAccountFromOrganization instead.</p>
 <p>This operation can be called only from a member account in the organization.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -4100,16 +3959,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_accounts">
-<tt class="descname">list_accounts</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_accounts" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists all the accounts in the organization. To request only the accounts in a specified root or organizational unit (OU), use the  ListAccountsForParent operation instead.</p>
+<dt id="Organizations.Client.list_accounts" class="collapsible-title">
+<tt class="descname">list_accounts</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_accounts" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists all the accounts in the organization. To request only the accounts in a specified root or organizational unit (OU), use the  ListAccountsForParent operation instead.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -4259,16 +4113,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_accounts_for_parent">
-<tt class="descname">list_accounts_for_parent</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_accounts_for_parent" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU). If you specify the root, you get a list of all the accounts that aren't in any OU. If you specify an OU, you get a list of all the accounts in only that OU and not in any child OUs. To get a list of all accounts in the organization, use the  ListAccounts operation.</p>
+<dt id="Organizations.Client.list_accounts_for_parent" class="collapsible-title">
+<tt class="descname">list_accounts_for_parent</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_accounts_for_parent" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the accounts in an organization that are contained by the specified target root or organizational unit (OU). If you specify the root, you get a list of all the accounts that aren't in any OU. If you specify an OU, you get a list of all the accounts in only that OU and not in any child OUs. To get a list of all accounts in the organization, use the  ListAccounts operation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -4406,16 +4255,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_aws_service_access_for_organization">
-<tt class="descname">list_aws_service_access_for_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_aws_service_access_for_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of the AWS services that you enabled to integrate with your organization. After a service on this list creates the resources that it requires for the integration, it can perform operations on your organization and its accounts.</p>
+<dt id="Organizations.Client.list_aws_service_access_for_organization" class="collapsible-title">
+<tt class="descname">list_aws_service_access_for_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_aws_service_access_for_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of the AWS services that you enabled to integrate with your organization. After a service on this list creates the resources that it requires for the integration, it can perform operations on your organization and its accounts.</p>
 <p>For more information about integrating other services with AWS Organizations, including the list of services that currently work with Organizations, see <a class="reference external" href="http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html">Integrating AWS Organizations with Other AWS Services</a> in the <em>AWS Organizations User Guide.</em></p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization">AWS API Documentation</a></p>
@@ -4486,16 +4330,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_children">
-<tt class="descname">list_children</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_children" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists all of the organizational units (OUs) or accounts that are contained in the specified parent OU or root. This operation, along with  ListParents enables you to traverse the tree structure that makes up this root.</p>
+<dt id="Organizations.Client.list_children" class="collapsible-title">
+<tt class="descname">list_children</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_children" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists all of the organizational units (OUs) or accounts that are contained in the specified parent OU or root. This operation, along with  ListParents enables you to traverse the tree structure that makes up this root.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -4614,16 +4453,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_create_account_status">
-<tt class="descname">list_create_account_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_create_account_status" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the account creation requests that match the specified status that is currently being tracked for the organization.</p>
+<dt id="Organizations.Client.list_create_account_status" class="collapsible-title">
+<tt class="descname">list_create_account_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_create_account_status" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the account creation requests that match the specified status that is currently being tracked for the organization.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -4800,16 +4634,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_delegated_administrators">
-<tt class="descname">list_delegated_administrators</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_delegated_administrators" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the AWS accounts that are designated as delegated administrators in this organization.</p>
+<dt id="Organizations.Client.list_delegated_administrators" class="collapsible-title">
+<tt class="descname">list_delegated_administrators</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_delegated_administrators" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the AWS accounts that are designated as delegated administrators in this organization.</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministrators">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4907,16 +4736,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_delegated_services_for_account">
-<tt class="descname">list_delegated_services_for_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_delegated_services_for_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>List the AWS services for which the specified account is a delegated administrator.</p>
+<dt id="Organizations.Client.list_delegated_services_for_account" class="collapsible-title">
+<tt class="descname">list_delegated_services_for_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_delegated_services_for_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>List the AWS services for which the specified account is a delegated administrator.</p>
 <p>This operation can be called only from the organization's management account or by a member account that is a delegated administrator for an AWS service.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -4992,16 +4816,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_handshakes_for_account">
-<tt class="descname">list_handshakes_for_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_handshakes_for_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the current handshakes that are associated with the account of the requesting user.</p>
+<dt id="Organizations.Client.list_handshakes_for_account" class="collapsible-title">
+<tt class="descname">list_handshakes_for_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_handshakes_for_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the current handshakes that are associated with the account of the requesting user.</p>
 <p>Handshakes that are <tt class="docutils literal"><span class="pre">ACCEPTED</span></tt> , <tt class="docutils literal"><span class="pre">DECLINED</span></tt> , or <tt class="docutils literal"><span class="pre">CANCELED</span></tt> appear in the results of this API for only 30 days after changing to that state. After that, they're deleted and no longer accessible.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -5240,16 +5059,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_handshakes_for_organization">
-<tt class="descname">list_handshakes_for_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_handshakes_for_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the handshakes that are associated with the organization that the requesting user is part of. The <tt class="docutils literal"><span class="pre">ListHandshakesForOrganization</span></tt> operation returns a list of handshake structures. Each structure contains details and status about a handshake.</p>
+<dt id="Organizations.Client.list_handshakes_for_organization" class="collapsible-title">
+<tt class="descname">list_handshakes_for_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_handshakes_for_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the handshakes that are associated with the organization that the requesting user is part of. The <tt class="docutils literal"><span class="pre">ListHandshakesForOrganization</span></tt> operation returns a list of handshake structures. Each structure contains details and status about a handshake.</p>
 <p>Handshakes that are <tt class="docutils literal"><span class="pre">ACCEPTED</span></tt> , <tt class="docutils literal"><span class="pre">DECLINED</span></tt> , or <tt class="docutils literal"><span class="pre">CANCELED</span></tt> appear in the results of this API for only 30 days after changing to that state. After that, they're deleted and no longer accessible.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -5531,16 +5345,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_organizational_units_for_parent">
-<tt class="descname">list_organizational_units_for_parent</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_organizational_units_for_parent" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the organizational units (OUs) in a parent organizational unit or root.</p>
+<dt id="Organizations.Client.list_organizational_units_for_parent" class="collapsible-title">
+<tt class="descname">list_organizational_units_for_parent</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_organizational_units_for_parent" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the organizational units (OUs) in a parent organizational unit or root.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -5658,16 +5467,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_parents">
-<tt class="descname">list_parents</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_parents" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the root or organizational units (OUs) that serve as the immediate parent of the specified child OU or account. This operation, along with  ListChildren enables you to traverse the tree structure that makes up this root.</p>
+<dt id="Organizations.Client.list_parents" class="collapsible-title">
+<tt class="descname">list_parents</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_parents" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the root or organizational units (OUs) that serve as the immediate parent of the specified child OU or account. This operation, along with  ListChildren enables you to traverse the tree structure that makes up this root.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -5781,16 +5585,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_policies">
-<tt class="descname">list_policies</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_policies" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Retrieves the list of all policies in an organization of a specified type.</p>
+<dt id="Organizations.Client.list_policies" class="collapsible-title">
+<tt class="descname">list_policies</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_policies" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Retrieves the list of all policies in an organization of a specified type.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -5935,16 +5734,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_policies_for_target">
-<tt class="descname">list_policies_for_target</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_policies_for_target" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the policies that are directly attached to the specified target root, organizational unit (OU), or account. You must specify the policy type that you want included in the returned list.</p>
+<dt id="Organizations.Client.list_policies_for_target" class="collapsible-title">
+<tt class="descname">list_policies_for_target</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_policies_for_target" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the policies that are directly attached to the specified target root, organizational unit (OU), or account. You must specify the policy type that you want included in the returned list.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -6085,16 +5879,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_roots">
-<tt class="descname">list_roots</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_roots" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists the roots that are defined in the current organization.</p>
+<dt id="Organizations.Client.list_roots" class="collapsible-title">
+<tt class="descname">list_roots</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_roots" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists the roots that are defined in the current organization.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -6232,16 +6021,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_tags_for_resource">
-<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists tags that are attached to the specified resource.</p>
+<dt id="Organizations.Client.list_tags_for_resource" class="collapsible-title">
+<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists tags that are attached to the specified resource.</p>
 <p>You can attach tags to the following resources in AWS Organizations.</p>
 <ul class="simple">
 <li>AWS account</li>
@@ -6333,16 +6117,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.list_targets_for_policy">
-<tt class="descname">list_targets_for_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_targets_for_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists all the roots, organizational units (OUs), and accounts that the specified policy is attached to.</p>
+<dt id="Organizations.Client.list_targets_for_policy" class="collapsible-title">
+<tt class="descname">list_targets_for_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.list_targets_for_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists all the roots, organizational units (OUs), and accounts that the specified policy is attached to.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Always check the <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter for a <tt class="docutils literal"><span class="pre">null</span></tt> value when calling a <tt class="docutils literal"><span class="pre">List*</span></tt> operation. These operations can occasionally return an empty set of results even when there are more results available. The <tt class="docutils literal"><span class="pre">NextToken</span></tt> response parameter value is <tt class="docutils literal"><span class="pre">null</span></tt>  <em>only</em> when there are no more results to display.</p>
@@ -6474,16 +6253,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.move_account">
-<tt class="descname">move_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.move_account" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Moves an account from its current source parent root or organizational unit (OU) to the specified destination parent root or OU.</p>
+<dt id="Organizations.Client.move_account" class="collapsible-title">
+<tt class="descname">move_account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.move_account" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Moves an account from its current source parent root or organizational unit (OU) to the specified destination parent root or OU.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/MoveAccount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -6554,16 +6328,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.register_delegated_administrator">
-<tt class="descname">register_delegated_administrator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.register_delegated_administrator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service.</p>
+<dt id="Organizations.Client.register_delegated_administrator" class="collapsible-title">
+<tt class="descname">register_delegated_administrator</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.register_delegated_administrator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Enables the specified member account to administer the Organizations features of the specified AWS service. It grants read-only access to AWS Organizations service data. The account still requires IAM permissions to access and administer the AWS service.</p>
 <p>You can run this action only for AWS services that support this feature. For a current list of services that support it, see the column <em>Supports Delegated Administrator</em> in the table at <a class="reference external" href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html">AWS Services that you can use with AWS Organizations</a> in the <em>AWS Organizations User Guide.</em></p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/RegisterDelegatedAdministrator">AWS API Documentation</a></p>
@@ -6601,16 +6370,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.UnsupportedAPIEndpointException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.remove_account_from_organization">
-<tt class="descname">remove_account_from_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.remove_account_from_organization" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes the specified account from the organization.</p>
+<dt id="Organizations.Client.remove_account_from_organization" class="collapsible-title">
+<tt class="descname">remove_account_from_organization</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.remove_account_from_organization" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes the specified account from the organization.</p>
 <p>The removed account becomes a standalone account that isn't a member of any organization. It's no longer subject to any policies and is responsible for its own bill payments. The organization's management account is no longer charged for any expenses accrued by the member account after it's removed from the organization.</p>
 <p>This operation can be called only from the organization's management account. Member accounts can remove themselves with  LeaveOrganization instead.</p>
 <div class="admonition warning">
@@ -6665,16 +6429,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.tag_resource">
-<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Adds one or more tags to the specified resource.</p>
+<dt id="Organizations.Client.tag_resource" class="collapsible-title">
+<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Adds one or more tags to the specified resource.</p>
 <p>Currently, you can attach tags to the following resources in AWS Organizations.</p>
 <ul class="simple">
 <li>AWS account</li>
@@ -6750,16 +6509,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.untag_resource">
-<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes any tags with the specified keys from the specified resource.</p>
+<dt id="Organizations.Client.untag_resource" class="collapsible-title">
+<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes any tags with the specified keys from the specified resource.</p>
 <p>You can attach tags to the following resources in AWS Organizations.</p>
 <ul class="simple">
 <li>AWS account</li>
@@ -6813,16 +6567,11 @@ print(response)
 <li><tt class="xref py py-class docutils literal"><span class="pre">Organizations.Client.exceptions.TooManyRequestsException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.update_organizational_unit">
-<tt class="descname">update_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.update_organizational_unit" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Renames the specified organizational unit (OU). The ID and ARN don't change. The child OUs and accounts remain in place, and any attached policies of the OU remain attached.</p>
+<dt id="Organizations.Client.update_organizational_unit" class="collapsible-title">
+<tt class="descname">update_organizational_unit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.update_organizational_unit" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Renames the specified organizational unit (OU). The ID and ARN don't change. The child OUs and accounts remain in place, and any attached policies of the OU remain attached.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdateOrganizationalUnit">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -6917,16 +6666,11 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="Organizations.Client.update_policy">
-<tt class="descname">update_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.update_policy" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates an existing policy with a new name, description, or content. If you don't supply any parameter, that value remains unchanged. You can't change a policy's type.</p>
+<dt id="Organizations.Client.update_policy" class="collapsible-title">
+<tt class="descname">update_policy</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Client.update_policy" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates an existing policy with a new name, description, or content. If you don't supply any parameter, that value remains unchanged. You can't change a policy's type.</p>
 <p>This operation can be called only from the organization's management account.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7087,7 +6831,6 @@ print(response)
 </pre></div>
 </div>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -7097,18 +6840,14 @@ print(response)
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListAWSServiceAccessForOrganization">
+<dt id="Organizations.Paginator.ListAWSServiceAccessForOrganization" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListAWSServiceAccessForOrganization</tt><a class="headerlink" href="#Organizations.Paginator.ListAWSServiceAccessForOrganization" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_aws_service_access_for_organization&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_aws_service_access_for_organization&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListAWSServiceAccessForOrganization.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListAWSServiceAccessForOrganization.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_aws_service_access_for_organization" title="Organizations.Client.list_aws_service_access_for_organization"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_aws_service_access_for_organization()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAWSServiceAccessForOrganization">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7165,23 +6904,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListAccounts">
+<dt id="Organizations.Paginator.ListAccounts" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListAccounts</tt><a class="headerlink" href="#Organizations.Paginator.ListAccounts" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_accounts&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_accounts&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListAccounts.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListAccounts.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_accounts" title="Organizations.Client.list_accounts"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_accounts()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccounts">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7257,23 +6991,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListAccountsForParent">
+<dt id="Organizations.Paginator.ListAccountsForParent" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListAccountsForParent</tt><a class="headerlink" href="#Organizations.Paginator.ListAccountsForParent" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_accounts_for_parent&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_accounts_for_parent&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListAccountsForParent.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListAccountsForParent.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_accounts_for_parent" title="Organizations.Client.list_accounts_for_parent"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_accounts_for_parent()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListAccountsForParent">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7369,23 +7098,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListChildren">
+<dt id="Organizations.Paginator.ListChildren" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListChildren</tt><a class="headerlink" href="#Organizations.Paginator.ListChildren" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_children&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_children&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListChildren.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListChildren.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_children" title="Organizations.Client.list_children"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_children()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListChildren">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7471,23 +7195,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListCreateAccountStatus">
+<dt id="Organizations.Paginator.ListCreateAccountStatus" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListCreateAccountStatus</tt><a class="headerlink" href="#Organizations.Paginator.ListCreateAccountStatus" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_create_account_status&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_create_account_status&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListCreateAccountStatus.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListCreateAccountStatus.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_create_account_status" title="Organizations.Client.list_create_account_status"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_create_account_status()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7604,23 +7323,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListDelegatedAdministrators">
+<dt id="Organizations.Paginator.ListDelegatedAdministrators" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListDelegatedAdministrators</tt><a class="headerlink" href="#Organizations.Paginator.ListDelegatedAdministrators" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_delegated_administrators&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_delegated_administrators&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListDelegatedAdministrators.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListDelegatedAdministrators.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_delegated_administrators" title="Organizations.Client.list_delegated_administrators"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_delegated_administrators()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedAdministrators">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7716,23 +7430,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListDelegatedServicesForAccount">
+<dt id="Organizations.Paginator.ListDelegatedServicesForAccount" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListDelegatedServicesForAccount</tt><a class="headerlink" href="#Organizations.Paginator.ListDelegatedServicesForAccount" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_delegated_services_for_account&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_delegated_services_for_account&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListDelegatedServicesForAccount.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListDelegatedServicesForAccount.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_delegated_services_for_account" title="Organizations.Client.list_delegated_services_for_account"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_delegated_services_for_account()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListDelegatedServicesForAccount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7804,23 +7513,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListHandshakesForAccount">
+<dt id="Organizations.Paginator.ListHandshakesForAccount" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListHandshakesForAccount</tt><a class="headerlink" href="#Organizations.Paginator.ListHandshakesForAccount" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_handshakes_for_account&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_handshakes_for_account&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListHandshakesForAccount.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListHandshakesForAccount.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_handshakes_for_account" title="Organizations.Client.list_handshakes_for_account"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_handshakes_for_account()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForAccount">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -7994,23 +7698,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListHandshakesForOrganization">
+<dt id="Organizations.Paginator.ListHandshakesForOrganization" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListHandshakesForOrganization</tt><a class="headerlink" href="#Organizations.Paginator.ListHandshakesForOrganization" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_handshakes_for_organization&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_handshakes_for_organization&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListHandshakesForOrganization.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListHandshakesForOrganization.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_handshakes_for_organization" title="Organizations.Client.list_handshakes_for_organization"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_handshakes_for_organization()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListHandshakesForOrganization">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8184,23 +7883,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListOrganizationalUnitsForParent">
+<dt id="Organizations.Paginator.ListOrganizationalUnitsForParent" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListOrganizationalUnitsForParent</tt><a class="headerlink" href="#Organizations.Paginator.ListOrganizationalUnitsForParent" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_organizational_units_for_parent&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_organizational_units_for_parent&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListOrganizationalUnitsForParent.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListOrganizationalUnitsForParent.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_organizational_units_for_parent" title="Organizations.Client.list_organizational_units_for_parent"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_organizational_units_for_parent()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListOrganizationalUnitsForParent">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8284,23 +7978,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListParents">
+<dt id="Organizations.Paginator.ListParents" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListParents</tt><a class="headerlink" href="#Organizations.Paginator.ListParents" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_parents&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_parents&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListParents.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListParents.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_parents" title="Organizations.Client.list_parents"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_parents()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListParents">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8382,23 +8071,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListPolicies">
+<dt id="Organizations.Paginator.ListPolicies" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListPolicies</tt><a class="headerlink" href="#Organizations.Paginator.ListPolicies" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_policies&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_policies&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListPolicies.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListPolicies.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_policies" title="Organizations.Client.list_policies"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_policies()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPolicies">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8495,23 +8179,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListPoliciesForTarget">
+<dt id="Organizations.Paginator.ListPoliciesForTarget" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListPoliciesForTarget</tt><a class="headerlink" href="#Organizations.Paginator.ListPoliciesForTarget" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_policies_for_target&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_policies_for_target&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListPoliciesForTarget.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListPoliciesForTarget.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_policies_for_target" title="Organizations.Client.list_policies_for_target"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_policies_for_target()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListPoliciesForTarget">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8618,23 +8297,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListRoots">
+<dt id="Organizations.Paginator.ListRoots" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListRoots</tt><a class="headerlink" href="#Organizations.Paginator.ListRoots" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_roots&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_roots&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListRoots.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListRoots.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_roots" title="Organizations.Client.list_roots"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_roots()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListRoots">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8719,23 +8393,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListTagsForResource">
+<dt id="Organizations.Paginator.ListTagsForResource" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListTagsForResource</tt><a class="headerlink" href="#Organizations.Paginator.ListTagsForResource" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_for_resource&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_for_resource&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListTagsForResource.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListTagsForResource.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_tags_for_resource" title="Organizations.Client.list_tags_for_resource"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_tags_for_resource()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8818,23 +8487,18 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Organizations.Paginator.ListTargetsForPolicy">
+<dt id="Organizations.Paginator.ListTargetsForPolicy" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">Organizations.Paginator.</tt><tt class="descname">ListTargetsForPolicy</tt><a class="headerlink" href="#Organizations.Paginator.ListTargetsForPolicy" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_targets_for_policy&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_targets_for_policy&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="Organizations.Paginator.ListTargetsForPolicy.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#Organizations.Paginator.ListTargetsForPolicy.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#Organizations.Client.list_targets_for_policy" title="Organizations.Client.list_targets_for_policy"><tt class="xref py py-meth docutils literal"><span class="pre">Organizations.Client.list_targets_for_policy()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListTargetsForPolicy">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -8923,7 +8587,6 @@ print(response)
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -8952,19 +8615,15 @@ print(response)
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="outposts.html" title="Outposts"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="opsworkscm.html" title="OpsWorksCM"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="outposts.html" title="Outposts">next</a> |</li>
+        <li class="right">
+          <a href="opsworkscm.html" title="OpsWorksCM">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -8975,24 +8634,21 @@ print(response)
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>

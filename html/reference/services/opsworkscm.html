@@ -39,41 +39,59 @@
   
    
 
-  <!-- collapsible -->
-<style>
-.collapsible {
-  background-color: aliceblue;
-  width: 100%;
-  border: none;
-  text-align: left;
-}
-.collapsible:hover {
-  background-color: #faf3e8;
-}
-.active {
-  background-color: aliceblue;
-}
-.content {
-  display: none;
-}
-</style>
+    <!-- collapsible items -->
+    <style>
+      /* collapsible functionality */
+      .collapsible-title {
+        background-color: #f8f8f8;
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding-left: 8px;
+      }
+      .collapsible-title:hover {
+        background-color: #faf3e8;
+      }
+      .collapsible-title-active {
+        background-color: aliceblue;
+      }
+      .collapsible-title-active:hover {
+        background-color: antiquewhite;
+      }
+      .collapsible-content {
+        display: none;
+      }
+      .collapsible-content-show {
+        display: block;
+      }
+      /* remove horizontal lines between methods */
+      dl.method {
+        border-bottom: none;
+      }
+      /* move margins from after each item to before the next admonition */
+      dl {
+        margin-bottom: 0px;
+      }
+      .admonition-title {
+        margin-top: 20px;
+      }
+      dl dd {
+        margin-bottom: 20px;
+      }
+    </style>
 </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="organizations.html" title="Organizations"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="opsworks.html" title="OpsWorks"
-             accesskey="P">previous</a> |</li>
+          <a href="../../genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="organizations.html" title="Organizations" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="opsworks.html" title="OpsWorks" accesskey="P">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Available services</a> &raquo;</li> 
       </ul>
@@ -479,14 +497,10 @@
 </div>
 <p>These are the available methods:</p>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.associate_node">
-<tt class="descname">associate_node</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.associate_node" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Associates a new node with the server. For more information about how to disassociate a node, see  DisassociateNode .</p>
+<dt id="OpsWorksCM.Client.associate_node" class="collapsible-title">
+<tt class="descname">associate_node</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.associate_node" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Associates a new node with the server. For more information about how to disassociate a node, see  DisassociateNode .</p>
 <p>On a Chef server: This command is an alternative to <tt class="docutils literal"><span class="pre">knife</span> <span class="pre">bootstrap</span></tt> .</p>
 <p>Example (Chef): <tt class="docutils literal"><span class="pre">aws</span> <span class="pre">opsworks-cm</span> <span class="pre">associate-node</span> <span class="pre">--server-name</span> <span class="pre">*MyServer*</span> <span class="pre">--node-name</span> <span class="pre">*MyManagedNode*</span> <span class="pre">--engine-attributes</span> <span class="pre">&quot;Name=*CHEF_ORGANIZATION*</span> <span class="pre">,Value=default&quot;</span> <span class="pre">&quot;Name=*CHEF_NODE_PUBLIC_KEY*</span> <span class="pre">,Value=*public-key-pem*</span> <span class="pre">&quot;</span></tt></p>
 <p>On a Puppet server, this command is an alternative to the <tt class="docutils literal"><span class="pre">puppet</span> <span class="pre">cert</span> <span class="pre">sign</span></tt> command that signs a Puppet node CSR.</p>
@@ -568,16 +582,11 @@
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.can_paginate">
-<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Check if an operation can be paginated.</p>
+<dt id="OpsWorksCM.Client.can_paginate" class="collapsible-title">
+<tt class="descname">can_paginate</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.can_paginate" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Check if an operation can be paginated.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -589,16 +598,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.create_backup">
-<tt class="descname">create_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.create_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates an application-level backup of a server. While the server is in the <tt class="docutils literal"><span class="pre">BACKING_UP</span></tt> state, the server cannot be changed, and no additional backup can be created.</p>
+<dt id="OpsWorksCM.Client.create_backup" class="collapsible-title">
+<tt class="descname">create_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.create_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates an application-level backup of a server. While the server is in the <tt class="docutils literal"><span class="pre">BACKING_UP</span></tt> state, the server cannot be changed, and no additional backup can be created.</p>
 <p>Backups can be created for servers in <tt class="docutils literal"><span class="pre">RUNNING</span></tt> , <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> , and <tt class="docutils literal"><span class="pre">UNHEALTHY</span></tt> states. By default, you can create a maximum of 50 manual backups.</p>
 <p>This operation is asynchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">LimitExceededException</span></tt> is thrown when the maximum number of manual backups is reached. An <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown when the server is not in any of the following states: RUNNING, HEALTHY, or UNHEALTHY. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server is not found. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is thrown when parameters of the request are not valid.</p>
@@ -781,16 +785,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.create_server">
-<tt class="descname">create_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.create_server" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Creates and immedately starts a new server. The server is ready to use when it is in the <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> state. By default, you can create a maximum of 10 servers.</p>
+<dt id="OpsWorksCM.Client.create_server" class="collapsible-title">
+<tt class="descname">create_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.create_server" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Creates and immedately starts a new server. The server is ready to use when it is in the <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> state. By default, you can create a maximum of 10 servers.</p>
 <p>This operation is asynchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">LimitExceededException</span></tt> is thrown when you have created the maximum number of servers (10). A <tt class="docutils literal"><span class="pre">ResourceAlreadyExistsException</span></tt> is thrown when a server with the same name already exists in the account. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is thrown when parameters of the request are not valid.</p>
 <p>If you do not specify a security group by adding the <tt class="docutils literal"><span class="pre">SecurityGroupIds</span></tt> parameter, AWS OpsWorks creates a new security group.</p>
@@ -866,13 +865,13 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <div><strong>Attributes accepted in a Chef createServer request:</strong></div></blockquote>
 <ul>
 <li><tt class="docutils literal"><span class="pre">CHEF_AUTOMATE_PIVOTAL_KEY</span></tt> : A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY is set, a private key is generated and returned in the response.</li>
-<li><tt class="docutils literal"><span class="pre">CHEF_AUTOMATE_ADMIN_PASSWORD</span></tt> : The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (<a class="reference external" href="mailto:!/&#37;&#52;&#48;#$%^&amp;+=_">!/<span>&#64;</span>#$%^&amp;+=_</a>). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.</li>
+<li><tt class="docutils literal"><span class="pre">CHEF_AUTOMATE_ADMIN_PASSWORD</span></tt> : The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (<a class="reference external" href="mailto:!/%40#$%^&+=_">!/<span>&#64;</span>#$%^&amp;+=_</a>). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.</li>
 </ul>
 <blockquote>
 <div><strong>Attributes accepted in a Puppet createServer request:</strong></div></blockquote>
 <ul>
 <li><tt class="docutils literal"><span class="pre">PUPPET_ADMIN_PASSWORD</span></tt> : To work with the Puppet Enterprise console, a password must use ASCII characters.</li>
-<li><tt class="docutils literal"><span class="pre">PUPPET_R10K_REMOTE</span></tt> : The r10k remote is the URL of your control repository (for example, <a class="reference external" href="ssh://git&#64;your.git-repo.com:user/control-repo.git">ssh://git&#64;your.git-repo.com:user/control-repo.git</a>). Specifying an r10k remote opens TCP port 8170.</li>
+<li><tt class="docutils literal"><span class="pre">PUPPET_R10K_REMOTE</span></tt> : The r10k remote is the URL of your control repository (for example, <a class="reference external" href="ssh://git@your.git-repo.com:user/control-repo.git">ssh://git&#64;your.git-repo.com:user/control-repo.git</a>). Specifying an r10k remote opens TCP port 8170.</li>
 <li><tt class="docutils literal"><span class="pre">PUPPET_R10K_PRIVATE_KEY</span></tt> : If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.</li>
 </ul>
 <ul>
@@ -1120,16 +1119,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.delete_backup">
-<tt class="descname">delete_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.delete_backup" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes a backup. You can delete both manual and automated backups. This operation is asynchronous.</p>
+<dt id="OpsWorksCM.Client.delete_backup" class="collapsible-title">
+<tt class="descname">delete_backup</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.delete_backup" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes a backup. You can delete both manual and automated backups. This operation is asynchronous.</p>
 <p>An <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown when a backup deletion is already in progress. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the backup does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is thrown when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackup">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1159,16 +1153,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.delete_server">
-<tt class="descname">delete_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.delete_server" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Deletes the server and the underlying AWS CloudFormation stacks (including the server's EC2 instance). When you run this command, the server state is updated to <tt class="docutils literal"><span class="pre">DELETING</span></tt> . After the server is deleted, it is no longer returned by <tt class="docutils literal"><span class="pre">DescribeServer</span></tt> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted.</p>
+<dt id="OpsWorksCM.Client.delete_server" class="collapsible-title">
+<tt class="descname">delete_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.delete_server" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Deletes the server and the underlying AWS CloudFormation stacks (including the server's EC2 instance). When you run this command, the server state is updated to <tt class="docutils literal"><span class="pre">DELETING</span></tt> . After the server is deleted, it is no longer returned by <tt class="docutils literal"><span class="pre">DescribeServer</span></tt> requests. If the AWS CloudFormation stack cannot be deleted, the server cannot be deleted.</p>
 <p>This operation is asynchronous.</p>
 <p>An <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown when a server deletion is already in progress. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServer">AWS API Documentation</a></p>
@@ -1199,16 +1188,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.describe_account_attributes">
-<tt class="descname">describe_account_attributes</tt><big>(</big><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_account_attributes" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes your OpsWorks-CM account attributes.</p>
+<dt id="OpsWorksCM.Client.describe_account_attributes" class="collapsible-title">
+<tt class="descname">describe_account_attributes</tt><big>(</big><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_account_attributes" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes your OpsWorks-CM account attributes.</p>
 <p>This operation is synchronous.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributes">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1255,16 +1239,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.describe_backups">
-<tt class="descname">describe_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_backups" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes backups. The results are ordered by time, with newest backups first. If you do not specify a BackupId or ServerName, the command returns all backups.</p>
+<dt id="OpsWorksCM.Client.describe_backups" class="collapsible-title">
+<tt class="descname">describe_backups</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_backups" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes backups. The results are ordered by time, with newest backups first. If you do not specify a BackupId or ServerName, the command returns all backups.</p>
 <p>This operation is synchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the backup does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups">AWS API Documentation</a></p>
@@ -1433,16 +1412,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.InvalidNextTokenException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.describe_events">
-<tt class="descname">describe_events</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_events" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Describes events for a specified server. Results are ordered by time, with newest events first.</p>
+<dt id="OpsWorksCM.Client.describe_events" class="collapsible-title">
+<tt class="descname">describe_events</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_events" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Describes events for a specified server. Results are ordered by time, with newest events first.</p>
 <p>This operation is synchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents">AWS API Documentation</a></p>
@@ -1521,16 +1495,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ResourceNotFoundException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.describe_node_association_status">
-<tt class="descname">describe_node_association_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_node_association_status" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns the current status of an existing association or disassociation request.</p>
+<dt id="OpsWorksCM.Client.describe_node_association_status" class="collapsible-title">
+<tt class="descname">describe_node_association_status</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_node_association_status" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns the current status of an existing association or disassociation request.</p>
 <p>A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when no recent association or disassociation request with the specified token is found, or when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1607,16 +1576,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.describe_servers">
-<tt class="descname">describe_servers</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_servers" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Lists all configuration management servers that are identified with your account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks CM does not query other services.</p>
+<dt id="OpsWorksCM.Client.describe_servers" class="collapsible-title">
+<tt class="descname">describe_servers</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.describe_servers" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Lists all configuration management servers that are identified with your account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks CM does not query other services.</p>
 <p>This operation is synchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers">AWS API Documentation</a></p>
@@ -1823,16 +1787,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.InvalidNextTokenException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.disassociate_node">
-<tt class="descname">disassociate_node</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.disassociate_node" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Disassociates a node from an AWS OpsWorks CM server, and removes the node from the server's managed nodes. After a node is disassociated, the node key pair is no longer valid for accessing the configuration manager's API. For more information about how to associate a node, see  AssociateNode .</p>
+<dt id="OpsWorksCM.Client.disassociate_node" class="collapsible-title">
+<tt class="descname">disassociate_node</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.disassociate_node" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Disassociates a node from an AWS OpsWorks CM server, and removes the node from the server's managed nodes. After a node is disassociated, the node key pair is no longer valid for accessing the configuration manager's API. For more information about how to associate a node, see  AssociateNode .</p>
 <p>A node can can only be disassociated from a server that is in a <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> state. Otherwise, an <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -1903,16 +1862,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.export_server_engine_attribute">
-<tt class="descname">export_server_engine_attribute</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.export_server_engine_attribute" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.</p>
+<dt id="OpsWorksCM.Client.export_server_engine_attribute" class="collapsible-title">
+<tt class="descname">export_server_engine_attribute</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.export_server_engine_attribute" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.</p>
 <p>This operation is synchronous.</p>
 <p>A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. An <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttribute">AWS API Documentation</a></p>
@@ -2000,16 +1954,11 @@ call <tt class="docutils literal"><span class="pre">client.get_paginator(&quot;c
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.InvalidStateException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.generate_presigned_url">
-<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Generate a presigned url given a client, its method, and arguments</p>
+<dt id="OpsWorksCM.Client.generate_presigned_url" class="collapsible-title">
+<tt class="descname">generate_presigned_url</tt><big>(</big><em>ClientMethod</em>, <em>Params=None</em>, <em>ExpiresIn=3600</em>, <em>HttpMethod=None</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.generate_presigned_url" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Generate a presigned url given a client, its method, and arguments</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><ul class="first simple">
 <li><strong>ClientMethod</strong> (<em>string</em>) -- The client method to presign for</li>
@@ -2025,16 +1974,11 @@ default, the http method is whatever is used in the method's model.</li>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.get_paginator">
-<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Create a paginator for an operation.</p>
+<dt id="OpsWorksCM.Client.get_paginator" class="collapsible-title">
+<tt class="descname">get_paginator</tt><big>(</big><em>operation_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.get_paginator" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Create a paginator for an operation.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>operation_name</strong> (<em>string</em>) -- The operation name.  This is the same name
 as the method name on the client.  For example, if the
@@ -2049,16 +1993,11 @@ check if an operation is pageable.</dd>
 <dt class="field-name">Returns</dt><dd class="field-body">A paginator object.</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.get_waiter">
-<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns an object that can wait for some condition.</p>
+<dt id="OpsWorksCM.Client.get_waiter" class="collapsible-title">
+<tt class="descname">get_waiter</tt><big>(</big><em>waiter_name</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.get_waiter" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns an object that can wait for some condition.</p>
 <dl class="docutils field-list" frame="void" rules="none">
 <dt class="field-name">Parameters</dt><dd class="field-body"><strong>waiter_name</strong> (<em>str</em>) -- The name of the waiter to get. See the waiters
 section of the service docs for a list of available waiters.</dd>
@@ -2066,16 +2005,11 @@ section of the service docs for a list of available waiters.</dd>
 <dt class="field-name">Return type</dt><dd class="field-body">botocore.waiter.Waiter</dd>
 </dl>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.list_tags_for_resource">
-<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.</p>
+<dt id="OpsWorksCM.Client.list_tags_for_resource" class="collapsible-title">
+<tt class="descname">list_tags_for_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.list_tags_for_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_tags_for_resource</span><span class="p">(</span>
@@ -2143,16 +2077,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.restore_server">
-<tt class="descname">restore_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.restore_server" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Restores a backup to a server that is in a <tt class="docutils literal"><span class="pre">CONNECTION_LOST</span></tt> , <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> , <tt class="docutils literal"><span class="pre">RUNNING</span></tt> , <tt class="docutils literal"><span class="pre">UNHEALTHY</span></tt> , or <tt class="docutils literal"><span class="pre">TERMINATED</span></tt> state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.</p>
+<dt id="OpsWorksCM.Client.restore_server" class="collapsible-title">
+<tt class="descname">restore_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.restore_server" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Restores a backup to a server that is in a <tt class="docutils literal"><span class="pre">CONNECTION_LOST</span></tt> , <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> , <tt class="docutils literal"><span class="pre">RUNNING</span></tt> , <tt class="docutils literal"><span class="pre">UNHEALTHY</span></tt> , or <tt class="docutils literal"><span class="pre">TERMINATED</span></tt> state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.</p>
 <p>Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> state, AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a <tt class="docutils literal"><span class="pre">Running</span></tt> or <tt class="docutils literal"><span class="pre">Stopped</span></tt> state, but is eventually terminated.</p>
 <p>This operation is asynchronous.</p>
 <p>An <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown when the server is not in a valid state. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
@@ -2347,16 +2276,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.start_maintenance">
-<tt class="descname">start_maintenance</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.start_maintenance" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an <tt class="docutils literal"><span class="pre">UNDER_MAINTENANCE</span></tt> state while maintenance is in progress.</p>
+<dt id="OpsWorksCM.Client.start_maintenance" class="collapsible-title">
+<tt class="descname">start_maintenance</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.start_maintenance" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying cause of maintenance failure has been resolved. The server is in an <tt class="docutils literal"><span class="pre">UNDER_MAINTENANCE</span></tt> state while maintenance is in progress.</p>
 <p>Maintenance can only be started on servers in <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> and <tt class="docutils literal"><span class="pre">UNHEALTHY</span></tt> states. Otherwise, an <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is thrown. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2564,16 +2488,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.tag_resource">
-<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.</p>
+<dt id="OpsWorksCM.Client.tag_resource" class="collapsible-title">
+<tt class="descname">tag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.tag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">tag_resource</span><span class="p">(</span>
@@ -2634,16 +2553,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.InvalidStateException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.untag_resource">
-<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Removes specified tags from an AWS OpsWorks-CM server or backup.</p>
+<dt id="OpsWorksCM.Client.untag_resource" class="collapsible-title">
+<tt class="descname">untag_resource</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.untag_resource" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Removes specified tags from an AWS OpsWorks-CM server or backup.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UntagResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">untag_resource</span><span class="p">(</span>
@@ -2687,16 +2601,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.InvalidStateException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.update_server">
-<tt class="descname">update_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.update_server" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates settings for a server.</p>
+<dt id="OpsWorksCM.Client.update_server" class="collapsible-title">
+<tt class="descname">update_server</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.update_server" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates settings for a server.</p>
 <p>This operation is synchronous.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServer">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -2895,16 +2804,11 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
-<!-- collapsible -->
-<button type="button" class="collapsible">
-<dt id="OpsWorksCM.Client.update_server_engine_attributes">
-<tt class="descname">update_server_engine_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.update_server_engine_attributes" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
 <dl class="method">
-<dd><p>Updates engine-specific attributes on a specified server. The server enters the <tt class="docutils literal"><span class="pre">MODIFYING</span></tt> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (<tt class="docutils literal"><span class="pre">CHEF_PIVOTAL_KEY</span></tt> ) or a Puppet server's admin password (<tt class="docutils literal"><span class="pre">PUPPET_ADMIN_PASSWORD</span></tt> ).</p>
+<dt id="OpsWorksCM.Client.update_server_engine_attributes" class="collapsible-title">
+<tt class="descname">update_server_engine_attributes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Client.update_server_engine_attributes" title="Permalink to this definition">¶</a></dt>
+<dd class="collapsible-content"><p>Updates engine-specific attributes on a specified server. The server enters the <tt class="docutils literal"><span class="pre">MODIFYING</span></tt> state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (<tt class="docutils literal"><span class="pre">CHEF_PIVOTAL_KEY</span></tt> ) or a Puppet server's admin password (<tt class="docutils literal"><span class="pre">PUPPET_ADMIN_PASSWORD</span></tt> ).</p>
 <p>This operation is asynchronous.</p>
 <p>This operation can only be called for servers in <tt class="docutils literal"><span class="pre">HEALTHY</span></tt> or <tt class="docutils literal"><span class="pre">UNHEALTHY</span></tt> states. Otherwise, an <tt class="docutils literal"><span class="pre">InvalidStateException</span></tt> is raised. A <tt class="docutils literal"><span class="pre">ResourceNotFoundException</span></tt> is thrown when the server does not exist. A <tt class="docutils literal"><span class="pre">ValidationException</span></tt> is raised when parameters of the request are not valid.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes">AWS API Documentation</a></p>
@@ -3096,7 +3000,6 @@ section of the service docs for a list of available waiters.</dd>
 <li><tt class="xref py py-class docutils literal"><span class="pre">OpsWorksCM.Client.exceptions.ValidationException</span></tt></li>
 </ul>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3106,18 +3009,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available paginators are:</p>
 
 <dl class="class">
-<dt id="OpsWorksCM.Paginator.DescribeBackups">
+<dt id="OpsWorksCM.Paginator.DescribeBackups" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">OpsWorksCM.Paginator.</tt><tt class="descname">DescribeBackups</tt><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeBackups" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_backups&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_backups&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="OpsWorksCM.Paginator.DescribeBackups.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeBackups.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#OpsWorksCM.Client.describe_backups" title="OpsWorksCM.Client.describe_backups"><tt class="xref py py-meth docutils literal"><span class="pre">OpsWorksCM.Client.describe_backups()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3287,23 +3186,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="OpsWorksCM.Paginator.DescribeEvents">
+<dt id="OpsWorksCM.Paginator.DescribeEvents" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">OpsWorksCM.Paginator.</tt><tt class="descname">DescribeEvents</tt><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeEvents" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_events&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_events&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="OpsWorksCM.Paginator.DescribeEvents.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeEvents.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#OpsWorksCM.Client.describe_events" title="OpsWorksCM.Client.describe_events"><tt class="xref py py-meth docutils literal"><span class="pre">OpsWorksCM.Client.describe_events()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3383,23 +3277,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="OpsWorksCM.Paginator.DescribeServers">
+<dt id="OpsWorksCM.Paginator.DescribeServers" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">OpsWorksCM.Paginator.</tt><tt class="descname">DescribeServers</tt><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeServers" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_servers&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;describe_servers&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="OpsWorksCM.Paginator.DescribeServers.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Paginator.DescribeServers.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#OpsWorksCM.Client.describe_servers" title="OpsWorksCM.Client.describe_servers"><tt class="xref py py-meth docutils literal"><span class="pre">OpsWorksCM.Client.describe_servers()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3607,23 +3496,18 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="OpsWorksCM.Paginator.ListTagsForResource">
+<dt id="OpsWorksCM.Paginator.ListTagsForResource" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">OpsWorksCM.Paginator.</tt><tt class="descname">ListTagsForResource</tt><a class="headerlink" href="#OpsWorksCM.Paginator.ListTagsForResource" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_for_resource&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_tags_for_resource&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="OpsWorksCM.Paginator.ListTagsForResource.paginate">
 <tt class="descname">paginate</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Paginator.ListTagsForResource.paginate" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Creates an iterator that will paginate through responses from <a class="reference internal" href="#OpsWorksCM.Client.list_tags_for_resource" title="OpsWorksCM.Client.list_tags_for_resource"><tt class="xref py py-meth docutils literal"><span class="pre">OpsWorksCM.Client.list_tags_for_resource()</span></tt></a>.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResource">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3695,7 +3579,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3705,18 +3588,14 @@ section of the service docs for a list of available waiters.</dd>
 <p>The available waiters are:</p>
 
 <dl class="class">
-<dt id="OpsWorksCM.Waiter.NodeAssociated">
+<dt id="OpsWorksCM.Waiter.NodeAssociated" class="collapsible-title">
 <em class="property">class </em><tt class="descclassname">OpsWorksCM.Waiter.</tt><tt class="descname">NodeAssociated</tt><a class="headerlink" href="#OpsWorksCM.Waiter.NodeAssociated" title="Permalink to this definition">¶</a></dt>
-<dd><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;node_associated&#39;</span><span class="p">)</span>
+<dd class="collapsible-content"><div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">waiter</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waiter</span><span class="p">(</span><span class="s1">&#39;node_associated&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<!-- collapsible -->
-<button type="button" class="collapsible">
+<dl class="method">
 <dt id="OpsWorksCM.Waiter.NodeAssociated.wait">
 <tt class="descname">wait</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#OpsWorksCM.Waiter.NodeAssociated.wait" title="Permalink to this definition">¶</a></dt>
-</button>
-<div class="content">
-<dl class="method">
 <dd><p>Polls <a class="reference internal" href="#OpsWorksCM.Client.describe_node_association_status" title="OpsWorksCM.Client.describe_node_association_status"><tt class="xref py py-meth docutils literal"><span class="pre">OpsWorksCM.Client.describe_node_association_status()</span></tt></a> every 15 seconds until a successful state is reached. An error is returned after 15 failed checks.</p>
 <p>See also: <a class="reference external" href="https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus">AWS API Documentation</a></p>
 <p><strong>Request Syntax</strong></p>
@@ -3752,7 +3631,6 @@ section of the service docs for a list of available waiters.</dd>
 </dd>
 </dl>
 </dd></dl>
-</div>
 
 </dd></dl>
 
@@ -3781,19 +3659,15 @@ section of the service docs for a list of available waiters.</dd>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="organizations.html" title="Organizations"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="opsworks.html" title="OpsWorks"
-             >previous</a> |</li>
+          <a href="../../genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="../../py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="organizations.html" title="Organizations">next</a> |</li>
+        <li class="right">
+          <a href="opsworks.html" title="OpsWorks">previous</a> |</li>
         <li><a href="../../index.html">Boto3 Docs 1.18.5 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Available services</a> &raquo;</li> 
+          <li><a href="index.html">Available services</a> &raquo;</li> 
       </ul>
     </div>
 <div class="footer">
@@ -3804,24 +3678,21 @@ section of the service docs for a list of available waiters.</dd>
 });
             shortbread.checkForCookieConsent();
     </script>
-    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a
-        href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
+    <a href="http://aws.amazon.com/privacy">Privacy</a> | <a href="http://aws.amazon.com/terms">Site Terms</a> | <a href="#" onclick="shortbread.customizeCookies();">Cookie preferences</a> |
     &copy; Copyright 2021, Amazon Web Services, Inc. Created using <a href="https://www.sphinx-doc.org/">Sphinx</a>.
 </div>
-  <!-- collapsible -->
-<script>
-var coll = document.getElementsByClassName("collapsible");
-for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  <!-- collapsible content -->
+  <script type="text/javascript">
+    var collapsibleTitles = document.getElementsByClassName("collapsible-title");
+    for (var i = 0; i < collapsibleTitles.length; i++) {
+      collapsibleTitles[i].addEventListener("click", function() {
+        const nextElement = this.nextElementSibling;
+        if (nextElement.classList.contains("collapsible-content")) {
+          this.classList.toggle("collapsible-title-active");
+          nextElement.classList.toggle("collapsible-content-show");
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 </body>
 </html>
