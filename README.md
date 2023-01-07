@@ -38,6 +38,10 @@ $ make html
 
 After all that, we will have the HTML documentation inside `boto3:docs/build/html`. This should give us the exact same documentation as the [official one](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html). Then we use `boto3-html-reformat.py` to convert each service documentation.
 
+## Todo
+
+Add a note saying that this documentation has been modified from the original. Decide whether to do it just on the first page, or on every page.
+
 ## Bugs
 
 It's currently a simple hack and slash. I'm planning to rewrite the script, to read the HTML file into memory as a nested OrderedDict, and then manipulate the tags there. I don't want to have to resort to a 3rd party library, so I would just have to do this myself. Using an OrderedDict will also make all the transformation goals much easier to achieve.
